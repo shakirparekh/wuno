@@ -2032,7 +2032,6 @@ static RPCHelpMan getblockstats()
         if (loop_outputs) {
             tx_total_out = tx->GetValueOut();
             for (const CTxOut& out : tx->vout) {
-                tx_total_out += out.nValue;
                 // SYSCOIN
                 size_t out_size = GetSerializeSize(out, PROTOCOL_VERSION, SER_SIZE, tx->nVersion) + PER_UTXO_OVERHEAD;
                 utxo_size_inc += out_size;
