@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_WALLET_WALLETDB_H
-#define SYSCOIN_WALLET_WALLETDB_H
+#ifndef wentuno_WALLET_WALLETDB_H
+#define wentuno_WALLET_WALLETDB_H
 
 #include <script/sign.h>
 #include <wallet/db.h>
@@ -19,7 +19,7 @@ class CScript;
 class uint160;
 class uint256;
 struct CBlockLocator;
-// SYSCOIN
+// wentuno
 namespace Governance
 {
     class Object;
@@ -93,7 +93,7 @@ extern const std::string WALLETDESCRIPTORCKEY;
 extern const std::string WALLETDESCRIPTORKEY;
 extern const std::string WATCHMETA;
 extern const std::string WATCHS;
-// SYSCOIN
+// wentuno
 extern const std::string GOBJECT;
 
 // Keys in this set pertain only to the legacy wallet (LegacyScriptPubKeyMan) and are removed during migration from legacy to descriptors.
@@ -298,7 +298,7 @@ public:
     bool TxnCommit();
     //! Abort current transaction
     bool TxnAbort();
-    // SYSCOIN
+    // wentuno
     //! Write a CGovernanceObject to the database
     bool WriteGovernanceObject(const Governance::Object& obj);
 private:
@@ -315,4 +315,4 @@ bool LoadEncryptionKey(CWallet* pwallet, DataStream& ssKey, DataStream& ssValue,
 bool LoadHDChain(CWallet* pwallet, DataStream& ssValue, std::string& strErr);
 } // namespace wallet
 
-#endif // SYSCOIN_WALLET_WALLETDB_H
+#endif // wentuno_WALLET_WALLETDB_H

@@ -3,7 +3,7 @@
 # Copyright 2016-2017 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Test framework for syscoin utils.
+"""Test framework for wentuno utils.
 
 Runs automatically during `make check`.
 
@@ -17,7 +17,7 @@ import logging
 import os
 import pprint
 import subprocess
-import sys
+import WUNO
 
 def main():
     config = configparser.ConfigParser()
@@ -39,7 +39,7 @@ def main():
     # Add the format/level to the logger
     logging.basicConfig(format=formatter, level=level)
 
-    bctester(os.path.join(env_conf["SRCDIR"], "test", "util", "data"), "syscoin-util-test.json", env_conf)
+    bctester(os.path.join(env_conf["SRCDIR"], "test", "util", "data"), "wentuno-util-test.json", env_conf)
 
 def bctester(testDir, input_basename, buildenv):
     """ Loads and parses the input file, runs all tests and reports results"""
@@ -62,9 +62,9 @@ def bctester(testDir, input_basename, buildenv):
         error_message = "FAILED_TESTCASES:\n"
         error_message += pprint.pformat(failed_testcases, width=400)
         logging.error(error_message)
-        sys.exit(1)
+        WUNO.exit(1)
     else:
-        sys.exit(0)
+        WUNO.exit(0)
 
 def bctest(testDir, testObj, buildenv):
     """Runs a single test, comparing output and RC to expected output and RC.
@@ -74,10 +74,10 @@ def bctest(testDir, testObj, buildenv):
     """
     # Get the exec names and arguments
     execprog = os.path.join(buildenv["BUILDDIR"], "src", testObj["exec"] + buildenv["EXEEXT"])
-    if testObj["exec"] == "./syscoin-util":
-        execprog = os.getenv("SYSCOINUTIL", default=execprog)
-    elif testObj["exec"] == "./syscoin-tx":
-        execprog = os.getenv("SYSCOINTX", default=execprog)
+    if testObj["exec"] == "./wentuno-util":
+        execprog = os.getenv("wentunoUTIL", default=execprog)
+    elif testObj["exec"] == "./wentuno-tx":
+        execprog = os.getenv("wentunoTX", default=execprog)
 
     execargs = testObj['args']
     execrun = [execprog] + execargs
@@ -160,7 +160,7 @@ def bctest(testDir, testObj, buildenv):
         want_error = testObj["error_txt"]
         # Compare error text
         # TODO: ideally, we'd compare the strings exactly and also assert
-        # That stderr is empty if no errors are expected. However, syscoin-tx
+        # That stderr is empty if no errors are expected. However, wentuno-tx
         # emits DISPLAY errors when running as a windows application on
         # linux through wine. Just assert that the expected error text appears
         # somewhere in stderr.

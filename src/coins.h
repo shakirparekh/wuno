@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_COINS_H
-#define SYSCOIN_COINS_H
+#ifndef wentuno_COINS_H
+#define wentuno_COINS_H
 
 #include <primitives/transaction.h>
 #include <core_memusage.h>
@@ -367,7 +367,7 @@ const Coin& AccessByTxid(const CCoinsViewCache& cache, const uint256& txid);
 /**
  * This is a minimally invasive approach to shutdown on LevelDB read errors from the
  * chainstate, while keeping user interface out of the common library, which is shared
- * between syscoind, and syscoin-qt and non-server tools.
+ * between wentunod, and wentuno-qt and non-server tools.
  *
  * Writes do not need similar protection, as failure to write is handled by the caller.
 */
@@ -389,4 +389,4 @@ private:
 
 };
 
-#endif // SYSCOIN_COINS_H
+#endif // wentuno_COINS_H

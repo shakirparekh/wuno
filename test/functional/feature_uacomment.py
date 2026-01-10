@@ -6,12 +6,12 @@
 
 import re
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.test_node import ErrorMatch
 from test_framework.util import assert_equal
 
 
-class UacommentTest(SyscoinTestFramework):
+class UacommentTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.setup_clean_chain = True

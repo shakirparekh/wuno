@@ -14,8 +14,8 @@
         <translation type="unfinished">&amp;Newydd</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the system clipboard</source>
-        <translation type="unfinished">Copio'r cyfeiriad sydd wedi'i ddewis i'r clipfwrdd system</translation>
+        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <translation type="unfinished">Copio'r cyfeiriad sydd wedi'i ddewis i'r clipfwrdd WUNOtem</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -58,8 +58,8 @@
         <translation type="unfinished">D&amp;ewis</translation>
     </message>
     <message>
-        <source>These are your Syscoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished">Rhain ydi eich cyfeiriadau Syscoin ar gyfer gyrru taliadau. Gwnewch yn sicr o'r swm a'r cyfeiriad derbyn cyn gyrru arian.</translation>
+        <source>These are your wentuno addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation type="unfinished">Rhain ydi eich cyfeiriadau wentuno ar gyfer gyrru taliadau. Gwnewch yn sicr o'r swm a'r cyfeiriad derbyn cyn gyrru arian.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -137,8 +137,8 @@
         <translation type="unfinished">Cadarnhau amgryptio'r waled</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR SYSCOINS&lt;/b&gt;!</source>
-        <translation type="unfinished">Rhybudd: Os ydych yn amgryptio'r waled ag yn colli'r cyfrinair, byddwch yn &lt;b&gt; COLLI EICH SYSCOINS I GYD &lt;b&gt; !</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR wentunoS&lt;/b&gt;!</source>
+        <translation type="unfinished">Rhybudd: Os ydych yn amgryptio'r waled ag yn colli'r cyfrinair, byddwch yn &lt;b&gt; COLLI EICH wentunoS I GYD &lt;b&gt; !</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -272,7 +272,7 @@
     </message>
     </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message>
         <source>&amp;Overview</source>
         <translation type="unfinished">&amp;Trosolwg</translation>
@@ -327,8 +327,8 @@
         <translation type="unfinished">Gweithgaredd rhwydwaith wedi anablu.</translation>
     </message>
     <message>
-        <source>Send coins to a Syscoin address</source>
-        <translation type="unfinished">Anfon arian i gyfeiriad Syscoin</translation>
+        <source>Send coins to a wentuno address</source>
+        <translation type="unfinished">Anfon arian i gyfeiriad wentuno</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -351,12 +351,12 @@
         <translation type="unfinished">Amgryptio'r allweddi preifat sy'n perthyn i'ch waled</translation>
     </message>
     <message>
-        <source>Sign messages with your Syscoin addresses to prove you own them</source>
-        <translation type="unfinished">Arwyddo negeseuon gyda eich cyfeiriadau Syscoin i brofi mae chi sy'n berchen arnynt</translation>
+        <source>Sign messages with your wentuno addresses to prove you own them</source>
+        <translation type="unfinished">Arwyddo negeseuon gyda eich cyfeiriadau wentuno i brofi mae chi sy'n berchen arnynt</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Syscoin addresses</source>
-        <translation type="unfinished">Gwirio negeseuon i sicrhau eu bod wedi eu harwyddo gyda cyfeiriadau Syscoin penodol</translation>
+        <source>Verify messages to ensure they were signed with specified wentuno addresses</source>
+        <translation type="unfinished">Gwirio negeseuon i sicrhau eu bod wedi eu harwyddo gyda cyfeiriadau wentuno penodol</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -375,8 +375,8 @@
         <translation type="unfinished">Bar offer tabiau</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and syscoin: URIs)</source>
-        <translation type="unfinished">Gofyn taliadau (creu côd QR a syscoin: URIs)</translation>
+        <source>Request payments (generates QR codes and wentuno: URIs)</source>
+        <translation type="unfinished">Gofyn taliadau (creu côd QR a wentuno: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -445,7 +445,7 @@
         <translation type="unfinished">&amp;Ffenestr</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
             <numerusform />

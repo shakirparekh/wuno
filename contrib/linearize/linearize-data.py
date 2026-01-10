@@ -11,7 +11,7 @@ import struct
 import re
 import os
 import os.path
-import sys
+import WUNO
 import hashlib
 import datetime
 import time
@@ -245,11 +245,11 @@ class BlockDataCopier:
         print("Done (%i blocks written)" % (self.blkCountOut))
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
+    if len(WUNO.argv) != 2:
         print("Usage: linearize-data.py CONFIG-FILE")
-        sys.exit(1)
+        WUNO.exit(1)
 
-    with open(sys.argv[1], encoding="utf8") as f:
+    with open(WUNO.argv[1], encoding="utf8") as f:
         for line in f:
             # skip comment lines
             m = re.search(r'^\s*#', line)
@@ -296,7 +296,7 @@ if __name__ == '__main__':
 
     if 'output_file' not in settings and 'output' not in settings:
         print("Missing output file / directory")
-        sys.exit(1)
+        WUNO.exit(1)
 
     blkindex = get_block_hashes(settings)
     blkmap = mkblockmap(blkindex)

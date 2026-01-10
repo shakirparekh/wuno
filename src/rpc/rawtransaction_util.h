@@ -2,13 +2,13 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_RPC_RAWTRANSACTION_UTIL_H
-#define SYSCOIN_RPC_RAWTRANSACTION_UTIL_H
+#ifndef wentuno_RPC_RAWTRANSACTION_UTIL_H
+#define wentuno_RPC_RAWTRANSACTION_UTIL_H
 
 #include <map>
 #include <string>
 #include <optional>
-// SYSCOIN
+// wentuno
 #include <core_io.h>
 struct bilingual_str;
 class FillableSigningProvider;
@@ -20,7 +20,7 @@ class COutPoint;
 class SigningProvider;
 class CTransaction;
 class Chainstate;
-// SYSCOIN
+// wentuno
 class CTxUndo;
 /**
  * Sign a transaction with the given keystore and previous transactions
@@ -52,7 +52,7 @@ void AddOutputs(CMutableTransaction& rawTx, const UniValue& outputs_in);
 
 /** Create a transaction from univalue parameters */
 CMutableTransaction ConstructTransaction(const UniValue& inputs_in, const UniValue& outputs_in, const UniValue& locktime, std::optional<bool> rbf);
-// SYSCOIN
+// wentuno
 void TxToJSON(const CTransaction& tx, const uint256 hashBlock, UniValue& entry, Chainstate& active_chainstate, const CTxUndo* txundo = nullptr, TxVerbosity verbosity = TxVerbosity::SHOW_DETAILS);
 
-#endif // SYSCOIN_RPC_RAWTRANSACTION_UTIL_H
+#endif // wentuno_RPC_RAWTRANSACTION_UTIL_H

@@ -19,7 +19,7 @@ from test_framework.messages import (
     msg_getdata,
 )
 from test_framework.p2p import P2PInterface
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     mine_large_block,
@@ -39,7 +39,7 @@ class TestP2PConn(P2PInterface):
         message.block.calc_sha256()
         self.block_receive_map[message.block.sha256] += 1
 
-class MaxUploadTest(SyscoinTestFramework):
+class MaxUploadTest(wentunoTestFramework):
 
     def set_test_params(self):
         self.setup_clean_chain = True
@@ -94,7 +94,7 @@ class MaxUploadTest(SyscoinTestFramework):
         getdata_request.inv.append(CInv(MSG_BLOCK, big_old_block))
 
         max_bytes_per_day = 800*1024*1024
-        # SYSCOIN
+        # wentuno
         max_bytes_available = max_bytes_per_day - 1
         success_count = max_bytes_available // old_block_size
 
@@ -131,7 +131,7 @@ class MaxUploadTest(SyscoinTestFramework):
 
         self.log.info("Peer 1 disconnected after trying to download old block")
 
-        self.log.info("Advancing system time on node to clear counters...")
+        self.log.info("Advancing WUNOtem time on node to clear counters...")
 
         # If we advance the time by 24 hours, then the counters should reset,
         # and p2p_conns[2] should be able to retrieve the old block.

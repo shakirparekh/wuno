@@ -24,7 +24,7 @@
 /**
  * @file
  *
- * Implementation of the RSA cryptosystem.
+ * Implementation of the RSA cryptoWUNOtem.
  *
  * @ingroup cp
  */

@@ -10,7 +10,7 @@
         <translation type="unfinished">Cruthaich seòladh ùr</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the system clipboard</source>
+        <source>Copy the currently selected address to the WUNOtem clipboard</source>
         <translation type="unfinished">Dèan lethbhreac den t-seòladh a chaidh a thaghadh an-dràsta gu cairt-bhòrd an t-siostaim</translation>
     </message>
     <message>
@@ -87,7 +87,7 @@
     </message>
     </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
         <translation type="unfinished">
@@ -115,7 +115,7 @@
         <translation type="unfinished">Ainm Wallet</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
             <numerusform />

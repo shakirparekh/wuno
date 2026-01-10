@@ -3,14 +3,14 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <chainparamsbase.h>
 #include <clientversion.h>
 #include <coins.h>
 #include <common/args.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <compat/compat.h>
 #include <consensus/amount.h>
 #include <consensus/consensus.h>
@@ -40,7 +40,7 @@ static const int CONTINUE_EXECUTION=-1;
 
 const std::function<std::string(const char*)> G_TRANSLATION_FUN = nullptr;
 
-static void SetupSyscoinTxArgs(ArgsManager &argsman)
+static void SetupwentunoTxArgs(ArgsManager &argsman)
 {
     SetupHelpOptions(argsman);
 
@@ -83,7 +83,7 @@ static void SetupSyscoinTxArgs(ArgsManager &argsman)
 //
 static int AppInitRawTx(int argc, char* argv[])
 {
-    SetupSyscoinTxArgs(gArgs);
+    SetupwentunoTxArgs(gArgs);
     std::string error;
     if (!gArgs.ParseParameters(argc, argv, error)) {
         tfm::format(std::cerr, "Error parsing command line arguments: %s\n", error);
@@ -102,14 +102,14 @@ static int AppInitRawTx(int argc, char* argv[])
 
     if (argc < 2 || HelpRequested(gArgs) || gArgs.IsArgSet("-version")) {
         // First part of help message is specific to this utility
-        std::string strUsage = PACKAGE_NAME " syscoin-tx utility version " + FormatFullVersion() + "\n";
+        std::string strUsage = PACKAGE_NAME " wentuno-tx utility version " + FormatFullVersion() + "\n";
 
         if (gArgs.IsArgSet("-version")) {
             strUsage += FormatParagraph(LicenseInfo());
         } else {
             strUsage += "\n"
-                "Usage:  syscoin-tx [options] <hex-tx> [commands]  Update hex-encoded syscoin transaction\n"
-                "or:     syscoin-tx [options] -create [commands]   Create hex-encoded syscoin transaction\n"
+                "Usage:  wentuno-tx [options] <hex-tx> [commands]  Update hex-encoded wentuno transaction\n"
+                "or:     wentuno-tx [options] -create [commands]   Create hex-encoded wentuno transaction\n"
                 "\n";
             strUsage += gArgs.GetHelpMessage();
         }
@@ -822,7 +822,7 @@ static int CommandLineRawTx(int argc, char* argv[])
             if (argc < 2)
                 throw std::runtime_error("too few parameters");
 
-            // param: hex-encoded syscoin transaction
+            // param: hex-encoded wentuno transaction
             std::string strHexTx(argv[1]);
             if (strHexTx == "-")                 // "-" implies standard input
                 strHexTx = readStdin();

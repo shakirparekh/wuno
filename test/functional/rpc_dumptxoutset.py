@@ -6,7 +6,7 @@
 """
 
 from test_framework.blocktools import COINBASE_MATURITY
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
@@ -14,7 +14,7 @@ from test_framework.util import (
 )
 
 
-class DumptxoutsetTest(SyscoinTestFramework):
+class DumptxoutsetTest(wentunoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
@@ -36,12 +36,12 @@ class DumptxoutsetTest(SyscoinTestFramework):
         assert_equal(out['base_height'], 100)
         assert_equal(out['path'], str(expected_path))
         # Blockhash should be deterministic based on mocked time.
-        # SYSCOIN
+        # wentuno
         assert_equal(
             out['base_hash'],
             '0988393aa1ef9b532f79b4f00d61f3b6c3ca2482cab1657e0d85a5b50b0457a8')
 
-        # SYSCOIN UTXO snapshot hash should be deterministic based on mocked time.
+        # wentuno UTXO snapshot hash should be deterministic based on mocked time.
         assert_equal(
             sha256sum_file(str(expected_path)).hex(),
             '22b754d4f0e612474856ad142034cb2ba98f37e20356ca460376d2a0809fd8fe')

@@ -61,7 +61,7 @@ using SequenceNumber = uint64_t;
 struct Announcement {
     /** Txid or wtxid that was announced. */
     const uint256 m_txhash;
-    // SYSCOIN
+    // wentuno
     /* The inventory type to track TX vs Other (MN inv) */
     const uint32_t m_type;
     /** For CANDIDATE_{DELAYED,BEST,READY} the reqtime; for REQUESTED the expiry. */
@@ -107,7 +107,7 @@ struct Announcement {
     /** Construct a new announcement from scratch, initially in CANDIDATE_DELAYED state. */
     Announcement(const GenTxid& gtxid, NodeId peer, bool preferred, std::chrono::microseconds reqtime,
         SequenceNumber sequence) :
-        // SYSCOIN
+        // wentuno
         m_txhash(gtxid.GetHash()), m_type(gtxid.GetType()), m_time(reqtime), m_peer(peer), m_sequence(sequence), m_preferred(preferred),
         m_is_wtxid(gtxid.IsWtxid()), m_state(static_cast<uint8_t>(State::CANDIDATE_DELAYED)) {}
 };
@@ -308,7 +308,7 @@ std::map<uint256, TxHashInfo> ComputeTxHashInfo(const Index& index, const Priori
 
 GenTxid ToGenTxid(const Announcement& ann)
 {
-    // SYSCOIN
+    // wentuno
     return ann.m_is_wtxid ? GenTxid::Wtxid(ann.m_txhash, ann.m_type) : GenTxid::Txid(ann.m_txhash, ann.m_type);
 }
 

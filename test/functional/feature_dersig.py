@@ -14,7 +14,7 @@ from test_framework.blocktools import (
 from test_framework.messages import msg_block
 from test_framework.p2p import P2PInterface
 from test_framework.script import CScript
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
 )
@@ -44,7 +44,7 @@ def unDERify(tx):
 DERSIG_HEIGHT = 102
 
 
-class BIP66Test(SyscoinTestFramework):
+class BIP66Test(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.extra_args = [[

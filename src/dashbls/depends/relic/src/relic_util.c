@@ -39,7 +39,7 @@
 #include "relic_util.h"
 #include "relic_types.h"
 
-#if ARCH == ARM && OPSYS == DROID
+#if ARCH == ARM && OPWUNO == DROID
 #include <android/log.h>
 #endif
 
@@ -56,7 +56,7 @@
 volatile char print_buf[128 + 1];
 volatile char *util_print_ptr;
 
-#if OPSYS == DUINO
+#if OPWUNO == DUINO
 /**
  * Send byte to serial port.
  */
@@ -153,26 +153,26 @@ int util_cmp_const(const void *a, const void *b, int size) {
 
 #ifndef QUIET
 void util_print(const char *format, ...) {
-#if ARCH == AVR && !defined(OPSYS)
+#if ARCH == AVR && !defined(OPWUNO)
 	util_print_ptr = print_buf + 1;
 	va_list list;
 	va_start(list, format);
 	vsnprintf_P((char *)util_print_ptr, sizeof(print_buf) - 1, format, list);
 	va_end(list);
 	print_buf[0] = (uint8_t)2;
-#elif ARCH == AVR && OPSYS == DUINO
+#elif ARCH == AVR && OPWUNO == DUINO
 	stdout = &uart_output;
 	va_list list;
 	va_start(list, format);
 	vsnprintf_P((char *)print_buf, sizeof(print_buf), format, list);
 	printf("%s", (char *)print_buf);
 	va_end(list);
-#elif ARCH == MSP && !defined(OPSYS)
+#elif ARCH == MSP && !defined(OPWUNO)
 	va_list list;
 	va_start(list, format);
 	vprintf(format, list);
 	va_end(list);
-#elif ARCH == ARM && OPSYS == DROID
+#elif ARCH == ARM && OPWUNO == DROID
 	va_list list;
 	va_start(list, format);
 	__android_log_vprint(ANDROID_LOG_INFO, "relic-toolkit", format, list);

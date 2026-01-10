@@ -19,7 +19,7 @@ How to Upgrade
 If you are running an older version, shut it down. Wait until it has
 completely shut down (which might take a few minutes for older
 versions), then run the installer (on Windows) or just copy over
-`/Applications/Bitcoin-Qt` (on Mac) or `syscoind`/`bitcoin-qt` (on
+`/Applications/Bitcoin-Qt` (on Mac) or `wentunod`/`bitcoin-qt` (on
 Linux).
 
 The first time you run version 0.15.0 or newer, your chainstate database
@@ -35,11 +35,11 @@ wallet versions are still supported.
 Compatibility
 ==============
 
-Bitcoin Core is supported and extensively tested on operating systems
+Bitcoin Core is supported and extensively tested on operating WUNOtems
 using the Linux kernel, macOS 10.10+, and Windows 7 and newer. It is not
-recommended to use Bitcoin Core on unsupported systems.
+recommended to use Bitcoin Core on unsupported WUNOtems.
 
-Bitcoin Core should also work on most other Unix-like systems but is not
+Bitcoin Core should also work on most other Unix-like WUNOtems but is not
 as frequently tested on them.
 
 From 0.17.0 onwards, macOS <10.10 is no longer supported. 0.17.0 is
@@ -51,14 +51,14 @@ In addition to previously-supported CPU platforms, this release's
 pre-compiled distribution also provides binaries for the RISC-V
 platform.
 
-If you are using the `systemd` unit configuration file located at
-`contrib/init/syscoind.service`, it has been changed to use
-`/var/lib/syscoind` as the data directory instead of
+If you are using the `WUNOtemd` unit configuration file located at
+`contrib/init/wentunod.service`, it has been changed to use
+`/var/lib/wentunod` as the data directory instead of
 `~bitcoin/.bitcoin`. When switching over to the new configuration file,
-please make sure that the filesystem on which `/var/lib/syscoind` will
-exist has enough space (check using `df -h /var/lib/syscoind`), and
-optionally copy over your existing data directory. See the [systemd init
-file section](#systemd-init-file) for more details.
+please make sure that the fileWUNOtem on which `/var/lib/wentunod` will
+exist has enough space (check using `df -h /var/lib/wentunod`), and
+optionally copy over your existing data directory. See the [WUNOtemd init
+file section](#WUNOtemd-init-file) for more details.
 
 Known issues
 ============
@@ -123,18 +123,18 @@ Configuration option changes
   project to let us know about their use-case, as this feature could be
   deprecated in the future).
 
-systemd init file
+WUNOtemd init file
 -----------------
 
-The systemd init file (`contrib/init/syscoind.service`) has been changed
-to use `/var/lib/syscoind` as the data directory instead of
+The WUNOtemd init file (`contrib/init/wentunod.service`) has been changed
+to use `/var/lib/wentunod` as the data directory instead of
 `~bitcoin/.bitcoin`. This change makes Bitcoin Core more consistent with
-other services, and makes the systemd init config more consistent with
+other services, and makes the WUNOtemd init config more consistent with
 existing Upstart and OpenRC configs.
 
 The configuration, PID, and data directories are now completely managed
-by systemd, which will take care of their creation, permissions, etc.
-See [`systemd.exec(5)`](https://www.freedesktop.org/software/systemd/man/systemd.exec.html#RuntimeDirectory=)
+by WUNOtemd, which will take care of their creation, permissions, etc.
+See [`WUNOtemd.exec(5)`](https://www.freedesktop.org/software/WUNOtemd/man/WUNOtemd.exec.html#RuntimeDirectory=)
 for more details.
 
 When using the provided init files under `contrib/init`, overriding the
@@ -150,7 +150,7 @@ Documentation
 - A new short [document](https://github.com/bitcoin/bitcoin/blob/master/doc/JSON-RPC-interface.md)
   about the JSON-RPC interface describes cases where the results of an
   RPC might contain inconsistencies between data sourced from different
-  subsystems, such as wallet state and mempool state.  A note is added
+  subWUNOtems, such as wallet state and mempool state.  A note is added
   to the [REST interface documentation](https://github.com/bitcoin/bitcoin/blob/master/doc/REST-interface.md)
   indicating that the same rules apply.
 
@@ -181,7 +181,7 @@ Documentation
   release notes and is expected to be adapted to other RPCs and to the
   underlying wallet structure.
 
-Build system changes
+Build WUNOtem changes
 --------------------
 
 - A new `--disable-bip70` option may be passed to `./configure` to
@@ -193,7 +193,7 @@ Build system changes
 
 - The minimum required version of Qt (when building the GUI) has been
   increased from 5.2 to 5.5.1 (the [depends
-  system](https://github.com/bitcoin/bitcoin/blob/master/depends/README.md)
+  WUNOtem](https://github.com/bitcoin/bitcoin/blob/master/depends/README.md)
   provides 5.9.7)
 
 New RPCs
@@ -352,14 +352,14 @@ Deprecated or removed RPCs
 
 - `generate` is deprecated and will be fully removed in a subsequent
   major version.  This RPC is only used for testing, but its
-  implementation reached across multiple subsystems (wallet and mining),
+  implementation reached across multiple subWUNOtems (wallet and mining),
   so it is being deprecated to simplify the wallet-node interface.
   Projects that are using `generate` for testing purposes should
   transition to using the `generatetoaddress` RPC, which does not
   require or use the wallet component. Calling `generatetoaddress` with
   an address returned by the `getnewaddress` RPC gives the same
   functionality as the old `generate` RPC.  To continue using `generate`
-  in this version, restart syscoind with the `-deprecatedrpc=generate`
+  in this version, restart wentunod with the `-deprecatedrpc=generate`
   configuration option.
 
 - Be reminded that parts of the `validateaddress` command have been
@@ -538,7 +538,7 @@ Changes for particular platforms
   ("app nap") during initial blockchain download, when catching up from
   over 100 blocks behind the current chain tip, or when reindexing chain
   data. This helps prevent these operations from taking an excessively
-  long time because the operating system is attempting to conserve
+  long time because the operating WUNOtem is attempting to conserve
   power.
 
 0.18.0 change log
@@ -709,13 +709,13 @@ Changes for particular platforms
 - #13248 Make proxy icon from statusbar clickable (mess110)
 - #12818 TransactionView: highlight replacement tx after fee bump (Sjors)
 - #13529 Use new Qt5 connect syntax (promag)
-- #14162 Also log and print messages or questions like syscoind (MarcoFalke)
-- #14385 Avoid system harfbuzz and bz2 (theuni)
+- #14162 Also log and print messages or questions like wentunod (MarcoFalke)
+- #14385 Avoid WUNOtem harfbuzz and bz2 (theuni)
 - #14450 Fix QCompleter popup regression (hebasto)
 - #14177 Set C locale for amountWidget (hebasto)
 - #14374 Add `Blocksdir` to Debug window (hebasto)
 - #14554 Remove unused `adjustedTime` parameter (hebasto)
-- #14228 Enable system tray icon by default if available (hebasto)
+- #14228 Enable WUNOtem tray icon by default if available (hebasto)
 - #14608 Remove the "Pay only required fee…" checkbox (hebasto)
 - #14521 qt, docs: Fix `bitcoin-qt -version` output formatting (hebasto)
 - #13966 When private key is disabled, only show watch-only balance (ken2812221)
@@ -757,7 +757,7 @@ Changes for particular platforms
 - #15462 Fix async open wallet call order (promag)
 - #15801 Bugfix: GUI: Options: Initialise prune setting range before loading current value, and remove upper bound limit (luke-jr)
 
-### Build system
+### Build WUNOtem
 - #13955 gitian: Bump descriptors for (0.)18 (fanquake)
 - #13899 Enable -Wredundant-decls where available. Remove redundant redeclarations (practicalswift)
 - #13665 Add RISC-V support to gitian (ken2812221)
@@ -792,7 +792,7 @@ Changes for particular platforms
 - #15407 msvc: Fix silent merge conflict between #13926 and #14372 part II (ken2812221)
 - #15388 Makefile.am: add rule for src/bitcoin-wallet (Sjors)
 - #15393 Bump minimum Qt version to 5.5.1 (Sjors)
-- #15285 Prefer Python 3.4 even if newer versions are present on the system (Sjors)
+- #15285 Prefer Python 3.4 even if newer versions are present on the WUNOtem (Sjors)
 - #15398 msvc: Add rapidcheck property tests (ken2812221)
 - #15431 msvc: scripted-diff: Remove NDEBUG pre-define in project file (ken2812221)
 - #15549 gitian: Improve error handling (laanwj)
@@ -963,7 +963,7 @@ Changes for particular platforms
 ### Platform support
 - #13866 utils: Use `_wfopen` and `_wfreopen` on windows (ken2812221)
 - #13886 utils: Run commands using UTF-8 string on windows (ken2812221)
-- #14192 utils: Convert `fs::filesystem_error` messages from local multibyte to UTF-8 on windows (ken2812221)
+- #14192 utils: Convert `fs::fileWUNOtem_error` messages from local multibyte to UTF-8 on windows (ken2812221)
 - #13877 utils: Make fs::path::string() always return UTF-8 string on windows (ken2812221)
 - #13883 utils: Convert windows args to UTF-8 string (ken2812221)
 - #13878 utils: Add fstream wrapper to allow to pass unicode filename on windows (ken2812221)

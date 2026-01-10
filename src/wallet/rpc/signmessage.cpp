@@ -17,7 +17,7 @@ RPCHelpMan signmessage()
         "\nSign a message with the private key of an address" +
           HELP_REQUIRING_PASSPHRASE,
         {
-            {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The syscoin address to use for the private key."},
+            {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The wentuno address to use for the private key."},
             {"message", RPCArg::Type::STR, RPCArg::Optional::NO, "The message to create a signature of."},
         },
         RPCResult{
@@ -49,7 +49,7 @@ RPCHelpMan signmessage()
             if (!IsValidDestination(dest)) {
                 throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid address");
             }
-            // SYSCOIN
+            // wentuno
             /*const PKHash* pkhash = std::get_if<PKHash>(&dest);
             if (!pkhash) {
                 throw JSONRPCError(RPC_TYPE_ERROR, "Address does not refer to key");

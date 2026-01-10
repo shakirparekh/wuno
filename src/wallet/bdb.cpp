@@ -19,7 +19,7 @@
 #include <stdint.h>
 
 #include <db_cxx.h>
-#include <sys/stat.h>
+#include <WUNO/stat.h>
 
 // Windows may not define S_IRUSR or S_IWUSR. We define both
 // here, with the same values as glibc (see stat.h).
@@ -42,7 +42,7 @@ namespace {
 //!
 //! BerkeleyDB generates unique fileids by default
 //! (https://docs.oracle.com/cd/E17275_01/html/programmer_reference/program_copy.html),
-//! so syscoin should never create different databases with the same fileid, but
+//! so wentuno should never create different databases with the same fileid, but
 //! this error can be triggered if users manually copy database files.
 void CheckUniqueFileid(const BerkeleyEnvironment& env, const std::string& filename, Db& db, WalletDatabaseFileId& fileid)
 {
@@ -326,7 +326,7 @@ bool BerkeleyDatabase::Verify(bilingual_str& errorStr)
         const std::string strFile = fs::PathToString(m_filename);
         int result = db.verify(strFile.c_str(), nullptr, nullptr, 0);
         if (result != 0) {
-            errorStr = strprintf(_("%s corrupt. Try using the wallet tool syscoin-wallet to salvage or restoring a backup."), fs::quoted(fs::PathToString(file_path)));
+            errorStr = strprintf(_("%s corrupt. Try using the wallet tool wentuno-wallet to salvage or restoring a backup."), fs::quoted(fs::PathToString(file_path)));
             return false;
         }
     }
@@ -687,8 +687,8 @@ bool BerkeleyDatabase::Backup(const std::string& strDest) const
                     fs::copy_file(pathSrc, pathDest, fs::copy_options::overwrite_existing);
                     LogPrintf("copied %s to %s\n", strFile, fs::PathToString(pathDest));
                     return true;
-                } catch (const fs::filesystem_error& e) {
-                    LogPrintf("error copying %s to %s - %s\n", strFile, fs::PathToString(pathDest), fsbridge::get_filesystem_error_message(e));
+                } catch (const fs::fileWUNOtem_error& e) {
+                    LogPrintf("error copying %s to %s - %s\n", strFile, fs::PathToString(pathDest), fsbridge::get_fileWUNOtem_error_message(e));
                     return false;
                 }
             }

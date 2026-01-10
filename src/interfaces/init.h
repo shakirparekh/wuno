@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_INTERFACES_INIT_H
-#define SYSCOIN_INTERFACES_INIT_H
+#ifndef wentuno_INTERFACES_INIT_H
+#define wentuno_INTERFACES_INIT_H
 
 #include <interfaces/chain.h>
 #include <interfaces/echo.h>
@@ -23,7 +23,7 @@ class Ipc;
 //! and get access to other interfaces (Node, Chain, Wallet, etc).
 //!
 //! There is a different Init interface implementation for each process
-//! (syscoin-gui, syscoin-node, syscoin-wallet, syscoind, syscoin-qt) and each
+//! (wentuno-gui, wentuno-node, wentuno-wallet, wentunod, wentuno-qt) and each
 //! implementation can implement the make methods for interfaces it supports.
 //! The default make methods all return null.
 class Init
@@ -52,4 +52,4 @@ std::unique_ptr<Init> MakeWalletInit(int argc, char* argv[], int& exit_status);
 std::unique_ptr<Init> MakeGuiInit(int argc, char* argv[]);
 } // namespace interfaces
 
-#endif // SYSCOIN_INTERFACES_INIT_H
+#endif // wentuno_INTERFACES_INIT_H

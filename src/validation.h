@@ -3,11 +3,11 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_VALIDATION_H
-#define SYSCOIN_VALIDATION_H
+#ifndef wentuno_VALIDATION_H
+#define wentuno_VALIDATION_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <arith_uint256.h>
@@ -46,7 +46,7 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
-// SYSCOIN
+// wentuno
 #include <saltedhasher.h>
 class Chainstate;
 class CTxMemPool;
@@ -56,7 +56,7 @@ class DisconnectedBlockTransactions;
 class CDeterministicMNListNEVMAddressDiff;
 struct PrecomputedTransactionData;
 struct LockPoints;
-// SYSCOIN
+// wentuno
 namespace llmq {
     class CChainLockSig;
 }
@@ -100,7 +100,7 @@ extern GlobalMutex g_best_block_mutex;
 extern std::condition_variable g_best_block_cv;
 /** Used to notify getblocktemplate RPC of new tips. */
 extern uint256 g_best_block;
-// SYSCOIN
+// wentuno
 extern bool fRegTest;
 extern bool fSigNet;
 extern bool fNEVMConnection;
@@ -367,7 +367,7 @@ bool TestBlockValidity(BlockValidationState& state,
                        const std::function<NodeClock::time_point()>& adjusted_time_callback,
                        bool fCheckPOW = true,
                        bool fCheckMerkleRoot = true) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
-// SYSCOIN
+// wentuno
 static std::vector<unsigned char> emptyVec;
 /** Check with the proof of work on each blockheader matches the value in nBits */
 bool HasValidProofOfWork(const std::vector<CBlockHeader>& headers, const Consensus::Params& consensusParams);
@@ -632,7 +632,7 @@ public:
      * If FlushStateMode::NONE is used, then FlushStateToDisk(...) won't do anything
      * besides checking if we need to prune.
      *
-     * @returns true unless a system error occurred
+     * @returns true unless a WUNOtem error occurred
      */
     bool FlushStateToDisk(
         BlockValidationState& state,
@@ -665,7 +665,7 @@ public:
      * background UTXO set to verify the assumeutxo value the snapshot was activated
      * with. `cs_main` will be held during this time.
      *
-     * @returns true unless a system error occurred
+     * @returns true unless a WUNOtem error occurred
      */
     bool ActivateBestChain(
         BlockValidationState& state,
@@ -674,7 +674,7 @@ public:
         LOCKS_EXCLUDED(::cs_main);
 
     // Block (dis)connection on a given view:
-    // SYSCOIN
+    // wentuno
     DisconnectResult DisconnectBlock(const CBlock& block, const CBlockIndex* pindex, CCoinsViewCache& view, NEVMMintTxSet &setMintTxs, std::vector<uint256> &vecNEVMBlocks, std::vector<std::pair<uint256,uint32_t> >& vecTXIDPairs, bool bReverify = true, bool bReplay = false) EXCLUSIVE_LOCKS_REQUIRED(::cs_main);
     bool ConnectBlock(const CBlock& block, BlockValidationState& state, CBlockIndex* pindex,
                     CCoinsViewCache& view, bool fJustCheck = false, bool bReverify = true) EXCLUSIVE_LOCKS_REQUIRED(::cs_main);
@@ -682,7 +682,7 @@ public:
     bool ConnectBlock(const CBlock& block, BlockValidationState& state, CBlockIndex* pindex,
                     CCoinsViewCache& view, bool fJustCheck, NEVMMintTxSet &setMintTxs, NEVMTxRootMap &mapNEVMTxRoots, PoDAMAPMemory &mapPoDA, std::vector<std::pair<uint256, uint32_t> > &vecTXIDPairs, bool bReverify = true) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
 
-    // SYSCOIN Apply the effects of a block disconnection on the UTXO set.
+    // wentuno Apply the effects of a block disconnection on the UTXO set.
     bool DisconnectTip(BlockValidationState& state, DisconnectedBlockTransactions* disconnectpool, bool bReverify = true) EXCLUSIVE_LOCKS_REQUIRED(cs_main, m_mempool->cs);
 
     // Manual block validity manipulation:
@@ -693,12 +693,12 @@ public:
     bool PreciousBlock(BlockValidationState& state, CBlockIndex* pindex)
         EXCLUSIVE_LOCKS_REQUIRED(!m_chainstate_mutex)
         LOCKS_EXCLUDED(::cs_main);
-    // SYSCOIN
+    // wentuno
     /** Mark a block as invalid. */
     bool InvalidateBlock(BlockValidationState& state, CBlockIndex* pindex, bool bReverify = true)
         EXCLUSIVE_LOCKS_REQUIRED(!m_chainstate_mutex)
         LOCKS_EXCLUDED(::cs_main);
-    // SYSCOIN
+    // wentuno
     bool RestartGethNode();
     bool DoGethStartupProcedure();
     bool StartGethNode();
@@ -784,7 +784,7 @@ private:
     /** Check warning conditions and do some notifications on new chain tip set. */
     void UpdateTip(const CBlockIndex* pindexNew)
         EXCLUSIVE_LOCKS_REQUIRED(::cs_main);
-    // SYSCOIN
+    // wentuno
     bool ConnectNEVMCommitment(BlockValidationState& state, NEVMTxRootMap &mapNEVMTxRoots, const CBlock& block, const uint256& nBlockHash, const uint32_t& nHeight, const bool fJustCheck, PoDAMAPMemory &mapPoDA, const CDeterministicMNListNEVMAddressDiff &diff) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
 
     SteadyClock::time_point m_last_write{};
@@ -840,13 +840,13 @@ enum class SnapshotCompletionResult {
  *    assumeutxo UTXO snapshot.
  *
  * *Active chainstate*: the chainstate containing the current most-work
- *    chain. Consulted by most parts of the system (net_processing,
+ *    chain. Consulted by most parts of the WUNOtem (net_processing,
  *    wallet) as a reflection of the current chain and UTXO set.
  *    This may either be an IBD chainstate or a snapshot chainstate.
  *
  * *Background IBD chainstate*: an IBD chainstate for which the
  *    IBD process is happening in the background while use of the
- *    active (snapshot) chainstate allows the rest of the system to function.
+ *    active (snapshot) chainstate allows the rest of the WUNOtem to function.
  */
 class ChainstateManager
 {
@@ -857,7 +857,7 @@ private:
     //! Its contents (including on-disk data) will be deleted *upon shutdown*
     //! after background validation of the snapshot has completed. We do not
     //! free the chainstate contents immediately after it finishes validation
-    //! to cautiously avoid a case where some other part of the system is still
+    //! to cautiously avoid a case where some other part of the WUNOtem is still
     //! using this pointer (e.g. net_processing).
     //!
     //! Once this pointer is set to a corresponding chainstate, it will not
@@ -900,7 +900,7 @@ private:
      * block index (permanent memory storage), indicating that the header is
      * known to be part of a sufficiently high-work chain (anti-dos check).
      */
-    // SYSCOIN
+    // wentuno
     bool AcceptBlockHeader(
         const CBlockHeader& block,
         BlockValidationState& state,
@@ -938,7 +938,7 @@ public:
     const arith_uint256& MinimumChainWork() const { return *Assert(m_options.minimum_chain_work); }
     const uint256& AssumedValidBlock() const { return *Assert(m_options.assumed_valid_block); }
     kernel::Notifications& GetNotifications() const { return m_options.notifications; };
-    // SYSCOIN
+    // wentuno
     std::vector<std::string> GethCommandLine() const { return m_options.geth_commandline; };
     /**
      * Make various assertions about the state of the block index.
@@ -1086,7 +1086,7 @@ public:
     {
         return m_blockman.m_block_index;
     }
-    // SYSCOIN
+    // wentuno
     node::PrevBlockMap& PrevBlockIndex() EXCLUSIVE_LOCKS_REQUIRED(::cs_main)
     {
         return m_blockman.m_prev_block_index;
@@ -1284,7 +1284,7 @@ public:
 
 /** Global variable that points to the height based on a transaction id  */
 static const uint32_t MAX_BLOCK_INDEX = 43800*12; // 2.5 year of blocks
-// SYSCOIN
+// wentuno
 class CBlockIndexDB : public CDBWrapper {
     std::unordered_map<uint256, uint32_t, StaticSaltedHasher> mapCache;
 public:
@@ -1297,7 +1297,7 @@ public:
     bool FlushCacheToDisk(const uint32_t &nHeight, std::size_t CHUNK_ITEMS = 100000);
 };
 extern std::unique_ptr<CBlockIndexDB> pblockindexdb;
-// SYSCOIN
+// wentuno
 static const unsigned int DEFAULT_RPC_SERIALIZE_VERSION = 1;
 int RPCSerializationFlags();
 bool DisconnectNEVMCommitment(BlockValidationState& state, std::vector<uint256> &vecNEVMBlocks, const CBlock& block, const CDeterministicMNListNEVMAddressDiff &diff) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
@@ -1337,4 +1337,4 @@ bool IsBIP30Repeat(const CBlockIndex& block_index);
 /** Identifies blocks which coinbase output was subsequently overwritten in the UTXO set (see BIP30) */
 bool IsBIP30Unspendable(const CBlockIndex& block_index);
 
-#endif // SYSCOIN_VALIDATION_H
+#endif // wentuno_VALIDATION_H

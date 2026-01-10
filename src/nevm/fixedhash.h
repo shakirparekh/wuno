@@ -21,8 +21,8 @@
  * The FixedHash fixed-size "hash" container type.
  */
 
-#ifndef SYSCOIN_NEVM_FIXEDHASH_H
-#define SYSCOIN_NEVM_FIXEDHASH_H
+#ifndef wentuno_NEVM_FIXEDHASH_H
+#define wentuno_NEVM_FIXEDHASH_H
 
 #include <array>
 #include <cstdint>
@@ -371,4 +371,4 @@ namespace std
 	template<> struct hash<dev::h256>: dev::h256::hash {};
 	template<> struct hash<dev::h512>: dev::h512::hash {};
 }
-#endif // SYSCOIN_NEVM_FIXEDHASH_H
+#endif // wentuno_NEVM_FIXEDHASH_H

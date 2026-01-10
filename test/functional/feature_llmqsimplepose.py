@@ -11,7 +11,7 @@ from test_framework.masternodes import check_banned, check_punished
 '''
 feature_llmqsimplepose.py
 
-Checks simple PoSe system based on LLMQ commitments
+Checks simple PoSe WUNOtem based on LLMQ commitments
 
 '''
 

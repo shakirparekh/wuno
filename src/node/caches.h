@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_NODE_CACHES_H
-#define SYSCOIN_NODE_CACHES_H
+#ifndef wentuno_NODE_CACHES_H
+#define wentuno_NODE_CACHES_H
 
 #include <cstddef>
 #include <cstdint>
@@ -17,7 +17,7 @@ struct CacheSizes {
     int64_t coins;
     int64_t tx_index;
     int64_t filter_index;
-    // SYSCOIN
+    // wentuno
     int64_t evo_dmn_db;
     int64_t evo_qc_db;
     int64_t evo_qvvecs_db;
@@ -27,4 +27,4 @@ struct CacheSizes {
 CacheSizes CalculateCacheSizes(const ArgsManager& args, size_t n_indexes = 0);
 } // namespace node
 
-#endif // SYSCOIN_NODE_CACHES_H
+#endif // wentuno_NODE_CACHES_H

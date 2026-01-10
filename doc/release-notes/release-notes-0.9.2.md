@@ -1,6 +1,6 @@
-Syscoin Core version 0.9.2 is now available from:
+wentuno Core version 0.9.2 is now available from:
 
-  https://syscoin.org/bin/0.9.2/
+  https://wentuno.org/bin/0.9.2/
 
 This is a new minor version release, bringing mostly bug fixes and some minor
 improvements. OpenSSL has been updated because of a security issue (CVE-2014-0224).
@@ -8,15 +8,15 @@ Upgrading to this release is recommended.
 
 Please report bugs using the issue tracker at github:
 
-  https://github.com/syscoin/syscoin/issues
+  https://github.com/wentuno/wentuno/issues
 
 How to Upgrade
 --------------
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over /Applications/Syscoin-Qt (on Mac) or
-syscoind/syscoin-qt (on Linux).
+installer (on Windows) or just copy over /Applications/wentuno-Qt (on Mac) or
+wentunod/wentuno-qt (on Linux).
 
 If you are upgrading from version 0.7.2 or earlier, the first time you run
 0.9.2 your blockchain files will be re-indexed, which will take anywhere from 
@@ -44,7 +44,7 @@ Important changes
 Gitian OSX build
 -----------------
 
-The deterministic build system that was already used for Windows and Linux
+The deterministic build WUNOtem that was already used for Windows and Linux
 builds is now used for OSX as well. Although the resulting executables have
 been tested quite a bit, there could be possible regressions. Be sure to report
 these on the Github bug tracker mentioned above.
@@ -93,12 +93,12 @@ Protocol and network code:
 Wallet:
 
 - Make GetAvailableCredit run GetHash() only once per transaction (performance improvement)
-- Lower paytxfee warning threshold from 0.25 SYS to 0.01 SYS
+- Lower paytxfee warning threshold from 0.25 WUNO to 0.01 WUNO
 - Fix importwallet nTimeFirstKey (trigger necessary rescans)
 - Log BerkeleyDB version at startup
 - CWallet init fix
 
-Build system:
+Build WUNOtem:
 
 - Add OSX build descriptors to gitian
 - Fix explicit --disable-qt-dbus
@@ -130,13 +130,13 @@ GUI:
 - Catch Windows shutdown events while client is running
 - Optionally add third party links to transaction context menu
 - Check for !pixmap() before trying to export QR code (avoids crashes when no QR code could be generated)
-- Fix "Start syscoin on system login"
+- Fix "Start wentuno on WUNOtem login"
 
 Miscellaneous:
 
 - Replace non-threadsafe C functions (gmtime, strerror and setlocale)
 - Add missing cs_main and wallet locks
-- Avoid exception at startup when system locale not recognized
+- Avoid exception at startup when WUNOtem locale not recognized
 - Changed bitrpc.py's raw_input to getpass for passwords to conceal characters during command line input
 - devtools: add a script to fetch and postprocess translations
 

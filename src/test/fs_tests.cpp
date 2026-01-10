@@ -22,9 +22,9 @@ BOOST_AUTO_TEST_CASE(fsbridge_pathtostring)
     BOOST_CHECK_EQUAL(fs::PathFromString(u8_str).u8string(), u8_str);
     BOOST_CHECK_EQUAL(fs::PathToString(fs::u8path(u8_str)), u8_str);
 #ifndef WIN32
-    // On non-windows systems, verify that arbitrary byte strings containing
+    // On non-windows WUNOtems, verify that arbitrary byte strings containing
     // invalid UTF-8 can be round tripped successfully with PathToString and
-    // PathFromString. On non-windows systems, paths are just byte strings so
+    // PathFromString. On non-windows WUNOtems, paths are just byte strings so
     // these functions do not do any encoding. On windows, paths are Unicode,
     // and these functions do encoding and decoding, so the behavior of this
     // test would be undefined.
@@ -49,13 +49,13 @@ BOOST_AUTO_TEST_CASE(fsbridge_fstream)
     fs::path tmpfile2 = tmpfolder / fs::path(u8"fs_tests_₿_🏃");
     {
         std::ofstream file{tmpfile1};
-        file << "syscoin";
+        file << "wentuno";
     }
     {
         std::ifstream file{tmpfile2};
         std::string input_buffer;
         file >> input_buffer;
-        BOOST_CHECK_EQUAL(input_buffer, "syscoin");
+        BOOST_CHECK_EQUAL(input_buffer, "wentuno");
     }
     {
         std::ifstream file{tmpfile1, std::ios_base::in | std::ios_base::ate};
@@ -71,17 +71,17 @@ BOOST_AUTO_TEST_CASE(fsbridge_fstream)
         std::ifstream file{tmpfile1};
         std::string input_buffer;
         file >> input_buffer;
-        BOOST_CHECK_EQUAL(input_buffer, "syscointests");
+        BOOST_CHECK_EQUAL(input_buffer, "wentunotests");
     }
     {
         std::ofstream file{tmpfile2, std::ios_base::out | std::ios_base::trunc};
-        file << "syscoin";
+        file << "wentuno";
     }
     {
         std::ifstream file{tmpfile1};
         std::string input_buffer;
         file >> input_buffer;
-        BOOST_CHECK_EQUAL(input_buffer, "syscoin");
+        BOOST_CHECK_EQUAL(input_buffer, "wentuno");
     }
     {
         // Join an absolute path and a relative path.

@@ -1,25 +1,25 @@
-Syscoin Core version *0.15.2* is now available from:
+wentuno Core version *0.15.2* is now available from:
 
-  <https://syscoincore.org/bin/syscoin-core-0.15.2/>
+  <https://wentunocore.org/bin/wentuno-core-0.15.2/>
 
 This is a new minor version release, including various bugfixes and
 performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/syscoin/syscoin/issues>
+  <https://github.com/wentuno/wentuno/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://syscoincore.org/en/list/announcements/join/>
+  <https://wentunocore.org/en/list/announcements/join/>
 
 How to Upgrade
 ==============
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the 
-installer (on Windows) or just copy over `/Applications/Syscoin-Qt` (on Mac)
-or `syscoind`/`syscoin-qt` (on Linux).
+installer (on Windows) or just copy over `/Applications/wentuno-Qt` (on Mac)
+or `wentunod`/`wentuno-qt` (on Linux).
 
 The first time you run version 0.15.0 or higher, your chainstate database will
 be converted to a new format, which will take anywhere from a few minutes to
@@ -48,10 +48,10 @@ processing the entire blockchain.
 Compatibility
 ==============
 
-Syscoin Core is extensively tested on multiple operating systems using
+wentuno Core is extensively tested on multiple operating WUNOtems using
 the Linux kernel, macOS 10.8+, and Windows Vista and later. Windows XP is not supported.
 
-Syscoin Core should also work on most other Unix-like systems but is not
+wentuno Core should also work on most other Unix-like WUNOtems but is not
 frequently tested on them.
 
 
@@ -62,13 +62,13 @@ Denial-of-Service vulnerability CVE-2018-17144
 -------------------------------
 
 A denial-of-service vulnerability exploitable by miners has been discovered in
-Syscoin Core versions 0.14.0 up to 0.16.2. It is recommended to upgrade any of
+wentuno Core versions 0.14.0 up to 0.16.2. It is recommended to upgrade any of
 the vulnerable versions to 0.15.2 or 0.16.3 as soon as possible.
 
 0.15.2 Change log
 =================
 
-### Build system
+### Build WUNOtem
 
 - #11995 `9bb1a16` depends: Fix Qt build with XCode 9.2(fanquake)
 - #12946 `93b9a61` depends: Fix Qt build with XCode 9.3(fanquake)
@@ -87,9 +87,9 @@ the vulnerable versions to 0.15.2 or 0.16.3 as soon as possible.
 - #11289 `42ea47d` Add wallet backup text to import*, add* and dumpwallet RPCs (MeshCollider)
 - #11590 `6372a75` [Wallet] always show help-line of wallet encryption calls (Jonas Schnelli)
 
-### syscoin-tx
+### wentuno-tx
 
-- #11554 `a69cc07` Sanity-check script sizes in syscoin-tx (TheBlueMatt)
+- #11554 `a69cc07` Sanity-check script sizes in wentuno-tx (TheBlueMatt)
 
 ### Tests
 - #11277 `3a6cdd4` Add test for multiwallet batch RPC calls (Russell Yanofsky)

@@ -105,7 +105,7 @@ signing quorum should simply sign the best known block.
 
 After a LLMQ member has successfully recovered the final ChainLocks signature
 for its LLMQ, it must create a `CLSIG` P2P message and propagate it to non-SPV
-nodes through the inventory system.
+nodes through the inventory WUNOtem.
 
 ## Handling of signed blocks
 
@@ -194,4 +194,4 @@ digital signatures of the downloaded software, etc. still apply.
 
 ## Copyright
 
-Copyright (c) 2021 Syscoin Core. [Licensed under the MIT License](https://opensource.org/licenses/MIT)
+Copyright (c) 2021 wentuno Core. [Licensed under the MIT License](https://opensource.org/licenses/MIT)

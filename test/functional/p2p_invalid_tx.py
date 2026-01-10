@@ -14,14 +14,14 @@ from test_framework.messages import (
     CTxOut,
 )
 from test_framework.p2p import P2PDataStore
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
 )
 from data import invalid_txs
 
 
-class InvalidTxRequestTest(SyscoinTestFramework):
+class InvalidTxRequestTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.extra_args = [[

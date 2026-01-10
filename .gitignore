@@ -2,18 +2,18 @@
 
 *.exe
 *.pdb
-src/syscoin
-src/syscoind
-src/syscoin-cli
-src/syscoin-gui
-src/syscoin-node
-src/syscoin-tx
-src/syscoin-util
-src/syscoin-chainstate
-src/syscoin-wallet
+src/wentuno
+src/wentunod
+src/wentuno-cli
+src/wentuno-gui
+src/wentuno-node
+src/wentuno-tx
+src/wentuno-util
+src/wentuno-chainstate
+src/wentuno-wallet
 src/test/fuzz/fuzz
-src/test/test_syscoin
-src/qt/test/test_syscoin-qt
+src/test/test_wentuno
+src/qt/test/test_wentuno-qt
 src/bin
 
 # autoreconf
@@ -38,8 +38,8 @@ config.log
 config.status
 configure
 libtool
-src/config/syscoin-config.h
-src/config/syscoin-config.h.in
+src/config/wentuno-config.h
+src/config/wentuno-config.h.in
 src/config/stamp-h1
 src/obj
 share/setup.nsi
@@ -51,11 +51,11 @@ src/qt/forms/ui_*.h
 
 src/qt/test/moc*.cpp
 
-src/qt/syscoin-qt.config
-src/qt/syscoin-qt.creator
-src/qt/syscoin-qt.creator.user
-src/qt/syscoin-qt.files
-src/qt/syscoin-qt.includes
+src/qt/wentuno-qt.config
+src/qt/wentuno-qt.creator
+src/qt/wentuno-qt.creator.user
+src/qt/wentuno-qt.files
+src/qt/wentuno-qt.includes
 
 .deps
 .dirstamp
@@ -93,15 +93,15 @@ src/qt/syscoin-qt.includes
 *.qm
 Makefile
 !depends/Makefile
-src/qt/syscoin-qt
-Syscoin-Qt.app
+src/qt/wentuno-qt
+wentuno-Qt.app
 
 # Qt Creator
 Makefile.am.user
 
 # Unit-tests
 Makefile.test
-syscoin-qt_test
+wentuno-qt_test
 
 # Resources cpp
 qrc_*.cpp
@@ -117,7 +117,7 @@ releases
 *.gcno
 *.gcda
 /*.info
-test_syscoin.coverage/
+test_wentuno.coverage/
 total.coverage/
 fuzz.coverage/
 coverage_percent.txt
@@ -145,7 +145,7 @@ test/.mypy_cache/
 
 /doc/doxygen/
 
-libsyscoinconsensus.pc
+libwentunoconsensus.pc
 contrib/devtools/split-debug.sh
 
 # Output from running db4 installation

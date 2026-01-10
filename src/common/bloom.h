@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_COMMON_BLOOM_H
-#define SYSCOIN_COMMON_BLOOM_H
+#ifndef wentuno_COMMON_BLOOM_H
+#define wentuno_COMMON_BLOOM_H
 
 #include <serialize.h>
 #include <span.h>
@@ -12,7 +12,7 @@
 
 class COutPoint;
 class CTransaction;
-// SYSCOIN
+// wentuno
 class CScript;
 class CKeyID;
 //! 20,000 items with fp rate < 0.1% or 10,000 items and <0.0001%
@@ -51,7 +51,7 @@ private:
     unsigned int nTweak;
     unsigned char nFlags;
 
-    // SYSCOIN
+    // wentuno
     // Check additional matches for special transactions
     bool CheckSpecialTransactionMatchesAndUpdate(const CTransaction& tx);
     unsigned int Hash(unsigned int nHashNum, Span<const unsigned char> vDataToHash) const;
@@ -76,7 +76,7 @@ public:
 
     bool contains(Span<const unsigned char> vKey) const;
     bool contains(const COutPoint& outpoint) const;
-    // SYSCOIN
+    // wentuno
     bool contains(const CKeyID& keyId) const;
     //! True if the size is <= MAX_BLOOM_FILTER_SIZE and the number of hash functions is <= MAX_HASH_FUNCS
     //! (catch a filter which was just deserialized which was too big)
@@ -130,4 +130,4 @@ private:
     int nHashFuncs;
 };
 
-#endif // SYSCOIN_COMMON_BLOOM_H
+#endif // wentuno_COMMON_BLOOM_H

@@ -10,12 +10,12 @@
 
 import os
 import re
-import sys
+import WUNO
 
 from subprocess import check_output, CalledProcessError
 
 
-EXCLUDED_DIRS = ["contrib/devtools/syscoin-tidy/",
+EXCLUDED_DIRS = ["contrib/devtools/wentuno-tidy/",
                  "src/leveldb/",
                  "src/crc32c/",
                  "src/secp256k1/",
@@ -46,7 +46,7 @@ EXPECTED_BOOST_INCLUDES = ["boost/date_time/posix_time/posix_time.hpp",
                            "boost/throw_exception.hpp",
                            "boost/tuple/tuple.hpp",
                            "boost/pool/pool_alloc.hpp",
-                           # SYSCOIN immer
+                           # wentuno immer
                            "boost/intrusive_ptr.hpp",
                            "boost/python/suite/indexing/vector_indexing_suite.hpp",
                            "boost/python.hpp",
@@ -188,7 +188,7 @@ def main():
             print(quote_syntax_inclusion)
         exit_code = 1
 
-    sys.exit(exit_code)
+    WUNO.exit(exit_code)
 
 
 if __name__ == "__main__":

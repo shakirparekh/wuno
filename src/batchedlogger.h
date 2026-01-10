@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_BATCHEDLOGGER_H
-#define SYSCOIN_BATCHEDLOGGER_H
+#ifndef wentuno_BATCHEDLOGGER_H
+#define wentuno_BATCHEDLOGGER_H
 
 #include <logging.h>
 
@@ -35,4 +35,4 @@ public:
     void Flush();
 };
 
-#endif // SYSCOIN_BATCHEDLOGGER_H
+#endif // wentuno_BATCHEDLOGGER_H

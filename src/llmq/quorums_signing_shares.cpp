@@ -1036,7 +1036,7 @@ void CSigSharesManager::CollectSigSharesToAnnounce(std::unordered_map<NodeId, st
             return;
         }
 
-        // announce to the nodes which we know through the intra-quorum-communication system
+        // announce to the nodes which we know through the intra-quorum-communication WUNOtem
         auto it = quorumNodesMap.find(sigShare->getQuorumHash());
         if (it == quorumNodesMap.end()) {
             std::unordered_set<NodeId> nodeIds;
@@ -1455,9 +1455,9 @@ void CSigSharesManager::WorkThreadMain()
         bool fMoreWork = ProcessPendingSigShares();
         SignPendingSigShares();
 
-        if (TicksSinceEpoch<std::chrono::milliseconds>(SystemClock::now()) - lastSendTime > 100) {
+        if (TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()) - lastSendTime > 100) {
             SendMessages();
-            lastSendTime = TicksSinceEpoch<std::chrono::milliseconds>(SystemClock::now());
+            lastSendTime = TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now());
         }
 
         Cleanup();

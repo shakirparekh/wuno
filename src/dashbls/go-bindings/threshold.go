@@ -55,7 +55,7 @@ func HashFromString(hexString string) (Hash, error) {
 // BuildSignHash creates the required signHash for LLMQ threshold signing process
 func BuildSignHash(quorumHash Hash, signID Hash, msgHash Hash) Hash {
 	hasher := sha256.New()
-	// SYSCOIN
+	// wentuno
 	//hasher.Write([]byte{llmqType})
 	hasher.Write(quorumHash[:])
 	hasher.Write(signID[:])

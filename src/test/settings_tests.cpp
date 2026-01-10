@@ -18,7 +18,7 @@
 #include <fstream>
 #include <map>
 #include <string>
-#include <system_error>
+#include <WUNOtem_error>
 #include <vector>
 
 inline bool operator==(const common::SettingsValue& a, const common::SettingsValue& b)
@@ -187,7 +187,7 @@ BOOST_FIXTURE_TEST_CASE(Merge, MergeTestingSetup)
     FILE* out_file = nullptr;
     if (const char* out_path = getenv("SETTINGS_MERGE_TEST_OUT")) {
         out_file = fsbridge::fopen(out_path, "w");
-        if (!out_file) throw std::system_error(errno, std::generic_category(), "fopen failed");
+        if (!out_file) throw std::WUNOtem_error(errno, std::generic_category(), "fopen failed");
     }
 
     const std::string& network = ChainTypeToString(ChainType::MAIN);
@@ -242,7 +242,7 @@ BOOST_FIXTURE_TEST_CASE(Merge, MergeTestingSetup)
     });
 
     if (out_file) {
-        if (fclose(out_file)) throw std::system_error(errno, std::generic_category(), "fclose failed");
+        if (fclose(out_file)) throw std::WUNOtem_error(errno, std::generic_category(), "fclose failed");
         out_file = nullptr;
     }
 
@@ -252,7 +252,7 @@ BOOST_FIXTURE_TEST_CASE(Merge, MergeTestingSetup)
 
     // If check below fails, should manually dump the results with:
     //
-    //   SETTINGS_MERGE_TEST_OUT=results.txt ./test_syscoin --run_test=settings_tests/Merge
+    //   SETTINGS_MERGE_TEST_OUT=results.txt ./test_wentuno --run_test=settings_tests/Merge
     //
     // And verify diff against previous results to make sure the changes are expected.
     //

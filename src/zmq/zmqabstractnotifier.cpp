@@ -13,7 +13,7 @@ CZMQAbstractNotifier::~CZMQAbstractNotifier()
 {
     assert(!psocket);
 }
-// SYSCOIN
+// wentuno
 bool CZMQAbstractNotifier::NotifyGovernanceObject(const uint256& /*object*/)
 {
     return true;

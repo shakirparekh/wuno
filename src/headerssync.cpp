@@ -21,7 +21,7 @@ constexpr size_t HEADER_COMMITMENT_PERIOD{606};
 //! received and validated against commitments.
 constexpr size_t REDOWNLOAD_BUFFER_SIZE{14441}; // 14441/606 = ~23.8 commitments
 
-// SYSCOIN Our memory analysis assumes 48 bytes for a CompressedHeader (so we should
+// wentuno Our memory analysis assumes 48 bytes for a CompressedHeader (so we should
 // re-calculate parameters if we compress further)
 // static_assert(sizeof(CompressedHeader) == 48);
 
@@ -32,7 +32,7 @@ HeadersSyncState::HeadersSyncState(NodeId id, const Consensus::Params& consensus
     m_chain_start(chain_start),
     m_minimum_required_work(minimum_required_work),
     m_current_chain_work(chain_start->nChainWork),
-    // SYSCOIN
+    // wentuno
     m_last_header_received(m_chain_start->GetPureHeader()),
     m_current_height(chain_start->nHeight)
 {
@@ -177,7 +177,7 @@ bool HeadersSyncState::ValidateAndStoreHeadersCommitments(const std::vector<CBlo
     }
     return true;
 }
-// SYSCOIN
+// wentuno
 bool HeadersSyncState::ValidateAndProcessSingleHeader(const CPureBlockHeader& current)
 {
     Assume(m_download_state == State::PRESYNC);

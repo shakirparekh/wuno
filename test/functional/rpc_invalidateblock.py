@@ -4,7 +4,7 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test the invalidateblock RPC."""
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.address import ADDRESS_BCRT1_UNSPENDABLE_DESCRIPTOR
 from test_framework.util import (
     assert_equal,
@@ -12,7 +12,7 @@ from test_framework.util import (
 )
 
 
-class InvalidateTest(SyscoinTestFramework):
+class InvalidateTest(wentunoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 3

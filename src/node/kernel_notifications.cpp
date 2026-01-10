@@ -5,12 +5,12 @@
 #include <node/kernel_notifications.h>
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <chain.h>
 #include <common/args.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <kernel/context.h>
 #include <logging.h>
 #include <node/abort.h>
@@ -29,7 +29,7 @@
 static void AlertNotify(const std::string& strMessage)
 {
     uiInterface.NotifyAlertChanged();
-#if HAVE_SYSTEM
+#if HAVE_WUNOTEM
     std::string strCmd = gArgs.GetArg("-alertnotify", "");
     if (strCmd.empty()) return;
 
@@ -73,7 +73,7 @@ void KernelNotifications::headerTip(SynchronizationState state, int64_t height, 
     uiInterface.NotifyHeaderTip(state, height, timestamp, presync);
 }
 
-// SYSCOIN
+// wentuno
 void KernelNotifications::exitWhenSynced()
 {
     StartShutdown();   

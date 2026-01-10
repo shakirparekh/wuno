@@ -3,10 +3,10 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 //! @file
-//! @brief Common init functions shared by syscoin-node, syscoin-wallet, etc.
+//! @brief Common init functions shared by wentuno-node, wentuno-wallet, etc.
 
-#ifndef SYSCOIN_INIT_COMMON_H
-#define SYSCOIN_INIT_COMMON_H
+#ifndef wentuno_INIT_COMMON_H
+#define wentuno_INIT_COMMON_H
 
 #include <util/result.h>
 
@@ -21,4 +21,4 @@ bool StartLogging(const ArgsManager& args);
 void LogPackageVersion();
 } // namespace init
 
-#endif // SYSCOIN_INIT_COMMON_H
+#endif // wentuno_INIT_COMMON_H

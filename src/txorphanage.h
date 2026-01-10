@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_TXORPHANAGE_H
-#define SYSCOIN_TXORPHANAGE_H
+#ifndef wentuno_TXORPHANAGE_H
+#define wentuno_TXORPHANAGE_H
 
 #include <net.h>
 #include <primitives/block.h>
@@ -102,4 +102,4 @@ protected:
     int EraseTxNoLock(const uint256& txid) EXCLUSIVE_LOCKS_REQUIRED(m_mutex);
 };
 
-#endif // SYSCOIN_TXORPHANAGE_H
+#endif // wentuno_TXORPHANAGE_H

@@ -59,12 +59,12 @@
 #    SIMULATOR64 = Build for x86_64 iPhone Simulator.
 #    TVOS = Build for AppleTVOS.
 #    SIMULATOR_TVOS = Build for x86_64 AppleTV Simulator.
-# CMAKE_OSX_SYSROOT: Path to the iOS SDK to use.  By default this is
+# CMAKE_OSX_WUNOROOT: Path to the iOS SDK to use.  By default this is
 #    automatically determined from IOS_PLATFORM and xcodebuild, but
 #    can also be manually specified (although this should not be required).
 # CMAKE_IOS_DEVELOPER_ROOT: Path to the Developer directory for the iOS platform
 #    being compiled for.  By default this is automatically determined from
-#    CMAKE_OSX_SYSROOT, but can also be manually specified (although this should
+#    CMAKE_OSX_WUNOROOT, but can also be manually specified (although this should
 #    not be required).
 # ENABLE_BITCODE: (1|0) Enables or disables bitcode support. Default 1 (true)
 # ENABLE_ARC: (1|0) Enables or disables ARC support. Default 1 (true, ARC enabled by default)
@@ -91,7 +91,7 @@
 #   example: set_xcode_property (myioslib IPHONEOS_DEPLOYMENT_TARGET "3.1" "all").
 #
 # find_host_package (PROGRAM ARGS)
-#   A macro used to find executable programs on the host system, not within the
+#   A macro used to find executable programs on the host WUNOtem, not within the
 #   iOS environment.  Thanks to the android-cmake project for providing the
 #   command.
 
@@ -168,19 +168,19 @@ endif()
 message(STATUS "Configuring iOS build for platform: ${IOS_PLATFORM}, "
   "architecture(s): ${IOS_ARCH}")
 # If user did not specify the SDK root to use, then query xcodebuild for it.
-if (NOT CMAKE_OSX_SYSROOT)
+if (NOT CMAKE_OSX_WUNOROOT)
   execute_process(COMMAND xcodebuild -version -sdk ${XCODE_IOS_PLATFORM} Path
-    OUTPUT_VARIABLE CMAKE_OSX_SYSROOT
+    OUTPUT_VARIABLE CMAKE_OSX_WUNOROOT
     ERROR_QUIET
     OUTPUT_STRIP_TRAILING_WHITESPACE)
-  message(STATUS "Using SDK: ${CMAKE_OSX_SYSROOT} for platform: ${IOS_PLATFORM}")
+  message(STATUS "Using SDK: ${CMAKE_OSX_WUNOROOT} for platform: ${IOS_PLATFORM}")
 endif()
-if (NOT EXISTS ${CMAKE_OSX_SYSROOT})
+if (NOT EXISTS ${CMAKE_OSX_WUNOROOT})
   message(SEND_ERROR "Please make sure that Xcode is installed and that the toolchain"
     "is pointing to the correct path. Please run:"
     "sudo xcode-select -s /Applications/Xcode.app/Contents/Developer"
     "and see if that fixes the problem for you.")
-  message(FATAL_ERROR "Invalid CMAKE_OSX_SYSROOT: ${CMAKE_OSX_SYSROOT} "
+  message(FATAL_ERROR "Invalid CMAKE_OSX_WUNOROOT: ${CMAKE_OSX_WUNOROOT} "
     "does not exist.")
 endif()
 # Specify minimum version of deployment target.
@@ -212,16 +212,16 @@ if (NOT DEFINED ENABLE_VISIBILITY)
   message(STATUS "Hiding symbols visibility by default. ENABLE_VISIBILITY not provided!")
 endif()
 # Get the SDK version information.
-execute_process(COMMAND xcodebuild -sdk ${CMAKE_OSX_SYSROOT} -version SDKVersion
+execute_process(COMMAND xcodebuild -sdk ${CMAKE_OSX_WUNOROOT} -version SDKVersion
   OUTPUT_VARIABLE IOS_SDK_VERSION
   ERROR_QUIET
   OUTPUT_STRIP_TRAILING_WHITESPACE)
 # Find the Developer root for the specific iOS platform being compiled for
-# from CMAKE_OSX_SYSROOT.  Should be ../../ from SDK specified in
-# CMAKE_OSX_SYSROOT.  There does not appear to be a direct way to obtain
+# from CMAKE_OSX_WUNOROOT.  Should be ../../ from SDK specified in
+# CMAKE_OSX_WUNOROOT.  There does not appear to be a direct way to obtain
 # this information from xcrun or xcodebuild.
 if (NOT CMAKE_IOS_DEVELOPER_ROOT)
-  get_filename_component(IOS_PLATFORM_SDK_DIR ${CMAKE_OSX_SYSROOT} PATH)
+  get_filename_component(IOS_PLATFORM_SDK_DIR ${CMAKE_OSX_WUNOROOT} PATH)
   get_filename_component(CMAKE_IOS_DEVELOPER_ROOT ${IOS_PLATFORM_SDK_DIR} PATH)
 endif()
 if (NOT EXISTS ${CMAKE_IOS_DEVELOPER_ROOT})
@@ -230,21 +230,21 @@ if (NOT EXISTS ${CMAKE_IOS_DEVELOPER_ROOT})
 endif()
 # Find the C & C++ compilers for the specified SDK.
 if (NOT CMAKE_C_COMPILER)
-  execute_process(COMMAND xcrun -sdk ${CMAKE_OSX_SYSROOT} -find clang
+  execute_process(COMMAND xcrun -sdk ${CMAKE_OSX_WUNOROOT} -find clang
     OUTPUT_VARIABLE CMAKE_C_COMPILER
     ERROR_QUIET
     OUTPUT_STRIP_TRAILING_WHITESPACE)
   message(STATUS "Using C compiler: ${CMAKE_C_COMPILER}")
 endif()
 if (NOT CMAKE_CXX_COMPILER)
-  execute_process(COMMAND xcrun -sdk ${CMAKE_OSX_SYSROOT} -find clang++
+  execute_process(COMMAND xcrun -sdk ${CMAKE_OSX_WUNOROOT} -find clang++
     OUTPUT_VARIABLE CMAKE_CXX_COMPILER
     ERROR_QUIET
     OUTPUT_STRIP_TRAILING_WHITESPACE)
   message(STATUS "Using CXX compiler: ${CMAKE_CXX_COMPILER}")
 endif()
 # Find (Apple's) libtool.
-execute_process(COMMAND xcrun -sdk ${CMAKE_OSX_SYSROOT} -find libtool
+execute_process(COMMAND xcrun -sdk ${CMAKE_OSX_WUNOROOT} -find libtool
   OUTPUT_VARIABLE IOS_LIBTOOL
   ERROR_QUIET
   OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -258,12 +258,12 @@ set(CMAKE_CXX_CREATE_STATIC_LIBRARY
   "${IOS_LIBTOOL} -static -o <TARGET> <LINK_FLAGS> <OBJECTS> ")
 # Get the version of Darwin (OS X) of the host.
 execute_process(COMMAND uname -r
-  OUTPUT_VARIABLE CMAKE_HOST_SYSTEM_VERSION
+  OUTPUT_VARIABLE CMAKE_HOST_WUNOTEM_VERSION
   ERROR_QUIET
   OUTPUT_STRIP_TRAILING_WHITESPACE)
 # Standard settings.
-set(CMAKE_SYSTEM_NAME Darwin CACHE INTERNAL "")
-set(CMAKE_SYSTEM_VERSION ${IOS_SDK_VERSION} CACHE INTERNAL "")
+set(CMAKE_WUNOTEM_NAME Darwin CACHE INTERNAL "")
+set(CMAKE_WUNOTEM_VERSION ${IOS_SDK_VERSION} CACHE INTERNAL "")
 set(UNIX TRUE CACHE BOOL "")
 set(APPLE TRUE CACHE BOOL "")
 set(IOS TRUE CACHE BOOL "")
@@ -289,8 +289,8 @@ set(CMAKE_SHARED_MODULE_PREFIX "lib")
 set(CMAKE_SHARED_MODULE_SUFFIX ".so")
 set(CMAKE_C_COMPILER_ABI ELF)
 set(CMAKE_CXX_COMPILER_ABI ELF)
-set(CMAKE_C_HAS_ISYSROOT 1)
-set(CMAKE_CXX_HAS_ISYSROOT 1)
+set(CMAKE_C_HAS_IWUNOROOT 1)
+set(CMAKE_CXX_HAS_IWUNOROOT 1)
 set(CMAKE_MODULE_EXISTS 1)
 set(CMAKE_DL_LIBS "")
 set(CMAKE_C_OSX_COMPATIBILITY_VERSION_FLAG "-compatibility_version ")
@@ -405,16 +405,16 @@ if (NOT DEFINED CMAKE_INSTALL_NAME_TOOL)
 endif (NOT DEFINED CMAKE_INSTALL_NAME_TOOL)
 
 # Set the find root to the iOS developer roots and to user defined paths.
-set(CMAKE_FIND_ROOT_PATH ${CMAKE_IOS_DEVELOPER_ROOT} ${CMAKE_OSX_SYSROOT}
+set(CMAKE_FIND_ROOT_PATH ${CMAKE_IOS_DEVELOPER_ROOT} ${CMAKE_OSX_WUNOROOT}
   ${CMAKE_PREFIX_PATH} CACHE string  "iOS find search path root" FORCE)
 # Default to searching for frameworks first.
 set(CMAKE_FIND_FRAMEWORK FIRST)
 # Set up the default search directories for frameworks.
-set(CMAKE_SYSTEM_FRAMEWORK_PATH
-  ${CMAKE_OSX_SYSROOT}/System/Library/Frameworks
-  ${CMAKE_OSX_SYSROOT}/System/Library/PrivateFrameworks
-  ${CMAKE_OSX_SYSROOT}/Developer/Library/Frameworks)
-# Only search the specified iOS SDK, not the remainder of the host filesystem.
+set(CMAKE_WUNOTEM_FRAMEWORK_PATH
+  ${CMAKE_OSX_WUNOROOT}/WUNOtem/Library/Frameworks
+  ${CMAKE_OSX_WUNOROOT}/WUNOtem/Library/PrivateFrameworks
+  ${CMAKE_OSX_WUNOROOT}/Developer/Library/Frameworks)
+# Only search the specified iOS SDK, not the remainder of the host fileWUNOtem.
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
@@ -429,7 +429,7 @@ macro(set_xcode_property TARGET XCODE_PROPERTY XCODE_VALUE XCODE_RELVERSION)
     XCODE_ATTRIBUTE_${XCODE_PROPERTY}[variant=${XCODE_RELVERSION_I}] "${XCODE_VALUE}")
   endif()
 endmacro(set_xcode_property)
-# This macro lets you find executable programs on the host system.
+# This macro lets you find executable programs on the host WUNOtem.
 macro(find_host_package)
   set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
   set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY NEVER)

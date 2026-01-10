@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SHUTDOWN_H
-#define SYSCOIN_SHUTDOWN_H
+#ifndef wentuno_SHUTDOWN_H
+#define wentuno_SHUTDOWN_H
 
 /** Request shutdown of the application. */
 void StartShutdown();
@@ -22,4 +22,4 @@ bool ShutdownRequested();
  */
 void WaitForShutdown();
 
-#endif // SYSCOIN_SHUTDOWN_H
+#endif // wentuno_SHUTDOWN_H

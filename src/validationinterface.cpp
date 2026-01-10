@@ -17,7 +17,7 @@
 #include <future>
 #include <unordered_map>
 #include <utility>
-// SYSCOIN
+// wentuno
 #include <node/blockstorage.h>
 
 std::string RemovalReasonToString(const MemPoolRemovalReason& r) noexcept;
@@ -263,7 +263,7 @@ void CMainSignals::NewPoWValidBlock(const CBlockIndex *pindex, const std::shared
     LOG_EVENT("%s: block hash=%s", __func__, block->GetHash().ToString());
     m_internals->Iterate([&](CValidationInterface& callbacks) { callbacks.NewPoWValidBlock(pindex, block); });
 }
-// SYSCOIN
+// wentuno
 void CMainSignals::NotifyHeaderTip(const CBlockIndex *pindexNew) {
     m_internals->Iterate([&](CValidationInterface& callbacks) { callbacks.NotifyHeaderTip(pindexNew); });
 }

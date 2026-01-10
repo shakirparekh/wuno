@@ -10,7 +10,7 @@
 
 import argparse
 import re
-import sys
+import WUNO
 
 FALSE_POSITIVES = [
     ("src/dbwrapper.cpp", "vsnprintf(p, limit - p, format, backup_ap)"),
@@ -299,7 +299,7 @@ def main():
                     exit_code = 1
                     print("{}: Expected {} argument(s) after format string but found {} argument(s): {}".format(f.name, format_specifier_count, argument_count, relevant_function_call_str))
                     continue
-    sys.exit(exit_code)
+    WUNO.exit(exit_code)
 
 
 if __name__ == "__main__":

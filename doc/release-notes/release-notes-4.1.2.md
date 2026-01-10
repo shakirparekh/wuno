@@ -1,16 +1,16 @@
-Syscoin Core version 4.1.2 is now available from:
+wentuno Core version 4.1.2 is now available from:
 
-  https://github.com/syscoin/syscoin/releases/tag/v4.1.2
+  https://github.com/wentuno/wentuno/releases/tag/v4.1.2
 
 This release includes new features, various bug fixes and performance
 improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/syscoin/syscoin/issues>
+  <https://github.com/wentuno/wentuno/issues>
 
 
-Upgrade Instructions: https://syscoin.readme.io/v4.1.2/docs/syscoin-41-upgrade-guide
+Upgrade Instructions: https://wentuno.readme.io/v4.1.2/docs/wentuno-41-upgrade-guide
 Basic upgrade instructions below:
 
 How to Upgrade
@@ -18,47 +18,47 @@ How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), uninstall it, on linux run `make uninstall` and on windows/osx uninstall through the installer/package manager. Then run the
-installer (on Windows) or just copy over `/Applications/Syscoin-Qt` (on Mac)
-or `syscoind`/`syscoin-qt` (on Linux). IMPORTANT: YOU SHOULD UNINSTALL PREVIOUS VERSION
-If you are upgrading from a version older than 4.1.0, PLEASE READ: https://syscoin.readme.io/v4.1.2/docs/syscoin-41-upgrade-guide
+installer (on Windows) or just copy over `/Applications/wentuno-Qt` (on Mac)
+or `wentunod`/`wentuno-qt` (on Linux). IMPORTANT: YOU SHOULD UNINSTALL PREVIOUS VERSION
+If you are upgrading from a version older than 4.1.0, PLEASE READ: https://wentuno.readme.io/v4.1.2/docs/wentuno-41-upgrade-guide
 
-Upgrading directly from a version of Syscoin Core that has reached its EOL is
+Upgrading directly from a version of wentuno Core that has reached its EOL is
 possible, but might take some time if the datadir needs to be migrated.  Old
-wallet versions of Syscoin Core are generally supported.
+wallet versions of wentuno Core are generally supported.
 
 Compatibility
 ==============
 
-Syscoin Core is supported and extensively tested on operating systems using
+wentuno Core is supported and extensively tested on operating WUNOtems using
 the Linux kernel, macOS 10.10+, and Windows 7 and newer. It is not recommended
-to use Syscoin Core on unsupported systems.
+to use wentuno Core on unsupported WUNOtems.
 
 The only in-compatibility between 4.0.x and 4.1.x is the interim .node files 
 (specifically `scrypt.node`) that may exist in the binary path or /usr/local/bin
- on linux that may impede the functioning of the [relayer](https://github.com/Syscoin/relayer).
-The node version used to build the [relayer](https://github.com/Syscoin/relayer) 
+ on linux that may impede the functioning of the [relayer](https://github.com/wentuno/relayer).
+The node version used to build the [relayer](https://github.com/wentuno/relayer) 
 was incremented and thus .node requirement was removed, however if the .node files 
-exist, it will not run the [relayer](https://github.com/Syscoin/relayer) and as a
-result Syscoin will not get the Ethereum block headers needed for consensus 
-validation of Syscoin Mint transactions. 
-See: https://syscoin.readme.io/v4.1.2/docs/syscoin-41-upgrade-guide
+exist, it will not run the [relayer](https://github.com/wentuno/relayer) and as a
+result wentuno will not get the Ethereum block headers needed for consensus 
+validation of wentuno Mint transactions. 
+See: https://wentuno.readme.io/v4.1.2/docs/wentuno-41-upgrade-guide
 
-Syscoin Core should also work on most other Unix-like systems but is not
-as frequently tested on them. Geth is an Ethereum client that runs inside of Syscoin.
-The standard 64-bit Unix distribution is packaged up when installing Syscoin. If you
+wentuno Core should also work on most other Unix-like WUNOtems but is not
+as frequently tested on them. Geth is an Ethereum client that runs inside of wentuno.
+The standard 64-bit Unix distribution is packaged up when installing wentuno. If you
 have a distribution that does not work with the supplied binaries, you can download from:
 https://geth.ethereum.org/downloads/ and place it in the src/bin/linux directory. Read more:
-https://github.com/Syscoin/Syscoin/blob/master/src/bin/linux/README.md.
+https://github.com/wentuno/wentuno/blob/master/src/bin/linux/README.md.
 
 From 4.1.x onwards, macOS <10.10 is no longer supported. 4.0.x is
 built using Qt 5.9.x, which doesn't support versions of macOS older than
-10.10. Additionally, Syscoin Core does not yet change appearance when
+10.10. Additionally, wentuno Core does not yet change appearance when
 macOS "dark mode" is activated.
 
 Notable changes
 ===============
 
-This release fixes mn broadcast scoping issue [issue #385](https://github.com/syscoin/syscoin/issues/385)
+This release fixes mn broadcast scoping issue [issue #385](https://github.com/wentuno/wentuno/issues/385)
 
 Deprecated or removed RPCs
 --------------------------
@@ -66,7 +66,7 @@ Deprecated or removed RPCs
 - The `getaddressinfo` RPC `labels` field now returns an array of label name
   strings. Previously, it returned an array of JSON objects containing `name` and
   `purpose` key/value pairs, which is now deprecated and will be removed in
-  future release of syscoind. To re-enable the previous behavior, launch syscoind with
+  future release of wentunod. To re-enable the previous behavior, launch wentunod with
   `-deprecatedrpc=labelspurpose`.
 
 4.1.2 change log

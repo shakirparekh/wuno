@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_SOCK_H
-#define SYSCOIN_UTIL_SOCK_H
+#ifndef wentuno_UTIL_SOCK_H
+#define wentuno_UTIL_SOCK_H
 
 #include <compat/compat.h>
 #include <util/threadinterrupt.h>
@@ -58,7 +58,7 @@ public:
      */
     virtual Sock& operator=(Sock&& other);
 
-    // SYSCOIN
+    // wentuno
     /**
      * Get the value of the contained socket.
      * @return socket or INVALID_SOCKET if empty
@@ -284,4 +284,4 @@ private:
 /** Return readable error string for a network error code */
 std::string NetworkErrorString(int err);
 
-#endif // SYSCOIN_UTIL_SOCK_H
+#endif // wentuno_UTIL_SOCK_H

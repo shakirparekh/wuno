@@ -4,7 +4,7 @@
 
 #include <blockencodings.h>
 #include <chainparams.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <consensus/consensus.h>
 #include <consensus/validation.h>
 #include <crypto/sha256.h>
@@ -16,7 +16,7 @@
 #include <validation.h>
 
 #include <unordered_map>
-// SYSCOIN
+// wentuno
 CBlockHeaderAndShortTxIDs::CBlockHeaderAndShortTxIDs(const CBlock& block, bool fMoveNEVMData) :
         nonce(GetRand<uint64_t>()),
         shorttxids(block.vtx.size() - 1), prefilledtxn(1), header(block) {
@@ -27,7 +27,7 @@ CBlockHeaderAndShortTxIDs::CBlockHeaderAndShortTxIDs(const CBlock& block, bool f
         const CTransaction& tx = *block.vtx[i];
         shorttxids[i - 1] = GetShortID(tx.GetWitnessHash());
     }
-    // SYSCOIN
+    // wentuno
     CBlock& blockRef = const_cast<CBlock&>(block);
     if(!block.vchNEVMBlockData.empty()) {
         if(fMoveNEVMData) {
@@ -172,7 +172,7 @@ ReadStatus PartiallyDownloadedBlock::InitData(CBlockHeaderAndShortTxIDs& cmpctbl
         if (mempool_count == shorttxids.size())
             break;
     }
-    // SYSCOIN
+    // wentuno
     if(!cmpctblock.vchNEVMBlockData.empty()) {
         vchNEVMBlockData = std::move(cmpctblock.vchNEVMBlockData);
     }
@@ -214,13 +214,13 @@ ReadStatus PartiallyDownloadedBlock::FillBlock(CBlock& block, const std::vector<
     if (vtx_missing.size() != tx_missing_offset)
         return READ_STATUS_INVALID;
 
-    // SYSCOIN
+    // wentuno
     if(!vchNEVMBlockData.empty() && block.vchNEVMBlockData.empty())
         block.vchNEVMBlockData = std::move(vchNEVMBlockData);
 
     BlockValidationState state;
     CheckBlockFn check_block = m_check_block_mock ? m_check_block_mock : CheckBlock;
-    // SYSCOIN
+    // wentuno
     if (!check_block(block, state, Params().GetConsensus(), /*fCheckPoW=*/true, /*fCheckMerkleRoot=*/true)) {
         // TODO: We really want to just check merkle tree manually here,
         // but that is expensive, and CheckBlock caches a block's

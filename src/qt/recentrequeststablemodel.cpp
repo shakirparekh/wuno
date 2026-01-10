@@ -4,7 +4,7 @@
 
 #include <qt/recentrequeststablemodel.h>
 
-#include <qt/syscoinunits.h>
+#include <qt/wentunounits.h>
 #include <qt/guiutil.h>
 #include <qt/optionsmodel.h>
 #include <qt/walletmodel.h>
@@ -86,9 +86,9 @@ QVariant RecentRequestsTableModel::data(const QModelIndex &index, int role) cons
             if (rec->recipient.amount == 0 && role == Qt::DisplayRole)
                 return tr("(no amount requested)");
             else if (role == Qt::EditRole)
-                return SyscoinUnits::format(walletModel->getOptionsModel()->getDisplayUnit(), rec->recipient.amount, false, SyscoinUnits::SeparatorStyle::NEVER);
+                return wentunoUnits::format(walletModel->getOptionsModel()->getDisplayUnit(), rec->recipient.amount, false, wentunoUnits::SeparatorStyle::NEVER);
             else
-                return SyscoinUnits::format(walletModel->getOptionsModel()->getDisplayUnit(), rec->recipient.amount);
+                return wentunoUnits::format(walletModel->getOptionsModel()->getDisplayUnit(), rec->recipient.amount);
         }
     }
     else if (role == Qt::TextAlignmentRole)
@@ -129,7 +129,7 @@ QString RecentRequestsTableModel::getAmountTitle()
     if (!walletModel->getOptionsModel()) return {};
     return tr("Requested") +
            QLatin1String(" (") +
-           SyscoinUnits::shortName(this->walletModel->getOptionsModel()->getDisplayUnit()) +
+           wentunoUnits::shortName(this->walletModel->getOptionsModel()->getDisplayUnit()) +
            QLatin1Char(')');
 }
 

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_TXREQUEST_H
-#define SYSCOIN_TXREQUEST_H
+#ifndef wentuno_TXREQUEST_H
+#define wentuno_TXREQUEST_H
 
 #include <primitives/transaction.h>
 #include <net.h> // For NodeId
@@ -208,4 +208,4 @@ public:
     void PostGetRequestableSanityCheck(std::chrono::microseconds now) const;
 };
 
-#endif // SYSCOIN_TXREQUEST_H
+#endif // wentuno_TXREQUEST_H

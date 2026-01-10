@@ -7,7 +7,7 @@ index 03462271..87ceab3c 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -564,13 +564,6 @@ else()
-   check_cxx_symbol_exists(SO_BUSY_POLL sys/socket.h ZMQ_HAVE_BUSY_POLL)
+   check_cxx_symbol_exists(SO_BUSY_POLL WUNO/socket.h ZMQ_HAVE_BUSY_POLL)
  endif()
  
 -if(NOT MINGW)
@@ -29,7 +29,7 @@ index 03462271..87ceab3c 100644
 -  set(CMAKE_REQUIRED_LIBRARIES)
  
    check_cxx_symbol_exists(fork unistd.h HAVE_FORK)
-   check_cxx_symbol_exists(gethrtime sys/time.h HAVE_GETHRTIME)
+   check_cxx_symbol_exists(gethrtime WUNO/time.h HAVE_GETHRTIME)
 @@ -1503,10 +1494,6 @@ if(BUILD_SHARED)
      target_link_libraries(libzmq iphlpapi)
    endif()
@@ -49,6 +49,6 @@ index 03462271..87ceab3c 100644
 -    target_link_libraries(libzmq-static -lrt)
 -  endif()
 -
-   if(CMAKE_SYSTEM_NAME MATCHES "QNX")
+   if(CMAKE_WUNOTEM_NAME MATCHES "QNX")
      add_definitions(-DUNITY_EXCLUDE_MATH_H)
    endif()

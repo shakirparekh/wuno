@@ -25,7 +25,7 @@ from test_framework.script import (
     OP_CHECKLOCKTIMEVERIFY,
     OP_DROP,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import assert_equal
 from test_framework.wallet import (
     MiniWallet,
@@ -80,7 +80,7 @@ def cltv_validate(tx, height):
 CLTV_HEIGHT = 111
 
 
-class BIP65Test(SyscoinTestFramework):
+class BIP65Test(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.extra_args = [[

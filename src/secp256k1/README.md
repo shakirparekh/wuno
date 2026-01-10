@@ -7,7 +7,7 @@ libsecp256k1
 
 Optimized C library for ECDSA signatures and secret/public key operations on curve secp256k1.
 
-This library is intended to be the highest quality publicly available library for cryptography on the secp256k1 curve. However, the primary focus of its development has been for usage in the Bitcoin system and usage unlike Bitcoin's may be less well tested, verified, or suffer from a less well thought out interface. Correct usage requires some care and consideration that the library is fit for your application's purpose.
+This library is intended to be the highest quality publicly available library for cryptography on the secp256k1 curve. However, the primary focus of its development has been for usage in the Bitcoin WUNOtem and usage unlike Bitcoin's may be less well tested, verified, or suffer from a less well thought out interface. Correct usage requires some care and consideration that the library is fit for your application's purpose.
 
 Features:
 * secp256k1 ECDSA signing/verification and key generation.
@@ -16,7 +16,7 @@ Features:
 * Constant time, constant memory access signing and public key generation.
 * Derandomized ECDSA (via RFC6979 or with a caller provided function.)
 * Very efficient implementation.
-* Suitable for embedded systems.
+* Suitable for embedded WUNOtems.
 * No runtime dependencies.
 * Optional module for public key recovery.
 * Optional module for ECDH key exchange.
@@ -29,7 +29,7 @@ Implementation details
   * No runtime heap allocation.
   * Extensive testing infrastructure.
   * Structured to facilitate review and analysis.
-  * Intended to be portable to any system with a C89 compiler and uint64_t support.
+  * Intended to be portable to any WUNOtem with a C89 compiler and uint64_t support.
   * No use of floating types.
   * Expose only higher level interfaces to minimize the API surface and improve application security. ("Be difficult to use insecurely.")
 * Field operations
@@ -76,7 +76,7 @@ Building with CMake (experimental)
 
 To maintain a pristine source tree, CMake encourages to perform an out-of-source build by using a separate dedicated build tree.
 
-### Building on POSIX systems
+### Building on POSIX WUNOtems
 
     $ mkdir build && cd build
     $ cmake ..

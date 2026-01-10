@@ -81,7 +81,7 @@ from test_framework.script_util import (
     script_to_p2sh_script,
     script_to_p2wsh_script,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     softfork_active,
@@ -209,7 +209,7 @@ class TestP2PConn(P2PInterface):
         self.wait_for_block(blockhash, timeout)
         return self.last_message["block"].block
 
-class SegWitTest(SyscoinTestFramework):
+class SegWitTest(wentunoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2
@@ -261,7 +261,7 @@ class SegWitTest(SyscoinTestFramework):
         self.test_v0_outputs_arent_spendable()
         self.test_block_relay()
         self.test_unnecessary_witness_before_segwit_activation()
-        # SYSCOIN
+        # wentuno
         # self.test_witness_tx_relay_before_segwit_activation()
         self.test_standardness_v0()
 
@@ -704,7 +704,7 @@ class SegWitTest(SyscoinTestFramework):
         # This transaction should not be accepted into the mempool pre- or
         # post-segwit.  Mempool acceptance will use SCRIPT_VERIFY_WITNESS which
         # will require a witness to spend a witness program regardless of
-        # segwit activation.  Note that older syscoind's that are not
+        # segwit activation.  Note that older wentunod's that are not
         # segwit-aware would also reject this for failing CLEANSTACK.
         with self.nodes[0].assert_debug_log(
                 expected_msgs=[spend_tx.hash, 'was not accepted: mandatory-script-verify-flag-failed (Witness program was passed an empty witness)']):
@@ -954,7 +954,7 @@ class SegWitTest(SyscoinTestFramework):
         assert_equal('bad-witness-merkle-match', self.nodes[0].submitblock(block.serialize().hex()))
         assert self.nodes[0].getbestblockhash() != block.hash
 
-        # Now redo commitment with the standard nonce, but let syscoind fill it in.
+        # Now redo commitment with the standard nonce, but let wentunod fill it in.
         add_witness_commitment(block, nonce=0)
         block.vtx[0].wit = CTxWitness()
         block.solve()

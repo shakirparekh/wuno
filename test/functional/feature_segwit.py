@@ -25,7 +25,7 @@ from test_framework.messages import (
     CTxIn,
     CTxOut,
     tx_from_hex,
-    #  SYSCOIN
+    #  wentuno
     MAX_BLOCK_SERIALIZED_SIZE,
     MAX_NEVM_DATA_BLOCK,
 )
@@ -44,7 +44,7 @@ from test_framework.script_util import (
     script_to_p2sh_script,
     script_to_p2wsh_script,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_greater_than_or_equal,
@@ -80,7 +80,7 @@ def find_spendable_utxo(node, min_value):
 txs_mined = {}  # txindex from txid to blockhash
 
 
-class SegWitTest(SyscoinTestFramework):
+class SegWitTest(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
 
@@ -133,7 +133,7 @@ class SegWitTest(SyscoinTestFramework):
         self.log.info("Verify sigops are counted in GBT with pre-BIP141 rules before the fork")
         txid = self.nodes[0].sendtoaddress(self.nodes[0].getnewaddress(), 1)
         tmpl = self.nodes[0].getblocktemplate({'rules': ['segwit']})
-        # SYSCOIN
+        # wentuno
         assert_equal(tmpl['sizelimit'], (MAX_BLOCK_SERIALIZED_SIZE + MAX_NEVM_DATA_BLOCK)/4)
         assert 'weightlimit' not in tmpl
         assert_equal(tmpl['sigoplimit'], 20000)

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_SYSCOINUNITS_H
-#define SYSCOIN_QT_SYSCOINUNITS_H
+#ifndef wentuno_QT_wentunoUNITS_H
+#define wentuno_QT_wentunoUNITS_H
 
 #include <consensus/amount.h>
 
@@ -26,23 +26,23 @@
 #define THIN_SP_UTF8 REAL_THIN_SP_UTF8
 #define THIN_SP_HTML HTML_HACK_SP
 
-/** Syscoin unit definitions. Encapsulates parsing and formatting
+/** wentuno unit definitions. Encapsulates parsing and formatting
    and serves as list model for drop-down selection boxes.
 */
-class SyscoinUnits: public QAbstractListModel
+class wentunoUnits: public QAbstractListModel
 {
     Q_OBJECT
 
 public:
-    explicit SyscoinUnits(QObject *parent);
+    explicit wentunoUnits(QObject *parent);
 
-    /** Syscoin units.
-      @note Source: https://en.syscoin.it/wiki/Units . Please add only sensible ones
+    /** wentuno units.
+      @note Source: https://en.wentuno.it/wiki/Units . Please add only sensible ones
      */
     enum class Unit {
-        SYS,
-        mSYS,
-        uSYS,
+        WUNO,
+        mWUNO,
+        uWUNO,
         SAT
     };
     Q_ENUM(Unit)
@@ -108,9 +108,9 @@ public:
 private:
     QList<Unit> unitlist;
 };
-typedef SyscoinUnits::Unit SyscoinUnit;
+typedef wentunoUnits::Unit wentunoUnit;
 
-QDataStream& operator<<(QDataStream& out, const SyscoinUnit& unit);
-QDataStream& operator>>(QDataStream& in, SyscoinUnit& unit);
+QDataStream& operator<<(QDataStream& out, const wentunoUnit& unit);
+QDataStream& operator>>(QDataStream& in, wentunoUnit& unit);
 
-#endif // SYSCOIN_QT_SYSCOINUNITS_H
+#endif // wentuno_QT_wentunoUNITS_H

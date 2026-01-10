@@ -1,5 +1,5 @@
 #!/bin/bash
-# Script to notarize signed Syscoin macOS binaries
+# Script to notarize signed wentuno macOS binaries
 set -e
 
 # Check for version parameter
@@ -12,11 +12,11 @@ fi
 VERSION=$1
 
 # Check if signed zip files exist
-if [ ! -f "syscoin-${VERSION}-arm64-apple-darwin-signed.zip" ] || [ ! -f "syscoin-${VERSION}-x86_64-apple-darwin-signed.zip" ]; then
+if [ ! -f "wentuno-${VERSION}-arm64-apple-darwin-signed.zip" ] || [ ! -f "wentuno-${VERSION}-x86_64-apple-darwin-signed.zip" ]; then
     echo "Error: Signed zip files not found!"
     echo "Expected files:"
-    echo "  - syscoin-${VERSION}-arm64-apple-darwin-signed.zip"
-    echo "  - syscoin-${VERSION}-x86_64-apple-darwin-signed.zip"
+    echo "  - wentuno-${VERSION}-arm64-apple-darwin-signed.zip"
+    echo "  - wentuno-${VERSION}-x86_64-apple-darwin-signed.zip"
     echo ""
     echo "Run ./sign-mac-binaries.sh ${VERSION} first."
     exit 1
@@ -35,17 +35,17 @@ if [ -z "$APPLE_TEAM_ID" ]; then
 fi
 
 # Check if credentials are stored
-if ! xcrun notarytool history --keychain-profile "syscoin-notary" 2>&1 | grep -q "id:"; then
+if ! xcrun notarytool history --keychain-profile "wentuno-notary" 2>&1 | grep -q "id:"; then
     echo "Notarization credentials not found."
     echo ""
     echo "Please store your credentials first:"
-    echo "xcrun notarytool store-credentials \"syscoin-notary\" --apple-id \"$APPLE_ID\" --team-id \"$APPLE_TEAM_ID\""
+    echo "xcrun notarytool store-credentials \"wentuno-notary\" --apple-id \"$APPLE_ID\" --team-id \"$APPLE_TEAM_ID\""
     echo ""
     echo "You'll need an app-specific password from https://appleid.apple.com"
     exit 1
 fi
 
-echo "=== Notarizing Syscoin macOS binaries v${VERSION} ==="
+echo "=== Notarizing wentuno macOS binaries v${VERSION} ==="
 echo "Apple ID: $APPLE_ID"
 echo "Team ID: $APPLE_TEAM_ID"
 
@@ -59,7 +59,7 @@ notarize_file() {
     
     # Submit for notarization
     if ! xcrun notarytool submit "$FILE" \
-        --keychain-profile "syscoin-notary" \
+        --keychain-profile "wentuno-notary" \
         --wait; then
         echo "Error: Notarization failed for $ARCH binary"
         echo ""
@@ -74,8 +74,8 @@ notarize_file() {
 }
 
 # Notarize both files
-notarize_file "syscoin-${VERSION}-arm64-apple-darwin-signed.zip" "ARM64"
-notarize_file "syscoin-${VERSION}-x86_64-apple-darwin-signed.zip" "x86_64"
+notarize_file "wentuno-${VERSION}-arm64-apple-darwin-signed.zip" "ARM64"
+notarize_file "wentuno-${VERSION}-x86_64-apple-darwin-signed.zip" "x86_64"
 
 echo -e "\n=== Notarization complete! ==="
 echo "The signed binaries have been notarized by Apple."
@@ -83,4 +83,4 @@ echo ""
 echo "Next step: Run ./staple-notarization.sh ${VERSION}"
 echo ""
 echo "To check notarization status later:"
-echo "xcrun notarytool history --keychain-profile \"syscoin-notary\"" 
+echo "xcrun notarytool history --keychain-profile \"wentuno-notary\"" 

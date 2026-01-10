@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_IPC_EXCEPTION_H
-#define SYSCOIN_IPC_EXCEPTION_H
+#ifndef wentuno_IPC_EXCEPTION_H
+#define wentuno_IPC_EXCEPTION_H
 
 #include <stdexcept>
 
@@ -17,4 +17,4 @@ public:
 };
 } // namespace ipc
 
-#endif // SYSCOIN_IPC_EXCEPTION_H
+#endif // wentuno_IPC_EXCEPTION_H

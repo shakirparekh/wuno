@@ -10,7 +10,7 @@
 #include <QMessageBox>
 #include <QMetaType>
 #include <QStyle>
-#include <QSystemTrayIcon>
+#include <QWUNOtemTrayIcon>
 #include <QTemporaryFile>
 #include <QVariant>
 #ifdef USE_DBUS
@@ -28,7 +28,7 @@
 const int FREEDESKTOP_NOTIFICATION_ICON_SIZE = 128;
 #endif
 
-Notificator::Notificator(const QString &_programName, QSystemTrayIcon *_trayIcon, QWidget *_parent) :
+Notificator::Notificator(const QString &_programName, QWUNOtemTrayIcon *_trayIcon, QWidget *_parent) :
     QObject(_parent),
     parent(_parent),
     programName(_programName),
@@ -36,7 +36,7 @@ Notificator::Notificator(const QString &_programName, QSystemTrayIcon *_trayIcon
 {
     if(_trayIcon && _trayIcon->supportsMessages())
     {
-        mode = QSystemTray;
+        mode = QWUNOtemTray;
     }
 #ifdef USE_DBUS
     interface = new QDBusInterface("org.freedesktop.Notifications",
@@ -194,14 +194,14 @@ void Notificator::notifyDBus(Class cls, const QString &title, const QString &tex
 }
 #endif
 
-void Notificator::notifySystray(Class cls, const QString &title, const QString &text, int millisTimeout)
+void Notificator::notifyWUNOtray(Class cls, const QString &title, const QString &text, int millisTimeout)
 {
-    QSystemTrayIcon::MessageIcon sicon = QSystemTrayIcon::NoIcon;
+    QWUNOtemTrayIcon::MessageIcon sicon = QWUNOtemTrayIcon::NoIcon;
     switch(cls) // Set icon based on class
     {
-    case Information: sicon = QSystemTrayIcon::Information; break;
-    case Warning: sicon = QSystemTrayIcon::Warning; break;
-    case Critical: sicon = QSystemTrayIcon::Critical; break;
+    case Information: sicon = QWUNOtemTrayIcon::Information; break;
+    case Warning: sicon = QWUNOtemTrayIcon::Warning; break;
+    case Critical: sicon = QWUNOtemTrayIcon::Critical; break;
     }
     trayIcon->showMessage(title, text, sicon, millisTimeout);
 }
@@ -223,8 +223,8 @@ void Notificator::notify(Class cls, const QString &title, const QString &text, c
         notifyDBus(cls, title, text, icon, millisTimeout);
         break;
 #endif
-    case QSystemTray:
-        notifySystray(cls, title, text, millisTimeout);
+    case QWUNOtemTray:
+        notifyWUNOtray(cls, title, text, millisTimeout);
         break;
 #ifdef Q_OS_MACOS
     case UserNotificationCenter:

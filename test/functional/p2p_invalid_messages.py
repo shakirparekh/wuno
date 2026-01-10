@@ -27,7 +27,7 @@ from test_framework.p2p import (
     P2PDataStore,
     P2PInterface,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     force_finish_mnsync,
@@ -56,14 +56,14 @@ class SenderOfAddrV2(P2PInterface):
         self.wait_until(lambda: 'sendaddrv2' in self.last_message)
 
 
-class InvalidMessagesTest(SyscoinTestFramework):
+class InvalidMessagesTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.setup_clean_chain = True
         self.extra_args = [["-whitelist=addr@127.0.0.1"]]
 
     def run_test(self):
-        # SYSCOIN
+        # wentuno
         for i in range(len(self.nodes)):
             force_finish_mnsync(self.nodes[i])
         self.test_buffer()
@@ -141,7 +141,7 @@ class InvalidMessagesTest(SyscoinTestFramework):
     def test_size(self):
         self.log.info("Test message with oversized payload disconnects peer")
         conn = self.nodes[0].add_p2p_connection(P2PDataStore())
-        # SYSCOIN 100MB
+        # wentuno 100MB
         with self.nodes[0].assert_debug_log(['Header error: Size too large (badmsg, 104857601 bytes)']):
             msg = msg_unrecognized(str_data="d" * (VALID_DATA_LIMIT + 1))
             msg = conn.build_message(msg)
@@ -167,7 +167,7 @@ class InvalidMessagesTest(SyscoinTestFramework):
         node = self.nodes[0]
         conn = node.add_p2p_connection(SenderOfAddrV2())
 
-        # Make sure syscoind signals support for ADDRv2, otherwise this test
+        # Make sure wentunod signals support for ADDRv2, otherwise this test
         # will bombard an old node with messages it does not recognize which
         # will produce unexpected results.
         conn.wait_for_sendaddrv2()
@@ -313,7 +313,7 @@ class InvalidMessagesTest(SyscoinTestFramework):
         self.log.info("Test node stays up despite many large junk messages")
         conn = self.nodes[0].add_p2p_connection(P2PDataStore())
         conn2 = self.nodes[0].add_p2p_connection(P2PDataStore())
-        # SYSCOIN
+        # wentuno
         msg_at_size = msg_unrecognized(str_data="b" * ((4 * 1024 * 1024) - 5))
         assert len(msg_at_size.serialize()) == (4 * 1024 * 1024)
 

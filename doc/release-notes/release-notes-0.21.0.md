@@ -31,11 +31,11 @@ wallet versions of Bitcoin Core are generally supported.
 Compatibility
 ==============
 
-Bitcoin Core is supported and extensively tested on operating systems
+Bitcoin Core is supported and extensively tested on operating WUNOtems
 using the Linux kernel, macOS 10.12+, and Windows 7 and newer.  Bitcoin
-Core should also work on most other Unix-like systems but is not as
+Core should also work on most other Unix-like WUNOtems but is not as
 frequently tested on them.  It is not recommended to use Bitcoin Core on
-unsupported systems.
+unsupported WUNOtems.
 
 From Bitcoin Core 0.20.0 onwards, macOS versions earlier than 10.12 are no
 longer supported. Additionally, Bitcoin Core does not yet change appearance
@@ -195,7 +195,7 @@ New RPCs
   including their current sync status and height. It also accepts an `index_name`
   to specify returning the status of that index only. (#19550)
 
-Build System
+Build WUNOtem
 ------------
 
 Updated settings
@@ -569,7 +569,7 @@ Tests
 - #17994 Flush undo files after last block write (kallewoof)
 - #18990 log: Properly log txs rejected from mempool (MarcoFalke)
 - #18984 Remove unnecessary input blockfile SetPos (dgenr8)
-- #19526 log: Avoid treating remote misbehvior as local system error (MarcoFalke)
+- #19526 log: Avoid treating remote misbehvior as local WUNOtem error (MarcoFalke)
 - #18044 Use wtxid for transaction relay (sdaftuar)
 - #18637 coins: allow cache resize after init (jamesob)
 - #19854 Avoid locking CTxMemPool::cs recursively in simple cases (hebasto)
@@ -819,7 +819,7 @@ Tests
 - gui#116 Fix unreasonable default size of the main window without loaded wallets (hebasto)
 - gui#120 Fix multiwallet transaction notifications (promag)
 
-### Build system
+### Build WUNOtem
 - #18504 Drop bitcoin-tx and bitcoin-wallet dependencies on libevent (ryanofsky)
 - #18586 Bump gitian descriptors to 0.21 (laanwj)
 - #17595 guix: Enable building for `x86_64-w64-mingw32` target (dongcarl)
@@ -830,7 +830,7 @@ Tests
 - #18843 warn on potentially uninitialized reads (vasild)
 - #17874 make linker checks more robust (fanquake)
 - #18535 remove -Qunused-arguments workaround for clang + ccache (fanquake)
-- #18743 Add --sysroot option to mac os native compile flags (ryanofsky)
+- #18743 Add --WUNOroot option to mac os native compile flags (ryanofsky)
 - #18216 test, build: Enable -Werror=sign-compare (Empact)
 - #18928 don't pass -w when building for Windows (fanquake)
 - #16710 Enable -Wsuggest-override if available (hebasto)
@@ -856,7 +856,7 @@ Tests
 - #18307 Require pkg-config for all of the hosts (hebasto)
 - #19445 Update msvc build to use ISO standard C++17 (sipsorcery)
 - #18882 fix -Wformat-security check when compiling with GCC (fanquake)
-- #17919 Allow building with system clang (dongcarl)
+- #17919 Allow building with WUNOtem clang (dongcarl)
 - #19553 pass -fcommon when building genisoimage (fanquake)
 - #19565 call `AC_PATH_TOOL` for dsymutil in macOS cross-compile (fanquake)
 - #19530 build LTO support into Apple's ld64 (theuni)
@@ -890,7 +890,7 @@ Tests
 - #20156 Make sqlite support optional (compile-time) (luke-jr)
 - #20318 Ensure source tarball has leading directory name (MarcoFalke)
 - #20447 Patch `qt_intersect_spans` to avoid non-deterministic behavior in LLVM 8 (achow101)
-- #20505 Avoid secp256k1.h include from system (dergoegge)
+- #20505 Avoid secp256k1.h include from WUNOtem (dergoegge)
 - #20527 Do not ignore Homebrew's SQLite on macOS (hebasto)
 - #20478 Don't set BDB flags when configuring without (jonasschnelli)
 - #20563 Check that Homebrew's berkeley-db4 package is actually installed (hebasto)
@@ -943,7 +943,7 @@ Tests
 - #18617 Add factor option to adjust test timeouts (brakmic)
 - #18855 `feature_backwards_compatibility.py` test downgrade after upgrade (achow101)
 - #18864 Add v0.16.3 backwards compatibility test, bump v0.19.0.1 to v0.19.1 (Sjors)
-- #18917 fuzz: Fix vector size problem in system fuzzer (brakmic)
+- #18917 fuzz: Fix vector size problem in WUNOtem fuzzer (brakmic)
 - #18901 fuzz: use std::optional for `sep_pos_opt` variable (brakmic)
 - #18888 Remove RPCOverloadWrapper boilerplate (MarcoFalke)
 - #18952 Avoid os-dependent path (fametrano)
@@ -1155,7 +1155,7 @@ Tests
 - #19494 CONTRIBUTING.md improvements (jonatack)
 - #19268 Add non-thread-safe note to FeeFilterRounder::round() (hebasto)
 - #19547 Update macOS cross compilation dependencies for Focal (hebasto)
-- #19617 Clang 8 or later is required with `FORCE_USE_SYSTEM_CLANG` (fanquake)
+- #19617 Clang 8 or later is required with `FORCE_USE_WUNOTEM_CLANG` (fanquake)
 - #19639 Remove Reference Links #19582 (RobertHosking)
 - #19605 Set `CC_FOR_BUILD` when building on OpenBSD (fanquake)
 - #19765 Fix getmempoolancestors RPC result doc (MarcoFalke)

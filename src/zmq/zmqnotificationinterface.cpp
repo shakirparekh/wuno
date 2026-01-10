@@ -21,7 +21,7 @@
 #include <string>
 #include <utility>
 #include <vector>
-// SYSCOIN
+// wentuno
 std::string fNEVMSub;
 CZMQNotificationInterface::CZMQNotificationInterface()
 {
@@ -50,7 +50,7 @@ std::unique_ptr<CZMQNotificationInterface> CZMQNotificationInterface::Create(std
         return std::make_unique<CZMQPublishRawBlockNotifier>(get_block_by_index);
     };
     factories["pubrawtx"] = CZMQAbstractNotifier::Create<CZMQPublishRawTransactionNotifier>;
-    // SYSCOIN
+    // wentuno
     factories["pubrawmempooltx"] = CZMQAbstractNotifier::Create<CZMQPublishRawMempoolTransactionNotifier>;
     factories["pubhashgovernancevote"] = CZMQAbstractNotifier::Create<CZMQPublishHashGovernanceVoteNotifier>;
     factories["pubhashgovernanceobject"] = CZMQAbstractNotifier::Create<CZMQPublishHashGovernanceObjectNotifier>;
@@ -144,7 +144,7 @@ bool CZMQNotificationInterface::Initialize()
     LogPrint(BCLog::ZMQ, "version %d.%d.%d\n", major, minor, patch);
 
     LogPrint(BCLog::ZMQ, "Initialize notification interface\n");
-    // SYSCOIN
+    // wentuno
     assert(!pcontext && !pcontextsub);
 
     pcontext = zmq_ctx_new();
@@ -182,7 +182,7 @@ void CZMQNotificationInterface::Shutdown()
 
         pcontext = nullptr;
     }
-    // SYSCOIN
+    // wentuno
     LogPrint(BCLog::ZMQ, "zmq: Shutdown subscription interface\n");
     if (pcontextsub)
     {
@@ -206,7 +206,7 @@ void TryForEachAndRemoveFailed(std::list<std::unique_ptr<CZMQAbstractNotifier>>&
         }
     }
 }
-// SYSCOIN
+// wentuno
 template <typename Function>
 void TryForEach(std::list<std::unique_ptr<CZMQAbstractNotifier>>& notifiers, const Function& func)
 {
@@ -220,7 +220,7 @@ void TryForEach(std::list<std::unique_ptr<CZMQAbstractNotifier>>& notifiers, con
     }
 }
 } // anonymous namespace
-// SYSCOIN
+// wentuno
 void CZMQNotificationInterface::NotifyNEVMComms(const std::string& commMessage, bool &bResponse)
 {
     TryForEach(notifiers, [&commMessage, &bResponse](CZMQAbstractNotifier* notifier) {
@@ -266,7 +266,7 @@ void CZMQNotificationInterface::TransactionAddedToMempool(const CTransactionRef&
     const CTransaction& tx = *ptx;
 
     TryForEachAndRemoveFailed(notifiers, [&tx, mempool_sequence](CZMQAbstractNotifier* notifier) {
-        // SYSCOIN
+        // wentuno
         return notifier->NotifyTransaction(tx) && notifier->NotifyTransactionAcceptance(tx, mempool_sequence) && (mempool_sequence > 0 || notifier->NotifyTransactionMempool(tx));
     });
 }
@@ -313,7 +313,7 @@ void CZMQNotificationInterface::BlockDisconnected(const std::shared_ptr<const CB
         return notifier->NotifyBlockDisconnect(pindexDisconnected);
     });
 }
-// SYSCOIN
+// wentuno
 void CZMQNotificationInterface::NotifyGovernanceVote(const uint256 &vote)
 {
     TryForEachAndRemoveFailed(notifiers, [&vote](CZMQAbstractNotifier* notifier) {

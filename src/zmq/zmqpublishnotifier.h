@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_ZMQ_ZMQPUBLISHNOTIFIER_H
-#define SYSCOIN_ZMQ_ZMQPUBLISHNOTIFIER_H
+#ifndef wentuno_ZMQ_ZMQPUBLISHNOTIFIER_H
+#define wentuno_ZMQ_ZMQPUBLISHNOTIFIER_H
 
 #include <zmq/zmqabstractnotifier.h>
 
@@ -14,7 +14,7 @@
 class CBlock;
 class CBlockIndex;
 class CTransaction;
-// SYSCOIN
+// wentuno
 class CNEVMBlock;
 class CNEVMHeader;
 class CBlock;
@@ -35,7 +35,7 @@ public:
           * message sequence number
     */
     bool SendZmqMessage(const char *command, const void* data, size_t size);
-    // SYSCOIN
+    // wentuno
     bool SendZmqMessageNEVM(const char *command, const void* data, size_t size);
     bool NotifyNEVMCommsCommon(const std::string& commMessage, bool &bResponse);
     /* receive zmq message
@@ -47,7 +47,7 @@ public:
     bool Initialize(void *pcontext, void *pcontextsub) override;
     void Shutdown() override;
 };
-// SYSCOIN
+// wentuno
 class CZMQPublishNEVMCommsNotifier : public CZMQAbstractPublishNotifier
 {
 public:
@@ -102,7 +102,7 @@ class CZMQPublishRawTransactionNotifier : public CZMQAbstractPublishNotifier
 public:
     bool NotifyTransaction(const CTransaction &transaction) override;
 };
-// SYSCOIN
+// wentuno
 class CZMQPublishRawMempoolTransactionNotifier : public CZMQAbstractPublishNotifier
 {
 public:
@@ -129,4 +129,4 @@ public:
     bool NotifyTransactionRemoval(const CTransaction &transaction, uint64_t mempool_sequence) override;
 };
 
-#endif // SYSCOIN_ZMQ_ZMQPUBLISHNOTIFIER_H
+#endif // wentuno_ZMQ_ZMQPUBLISHNOTIFIER_H

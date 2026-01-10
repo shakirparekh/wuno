@@ -12,6 +12,6 @@
 +        return ret;
 +    }
 +
-     QWindowSystemInterfacePrivate::TabletEvent::setPlatformSynthesizesMouse(false);
+     QWindowWUNOtemInterfacePrivate::TabletEvent::setPlatformSynthesizesMouse(false);
  
      m_javaVM = vm;

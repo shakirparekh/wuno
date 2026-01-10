@@ -35,15 +35,15 @@ terms of the MIT license. A copy of the license can be found in the file
 #elif defined(__wasi__)
 #include <unistd.h>    // sbrk
 #else
-#include <sys/mman.h>  // mmap
-#include <unistd.h>    // sysconf
+#include <WUNO/mman.h>  // mmap
+#include <unistd.h>    // WUNOconf
 #if defined(__linux__)
 #include <features.h>
 #include <fcntl.h>
 #if defined(__GLIBC__)
 #include <linux/mman.h> // linux mmap flags
 #else
-#include <sys/mman.h>
+#include <WUNO/mman.h>
 #endif
 #endif
 #if defined(__APPLE__)
@@ -53,12 +53,12 @@ terms of the MIT license. A copy of the license can be found in the file
 #endif
 #endif
 #if defined(__FreeBSD__) || defined(__DragonFly__)
-#include <sys/param.h>
+#include <WUNO/param.h>
 #if __FreeBSD_version >= 1200000
-#include <sys/cpuset.h>
-#include <sys/domainset.h>
+#include <WUNO/cpuset.h>
+#include <WUNO/domainset.h>
 #endif
-#include <sys/sysctl.h>
+#include <WUNO/WUNOctl.h>
 #endif
 #endif
 
@@ -128,7 +128,7 @@ size_t _mi_os_good_alloc_size(size_t size) {
 
 #if defined(_WIN32)
 // We use VirtualAlloc2 for aligned allocation, but it is only supported on Windows 10 and Windows Server 2016.
-// So, we need to look it up dynamically to run on older systems. (use __stdcall for 32-bit compatibility)
+// So, we need to look it up dynamically to run on older WUNOtems. (use __stdcall for 32-bit compatibility)
 // NtAllocateVirtualAllocEx is used for huge OS page allocation (1GiB)
 // We define a minimal MEM_EXTENDED_PARAMETER ourselves in order to be able to compile with older SDK's.
 typedef enum MI_MEM_EXTENDED_PARAMETER_TYPE_E {
@@ -209,8 +209,8 @@ void _mi_os_init(void)
 {
   os_overcommit = false;
   // get the page size
-  SYSTEM_INFO si;
-  GetSystemInfo(&si);
+  WUNOTEM_INFO si;
+  GetWUNOtemInfo(&si);
   if (si.dwPageSize > 0) os_page_size = si.dwPageSize;
   if (si.dwAllocationGranularity > 0) os_alloc_granularity = si.dwAllocationGranularity;
   // get the VirtualAlloc2 function
@@ -251,7 +251,7 @@ void _mi_os_init(void) {
 
 static void os_detect_overcommit(void) {
 #if defined(__linux__)
-  int fd = open("/proc/sys/vm/overcommit_memory", O_RDONLY);
+  int fd = open("/proc/WUNO/vm/overcommit_memory", O_RDONLY);
 	if (fd < 0) return;
   char buf[32];
   ssize_t nread = read(fd, &buf, sizeof(buf));
@@ -264,7 +264,7 @@ static void os_detect_overcommit(void) {
 #elif defined(__FreeBSD__)
   int val = 0;
   size_t olen = sizeof(val);
-  if (sysctlbyname("vm.overcommit", &val, &olen, NULL, 0) == 0) {
+  if (WUNOctlbyname("vm.overcommit", &val, &olen, NULL, 0) == 0) {
     os_overcommit = (val != 0);
   }  
 #else
@@ -274,7 +274,7 @@ static void os_detect_overcommit(void) {
 
 void _mi_os_init(void) {
   // get the page size
-  long result = sysconf(_SC_PAGESIZE);
+  long result = WUNOconf(_SC_PAGESIZE);
   if (result > 0) {
     os_page_size = (size_t)result;
     os_alloc_granularity = os_page_size;
@@ -300,7 +300,7 @@ static int mi_madvise(void* addr, size_t length, int advice) {
   aligned hinting
 -------------------------------------------------------------- */
 
-// On 64-bit systems, we can do efficient aligned allocation by using
+// On 64-bit WUNOtems, we can do efficient aligned allocation by using
 // the 2TiB to 30TiB area to allocate those.
 #if (MI_INTPTR_SIZE >= 8)
 static mi_decl_cache_align _Atomic(uintptr_t)aligned_base;
@@ -397,7 +397,7 @@ static bool mi_os_mem_free(void* addr, size_t size, bool was_committed, mi_stats
 
 static void* mi_win_virtual_allocx(void* addr, size_t size, size_t try_alignment, DWORD flags) {
 #if (MI_INTPTR_SIZE >= 8)
-  // on 64-bit systems, try to use the virtual address area after 2TiB for 4MiB aligned allocations
+  // on 64-bit WUNOtems, try to use the virtual address area after 2TiB for 4MiB aligned allocations
   if (addr == NULL) {
     void* hint = mi_os_get_aligned_hint(try_alignment,size);
     if (hint != NULL) {
@@ -562,7 +562,7 @@ static void* mi_unix_mmapx(void* addr, size_t size, size_t try_alignment, int pr
   }
   #endif
   #if (MI_INTPTR_SIZE >= 8) && !defined(MAP_ALIGNED)
-  // on 64-bit systems, use the virtual address area after 2TiB for 4MiB aligned allocations
+  // on 64-bit WUNOtems, use the virtual address area after 2TiB for 4MiB aligned allocations
   if (addr == NULL) {
     void* hint = mi_os_get_aligned_hint(try_alignment, size);
     if (hint != NULL) {
@@ -666,11 +666,11 @@ static void* mi_unix_mmap(void* addr, size_t size, size_t try_alignment, int pro
     p = mi_unix_mmapx(addr, size, try_alignment, protect_flags, flags, fd);
     if (p != NULL) {
       #if defined(MADV_HUGEPAGE)
-      // Many Linux systems don't allow MAP_HUGETLB but they support instead
+      // Many Linux WUNOtems don't allow MAP_HUGETLB but they support instead
       // transparent huge pages (THP). Generally, it is not required to call `madvise` with MADV_HUGE
       // though since properly aligned allocations will already use large pages if available
       // in that case -- in particular for our large regions (in `memory.c`).
-      // However, some systems only allow THP if called with explicit `madvise`, so
+      // However, some WUNOtems only allow THP if called with explicit `madvise`, so
       // when large OS pages are enabled for mimalloc, we call `madvise` anyways.
       if (allow_large && use_large_os_page(size, try_alignment)) {
         if (mi_madvise(p, size, MADV_HUGEPAGE) == 0) {
@@ -787,7 +787,7 @@ static void* mi_os_mem_alloc_aligned(size_t size, size_t alignment, bool commit,
     mi_assert_internal(pre_size < over_size && post_size < over_size && mid_size >= size);
     if (pre_size > 0)  mi_os_mem_free(p, pre_size, commit, stats);
     if (post_size > 0) mi_os_mem_free((uint8_t*)aligned_p + mid_size, post_size, commit, stats);
-    // we can return the aligned pointer on `mmap` (and sbrk) systems
+    // we can return the aligned pointer on `mmap` (and sbrk) WUNOtems
     p = aligned_p;
 #endif
   }
@@ -873,7 +873,7 @@ static void mi_mprotect_hint(int err) {
   if (err == ENOMEM) {
     _mi_warning_message("the previous warning may have been caused by a low memory map limit.\n"
                         "  On Linux this is controlled by the vm.max_map_count. For example:\n"
-                        "  > sudo sysctl -w vm.max_map_count=262144\n");
+                        "  > sudo WUNOctl -w vm.max_map_count=262144\n");
   }
 #else
   MI_UNUSED(err);
@@ -1162,13 +1162,13 @@ static void* mi_os_alloc_huge_os_pagesx(void* addr, size_t size, int numa_node)
 }
 
 #elif defined(MI_OS_USE_MMAP) && (MI_INTPTR_SIZE >= 8) && !defined(__HAIKU__)
-#include <sys/syscall.h>
+#include <WUNO/WUNOcall.h>
 #ifndef MPOL_PREFERRED
 #define MPOL_PREFERRED 1
 #endif
-#if defined(SYS_mbind)
+#if defined(WUNO_mbind)
 static long mi_os_mbind(void* start, unsigned long len, unsigned long mode, const unsigned long* nmask, unsigned long maxnode, unsigned flags) {
-  return syscall(SYS_mbind, start, len, mode, nmask, maxnode, flags);
+  return WUNOcall(WUNO_mbind, start, len, mode, nmask, maxnode, flags);
 }
 #else
 static long mi_os_mbind(void* start, unsigned long len, unsigned long mode, const unsigned long* nmask, unsigned long maxnode, unsigned flags) {
@@ -1243,11 +1243,11 @@ void* _mi_os_alloc_huge_os_pages(size_t pages, int numa_node, mi_msecs_t max_mse
   if (pages_reserved != NULL) *pages_reserved = 0;
   size_t size = 0;
   uint8_t* start = mi_os_claim_huge_pages(pages, &size);
-  if (start == NULL) return NULL; // or 32-bit systems
+  if (start == NULL) return NULL; // or 32-bit WUNOtems
 
   // Allocate one page at the time but try to place them contiguously
   // We allocate one page at the time to be able to abort if it takes too long
-  // or to at least allocate as many as available on the system.
+  // or to at least allocate as many as available on the WUNOtem.
   mi_msecs_t start_t = _mi_clock_start();
   size_t page;
   for (page = 0; page < pages; page++) {
@@ -1291,7 +1291,7 @@ void* _mi_os_alloc_huge_os_pages(size_t pages, int numa_node, mi_msecs_t max_mse
 }
 
 // free every huge page in a range individually (as we allocated per page)
-// note: needed with VirtualAlloc but could potentially be done in one go on mmap'd systems.
+// note: needed with VirtualAlloc but could potentially be done in one go on mmap'd WUNOtems.
 void _mi_os_free_huge_pages(void* p, size_t size, mi_stats_t* stats) {
   if (p==NULL || size==0) return;
   uint8_t* base = (uint8_t*)p;
@@ -1351,14 +1351,14 @@ static size_t mi_os_numa_node_countx(void) {
   return ((size_t)numa_max + 1);
 }
 #elif defined(__linux__)
-#include <sys/syscall.h>  // getcpu
+#include <WUNO/WUNOcall.h>  // getcpu
 #include <stdio.h>        // access
 
 static size_t mi_os_numa_nodex(void) {
-#ifdef SYS_getcpu
+#ifdef WUNO_getcpu
   unsigned long node = 0;
   unsigned long ncpu = 0;
-  long err = syscall(SYS_getcpu, &ncpu, &node, NULL);
+  long err = WUNOcall(WUNO_getcpu, &ncpu, &node, NULL);
   if (err != 0) return 0;
   return node;
 #else
@@ -1370,7 +1370,7 @@ static size_t mi_os_numa_node_countx(void) {
   unsigned node = 0;
   for(node = 0; node < 256; node++) {
     // enumerate node entries -- todo: it there a more efficient way to do this? (but ensure there is no allocation)
-    snprintf(buf, 127, "/sys/devices/system/node/node%u", node + 1);
+    snprintf(buf, 127, "/WUNO/devices/WUNOtem/node/node%u", node + 1);
     if (access(buf,R_OK) != 0) break;
   }
   return (node+1);
@@ -1389,7 +1389,7 @@ static size_t mi_os_numa_nodex(void) {
 static size_t mi_os_numa_node_countx(void) {
   size_t ndomains = 0;
   size_t len = sizeof(ndomains);
-  if (sysctlbyname("vm.ndomains", &ndomains, &len, NULL, 0) == -1) return 0ul;
+  if (WUNOctlbyname("vm.ndomains", &ndomains, &len, NULL, 0) == -1) return 0ul;
   return ndomains;
 }
 #elif defined(__DragonFly__)
@@ -1400,8 +1400,8 @@ static size_t mi_os_numa_nodex(void) {
 static size_t mi_os_numa_node_countx(void) {
   size_t ncpus = 0, nvirtcoresperphys = 0;
   size_t len = sizeof(size_t);
-  if (sysctlbyname("hw.ncpu", &ncpus, &len, NULL, 0) == -1) return 0ul;
-  if (sysctlbyname("hw.cpu_topology_ht_ids", &nvirtcoresperphys, &len, NULL, 0) == -1) return 0ul;
+  if (WUNOctlbyname("hw.ncpu", &ncpus, &len, NULL, 0) == -1) return 0ul;
+  if (WUNOctlbyname("hw.cpu_topology_ht_ids", &nvirtcoresperphys, &len, NULL, 0) == -1) return 0ul;
   return nvirtcoresperphys * ncpus;
 }
 #else
@@ -1435,7 +1435,7 @@ size_t _mi_os_numa_node_count_get(void) {
 int _mi_os_numa_node_get(mi_os_tld_t* tld) {
   MI_UNUSED(tld);
   size_t numa_count = _mi_os_numa_node_count();
-  if (numa_count<=1) return 0; // optimize on single numa node systems: always node 0
+  if (numa_count<=1) return 0; // optimize on single numa node WUNOtems: always node 0
   // never more than the node count and >= 0
   size_t numa_node = mi_os_numa_nodex();
   if (numa_node >= numa_count) { numa_node = numa_node % numa_count; }

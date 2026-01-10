@@ -4,8 +4,8 @@
 //
 // C++ wrapper around ctaes, a constant-time AES implementation
 
-#ifndef SYSCOIN_CRYPTO_AES_H
-#define SYSCOIN_CRYPTO_AES_H
+#ifndef wentuno_CRYPTO_AES_H
+#define wentuno_CRYPTO_AES_H
 
 extern "C" {
 #include <crypto/ctaes/ctaes.h>
@@ -64,4 +64,4 @@ private:
     unsigned char iv[AES_BLOCKSIZE];
 };
 
-#endif // SYSCOIN_CRYPTO_AES_H
+#endif // wentuno_CRYPTO_AES_H

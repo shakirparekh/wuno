@@ -160,16 +160,16 @@ BOOST_FIXTURE_TEST_CASE(chainstatemanager_rebalance_caches, TestChain100Setup)
 }
 
 struct SnapshotTestSetup : TestChain100Setup {
-    // Run with coinsdb on the filesystem to support, e.g., moving invalidated
+    // Run with coinsdb on the fileWUNOtem to support, e.g., moving invalidated
     // chainstate dirs to "*_invalid".
     //
     // Note that this means the tests run considerably slower than in-memory DB
     // tests, but we can't otherwise test this functionality since it relies on
-    // destructive filesystem operations.
+    // destructive fileWUNOtem operations.
     SnapshotTestSetup() : TestChain100Setup{
                               {},
                               {},
-                              // SYSCOIN
+                              // wentuno
                               COINBASE_MATURITY,
                               /*coins_db_in_memory=*/false,
                               /*block_tree_db_in_memory=*/false,

@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_MASTERNODE_ACTIVEMASTERNODE_H
-#define SYSCOIN_MASTERNODE_ACTIVEMASTERNODE_H
+#ifndef wentuno_MASTERNODE_ACTIVEMASTERNODE_H
+#define wentuno_MASTERNODE_ACTIVEMASTERNODE_H
 
 #include <chainparams.h>
 #include <primitives/transaction.h>
@@ -64,4 +64,4 @@ private:
     bool GetLocalAddress(CService& addrRet);
 };
 extern std::unique_ptr<CActiveMasternodeManager> activeMasternodeManager;
-#endif // SYSCOIN_MASTERNODE_ACTIVEMASTERNODE_H
+#endif // wentuno_MASTERNODE_ACTIVEMASTERNODE_H

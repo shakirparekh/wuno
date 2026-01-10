@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_COMPAT_STDIN_H
-#define SYSCOIN_COMPAT_STDIN_H
+#ifndef wentuno_COMPAT_STDIN_H
+#define wentuno_COMPAT_STDIN_H
 
 struct NoechoInst {
     NoechoInst();
@@ -15,4 +15,4 @@ struct NoechoInst {
 bool StdinTerminal();
 bool StdinReady();
 
-#endif // SYSCOIN_COMPAT_STDIN_H
+#endif // wentuno_COMPAT_STDIN_H

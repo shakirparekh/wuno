@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_TEST_UTIL_RANDOM_H
-#define SYSCOIN_TEST_UTIL_RANDOM_H
+#ifndef wentuno_TEST_UTIL_RANDOM_H
+#define wentuno_TEST_UTIL_RANDOM_H
 
 #include <consensus/amount.h>
 #include <random.h>
@@ -27,13 +27,13 @@ extern bool g_mock_deterministic_tests;
 
 enum class SeedRand {
     ZEROS, //!< Seed with a compile time constant of zeros
-    // SYSCOIN
+    // wentuno
     SEEDRAND,  //!< Call the Seed() helper
 };
 
 /** Seed the given random ctx or use the seed passed in via an environment var */
 void Seed(FastRandomContext& ctx);
-// SYSCOIN
+// wentuno
 static inline void SeedInsecureRand(SeedRand seed = SeedRand::SEEDRAND)
 {
     if (seed == SeedRand::ZEROS) {
@@ -73,4 +73,4 @@ static inline CAmount InsecureRandMoneyAmount()
     return static_cast<CAmount>(InsecureRandRange(MAX_MONEY + 1));
 }
 
-#endif // SYSCOIN_TEST_UTIL_RANDOM_H
+#endif // wentuno_TEST_UTIL_RANDOM_H

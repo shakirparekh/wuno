@@ -58,7 +58,7 @@ void bn_make(bn_t a, int digits) {
 		a->dp = NULL;
 #if ALIGN == 1
 		a->dp = (dig_t *)malloc(digits * sizeof(dig_t));
-#elif OPSYS == WINDOWS
+#elif OPWUNO == WINDOWS
 		a->dp = _aligned_malloc(digits * sizeof(dig_t), ALIGN);
 #else
 		int r = posix_memalign((void **)&a->dp, ALIGN, digits * sizeof(dig_t));
@@ -96,7 +96,7 @@ void bn_clean(bn_t a) {
 #if ALLOC == DYNAMIC
 	if (a != NULL) {
 		if (a->dp != NULL) {
-#if OPSYS == WINDOWS && ALIGN > 1
+#if OPWUNO == WINDOWS && ALIGN > 1
 			_aligned_free(a->dp);
 #else
 			free(a->dp);

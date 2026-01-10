@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Berria</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the system clipboard</source>
+        <source>Copy the currently selected address to the WUNOtem clipboard</source>
         <translation type="unfinished">Kopiatu hautatutako helbidea sistemaren arbelean</translation>
     </message>
     <message>
@@ -58,13 +58,13 @@
         <translation type="unfinished">&amp;Aukeratu</translation>
     </message>
     <message>
-        <source>These are your Syscoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished">Hauek dira zuk dirua jaso dezaketen Syscoin helbideak. Egiaztatu beti diru-kopurua eta dirua jasoko duen helbidea zuzen egon daitezen, txanponak bidali baino lehen.</translation>
+        <source>These are your wentuno addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation type="unfinished">Hauek dira zuk dirua jaso dezaketen wentuno helbideak. Egiaztatu beti diru-kopurua eta dirua jasoko duen helbidea zuzen egon daitezen, txanponak bidali baino lehen.</translation>
     </message>
     <message>
-        <source>These are your Syscoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
+        <source>These are your wentuno addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
 Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">Hauek dira ordainketak jasotzeko zure Syscoin helbideak. Jaso taulako 'Jasotzeko helbide berri bat sortu' botoia erabili helbide berri bat sortzeko.
+        <translation type="unfinished">Hauek dira ordainketak jasotzeko zure wentuno helbideak. Jaso taulako 'Jasotzeko helbide berri bat sortu' botoia erabili helbide berri bat sortzeko.
 Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
     </message>
     <message>
@@ -156,8 +156,8 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <translation type="unfinished">Diruorroaren enkriptazioa berretsi</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR SYSCOINS&lt;/b&gt;!</source>
-        <translation type="unfinished">Abisua: Diruzorroa enkriptatzen baduzu eta zure pasahitza galtzen baduzu, &lt;b&gt;SYSCOIN GUZTIAK GALDUKO DITUZU&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR wentunoS&lt;/b&gt;!</source>
+        <translation type="unfinished">Abisua: Diruzorroa enkriptatzen baduzu eta zure pasahitza galtzen baduzu, &lt;b&gt;wentuno GUZTIAK GALDUKO DITUZU&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -176,8 +176,8 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <translation type="unfinished">Diruzorroaren pasahitz zahar zein berria sartu.</translation>
     </message>
     <message>
-        <source>Remember that encrypting your wallet cannot fully protect your syscoins from being stolen by malware infecting your computer.</source>
-        <translation type="unfinished">Gogoan izan diruzorroaren enkripzioak ezin dituela zure syscoinak zure ordenagailuan izan dezakezun malware batengandik lapurtuak izatetik guztiz babestu .</translation>
+        <source>Remember that encrypting your wallet cannot fully protect your wentunos from being stolen by malware infecting your computer.</source>
+        <translation type="unfinished">Gogoan izan diruzorroaren enkripzioak ezin dituela zure wentunoak zure ordenagailuan izan dezakezun malware batengandik lapurtuak izatetik guztiz babestu .</translation>
     </message>
     <message>
         <source>Wallet to be encrypted</source>
@@ -236,7 +236,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
     </message>
 </context>
 <context>
-    <name>SyscoinApplication</name>
+    <name>wentunoApplication</name>
     <message>
         <source>Runaway exception</source>
         <translation type="unfinished">Ranaway exception</translation>
@@ -312,7 +312,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
     </message>
     </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message>
         <source>&amp;Overview</source>
         <translation type="unfinished">&amp;Gainbegiratu</translation>
@@ -379,8 +379,8 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <translation type="unfinished">Proxya &lt;b&gt;gaituta&lt;/b&gt; dago : %1</translation>
     </message>
     <message>
-        <source>Send coins to a Syscoin address</source>
-        <translation type="unfinished">Bidali txanponak Syscoin helbide batera</translation>
+        <source>Send coins to a wentuno address</source>
+        <translation type="unfinished">Bidali txanponak wentuno helbide batera</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -423,16 +423,16 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <translation type="unfinished">sinatu &amp;mezua</translation>
     </message>
     <message>
-        <source>Sign messages with your Syscoin addresses to prove you own them</source>
-        <translation type="unfinished">Sinatu mezuak Syscoinen helbideekin, jabetza frogatzeko.</translation>
+        <source>Sign messages with your wentuno addresses to prove you own them</source>
+        <translation type="unfinished">Sinatu mezuak wentunoen helbideekin, jabetza frogatzeko.</translation>
     </message>
     <message>
         <source>&amp;Verify message…</source>
         <translation type="unfinished">Mezua &amp;balioztatu</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Syscoin addresses</source>
-        <translation type="unfinished">Egiaztatu mesua Syscoin helbide espezifikoarekin erregistratu direla ziurtatzeko</translation>
+        <source>Verify messages to ensure they were signed with specified wentuno addresses</source>
+        <translation type="unfinished">Egiaztatu mesua wentuno helbide espezifikoarekin erregistratu direla ziurtatzeko</translation>
     </message>
     <message>
         <source>&amp;Load PSBT from file…</source>
@@ -538,16 +538,16 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <translation type="unfinished">Eguneratua</translation>
     </message>
     <message>
-        <source>Load Partially Signed Syscoin Transaction</source>
-        <translation type="unfinished">Partzialki sinatutako Syscoin transakzioa kargatu</translation>
+        <source>Load Partially Signed wentuno Transaction</source>
+        <translation type="unfinished">Partzialki sinatutako wentuno transakzioa kargatu</translation>
     </message>
     <message>
         <source>Load PSBT from &amp;clipboard…</source>
         <translation type="unfinished">kargatu PSBT arbeletik...</translation>
     </message>
     <message>
-        <source>Load Partially Signed Syscoin Transaction from clipboard</source>
-        <translation type="unfinished">Partzialki sinatutako Syscoin transakzioa kargatu arbeletik</translation>
+        <source>Load Partially Signed wentuno Transaction from clipboard</source>
+        <translation type="unfinished">Partzialki sinatutako wentuno transakzioa kargatu arbeletik</translation>
     </message>
     <message>
         <source>Node window</source>
@@ -562,8 +562,8 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <translation type="unfinished">&amp;Helbideak jasotzen</translation>
     </message>
     <message>
-        <source>Open a syscoin: URI</source>
-        <translation type="unfinished">Ireki syscoin bat: URI</translation>
+        <source>Open a wentuno: URI</source>
+        <translation type="unfinished">Ireki wentuno bat: URI</translation>
     </message>
     <message>
         <source>Open Wallet</source>
@@ -619,7 +619,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <translation type="unfinished">E&amp;rakutsi</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
             <numerusform />
@@ -1098,8 +1098,8 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
 <context>
     <name>OpenURIDialog</name>
     <message>
-        <source>Open syscoin URI</source>
-        <translation type="unfinished">Ireki syscoin URIa</translation>
+        <source>Open wentuno URI</source>
+        <translation type="unfinished">Ireki wentuno URIa</translation>
     </message>
     <message>
         <source>URI:</source>
@@ -1837,7 +1837,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <translation type="unfinished">Sinadura</translation>
     </message>
     <message>
-        <source>Copy the current signature to the system clipboard</source>
+        <source>Copy the current signature to the WUNOtem clipboard</source>
         <translation type="unfinished">Kopiatu oraingo sinadura sistemaren arbelera</translation>
     </message>
     <message>
@@ -2174,7 +2174,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
     </message>
     </context>
 <context>
-    <name>syscoin-core</name>
+    <name>wentuno-core</name>
     <message>
         <source>Done loading</source>
         <translation type="unfinished">Zamaketa amaitua</translation>

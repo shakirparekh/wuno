@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_DBWRAPPER_H
-#define SYSCOIN_DBWRAPPER_H
+#ifndef wentuno_DBWRAPPER_H
+#define wentuno_DBWRAPPER_H
 
 #include <attributes.h>
 #include <clientversion.h>
@@ -32,7 +32,7 @@ struct DBOptions {
 
 //! Application-specific storage settings.
 struct DBParams {
-    //! Location in the filesystem where leveldb data will be stored.
+    //! Location in the fileWUNOtem where leveldb data will be stored.
     fs::path path;
     //! Configures various leveldb cache settings.
     size_t cache_bytes;
@@ -200,7 +200,7 @@ private:
 
     std::vector<unsigned char> CreateObfuscateKey() const;
 
-    //! path to filesystem storage
+    //! path to fileWUNOtem storage
     const fs::path m_path;
 
     //! whether or not the database resides in memory
@@ -245,7 +245,7 @@ public:
         return WriteBatch(batch, fSync);
     }
 
-    //! @returns filesystem path to the on-disk data.
+    //! @returns fileWUNOtem path to the on-disk data.
     std::optional<fs::path> StoragePath() {
         if (m_is_memory) {
             return {};
@@ -292,9 +292,9 @@ public:
         ssKey2 << key_end;
         return EstimateSizeImpl(ssKey1, ssKey2);
     }
-    // SYSCOIN
+    // wentuno
     std::string GetName() const { return m_name; }
     void ResetDB();
 };
 
-#endif // SYSCOIN_DBWRAPPER_H
+#endif // wentuno_DBWRAPPER_H

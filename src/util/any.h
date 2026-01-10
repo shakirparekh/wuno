@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_ANY_H
-#define SYSCOIN_UTIL_ANY_H
+#ifndef wentuno_UTIL_ANY_H
+#define wentuno_UTIL_ANY_H
 
 #include <any>
 
@@ -23,4 +23,4 @@ T* AnyPtr(const std::any& any) noexcept
 
 } // namespace util
 
-#endif // SYSCOIN_UTIL_ANY_H
+#endif // wentuno_UTIL_ANY_H

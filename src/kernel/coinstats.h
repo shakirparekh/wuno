@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_KERNEL_COINSTATS_H
-#define SYSCOIN_KERNEL_COINSTATS_H
+#ifndef wentuno_KERNEL_COINSTATS_H
+#define wentuno_KERNEL_COINSTATS_H
 
 #include <consensus/amount.h>
 #include <crypto/muhash.h>
@@ -79,4 +79,4 @@ void RemoveCoinHash(MuHash3072& muhash, const COutPoint& outpoint, const Coin& c
 std::optional<CCoinsStats> ComputeUTXOStats(CoinStatsHashType hash_type, CCoinsView* view, node::BlockManager& blockman, const std::function<void()>& interruption_point = {});
 } // namespace kernel
 
-#endif // SYSCOIN_KERNEL_COINSTATS_H
+#endif // wentuno_KERNEL_COINSTATS_H

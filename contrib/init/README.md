@@ -1,11 +1,11 @@
 Sample configuration files for:
 ```
-systemd: syscoind.service
-Upstart: syscoind.conf
-OpenRC:  syscoind.openrc
-         syscoind.openrcconf
-CentOS:  syscoind.init
-macOS:   org.syscoin.syscoind.plist
+WUNOtemd: wentunod.service
+Upstart: wentunod.conf
+OpenRC:  wentunod.openrc
+         wentunod.openrcconf
+CentOS:  wentunod.init
+macOS:   org.wentuno.wentunod.plist
 ```
 have been made available to assist packagers in creating node packages here.
 

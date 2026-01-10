@@ -2,13 +2,13 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_WALLETVIEW_H
-#define SYSCOIN_QT_WALLETVIEW_H
+#ifndef wentuno_QT_WALLETVIEW_H
+#define wentuno_QT_WALLETVIEW_H
 
 #include <consensus/amount.h>
-// SYSCOIN
+// wentuno
 #include <qt/masternodelist.h>
-#include <qt/syscoinunits.h>
+#include <qt/wentunounits.h>
 
 #include <QStackedWidget>
 
@@ -66,7 +66,7 @@ private:
     SendCoinsDialog *sendCoinsPage;
     AddressBookPage *usedSendingAddressesPage;
     AddressBookPage *usedReceivingAddressesPage;
-    // SYSCOIN
+    // wentuno
     MasternodeList *masternodeListPage;
     TransactionView *transactionView;
 
@@ -78,7 +78,7 @@ public Q_SLOTS:
     void gotoOverviewPage();
     /** Switch to history (transactions) page */
     void gotoHistoryPage();
-    // SYSCOIN
+    // wentuno
     /** Switch to masternode page */
     void gotoMasternodePage();
     /** Switch to receive coins page */
@@ -125,9 +125,9 @@ Q_SIGNALS:
     /** Encryption status of wallet changed */
     void encryptionStatusChanged();
     /** Notify that a new transaction appeared */
-    void incomingTransaction(const QString& date, SyscoinUnit unit, const CAmount& amount, const QString& type, const QString& address, const QString& label, const QString& walletName);
+    void incomingTransaction(const QString& date, wentunoUnit unit, const CAmount& amount, const QString& type, const QString& address, const QString& label, const QString& walletName);
     /** Notify that the out of sync warning icon has been pressed */
     void outOfSyncWarningClicked();
 };
 
-#endif // SYSCOIN_QT_WALLETVIEW_H
+#endif // wentuno_QT_WALLETVIEW_H

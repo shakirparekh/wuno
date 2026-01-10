@@ -4,10 +4,10 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import assert_raises_rpc_error
 
-class WalletCrossChain(SyscoinTestFramework):
+class WalletCrossChain(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
 
@@ -23,7 +23,7 @@ class WalletCrossChain(SyscoinTestFramework):
 
         # Switch node 1 to testnet before starting it.
         self.nodes[1].chain = 'testnet3'
-        # SYSCOIN
+        # wentuno
         self.nodes[1].extra_args = ['-zmqpubnevm=', '-maxconnections=0', '-prune=550'] # disable testnet sync
         self.nodes[1].replace_in_config([('regtest=', 'testnet='), ('[regtest]', '[test]')])
         self.start_nodes()

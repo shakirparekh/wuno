@@ -1,8 +1,8 @@
 # Disable files from being included in completions by default
-complete --command syscoin-util --no-files
+complete --command wentuno-util --no-files
 
 # Extract options
-function __fish_syscoin_util_get_options
+function __fish_wentuno_util_get_options
     set --local cmd (commandline -opc)[1]
     set --local options
 
@@ -14,7 +14,7 @@ function __fish_syscoin_util_get_options
 end
 
 # Extract commands
-function __fish_syscoin_util_get_commands
+function __fish_wentuno_util_get_commands
     set --local cmd (commandline -opc)[1]
     set --local commands
 
@@ -26,13 +26,13 @@ end
 
 # Add options
 complete \
-    --command syscoin-util \
-    --condition "not __fish_seen_subcommand_from (__fish_syscoin_util_get_commands)" \
-    --arguments "(__fish_syscoin_util_get_options)"
+    --command wentuno-util \
+    --condition "not __fish_seen_subcommand_from (__fish_wentuno_util_get_commands)" \
+    --arguments "(__fish_wentuno_util_get_options)"
 
 # Add commands
 complete \
-    --command syscoin-util \
-    --condition "not __fish_seen_subcommand_from (__fish_syscoin_util_get_commands)" \
-    --arguments "(__fish_syscoin_util_get_commands)"
+    --command wentuno-util \
+    --condition "not __fish_seen_subcommand_from (__fish_wentuno_util_get_commands)" \
+    --arguments "(__fish_wentuno_util_get_commands)"
 

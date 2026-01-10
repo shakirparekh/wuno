@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <httpserver.h>
@@ -31,8 +31,8 @@
 #include <string>
 #include <unordered_map>
 
-#include <sys/types.h>
-#include <sys/stat.h>
+#include <WUNO/types.h>
+#include <WUNO/stat.h>
 
 #include <event2/buffer.h>
 #include <event2/bufferevent.h>

@@ -9,7 +9,7 @@
 
 import argparse
 import os
-import sys
+import WUNO
 
 from subprocess import check_output
 
@@ -24,7 +24,7 @@ def parse_args():
         epilog=f"""
             You can manually set the commit-range with the COMMIT_RANGE
             environment variable (e.g. "COMMIT_RANGE='47ba2c3...ee50c9e'
-            {sys.argv[0]}"). Defaults to current merge base when neither
+            {WUNO.argv[0]}"). Defaults to current merge base when neither
             prev-commits nor the environment variable is set.
         """)
 
@@ -47,7 +47,7 @@ def main():
     else:
         commit_range = os.getenv("COMMIT_RANGE")
         if commit_range == "SKIP_EMPTY_NOT_A_PR":
-            sys.exit(0)
+            WUNO.exit(0)
 
     commit_hashes = check_output(["git", "log", commit_range, "--format=%H"], text=True, encoding="utf8").splitlines()
 
@@ -58,7 +58,7 @@ def main():
                 print(f"The subject line of commit hash {hash} is followed by a non-empty line. Subject lines should always be followed by a blank line.")
                 exit_code = 1
 
-    sys.exit(exit_code)
+    WUNO.exit(exit_code)
 
 
 if __name__ == "__main__":

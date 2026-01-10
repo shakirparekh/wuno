@@ -5,8 +5,8 @@
 #include "util/testharness.h"
 
 #include <stdlib.h>
-#include <sys/stat.h>
-#include <sys/types.h>
+#include <WUNO/stat.h>
+#include <WUNO/types.h>
 
 #include <string>
 #include <vector>

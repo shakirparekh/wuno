@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_LLMQ_QUORUMS_INIT_H
-#define SYSCOIN_LLMQ_QUORUMS_INIT_H
+#ifndef wentuno_LLMQ_QUORUMS_INIT_H
+#define wentuno_LLMQ_QUORUMS_INIT_H
 
 class CDBWrapper;
 class CConnman;
@@ -18,13 +18,13 @@ namespace llmq
 static const bool DEFAULT_WATCH_QUORUMS = false;
 
 // Init/destroy LLMQ globals
-void InitLLMQSystem(const DBParams& quorumCommitmentDB, const DBParams& quorumVectorDB, const DBParams& quorumSkDB, bool unitTests, CConnman& connman, BanMan& banman, PeerManager& peerman, ChainstateManager& chainman, bool fWipe = false);
-void DestroyLLMQSystem();
+void InitLLMQWUNOtem(const DBParams& quorumCommitmentDB, const DBParams& quorumVectorDB, const DBParams& quorumSkDB, bool unitTests, CConnman& connman, BanMan& banman, PeerManager& peerman, ChainstateManager& chainman, bool fWipe = false);
+void DestroyLLMQWUNOtem();
 
 // Manage scheduled tasks, threads, listeners etc.
-void StartLLMQSystem();
-void StopLLMQSystem();
-void InterruptLLMQSystem();
+void StartLLMQWUNOtem();
+void StopLLMQWUNOtem();
+void InterruptLLMQWUNOtem();
 } // namespace llmq
 
-#endif // SYSCOIN_LLMQ_QUORUMS_INIT_H
+#endif // wentuno_LLMQ_QUORUMS_INIT_H

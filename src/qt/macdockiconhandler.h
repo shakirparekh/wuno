@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_MACDOCKICONHANDLER_H
-#define SYSCOIN_QT_MACDOCKICONHANDLER_H
+#ifndef wentuno_QT_MACDOCKICONHANDLER_H
+#define wentuno_QT_MACDOCKICONHANDLER_H
 
 #include <QObject>
 
@@ -24,4 +24,4 @@ private:
     MacDockIconHandler();
 };
 
-#endif // SYSCOIN_QT_MACDOCKICONHANDLER_H
+#endif // wentuno_QT_MACDOCKICONHANDLER_H

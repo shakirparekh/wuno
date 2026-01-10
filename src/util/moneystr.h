@@ -6,8 +6,8 @@
 /**
  * Money parsing/formatting utilities.
  */
-#ifndef SYSCOIN_UTIL_MONEYSTR_H
-#define SYSCOIN_UTIL_MONEYSTR_H
+#ifndef wentuno_UTIL_MONEYSTR_H
+#define wentuno_UTIL_MONEYSTR_H
 
 #include <consensus/amount.h>
 
@@ -21,4 +21,4 @@ std::string FormatMoney(const CAmount n);
 /** Parse an amount denoted in full coins. E.g. "0.0034" supplied on the command line. **/
 std::optional<CAmount> ParseMoney(const std::string& str);
 
-#endif // SYSCOIN_UTIL_MONEYSTR_H
+#endif // wentuno_UTIL_MONEYSTR_H

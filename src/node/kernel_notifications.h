@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_NODE_KERNEL_NOTIFICATIONS_H
-#define SYSCOIN_NODE_KERNEL_NOTIFICATIONS_H
+#ifndef wentuno_NODE_KERNEL_NOTIFICATIONS_H
+#define wentuno_NODE_KERNEL_NOTIFICATIONS_H
 
 #include <kernel/notifications_interface.h>
 
@@ -37,7 +37,7 @@ public:
 
     void fatalError(const std::string& debug_message, const bilingual_str& user_message = {}) override;
 
-    // SYSCOIN
+    // wentuno
     void exitWhenSynced() override;
 
     //! Block height after which blockTip notification will return Interrupted{}, if >0.
@@ -52,4 +52,4 @@ void ReadNotificationArgs(const ArgsManager& args, KernelNotifications& notifica
 
 } // namespace node
 
-#endif // SYSCOIN_NODE_KERNEL_NOTIFICATIONS_H
+#endif // wentuno_NODE_KERNEL_NOTIFICATIONS_H

@@ -5,7 +5,7 @@
 """
 A test for RPC users with restricted permissions
 """
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     str_to_b64str,
@@ -24,7 +24,7 @@ def rpccall(node, user, method):
     return resp
 
 
-class RPCWhitelistTest(SyscoinTestFramework):
+class RPCWhitelistTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
 
@@ -52,7 +52,7 @@ class RPCWhitelistTest(SyscoinTestFramework):
         ]
         # These commands shouldn't be allowed for any user to test failures
         self.never_allowed = ["getnetworkinfo"]
-        with open(self.nodes[0].datadir_path / "syscoin.conf", "a", encoding="utf8") as f:
+        with open(self.nodes[0].datadir_path / "wentuno.conf", "a", encoding="utf8") as f:
             f.write("\nrpcwhitelistdefault=0\n")
             for user in self.users:
                 f.write("rpcauth=" + user[0] + ":" + user[1] + "\n")

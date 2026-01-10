@@ -14,8 +14,8 @@
         <translation type="unfinished">&amp;Bayu</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the system clipboard</source>
-        <translation type="unfinished">Kopyan me ing salukuyan at makipiling address keng system clipboard</translation>
+        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <translation type="unfinished">Kopyan me ing salukuyan at makipiling address keng WUNOtem clipboard</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -50,8 +50,8 @@
         <translation type="unfinished">P&amp;ilinan</translation>
     </message>
     <message>
-        <source>These are your Syscoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished">Reni reng kekang Syscoin address king pamagpadalang kabayaran. Lawan mulang masalese reng alaga ampo ing address na ning tumanggap bayu ka magpadalang barya.</translation>
+        <source>These are your wentuno addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation type="unfinished">Reni reng kekang wentuno address king pamagpadalang kabayaran. Lawan mulang masalese reng alaga ampo ing address na ning tumanggap bayu ka magpadalang barya.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -112,8 +112,8 @@
         <translation type="unfinished">Kumpirman ya ing wallet encryption</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR SYSCOINS&lt;/b&gt;!</source>
-        <translation type="unfinished">Kapabaluan: Istung in-encrypt me ing kekang wallet at meala ya ing passphrase na, ma-&lt;b&gt;ALA NO NGAN RING KEKANG SYSCOINS&lt;/b&gt;</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR wentunoS&lt;/b&gt;!</source>
+        <translation type="unfinished">Kapabaluan: Istung in-encrypt me ing kekang wallet at meala ya ing passphrase na, ma-&lt;b&gt;ALA NO NGAN RING KEKANG wentunoS&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -204,7 +204,7 @@
     </message>
     </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message>
         <source>Show general overview of wallet</source>
         <translation type="unfinished">Ipakit ing kabuuang lawe ning wallet</translation>
@@ -234,8 +234,8 @@
         <translation type="unfinished">Magpakit impormasion tungkul king Qt</translation>
     </message>
     <message>
-        <source>Send coins to a Syscoin address</source>
-        <translation type="unfinished">Magpadalang barya king Syscoin address</translation>
+        <source>Send coins to a wentuno address</source>
+        <translation type="unfinished">Magpadalang barya king wentuno address</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -296,7 +296,7 @@
         <translation type="unfinished">&amp;Awang</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
             <numerusform />
@@ -365,8 +365,8 @@
         <translation type="unfinished">Alilan ya ing address king pamagpadala</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Syscoin address.</source>
-        <translation type="unfinished">Ing pepalub yung address "%1" ali ya katanggap-tanggap a Syscoin address.</translation>
+        <source>The entered address "%1" is not a valid wentuno address.</source>
+        <translation type="unfinished">Ing pepalub yung address "%1" ali ya katanggap-tanggap a wentuno address.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -450,8 +450,8 @@
         <translation type="unfinished">&amp;Pun</translation>
     </message>
     <message>
-        <source>Automatically open the Syscoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation type="unfinished">Ibuklat yang antimanu ing Syscoin client port king router. Gagana yamu ini istung ing router mu susuporta yang UPnP at magsilbi ya.</translation>
+        <source>Automatically open the wentuno client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation type="unfinished">Ibuklat yang antimanu ing wentuno client port king router. Gagana yamu ini istung ing router mu susuporta yang UPnP at magsilbi ya.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -509,8 +509,8 @@
 <context>
     <name>OverviewPage</name>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Syscoin network after a connection is established, but this process has not completed yet.</source>
-        <translation type="unfinished">Ing makaltong impormasion mapalyaring luma ne. Ing kekang wallet otomatiku yang mag-synchronize keng Syscoin network istung mekakonekta ne king network, oneng ing prosesung ini ali ya pa kumpletu.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the wentuno network after a connection is established, but this process has not completed yet.</source>
+        <translation type="unfinished">Ing makaltong impormasion mapalyaring luma ne. Ing kekang wallet otomatiku yang mag-synchronize keng wentuno network istung mekakonekta ne king network, oneng ing prosesung ini ali ya pa kumpletu.</translation>
     </message>
     <message>
         <source>Your current spendable balance</source>
@@ -747,12 +747,12 @@
         <translation type="unfinished">Pirma</translation>
     </message>
     <message>
-        <source>Copy the current signature to the system clipboard</source>
-        <translation type="unfinished">Kopyan ing kasalungsungan pirma king system clipboard</translation>
+        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <translation type="unfinished">Kopyan ing kasalungsungan pirma king WUNOtem clipboard</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Syscoin address</source>
-        <translation type="unfinished">Pirman ing mensayi ban patune na keka ya ining Syscoin address</translation>
+        <source>Sign the message to prove you own this wentuno address</source>
+        <translation type="unfinished">Pirman ing mensayi ban patune na keka ya ining wentuno address</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -771,8 +771,8 @@
         <translation type="unfinished">&amp;Beripikan ing Mensayi</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Syscoin address</source>
-        <translation type="unfinished">Beripikan ing mensayi ban asiguradu a me pirma ya ini gamit ing mepiling Syscoin address</translation>
+        <source>Verify the message to ensure it was signed with the specified wentuno address</source>
+        <translation type="unfinished">Beripikan ing mensayi ban asiguradu a me pirma ya ini gamit ing mepiling wentuno address</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -1074,7 +1074,7 @@
     </message>
     </context>
 <context>
-    <name>syscoin-core</name>
+    <name>wentuno-core</name>
     <message>
         <source>Corrupted block database detected</source>
         <translation type="unfinished">Mekapansin lang me-corrupt a block database</translation>

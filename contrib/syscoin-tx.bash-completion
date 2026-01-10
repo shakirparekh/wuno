@@ -1,15 +1,15 @@
-# bash programmable completion for syscoin-tx(1)
+# bash programmable completion for wentuno-tx(1)
 # Copyright (c) 2016 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-_syscoin_tx() {
+_wentuno_tx() {
     local cur prev words=() cword
-    local syscoin_tx
+    local wentuno_tx
 
-    # save and use original argument to invoke syscoin-tx for -help
+    # save and use original argument to invoke wentuno-tx for -help
     # it might not be in $PATH
-    syscoin_tx="$1"
+    wentuno_tx="$1"
 
     COMPREPLY=()
     _get_comp_words_by_ref -n =: cur prev words cword
@@ -27,15 +27,15 @@ _syscoin_tx() {
 
     if [[ "$cword" == 1 || ( "$prev" != "-create" && "$prev" == -* ) ]]; then
         # only options (or an uncompletable hex-string) allowed
-        # parse syscoin-tx -help for options
+        # parse wentuno-tx -help for options
         local helpopts
-        helpopts=$($syscoin_tx -help | sed -e '/^  -/ p' -e d )
+        helpopts=$($wentuno_tx -help | sed -e '/^  -/ p' -e d )
         COMPREPLY=( $( compgen -W "$helpopts" -- "$cur" ) )
     else
         # only commands are allowed
         # parse -help for commands
         local helpcmds
-        helpcmds=$($syscoin_tx -help | sed -e '1,/Commands:/d' -e 's/=.*/=/' -e '/^  [a-z]/ p' -e d )
+        helpcmds=$($wentuno_tx -help | sed -e '1,/Commands:/d' -e 's/=.*/=/' -e '/^  [a-z]/ p' -e d )
         COMPREPLY=( $( compgen -W "$helpcmds" -- "$cur" ) )
     fi
 
@@ -46,7 +46,7 @@ _syscoin_tx() {
 
     return 0
 } &&
-complete -F _syscoin_tx syscoin-tx
+complete -F _wentuno_tx wentuno-tx
 
 # Local variables:
 # mode: shell-script

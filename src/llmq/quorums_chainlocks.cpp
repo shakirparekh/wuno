@@ -281,7 +281,7 @@ bool CChainLocksHandler::VerifyChainLockShare(const CChainLockSig& clsig, const 
             ret = std::make_pair(i, quorum);
             {
                 LOCK(cs);
-                sigChecked.emplace(hash, TicksSinceEpoch<std::chrono::milliseconds>(SystemClock::now()));
+                sigChecked.emplace(hash, TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()));
             }
             return true;
         }
@@ -338,7 +338,7 @@ bool CChainLocksHandler::VerifyAggregatedChainLock(const CChainLockSig& clsig, c
     bool result = clsig.sig.VerifyInsecureAggregated(quorumPublicKeys, hashes);
     if(result) {
         LOCK(cs);
-        sigChecked.emplace(hash, TicksSinceEpoch<std::chrono::milliseconds>(SystemClock::now()));
+        sigChecked.emplace(hash, TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()));
     }
     return result;
 }
@@ -567,7 +567,7 @@ bool CChainLocksHandler::ProcessNewChainLock(const NodeId from, llmq::CChainLock
     }
     {
         LOCK(cs);
-        seenChainLocks.emplace(hash, TicksSinceEpoch<std::chrono::milliseconds>(SystemClock::now()));
+        seenChainLocks.emplace(hash, TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()));
     }
     if (from != -1) {
         LOCK(cs_main);
@@ -935,7 +935,7 @@ void CChainLocksHandler::Cleanup()
 
     {
         LOCK(cs);
-        if (TicksSinceEpoch<std::chrono::milliseconds>(SystemClock::now()) - lastCleanupTime < CLEANUP_INTERVAL) {
+        if (TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()) - lastCleanupTime < CLEANUP_INTERVAL) {
             return;
         }
     }
@@ -943,14 +943,14 @@ void CChainLocksHandler::Cleanup()
     LOCK(cs);
 
     for (auto it = seenChainLocks.begin(); it != seenChainLocks.end(); ) {
-        if (TicksSinceEpoch<std::chrono::milliseconds>(SystemClock::now()) - it->second >= CLEANUP_SEEN_TIMEOUT) {
+        if (TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()) - it->second >= CLEANUP_SEEN_TIMEOUT) {
             it = seenChainLocks.erase(it);
         } else {
             ++it;
         }
     }
     for (auto it = sigChecked.begin(); it != sigChecked.end(); ) {
-        if (TicksSinceEpoch<std::chrono::milliseconds>(SystemClock::now()) - it->second >= CLEANUP_SEEN_TIMEOUT) {
+        if (TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()) - it->second >= CLEANUP_SEEN_TIMEOUT) {
             it = sigChecked.erase(it);
         } else {
             ++it;
@@ -974,7 +974,7 @@ void CChainLocksHandler::Cleanup()
             }
         }
     }
-    lastCleanupTime = TicksSinceEpoch<std::chrono::milliseconds>(SystemClock::now());
+    lastCleanupTime = TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now());
 }
 
 bool AreChainLocksEnabled()

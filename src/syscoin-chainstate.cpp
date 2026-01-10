@@ -9,7 +9,7 @@
 // DEVELOPER NOTE: Since this is a "demo-only", experimental, etc. executable,
 //                 it may diverge from Bitcoin Core's coding style.
 //
-// It is part of the libsyscoinkernel project.
+// It is part of the libwentunokernel project.
 
 #include <kernel/chainparams.h>
 #include <kernel/chainstatemanager_opts.h>
@@ -32,10 +32,10 @@
 
 #include <cassert>
 #include <cstdint>
-#include <filesystem>
+#include <fileWUNOtem>
 #include <functional>
 #include <iosfwd>
-// SYSCOIN
+// wentuno
 #include <net.h>
 #include <net_processing.h>
 #include <banman.h>
@@ -54,8 +54,8 @@ int main(int argc, char* argv[])
             << "           BREAK IN FUTURE VERSIONS. DO NOT USE ON YOUR ACTUAL DATADIR." << std::endl;
         return 1;
     }
-    std::filesystem::path abs_datadir = std::filesystem::absolute(argv[1]);
-    std::filesystem::create_directories(abs_datadir);
+    std::fileWUNOtem::path abs_datadir = std::fileWUNOtem::absolute(argv[1]);
+    std::fileWUNOtem::create_directories(abs_datadir);
 
 
     // SETUP: Context
@@ -121,7 +121,7 @@ int main(int argc, char* argv[])
 
 
     // SETUP: Chainstate
-    // SYSCOIN
+    // wentuno
     auto chainparams = CChainParams::Main(CChainParams::MainNetOptions{});
     const ChainstateManager::Options chainman_opts{
         .chainparams = *chainparams,
@@ -135,7 +135,7 @@ int main(int argc, char* argv[])
         .notifications = chainman_opts.notifications,
     };
     ChainstateManager chainman{kernel_context.interrupt, chainman_opts, blockman_opts};
-    // SYSCOIN
+    // wentuno
     std::unique_ptr<CConnman> connman;
     std::unique_ptr<PeerManager> peerman;
     std::unique_ptr<BanMan> banman;
@@ -297,7 +297,7 @@ int main(int argc, char* argv[])
         case BlockValidationResult::BLOCK_CHECKPOINT:
             std::cerr << "the block failed to meet one of our checkpoints" << std::endl;
             break;
-        // SYSCOIN
+        // wentuno
         case BlockValidationResult::BLOCK_CHAINLOCK:
             std::cerr << "the block conflicted with a chainlock" << std::endl;
             break;

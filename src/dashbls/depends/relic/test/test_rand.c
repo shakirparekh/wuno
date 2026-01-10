@@ -382,7 +382,7 @@ static int test(void) {
 #elif RAND == CALL
 
 #include <unistd.h>
-#include <sys/stat.h>
+#include <WUNO/stat.h>
 #include <fcntl.h>
 
 static void test_bytes(uint8_t *buf, int size, void *args) {

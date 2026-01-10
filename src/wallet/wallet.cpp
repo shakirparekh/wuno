@@ -6,7 +6,7 @@
 #include <wallet/wallet.h>
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 #include <addresstype.h>
 #include <blockfilter.h>
@@ -14,7 +14,7 @@
 #include <coins.h>
 #include <common/args.h>
 #include <common/settings.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <consensus/amount.h>
 #include <consensus/consensus.h>
 #include <consensus/validation.h>
@@ -76,7 +76,7 @@
 #include <condition_variable>
 #include <exception>
 #include <optional>
-// SYSCOIN
+// wentuno
 #include <evo/deterministicmns.h>
 
 #include <stdexcept>
@@ -1084,7 +1084,7 @@ CWalletTx* CWallet::AddToWallet(CTransactionRef tx, const TxState& state, const 
         wtx.m_it_wtxOrdered = wtxOrdered.insert(std::make_pair(wtx.nOrderPos, &wtx));
         wtx.nTimeSmart = ComputeTimeSmart(wtx, rescanning_old_block);
         AddToSpends(wtx, &batch);
-        // SYSCOIN
+        // wentuno
         auto mnList = deterministicMNManager->GetListAtChainTip();
         for(unsigned int i = 0; i < wtx.tx->vout.size(); ++i) {
             if (IsMine(wtx.tx->vout[i]) && !IsSpent(COutPoint(hash, i))) {
@@ -1156,7 +1156,7 @@ CWalletTx* CWallet::AddToWallet(CTransactionRef tx, const TxState& state, const 
     // Notify UI of new or updated transaction
     NotifyTransactionChanged(hash, fInsertedNew ? CT_NEW : CT_UPDATED);
 
-#if HAVE_SYSTEM
+#if HAVE_WUNOTEM
     // notify an external script when a wallet transaction comes in or is updated
     std::string strCmd = m_notify_tx_changed_script;
 
@@ -1174,9 +1174,9 @@ CWalletTx* CWallet::AddToWallet(CTransactionRef tx, const TxState& state, const 
 #ifndef WIN32
         // Substituting the wallet name isn't currently supported on windows
         // because windows shell escaping has not been implemented yet:
-        // https://github.com/syscoin/syscoin/pull/13339#issuecomment-537384875
+        // https://github.com/wentuno/wentuno/pull/13339#issuecomment-537384875
         // A few ways it could be implemented in the future are described in:
-        // https://github.com/syscoin/syscoin/pull/13339#issuecomment-461288094
+        // https://github.com/wentuno/wentuno/pull/13339#issuecomment-461288094
         ReplaceAll(strCmd, "%w", ShellEscape(GetName()));
 #endif
         std::thread t(runCommand, strCmd);
@@ -1194,7 +1194,7 @@ bool CWallet::LoadToWallet(const uint256& hash, const UpdateWalletTxFn& fill_wtx
     if (!fill_wtx(wtx, ins.second)) {
         return false;
     }
-    // If wallet doesn't have a chain (e.g when using syscoin-wallet tool),
+    // If wallet doesn't have a chain (e.g when using wentuno-wallet tool),
     // don't bother to update txn.
     if (HaveChain()) {
         bool active;
@@ -1458,7 +1458,7 @@ void CWallet::transactionRemovedFromMempool(const CTransactionRef& tx, MemPoolRe
         //    provide the conflicting block's hash and height, and for backwards
         //    compatibility reasons it may not be not safe to store conflicted
         //    wallet transactions with a null block hash. See
-        //    https://github.com/syscoin/syscoin/pull/18600#discussion_r420195993.
+        //    https://github.com/wentuno/wentuno/pull/18600#discussion_r420195993.
         // 2. For most of these transactions, the wallet's internal conflict
         //    detection in the blockConnected handler will subsequently call
         //    MarkConflicted and update them with CONFLICTED status anyway. This
@@ -1466,7 +1466,7 @@ void CWallet::transactionRemovedFromMempool(const CTransactionRef& tx, MemPoolRe
         //    block, or that has ancestors in the wallet with inputs spent by
         //    the block.
         // 3. Longstanding behavior since the sync implementation in
-        //    https://github.com/syscoin/syscoin/pull/9371 and the prior sync
+        //    https://github.com/wentuno/wentuno/pull/9371 and the prior sync
         //    implementation before that was to mark these transactions
         //    unconfirmed rather than conflicted.
         //
@@ -1474,7 +1474,7 @@ void CWallet::transactionRemovedFromMempool(const CTransactionRef& tx, MemPoolRe
         // when improving this code in the future. The wallet's heuristics for
         // distinguishing between conflicted and unconfirmed transactions are
         // imperfect, and could be improved in general, see
-        // https://github.com/syscoin-core/syscoin-devwiki/wiki/Wallet-Transaction-Conflict-Tracking
+        // https://github.com/wentuno-core/wentuno-devwiki/wiki/Wallet-Transaction-Conflict-Tracking
         SyncTransaction(tx, TxStateInactive{});
     }
 }
@@ -2214,7 +2214,7 @@ SigningResult CWallet::SignMessage(const std::string& message, const PKHash& pkh
     }
     return SigningResult::PRIVATE_KEY_NOT_AVAILABLE;
 }
-// SYSCOIN
+// wentuno
 SigningResult CWallet::SignMessage(const std::string& message, const CTxDestination& dest, std::string& str_sig) const
 {
     SignatureData sigdata;
@@ -2292,7 +2292,7 @@ OutputType CWallet::TransactionChangeType(const std::optional<OutputType>& chang
 void CWallet::CommitTransaction(CTransactionRef tx, mapValue_t mapValue, std::vector<std::pair<std::string, std::string>> orderForm)
 {
     LOCK(cs_wallet);
-    WalletLogPrintf("CommitTransaction:\n%s", tx->ToString()); // NOLINT(syscoin-unterminated-logprintf)
+    WalletLogPrintf("CommitTransaction:\n%s", tx->ToString()); // NOLINT(wentuno-unterminated-logprintf)
 
     // Add tx to wallet, because if it has change it's also ours,
     // otherwise just for transaction history.
@@ -2352,7 +2352,7 @@ DBErrors CWallet::LoadWallet()
 
     return nLoadWalletRet;
 }
-// SYSCOIN
+// wentuno
 // Goes through all wallet transactions and checks if they are masternode collaterals, in which case these are locked
 // This avoids accidental spending of collaterals. They can still be unlocked manually if a spend is really intended.
 void CWallet::AutoLockMasternodeCollaterals()
@@ -2687,7 +2687,7 @@ void CWallet::ListLockedCoins(std::vector<COutPoint>& vOutpts) const
         vOutpts.push_back(outpt);
     }
 }
-// SYSCOIN
+// wentuno
 void CWallet::ListProTxCoins(std::vector<COutPoint>& vOutpts) const
 {
     auto mnList = deterministicMNManager->GetListAtChainTip();
@@ -2786,8 +2786,8 @@ void CWallet::GetKeyBirthTimes(std::map<CKeyID, int64_t>& mapKeyBirth) const {
  *   the block time.
  *
  * For more information see CWalletTx::nTimeSmart,
- * https://syscointalk.org/?topic=54527, or
- * https://github.com/syscoin/syscoin/pull/1393.
+ * https://wentunotalk.org/?topic=54527, or
+ * https://github.com/wentuno/wentuno/pull/1393.
  */
 unsigned int CWallet::ComputeTimeSmart(const CWalletTx& wtx, bool rescanning_old_block) const
 {
@@ -3197,7 +3197,7 @@ bool CWallet::AttachChain(const std::shared_ptr<CWallet>& walletInstance, interf
             // Wallet is assumed to be from another chain, if genesis block in the active
             // chain differs from the genesis block known to the wallet.
             if (chain.getBlockHash(0) != locator.vHave.back()) {
-                error = Untranslated("Wallet files should not be reused across chains. Restart syscoind with -walletcrosschain to override.");
+                error = Untranslated("Wallet files should not be reused across chains. Restart wentunod with -walletcrosschain to override.");
                 return false;
             }
         }
@@ -3361,7 +3361,7 @@ bool CWallet::BackupWallet(const std::string& strDest) const
 {
     return GetDatabase().Backup(strDest);
 }
-// SYSCOIN
+// wentuno
 bool CWallet::LoadGovernanceObject(const Governance::Object& obj)
 {
     AssertLockHeld(cs_wallet);

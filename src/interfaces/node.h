@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_INTERFACES_NODE_H
-#define SYSCOIN_INTERFACES_NODE_H
+#ifndef wentuno_INTERFACES_NODE_H
+#define wentuno_INTERFACES_NODE_H
 
 #include <common/settings.h>
 #include <consensus/amount.h>          // For CAmount
@@ -29,7 +29,7 @@ class Coin;
 class RPCTimerInterface;
 class UniValue;
 class Proxy;
-// SYSCOIN
+// wentuno
 class CDeterministicMNList;
 enum class SynchronizationState;
 enum class TransactionError;
@@ -56,8 +56,8 @@ struct BlockAndHeaderTipInfo
     int64_t header_time;
     double verification_progress;
 };
-// SYSCOIN
-//! Interface for the src/evo part of a syscoin node (syscoind process).
+// wentuno
+//! Interface for the src/evo part of a wentuno node (wentunod process).
 class EVO
 {
 public:
@@ -66,7 +66,7 @@ public:
 };
 
 
-//! Interface for the src/masternode part of a syscoin node (syscoind process).
+//! Interface for the src/masternode part of a wentuno node (wentunod process).
 namespace Masternode
 {
 class Sync
@@ -89,7 +89,7 @@ public:
     virtual std::string getName() = 0;
 };
 
-//! Top-level interface for a syscoin node (syscoind process).
+//! Top-level interface for a wentuno node (wentunod process).
 class Node
 {
 public:
@@ -234,7 +234,7 @@ public:
     //! Broadcast transaction.
     virtual TransactionError broadcastTransaction(CTransactionRef tx, CAmount max_tx_fee, std::string& err_string) = 0;
 
-    // SYSCOIN
+    // wentuno
     //! Return interface for accessing evo related handler.
     virtual EVO& evo() = 0;
 
@@ -293,7 +293,7 @@ public:
         std::function<void(SynchronizationState, interfaces::BlockTip tip, bool presync)>;
     virtual std::unique_ptr<Handler> handleNotifyHeaderTip(NotifyHeaderTipFn fn) = 0;
 
-    // SYSCOIN
+    // wentuno
     //! Register handler for additional sync messages.
     using NotifyAdditionalDataSyncProgressChangedFn = std::function<void(double nSyncProgress)>;
     virtual std::unique_ptr<Handler> handleNotifyAdditionalDataSyncProgressChanged(NotifyAdditionalDataSyncProgressChangedFn fn) = 0;  
@@ -318,4 +318,4 @@ struct BlockTip {
 
 } // namespace interfaces
 
-#endif // SYSCOIN_INTERFACES_NODE_H
+#endif // wentuno_INTERFACES_NODE_H

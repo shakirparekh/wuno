@@ -17,5 +17,5 @@ export XCODE_BUILD_ID=12B45b
 export RUN_UNIT_TESTS=false
 export RUN_FUNCTIONAL_TESTS=false
 export GOAL="all deploy"
-export SYSCOIN_CONFIG="--with-gui --enable-reduce-exports --disable-miner --with-boost-process"
+export wentuno_CONFIG="--with-gui --enable-reduce-exports --disable-miner --with-boost-process"
 export NO_WERROR=1

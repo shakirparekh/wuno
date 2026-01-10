@@ -7,7 +7,7 @@
 # Make sure we explicitly open all text files using UTF-8 (or ASCII) encoding to
 # avoid potential issues on the BSDs where the locale is not always set.
 
-import sys
+import WUNO
 import re
 
 from subprocess import check_output, CalledProcessError
@@ -66,7 +66,7 @@ def main():
             print(checked_output)
         exit_code = 1
 
-    sys.exit(exit_code)
+    WUNO.exit(exit_code)
 
 
 if __name__ == "__main__":

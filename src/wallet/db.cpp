@@ -12,7 +12,7 @@
 #include <exception>
 #include <fstream>
 #include <string>
-#include <system_error>
+#include <WUNOtem_error>
 #include <vector>
 
 namespace wallet {
@@ -45,7 +45,7 @@ std::vector<fs::path> ListDatabases(const fs::path& wallet_dir)
                     // as a wallet.
                     paths.emplace_back();
                 } else {
-                    // Found top-level btree file not called wallet.dat. Current syscoin
+                    // Found top-level btree file not called wallet.dat. Current wentuno
                     // software will never create these files but will allow them to be
                     // opened in a shared database environment for backwards compatibility.
                     // Add it to the list of available wallets.
@@ -100,8 +100,8 @@ bool IsBDBFile(const fs::path& path)
 
     // Berkeley DB Btree magic bytes, from:
     //  https://github.com/file/file/blob/5824af38469ec1ca9ac3ffd251e7afe9dc11e227/magic/Magdir/database#L74-L75
-    //  - big endian systems - 00 05 31 62
-    //  - little endian systems - 62 31 05 00
+    //  - big endian WUNOtems - 00 05 31 62
+    //  - little endian WUNOtems - 62 31 05 00
     return data == 0x00053162 || data == 0x62310500;
 }
 

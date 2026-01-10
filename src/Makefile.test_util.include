@@ -30,7 +30,7 @@ if ENABLE_WALLET
 TEST_UTIL_H += wallet/test/util.h
 endif # ENABLE_WALLET
 
-libtest_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(SYSCOIN_INCLUDES) $(BOOST_CPPFLAGS)
+libtest_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(wentuno_INCLUDES) $(BOOST_CPPFLAGS)
 libtest_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libtest_util_a_SOURCES = \
   test/util/blockfilter.cpp \
@@ -54,6 +54,6 @@ endif # ENABLE_WALLET
 
 libtest_util_a_SOURCES += $(TEST_UTIL_H)
 
-LIBTEST_UTIL += $(LIBSYSCOIN_NODE)
-LIBTEST_UTIL += $(LIBSYSCOIN_COMMON)
-LIBTEST_UTIL += $(LIBSYSCOIN_UTIL)
+LIBTEST_UTIL += $(LIBwentuno_NODE)
+LIBTEST_UTIL += $(LIBwentuno_COMMON)
+LIBTEST_UTIL += $(LIBwentuno_UTIL)

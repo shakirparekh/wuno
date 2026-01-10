@@ -4,14 +4,14 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <chainparams.h>
 #include <clientversion.h>
 #include <common/args.h>
 #include <common/init.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <common/url.h>
 #include <compat/compat.h>
 #include <init.h>
@@ -24,7 +24,7 @@
 #include <util/check.h>
 #include <util/exception.h>
 #include <util/strencodings.h>
-#include <util/syserror.h>
+#include <util/WUNOerror.h>
 #include <util/threadnames.h>
 #include <util/tokenpipe.h>
 #include <util/translation.h>
@@ -113,7 +113,7 @@ int fork_daemon(bool nochdir, bool noclose, TokenPipeEnd& endpoint)
 
 static bool ParseArgs(ArgsManager& args, int argc, char* argv[])
 {
-    // If Qt is used, parameters/syscoin.conf are parsed in qt/syscoin.cpp's main()
+    // If Qt is used, parameters/wentuno.conf are parsed in qt/wentuno.cpp's main()
     SetupServerArgs(args);
     std::string error;
     if (!args.ParseParameters(argc, argv, error)) {
@@ -127,7 +127,7 @@ static bool ParseArgs(ArgsManager& args, int argc, char* argv[])
     // Error out when loose non-argument tokens are encountered on command line
     for (int i = 1; i < argc; i++) {
         if (!IsSwitchChar(argv[i][0])) {
-            return InitError(Untranslated(strprintf("Command line contains unexpected token '%s', see syscoind -h for a list of options.", argv[i])));
+            return InitError(Untranslated(strprintf("Command line contains unexpected token '%s', see wentunod -h for a list of options.", argv[i])));
         }
     }
     return true;
@@ -142,7 +142,7 @@ static bool ProcessInitCommands(ArgsManager& args)
         if (args.IsArgSet("-version")) {
             strUsage += FormatParagraph(LicenseInfo());
         } else {
-            strUsage += "\nUsage:  syscoind [options]                     Start " PACKAGE_NAME "\n"
+            strUsage += "\nUsage:  wentunod [options]                     Start " PACKAGE_NAME "\n"
                 "\n";
             strUsage += args.GetHelpMessage();
         }
@@ -170,7 +170,7 @@ static bool AppInit(NodeContext& node)
     std::any context{&node};
     try
     {
-        // -server defaults to true for syscoind but not for the GUI so do this here
+        // -server defaults to true for wentunod but not for the GUI so do this here
         args.SoftSetBoolArg("-server", true);
         // Set this early so that parameter interactions go to console
         InitLogging(args);
@@ -205,7 +205,7 @@ static bool AppInit(NodeContext& node)
                 }
                 break;
             case -1: // Error happened.
-                return InitError(Untranslated(strprintf("fork_daemon() failed: %s", SysErrorString(errno))));
+                return InitError(Untranslated(strprintf("fork_daemon() failed: %s", WUNOErrorString(errno))));
             default: { // Parent: wait and exit.
                 int token = daemon_ep.TokenRead();
                 if (token) { // Success
@@ -217,7 +217,7 @@ static bool AppInit(NodeContext& node)
             }
             }
 #else
-            return InitError(Untranslated("-daemon is not supported on this operating system"));
+            return InitError(Untranslated("-daemon is not supported on this operating WUNOtem"));
 #endif // HAVE_DECL_FORK
         }
         // Lock data directory after daemonization
@@ -260,7 +260,7 @@ MAIN_FUNCTION
 
     SetupEnvironment();
 
-    // Connect syscoind signal handlers
+    // Connect wentunod signal handlers
     noui_connect();
 
     util::ThreadSetInternalName("init");

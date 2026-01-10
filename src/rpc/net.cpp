@@ -117,7 +117,7 @@ static RPCHelpMan getpeerinfo()
                     {RPCResult::Type::NUM, "mapped_as", /*optional=*/true, "The AS in the BGP route to the peer used for diversifying\n"
                                                         "peer selection (only available if the asmap config flag is set)"},
                     {RPCResult::Type::STR_HEX, "services", "The services offered"},
-                    // SYSCOIN
+                    // wentuno
                     {RPCResult::Type::STR_HEX, "verified_proregtx_hash",  /*optional=*/true, "Only present when the peer is a masternode and successfully\n"
                                                                                 "authenticated via MNAUTH. In this case, this field contains the\n"
                                                                                 "protx hash of the masternode"},
@@ -145,7 +145,7 @@ static RPCHelpMan getpeerinfo()
                     {RPCResult::Type::BOOL, "inbound", "Inbound (true) or Outbound (false)"},
                     {RPCResult::Type::BOOL, "bip152_hb_to", "Whether we selected peer as (compact blocks) high-bandwidth peer"},
                     {RPCResult::Type::BOOL, "bip152_hb_from", "Whether peer selected us as (compact blocks) high-bandwidth peer"},
-                    // SYSCOIN
+                    // wentuno
                     {RPCResult::Type::BOOL, "masternode", "Whether connection was due to masternode connection attempt"},
                     {RPCResult::Type::NUM, "startingheight", "The starting height (block) of the peer"},
                     {RPCResult::Type::NUM, "presynced_headers", "The current height of header pre-synchronization with this peer, or -1 if no low-work sync is in progress"},
@@ -226,7 +226,7 @@ static RPCHelpMan getpeerinfo()
         ServiceFlags services{statestats.their_services};
         obj.pushKV("services", strprintf("%016x", services));
         obj.pushKV("servicesnames", GetServicesNames(services));
-        // SYSCOIN
+        // wentuno
         if (!stats.verifiedProRegTxHash.IsNull()) {
             obj.pushKV("verified_proregtx_hash", stats.verifiedProRegTxHash.ToString());
         }
@@ -259,7 +259,7 @@ static RPCHelpMan getpeerinfo()
         obj.pushKV("inbound", stats.fInbound);
         obj.pushKV("bip152_hb_to", stats.m_bip152_highbandwidth_to);
         obj.pushKV("bip152_hb_from", stats.m_bip152_highbandwidth_from);
-        // SYSCOIN
+        // wentuno
         obj.pushKV("masternode", stats.m_masternode_connection);
         obj.pushKV("startingheight", statestats.m_starting_height);
         obj.pushKV("presynced_headers", statestats.presync_height);
@@ -488,7 +488,7 @@ static RPCHelpMan getaddednodeinfo()
                             {
                                 {RPCResult::Type::OBJ, "", "",
                                 {
-                                    {RPCResult::Type::STR, "address", "The syscoin server IP and port we're connected to"},
+                                    {RPCResult::Type::STR, "address", "The wentuno server IP and port we're connected to"},
                                     {RPCResult::Type::STR, "connected", "connection, inbound or outbound"},
                                 }},
                             }},
@@ -546,14 +546,14 @@ static RPCHelpMan getnettotals()
 {
     return RPCHelpMan{"getnettotals",
         "Returns information about network traffic, including bytes in, bytes out,\n"
-        "and current system time.",
+        "and current WUNOtem time.",
         {},
                 RPCResult{
                    RPCResult::Type::OBJ, "", "",
                    {
                        {RPCResult::Type::NUM, "totalbytesrecv", "Total bytes received"},
                        {RPCResult::Type::NUM, "totalbytessent", "Total bytes sent"},
-                       {RPCResult::Type::NUM_TIME, "timemillis", "Current system " + UNIX_EPOCH_TIME + " in milliseconds"},
+                       {RPCResult::Type::NUM_TIME, "timemillis", "Current WUNOtem " + UNIX_EPOCH_TIME + " in milliseconds"},
                        {RPCResult::Type::OBJ, "uploadtarget", "",
                        {
                            {RPCResult::Type::NUM, "timeframe", "Length of the measuring timeframe in seconds"},
@@ -577,7 +577,7 @@ static RPCHelpMan getnettotals()
     UniValue obj(UniValue::VOBJ);
     obj.pushKV("totalbytesrecv", connman.GetTotalBytesRecv());
     obj.pushKV("totalbytessent", connman.GetTotalBytesSent());
-    obj.pushKV("timemillis", TicksSinceEpoch<std::chrono::milliseconds>(SystemClock::now()));
+    obj.pushKV("timemillis", TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()));
 
     UniValue outboundLimit(UniValue::VOBJ);
     outboundLimit.pushKV("timeframe", count_seconds(connman.GetMaxOutboundTimeframe()));
@@ -632,7 +632,7 @@ static RPCHelpMan getnetworkinfo()
                         {RPCResult::Type::NUM, "connections", "the total number of connections"},
                         {RPCResult::Type::NUM, "connections_in", "the number of inbound connections"},
                         {RPCResult::Type::NUM, "connections_out", "the number of outbound connections"},
-                        // SYSCOIN
+                        // wentuno
                         {RPCResult::Type::NUM, "connections_mn", "the number of verified mn connections"},
                         {RPCResult::Type::NUM, "connections_mn_in", "the number of inbound verified mn connections"},
                         {RPCResult::Type::NUM, "connections_mn_out", "the number of outbound verified mn connections"},
@@ -688,7 +688,7 @@ static RPCHelpMan getnetworkinfo()
         obj.pushKV("connections", node.connman->GetNodeCount(ConnectionDirection::Both));
         obj.pushKV("connections_in", node.connman->GetNodeCount(ConnectionDirection::In));
         obj.pushKV("connections_out", node.connman->GetNodeCount(ConnectionDirection::Out));
-        // SYSCOIN
+        // wentuno
         obj.pushKV("connections_mn",   node.connman->GetNodeCount(ConnectionDirection::Verified));
         obj.pushKV("connections_mn_in",   node.connman->GetNodeCount(ConnectionDirection::VerifiedIn));
         obj.pushKV("connections_mn_out",   node.connman->GetNodeCount(ConnectionDirection::VerifiedOut));

@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <arith_uint256.h>
@@ -12,7 +12,7 @@
 #include <chainparamsbase.h>
 #include <clientversion.h>
 #include <common/args.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <compat/compat.h>
 #include <core_io.h>
 #include <streams.h>
@@ -31,7 +31,7 @@ static const int CONTINUE_EXECUTION=-1;
 
 const std::function<std::string(const char*)> G_TRANSLATION_FUN = nullptr;
 
-static void SetupSyscoinUtilArgs(ArgsManager &argsman)
+static void SetupwentunoUtilArgs(ArgsManager &argsman)
 {
     SetupHelpOptions(argsman);
 
@@ -46,7 +46,7 @@ static void SetupSyscoinUtilArgs(ArgsManager &argsman)
 // CONTINUE_EXECUTION when it's expected to continue further.
 static int AppInitUtil(ArgsManager& args, int argc, char* argv[])
 {
-    SetupSyscoinUtilArgs(gArgs);
+    SetupwentunoUtilArgs(gArgs);
     std::string error;
     if (!args.ParseParameters(argc, argv, error)) {
         tfm::format(std::cerr, "Error parsing command line arguments: %s\n", error);
@@ -55,13 +55,13 @@ static int AppInitUtil(ArgsManager& args, int argc, char* argv[])
 
     if (HelpRequested(args) || args.IsArgSet("-version")) {
         // First part of help message is specific to this utility
-        std::string strUsage = PACKAGE_NAME " syscoin-util utility version " + FormatFullVersion() + "\n";
+        std::string strUsage = PACKAGE_NAME " wentuno-util utility version " + FormatFullVersion() + "\n";
 
         if (args.IsArgSet("-version")) {
             strUsage += FormatParagraph(LicenseInfo());
         } else {
             strUsage += "\n"
-                "Usage:  syscoin-util [options] [commands]  Do stuff\n";
+                "Usage:  wentuno-util [options] [commands]  Do stuff\n";
             strUsage += "\n" + gArgs.GetHelpMessage();
         }
 
@@ -142,7 +142,7 @@ static int Grind(const std::vector<std::string>& args, std::string& strPrint)
         strPrint = "Could not satisfy difficulty target";
         return EXIT_FAILURE;
     }
-    // SYSCOIN
+    // wentuno
     CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
     ss << header;
     strPrint = HexStr(ss);

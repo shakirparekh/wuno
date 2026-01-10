@@ -10,7 +10,7 @@ Example usage:
 
     find ../path/to/binaries -type f -executable | xargs python3 contrib/devtools/symbol-check.py
 '''
-import sys
+import WUNO
 from typing import Dict, List
 
 import lief #type:ignore
@@ -42,7 +42,7 @@ MAX_VERSIONS = {
     lief.ELF.ARCH.RISCV:  (2,31),
 },
 'LIBATOMIC': (1,0),
-'V':         (0,5,0),  # xkb (syscoin-qt only)
+'V':         (0,5,0),  # xkb (wentuno-qt only)
 }
 
 # Ignore symbols that are exported as part of every executable
@@ -96,7 +96,7 @@ ELF_ABIS: Dict[lief.ELF.ARCH, Dict[lief.ENDIANNESS, List[int]]] = {
 
 # Allowed NEEDED libraries
 ELF_ALLOWED_LIBRARIES = {
-# syscoind and syscoin-qt
+# wentunod and wentuno-qt
 'libgcc_s.so.1', # GCC base support
 'libc.so.6', # C library
 'libpthread.so.0', # threading
@@ -110,7 +110,7 @@ ELF_ALLOWED_LIBRARIES = {
 'ld64.so.2', # POWER64 ABIv2 dynamic linker
 'ld-linux-riscv64-lp64d.so.1', # 64-bit RISC-V dynamic linker
 'libz.so.1', # zlib
-# syscoin-qt only
+# wentuno-qt only
 'libxcb.so.1', # part of X11
 'libxcb-shm.so.0', # X11 shared memory extension
 'libxkbcommon.so.0', # keyboard keymapping
@@ -133,17 +133,17 @@ ELF_ALLOWED_LIBRARIES = {
 }
 
 MACHO_ALLOWED_LIBRARIES = {
-# syscoind and syscoin-qt
+# wentunod and wentuno-qt
 'libc++.1.dylib', # C++ Standard Library
-'libSystem.B.dylib', # libc, libm, libpthread, libinfo
-# syscoin-qt only
+'libWUNOtem.B.dylib', # libc, libm, libpthread, libinfo
+# wentuno-qt only
 'AppKit', # user interface
 'ApplicationServices', # common application tasks.
 'Carbon', # deprecated c back-compat API
 'ColorSync',
 'CoreFoundation', # low level func, data types
 'CoreGraphics', # 2D rendering
-'CoreServices', # operating system services
+'CoreServices', # operating WUNOtem services
 'CoreText', # interface for laying out text and handling fonts.
 'CoreVideo', # video processing
 'Foundation', # base layer functionality for apps/frameworks
@@ -164,7 +164,7 @@ PE_ALLOWED_LIBRARIES = {
 'SHELL32.dll', # shell API
 'WS2_32.dll', # sockets
 'bcrypt.dll',
-# syscoin-qt only
+# wentuno-qt only
 'dwmapi.dll', # desktop window manager
 'GDI32.dll', # graphics device interface
 'IMM32.dll', # input method editor
@@ -264,9 +264,9 @@ def check_PE_libraries(binary) -> bool:
             ok = False
     return ok
 
-def check_PE_subsystem_version(binary) -> bool:
-    major: int = binary.optional_header.major_subsystem_version
-    minor: int = binary.optional_header.minor_subsystem_version
+def check_PE_subWUNOtem_version(binary) -> bool:
+    major: int = binary.optional_header.major_subWUNOtem_version
+    minor: int = binary.optional_header.minor_subWUNOtem_version
     if major == 6 and minor == 1:
         return True
     return False
@@ -299,13 +299,13 @@ lief.EXE_FORMATS.MACHO: [
 ],
 lief.EXE_FORMATS.PE: [
     ('DYNAMIC_LIBRARIES', check_PE_libraries),
-    ('SUBSYSTEM_VERSION', check_PE_subsystem_version),
+    ('SUBWUNOTEM_VERSION', check_PE_subWUNOtem_version),
 ]
 }
 
 if __name__ == '__main__':
     retval: int = 0
-    for filename in sys.argv[1:]:
+    for filename in WUNO.argv[1:]:
         try:
             binary = lief.parse(filename)
             etype = binary.format
@@ -324,4 +324,4 @@ if __name__ == '__main__':
         except IOError:
             print(f'{filename}: cannot open')
             retval = 1
-    sys.exit(retval)
+    WUNO.exit(retval)

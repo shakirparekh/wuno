@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_QVALUECOMBOBOX_H
-#define SYSCOIN_QT_QVALUECOMBOBOX_H
+#ifndef wentuno_QT_QVALUECOMBOBOX_H
+#define wentuno_QT_QVALUECOMBOBOX_H
 
 #include <QComboBox>
 #include <QVariant>
@@ -34,4 +34,4 @@ private Q_SLOTS:
     void handleSelectionChanged(int idx);
 };
 
-#endif // SYSCOIN_QT_QVALUECOMBOBOX_H
+#endif // wentuno_QT_QVALUECOMBOBOX_H

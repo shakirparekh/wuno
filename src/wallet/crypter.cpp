@@ -4,7 +4,7 @@
 
 #include <wallet/crypter.h>
 
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <crypto/aes.h>
 #include <crypto/sha512.h>
 

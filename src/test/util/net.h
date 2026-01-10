@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_TEST_UTIL_NET_H
-#define SYSCOIN_TEST_UTIL_NET_H
+#ifndef wentuno_TEST_UTIL_NET_H
+#define wentuno_TEST_UTIL_NET_H
 
 #include <compat/compat.h>
 #include <node/eviction.h>
@@ -206,4 +206,4 @@ private:
 
 std::vector<NodeEvictionCandidate> GetRandomNodeEvictionCandidates(int n_candidates, FastRandomContext& random_context);
 
-#endif // SYSCOIN_TEST_UTIL_NET_H
+#endif // wentuno_TEST_UTIL_NET_H

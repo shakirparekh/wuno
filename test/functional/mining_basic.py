@@ -23,12 +23,12 @@ from test_framework.messages import (
     CBlockHeader,
     COIN,
     ser_uint256,
-    # SYSCOIN
+    # wentuno
     CHAIN_ID,
     VERSION_START_BIT,
 )
 from test_framework.p2p import P2PDataStore
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
@@ -53,7 +53,7 @@ def assert_template(node, block, expect, rehash=True):
     assert_equal(rsp, expect)
 
 
-class MiningTest(SyscoinTestFramework):
+class MiningTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         self.setup_clean_chain = True
@@ -70,7 +70,7 @@ class MiningTest(SyscoinTestFramework):
         assert_equal(mining_info['currentblockweight'], 4000)
 
         self.log.info('test blockversion')
-        # SYSCOIN version
+        # wentuno version
         self.restart_node(0, extra_args=[f'-mocktime={t}', '-blockversion=1237'])
         self.connect_nodes(0, 1)
         assert_equal(1237, self.nodes[0].getblocktemplate(NORMAL_GBT_REQUEST_PARAMS)['version'])

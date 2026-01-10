@@ -5,7 +5,7 @@
 """Test the ZMQ notification interface."""
 
 from test_framework.address import ADDRESS_BCRT1_UNSPENDABLE
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.messages import hash256, CNEVMBlock, CNEVMBlockConnect, CNEVMBlockDisconnect, uint256_from_str
 from test_framework.util import (
     assert_equal,
@@ -74,8 +74,8 @@ class ZMQPublisher:
     def __init__(self,log, socket):
         self.socket = socket
         self.log = log
-        self.sysToNEVMBlockMapping = {}
-        self.NEVMToSysBlockMapping = {}
+        self.WUNOToNEVMBlockMapping = {}
+        self.NEVMToWUNOBlockMapping = {}
         self.mnNEVMAddressMapping = {}
         self.artificialDelay = False
 
@@ -122,14 +122,14 @@ class ZMQPublisher:
             evmBlockConnect.diff.updatedMNNEVM,
             evmBlockConnect.diff.removedMNNEVM
         )
-        if evmBlockConnect.sysblockhash == 0:
+        if evmBlockConnect.WUNOblockhash == 0:
             return True
-        if (evmBlockConnect.sysblockhash in self.sysToNEVMBlockMapping or 
-            evmBlockConnect.evmBlock.nBlockHash in self.NEVMToSysBlockMapping):
+        if (evmBlockConnect.WUNOblockhash in self.WUNOToNEVMBlockMapping or 
+            evmBlockConnect.evmBlock.nBlockHash in self.NEVMToWUNOBlockMapping):
             return False
         
-        self.sysToNEVMBlockMapping[evmBlockConnect.sysblockhash] = evmBlockConnect
-        self.NEVMToSysBlockMapping[evmBlockConnect.evmBlock.nBlockHash] = evmBlockConnect.sysblockhash
+        self.WUNOToNEVMBlockMapping[evmBlockConnect.WUNOblockhash] = evmBlockConnect
+        self.NEVMToWUNOBlockMapping[evmBlockConnect.evmBlock.nBlockHash] = evmBlockConnect.WUNOblockhash
         
 
         
@@ -142,35 +142,35 @@ class ZMQPublisher:
             evmBlockDisconnect.diff.updatedMNNEVM,
             evmBlockDisconnect.diff.removedMNNEVM
         )
-        nevmConnect = self.sysToNEVMBlockMapping.get(evmBlockDisconnect.sysblockhash)
+        nevmConnect = self.WUNOToNEVMBlockMapping.get(evmBlockDisconnect.WUNOblockhash)
         if nevmConnect is None:
             return False
         
-        sysMappingHash = self.NEVMToSysBlockMapping.get(nevmConnect.evmBlock.nBlockHash)
-        if sysMappingHash is None or sysMappingHash != nevmConnect.sysblockhash:
+        WUNOMappingHash = self.NEVMToWUNOBlockMapping.get(nevmConnect.evmBlock.nBlockHash)
+        if WUNOMappingHash is None or WUNOMappingHash != nevmConnect.WUNOblockhash:
             return False
         
 
         
         # Remove the block from the mapping
-        del self.sysToNEVMBlockMapping[evmBlockDisconnect.sysblockhash]
-        del self.NEVMToSysBlockMapping[nevmConnect.evmBlock.nBlockHash]
+        del self.WUNOToNEVMBlockMapping[evmBlockDisconnect.WUNOblockhash]
+        del self.NEVMToWUNOBlockMapping[nevmConnect.evmBlock.nBlockHash]
         
         return True
 
-    def getLastSYSBlock(self):
-        if not self.NEVMToSysBlockMapping:
+    def getLastWUNOBlock(self):
+        if not self.NEVMToWUNOBlockMapping:
             return 0
-        return list(self.NEVMToSysBlockMapping.values())[-1]
+        return list(self.NEVMToWUNOBlockMapping.values())[-1]
 
     def getLastNEVMBlock(self):
-        if not self.sysToNEVMBlockMapping:
+        if not self.WUNOToNEVMBlockMapping:
             return None
-        return self.sysToNEVMBlockMapping[self.getLastSYSBlock()]
+        return self.WUNOToNEVMBlockMapping[self.getLastWUNOBlock()]
 
     def clearMappings(self):
-        self.sysToNEVMBlockMapping = {}
-        self.NEVMToSysBlockMapping = {}
+        self.WUNOToNEVMBlockMapping = {}
+        self.NEVMToWUNOBlockMapping = {}
         self.mnNEVMAddressMapping = {}
         
     def assertMNList(self, expected_mn_mapping):
@@ -178,7 +178,7 @@ class ZMQPublisher:
         print(f"Expected: {expected_mn_mapping}")
         assert self.mnNEVMAddressMapping == expected_mn_mapping, "MN mapping did not match expected state"
 
-class ZMQTest(SyscoinTestFramework):
+class ZMQTest(wentunoTestFramework):
 
     def add_options(self, parser):
         self.add_wallet_options(parser)
@@ -192,7 +192,7 @@ class ZMQTest(SyscoinTestFramework):
         
     def skip_test_if_missing_module(self):
         self.skip_if_no_py3_zmq()
-        self.skip_if_no_syscoind_zmq()
+        self.skip_if_no_wentunod_zmq()
         self.skip_if_no_wallet()
         self.skip_if_no_bdb()
 
@@ -251,8 +251,8 @@ class ZMQTest(SyscoinTestFramework):
 
     def test_basic(self, nevmsub, nevmsub1):
         bestblockhash = self.nodes[0].getbestblockhash()
-        assert_equal(int(bestblockhash, 16), nevmsub.getLastSYSBlock())
-        assert_equal(nevmsub1.getLastSYSBlock(), nevmsub.getLastSYSBlock())
+        assert_equal(int(bestblockhash, 16), nevmsub.getLastWUNOBlock())
+        assert_equal(nevmsub1.getLastWUNOBlock(), nevmsub.getLastWUNOBlock())
         assert_equal(self.nodes[1].getbestblockhash(), bestblockhash)
 
         prevblockhash = self.nodes[0].getblockhash(205)
@@ -261,33 +261,33 @@ class ZMQTest(SyscoinTestFramework):
         self.nodes[1].invalidateblock(blockhash)
         self.sync_blocks()
 
-        assert_equal(int(prevblockhash, 16), nevmsub.getLastSYSBlock())
-        assert_equal(nevmsub1.getLastSYSBlock(), nevmsub.getLastSYSBlock())
+        assert_equal(int(prevblockhash, 16), nevmsub.getLastWUNOBlock())
+        assert_equal(nevmsub1.getLastWUNOBlock(), nevmsub.getLastWUNOBlock())
 
         self.nodes[0].reconsiderblock(blockhash)
         self.nodes[1].reconsiderblock(blockhash)
         self.sync_blocks()
 
-        assert_equal(int(bestblockhash, 16), nevmsub.getLastSYSBlock())
+        assert_equal(int(bestblockhash, 16), nevmsub.getLastWUNOBlock())
         assert_equal(self.nodes[1].getbestblockhash(), bestblockhash)
-        assert_equal(nevmsub1.getLastSYSBlock(), nevmsub.getLastSYSBlock())
+        assert_equal(nevmsub1.getLastWUNOBlock(), nevmsub.getLastWUNOBlock())
 
         self.log.info('Restarting node 0')
         self.restart_node(0, self.extra_args[0])
         self.sync_blocks()
 
-        assert_equal(int(bestblockhash, 16), nevmsub.getLastSYSBlock())
+        assert_equal(int(bestblockhash, 16), nevmsub.getLastWUNOBlock())
         assert_equal(self.nodes[1].getbestblockhash(), bestblockhash)
-        assert_equal(nevmsub1.getLastSYSBlock(), nevmsub.getLastSYSBlock())
+        assert_equal(nevmsub1.getLastWUNOBlock(), nevmsub.getLastWUNOBlock())
 
         self.log.info('Restarting node 1')
         self.restart_node(1, self.extra_args[1])
         self.connect_nodes(0, 1)
         self.sync_blocks()
 
-        assert_equal(int(bestblockhash, 16), nevmsub.getLastSYSBlock())
+        assert_equal(int(bestblockhash, 16), nevmsub.getLastWUNOBlock())
         assert_equal(self.nodes[1].getbestblockhash(), bestblockhash)
-        assert_equal(nevmsub1.getLastSYSBlock(), nevmsub.getLastSYSBlock())
+        assert_equal(nevmsub1.getLastWUNOBlock(), nevmsub.getLastWUNOBlock())
 
         self.log.info('Reindexing node 0')
         self.extra_args[0] += ["-reindex"]
@@ -296,9 +296,9 @@ class ZMQTest(SyscoinTestFramework):
         self.connect_nodes(0, 1)
         self.sync_blocks()
 
-        assert_equal(int(bestblockhash, 16), nevmsub.getLastSYSBlock())
+        assert_equal(int(bestblockhash, 16), nevmsub.getLastWUNOBlock())
         assert_equal(self.nodes[1].getbestblockhash(), bestblockhash)
-        assert_equal(nevmsub1.getLastSYSBlock(), nevmsub.getLastSYSBlock())
+        assert_equal(nevmsub1.getLastWUNOBlock(), nevmsub.getLastWUNOBlock())
 
         self.log.info('Reindexing node 1')
         self.extra_args[1] += ["-reindex"]
@@ -307,9 +307,9 @@ class ZMQTest(SyscoinTestFramework):
         self.connect_nodes(0, 1)
         self.sync_blocks()
 
-        assert_equal(int(bestblockhash, 16), nevmsub.getLastSYSBlock())
+        assert_equal(int(bestblockhash, 16), nevmsub.getLastWUNOBlock())
         assert_equal(self.nodes[1].getbestblockhash(), bestblockhash)
-        assert_equal(nevmsub1.getLastSYSBlock(), nevmsub.getLastSYSBlock())
+        assert_equal(nevmsub1.getLastWUNOBlock(), nevmsub.getLastWUNOBlock())
 
         self.disconnect_nodes(0, 1)
         self.log.info("Mine 4 blocks on Node 0")
@@ -351,8 +351,8 @@ class ZMQTest(SyscoinTestFramework):
         sleep(1)
         self.sync_blocks()
 
-        assert_equal(nevmsub1.getLastSYSBlock(), nevmsub.getLastSYSBlock())
-        assert_equal(int(besthash, 16), nevmsub.getLastSYSBlock())
+        assert_equal(nevmsub1.getLastWUNOBlock(), nevmsub.getLastWUNOBlock())
+        assert_equal(int(besthash, 16), nevmsub.getLastWUNOBlock())
         assert_equal(self.nodes[0].getbestblockhash(), self.nodes[1].getbestblockhash())
     
     def test_nevm_mapping(self, nevmsub):

@@ -2,10 +2,10 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_TRANSACTIONDESC_H
-#define SYSCOIN_QT_TRANSACTIONDESC_H
+#ifndef wentuno_QT_TRANSACTIONDESC_H
+#define wentuno_QT_TRANSACTIONDESC_H
 
-#include <qt/syscoinunits.h>
+#include <qt/wentunounits.h>
 
 #include <QObject>
 #include <QString>
@@ -26,7 +26,7 @@ class TransactionDesc: public QObject
     Q_OBJECT
 
 public:
-    static QString toHTML(interfaces::Node& node, interfaces::Wallet& wallet, TransactionRecord* rec, SyscoinUnit unit);
+    static QString toHTML(interfaces::Node& node, interfaces::Wallet& wallet, TransactionRecord* rec, wentunoUnit unit);
 
 private:
     TransactionDesc() {}
@@ -34,4 +34,4 @@ private:
     static QString FormatTxStatus(const interfaces::WalletTxStatus& status, bool inMempool);
 };
 
-#endif // SYSCOIN_QT_TRANSACTIONDESC_H
+#endif // wentuno_QT_TRANSACTIONDESC_H

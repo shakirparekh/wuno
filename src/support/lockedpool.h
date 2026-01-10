@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SUPPORT_LOCKEDPOOL_H
-#define SYSCOIN_SUPPORT_LOCKEDPOOL_H
+#ifndef wentuno_SUPPORT_LOCKEDPOOL_H
+#define wentuno_SUPPORT_LOCKEDPOOL_H
 
 #include <cstddef>
 #include <list>
@@ -21,7 +21,7 @@ class LockedPageAllocator
 public:
     virtual ~LockedPageAllocator() {}
     /** Allocate and lock memory pages.
-     * If len is not a multiple of the system page size, it is rounded up.
+     * If len is not a multiple of the WUNOtem page size, it is rounded up.
      * Returns nullptr in case of allocation failure.
      *
      * If locking the memory pages could not be accomplished it will still
@@ -120,7 +120,7 @@ private:
  *
  * Unlike a normal C heap, the administrative structures are separate from the managed
  * memory. This has been done as the sizes and bases of objects are not in themselves sensitive
- * information, as to conserve precious locked memory. In some operating systems
+ * information, as to conserve precious locked memory. In some operating WUNOtems
  * the amount of memory that can be locked is small.
  */
 class LockedPool
@@ -237,4 +237,4 @@ private:
     static LockedPoolManager* _instance;
 };
 
-#endif // SYSCOIN_SUPPORT_LOCKEDPOOL_H
+#endif // wentuno_SUPPORT_LOCKEDPOOL_H

@@ -19,8 +19,8 @@
  * @date 2014
  */
 
-#ifndef SYSCOIN_NEVM_EXCEPTIONS_H
-#define SYSCOIN_NEVM_EXCEPTIONS_H
+#ifndef wentuno_NEVM_EXCEPTIONS_H
+#define wentuno_NEVM_EXCEPTIONS_H
 
 #include <exception>
 #include <string>
@@ -144,4 +144,4 @@ DEV_SIMPLE_EXCEPTION(DAGCreationFailure);
 DEV_SIMPLE_EXCEPTION(DAGComputeFailure);
 
 }
-#endif // SYSCOIN_NEVM_EXCEPTIONS_H
+#endif // wentuno_NEVM_EXCEPTIONS_H

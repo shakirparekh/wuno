@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_POLICY_RBF_H
-#define SYSCOIN_POLICY_RBF_H
+#ifndef wentuno_POLICY_RBF_H
+#define wentuno_POLICY_RBF_H
 
 #include <consensus/amount.h>
 #include <primitives/transaction.h>
@@ -45,7 +45,7 @@ enum class RBFTransactionState {
  * @return     The rbf state
  */
 RBFTransactionState IsRBFOptIn(const CTransaction& tx, const CTxMemPool& pool) EXCLUSIVE_LOCKS_REQUIRED(pool.cs);
-// SYSCOIN
+// wentuno
 RBFTransactionState IsRBFOptIn(const CTransaction& tx, const CTxMemPool& pool, CTxMemPool::setEntries &setAncestors) EXCLUSIVE_LOCKS_REQUIRED(pool.cs);
 RBFTransactionState IsRBFOptInEmptyMempool(const CTransaction& tx);
 
@@ -81,7 +81,7 @@ std::optional<std::string> HasNoNewUnconfirmed(const CTransaction& tx, const CTx
  * @param[in]   txid                Transaction ID, included in the error message if violation occurs.
  * @returns error message if the sets intersect, std::nullopt if they are disjoint.
  */
-// SYSCOIN
+// wentuno
 std::optional<std::string> EntriesAndTxidsDisjoint(const CTxMemPool::setEntries& ancestors,
                                                    const std::set<uint256>& direct_conflicts,
                                                    const std::set<uint256>& direct_conflicts_asset,
@@ -110,4 +110,4 @@ std::optional<std::string> PaysForRBF(CAmount original_fees,
                                       CFeeRate relay_fee,
                                       const uint256& txid);
 
-#endif // SYSCOIN_POLICY_RBF_H
+#endif // wentuno_POLICY_RBF_H

@@ -3,12 +3,12 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_CONSENSUS_CONSENSUS_H
-#define SYSCOIN_CONSENSUS_CONSENSUS_H
+#ifndef wentuno_CONSENSUS_CONSENSUS_H
+#define wentuno_CONSENSUS_CONSENSUS_H
 
 #include <cstdlib>
 #include <stdint.h>
-// SYSCOIN 32MB max NEVM payload
+// wentuno 32MB max NEVM payload
 static const int MAX_NEVM_BLOCK_SIZE = 32 << 20;
 /** The maximum allowed size for a serialized block, in bytes (only for buffer size limits) */
 static const unsigned int MAX_BLOCK_SERIALIZED_SIZE = 4000000 + MAX_NEVM_BLOCK_SIZE;
@@ -28,4 +28,4 @@ static const size_t MIN_SERIALIZABLE_TRANSACTION_WEIGHT = WITNESS_SCALE_FACTOR *
 /** Interpret sequence numbers as relative lock-time constraints. */
 static constexpr unsigned int LOCKTIME_VERIFY_SEQUENCE = (1 << 0);
 
-#endif // SYSCOIN_CONSENSUS_CONSENSUS_H
+#endif // wentuno_CONSENSUS_CONSENSUS_H

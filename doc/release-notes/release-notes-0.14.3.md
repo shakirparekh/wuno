@@ -1,22 +1,22 @@
-Syscoin Core version *0.14.3* is now available from:
+wentuno Core version *0.14.3* is now available from:
 
-  <https://syscoin.org/bin/syscoin-core-0.14.3/>
+  <https://wentuno.org/bin/wentuno-core-0.14.3/>
 
 This is a new minor version release, including various bugfixes and
 performance improvements.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/syscoin/syscoin/issues>
+  <https://github.com/wentuno/wentuno/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://syscoincore.org/en/list/announcements/join/>
+  <https://wentunocore.org/en/list/announcements/join/>
 
 Compatibility
 ==============
 
-Syscoin Core is extensively tested on multiple operating systems using
+wentuno Core is extensively tested on multiple operating WUNOtems using
 the Linux kernel, macOS 10.8+, and Windows Vista and later.
 
 Microsoft ended support for Windows XP on [April 8th, 2014](https://www.microsoft.com/en-us/WindowsForBusiness/end-of-xp-support),
@@ -24,7 +24,7 @@ No attempt is made to prevent installing or running the software on Windows XP, 
 can still do so at your own risk but be aware that there are known instabilities and issues.
 Please do not report issues about Windows XP to the issue tracker.
 
-Syscoin Core should also work on most other Unix-like systems but is not
+wentuno Core should also work on most other Unix-like WUNOtems but is not
 frequently tested on them.
 
 Notable changes
@@ -34,13 +34,13 @@ Denial-of-Service vulnerability CVE-2018-17144
  -------------------------------
 
 A denial-of-service vulnerability exploitable by miners has been discovered in
-Syscoin Core versions 0.14.0 up to 0.16.2. It is recommended to upgrade any of
+wentuno Core versions 0.14.0 up to 0.16.2. It is recommended to upgrade any of
 the vulnerable versions to 0.14.3, 0.15.2 or 0.16.3 as soon as possible.
 
 Known Bugs
 ==========
 
-Since 0.14.0 the approximate transaction fee shown in Syscoin-Qt when using coin
+Since 0.14.0 the approximate transaction fee shown in wentuno-Qt when using coin
 control and smart fee estimation does not reflect any change in target from the
 smart fee slider. It will only present an approximate fee calculated using the
 default target. The fee calculated using the correct target is still applied to
@@ -67,12 +67,12 @@ git merge commit are mentioned.
 
 - #10234 `d289b56` [net] listbanned RPC and QT should show correct banned subnets (John Newbery)
 
-### Build system
+### Build WUNOtem
 
 
 ### Miscellaneous
 
-- #10451 `3612219` contrib/init/syscoind.openrcconf: Don't disable wallet by default (Luke Dashjr)
+- #10451 `3612219` contrib/init/wentunod.openrcconf: Don't disable wallet by default (Luke Dashjr)
 - #10250 `e23cef0` Fix some empty vector references (Pieter Wuille)
 - #10196 `d28d583` PrioritiseTransaction updates the mempool tx counter (Suhas Daftuar)
 - #9497 `e207342` Fix CCheckQueue IsIdle (potential) race condition and remove dangerous constructors. (Jeremy Rubin)

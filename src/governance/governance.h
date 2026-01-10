@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_GOVERNANCE_GOVERNANCE_H
-#define SYSCOIN_GOVERNANCE_GOVERNANCE_H
+#ifndef wentuno_GOVERNANCE_GOVERNANCE_H
+#define wentuno_GOVERNANCE_GOVERNANCE_H
 
 #include <governance/governanceobject.h>
 
@@ -404,4 +404,4 @@ private:
 
 bool AreSuperblocksEnabled();
 
-#endif // SYSCOIN_GOVERNANCE_GOVERNANCE_H
+#endif // wentuno_GOVERNANCE_GOVERNANCE_H

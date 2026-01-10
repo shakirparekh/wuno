@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_RPC_SERVER_UTIL_H
-#define SYSCOIN_RPC_SERVER_UTIL_H
+#ifndef wentuno_RPC_SERVER_UTIL_H
+#define wentuno_RPC_SERVER_UTIL_H
 
 #include <any>
 
@@ -35,4 +35,4 @@ PeerManager& EnsurePeerman(const node::NodeContext& node);
 AddrMan& EnsureAddrman(const node::NodeContext& node);
 AddrMan& EnsureAnyAddrman(const std::any& context);
 
-#endif // SYSCOIN_RPC_SERVER_UTIL_H
+#endif // wentuno_RPC_SERVER_UTIL_H

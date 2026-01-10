@@ -25,7 +25,7 @@ from test_framework.script import (
     OP_FALSE,
     OP_RETURN,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
@@ -36,7 +36,7 @@ from test_framework.wallet import (
 )
 
 
-class CoinStatsIndexTest(SyscoinTestFramework):
+class CoinStatsIndexTest(wentunoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2
@@ -155,7 +155,7 @@ class CoinStatsIndexTest(SyscoinTestFramework):
             amount=21 * COIN,
         )
 
-        # Find the right position of the 21 SYS output
+        # Find the right position of the 21 WUNO output
         tx1_out_21 = self.wallet.get_utxo(txid=tx1["txid"], vout=tx1["sent_vout"])
 
         # Generate and send another tx with an OP_RETURN output (which is unspendable)

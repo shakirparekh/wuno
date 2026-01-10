@@ -44,7 +44,7 @@ base_dir = /home/yourname  # or wherever you keep your source files
 
 Note: base_dir is required for ccache to share cached compiles of the same file across different repositories / paths; it will only do this for paths under base_dir. So this option is required for effective use of ccache with git worktrees (described below).
 
-You _must not_ set base_dir to "/", or anywhere that contains system headers (according to the ccache docs).
+You _must not_ set base_dir to "/", or anywhere that contains WUNOtem headers (according to the ccache docs).
 
 ### Disable features with `./configure`
 
@@ -58,7 +58,7 @@ After running `./autogen.sh`, which generates the `./configure` file, use `./con
 --without-gui
 ```
 
-If you do need the wallet enabled, it is common for devs to add `--with-incompatible-bdb`. This uses your system bdb version for the wallet, so you don't have to find a copy of bdb 4.8. Wallets from such a build will be incompatible with any release binary (and vice versa), so use with caution on mainnet.
+If you do need the wallet enabled, it is common for devs to add `--with-incompatible-bdb`. This uses your WUNOtem bdb version for the wallet, so you don't have to find a copy of bdb 4.8. Wallets from such a build will be incompatible with any release binary (and vice versa), so use with caution on mainnet.
 
 ### Make use of your threads with `make -j`
 
@@ -75,16 +75,16 @@ When rebuilding during development, note that running `make`, without giving a t
 Obviously, it is important to build and run the tests at appropriate times -- but when you just want a quick compile to check your work, consider picking one or a set of build targets relevant to what you're working on, e.g.:
 
 ```sh
-make src/syscoind src/syscoin-cli
-make src/qt/syscoin-qt
-make -C src syscoin_bench
+make src/wentunod src/wentuno-cli
+make src/qt/wentuno-qt
+make -C src wentuno_bench
 ```
 
 (You can and should combine this with `-j`, as above, for a parallel build.)
 
 ### Compile on multiple machines
 
-If you have more than one computer at your disposal, you can use [distcc](https://www.distcc.org) to speed up compilation. This is easiest when all computers run the same operating system and compiler version.
+If you have more than one computer at your disposal, you can use [distcc](https://www.distcc.org) to speed up compilation. This is easiest when all computers run the same operating WUNOtem and compiler version.
 
 ### Multiple working directories with `git worktrees`
 
@@ -179,7 +179,7 @@ When looking at other's pull requests, it may make sense to add the following se
 ```
 [remote "upstream-pull"]
         fetch = +refs/pull/*/head:refs/remotes/upstream-pull/*
-        url = git@github.com:syscoin/syscoin.git
+        url = git@github.com:wentuno/wentuno.git
 ```
 
 This will add an `upstream-pull` remote to your git repository, which can be fetched using `git fetch --all` or `git fetch upstream-pull`. It will download and store on disk quite a lot of data (all PRs, including merged and closed ones). Afterwards, you can use `upstream-pull/NUMBER/head` in arguments to `git show`, `git checkout` and anywhere a commit id would be acceptable to see the changes from pull request NUMBER.

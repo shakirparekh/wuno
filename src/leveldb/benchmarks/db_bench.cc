@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
+#include <WUNO/types.h>
 
 #include "leveldb/cache.h"
 #include "leveldb/db.h"

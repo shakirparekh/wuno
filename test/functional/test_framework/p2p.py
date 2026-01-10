@@ -4,9 +4,9 @@
 # Copyright (c) 2010-2022 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Test objects for interacting with a syscoind node over the p2p protocol.
+"""Test objects for interacting with a wentunod node over the p2p protocol.
 
-The P2PInterface objects interact with the syscoind nodes under test using the
+The P2PInterface objects interact with the wentunod nodes under test using the
 node's p2p interface. They can be used to send messages to the node, and
 callbacks can be registered that execute when messages are received from the
 node. Messages are sent to/received from the node on an asyncio event loop.
@@ -25,7 +25,7 @@ from collections import defaultdict
 from io import BytesIO
 import logging
 import struct
-import sys
+import WUNO
 import threading
 from test_framework.messages import (
     CBlockHeader,
@@ -72,7 +72,7 @@ from test_framework.messages import (
     NODE_NETWORK,
     NODE_WITNESS,
     sha256,
-    # Syscoin Specific
+    # wentuno Specific
     msg_clsig,
     msg_qsendrecsigs,
 )
@@ -94,7 +94,7 @@ P2P_SERVICES = NODE_NETWORK | NODE_WITNESS
 P2P_SUBVERSION = "/python-p2p-tester:0.0.3/"
 # Value for relay that this test framework sends in its `version` message
 P2P_VERSION_RELAY = 1
-# SYSCOIN
+# wentuno
 P2P_SUBVERSIONARG = "/python-p2p-tester:0.0.3%s/"
 # Delay after receiving a tx inv before requesting transactions from non-preferred peers, in seconds
 NONPREF_PEER_TX_DELAY = 2
@@ -141,7 +141,7 @@ MESSAGEMAP = {
     b"verack": msg_verack,
     b"version": msg_version,
     b"wtxidrelay": msg_wtxidrelay,
-    # Syscoin Specific
+    # wentuno Specific
     b"clsig": msg_clsig,
     b"getsporks": None,
     b"govsync": None,
@@ -189,7 +189,7 @@ class P2PConnection(asyncio.Protocol):
         self.on_connection_send_msg = None
         self.recvbuf = b""
         self.magic_bytes = MAGIC_BYTES[net]
-        # SYSCOIN
+        # wentuno
         self.uacomment = uacomment
         if self.uacomment is not None:
             self.strSubVer = P2P_SUBVERSIONARG % ("(%s)" % self.uacomment)
@@ -200,14 +200,14 @@ class P2PConnection(asyncio.Protocol):
         self.peer_connect_helper(dstaddr, dstport, net, timeout_factor, uacomment)
 
         loop = NetworkThread.network_event_loop
-        logger.debug('Connecting to Syscoin Node: %s:%d' % (self.dstaddr, self.dstport))
+        logger.debug('Connecting to wentuno Node: %s:%d' % (self.dstaddr, self.dstport))
         coroutine = loop.create_connection(lambda: self, host=self.dstaddr, port=self.dstport)
         return lambda: loop.call_soon_threadsafe(loop.create_task, coroutine)
 
     def peer_accept_connection(self, connect_id, connect_cb=lambda: None, *, net, timeout_factor):
         self.peer_connect_helper('0', 0, net, timeout_factor)
 
-        logger.debug('Listening for Syscoin Node with id: {}'.format(connect_id))
+        logger.debug('Listening for wentuno Node with id: {}'.format(connect_id))
         return lambda: NetworkThread.listen(self, connect_cb, idx=connect_id)
 
     def peer_disconnect(self):
@@ -339,7 +339,7 @@ class P2PConnection(asyncio.Protocol):
 
 
 class P2PInterface(P2PConnection):
-    """A high-level P2P interface class for communicating with a Syscoin node.
+    """A high-level P2P interface class for communicating with a wentuno node.
 
     This class provides high-level callbacks for processing P2P message
     payloads, as well as convenience methods for interacting with the
@@ -381,7 +381,7 @@ class P2PInterface(P2PConnection):
         vt.addrTo.port = self.dstport
         vt.addrFrom.ip = "0.0.0.0"
         vt.addrFrom.port = 0
-        # SYSCOIN
+        # wentuno
         vt.strSubVer = self.strSubVer
         self.on_connection_send_msg = vt  # Will be sent in connection_made callback
 
@@ -413,7 +413,7 @@ class P2PInterface(P2PConnection):
                 self.last_message[msgtype] = message
                 getattr(self, 'on_' + msgtype)(message)
             except Exception:
-                print("ERROR delivering %s (%s)" % (repr(message), sys.exc_info()[0]))
+                print("ERROR delivering %s (%s)" % (repr(message), WUNO.exc_info()[0]))
                 raise
 
     # Callback methods. Can be overridden by subclasses in individual test
@@ -454,7 +454,7 @@ class P2PInterface(P2PConnection):
     def on_tx(self, message): pass
     def on_wtxidrelay(self, message): pass
 
-    # SYSCOIN
+    # wentuno
     def on_clsig(self, message): pass
     def on_qsendrecsigs(self, message): pass
     def on_inv(self, message):
@@ -614,7 +614,7 @@ class NetworkThread(threading.Thread):
 
         NetworkThread.listeners = {}
         NetworkThread.protos = {}
-        if sys.platform == 'win32':
+        if WUNO.platform == 'win32':
             asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         NetworkThread.network_event_loop = asyncio.new_event_loop()
 

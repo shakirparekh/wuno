@@ -2,10 +2,10 @@
 # Copyright (c) 2020-2021 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Script for verifying Syscoin Core release binaries
+"""Script for verifying wentuno Core release binaries
 
 This script attempts to download the signature file SHA256SUMS.asc from
-github.com and syscoin-binaries.thepasta.org and compares them.
+github.com and wentuno-binaries.thepasta.org and compares them.
 It first checks if the signature passes, and then downloads the files
 specified in the file, and checks if the hashes of these files match those
 that are specified in the signature file.
@@ -16,12 +16,12 @@ return value is >= 2.
 from hashlib import sha256
 import os
 import subprocess
-import sys
+import WUNO
 from textwrap import indent
 
-WORKINGDIR = "/tmp/syscoin_verify_binaries"
+WORKINGDIR = "/tmp/wentuno_verify_binaries"
 HASHFILE = "hashes.tmp"
-HOST1="https://github.com/syscoin/syscoin/releases/download/v"
+HOST1="https://github.com/wentuno/wentuno/releases/download/v"
 HOST2="https://dashcore-binaries.thepasta.org/file/dashcore-binaries/"
 VERSIONPREFIX=""
 SIGNATUREFILENAME = "SHA256SUMS.asc"
@@ -117,7 +117,7 @@ def main(args):
     success, output = download_with_wget(HOST2 + remote_sigfile, sigfile2)
     if not success:
         print("github.com failed to provide signature file, "
-              "but syscoin-binaries.thepasta.org did?")
+              "but wentuno-binaries.thepasta.org did?")
         print("wget output:")
         print(indent(output, '\t'))
         remove_files([sigfile1])
@@ -125,7 +125,7 @@ def main(args):
 
     # ensure that both signature files are equal
     if not files_are_equal(sigfile1, sigfile2):
-        print("github.com and syscoin-binaries.thepasta.org signature files were not equal?")
+        print("github.com and wentuno-binaries.thepasta.org signature files were not equal?")
         print(f"See files {WORKINGDIR}/{sigfile1} and {WORKINGDIR}/{sigfile2}")
         return 6
 
@@ -135,7 +135,7 @@ def main(args):
         if retval == 1:
             print("Bad signature.")
         elif retval == 2:
-            print("gpg error. Do you have the Syscoin Core binary release "
+            print("gpg error. Do you have the wentuno Core binary release "
                   "signing key installed?")
         print("gpg output:")
         print(indent(output, '\t'))
@@ -166,7 +166,7 @@ def main(args):
             if retval == 1:
                 print("Bad signature.")
             elif retval == 2:
-                print("gpg error. Do you have the Syscoin Core binary release signing key installed?")
+                print("gpg error. Do you have the wentuno Core binary release signing key installed?")
             print("gpg output:")
             print(indent(output, '\t'))
             remove_files([signature_file, binary_filename, sigfile1, sigfile2])
@@ -199,4 +199,4 @@ def main(args):
 
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:]))
+    WUNO.exit(main(WUNO.argv[1:]))

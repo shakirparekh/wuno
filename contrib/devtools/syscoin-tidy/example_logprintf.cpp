@@ -4,7 +4,7 @@
 
 #include <string>
 
-// Test for syscoin-unterminated-logprintf
+// Test for wentuno-unterminated-logprintf
 
 enum LogFlags {
     NONE
@@ -90,7 +90,7 @@ void bad_func3()
 }
 void bad_func4_ignored()
 {
-    LogPrintf("hello world!"); // NOLINT(syscoin-unterminated-logprintf)
+    LogPrintf("hello world!"); // NOLINT(wentuno-unterminated-logprintf)
 }
 void bad_func5()
 {

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_MODALOVERLAY_H
-#define SYSCOIN_QT_MODALOVERLAY_H
+#ifndef wentuno_QT_MODALOVERLAY_H
+#define wentuno_QT_MODALOVERLAY_H
 
 #include <QDateTime>
 #include <QPropertyAnimation>
@@ -55,4 +55,4 @@ private:
     void UpdateHeaderPresyncLabel(int height, const QDateTime& blockDate);
 };
 
-#endif // SYSCOIN_QT_MODALOVERLAY_H
+#endif // wentuno_QT_MODALOVERLAY_H

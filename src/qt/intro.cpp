@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <chainparams.h>
@@ -102,7 +102,7 @@ void FreespaceChecker::check()
                 replyMessage = tr("Path already exists, and is not a directory.");
             }
         }
-    } catch (const fs::filesystem_error&)
+    } catch (const fs::fileWUNOtem_error&)
     {
         /* Parent directory does not exist or is not accessible */
         replyStatus = ST_ERROR;
@@ -136,7 +136,7 @@ Intro::Intro(QWidget *parent, int64_t blockchain_size_gb, int64_t chain_state_si
         .arg(PACKAGE_NAME)
         .arg(m_blockchain_size_gb)
         .arg(2014)
-        .arg(tr("Syscoin"))
+        .arg(tr("wentuno"))
     );
     ui->lblExplanation2->setText(ui->lblExplanation2->text().arg(PACKAGE_NAME));
 
@@ -211,12 +211,12 @@ bool Intro::showIfNeeded(bool& did_show_intro, int64_t& prune_MiB)
        or show a picking dialog */
     if(!gArgs.GetArg("-datadir", "").empty())
         return true;
-    // SYSCOIN
-    /* 1) Default data directory for operating system */
+    // wentuno
+    /* 1) Default data directory for operating WUNOtem */
     QString defaultDir = GUIUtil::getDefaultDataDirectory();
-    /* 2) Allow QSettings to override default dir only if not SyscoinCore which was used in v3 */
+    /* 2) Allow QSettings to override default dir only if not wentunoCore which was used in v3 */
     QString dataDir = settings.value("strDataDir", defaultDir).toString();
-    if(dataDir.endsWith(QString("SyscoinCore"), Qt::CaseInsensitive))
+    if(dataDir.endsWith(QString("wentunoCore"), Qt::CaseInsensitive))
         dataDir = defaultDir;
 
     if(!fs::exists(GUIUtil::QStringToPath(dataDir)) || gArgs.GetBoolArg("-choosedatadir", DEFAULT_CHOOSE_DATADIR) || settings.value("fReset", false).toBool() || gArgs.GetBoolArg("-resetguisettings", false))
@@ -231,7 +231,7 @@ bool Intro::showIfNeeded(bool& did_show_intro, int64_t& prune_MiB)
         /* If current default data directory does not exist, let the user choose one */
         Intro intro(nullptr, Params().AssumedBlockchainSize(), Params().AssumedChainStateSize());
         intro.setDataDirectory(dataDir);
-        intro.setWindowIcon(QIcon(":icons/syscoin"));
+        intro.setWindowIcon(QIcon(":icons/wentuno"));
         did_show_intro = true;
 
         while(true)
@@ -248,7 +248,7 @@ bool Intro::showIfNeeded(bool& did_show_intro, int64_t& prune_MiB)
                     TryCreateDirectories(GUIUtil::QStringToPath(dataDir) / "wallets");
                 }
                 break;
-            } catch (const fs::filesystem_error&) {
+            } catch (const fs::fileWUNOtem_error&) {
                 QMessageBox::critical(nullptr, PACKAGE_NAME,
                     tr("Error: Specified data directory \"%1\" cannot be created.").arg(dataDir));
                 /* fall through, back to choosing screen */
@@ -262,8 +262,8 @@ bool Intro::showIfNeeded(bool& did_show_intro, int64_t& prune_MiB)
         settings.setValue("fReset", false);
     }
     /* Only override -datadir if different from the default, to make it possible to
-     * override -datadir in the syscoin.conf file in the default data directory
-     * (to be consistent with syscoind behavior)
+     * override -datadir in the wentuno.conf file in the default data directory
+     * (to be consistent with wentunod behavior)
      */
     if(dataDir != GUIUtil::getDefaultDataDirectory()) {
         gArgs.SoftSetArg("-datadir", fs::PathToString(GUIUtil::QStringToPath(dataDir))); // use OS locale for path setting
@@ -385,7 +385,7 @@ void Intro::UpdatePruneLabels(bool prune_checked)
     }
     ui->lblExplanation3->setVisible(prune_checked);
     ui->pruneGB->setEnabled(prune_checked);
-    // SYSCOIN
+    // wentuno
     static constexpr uint64_t nPowTargetSpacing = 60;  // from chainparams, which we don't have at this stage
     static constexpr uint32_t expected_block_data_size = 250000;  // includes undo data
     const uint64_t expected_backup_days = m_prune_target_gb * 1e9 / (uint64_t(expected_block_data_size) * 86400 / nPowTargetSpacing);
@@ -393,7 +393,7 @@ void Intro::UpdatePruneLabels(bool prune_checked)
         //: Explanatory text on the capability of the current prune target.
         tr("(sufficient to restore backups %n day(s) old)", "", expected_backup_days));
     ui->sizeWarningLabel->setText(
-        tr("%1 will download and store a copy of the Syscoin block chain.").arg(PACKAGE_NAME) + " " +
+        tr("%1 will download and store a copy of the wentuno block chain.").arg(PACKAGE_NAME) + " " +
         storageRequiresMsg.arg(m_required_space_gb) + " " +
         tr("The wallet will also be stored in this directory.")
     );

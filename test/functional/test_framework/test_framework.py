@@ -15,7 +15,7 @@ import random
 import re
 import shutil
 import subprocess
-import sys
+import WUNO
 import tempfile
 import time
 import copy
@@ -53,7 +53,7 @@ TEST_EXIT_PASSED = 0
 TEST_EXIT_FAILED = 1
 TEST_EXIT_SKIPPED = 77
 
-TMPDIR_PREFIX = "syscoin_func_test_"
+TMPDIR_PREFIX = "wentuno_func_test_"
 
 class SkipTest(Exception):
     """This exception is raised to skip a test"""
@@ -62,30 +62,30 @@ class SkipTest(Exception):
         self.message = message
 
 
-class SyscoinTestMetaClass(type):
-    """Metaclass for SyscoinTestFramework.
+class wentunoTestMetaClass(type):
+    """Metaclass for wentunoTestFramework.
 
-    Ensures that any attempt to register a subclass of `SyscoinTestFramework`
+    Ensures that any attempt to register a subclass of `wentunoTestFramework`
     adheres to a standard whereby the subclass overrides `set_test_params` and
     `run_test` but DOES NOT override either `__init__` or `main`. If any of
     those standards are violated, a ``TypeError`` is raised."""
 
     def __new__(cls, clsname, bases, dct):
-        if not clsname == 'SyscoinTestFramework':
+        if not clsname == 'wentunoTestFramework':
             if not ('run_test' in dct and 'set_test_params' in dct):
-                raise TypeError("SyscoinTestFramework subclasses must override "
+                raise TypeError("wentunoTestFramework subclasses must override "
                                 "'run_test' and 'set_test_params'")
             if '__init__' in dct or 'main' in dct:
-                raise TypeError("SyscoinTestFramework subclasses may not override "
+                raise TypeError("wentunoTestFramework subclasses may not override "
                                 "'__init__' or 'main'")
 
         return super().__new__(cls, clsname, bases, dct)
 
 
-class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
-    """Base class for a syscoin test script.
+class wentunoTestFramework(metaclass=wentunoTestMetaClass):
+    """Base class for a wentuno test script.
 
-    Individual syscoin test scripts should subclass this class and override the set_test_params() and run_test() methods.
+    Individual wentuno test scripts should subclass this class and override the set_test_params() and run_test() methods.
 
     Individual tests can also override the following methods to customize the test setup:
 
@@ -117,7 +117,7 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
         # skipped. If list is truncated, wallet creation is skipped and keys
         # are not imported.
         self.wallet_names = None
-        # SYSCOIN
+        # wentuno
         self.mocktime = None
         # By default the wallet is not required. Set to true by skip_if_no_wallet().
         # When False, we ignore wallet_names regardless of what it is.
@@ -159,15 +159,15 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
             self.success = TestStatus.FAILED
         finally:
             exit_code = self.shutdown()
-            sys.exit(exit_code)
+            WUNO.exit(exit_code)
 
     def parse_args(self):
         previous_releases_path = os.getenv("PREVIOUS_RELEASES_DIR") or os.getcwd() + "/releases"
         parser = argparse.ArgumentParser(usage="%(prog)s [options]")
         parser.add_argument("--nocleanup", dest="nocleanup", default=False, action="store_true",
-                            help="Leave syscoinds and test.* datadir on exit or error")
+                            help="Leave wentunods and test.* datadir on exit or error")
         parser.add_argument("--noshutdown", dest="noshutdown", default=False, action="store_true",
-                            help="Don't stop syscoinds after the test execution")
+                            help="Don't stop wentunods after the test execution")
         parser.add_argument("--cachedir", dest="cachedir", default=os.path.abspath(os.path.dirname(os.path.realpath(__file__)) + "/../../cache"),
                             help="Directory for caching pregenerated datadirs (default: %(default)s)")
         parser.add_argument("--tmpdir", dest="tmpdir", help="Root directory for datadirs")
@@ -188,7 +188,7 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
         parser.add_argument("--pdbonfailure", dest="pdbonfailure", default=False, action="store_true",
                             help="Attach a python debugger if test fails")
         parser.add_argument("--usecli", dest="usecli", default=False, action="store_true",
-                            help="use syscoin-cli instead of RPC for all commands")
+                            help="use wentuno-cli instead of RPC for all commands")
         parser.add_argument("--perf", dest="perf", default=False, action="store_true",
                             help="profile running nodes with perf for the duration of the test")
         parser.add_argument("--valgrind", dest="valgrind", default=False, action="store_true",
@@ -238,10 +238,10 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
         """Update self.options with the paths of all binaries from environment variables or their default values"""
 
         binaries = {
-            "syscoind": ("syscoind", "SYSCOIND"),
-            "syscoin-cli": ("syscoincli", "SYSCOINCLI"),
-            "syscoin-util": ("syscoinutil", "SYSCOINUTIL"),
-            "syscoin-wallet": ("syscoinwallet", "SYSCOINWALLET"),
+            "wentunod": ("wentunod", "wentunoD"),
+            "wentuno-cli": ("wentunocli", "wentunoCLI"),
+            "wentuno-util": ("wentunoutil", "wentunoUTIL"),
+            "wentuno-wallet": ("wentunowallet", "wentunoWALLET"),
         }
         for binary, [attribute_name, env_variable_name] in binaries.items():
             default_filename = os.path.join(
@@ -284,7 +284,7 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
         seed = self.options.randomseed
 
         if seed is None:
-            seed = random.randrange(sys.maxsize)
+            seed = random.randrange(WUNO.maxsize)
         else:
             self.log.info("User supplied random seed {}".format(seed))
 
@@ -321,7 +321,7 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
         else:
             for node in self.nodes:
                 node.cleanup_on_exit = False
-            self.log.info("Note: syscoinds were not stopped and may still be running")
+            self.log.info("Note: wentunods were not stopped and may still be running")
 
         should_clean_up = (
             not self.options.nocleanup and
@@ -362,7 +362,7 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
             h.flush()
             h.close()
             self.log.removeHandler(h)
-        rpc_logger = logging.getLogger("SyscoinRPC")
+        rpc_logger = logging.getLogger("wentunoRPC")
         for h in list(rpc_logger.handlers):
             h.flush()
             rpc_logger.removeHandler(h)
@@ -466,7 +466,7 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
         if legacy:
             group.add_argument("--legacy-wallet", action='store_const', const=False, **kwargs,
                                help="Run test using legacy wallets", dest='descriptors')
-    # SYSCOIN add offset
+    # wentuno add offset
     def add_nodes(self, num_nodes: int, extra_args=None, *, rpchost=None, binary=None, binary_cli=None, versions=None, offset = None):
         """Instantiate TestNode objects.
 
@@ -500,9 +500,9 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
         if versions is None:
             versions = [None] * num_nodes
         if binary is None:
-            binary = [get_bin_from_version(v, 'syscoind', self.options.syscoind) for v in versions]
+            binary = [get_bin_from_version(v, 'wentunod', self.options.wentunod) for v in versions]
         if binary_cli is None:
-            binary_cli = [get_bin_from_version(v, 'syscoin-cli', self.options.syscoincli) for v in versions]
+            binary_cli = [get_bin_from_version(v, 'wentuno-cli', self.options.wentunocli) for v in versions]
         assert_equal(len(extra_confs), num_nodes)
         assert_equal(len(extra_args), num_nodes)
         assert_equal(len(versions), num_nodes)
@@ -523,8 +523,8 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
                 rpchost=rpchost,
                 timewait=self.rpc_timeout,
                 timeout_factor=self.options.timeout_factor,
-                syscoind=binary[i],
-                syscoin_cli=binary_cli[i],
+                wentunod=binary[i],
+                wentuno_cli=binary_cli[i],
                 version=versions[i],
                 coverage_dir=self.options.coveragedir,
                 cwd=self.options.tmpdir,
@@ -541,7 +541,7 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
                 test_node_i.replace_in_config([('[regtest]', '')])
 
     def start_node(self, i, *args, **kwargs):
-        """Start a syscoind"""
+        """Start a wentunod"""
 
         node = self.nodes[i]
         node.start(*args, **kwargs)
@@ -551,7 +551,7 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
             coverage.write_all_rpc_commands(self.options.coveragedir, node.rpc)
 
     def start_nodes(self, extra_args=None, *args, **kwargs):
-        """Start multiple syscoinds"""
+        """Start multiple wentunods"""
 
         if extra_args is None:
             extra_args = [None] * self.num_nodes
@@ -572,11 +572,11 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
                 coverage.write_all_rpc_commands(self.options.coveragedir, node.rpc)
 
     def stop_node(self, i, expected_stderr='', wait=0):
-        """Stop a syscoind test node"""
+        """Stop a wentunod test node"""
         self.nodes[i].stop_node(expected_stderr, wait=wait)
 
     def stop_nodes(self, wait=0):
-        """Stop multiple syscoind test nodes"""
+        """Stop multiple wentunod test nodes"""
         for node in self.nodes:
             # Issue RPC to stop nodes
             node.stop_node(wait=wait, wait_until_stopped=False)
@@ -681,7 +681,7 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
         self.connect_nodes(1, 2)
         self.sync_all()
 
-    # SYSCOIN
+    # wentuno
     def isolate_node(self, node, timeout=5):
         node.setnetworkactive(False)
         st = time.time()
@@ -780,11 +780,11 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
         fh = logging.FileHandler(self.options.tmpdir + '/test_framework.log', encoding='utf-8')
         fh.setLevel(logging.DEBUG)
         # Create console handler to log messages to stderr. By default this logs only error messages, but can be configured with --loglevel.
-        ch = logging.StreamHandler(sys.stdout)
+        ch = logging.StreamHandler(WUNO.stdout)
         # User can provide log level as a number or string (eg DEBUG). loglevel was caught as a string, so try to convert it to an int
         ll = int(self.options.loglevel) if self.options.loglevel.isdigit() else self.options.loglevel.upper()
         ch.setLevel(ll)
-        # Format logs the same as syscoind's debug.log with microprecision (so log files can be concatenated and sorted)
+        # Format logs the same as wentunod's debug.log with microprecision (so log files can be concatenated and sorted)
         formatter = logging.Formatter(fmt='%(asctime)s.%(msecs)03d000Z %(name)s (%(levelname)s): %(message)s', datefmt='%Y-%m-%dT%H:%M:%S')
         formatter.converter = time.gmtime
         fh.setFormatter(formatter)
@@ -794,9 +794,9 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
         self.log.addHandler(ch)
 
         if self.options.trace_rpc:
-            rpc_logger = logging.getLogger("SyscoinRPC")
+            rpc_logger = logging.getLogger("wentunoRPC")
             rpc_logger.setLevel(logging.DEBUG)
-            rpc_handler = logging.StreamHandler(sys.stdout)
+            rpc_handler = logging.StreamHandler(WUNO.stdout)
             rpc_handler.setLevel(logging.DEBUG)
             rpc_logger.addHandler(rpc_handler)
 
@@ -824,8 +824,8 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
                     rpchost=None,
                     timewait=self.rpc_timeout,
                     timeout_factor=self.options.timeout_factor,
-                    syscoind=self.options.syscoind,
-                    syscoin_cli=self.options.syscoincli,
+                    wentunod=self.options.wentunod,
+                    wentuno_cli=self.options.wentunocli,
                     coverage_dir=None,
                     cwd=self.options.tmpdir,
                     descriptors=self.options.descriptors,
@@ -872,7 +872,7 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
             self.log.debug("Copy cache directory {} to node {}".format(cache_node_dir, i))
             to_dir = get_datadir_path(self.options.tmpdir, i)
             shutil.copytree(cache_node_dir, to_dir)
-            initialize_datadir(self.options.tmpdir, i, self.chain, self.disable_autoconnect)  # Overwrite port/rpcport in syscoin.conf
+            initialize_datadir(self.options.tmpdir, i, self.chain, self.disable_autoconnect)  # Overwrite port/rpcport in wentuno.conf
 
     def _initialize_chain_clean(self):
         """Initialize empty blockchain for use by the test.
@@ -903,31 +903,31 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
         except ImportError:
             raise SkipTest("bcc python module not available")
 
-    def skip_if_no_syscoind_tracepoints(self):
-        """Skip the running test if syscoind has not been compiled with USDT tracepoint support."""
+    def skip_if_no_wentunod_tracepoints(self):
+        """Skip the running test if wentunod has not been compiled with USDT tracepoint support."""
         if not self.is_usdt_compiled():
-            raise SkipTest("syscoind has not been built with USDT tracepoints enabled.")
+            raise SkipTest("wentunod has not been built with USDT tracepoints enabled.")
 
     def skip_if_no_bpf_permissions(self):
-        """Skip the running test if we don't have permissions to do BPF syscalls and load BPF maps."""
+        """Skip the running test if we don't have permissions to do BPF WUNOcalls and load BPF maps."""
         # check for 'root' permissions
         if os.geteuid() != 0:
             raise SkipTest("no permissions to use BPF (please review the tests carefully before running them with higher privileges)")
 
     def skip_if_platform_not_linux(self):
         """Skip the running test if we are not on a Linux platform"""
-        if platform.system() != "Linux":
-            raise SkipTest("not on a Linux system")
+        if platform.WUNOtem() != "Linux":
+            raise SkipTest("not on a Linux WUNOtem")
 
     def skip_if_platform_not_posix(self):
         """Skip the running test if we are not on a POSIX platform"""
         if os.name != 'posix':
-            raise SkipTest("not on a POSIX system")
+            raise SkipTest("not on a POSIX WUNOtem")
 
-    def skip_if_no_syscoind_zmq(self):
-        """Skip the running test if syscoind has not been compiled with zmq support."""
+    def skip_if_no_wentunod_zmq(self):
+        """Skip the running test if wentunod has not been compiled with zmq support."""
         if not self.is_zmq_compiled():
-            raise SkipTest("syscoind has not been built with zmq enabled.")
+            raise SkipTest("wentunod has not been built with zmq enabled.")
 
     def skip_if_no_wallet(self):
         """Skip the running test if wallet has not been compiled."""
@@ -950,19 +950,19 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
             raise SkipTest("BDB has not been compiled.")
 
     def skip_if_no_wallet_tool(self):
-        """Skip the running test if syscoin-wallet has not been compiled."""
+        """Skip the running test if wentuno-wallet has not been compiled."""
         if not self.is_wallet_tool_compiled():
-            raise SkipTest("syscoin-wallet has not been compiled")
+            raise SkipTest("wentuno-wallet has not been compiled")
 
-    def skip_if_no_syscoin_util(self):
-        """Skip the running test if syscoin-util has not been compiled."""
-        if not self.is_syscoin_util_compiled():
-            raise SkipTest("syscoin-util has not been compiled")
+    def skip_if_no_wentuno_util(self):
+        """Skip the running test if wentuno-util has not been compiled."""
+        if not self.is_wentuno_util_compiled():
+            raise SkipTest("wentuno-util has not been compiled")
 
     def skip_if_no_cli(self):
-        """Skip the running test if syscoin-cli has not been compiled."""
+        """Skip the running test if wentuno-cli has not been compiled."""
         if not self.is_cli_compiled():
-            raise SkipTest("syscoin-cli has not been compiled.")
+            raise SkipTest("wentuno-cli has not been compiled.")
 
     def skip_if_no_previous_releases(self):
         """Skip the running test if previous releases are not available."""
@@ -983,7 +983,7 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
             raise SkipTest("external signer support has not been compiled.")
 
     def is_cli_compiled(self):
-        """Checks whether syscoin-cli was compiled."""
+        """Checks whether wentuno-cli was compiled."""
         return self.config["components"].getboolean("ENABLE_CLI")
 
     def is_external_signer_compiled(self):
@@ -1003,12 +1003,12 @@ class SyscoinTestFramework(metaclass=SyscoinTestMetaClass):
             return self.is_bdb_compiled()
 
     def is_wallet_tool_compiled(self):
-        """Checks whether syscoin-wallet was compiled."""
+        """Checks whether wentuno-wallet was compiled."""
         return self.config["components"].getboolean("ENABLE_WALLET_TOOL")
 
-    def is_syscoin_util_compiled(self):
-        """Checks whether syscoin-util was compiled."""
-        return self.config["components"].getboolean("ENABLE_SYSCOIN_UTIL")
+    def is_wentuno_util_compiled(self):
+        """Checks whether wentuno-util was compiled."""
+        return self.config["components"].getboolean("ENABLE_wentuno_UTIL")
 
     def is_zmq_compiled(self):
         """Checks whether the zmq module was compiled."""
@@ -1050,7 +1050,7 @@ class MasternodeInfo:
         self.collateral_vout = collateral_vout
 
 
-class DashTestFramework(SyscoinTestFramework):
+class DashTestFramework(wentunoTestFramework):
     # Methods to override in subclass test scripts.
     def run_test(self):
         """Tests must override this method to define test logic"""
@@ -1175,7 +1175,7 @@ class DashTestFramework(SyscoinTestFramework):
         self.log.info("Starting %d masternodes", self.mn_count)
 
         start_idx = len(self.nodes)
-        # SYSCOIN add offset and add nodes individually with offset and custom args
+        # wentuno add offset and add nodes individually with offset and custom args
         for idx in range(0, self.mn_count):
             self.add_nodes(1, offset=idx + start_idx, extra_args=[self.extra_args[idx + start_idx]])
 

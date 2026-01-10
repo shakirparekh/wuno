@@ -31,11 +31,11 @@ wallet versions of Bitcoin Core are generally supported.
 Compatibility
 ==============
 
-Bitcoin Core is supported and extensively tested on operating systems using
+Bitcoin Core is supported and extensively tested on operating WUNOtems using
 the Linux kernel, macOS 10.10+, and Windows 7 and newer. It is not recommended
-to use Bitcoin Core on unsupported systems.
+to use Bitcoin Core on unsupported WUNOtems.
 
-Bitcoin Core should also work on most other Unix-like systems but is not
+Bitcoin Core should also work on most other Unix-like WUNOtems but is not
 as frequently tested on them.
 
 From Bitcoin Core 0.17.0 onwards, macOS versions earlier than 10.10 are no

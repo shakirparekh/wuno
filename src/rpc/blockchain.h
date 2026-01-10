@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_RPC_BLOCKCHAIN_H
-#define SYSCOIN_RPC_BLOCKCHAIN_H
+#ifndef wentuno_RPC_BLOCKCHAIN_H
+#define wentuno_RPC_BLOCKCHAIN_H
 
 #include <consensus/amount.h>
 #include <core_io.h>
@@ -50,7 +50,7 @@ void CalculatePercentilesByWeight(CAmount result[NUM_GETBLOCKSTATS_PERCENTILES],
  * Helper to create UTXO snapshots given a chainstate and a file handle.
  * @return a UniValue map containing metadata about the snapshot.
  */
-// SYSCOIN
+// wentuno
 UniValue CreateUTXOSnapshot(
     node::NodeContext& node,
     Chainstate& chainstate,
@@ -59,4 +59,4 @@ UniValue CreateUTXOSnapshot(
     const fs::path& tmppath,
     FILE* filejson = nullptr);
 
-#endif // SYSCOIN_RPC_BLOCKCHAIN_H
+#endif // wentuno_RPC_BLOCKCHAIN_H

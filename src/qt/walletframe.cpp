@@ -10,7 +10,7 @@
 #include <qt/overviewpage.h>
 #include <qt/psbtoperationsdialog.h>
 #include <qt/walletmodel.h>
-// SYSCOIN
+// wentuno
 #include <qt/masternodelist.h>
 #include <qt/walletview.h>
 #include <util/fs.h>
@@ -27,7 +27,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QVBoxLayout>
-// SYSCOIN 
+// wentuno 
 #include <QSettings>
 WalletFrame::WalletFrame(const PlatformStyle* _platformStyle, QWidget* parent)
     : QFrame(parent),
@@ -56,7 +56,7 @@ WalletFrame::WalletFrame(const PlatformStyle* _platformStyle, QWidget* parent)
     no_wallet_group->setLayout(no_wallet_layout);
 
     walletStack->addWidget(no_wallet_group);
-    // SYSCOIN
+    // wentuno
     masternodeListPage = new MasternodeList();
     walletStack->addWidget(masternodeListPage);
 }
@@ -66,7 +66,7 @@ WalletFrame::~WalletFrame() = default;
 void WalletFrame::setClientModel(ClientModel *_clientModel)
 {
     this->clientModel = _clientModel;
-    // SYSCOIN
+    // wentuno
     masternodeListPage->setClientModel(_clientModel);
 
     for (auto i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i) {
@@ -92,7 +92,7 @@ bool WalletFrame::addView(WalletView* walletView)
 
     walletStack->addWidget(walletView);
     mapWalletViews[walletView->getWalletModel()] = walletView;
-    // SYSCOIN
+    // wentuno
     QSettings settings;
     if (settings.value("fShowMasternodesTab").toBool()) {
         masternodeListPage->setWalletModel(walletView->getWalletModel());
@@ -173,7 +173,7 @@ void WalletFrame::gotoHistoryPage()
     for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i)
         i.value()->gotoHistoryPage();
 }
-// SYSCOIN
+// wentuno
 void WalletFrame::gotoMasternodePage()
 {
     QMap<WalletModel*, WalletView*>::const_iterator i;

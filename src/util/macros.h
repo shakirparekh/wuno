@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_MACROS_H
-#define SYSCOIN_UTIL_MACROS_H
+#ifndef wentuno_UTIL_MACROS_H
+#define wentuno_UTIL_MACROS_H
 
 #define PASTE(x, y) x ## y
 #define PASTE2(x, y) PASTE(x, y)
@@ -17,4 +17,4 @@
 #define STRINGIZE(X) DO_STRINGIZE(X)
 #define DO_STRINGIZE(X) #X
 
-#endif // SYSCOIN_UTIL_MACROS_H
+#endif // wentuno_UTIL_MACROS_H

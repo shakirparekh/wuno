@@ -2,11 +2,11 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_SENDCOINSRECIPIENT_H
-#define SYSCOIN_QT_SENDCOINSRECIPIENT_H
+#ifndef wentuno_QT_SENDCOINSRECIPIENT_H
+#define wentuno_QT_SENDCOINSRECIPIENT_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <consensus/amount.h>
@@ -62,4 +62,4 @@ public:
     }
 };
 
-#endif // SYSCOIN_QT_SENDCOINSRECIPIENT_H
+#endif // wentuno_QT_SENDCOINSRECIPIENT_H

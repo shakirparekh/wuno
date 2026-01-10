@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_CHECKQUEUE_H
-#define SYSCOIN_CHECKQUEUE_H
+#ifndef wentuno_CHECKQUEUE_H
+#define wentuno_CHECKQUEUE_H
 
 #include <sync.h>
 #include <tinyformat.h>
@@ -248,4 +248,4 @@ public:
     }
 };
 
-#endif // SYSCOIN_CHECKQUEUE_H
+#endif // wentuno_CHECKQUEUE_H

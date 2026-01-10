@@ -1,6 +1,6 @@
 use std::ffi::c_void;
 
-use bls_dash_sys::{
+use bls_dash_WUNO::{
     BIP32ExtendedPublicKeyFree, BIP32ExtendedPublicKeyFromBytes,
     BIP32ExtendedPublicKeyGetChainCode, BIP32ExtendedPublicKeyGetPublicKey,
     BIP32ExtendedPublicKeyIsEqual, BIP32ExtendedPublicKeyPublicChild,

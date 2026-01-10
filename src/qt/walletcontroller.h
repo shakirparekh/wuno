@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_WALLETCONTROLLER_H
-#define SYSCOIN_QT_WALLETCONTROLLER_H
+#ifndef wentuno_QT_WALLETCONTROLLER_H
+#define wentuno_QT_WALLETCONTROLLER_H
 
 #include <qt/sendcoinsrecipient.h>
 #include <support/allocators/secure.h>
@@ -197,4 +197,4 @@ private:
     void finish();
 };
 
-#endif // SYSCOIN_QT_WALLETCONTROLLER_H
+#endif // wentuno_QT_WALLETCONTROLLER_H

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_SENDCOINSDIALOG_H
-#define SYSCOIN_QT_SENDCOINSDIALOG_H
+#ifndef wentuno_QT_SENDCOINSDIALOG_H
+#define wentuno_QT_SENDCOINSDIALOG_H
 
 #include <qt/clientmodel.h>
 #include <qt/walletmodel.h>
@@ -29,7 +29,7 @@ QT_BEGIN_NAMESPACE
 class QUrl;
 QT_END_NAMESPACE
 
-/** Dialog for sending syscoins */
+/** Dialog for sending wentunos */
 class SendCoinsDialog : public QDialog
 {
     Q_OBJECT
@@ -148,4 +148,4 @@ private:
     QString m_psbt_button_text{tr("Create Unsigned")};
 };
 
-#endif // SYSCOIN_QT_SENDCOINSDIALOG_H
+#endif // wentuno_QT_SENDCOINSDIALOG_H

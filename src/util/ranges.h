@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_RANGES_H
-#define SYSCOIN_UTIL_RANGES_H
+#ifndef wentuno_UTIL_RANGES_H
+#define wentuno_UTIL_RANGES_H
 
 #include <algorithm>
 #include <optional>
@@ -41,4 +41,4 @@ namespace ranges {
 }
 
 //#endif // C++20 compiler
-#endif // SYSCOIN_UTIL_RANGES_H
+#endif // wentuno_UTIL_RANGES_H

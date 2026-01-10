@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_MACOS_APPNAP_H
-#define SYSCOIN_QT_MACOS_APPNAP_H
+#ifndef wentuno_QT_MACOS_APPNAP_H
+#define wentuno_QT_MACOS_APPNAP_H
 
 #include <memory>
 
@@ -21,4 +21,4 @@ private:
     std::unique_ptr<CAppNapImpl> impl;
 };
 
-#endif // SYSCOIN_QT_MACOS_APPNAP_H
+#endif // wentuno_QT_MACOS_APPNAP_H

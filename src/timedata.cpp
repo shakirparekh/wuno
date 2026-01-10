@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <timedata.h>
@@ -23,9 +23,9 @@ static int64_t nTimeOffset GUARDED_BY(g_timeoffset_mutex) = 0;
 /**
  * "Never go to sea with two chronometers; take one or three."
  * Our three time sources are:
- *  - System clock
+ *  - WUNOtem clock
  *  - Median of other nodes clocks
- *  - The user (asking the user to fix the system clock if the first two disagree)
+ *  - The user (asking the user to fix the WUNOtem clock if the first two disagree)
  */
 int64_t GetTimeOffset()
 {
@@ -38,17 +38,17 @@ NodeClock::time_point GetAdjustedTime()
     return NodeClock::now() + std::chrono::seconds{GetTimeOffset()};
 }
 
-#define SYSCOIN_TIMEDATA_MAX_SAMPLES 200
+#define wentuno_TIMEDATA_MAX_SAMPLES 200
 
 static std::set<CNetAddr> g_sources;
-static CMedianFilter<int64_t> g_time_offsets{SYSCOIN_TIMEDATA_MAX_SAMPLES, 0};
+static CMedianFilter<int64_t> g_time_offsets{wentuno_TIMEDATA_MAX_SAMPLES, 0};
 static bool g_warning_emitted;
 
 void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample)
 {
     LOCK(g_timeoffset_mutex);
     // Ignore duplicates
-    if (g_sources.size() == SYSCOIN_TIMEDATA_MAX_SAMPLES)
+    if (g_sources.size() == wentuno_TIMEDATA_MAX_SAMPLES)
         return;
     if (!g_sources.insert(ip).second)
         return;
@@ -116,6 +116,6 @@ void TestOnlyResetTimeData()
     LOCK(g_timeoffset_mutex);
     nTimeOffset = 0;
     g_sources.clear();
-    g_time_offsets = CMedianFilter<int64_t>{SYSCOIN_TIMEDATA_MAX_SAMPLES, 0};
+    g_time_offsets = CMedianFilter<int64_t>{wentuno_TIMEDATA_MAX_SAMPLES, 0};
     g_warning_emitted = false;
 }

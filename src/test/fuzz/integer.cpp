@@ -3,10 +3,10 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <arith_uint256.h>
-// SYSCOIN
+// wentuno
 #include <primitives/transaction.h>
 #include <common/args.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <consensus/amount.h>
 #include <consensus/merkle.h>
 #include <core_io.h>

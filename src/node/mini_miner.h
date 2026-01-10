@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_NODE_MINI_MINER_H
-#define SYSCOIN_NODE_MINI_MINER_H
+#ifndef wentuno_NODE_MINI_MINER_H
+#define wentuno_NODE_MINI_MINER_H
 
 #include <txmempool.h>
 
@@ -123,4 +123,4 @@ public:
 };
 } // namespace node
 
-#endif // SYSCOIN_NODE_MINI_MINER_H
+#endif // wentuno_NODE_MINI_MINER_H

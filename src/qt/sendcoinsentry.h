@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_SENDCOINSENTRY_H
-#define SYSCOIN_QT_SENDCOINSENTRY_H
+#ifndef wentuno_QT_SENDCOINSENTRY_H
+#define wentuno_QT_SENDCOINSENTRY_H
 
 #include <qt/sendcoinsrecipient.h>
 
@@ -21,7 +21,7 @@ namespace Ui {
 }
 
 /**
- * A single entry in the dialog for sending syscoins.
+ * A single entry in the dialog for sending wentunos.
  */
 class SendCoinsEntry : public QWidget
 {
@@ -79,4 +79,4 @@ private:
     bool updateLabel(const QString &address);
 };
 
-#endif // SYSCOIN_QT_SENDCOINSENTRY_H
+#endif // wentuno_QT_SENDCOINSENTRY_H

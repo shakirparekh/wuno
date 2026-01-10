@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_THREADSAFETY_H
-#define SYSCOIN_THREADSAFETY_H
+#ifndef wentuno_THREADSAFETY_H
+#define wentuno_THREADSAFETY_H
 
 #include <mutex>
 
@@ -74,4 +74,4 @@ public:
     ~StdLockGuard() UNLOCK_FUNCTION() {}
 };
 
-#endif // SYSCOIN_THREADSAFETY_H
+#endif // wentuno_THREADSAFETY_H

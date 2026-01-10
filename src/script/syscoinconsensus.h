@@ -3,13 +3,13 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SCRIPT_SYSCOINCONSENSUS_H
-#define SYSCOIN_SCRIPT_SYSCOINCONSENSUS_H
+#ifndef wentuno_SCRIPT_wentunoCONSENSUS_H
+#define wentuno_SCRIPT_wentunoCONSENSUS_H
 
 #include <stdint.h>
 
-#if defined(BUILD_SYSCOIN_INTERNAL) && defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#if defined(BUILD_wentuno_INTERNAL) && defined(HAVE_CONFIG_H)
+#include <config/wentuno-config.h>
   #if defined(_WIN32)
     #if defined(HAVE_DLLEXPORT_ATTRIBUTE)
       #define EXPORT_SYMBOL __declspec(dllexport)
@@ -19,7 +19,7 @@
   #elif defined(HAVE_DEFAULT_VISIBILITY_ATTRIBUTE)
     #define EXPORT_SYMBOL __attribute__ ((visibility ("default")))
   #endif
-#elif defined(MSC_VER) && !defined(STATIC_LIBSYSCOINCONSENSUS)
+#elif defined(MSC_VER) && !defined(STATIC_LIBwentunoCONSENSUS)
   #define EXPORT_SYMBOL __declspec(dllimport)
 #endif
 
@@ -31,35 +31,35 @@
 extern "C" {
 #endif
 
-#define SYSCOINCONSENSUS_API_VER 2
+#define wentunoCONSENSUS_API_VER 2
 
-typedef enum syscoinconsensus_error_t
+typedef enum wentunoconsensus_error_t
 {
-    syscoinconsensus_ERR_OK = 0,
-    syscoinconsensus_ERR_TX_INDEX,
-    syscoinconsensus_ERR_TX_SIZE_MISMATCH,
-    syscoinconsensus_ERR_TX_DESERIALIZE,
-    syscoinconsensus_ERR_AMOUNT_REQUIRED,
-    syscoinconsensus_ERR_INVALID_FLAGS,
-    syscoinconsensus_ERR_SPENT_OUTPUTS_REQUIRED,
-    syscoinconsensus_ERR_SPENT_OUTPUTS_MISMATCH
-} syscoinconsensus_error;
+    wentunoconsensus_ERR_OK = 0,
+    wentunoconsensus_ERR_TX_INDEX,
+    wentunoconsensus_ERR_TX_SIZE_MISMATCH,
+    wentunoconsensus_ERR_TX_DESERIALIZE,
+    wentunoconsensus_ERR_AMOUNT_REQUIRED,
+    wentunoconsensus_ERR_INVALID_FLAGS,
+    wentunoconsensus_ERR_SPENT_OUTPUTS_REQUIRED,
+    wentunoconsensus_ERR_SPENT_OUTPUTS_MISMATCH
+} wentunoconsensus_error;
 
 /** Script verification flags */
 enum
 {
-    syscoinconsensus_SCRIPT_FLAGS_VERIFY_NONE                = 0,
-    syscoinconsensus_SCRIPT_FLAGS_VERIFY_P2SH                = (1U << 0), // evaluate P2SH (BIP16) subscripts
-    syscoinconsensus_SCRIPT_FLAGS_VERIFY_DERSIG              = (1U << 2), // enforce strict DER (BIP66) compliance
-    syscoinconsensus_SCRIPT_FLAGS_VERIFY_NULLDUMMY           = (1U << 4), // enforce NULLDUMMY (BIP147)
-    syscoinconsensus_SCRIPT_FLAGS_VERIFY_CHECKLOCKTIMEVERIFY = (1U << 9), // enable CHECKLOCKTIMEVERIFY (BIP65)
-    syscoinconsensus_SCRIPT_FLAGS_VERIFY_CHECKSEQUENCEVERIFY = (1U << 10), // enable CHECKSEQUENCEVERIFY (BIP112)
-    syscoinconsensus_SCRIPT_FLAGS_VERIFY_WITNESS             = (1U << 11), // enable WITNESS (BIP141)
-    syscoinconsensus_SCRIPT_FLAGS_VERIFY_TAPROOT             = (1U << 17), // enable TAPROOT (BIPs 341 & 342)
-    syscoinconsensus_SCRIPT_FLAGS_VERIFY_ALL                 = syscoinconsensus_SCRIPT_FLAGS_VERIFY_P2SH | syscoinconsensus_SCRIPT_FLAGS_VERIFY_DERSIG |
-                                                               syscoinconsensus_SCRIPT_FLAGS_VERIFY_NULLDUMMY | syscoinconsensus_SCRIPT_FLAGS_VERIFY_CHECKLOCKTIMEVERIFY |
-                                                               syscoinconsensus_SCRIPT_FLAGS_VERIFY_CHECKSEQUENCEVERIFY | syscoinconsensus_SCRIPT_FLAGS_VERIFY_WITNESS |
-                                                               syscoinconsensus_SCRIPT_FLAGS_VERIFY_TAPROOT
+    wentunoconsensus_SCRIPT_FLAGS_VERIFY_NONE                = 0,
+    wentunoconsensus_SCRIPT_FLAGS_VERIFY_P2SH                = (1U << 0), // evaluate P2SH (BIP16) subscripts
+    wentunoconsensus_SCRIPT_FLAGS_VERIFY_DERSIG              = (1U << 2), // enforce strict DER (BIP66) compliance
+    wentunoconsensus_SCRIPT_FLAGS_VERIFY_NULLDUMMY           = (1U << 4), // enforce NULLDUMMY (BIP147)
+    wentunoconsensus_SCRIPT_FLAGS_VERIFY_CHECKLOCKTIMEVERIFY = (1U << 9), // enable CHECKLOCKTIMEVERIFY (BIP65)
+    wentunoconsensus_SCRIPT_FLAGS_VERIFY_CHECKSEQUENCEVERIFY = (1U << 10), // enable CHECKSEQUENCEVERIFY (BIP112)
+    wentunoconsensus_SCRIPT_FLAGS_VERIFY_WITNESS             = (1U << 11), // enable WITNESS (BIP141)
+    wentunoconsensus_SCRIPT_FLAGS_VERIFY_TAPROOT             = (1U << 17), // enable TAPROOT (BIPs 341 & 342)
+    wentunoconsensus_SCRIPT_FLAGS_VERIFY_ALL                 = wentunoconsensus_SCRIPT_FLAGS_VERIFY_P2SH | wentunoconsensus_SCRIPT_FLAGS_VERIFY_DERSIG |
+                                                               wentunoconsensus_SCRIPT_FLAGS_VERIFY_NULLDUMMY | wentunoconsensus_SCRIPT_FLAGS_VERIFY_CHECKLOCKTIMEVERIFY |
+                                                               wentunoconsensus_SCRIPT_FLAGS_VERIFY_CHECKSEQUENCEVERIFY | wentunoconsensus_SCRIPT_FLAGS_VERIFY_WITNESS |
+                                                               wentunoconsensus_SCRIPT_FLAGS_VERIFY_TAPROOT
 };
 
 typedef struct {
@@ -72,20 +72,20 @@ typedef struct {
 /// txTo correctly spends the scriptPubKey pointed to by scriptPubKey under
 /// the additional constraints specified by flags.
 /// If not nullptr, err will contain an error/success code for the operation
-EXPORT_SYMBOL int syscoinconsensus_verify_script(const unsigned char *scriptPubKey, unsigned int scriptPubKeyLen,
+EXPORT_SYMBOL int wentunoconsensus_verify_script(const unsigned char *scriptPubKey, unsigned int scriptPubKeyLen,
                                                  const unsigned char *txTo        , unsigned int txToLen,
-                                                 unsigned int nIn, unsigned int flags, syscoinconsensus_error* err);
+                                                 unsigned int nIn, unsigned int flags, wentunoconsensus_error* err);
 
-EXPORT_SYMBOL int syscoinconsensus_verify_script_with_amount(const unsigned char *scriptPubKey, unsigned int scriptPubKeyLen, int64_t amount,
+EXPORT_SYMBOL int wentunoconsensus_verify_script_with_amount(const unsigned char *scriptPubKey, unsigned int scriptPubKeyLen, int64_t amount,
                                     const unsigned char *txTo        , unsigned int txToLen,
-                                    unsigned int nIn, unsigned int flags, syscoinconsensus_error* err);
+                                    unsigned int nIn, unsigned int flags, wentunoconsensus_error* err);
 
-EXPORT_SYMBOL int syscoinconsensus_verify_script_with_spent_outputs(const unsigned char *scriptPubKey, unsigned int scriptPubKeyLen, int64_t amount,
+EXPORT_SYMBOL int wentunoconsensus_verify_script_with_spent_outputs(const unsigned char *scriptPubKey, unsigned int scriptPubKeyLen, int64_t amount,
                                     const unsigned char *txTo        , unsigned int txToLen,
                                     const UTXO *spentOutputs, unsigned int spentOutputsLen,
-                                    unsigned int nIn, unsigned int flags, syscoinconsensus_error* err);
+                                    unsigned int nIn, unsigned int flags, wentunoconsensus_error* err);
 
-EXPORT_SYMBOL unsigned int syscoinconsensus_version();
+EXPORT_SYMBOL unsigned int wentunoconsensus_version();
 
 #ifdef __cplusplus
 } // extern "C"
@@ -93,4 +93,4 @@ EXPORT_SYMBOL unsigned int syscoinconsensus_version();
 
 #undef EXPORT_SYMBOL
 
-#endif // SYSCOIN_SCRIPT_SYSCOINCONSENSUS_H
+#endif // wentuno_SCRIPT_wentunoCONSENSUS_H

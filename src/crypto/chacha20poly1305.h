@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_CRYPTO_CHACHA20POLY1305_H
-#define SYSCOIN_CRYPTO_CHACHA20POLY1305_H
+#ifndef wentuno_CRYPTO_CHACHA20POLY1305_H
+#define wentuno_CRYPTO_CHACHA20POLY1305_H
 
 #include <cstddef>
 #include <stdint.h>
@@ -145,4 +145,4 @@ public:
     bool Decrypt(Span<const std::byte> cipher, Span<const std::byte> aad, Span<std::byte> plain1, Span<std::byte> plain2) noexcept;
 };
 
-#endif // SYSCOIN_CRYPTO_CHACHA20POLY1305_H
+#endif // wentuno_CRYPTO_CHACHA20POLY1305_H

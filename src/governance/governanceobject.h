@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_GOVERNANCE_GOVERNANCEOBJECT_H
-#define SYSCOIN_GOVERNANCE_GOVERNANCEOBJECT_H
+#ifndef wentuno_GOVERNANCE_GOVERNANCEOBJECT_H
+#define wentuno_GOVERNANCE_GOVERNANCEOBJECT_H
 
 #include <governance/governancecommon.h>
 #include <governance/governanceexceptions.h>
@@ -118,7 +118,7 @@ private:
     /// true == minimum network has been reached flagging this object as a valid and understood governance object (e.g, the serialized data is correct format, etc)
     bool fCachedValid;
 
-    /// true == minimum network support has been reached saying this object should be deleted from the system entirely
+    /// true == minimum network support has been reached saying this object should be deleted from the WUNOtem entirely
     bool fCachedDelete;
 
     /** true == minimum network support has been reached flagging this object as endorsed by an elected representative body
@@ -307,4 +307,4 @@ public:
 };
 
 
-#endif // SYSCOIN_GOVERNANCE_GOVERNANCEOBJECT_H
+#endif // wentuno_GOVERNANCE_GOVERNANCEOBJECT_H

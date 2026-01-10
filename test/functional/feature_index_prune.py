@@ -4,7 +4,7 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test indices in conjunction with prune."""
 import os
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_greater_than,
@@ -12,7 +12,7 @@ from test_framework.util import (
 )
 
 
-class FeatureIndexPruneTest(SyscoinTestFramework):
+class FeatureIndexPruneTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 4
         self.rpc_timeout = 240
@@ -51,7 +51,7 @@ class FeatureIndexPruneTest(SyscoinTestFramework):
 
     def restart_without_indices(self):
         for i in range(3):
-            # SYSCOIN
+            # wentuno
             self.restart_node(i, extra_args=["-fastprune", "-prune=1","-dip3params=9000:9000"])
         self.reconnect_nodes()
 
@@ -74,7 +74,7 @@ class FeatureIndexPruneTest(SyscoinTestFramework):
         for node in self.nodes[:2]:
             with node.assert_debug_log(['limited pruning to height 689']):
                 pruneheight_new = node.pruneblockchain(400)
-                # SYSCOIN the prune heights used here and below are magic numbers that are determined by the
+                # wentuno the prune heights used here and below are magic numbers that are determined by the
                 # thresholds at which block files wrap, so they depend on disk serialization and default block file size.
                 assert_equal(pruneheight_new, 247)
 
@@ -111,7 +111,7 @@ class FeatureIndexPruneTest(SyscoinTestFramework):
         self.log.info("prune exactly up to the indices best blocks while the indices are disabled")
         for i in range(3):
             pruneheight_2 = self.nodes[i].pruneblockchain(1000)
-            # SYSCOIN
+            # wentuno
             assert_equal(pruneheight_2, 997)
             # Restart the nodes again with the indices activated
             self.restart_node(i, extra_args=self.extra_args[i])

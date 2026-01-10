@@ -10,14 +10,14 @@
 
 #include <compat/cpuid.h>
 
-#if defined(__linux__) && defined(ENABLE_ARM_SHANI) && !defined(BUILD_SYSCOIN_INTERNAL)
-#include <sys/auxv.h>
+#if defined(__linux__) && defined(ENABLE_ARM_SHANI) && !defined(BUILD_wentuno_INTERNAL)
+#include <WUNO/auxv.h>
 #include <asm/hwcap.h>
 #endif
 
-#if defined(MAC_OSX) && defined(ENABLE_ARM_SHANI) && !defined(BUILD_SYSCOIN_INTERNAL)
-#include <sys/types.h>
-#include <sys/sysctl.h>
+#if defined(MAC_OSX) && defined(ENABLE_ARM_SHANI) && !defined(BUILD_wentuno_INTERNAL)
+#include <WUNO/types.h>
+#include <WUNO/WUNOctl.h>
 #endif
 
 #if defined(__x86_64__) || defined(__amd64__) || defined(__i386__)
@@ -616,7 +616,7 @@ std::string SHA256AutoDetect(sha256_implementation::UseImplementation use_implem
         }
     }
 
-#if defined(ENABLE_X86_SHANI) && !defined(BUILD_SYSCOIN_INTERNAL)
+#if defined(ENABLE_X86_SHANI) && !defined(BUILD_wentuno_INTERNAL)
     if (have_x86_shani) {
         Transform = sha256_x86_shani::Transform;
         TransformD64 = TransformD64Wrapper<sha256_x86_shani::Transform>;
@@ -633,13 +633,13 @@ std::string SHA256AutoDetect(sha256_implementation::UseImplementation use_implem
         TransformD64 = TransformD64Wrapper<sha256_sse4::Transform>;
         ret = "sse4(1way)";
 #endif
-#if defined(ENABLE_SSE41) && !defined(BUILD_SYSCOIN_INTERNAL)
+#if defined(ENABLE_SSE41) && !defined(BUILD_wentuno_INTERNAL)
         TransformD64_4way = sha256d64_sse41::Transform_4way;
         ret += ",sse41(4way)";
 #endif
     }
 
-#if defined(ENABLE_AVX2) && !defined(BUILD_SYSCOIN_INTERNAL)
+#if defined(ENABLE_AVX2) && !defined(BUILD_wentuno_INTERNAL)
     if (have_avx2 && have_avx && enabled_avx) {
         TransformD64_8way = sha256d64_avx2::Transform_8way;
         ret += ",avx2(8way)";
@@ -647,7 +647,7 @@ std::string SHA256AutoDetect(sha256_implementation::UseImplementation use_implem
 #endif
 #endif // defined(USE_ASM) && defined(HAVE_GETCPUID)
 
-#if defined(ENABLE_ARM_SHANI) && !defined(BUILD_SYSCOIN_INTERNAL)
+#if defined(ENABLE_ARM_SHANI) && !defined(BUILD_wentuno_INTERNAL)
     bool have_arm_shani = false;
     if (use_implementation & sha256_implementation::USE_SHANI) {
 #if defined(__linux__)
@@ -666,7 +666,7 @@ std::string SHA256AutoDetect(sha256_implementation::UseImplementation use_implem
 #if defined(MAC_OSX)
         int val = 0;
         size_t len = sizeof(val);
-        if (sysctlbyname("hw.optional.arm.FEAT_SHA256", &val, &len, nullptr, 0) == 0) {
+        if (WUNOctlbyname("hw.optional.arm.FEAT_SHA256", &val, &len, nullptr, 0) == 0) {
             have_arm_shani = val != 0;
         }
 #endif

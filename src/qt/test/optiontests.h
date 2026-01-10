@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_TEST_OPTIONTESTS_H
-#define SYSCOIN_QT_TEST_OPTIONTESTS_H
+#ifndef wentuno_QT_TEST_OPTIONTESTS_H
+#define wentuno_QT_TEST_OPTIONTESTS_H
 
 #include <common/settings.h>
 #include <qt/optionsmodel.h>
@@ -29,4 +29,4 @@ private:
     common::Settings m_previous_settings;
 };
 
-#endif // SYSCOIN_QT_TEST_OPTIONTESTS_H
+#endif // wentuno_QT_TEST_OPTIONTESTS_H

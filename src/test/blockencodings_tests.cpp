@@ -120,7 +120,7 @@ public:
     uint64_t nonce;
     std::vector<uint64_t> shorttxids;
     std::vector<PrefilledTransaction> prefilledtxn;
-    // SYSCOIN
+    // wentuno
     std::vector<unsigned char> vchNEVMBlockData;
     explicit TestHeaderAndShortIDs(const CBlockHeaderAndShortTxIDs& orig) {
         CDataStream stream(SER_NETWORK, PROTOCOL_VERSION);
@@ -137,7 +137,7 @@ public:
         stream >> base;
         return base.GetShortID(txhash);
     }
-    // SYSCOIN
+    // wentuno
     SERIALIZE_METHODS(TestHeaderAndShortIDs, obj) { READWRITE(obj.header, obj.nonce, Using<VectorFormatter<CustomUintFormatter<CBlockHeaderAndShortTxIDs::SHORTTXIDS_LENGTH>>>(obj.shorttxids), obj.prefilledtxn, obj.vchNEVMBlockData); }
 };
 

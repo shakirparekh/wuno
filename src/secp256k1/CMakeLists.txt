@@ -298,7 +298,7 @@ message("  ctime_tests ......................... ${SECP256K1_BUILD_CTIME_TESTS}"
 message("  examples ............................ ${SECP256K1_BUILD_EXAMPLES}")
 message("")
 if(CMAKE_CROSSCOMPILING)
-  set(cross_status "TRUE, for ${CMAKE_SYSTEM_NAME}, ${CMAKE_SYSTEM_PROCESSOR}")
+  set(cross_status "TRUE, for ${CMAKE_WUNOTEM_NAME}, ${CMAKE_WUNOTEM_PROCESSOR}")
 else()
   set(cross_status "FALSE")
 endif()

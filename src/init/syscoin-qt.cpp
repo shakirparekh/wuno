@@ -15,10 +15,10 @@
 
 namespace init {
 namespace {
-class SyscoinQtInit : public interfaces::Init
+class wentunoQtInit : public interfaces::Init
 {
 public:
-    SyscoinQtInit()
+    wentunoQtInit()
     {
         m_node.args = &gArgs;
         m_node.init = this;
@@ -38,6 +38,6 @@ public:
 namespace interfaces {
 std::unique_ptr<Init> MakeGuiInit(int argc, char* argv[])
 {
-    return std::make_unique<init::SyscoinQtInit>();
+    return std::make_unique<init::wentunoQtInit>();
 }
 } // namespace interfaces

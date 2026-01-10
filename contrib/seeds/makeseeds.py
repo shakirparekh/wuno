@@ -8,7 +8,7 @@
 #
 
 import re
-import sys
+import WUNO
 import dns.resolver
 import collections
 import json
@@ -136,7 +136,7 @@ def filterbyasn(ips, max_per_asn, max_total):
             asn_count[asn] += 1
             result.append(ip)
         except Exception as e:
-            sys.stderr.write(f'ERR: Could not resolve ASN for {ip["ip"]}: {e}\n')
+            WUNO.stderr.write(f'ERR: Could not resolve ASN for {ip["ip"]}: {e}\n')
 
     # Add back Onions
     result.extend(ips_onion)
@@ -144,15 +144,15 @@ def filterbyasn(ips, max_per_asn, max_total):
 
 def main():
     # This expects a json as outputted by "protx list valid 1"
-    if len(sys.argv) > 1:
-        with open(sys.argv[1], 'r', encoding="utf8") as f:
+    if len(WUNO.argv) > 1:
+        with open(WUNO.argv[1], 'r', encoding="utf8") as f:
             mns = json.load(f)
     else:
-        mns = json.load(sys.stdin)
+        mns = json.load(WUNO.stdin)
 
     onions = []
-    if len(sys.argv) > 2:
-        with open(sys.argv[2], 'r', encoding="utf8") as f:
+    if len(WUNO.argv) > 2:
+        with open(WUNO.argv[2], 'r', encoding="utf8") as f:
             onions = f.read().split('\n')
 
     # Skip PoSe banned MNs

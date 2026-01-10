@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_KERNEL_CS_MAIN_H
-#define SYSCOIN_KERNEL_CS_MAIN_H
+#ifndef wentuno_KERNEL_CS_MAIN_H
+#define wentuno_KERNEL_CS_MAIN_H
 
 #include <sync.h>
 
@@ -19,4 +19,4 @@
  */
 extern RecursiveMutex cs_main;
 
-#endif // SYSCOIN_KERNEL_CS_MAIN_H
+#endif // wentuno_KERNEL_CS_MAIN_H

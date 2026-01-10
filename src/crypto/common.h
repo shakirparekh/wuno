@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_CRYPTO_COMMON_H
-#define SYSCOIN_CRYPTO_COMMON_H
+#ifndef wentuno_CRYPTO_COMMON_H
+#define wentuno_CRYPTO_COMMON_H
 
 #include <compat/endian.h>
 
@@ -82,4 +82,4 @@ void static inline WriteBE64(unsigned char* ptr, uint64_t x)
     memcpy(ptr, &v, 8);
 }
 
-#endif // SYSCOIN_CRYPTO_COMMON_H
+#endif // wentuno_CRYPTO_COMMON_H

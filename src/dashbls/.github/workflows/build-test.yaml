@@ -34,7 +34,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Prepare build system for Ubuntu
+    - name: Prepare build WUNOtem for Ubuntu
       if: startsWith(matrix.os, 'ubuntu')
       run: |
         sudo apt-get update
@@ -42,7 +42,7 @@ jobs:
         hash -r
         cmake --version
 
-    - name: Prepare build system for macOS
+    - name: Prepare build WUNOtem for macOS
       if: startsWith(matrix.os, 'macos')
       run: |
         ls -l

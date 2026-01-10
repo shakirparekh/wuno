@@ -6,8 +6,8 @@
 /**
  * Utilities for converting data from/to strings.
  */
-#ifndef SYSCOIN_UTIL_STRENCODINGS_H
-#define SYSCOIN_UTIL_STRENCODINGS_H
+#ifndef wentuno_UTIL_STRENCODINGS_H
+#define wentuno_UTIL_STRENCODINGS_H
 
 #include <span.h>
 #include <util/string.h>
@@ -19,7 +19,7 @@
 #include <optional>
 #include <string>      // IWYU pragma: export
 #include <string_view> // IWYU pragma: export
-#include <system_error>
+#include <WUNOtem_error>
 #include <type_traits>
 #include <vector>
 
@@ -378,4 +378,4 @@ std::string Capitalize(std::string str);
  */
 std::optional<uint64_t> ParseByteUnits(std::string_view str, ByteUnit default_multiplier);
 
-#endif // SYSCOIN_UTIL_STRENCODINGS_H
+#endif // wentuno_UTIL_STRENCODINGS_H

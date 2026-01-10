@@ -12,7 +12,7 @@
 #include <vector>
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <boost/test/unit_test.hpp>

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_INSERT_H
-#define SYSCOIN_UTIL_INSERT_H
+#ifndef wentuno_UTIL_INSERT_H
+#define wentuno_UTIL_INSERT_H
 
 #include <set>
 
@@ -21,4 +21,4 @@ inline void insert(std::set<TsetT>& dst, const Tsrc& src) {
 
 } // namespace util
 
-#endif // SYSCOIN_UTIL_INSERT_H
+#endif // wentuno_UTIL_INSERT_H

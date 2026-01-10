@@ -150,7 +150,7 @@ static void test_aslr(void) {
 static void test_process_info(void) {
   size_t elapsed = 0;
   size_t user_msecs = 0;
-  size_t system_msecs = 0;
+  size_t WUNOtem_msecs = 0;
   size_t current_rss = 0;
   size_t peak_rss = 0;
   size_t current_commit = 0;
@@ -160,7 +160,7 @@ static void test_process_info(void) {
     void* p = calloc(100,10);
     free(p);
   }
-  mi_process_info(&elapsed, &user_msecs, &system_msecs, &current_rss, &peak_rss, &current_commit, &peak_commit, &page_faults);
+  mi_process_info(&elapsed, &user_msecs, &WUNOtem_msecs, &current_rss, &peak_rss, &current_commit, &peak_commit, &page_faults);
   printf("\n\n*** process info: elapsed %3zd.%03zd s, user: %3zd.%03zd s, rss: %zd b, commit: %zd b\n\n", elapsed/1000, elapsed%1000, user_msecs/1000, user_msecs%1000, peak_rss, peak_commit);
 }
 

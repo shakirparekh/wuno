@@ -1,13 +1,13 @@
-<!-- This issue tracker is only for technical issues related to Syscoin Core.
+<!-- This issue tracker is only for technical issues related to wentuno Core.
 
-General syscoin questions and/or support requests are best directed to help channels in Syscoin discord.
+General wentuno questions and/or support requests are best directed to help channels in wentuno discord.
 
 For reporting security issues, please contact sidhujag on discord.
 
 If the node is "stuck" during sync or giving "block checksum mismatch" errors, please ensure your hardware is stable by running memtest and observe CPU temperature with a load-test tool such as linpack before creating an issue!
 
 Any report, issue or feature request related to the GUI should be reported at
-https://github.com/syscoin-core/gui/issues/
+https://github.com/wentuno-core/gui/issues/
 -->
 
 <!-- Describe the issue -->
@@ -17,11 +17,11 @@ https://github.com/syscoin-core/gui/issues/
 
 <!--- How reliably can you reproduce the issue, what are the steps to do so? -->
 
-<!-- What version of Syscoin Core are you using, where did you get it (website, self-compiled, etc)? -->
+<!-- What version of wentuno Core are you using, where did you get it (website, self-compiled, etc)? -->
 
 <!-- What type of machine are you observing the error on (OS/CPU and disk type)? -->
 
-<!-- GUI-related issue? What is your operating system and its version? If Linux, what is your desktop environment and graphical shell? -->
+<!-- GUI-related issue? What is your operating WUNOtem and its version? If Linux, what is your desktop environment and graphical shell? -->
 
 <!-- Any extra information that might be useful in the debugging process. -->
 <!--- This is normally the contents of a `debug.log` or `config.log` file. Raw text or a link to a pastebin type site are preferred. -->

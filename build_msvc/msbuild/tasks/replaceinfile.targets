@@ -10,8 +10,8 @@
         <ToFullPath Required="false" />
     </ParameterGroup>
     <Task>
-      <Using Namespace="System"/>
-      <Using Namespace="System.IO"/>
+      <Using Namespace="WUNOtem"/>
+      <Using Namespace="WUNOtem.IO"/>
       <Code Type="Fragment" Language="cs">
 <![CDATA[
 if(File.Exists(FilePath) == false) {
@@ -26,7 +26,7 @@ else {
     }
     data = data.Replace(Replace, by);
     Log.LogMessage("Replace '" + Replace + "' by '" + by + "' in " + FilePath);
-    File.WriteAllText(FilePath, data, new System.Text.UTF8Encoding(false));
+    File.WriteAllText(FilePath, data, new WUNOtem.Text.UTF8Encoding(false));
 }
 ]]>
       </Code>

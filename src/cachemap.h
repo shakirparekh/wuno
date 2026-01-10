@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_CACHEMAP_H
-#define SYSCOIN_CACHEMAP_H
+#ifndef wentuno_CACHEMAP_H
+#define wentuno_CACHEMAP_H
 
 #include <map>
 #include <list>
@@ -176,4 +176,4 @@ private:
     }
 };
 
-#endif // SYSCOIN_CACHEMAP_H
+#endif // wentuno_CACHEMAP_H

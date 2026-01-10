@@ -37,7 +37,7 @@ util::Result<void> ApplyArgsManOptions(const ArgsManager& args, ChainstateManage
 
     if (auto value{args.GetIntArg("-maxtipage")}) opts.max_tip_age = std::chrono::seconds{*value};
 
-    // SYSCOIN
+    // wentuno
     auto value{args.GetArgs("-gethcommandline")};
     if (!value.empty()) opts.geth_commandline = value;
 

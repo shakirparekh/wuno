@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_HTTPSERVER_H
-#define SYSCOIN_HTTPSERVER_H
+#ifndef wentuno_HTTPSERVER_H
+#define wentuno_HTTPSERVER_H
 
 #include <functional>
 #include <optional>
@@ -172,4 +172,4 @@ private:
     struct event* ev;
 };
 
-#endif // SYSCOIN_HTTPSERVER_H
+#endif // wentuno_HTTPSERVER_H

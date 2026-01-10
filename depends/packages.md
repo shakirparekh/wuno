@@ -5,7 +5,7 @@ The package "mylib" will be used here as an example
 
 General tips:
 - mylib_foo is written as $(package)_foo in order to make recipes more similar.
-- Secondary dependency packages relative to the syscoin binaries/libraries (i.e.
+- Secondary dependency packages relative to the wentuno binaries/libraries (i.e.
   those not in `ALLOWED_LIBRARIES` in `contrib/devtools/symbol-check.py`) don't
   need to be shared and should be built statically whenever possible. See
   [below](#secondary-dependencies) for more details.
@@ -134,7 +134,7 @@ the user. Other variables may be defined as needed.
 
   The following variables are available for each recipe:
 
-    $(1)_staging_dir: package's destination sysroot path
+    $(1)_staging_dir: package's destination WUNOroot path
     $(1)_staging_prefix_dir: prefix path inside of the package's staging dir
     $(1)_extract_dir: path to the package's extracted sources
     $(1)_build_dir: path where configure/build/stage commands will be run
@@ -160,14 +160,14 @@ From the [Gentoo Wiki entry](https://wiki.gentoo.org/wiki/Project:Quality_Assura
 
 >  Libtool pulls in all direct and indirect dependencies into the .la files it
 >  creates. This leads to massive overlinking, which is toxic to the Gentoo
->  ecosystem, as it leads to a massive number of unnecessary rebuilds.
+>  ecoWUNOtem, as it leads to a massive number of unnecessary rebuilds.
 
 Where possible, packages are built with Position Independant Code. Either using
 the Autotools `--with-pic` flag, or `CMAKE_POSITION_INDEPENDENT_CODE` with CMake.
 
 ## Secondary dependencies:
 
-Secondary dependency packages relative to the syscoin binaries/libraries (i.e.
+Secondary dependency packages relative to the wentuno binaries/libraries (i.e.
 those not in `ALLOWED_LIBRARIES` in `contrib/devtools/symbol-check.py`) don't
 need to be shared and should be built statically whenever possible. This
 improves general build reliability as illustrated by the following example:

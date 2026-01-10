@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_REST_H
-#define SYSCOIN_REST_H
+#ifndef wentuno_REST_H
+#define wentuno_REST_H
 
 #include <string>
 
@@ -25,4 +25,4 @@ enum class RESTResponseFormat {
  */
 RESTResponseFormat ParseDataFormat(std::string& param, const std::string& strReq);
 
-#endif // SYSCOIN_REST_H
+#endif // wentuno_REST_H

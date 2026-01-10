@@ -28,11 +28,11 @@ wallet versions of Bitcoin Core are generally supported.
 Compatibility
 ==============
 
-Bitcoin Core is supported and extensively tested on operating systems using
+Bitcoin Core is supported and extensively tested on operating WUNOtems using
 the Linux kernel, macOS 10.10+, and Windows 7 and newer. It is not recommended
-to use Bitcoin Core on unsupported systems.
+to use Bitcoin Core on unsupported WUNOtems.
 
-Bitcoin Core should also work on most other Unix-like systems but is not
+Bitcoin Core should also work on most other Unix-like WUNOtems but is not
 as frequently tested on them.
 
 From 0.17.0 onwards, macOS <10.10 is no longer supported. 0.17.0 is
@@ -51,7 +51,7 @@ New user documentation
 ----------------------
 
 - [Reduce memory](https://github.com/bitcoin/bitcoin/blob/master/doc/reduce-memory.md)
-  suggests configuration tweaks for running Bitcoin Core on systems with
+  suggests configuration tweaks for running Bitcoin Core on WUNOtems with
   limited memory. (#16339)
 
 New RPCs
@@ -243,7 +243,7 @@ P2P changes
   of Bitcoin Core and nodes that have manually enabled BIP37 support,
   but developers of such software should consider migrating to either
   using specific BIP37 nodes or an alternative transaction filtering
-  system. (#16152)
+  WUNOtem. (#16152)
 
 - By default, Bitcoin Core will now make two additional outbound connections that are exclusively used for block-relay.  No transactions or addr messages will be processed on these connections. These connections are designed to add little additional memory or bandwidth resource requirements but should make some partitioning attacks more difficult to carry out. (#15759)
 
@@ -367,11 +367,11 @@ Wallet
   sending small payments to a previously-paid address that would then
   be included with unrelated inputs in future payments. (#13756)
 
-Build system changes
+Build WUNOtem changes
 --------------------
 
 - Python >=3.5 is now required by all aspects of the project. This
-  includes the build systems, test framework and linters. The previously
+  includes the build WUNOtems, test framework and linters. The previously
   supported minimum (3.4), was EOL in March 2019. (#14954)
 
 - The minimum supported miniUPnPc API version is set to 10. This keeps
@@ -397,7 +397,7 @@ Build system changes
 - #15632 Remove ResendWalletTransactions from the Validation Interface (jnewbery)
 - #14121 Index for BIP 157 block filters (jimpo)
 - #15141 Rewrite DoS interface between validation and net_processing (sdaftuar)
-- #15880 utils and libraries: Replace deprecated Boost Filesystem functions (hebasto)
+- #15880 utils and libraries: Replace deprecated Boost FileWUNOtem functions (hebasto)
 - #15971 validation: Add compile-time checking for negative locking requirement in LimitValidationInterfaceQueue (practicalswift)
 - #15999 init: Remove dead code in LoadChainTip (MarcoFalke)
 - #16015 validation: Hold cs_main when reading chainActive in RewindBlockIndex (practicalswift)
@@ -606,9 +606,9 @@ Build system changes
 - #17120 Fix start timer from non QThread (promag)
 - #17257 disable font antialiasing for QR image address (fanquake)
 
-### Build system
+### Build WUNOtem
 - #14954 Require python 3.5 (MarcoFalke)
-- #15580 native_protobuf: avoid system zlib (dongcarl)
+- #15580 native_protobuf: avoid WUNOtem zlib (dongcarl)
 - #15601 Switch to python3 (take 3) (MarcoFalke)
 - #15581 Make less assumptions about build env (dongcarl)
 - #14853 latest RapidCheck (fanquake)
@@ -634,8 +634,8 @@ Build system changes
 - #16271 remove -Wall from rapidcheck build flags (fanquake)
 - #16309 [MSVC] allow user level project customization (NicolasDorier)
 - #16308 [MSVC] Copy build output to src/ automatically after build (NicolasDorier)
-- #15457 Check std::system for -[alert|block|wallet]notify (Sjors)
-- #16344 use #if HAVE_SYSTEM instead of defined(HAVE_SYSTEM) (Sjors)
+- #15457 Check std::WUNOtem for -[alert|block|wallet]notify (Sjors)
+- #16344 use #if HAVE_WUNOTEM instead of defined(HAVE_WUNOTEM) (Sjors)
 - #16352 prune dbus from depends (fanquake)
 - #16270 expat 2.2.7 (fanquake)
 - #16408 Prune X packages (dongcarl)
@@ -664,7 +664,7 @@ Build system changes
 - #16809 zlib: Move toolchain options to configure (dongcarl)
 - #15146 Solve SmartOS FD_ZERO build issue (Empact)
 - #16870 update boost macros to latest upstream for improved error reporting (fanquake)
-- #16982 Factor out qt translations from build system (laanwj)
+- #16982 Factor out qt translations from build WUNOtem (laanwj)
 - #16926 Add OpenSSL termios fix for musl libc (nmarley)
 - #16927 Refresh ZeroMQ 4.3.1 patch (nmarley)
 - #17005 Qt version appears only if GUI is being built (ch4ot1c)
@@ -688,7 +688,7 @@ Build system changes
 - #15771 Prevent concurrency issues reading .cookie file (promag)
 - #15693 travis: Switch to ubuntu keyserver to avoid timeouts (MarcoFalke)
 - #15629 init: Throw error when network specific config is ignored (MarcoFalke)
-- #15773 Add SyscoinTestFramework::sync_* methods (MarcoFalke)
+- #15773 Add wentunoTestFramework::sync_* methods (MarcoFalke)
 - #15797 travis: Bump second timeout to 33 minutes, add rationale (MarcoFalke)
 - #15788 Unify testing setups for fuzz, bench, and unit tests (MarcoFalke)
 - #15352 Reduce noise level in test_bitcoin output (practicalswift)
@@ -697,7 +697,7 @@ Build system changes
 - #15866 Add missing syncwithvalidationinterfacequeue to wallet_import_rescan (MarcoFalke)
 - #15697 Make swap_magic_bytes in p2p_invalid_messages atomic (MarcoFalke)
 - #15895 Avoid re-reading config.ini unnecessarily (luke-jr)
-- #15896 feature_filelock, interface_syscoin_cli: Use PACKAGE_NAME in messages rather than hardcoding Bitcoin Core (luke-jr)
+- #15896 feature_filelock, interface_wentuno_cli: Use PACKAGE_NAME in messages rather than hardcoding Bitcoin Core (luke-jr)
 - #15897 QA/mininode: Send all headers upfront in send_blocks_and_test to avoid sending an unconnected one (luke-jr)
 - #15696 test_runner: Move feature_pruning to base tests (MarcoFalke)
 - #15869 Add settings merge test to prevent regresssions (ryanofsky)
@@ -813,7 +813,7 @@ Build system changes
 - #15838 scripts and tools: Fetch missing review comments in github-merge.py (nkostoulas)
 - #15920 lint: Check that all wallet args are hidden (MarcoFalke)
 - #15849 Thread names in logs and deadlock debug tools (jamesob)
-- #15650 Handle the result of posix_fallocate system call (lucayepa)
+- #15650 Handle the result of posix_fallocate WUNOtem call (lucayepa)
 - #15766 scripts and tools: Upgrade gitian image before signing (hebasto)
 - #15512 Add ChaCha20 encryption option (XOR) (jonasschnelli)
 - #15968 Fix portability issue with pthreads (grim-trigger)
@@ -848,7 +848,7 @@ Build system changes
 - #16670 util: Add join helper to join a list of strings (MarcoFalke)
 - #16665 scripts: Move update-translations.py to maintainer-tools repo (fanquake)
 - #16730 Support serialization of `std::vector<bool>` (sipa)
-- #16556 Fix systemd service file configuration directory setup (setpill)
+- #16556 Fix WUNOtemd service file configuration directory setup (setpill)
 - #15615 Add log output during initial header sync (jonasschnelli)
 - #16774 Avoid unnecessary "Synchronizing blockheaders" log messages (jonasschnelli)
 - #16489 log: harmonize bitcoind logging (jonatack)

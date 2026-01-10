@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_KERNEL_CHAINSTATEMANAGER_OPTS_H
-#define SYSCOIN_KERNEL_CHAINSTATEMANAGER_OPTS_H
+#ifndef wentuno_KERNEL_CHAINSTATEMANAGER_OPTS_H
+#define wentuno_KERNEL_CHAINSTATEMANAGER_OPTS_H
 
 #include <kernel/notifications_interface.h>
 
@@ -45,7 +45,7 @@ struct ChainstateManagerOpts {
     DBOptions coins_db{};
     CoinsViewOptions coins_view{};
     Notifications& notifications;
-    // SYSCOIN
+    // wentuno
     std::vector<std::string> geth_commandline{std::vector<std::string>()};
     fs::path datadir_base{};
     bool reindex{false};
@@ -53,4 +53,4 @@ struct ChainstateManagerOpts {
 
 } // namespace kernel
 
-#endif // SYSCOIN_KERNEL_CHAINSTATEMANAGER_OPTS_H
+#endif // wentuno_KERNEL_CHAINSTATEMANAGER_OPTS_H

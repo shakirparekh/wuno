@@ -429,7 +429,7 @@ typedef struct _ctx_t {
 	int counter;
 
 #if TIMER == PERF
-	/** File descriptor for perf system call. */
+	/** File descriptor for perf WUNOtem call. */
 	int perf_fd;
 	/** Buffer for storing perf data, */
 	struct perf_event_mmap_page *perf_buf;

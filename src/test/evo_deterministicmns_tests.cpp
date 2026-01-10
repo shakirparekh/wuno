@@ -104,7 +104,7 @@ static CMutableTransaction CreateProRegTx(const node::NodeContext& node, SimpleU
     proTx.nOperatorReward = 5000;
 
     CMutableTransaction tx;
-    tx.nVersion = SYSCOIN_TX_VERSION_MN_REGISTER;
+    tx.nVersion = wentuno_TX_VERSION_MN_REGISTER;
     FundTransaction(node, tx, utxos, scriptPayout, 100 * COIN);
     proTx.inputsHash = CalcTxInputsHash(CTransaction(tx));
     SetTxPayload(tx, proTx);
@@ -121,7 +121,7 @@ static CMutableTransaction CreateProUpServTx(const node::NodeContext& node, Simp
     proTx.addr = LookupNumeric("1.1.1.1", port);
     proTx.scriptOperatorPayout = GetScriptForDestination(WitnessV0KeyHash(coinbaseKey.GetPubKey()));
     CMutableTransaction tx;
-    tx.nVersion = SYSCOIN_TX_VERSION_MN_UPDATE_SERVICE;
+    tx.nVersion = wentuno_TX_VERSION_MN_UPDATE_SERVICE;
     FundTransaction(node, tx, utxos, GetScriptForDestination(WitnessV0KeyHash(coinbaseKey.GetPubKey())), 1 * COIN);
     proTx.inputsHash = CalcTxInputsHash(CTransaction(tx));
     proTx.sig = operatorKey.Sign(::SerializeHash(proTx), bls::bls_legacy_scheme);
@@ -142,7 +142,7 @@ static CMutableTransaction CreateProUpRegTx(const node::NodeContext& node, Simpl
     proTx.scriptPayout = scriptPayout;
 
     CMutableTransaction tx;
-    tx.nVersion = SYSCOIN_TX_VERSION_MN_UPDATE_REGISTRAR;
+    tx.nVersion = wentuno_TX_VERSION_MN_UPDATE_REGISTRAR;
     FundTransaction(node, tx, utxos, GetScriptForDestination(WitnessV0KeyHash(coinbaseKey.GetPubKey())), 1 * COIN);
     proTx.inputsHash = CalcTxInputsHash(CTransaction(tx));
     CHashSigner::SignHash(::SerializeHash(proTx), mnKey, proTx.vchSig);
@@ -159,7 +159,7 @@ static CMutableTransaction CreateProUpRevTx(const node::NodeContext& node, Simpl
     proTx.proTxHash = proTxHash;
 
     CMutableTransaction tx;
-    tx.nVersion = SYSCOIN_TX_VERSION_MN_UPDATE_REVOKE;
+    tx.nVersion = wentuno_TX_VERSION_MN_UPDATE_REVOKE;
     FundTransaction(node, tx, utxos, GetScriptForDestination(WitnessV0KeyHash(coinbaseKey.GetPubKey())), 1 * COIN);
     proTx.inputsHash = CalcTxInputsHash(CTransaction(tx));
     proTx.sig = operatorKey.Sign(::SerializeHash(proTx), bls::bls_legacy_scheme);
@@ -480,7 +480,7 @@ void FuncTestMempoolReorg(TestChain100Setup& setup)
     }
 
     CMutableTransaction tx_reg;
-    tx_reg.nVersion = SYSCOIN_TX_VERSION_MN_REGISTER;
+    tx_reg.nVersion = wentuno_TX_VERSION_MN_REGISTER;
     FundTransaction(setup.m_node, tx_reg, utxos, scriptPayout, 100 * COIN);
     payload.inputsHash = CalcTxInputsHash(CTransaction(tx_reg));
     CMessageSigner::SignMessage(payload.MakeSignString(), payload.vchSig, collateralKey);
@@ -547,7 +547,7 @@ void FuncTestMempoolDualProregtx(TestChain100Setup& setup)
     }
 
     CMutableTransaction tx_reg2;
-    tx_reg2.nVersion = SYSCOIN_TX_VERSION_MN_REGISTER;
+    tx_reg2.nVersion = wentuno_TX_VERSION_MN_REGISTER;
     FundTransaction(setup.m_node, tx_reg2, utxos, scriptPayout, 100 * COIN);
     payload.inputsHash = CalcTxInputsHash(CTransaction(tx_reg2));
     CMessageSigner::SignMessage(payload.MakeSignString(), payload.vchSig, collateralKey);
@@ -607,7 +607,7 @@ void FuncVerifyDB(TestChain100Setup& setup)
     }
 
     CMutableTransaction tx_reg;
-    tx_reg.nVersion = SYSCOIN_TX_VERSION_MN_REGISTER;
+    tx_reg.nVersion = wentuno_TX_VERSION_MN_REGISTER;
     FundTransaction(setup.m_node, tx_reg, utxos, scriptPayout, 100 * COIN);
     payload.inputsHash = CalcTxInputsHash(CTransaction(tx_reg));
     CMessageSigner::SignMessage(payload.MakeSignString(), payload.vchSig, collateralKey);

@@ -156,11 +156,11 @@ int main() {
 " HAVE_ARM64_CRC32C)
 set(CMAKE_REQUIRED_FLAGS ${OLD_CMAKE_REQURED_FLAGS})
 
-# Check for strong getauxval() support in the system headers.
+# Check for strong getauxval() support in the WUNOtem headers.
 check_cxx_source_compiles("
 #include <arm_acle.h>
 #include <arm_neon.h>
-#include <sys/auxv.h>
+#include <WUNO/auxv.h>
 
 int main() {
   getauxval(AT_HWCAP);

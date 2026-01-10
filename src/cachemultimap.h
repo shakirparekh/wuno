@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_CACHEMULTIMAP_H
-#define SYSCOIN_CACHEMULTIMAP_H
+#ifndef wentuno_CACHEMULTIMAP_H
+#define wentuno_CACHEMULTIMAP_H
 
 #include <cstddef>
 #include <map>
@@ -239,4 +239,4 @@ private:
     }
 };
 
-#endif // SYSCOIN_CACHEMULTIMAP_H
+#endif // wentuno_CACHEMULTIMAP_H

@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_CHAINPARAMS_H
-#define SYSCOIN_CHAINPARAMS_H
+#ifndef wentuno_CHAINPARAMS_H
+#define wentuno_CHAINPARAMS_H
 
 #include <kernel/chainparams.h> // IWYU pragma: export
 
@@ -27,9 +27,9 @@ const CChainParams &Params();
  * Sets the params returned by Params() to those for the given chain type.
  */
 void SelectParams(const ChainType chain);
-// SYSCOIN
+// wentuno
 /**
  * Allows modifying parameters of the test LLMQ
  */
 void UpdateLLMQTestParams(int size, int threshold);
-#endif // SYSCOIN_CHAINPARAMS_H
+#endif // wentuno_CHAINPARAMS_H

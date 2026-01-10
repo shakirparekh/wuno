@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_BANTABLEMODEL_H
-#define SYSCOIN_QT_BANTABLEMODEL_H
+#ifndef wentuno_QT_BANTABLEMODEL_H
+#define wentuno_QT_BANTABLEMODEL_H
 
 #include <addrdb.h>
 #include <net.h>
@@ -79,4 +79,4 @@ private:
     std::unique_ptr<BanTablePriv> priv;
 };
 
-#endif // SYSCOIN_QT_BANTABLEMODEL_H
+#endif // wentuno_QT_BANTABLEMODEL_H

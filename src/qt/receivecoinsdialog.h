@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_RECEIVECOINSDIALOG_H
-#define SYSCOIN_QT_RECEIVECOINSDIALOG_H
+#ifndef wentuno_QT_RECEIVECOINSDIALOG_H
+#define wentuno_QT_RECEIVECOINSDIALOG_H
 
 #include <qt/guiutil.h>
 
@@ -26,7 +26,7 @@ QT_BEGIN_NAMESPACE
 class QModelIndex;
 QT_END_NAMESPACE
 
-/** Dialog for requesting payment of syscoins */
+/** Dialog for requesting payment of wentunos */
 class ReceiveCoinsDialog : public QDialog
 {
     Q_OBJECT
@@ -76,4 +76,4 @@ private Q_SLOTS:
     void copyAmount();
 };
 
-#endif // SYSCOIN_QT_RECEIVECOINSDIALOG_H
+#endif // wentuno_QT_RECEIVECOINSDIALOG_H

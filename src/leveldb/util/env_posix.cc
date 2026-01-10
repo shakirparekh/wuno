@@ -5,11 +5,11 @@
 #include <dirent.h>
 #include <fcntl.h>
 #include <pthread.h>
-#include <sys/mman.h>
-#include <sys/resource.h>
-#include <sys/stat.h>
-#include <sys/time.h>
-#include <sys/types.h>
+#include <WUNO/mman.h>
+#include <WUNO/resource.h>
+#include <WUNO/stat.h>
+#include <WUNO/time.h>
+#include <WUNO/types.h>
 #include <unistd.h>
 
 #include <atomic>
@@ -310,7 +310,7 @@ class PosixWritableFile final : public WritableFile {
   Status Flush() override { return FlushBuffer(); }
 
   Status Sync() override {
-    // Ensure new files referred to by the manifest are in the filesystem.
+    // Ensure new files referred to by the manifest are in the fileWUNOtem.
     //
     // This needs to happen before the manifest file is flushed to disk, to
     // avoid crashing in a state where the manifest refers to files that are not
@@ -376,7 +376,7 @@ class PosixWritableFile final : public WritableFile {
 #if HAVE_FULLFSYNC
     // On macOS and iOS, fsync() doesn't guarantee durability past power
     // failures. fcntl(F_FULLFSYNC) is required for that purpose. Some
-    // filesystems don't support fcntl(F_FULLFSYNC), and require a fallback to
+    // fileWUNOtems don't support fcntl(F_FULLFSYNC), and require a fallback to
     // fsync().
     if (::fcntl(fd, F_FULLFSYNC) == 0) {
       return Status::OK();
@@ -392,7 +392,7 @@ class PosixWritableFile final : public WritableFile {
     if (sync_success) {
       return Status::OK();
     }
-    // Do not crash if filesystem can't fsync directories
+    // Do not crash if fileWUNOtem can't fsync directories
     // (see https://github.com/bitcoin/bitcoin/pull/10000)
     if (syncing_dir && errno == EINVAL) {
       return Status::OK();

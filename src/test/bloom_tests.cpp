@@ -5,7 +5,7 @@
 #include <common/bloom.h>
 #include <bls/bls.h>
 #include <clientversion.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <key.h>
 #include <key_io.h>
 #include <merkleblock.h>
@@ -165,7 +165,7 @@ BOOST_AUTO_TEST_CASE(bloom_match)
     filter.insert(COutPoint(uint256S("0x000000d70786e899529d71dbeba91ba216982fb6ba58f3bdaab65e73b7e9260b"), 0));
     BOOST_CHECK_MESSAGE(!filter.IsRelevantAndUpdate(tx), "Simple Bloom filter matched COutPoint for an output we didn't care about");
 }
-// SYSCOIN
+// wentuno
 BOOST_AUTO_TEST_CASE(dip2_bloom_match)
 {
     //TODO: Provide raw data for basic scheme as well
@@ -444,7 +444,7 @@ BOOST_AUTO_TEST_CASE(merkle_block_3_and_serialize)
     BOOST_CHECK(vMatched.size() == merkleBlock.vMatchedTxn.size());
     for (unsigned int i = 0; i < vMatched.size(); i++)
         BOOST_CHECK(vMatched[i] == merkleBlock.vMatchedTxn[i].second);
-    // SYSCOIN
+    // wentuno
     CDataStream merkleStream(SER_NETWORK, PROTOCOL_VERSION);
     merkleStream << merkleBlock;
 

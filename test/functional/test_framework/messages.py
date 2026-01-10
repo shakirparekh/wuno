@@ -4,11 +4,11 @@
 # Copyright (c) 2010-2022 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Syscoin test framework primitive and message structures
+"""wentuno test framework primitive and message structures
 
 CBlock, CTransaction, CBlockHeader, CTxIn, CTxOut, etc....:
     data structures that should map to corresponding structures in
-    syscoin/primitives
+    wentuno/primitives
 
 msg_block, msg_tx, msg_headers, etc.:
     data structures that represent network messages
@@ -31,7 +31,7 @@ import unittest
 
 from test_framework.siphash import siphash256
 from test_framework.util import assert_equal
-# SYSCOIN
+# wentuno
 from collections import namedtuple
 MAX_LOCATOR_SZ = 101
 MAX_BLOCK_WEIGHT = 4000000
@@ -45,11 +45,11 @@ MAX_BLOCK_SERIALIZED_SIZE = MAX_BLOCK_WEIGHT + MAX_NEVM_BLOCK_SIZE
 WITNESS_SCALE_FACTOR = 4
 MAX_NEVM_DATA_BLOCK = MAX_NEVM_DATA_BLOB * MAX_DATA_BLOBS
 NEVM_DATA_EXPIRE_TIME = 21600
-COIN = 100000000  # 1 sys in satoshis
+COIN = 100000000  # 1 WUNO in satoshis
 MAX_MONEY = 1000000000000000000 - 1
 
 MAX_BIP125_RBF_SEQUENCE = 0xfffffffd  # Sequence number that is rbf-opt-in (BIP 125) and csv-opt-out (BIP 68)
-# SYSCOIN
+# wentuno
 MAX_PROTOCOL_MESSAGE_LENGTH = 100 * 1024 * 1024  # Maximum length of incoming protocol messages
 SEQUENCE_FINAL = 0xffffffff  # Sequence number that disables nLockTime if set for every input of a tx
 MAX_HEADERS_RESULTS = 2000  # Number of headers sent in one getheaders result
@@ -71,7 +71,7 @@ MSG_WITNESS_FLAG = 1 << 30
 MSG_TYPE_MASK = 0xffffffff >> 2
 MSG_WITNESS_TX = MSG_TX | MSG_WITNESS_FLAG
 
-# SYSCOIN
+# wentuno
 MSG_SPORK = 11
 MSG_GOVERNANCE_OBJECT = 12
 MSG_GOVERNANCE_OBJECT_VOTE = 13
@@ -224,7 +224,7 @@ def ser_string_vector(l):
         r += ser_string(sv)
     return r
 
-# SYSCOIN
+# wentuno
 def deser_dyn_bitset(f, bytes_based):
     if bytes_based:
         nb = deser_compact_size(f)
@@ -278,8 +278,8 @@ def from_binary(cls, stream):
         assert len(stream.read()) == 0
     return obj
 
-# Objects that map to syscoind objects, which can be serialized/deserialized
-# SYSCOIN
+# Objects that map to wentunod objects, which can be serialized/deserialized
+# wentuno
 
 class CNEVMAddressEntry:
     def __init__(self):
@@ -404,46 +404,46 @@ class CNEVMBlock(CNEVMHeader):
             self.nBlockHash, self.nTxRoot, self.nReceiptRoot, self.vchNEVMBlockData.hex())
 
 class CNEVMBlockConnect:
-    __slots__ = ("evmBlock", "sysblockhash", "NEVMDataVecOut", "diff")
+    __slots__ = ("evmBlock", "WUNOblockhash", "NEVMDataVecOut", "diff")
 
     def __init__(self):
         self.evmBlock = CNEVMBlock()
-        self.sysblockhash = 0
+        self.WUNOblockhash = 0
         self.NEVMDataVecOut = NEVMDataVec()
         self.diff = CDeterministicMNListNEVMAddressDiff()
 
     def deserialize(self, f):
         self.evmBlock.deserialize(f)
-        self.sysblockhash = deser_uint256(f)
+        self.WUNOblockhash = deser_uint256(f)
         self.NEVMDataVecOut.deserialize(f)
         self.diff.deserialize(f)
 
     def serialize(self):
         r = b""
         r += self.evmBlock.serialize()
-        r += ser_uint256(self.sysblockhash)
+        r += ser_uint256(self.WUNOblockhash)
         r += self.NEVMDataVecOut.serialize()
         r += self.diff.serialize()
         return r
 
     def __repr__(self):
-        return "CNEVMBlockConnect(evmBlock=%s, sysblockhash=%064x, NEVMDataVecOut=%s, diff=%s)" % (
-            repr(self.evmBlock), self.sysblockhash, repr(self.NEVMDataVecOut), repr(self.diff))
+        return "CNEVMBlockConnect(evmBlock=%s, WUNOblockhash=%064x, NEVMDataVecOut=%s, diff=%s)" % (
+            repr(self.evmBlock), self.WUNOblockhash, repr(self.NEVMDataVecOut), repr(self.diff))
 
 class CNEVMBlockDisconnect:
-    __slots__ = ("sysblockhash", "diff")
+    __slots__ = ("WUNOblockhash", "diff")
 
     def __init__(self):
-        self.sysblockhash = 0
+        self.WUNOblockhash = 0
         self.diff = CDeterministicMNListNEVMAddressDiff()
 
     def deserialize(self, f):
-        self.sysblockhash = deser_uint256(f)
+        self.WUNOblockhash = deser_uint256(f)
         self.diff.deserialize(f)
 
     def __repr__(self):
-        return "CNEVMBlockDisconnect(sysblockhash=%064x, diff=%s)" % (
-            self.sysblockhash, repr(self.diff))
+        return "CNEVMBlockDisconnect(WUNOblockhash=%064x, diff=%s)" % (
+            self.WUNOblockhash, repr(self.diff))
 
 class CService:
     __slots__ = ("ip", "port")
@@ -602,7 +602,7 @@ class CInv:
         MSG_FILTERED_BLOCK: "filtered Block",
         MSG_CMPCT_BLOCK: "CompactBlock",
         MSG_WTX: "WTX",
-        # SYSCOIN message types
+        # wentuno message types
         MSG_SPORK: "spork",
         MSG_GOVERNANCE_OBJECT: "govobj",
         MSG_GOVERNANCE_OBJECT_VOTE: "govobjvote",
@@ -802,7 +802,7 @@ class CTransaction:
                  "wit", "extraData")
 
     def __init__(self, tx=None):
-        # SYSCOIN
+        # wentuno
         self.extraData = None
         if tx is None:
             self.nVersion = 2
@@ -828,7 +828,7 @@ class CTransaction:
         if len(self.vin) == 0:
             flags = struct.unpack("<B", f.read(1))[0]
             # Not sure why flags can't be zero, but this
-            # matches the implementation in syscoind
+            # matches the implementation in wentunod
             if (flags != 0):
                 self.vin = deser_vector(f, CTxIn)
                 self.vout = deser_vector(f, CTxOut)
@@ -1013,7 +1013,7 @@ class CBlockHeader:
             self.auxpow = CAuxPow()
             self.auxpow.deserialize(f)
         elif self.is_nevm():
-            # SYSCOIN read 1 byte for nevm data, note auxpow has parent header which puts the extra byte at the end of auxpow
+            # wentuno read 1 byte for nevm data, note auxpow has parent header which puts the extra byte at the end of auxpow
             f.read(1)
         self.sha256 = None
         self.hash = None
@@ -1029,7 +1029,7 @@ class CBlockHeader:
         if self.is_auxpow():
             r += self.auxpow.serialize()
         elif self.is_nevm():
-            # SYSCOIN nevm data, note auxpow reads one extra byte from parent block header so no need to read it if auxpow here
+            # wentuno nevm data, note auxpow reads one extra byte from parent block header so no need to read it if auxpow here
             r += struct.pack("<b", 0)
         return r
 
@@ -1213,7 +1213,7 @@ class P2PHeaderAndShortIDs:
             r += ser_vector(self.prefilled_txn, "serialize_with_witness")
         else:
             r += ser_vector(self.prefilled_txn, "serialize_without_witness")
-        # SYSCOIN nevm data
+        # wentuno nevm data
         r += struct.pack("<b", 0)
         return r
 
@@ -1362,7 +1362,7 @@ class BlockTransactions:
             r += ser_vector(self.transactions, "serialize_with_witness")
         else:
             r += ser_vector(self.transactions, "serialize_without_witness")
-        # SYSCOIN nevm data
+        # wentuno nevm data
         r += struct.pack("<b", 0)
         return r
 
@@ -1628,7 +1628,7 @@ class msg_version:
         self.strSubVer = ''
         self.nStartingHeight = -1
         self.relay = 0
-        # SYSCOIN
+        # wentuno
         self.receivedMNAuthChallenge = 0
         self.fOtherMasternode = 0
 
@@ -1648,7 +1648,7 @@ class msg_version:
         self.nStartingHeight = struct.unpack("<i", f.read(4))[0]
 
         # Relay field is optional for version 70001 onwards
-        # But, unconditionally check it to match behaviour in syscoind
+        # But, unconditionally check it to match behaviour in wentunod
         try:
             self.relay = struct.unpack("<b", f.read(1))[0]
         except struct.error:
@@ -2033,7 +2033,7 @@ class msg_headers:
         self.headers = headers if headers is not None else []
 
     def deserialize(self, f):
-        # comment in syscoind indicates these should be deserialized as blocks
+        # comment in wentunod indicates these should be deserialized as blocks
         blocks = deser_vector(f, CBlock)
         for x in blocks:
             self.headers.append(CBlockHeader(x))

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_IPC_CAPNP_PROTOCOL_H
-#define SYSCOIN_IPC_CAPNP_PROTOCOL_H
+#ifndef wentuno_IPC_CAPNP_PROTOCOL_H
+#define wentuno_IPC_CAPNP_PROTOCOL_H
 
 #include <memory>
 
@@ -14,4 +14,4 @@ std::unique_ptr<Protocol> MakeCapnpProtocol();
 } // namespace capnp
 } // namespace ipc
 
-#endif // SYSCOIN_IPC_CAPNP_PROTOCOL_H
+#endif // wentuno_IPC_CAPNP_PROTOCOL_H

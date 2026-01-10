@@ -8,7 +8,7 @@ from decimal import Decimal
 
 from test_framework.blocktools import COINBASE_MATURITY
 from test_framework.p2p import P2PTxInvStore
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_fee_amount,
@@ -24,11 +24,11 @@ from test_framework.wallet import (
 )
 
 
-class MempoolLimitTest(SyscoinTestFramework):
+class MempoolLimitTest(wentunoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
-        # SYSCOIN
+        # wentuno
         self.extra_args = [[
             "-datacarriersize=100000",
             "-maxmempool=5",

@@ -12,6 +12,6 @@ export CI_IMAGE_NAME_TAG="docker.io/amd64/ubuntu:20.04"
 export PACKAGES="cmake llvm clang g++-multilib"
 export DEP_OPTS="DEBUG=1 MULTIPROCESS=1"
 export GOAL="install"
-export SYSCOIN_CONFIG="--enable-debug CC='clang -m32' CXX='clang++ -m32' \
+export wentuno_CONFIG="--enable-debug CC='clang -m32' CXX='clang++ -m32' \
 LDFLAGS='--rtlib=compiler-rt -lgcc_s' CPPFLAGS='-DBOOST_MULTI_INDEX_ENABLE_SAFE_MODE'"
-export TEST_RUNNER_ENV="SYSCOIND=syscoin-node"
+export TEST_RUNNER_ENV="wentunoD=wentuno-node"

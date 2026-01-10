@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_PRIMITIVES_BLOCK_H
-#define SYSCOIN_PRIMITIVES_BLOCK_H
+#ifndef wentuno_PRIMITIVES_BLOCK_H
+#define wentuno_PRIMITIVES_BLOCK_H
 #include <auxpow.h>
 #include <primitives/transaction.h>
 #include <primitives/pureheader.h>
@@ -81,7 +81,7 @@ public:
     std::vector<CTransactionRef> vtx;
     // memory only
     mutable bool fChecked;
-    // SYSCOIN
+    // wentuno
     std::vector<unsigned char> vchNEVMBlockData;
     CBlock()
     {
@@ -97,7 +97,7 @@ public:
     SERIALIZE_METHODS(CBlock, obj)
     {
         READWRITE(AsBase<CBlockHeader>(obj), obj.vtx);
-        // SYSCOIN
+        // wentuno
         if (obj.IsNEVM() && !(s.GetType() & SER_GETHASH) && !(s.GetType() & SER_SIZE))
             READWRITE(obj.vchNEVMBlockData);
     }
@@ -107,7 +107,7 @@ public:
         CBlockHeader::SetNull();
         vtx.clear();
         fChecked = false;
-        // SYSCOIN
+        // wentuno
         vchNEVMBlockData.clear();
     }
 
@@ -166,4 +166,4 @@ struct CBlockLocator
     }
 };
 
-#endif // SYSCOIN_PRIMITIVES_BLOCK_H
+#endif // wentuno_PRIMITIVES_BLOCK_H

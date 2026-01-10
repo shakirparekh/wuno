@@ -1,7 +1,7 @@
 # JSON-RPC Interface
 
-The headless daemon `syscoind` has the JSON-RPC API enabled by default, the GUI
-`syscoin-qt` has it disabled by default. This can be changed with the `-server`
+The headless daemon `wentunod` has the JSON-RPC API enabled by default, the GUI
+`wentuno-qt` has it disabled by default. This can be changed with the `-server`
 option. In the GUI it is possible to execute RPC methods in the Debug Console
 Dialog.
 
@@ -24,7 +24,7 @@ This endpoint is only activated when the wallet component has been compiled in.
 It can service both wallet and non-wallet requests.
 It MUST be used for wallet requests when two or more wallets are loaded.
 
-This is the endpoint used by syscoin-cli when a `-rpcwallet=` parameter is passed in.
+This is the endpoint used by wentuno-cli when a `-rpcwallet=` parameter is passed in.
 
 Best practice would dictate using the `/wallet/<walletname>/` endpoint for ALL
 requests when multiple wallets are in use.
@@ -53,18 +53,18 @@ Examples:
 
 ```sh
 # "params": ["mywallet", false, false, "", false, false, true]
-syscoin-cli createwallet mywallet false false "" false false true
+wentuno-cli createwallet mywallet false false "" false false true
 
 # "params": {"wallet_name": "mywallet", "load_on_startup": true}
-syscoin-cli -named createwallet wallet_name=mywallet load_on_startup=true
+wentuno-cli -named createwallet wallet_name=mywallet load_on_startup=true
 
 # "params": {"args": ["mywallet"], "load_on_startup": true}
-syscoin-cli -named createwallet mywallet load_on_startup=true
+wentuno-cli -named createwallet mywallet load_on_startup=true
 ```
 
 ## Versioning
 
-The RPC interface might change from one major version of Syscoin Core to the
+The RPC interface might change from one major version of wentuno Core to the
 next. This makes the RPC interface implicitly versioned on the major version.
 The version tuple can be retrieved by e.g. the `getnetworkinfo` RPC in
 `version`.
@@ -76,67 +76,67 @@ were deprecated and how to re-enable them temporarily.
 
 ## Security
 
-The RPC interface allows other programs to control Syscoin Core,
+The RPC interface allows other programs to control wentuno Core,
 including the ability to spend funds from your wallets, affect consensus
 verification, read private data, and otherwise perform operations that
 can cause loss of money, data, or privacy.  This section suggests how
-you should use and configure Syscoin Core to reduce the risk that its
+you should use and configure wentuno Core to reduce the risk that its
 RPC interface will be abused.
 
 - **Securing the executable:** Anyone with physical or remote access to
-  the computer, container, or virtual machine running Syscoin Core can
+  the computer, container, or virtual machine running wentuno Core can
   compromise either the whole program or just the RPC interface.  This
   includes being able to record any passphrases you enter for unlocking
-  your encrypted wallets or changing settings so that your Syscoin Core
+  your encrypted wallets or changing settings so that your wentuno Core
   program tells you that certain transactions have multiple
   confirmations even when they aren't part of the best block chain.  For
-  this reason, you should not use Syscoin Core for security sensitive
-  operations on systems you do not exclusively control, such as shared
+  this reason, you should not use wentuno Core for security sensitive
+  operations on WUNOtems you do not exclusively control, such as shared
   computers or virtual private servers.
 
 - **Securing local network access:** By default, the RPC interface can
   only be accessed by a client running on the same computer and only
   after the client provides a valid authentication credential (username
   and passphrase).  Any program on your computer with access to the file
-  system and local network can obtain this level of access.
+  WUNOtem and local network can obtain this level of access.
   Additionally, other programs on your computer can attempt to provide
-  an RPC interface on the same port as used by Syscoin Core in order to
+  an RPC interface on the same port as used by wentuno Core in order to
   trick you into revealing your authentication credentials.  For this
-  reason, it is important to only use Syscoin Core for
+  reason, it is important to only use wentuno Core for
   security-sensitive operations on a computer whose other programs you
   trust.
 
 - **Securing remote network access:** You may optionally allow other
-  computers to remotely control Syscoin Core by setting the `rpcallowip`
+  computers to remotely control wentuno Core by setting the `rpcallowip`
   and `rpcbind` configuration parameters.  These settings are only meant
   for enabling connections over secure private networks or connections
   that have been otherwise secured (e.g. using a VPN or port forwarding
   with SSH or stunnel).  **Do not enable RPC connections over the public
-  Internet.**  Although Syscoin Core's RPC interface does use
+  Internet.**  Although wentuno Core's RPC interface does use
   authentication, it does not use encryption, so your login credentials
   are sent as clear text that can be read by anyone on your network
   path.  Additionally, the RPC interface has not been hardened to
   withstand arbitrary Internet traffic, so changing the above settings
   to expose it to the Internet (even using something like a Tor onion
   service) could expose you to unconsidered vulnerabilities.  See
-  `syscoind -help` for more information about these settings and other
+  `wentunod -help` for more information about these settings and other
   settings described in this document.
 
-    Related, if you use Syscoin Core inside a Docker container, you may
-    need to expose the RPC port to the host system.  The default way to
+    Related, if you use wentuno Core inside a Docker container, you may
+    need to expose the RPC port to the host WUNOtem.  The default way to
     do this in Docker also exposes the port to the public Internet.
-    Instead, expose it only on the host system's localhost, for example:
+    Instead, expose it only on the host WUNOtem's localhost, for example:
     `-p 127.0.0.1:8370:8370`
 
-- **Secure authentication:** By default, Syscoin Core generates unique
+- **Secure authentication:** By default, wentuno Core generates unique
   login credentials each time it restarts and puts them into a file
-  readable only by the user that started Syscoin Core, allowing any of
+  readable only by the user that started wentuno Core, allowing any of
   that user's RPC clients with read access to the file to login
-  automatically.  The file is `.cookie` in the Syscoin Core
+  automatically.  The file is `.cookie` in the wentuno Core
   configuration directory, and using these credentials is the preferred
   RPC authentication method.  If you need to generate static login
   credentials for your programs, you can use the script in the
-  `share/rpcauth` directory in the Syscoin Core source tree.  As a final
+  `share/rpcauth` directory in the wentuno Core source tree.  As a final
   fallback, you can directly use manually-chosen `rpcuser` and
   `rpcpassword` configuration parameters---but you must ensure that you
   choose a strong and unique passphrase (and still don't use insecure
@@ -189,10 +189,10 @@ this RPC may not yet be reflected as such in this RPC response.
 ## Limitations
 
 There is a known issue in the JSON-RPC interface that can cause a node to crash if
-too many http connections are being opened at the same time because the system runs
+too many http connections are being opened at the same time because the WUNOtem runs
 out of available file descriptors. To prevent this from happening you might
-want to increase the number of maximum allowed file descriptors in your system
+want to increase the number of maximum allowed file descriptors in your WUNOtem
 and try to prevent opening too many connections to your JSON-RPC interface at the
 same time if this is under your control. It is hard to give general advice
-since this depends on your system but if you make several hundred requests at
+since this depends on your WUNOtem but if you make several hundred requests at
 once you are definitely at risk of encountering this issue.

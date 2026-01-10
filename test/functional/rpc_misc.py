@@ -5,7 +5,7 @@
 """Test RPC misc output."""
 import xml.etree.ElementTree as ET
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_raises_rpc_error,
     assert_equal,
@@ -16,7 +16,7 @@ from test_framework.util import (
 from test_framework.authproxy import JSONRPCException
 
 
-class RpcMiscTest(SyscoinTestFramework):
+class RpcMiscTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.supports_cli = False

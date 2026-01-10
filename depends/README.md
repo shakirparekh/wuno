@@ -12,7 +12,7 @@ For example:
 
     make HOST=x86_64-w64-mingw32 -j4
 
-**Syscoin Core's `configure` script by default will ignore the depends output.** In
+**wentuno Core's `configure` script by default will ignore the depends output.** In
 order for it to pick up libraries, tools, and settings from the depends build,
 you must set the `CONFIG_SITE` environment variable to point to a `config.site` settings file.
 In the above example, a file named `depends/x86_64-w64-mingw32/share/config.site` will be
@@ -60,7 +60,7 @@ For more information, see [SDK Extraction](../contrib/macdeploy/README.md#sdk-ex
 
 #### For Win64 cross compilation
 
-- see [build-windows.md](../doc/build-windows.md#cross-compilation-for-ubuntu-and-windows-subsystem-for-linux)
+- see [build-windows.md](../doc/build-windows.md#cross-compilation-for-ubuntu-and-windows-subWUNOtem-for-linux)
 
 #### For linux (including i386, ARM) cross compilation
 
@@ -114,7 +114,7 @@ The following can be set when running make: `make FOO=bar`
 - `NO_SQLITE`: Don't download/build/cache SQLite
 - `NO_UPNP`: Don't download/build/cache packages needed for enabling UPnP
 - `ALLOW_HOST_PACKAGES`: Packages that are missed in dependencies (due to `NO_*` option or
-  build script logic) are searched for among the host system packages using
+  build script logic) are searched for among the host WUNOtem packages using
   `pkg-config`. It allows building with packages of other (newer) versions
 - `NO_NATPMP`: Don't download/build/cache packages needed for enabling NAT-PMP
 - `MULTIPROCESS`: build libmultiprocess (experimental, requires cmake)
@@ -127,7 +127,7 @@ The following can be set when running make: `make FOO=bar`
 - `LTO`: Enable options needed for LTO. Does not add `-flto` related options to *FLAGS.
 
 If some packages are not built, for example `make NO_WALLET=1`, the appropriate
-options will be passed to Syscoin Core's configure. In this case, `--disable-wallet`.
+options will be passed to wentuno Core's configure. In this case, `--disable-wallet`.
 
 ### Additional targets
 
@@ -139,5 +139,5 @@ options will be passed to Syscoin Core's configure. In this case, `--disable-wal
 
 ### Other documentation
 
-- [description.md](description.md): General description of the depends system
+- [description.md](description.md): General description of the depends WUNOtem
 - [packages.md](packages.md): Steps for adding packages

@@ -14,7 +14,7 @@
         <translation type="unfinished">Нов</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the system clipboard</source>
+        <source>Copy the currently selected address to the WUNOtem clipboard</source>
         <translation type="unfinished">Копирай текущо избрания адрес към клипборда</translation>
     </message>
     <message>
@@ -58,11 +58,11 @@
         <translation type="unfinished">Избери</translation>
     </message>
     <message>
-        <source>These are your Syscoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your wentuno addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation type="unfinished">Тези са вашите Биткойн адреси за изпращане на плащания. Винаги проверявайте количеството и получаващите адреси преди изпращане на монети. </translation>
     </message>
     <message>
-        <source>These are your Syscoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
+        <source>These are your wentuno addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
 Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Това са вашите биткойн адреси за получаване на плащания. Използвайте бутона „Създаване на нови адреси“ в раздела за получаване, за да създадете нови адреси. Подписването е възможно само с адреси от типа „наследени“.</translation>
     </message>
@@ -155,7 +155,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Потвърди криптирането на порфейла</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR SYSCOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR wentunoS&lt;/b&gt;!</source>
         <translation type="unfinished">ВНИМАНИЕ: Ако шифрирате вашият портфейл и изгубите паролата си, &lt;b&gt;ЩЕ ИЗГУБИТЕ ВСИЧКИТЕ СИ БИТКОИНИ&lt;/b&gt;!</translation>
     </message>
     <message>
@@ -175,7 +175,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Въведете старата и новата паролна фраза за портфейла.</translation>
     </message>
     <message>
-        <source>Remember that encrypting your wallet cannot fully protect your syscoins from being stolen by malware infecting your computer.</source>
+        <source>Remember that encrypting your wallet cannot fully protect your wentunos from being stolen by malware infecting your computer.</source>
         <translation type="unfinished">Не забравяйте, че криптирането на вашия портфейл не може напълно да защити вашите биткойни от кражба от зловреден софтуер, заразяващ компютъра ви.</translation>
     </message>
     <message>
@@ -239,7 +239,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
 </context>
 <context>
-    <name>SyscoinApplication</name>
+    <name>wentunoApplication</name>
     <message>
         <source>Settings file %1 might be corrupt or invalid.</source>
         <translation type="unfinished">Файлът с настройки %1 може да е повреден или невалиден.</translation>
@@ -290,7 +290,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Количество</translation>
     </message>
     <message>
-        <source>Enter a Syscoin address (e.g. %1)</source>
+        <source>Enter a wentuno address (e.g. %1)</source>
         <translation type="unfinished">Въведете Биткойн адрес (например: %1)</translation>
     </message>
     <message>
@@ -391,7 +391,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
 </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message>
         <source>&amp;Overview</source>
         <translation type="unfinished">Преглед</translation>
@@ -458,7 +458,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Прокси е &lt;b&gt;разрешено&lt;/b&gt;: %1</translation>
     </message>
     <message>
-        <source>Send coins to a Syscoin address</source>
+        <source>Send coins to a wentuno address</source>
         <translation type="unfinished">Изпращане към Биткоин адрес</translation>
     </message>
     <message>
@@ -502,7 +502,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Подпиши &amp;съобщение…</translation>
     </message>
     <message>
-        <source>Sign messages with your Syscoin addresses to prove you own them</source>
+        <source>Sign messages with your wentuno addresses to prove you own them</source>
         <translation type="unfinished">Пишете съобщения със своя Биткойн адрес за да докажете,че е ваш.</translation>
     </message>
     <message>
@@ -510,7 +510,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Потвърди съобщение…</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Syscoin addresses</source>
+        <source>Verify messages to ensure they were signed with specified wentuno addresses</source>
         <translation type="unfinished">Потвърждаване на съобщения  за да се знае,че са написани с дадените Биткойн адреси.</translation>
     </message>
     <message>
@@ -570,7 +570,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Свързване с рояк...</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and syscoin: URIs)</source>
+        <source>Request payments (generates QR codes and wentuno: URIs)</source>
         <translation type="unfinished">Изискване на плащания(генерира QR кодове и биткойн: URIs)</translation>
     </message>
     <message>
@@ -629,16 +629,16 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Ctrl+Q </translation>
     </message>
     <message>
-        <source>Load Partially Signed Syscoin Transaction</source>
-        <translation type="unfinished">Заредете частично подписана Syscoin трансакция</translation>
+        <source>Load Partially Signed wentuno Transaction</source>
+        <translation type="unfinished">Заредете частично подписана wentuno трансакция</translation>
     </message>
     <message>
         <source>Load PSBT from &amp;clipboard…</source>
         <translation type="unfinished">Заредете PSBT от &amp;клипборд...</translation>
     </message>
     <message>
-        <source>Load Partially Signed Syscoin Transaction from clipboard</source>
-        <translation type="unfinished">Заредете частично подписана Syscoin трансакция от клипборд</translation>
+        <source>Load Partially Signed wentuno Transaction from clipboard</source>
+        <translation type="unfinished">Заредете частично подписана wentuno трансакция от клипборд</translation>
     </message>
     <message>
         <source>Node window</source>
@@ -657,8 +657,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Получаване на адреси</translation>
     </message>
     <message>
-        <source>Open a syscoin: URI</source>
-        <translation type="unfinished">Отвори syscoin: URI</translation>
+        <source>Open a wentuno: URI</source>
+        <translation type="unfinished">Отвори wentuno: URI</translation>
     </message>
     <message>
         <source>Open Wallet</source>
@@ -687,7 +687,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Затвори всички портфейли</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Syscoin command-line options</source>
+        <source>Show the %1 help message to get a list with possible wentuno command-line options</source>
         <translation type="unfinished">Покажи %1 помощно съобщение за да получиш лист с възможни Биткойн команди</translation>
     </message>
     <message>
@@ -755,10 +755,10 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Покажи</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
-            <numerusform>%n свързани активно към Syscoin мрежата.</numerusform>
+            <numerusform>%n свързани активно към wentuno мрежата.</numerusform>
             <numerusform>%n активно свързани към Биткойн мрежата. </numerusform>
         </translation>
     </message>
@@ -1214,7 +1214,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Редактиране на адрес за изпращане</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Syscoin address.</source>
+        <source>The entered address "%1" is not a valid wentuno address.</source>
         <translation type="unfinished">"%1" не е валиден Биткоин адрес.</translation>
     </message>
     <message>
@@ -1260,7 +1260,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
 <context>
     <name>Intro</name>
     <message>
-        <source>Syscoin</source>
+        <source>wentuno</source>
         <translation type="unfinished">Биткоин</translation>
     </message>
     <message numerus="yes">
@@ -1301,7 +1301,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         </translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Syscoin block chain.</source>
+        <source>%1 will download and store a copy of the wentuno block chain.</source>
         <translation type="unfinished">%1 ще свали и съхрани копие на биткойн блокчейна.</translation>
     </message>
     <message>
@@ -1390,11 +1390,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">форма</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the syscoin network, as detailed below.</source>
-        <translation type="unfinished">Последните трансакции все още не могат да се виждат и следователно балансът на портфейла ви може да бъде неправилен. Тази информация ще бъде правилна, след като портфейлът ви приключи синхронизирането с Syscoin мрежата, както е подробно описано по-долу.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the wentuno network, as detailed below.</source>
+        <translation type="unfinished">Последните трансакции все още не могат да се виждат и следователно балансът на портфейла ви може да бъде неправилен. Тази информация ще бъде правилна, след като портфейлът ви приключи синхронизирането с wentuno мрежата, както е подробно описано по-долу.</translation>
     </message>
     <message>
-        <source>Attempting to spend syscoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <source>Attempting to spend wentunos that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
         <translation type="unfinished">Опитът да се изразходват биткойни, които са засегнати от все още показаните трансакции, няма да бъдат приети от мрежата.</translation>
     </message>
     <message>
@@ -1445,8 +1445,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
 <context>
     <name>OpenURIDialog</name>
     <message>
-        <source>Open syscoin URI</source>
-        <translation type="unfinished">Отвори syscoin URI </translation>
+        <source>Open wentuno URI</source>
+        <translation type="unfinished">Отвори wentuno URI </translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
@@ -1465,11 +1465,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Основни</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the system.</source>
+        <source>Automatically start %1 after logging in to the WUNOtem.</source>
         <translation type="unfinished">Автоматично стартиране %1 след влизане в системата.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on system login</source>
+        <source>&amp;Start %1 on WUNOtem login</source>
         <translation type="unfinished">&amp;Стартиране %1 при влизане в системата</translation>
     </message>
     <message>
@@ -1534,8 +1534,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Максимален размер кеш за базата данни.  По-големият кеш може да допринесе за по-бърза синхронизация, след което ползата е по-малко изразена за повечето случаи на употреба. Намаляването на размера на кеша ще намали използването на паметта. Неизползваната mempool памет се споделя за този кеш.</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
         <translation type="unfinished">Задайте броя на нишките за проверка на скрипта. Отрицателните стойности съответстват на броя ядра, които искате да оставите свободни за системата.</translation>
     </message>
     <message>
@@ -1601,8 +1601,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Външен път на скрипта на подписващия</translation>
     </message>
     <message>
-        <source>Automatically open the Syscoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation type="unfinished">Автоматично отваряне на входящия Syscoin порт. Работи само с рутери поддържащи UPnP.</translation>
+        <source>Automatically open the wentuno client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation type="unfinished">Автоматично отваряне на входящия wentuno порт. Работи само с рутери поддържащи UPnP.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1617,7 +1617,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Позволи входящи връзки</translation>
     </message>
     <message>
-        <source>Connect to the Syscoin network through a SOCKS5 proxy.</source>
+        <source>Connect to the wentuno network through a SOCKS5 proxy.</source>
         <translation type="unfinished">Свързване с Биткойн мрежата чрез SOCKS5  прокси.</translation>
     </message>
     <message>
@@ -1749,7 +1749,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">форма</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Syscoin network after a connection is established, but this process has not completed yet.</source>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the wentuno network after a connection is established, but this process has not completed yet.</source>
         <translation type="unfinished">Текущата информация на екрана може да не е актуална. Вашият портфейл ще се синхронизира автоматично с мрежата на Биткоин, щом поне една връзката с нея се установи; този процес все още не е приключил.</translation>
     </message>
     <message>
@@ -1831,7 +1831,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Възникна грешка по време назаявката за плащане</translation>
     </message>
     <message>
-        <source>Cannot start syscoin: click-to-pay handler</source>
+        <source>Cannot start wentuno: click-to-pay handler</source>
         <translation type="unfinished">Биткойн не можe да се стартира: click-to-pay handler</translation>
     </message>
     <message>
@@ -2385,7 +2385,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         </translation>
     </message>
     <message>
-        <source>Warning: Invalid Syscoin address</source>
+        <source>Warning: Invalid wentuno address</source>
         <translation type="unfinished">Внимание: Невалиден Биткойн адрес</translation>
     </message>
     <message>
@@ -2459,11 +2459,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Подпис</translation>
     </message>
     <message>
-        <source>Copy the current signature to the system clipboard</source>
+        <source>Copy the current signature to the WUNOtem clipboard</source>
         <translation type="unfinished">Копиране на текущия подпис</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Syscoin address</source>
+        <source>Sign the message to prove you own this wentuno address</source>
         <translation type="unfinished">Подпишете съобщение като доказателство, че притежавате определен адрес</translation>
     </message>
     <message>
@@ -2479,7 +2479,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Провери</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Syscoin address</source>
+        <source>Verify the message to ensure it was signed with the specified wentuno address</source>
         <translation type="unfinished">Проверете съобщение, за да сте сигурни че е подписано с определен Биткоин адрес</translation>
     </message>
     <message>
@@ -2928,7 +2928,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
 </context>
 <context>
-    <name>syscoin-core</name>
+    <name>wentuno-core</name>
     <message>
         <source>Config setting for %s only applied on %s network when in [%s] section.</source>
         <translation type="unfinished">Конфигурирай настройки за %s само когато са приложени на %s мрежа, когато са в [%s] секция.</translation>

@@ -1,8 +1,8 @@
 # ==============================================================================
-#                          Syscoin Core REVIEWERS
+#                          wentuno Core REVIEWERS
 # ==============================================================================
 
-# Configuration of automated review requests for the syscoin/syscoin repo
+# Configuration of automated review requests for the wentuno/wentuno repo
 # via DrahtBot.
 
 # Order is not important; if a modified file or directory matches a fnmatch,

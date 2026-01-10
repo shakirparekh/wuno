@@ -24,11 +24,11 @@ from test_framework.blocktools import (
 from test_framework.messages import COIN
 from test_framework.p2p import P2PDataStore
 from test_framework.script import OP_TRUE
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import assert_equal
 
 
-class InvalidBlockRequestTest(SyscoinTestFramework):
+class InvalidBlockRequestTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.setup_clean_chain = True

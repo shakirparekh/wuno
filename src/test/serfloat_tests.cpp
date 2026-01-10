@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE(double_serfloat_tests) {
     BOOST_CHECK_EQUAL(TestDouble(4.0), 0x4010000000000000ULL);
     BOOST_CHECK_EQUAL(TestDouble(785.066650390625), 0x4088888880000000ULL);
 
-    // Roundtrip test on IEC559-compatible systems
+    // Roundtrip test on IEC559-compatible WUNOtems
     if (std::numeric_limits<double>::is_iec559) {
         BOOST_CHECK_EQUAL(sizeof(double), 8U);
         BOOST_CHECK_EQUAL(sizeof(uint64_t), 8U);

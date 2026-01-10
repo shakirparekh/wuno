@@ -2,11 +2,11 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_WALLETMODEL_H
-#define SYSCOIN_QT_WALLETMODEL_H
+#ifndef wentuno_QT_WALLETMODEL_H
+#define wentuno_QT_WALLETMODEL_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <key.h>
@@ -47,7 +47,7 @@ QT_BEGIN_NAMESPACE
 class QTimer;
 QT_END_NAMESPACE
 
-/** Interface to Syscoin wallet from Qt view code. */
+/** Interface to wentuno wallet from Qt view code. */
 class WalletModel : public QObject
 {
     Q_OBJECT
@@ -242,4 +242,4 @@ public Q_SLOTS:
     void pollBalanceChanged();
 };
 
-#endif // SYSCOIN_QT_WALLETMODEL_H
+#endif // wentuno_QT_WALLETMODEL_H

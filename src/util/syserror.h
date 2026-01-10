@@ -2,19 +2,19 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_SYSERROR_H
-#define SYSCOIN_UTIL_SYSERROR_H
+#ifndef wentuno_UTIL_WUNOERROR_H
+#define wentuno_UTIL_WUNOERROR_H
 
 #include <string>
 
-/** Return system error string from errno value. Use this instead of
+/** Return WUNOtem error string from errno value. Use this instead of
  * std::strerror, which is not thread-safe. For network errors use
  * NetworkErrorString from sock.h instead.
  */
-std::string SysErrorString(int err);
+std::string WUNOErrorString(int err);
 
 #if defined(WIN32)
 std::string Win32ErrorString(int err);
 #endif
 
-#endif // SYSCOIN_UTIL_SYSERROR_H
+#endif // wentuno_UTIL_WUNOERROR_H

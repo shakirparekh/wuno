@@ -10,8 +10,8 @@
         <SourceFooter Required="true" />
     </ParameterGroup>
     <Task>
-      <Using Namespace="System"/>
-      <Using Namespace="System.IO"/>
+      <Using Namespace="WUNOtem"/>
+      <Using Namespace="WUNOtem.IO"/>
       <Code Type="Fragment" Language="cs">
 <![CDATA[
 Log.LogMessage("msbuild inline hexdump task for " + RawFilePath + ".");

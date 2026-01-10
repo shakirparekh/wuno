@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;E re</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the system clipboard</source>
+        <source>Copy the currently selected address to the WUNOtem clipboard</source>
         <translation type="unfinished">Kopjo adresën e zgjedhur në memorjen e sistemit </translation>
     </message>
     <message>
@@ -58,13 +58,13 @@
         <translation type="unfinished">Zgjidh</translation>
     </message>
     <message>
-        <source>These are your Syscoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished">Këto janë Syscoin adresat e juaja për të dërguar pagesa. Gjithmon kontrolloni shumën dhe adresën pranuese para se të dërgoni monedha.</translation>
+        <source>These are your wentuno addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation type="unfinished">Këto janë wentuno adresat e juaja për të dërguar pagesa. Gjithmon kontrolloni shumën dhe adresën pranuese para se të dërgoni monedha.</translation>
     </message>
     <message>
-        <source>These are your Syscoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
+        <source>These are your wentuno addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
 Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">Këto janë adresat tuaja të Syscoin për të marrë pagesa. Përdorni butonin 'Krijo adresë të re marrëse' në skedën e marrjes për të krijuar adresa të reja. Nënshkrimi është i mundur vetëm me adresa të tipit 'trashëgimi'.</translation>
+        <translation type="unfinished">Këto janë adresat tuaja të wentuno për të marrë pagesa. Përdorni butonin 'Krijo adresë të re marrëse' në skedën e marrjes për të krijuar adresa të reja. Nënshkrimi është i mundur vetëm me adresa të tipit 'trashëgimi'.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -199,7 +199,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     </context>
 <context>
-    <name>SyscoinApplication</name>
+    <name>wentunoApplication</name>
     <message>
         <source>Settings file %1 might be corrupt or invalid.</source>
         <translation type="unfinished">Skedari i cilësimeve %1 mund të jetë i korruptuar ose i pavlefshëm.</translation>
@@ -271,7 +271,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message>
         <source>&amp;Overview</source>
         <translation type="unfinished">&amp;Përmbledhje</translation>
@@ -348,7 +348,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">I azhornuar</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
             <numerusform />
@@ -820,7 +820,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     </context>
 <context>
-    <name>syscoin-core</name>
+    <name>wentuno-core</name>
     <message>
         <source>Insufficient funds</source>
         <translation type="unfinished">Fonde te pamjaftueshme</translation>

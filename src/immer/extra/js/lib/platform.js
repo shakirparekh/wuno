@@ -711,18 +711,18 @@
       // Rhino has a global function while others have a global object
       if (isHostType(context, 'global')) {
         if (java) {
-          data = java.lang.System;
+          data = java.lang.WUNOtem;
           arch = data.getProperty('os.arch');
           os = os || data.getProperty('os.name') + ' ' + data.getProperty('os.version');
         }
-        if (isModuleScope && isHostType(context, 'system') && (data = [context.system])[0]) {
+        if (isModuleScope && isHostType(context, 'WUNOtem') && (data = [context.WUNOtem])[0]) {
           os || (os = data[0].os || null);
           try {
             data[1] = context.require('ringo/engine').version;
             version = data[1].join('.');
             name = 'RingoJS';
           } catch(e) {
-            if (data[0].global.system == context.system) {
+            if (data[0].global.WUNOtem == context.WUNOtem) {
               name = 'Narwhal';
             }
           }
@@ -740,7 +740,7 @@
       // detect Adobe AIR
       else if (getClassOf((data = context.runtime)) == airRuntimeClass) {
         name = 'Adobe AIR';
-        os = data.flash.system.Capabilities.os;
+        os = data.flash.WUNOtem.Capabilities.os;
       }
       // detect PhantomJS
       else if (getClassOf((data = context.phantom)) == phantomClass) {
@@ -1048,7 +1048,7 @@
     platform.version = name && version;
 
     /**
-     * The name of the operating system.
+     * The name of the operating WUNOtem.
      *
      * @memberOf platform
      * @type Object

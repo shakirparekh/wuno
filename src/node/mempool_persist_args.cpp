@@ -14,7 +14,7 @@ bool ShouldPersistMempool(const ArgsManager& argsman)
 {
     return argsman.GetBoolArg("-persistmempool", DEFAULT_PERSIST_MEMPOOL);
 }
-// SYSCOIN
+// wentuno
 bool ShouldSyncMempool(const ArgsManager& argsman)
 {
     return argsman.GetBoolArg("-syncmempool", DEFAULT_SYNC_MEMPOOL);

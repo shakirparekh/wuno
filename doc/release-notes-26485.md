@@ -6,11 +6,11 @@ For RPC methods which accept `options` parameters ((`importmulti`, `listunspent`
 This means it is possible make calls like:
 
 ```sh
-src/syscoin-cli -named bumpfee txid fee_rate=100
+src/wentuno-cli -named bumpfee txid fee_rate=100
 ```
 
 instead of
 
 ```sh
-src/syscoin-cli -named bumpfee txid options='{"fee_rate": 100}'
+src/wentuno-cli -named bumpfee txid options='{"fee_rate": 100}'
 ```

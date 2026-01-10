@@ -3,13 +3,13 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_CONSENSUS_PARAMS_H
-#define SYSCOIN_CONSENSUS_PARAMS_H
+#ifndef wentuno_CONSENSUS_PARAMS_H
+#define wentuno_CONSENSUS_PARAMS_H
 
 #include <uint256.h>
 
 #include <limits>
-// SYSCOIN
+// wentuno
 #include <cmath>
 #include <map>
 #include <vector>
@@ -155,10 +155,10 @@ struct LLMQParams {
  */
 struct Params {
     uint256 hashGenesisBlock;
-    // SYSCOIN
-    uint64_t nSYSXAsset;
+    // wentuno
+    uint64_t nWUNOXAsset;
     uint32_t nNEVMChainID;
-    std::vector<unsigned char> vchSyscoinVaultManager;
+    std::vector<unsigned char> vchwentunoVaultManager;
     std::vector<unsigned char> vchTokenFreezeMethod;
     unsigned int nSeniorityHeight1;
     double nSeniorityLevel1;
@@ -286,7 +286,7 @@ struct Params {
             return true;
         return static_cast<int> (nHeight) < nLegacyBlocksBefore;
     }
-    // SYSCOIN
+    // wentuno
     /** Block height at which DIP0003 becomes active */
     int DIP0003Height;
     /** Block height at which DIP0003 becomes enforced */
@@ -318,4 +318,4 @@ struct Params {
 };
 
 } // namespace Consensus
-#endif // SYSCOIN_CONSENSUS_PARAMS_H
+#endif // wentuno_CONSENSUS_PARAMS_H

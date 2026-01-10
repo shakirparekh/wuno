@@ -15,17 +15,17 @@ from test_framework.p2p import (
     P2P_SERVICES,
     P2PInterface,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
 )
 
 
-class GetBlockFromPeerTest(SyscoinTestFramework):
+class GetBlockFromPeerTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 3
-        # SYSCOIN
+        # wentuno
         self.extra_args = [
             ['-dip3params=9000:9000'],
             ['-dip3params=9000:9000'],
@@ -126,7 +126,7 @@ class GetBlockFromPeerTest(SyscoinTestFramework):
         self.generate(self.nodes[0], 400, sync_fun=self.no_op)
         self.sync_blocks([self.nodes[0], pruned_node])
         pruneheight = pruned_node.pruneblockchain(300)
-        # SYSCOIN
+        # wentuno
         assert_equal(pruneheight, 247)
         # Ensure the block is actually pruned
         pruned_block = self.nodes[0].getblockhash(2)
@@ -143,7 +143,7 @@ class GetBlockFromPeerTest(SyscoinTestFramework):
         self.log.info("Fetched block persists after next pruning event")
         self.generate(self.nodes[0], 250, sync_fun=self.no_op)
         self.sync_blocks([self.nodes[0], pruned_node])
-        # SYSCOIN
+        # wentuno
         pruneheight += 250
         assert_equal(pruned_node.pruneblockchain(700), pruneheight)
         assert_equal(pruned_node.getblock(pruned_block)["hash"], "7e1277339793bb0ac209b52cbaaaa6e648085fd68365b25855da0deedc09120c")
@@ -151,7 +151,7 @@ class GetBlockFromPeerTest(SyscoinTestFramework):
         self.log.info("Fetched block can be pruned again when prune height exceeds the height of the tip at the time when the block was fetched")
         self.generate(self.nodes[0], 250, sync_fun=self.no_op)
         self.sync_blocks([self.nodes[0], pruned_node])
-        # SYSCOIN
+        # wentuno
         pruneheight += 249
         assert_equal(pruned_node.pruneblockchain(1000), pruneheight)
         assert_raises_rpc_error(-1, "Block not available (pruned data)", pruned_node.getblock, pruned_block)

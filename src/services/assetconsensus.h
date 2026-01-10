@@ -1,9 +1,9 @@
-﻿// Copyright (c) 2017-2018 The Syscoin Core developers
+﻿// Copyright (c) 2017-2018 The wentuno Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SERVICES_ASSETCONSENSUS_H
-#define SYSCOIN_SERVICES_ASSETCONSENSUS_H
+#ifndef wentuno_SERVICES_ASSETCONSENSUS_H
+#define wentuno_SERVICES_ASSETCONSENSUS_H
 #include <primitives/transaction.h>
 #include <dbwrapper.h>
 #include <consensus/params.h>
@@ -37,7 +37,7 @@ public:
 extern std::unique_ptr<CNEVMTxRootsDB> pnevmtxrootsdb;
 extern std::unique_ptr<CNEVMMintedTxDB> pnevmtxmintdb;
 bool DisconnectMintAsset(const CTransaction &tx, NEVMMintTxSet &setMintTxs);
-bool CheckSyscoinMint(const CTransaction& tx, 
+bool CheckwentunoMint(const CTransaction& tx, 
     const uint256& txHash,
     TxValidationState &tstate,
     const uint32_t& nHeight, 
@@ -45,14 +45,14 @@ bool CheckSyscoinMint(const CTransaction& tx,
     NEVMMintTxSet &setMintTxs, 
     CAssetsMap &mapAssetIn, 
     CAssetsMap &mapAssetOut);
-bool CheckSyscoinMintInternal(const CMintSyscoin &mintSyscoin,
+bool CheckwentunoMintInternal(const CMintwentuno &mintwentuno,
     TxValidationState &state,
     const bool &fJustCheck,
     NEVMMintTxSet &setMintTxs,
     uint64_t &nAssetFromLog,
     CAmount &outputAmount,
     std::string &witnessAddress);
-bool CheckSyscoinInputs(const Consensus::Params& params, 
+bool CheckwentunoInputs(const Consensus::Params& params, 
     const CTransaction& tx, 
     const uint256& txHash, 
     TxValidationState &tstate, 
@@ -68,5 +68,5 @@ bool CheckAssetAllocationInputs(const CTransaction &tx,
     const bool &fJustCheck, 
     CAssetsMap &mapAssetIn, 
     CAssetsMap &mapAssetOut);
-std::string stringFromSyscoinTx(const int &nVersion);
-#endif // SYSCOIN_SERVICES_ASSETCONSENSUS_H
+std::string stringFromwentunoTx(const int &nVersion);
+#endif // wentuno_SERVICES_ASSETCONSENSUS_H

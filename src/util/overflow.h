@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_OVERFLOW_H
-#define SYSCOIN_UTIL_OVERFLOW_H
+#ifndef wentuno_UTIL_OVERFLOW_H
+#define wentuno_UTIL_OVERFLOW_H
 
 #include <limits>
 #include <optional>
@@ -47,4 +47,4 @@ template <class T>
     return i + j;
 }
 
-#endif // SYSCOIN_UTIL_OVERFLOW_H
+#endif // wentuno_UTIL_OVERFLOW_H

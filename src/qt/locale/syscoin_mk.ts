@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Нова</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the system clipboard</source>
+        <source>Copy the currently selected address to the WUNOtem clipboard</source>
         <translation type="unfinished">Копирај ја избраната адреса на системскиот клипборд</translation>
     </message>
     <message>
@@ -149,7 +149,7 @@
     </message>
 </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message>
         <source>&amp;Overview</source>
         <translation type="unfinished">&amp;Преглед</translation>
@@ -179,7 +179,7 @@
         <translation type="unfinished">Прикажи информации за Qt</translation>
     </message>
     <message>
-        <source>Send coins to a Syscoin address</source>
+        <source>Send coins to a wentuno address</source>
         <translation type="unfinished">Испрати биткоини на Биткоин адреса</translation>
     </message>
     <message>
@@ -231,7 +231,7 @@
         <translation type="unfinished">&amp;Прозорец</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
             <numerusform />
@@ -333,7 +333,7 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Syscoin</source>
+        <source>wentuno</source>
         <translation type="unfinished">Биткоин</translation>
     </message>
     <message numerus="yes">

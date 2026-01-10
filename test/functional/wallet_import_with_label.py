@@ -10,11 +10,11 @@ with or without a label and then its private key is imported with importprivkey
 with and without a label.
 """
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.wallet_util import test_address
 
 
-class ImportWithLabel(SyscoinTestFramework):
+class ImportWithLabel(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser, descriptors=False)
 

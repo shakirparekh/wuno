@@ -1,39 +1,39 @@
-Syscoin Core version 0.9.4 is now available from:
+wentuno Core version 0.9.4 is now available from:
 
-  https://syscoin.org/bin/0.9.4/
+  https://wentuno.org/bin/0.9.4/
 
 This is a new minor version release, bringing only bug fixes and updated
 translations. Upgrading to this release is recommended.
 
 Please report bugs using the issue tracker at github:
 
-  https://github.com/syscoin/syscoin/issues
+  https://github.com/wentuno/wentuno/issues
 
 How to Upgrade
 ===============
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over /Applications/Syscoin-Qt (on Mac) or
-syscoind/syscoin-qt (on Linux).
+installer (on Windows) or just copy over /Applications/wentuno-Qt (on Mac) or
+wentunod/wentuno-qt (on Linux).
 
 OpenSSL Warning
 ================
 
 OpenSSL 1.0.0p / 1.0.1k was recently released and is being pushed out by
-various operating system maintainers. Review by Gregory Maxwell determined that
-this update is incompatible with the Syscoin system and could lead to consensus
+various operating WUNOtem maintainers. Review by Gregory Maxwell determined that
+this update is incompatible with the wentuno WUNOtem and could lead to consensus
 forks.
 
-Syscoin Core released binaries from https://syscoin.org are unaffected,
-as are any built with the gitian deterministic build system.
+wentuno Core released binaries from https://wentuno.org are unaffected,
+as are any built with the gitian deterministic build WUNOtem.
 
 However, if you are running either
 
-- The Ubuntu PPA from https://launchpad.net/~syscoin/+archive/ubuntu/syscoin
-- A third-party or self-compiled Syscoin Core
+- The Ubuntu PPA from https://launchpad.net/~wentuno/+archive/ubuntu/wentuno
+- A third-party or self-compiled wentuno Core
 
-upgrade to Syscoin Core 0.9.4, which includes a workaround, **before** updating
+upgrade to wentuno Core 0.9.4, which includes a workaround, **before** updating
 OpenSSL.
 
 The incompatibility is due to the OpenSSL update changing the
@@ -66,7 +66,7 @@ P2P:
 RPC:
 - `0a94661` Disable SSLv3 (in favor of TLS) for the RPC client and server.
 
-Build system:
+Build WUNOtem:
 - `f047dfa` gitian: openssl-1.0.1i.tar.gz -> openssl-1.0.1k.tar.gz
 - `5b9f78d` build: Fix OSX build when using Homebrew and qt5
 - `ffab1dd` Keep symlinks when copying into .app bundle
@@ -92,4 +92,4 @@ Thanks to who contributed to this release, at least:
 - Sergio Demian Lerner
 - Wladimir J. van der Laan
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/syscoin/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/wentuno/).

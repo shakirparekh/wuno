@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_ADDRMAN_H
-#define SYSCOIN_ADDRMAN_H
+#ifndef wentuno_ADDRMAN_H
+#define wentuno_ADDRMAN_H
 
 #include <netaddress.h>
 #include <netgroup.h>
@@ -206,4 +206,4 @@ public:
     std::optional<AddressPosition> FindAddressEntry(const CAddress& addr);
 };
 
-#endif // SYSCOIN_ADDRMAN_H
+#endif // wentuno_ADDRMAN_H

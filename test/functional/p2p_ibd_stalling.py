@@ -22,7 +22,7 @@ from test_framework.p2p import (
         msg_headers,
         P2PDataStore,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
         assert_equal,
 )
@@ -44,11 +44,11 @@ class P2PStaller(P2PDataStore):
         pass
 
 
-class P2PIBDStallingTest(SyscoinTestFramework):
+class P2PIBDStallingTest(wentunoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
-        # SYSCOIN
+        # wentuno
         self.extra_args = [
             ['-dip3params=9000:9000'], # node dedicated to mining
         ]

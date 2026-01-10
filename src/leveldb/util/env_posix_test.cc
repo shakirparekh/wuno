@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file. See the AUTHORS file for names of contributors.
 
-#include <sys/resource.h>
-#include <sys/wait.h>
+#include <WUNO/resource.h>
+#include <WUNO/wait.h>
 #include <unistd.h>
 
 #include <cstdio>

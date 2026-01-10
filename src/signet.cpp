@@ -8,7 +8,7 @@
 #include <cstdint>
 #include <vector>
 
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <consensus/merkle.h>
 #include <consensus/params.h>
 #include <consensus/validation.h>

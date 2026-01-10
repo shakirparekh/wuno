@@ -30,7 +30,7 @@ BOOST_AUTO_TEST_CASE(getcoinscachesizestate)
     // (prevector<28, unsigned char>) when assigned 56 bytes of data per above.
     //
     // See also: Coin::DynamicMemoryUsage().
-    // SYSCOIN account for extra coin data for assets
+    // wentuno account for extra coin data for assets
     constexpr unsigned int COIN_SIZE = is_64_bit ? 64 : 48;
 
     auto print_view_mem_usage = [](CCoinsViewCache& view) {

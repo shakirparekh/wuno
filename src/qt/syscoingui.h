@@ -2,14 +2,14 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_SYSCOINGUI_H
-#define SYSCOIN_QT_SYSCOINGUI_H
+#ifndef wentuno_QT_wentunoGUI_H
+#define wentuno_QT_wentunoGUI_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
-#include <qt/syscoinunits.h>
+#include <qt/wentunounits.h>
 #include <qt/clientmodel.h>
 #include <qt/guiutil.h>
 #include <qt/optionsdialog.h>
@@ -21,7 +21,7 @@
 #include <QMap>
 #include <QMenu>
 #include <QPoint>
-#include <QSystemTrayIcon>
+#include <QWUNOtemTrayIcon>
 
 #ifdef Q_OS_MACOS
 #include <qt/macos_appnap.h>
@@ -54,7 +54,7 @@ class QComboBox;
 class QDateTime;
 class QProgressBar;
 class QProgressDialog;
-// SYSCOIN
+// wentuno
 class QStringList;
 QT_END_NAMESPACE
 
@@ -64,18 +64,18 @@ class ClickableProgressBar;
 }
 
 /**
-  Syscoin GUI main class. This class represents the main window of the Syscoin UI. It communicates with both the client and
+  wentuno GUI main class. This class represents the main window of the wentuno UI. It communicates with both the client and
   wallet models to give the user an up-to-date view of the current core state.
 */
-class SyscoinGUI : public QMainWindow
+class wentunoGUI : public QMainWindow
 {
     Q_OBJECT
 
 public:
     static const std::string DEFAULT_UIPLATFORM;
 
-    explicit SyscoinGUI(interfaces::Node& node, const PlatformStyle *platformStyle, const NetworkStyle *networkStyle, QWidget *parent = nullptr);
-    ~SyscoinGUI();
+    explicit wentunoGUI(interfaces::Node& node, const PlatformStyle *platformStyle, const NetworkStyle *networkStyle, QWidget *parent = nullptr);
+    ~wentunoGUI();
 
     /** Set the client model.
         The client model represents the part of the core that communicates with the P2P network, and is wallet-agnostic.
@@ -88,7 +88,7 @@ public:
 
 #ifdef ENABLE_WALLET
     /** Set the wallet model.
-        The wallet model represents a syscoin wallet, and offers access to the list of transactions, address book and sending
+        The wallet model represents a wentuno wallet, and offers access to the list of transactions, address book and sending
         functionality.
     */
     void addWallet(WalletModel* walletModel);
@@ -98,7 +98,7 @@ public:
     bool enableWallet = false;
 
     /** Get the tray icon status.
-        Some systems have not "system tray" or "notification area" available.
+        Some WUNOtems have not "WUNOtem tray" or "notification area" available.
     */
     bool hasTrayIcon() const { return trayIcon; }
 
@@ -163,7 +163,7 @@ private:
     QAction* m_close_all_wallets_action{nullptr};
     QAction* m_wallet_selector_label_action = nullptr;
     QAction* m_wallet_selector_action = nullptr;
-    // SYSCOIN
+    // wentuno
     QAction *masternodeAction = nullptr;
     QAction* m_mask_values_action{nullptr};
     QAction* m_migrate_wallet_action{nullptr};
@@ -172,7 +172,7 @@ private:
     QLabel *m_wallet_selector_label = nullptr;
     QComboBox* m_wallet_selector = nullptr;
 
-    QSystemTrayIcon* trayIcon = nullptr;
+    QWUNOtemTrayIcon* trayIcon = nullptr;
     const std::unique_ptr<QMenu> trayIconMenu;
     Notificator* notificator = nullptr;
     RPCConsole* rpcConsole = nullptr;
@@ -198,9 +198,9 @@ private:
     void createMenuBar();
     /** Create the toolbars */
     void createToolBars();
-    /** Create system tray icon and notification */
+    /** Create WUNOtem tray icon and notification */
     void createTrayIcon();
-    /** Create system tray menu (or setup the dock menu) */
+    /** Create WUNOtem tray menu (or setup the dock menu) */
     void createTrayIconMenu();
 
     /** Enable or disable all wallet-related actions */
@@ -233,7 +233,7 @@ public Q_SLOTS:
     void setNetworkActive(bool network_active);
     /** Set number of blocks and last block date shown in the UI */
     void setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress, SyncType synctype, SynchronizationState sync_state);
-    /** SYSCOIN Set additional data sync status shown in the UI */
+    /** wentuno Set additional data sync status shown in the UI */
     void setAdditionalDataSyncProgress(double nSyncProgress);
     /** Notify the user of an event from the core network or transaction handling code.
        @param[in] title             the message box / notification title
@@ -269,7 +269,7 @@ public Q_SLOTS:
     bool handlePaymentRequest(const SendCoinsRecipient& recipient);
 
     /** Show incoming transaction notification for new transactions. */
-    void incomingTransaction(const QString& date, SyscoinUnit unit, const CAmount& amount, const QString& type, const QString& address, const QString& label, const QString& walletName);
+    void incomingTransaction(const QString& date, wentunoUnit unit, const CAmount& amount, const QString& type, const QString& address, const QString& label, const QString& walletName);
 #endif // ENABLE_WALLET
 
 private:
@@ -283,7 +283,7 @@ public Q_SLOTS:
     void gotoOverviewPage();
     /** Switch to history (transactions) page */
     void gotoHistoryPage();
-    /** SYSCOIN Switch to masternode page */
+    /** wentuno Switch to masternode page */
     void gotoMasternodePage();
     /** Switch to receive coins page */
     void gotoReceiveCoinsPage();
@@ -294,7 +294,7 @@ public Q_SLOTS:
     void gotoSignMessageTab(QString addr = "");
     /** Show Sign/Verify Message dialog and switch to verify message tab */
     void gotoVerifyMessageTab(QString addr = "");
-    /** Load Partially Signed Syscoin Transaction from file or clipboard */
+    /** Load Partially Signed wentuno Transaction from file or clipboard */
     void gotoLoadPSBT(bool from_clipboard = false);
     /** Enable history action when privacy is changed */
     void enableHistoryAction(bool privacy);
@@ -354,9 +354,9 @@ private:
 
 private Q_SLOTS:
     /** When Display Units are changed on OptionsModel it will refresh the display text of the control on the status bar */
-    void updateDisplayUnit(SyscoinUnit newUnits);
+    void updateDisplayUnit(wentunoUnit newUnits);
     /** Tells underlying optionsModel to update its current display unit. */
     void onMenuSelection(QAction* action);
 };
 
-#endif // SYSCOIN_QT_SYSCOINGUI_H
+#endif // wentuno_QT_wentunoGUI_H

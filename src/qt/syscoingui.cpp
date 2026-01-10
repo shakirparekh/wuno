@@ -2,9 +2,9 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <qt/syscoingui.h>
+#include <qt/wentunogui.h>
 
-#include <qt/syscoinunits.h>
+#include <qt/wentunounits.h>
 #include <qt/clientmodel.h>
 #include <qt/createwalletdialog.h>
 #include <qt/guiconstants.h>
@@ -32,7 +32,7 @@
 
 #include <chain.h>
 #include <chainparams.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <interfaces/handler.h>
 #include <interfaces/node.h>
 #include <node/interface_ui.h>
@@ -62,17 +62,17 @@
 #include <QStackedWidget>
 #include <QStatusBar>
 #include <QStyle>
-#include <QSystemTrayIcon>
+#include <QWUNOtemTrayIcon>
 #include <QTimer>
 #include <QToolBar>
 #include <QUrlQuery>
 #include <QVBoxLayout>
 #include <QWindow>
 
-// SYSCOIN
+// wentuno
 #include <qt/masternodelist.h>
 #include <QStringList>
-const std::string SyscoinGUI::DEFAULT_UIPLATFORM =
+const std::string wentunoGUI::DEFAULT_UIPLATFORM =
 #if defined(Q_OS_MACOS)
         "macosx"
 #elif defined(Q_OS_WIN)
@@ -82,7 +82,7 @@ const std::string SyscoinGUI::DEFAULT_UIPLATFORM =
 #endif
         ;
 
-SyscoinGUI::SyscoinGUI(interfaces::Node& node, const PlatformStyle *_platformStyle, const NetworkStyle *networkStyle, QWidget *parent) :
+wentunoGUI::wentunoGUI(interfaces::Node& node, const PlatformStyle *_platformStyle, const NetworkStyle *networkStyle, QWidget *parent) :
     QMainWindow(parent),
     m_node(node),
     trayIconMenu{new QMenu()},
@@ -145,8 +145,8 @@ SyscoinGUI::SyscoinGUI(interfaces::Node& node, const PlatformStyle *_platformSty
     // Create the toolbars
     createToolBars();
 
-    // Create system tray icon and notification
-    if (QSystemTrayIcon::isSystemTrayAvailable()) {
+    // Create WUNOtem tray icon and notification
+    if (QWUNOtemTrayIcon::isWUNOtemTrayAvailable()) {
         createTrayIcon();
     }
     notificator = new Notificator(QApplication::applicationName(), trayIcon, this);
@@ -220,8 +220,8 @@ SyscoinGUI::SyscoinGUI(interfaces::Node& node, const PlatformStyle *_platformSty
         openOptionsDialogWithTab(OptionsDialog::TAB_NETWORK);
     });
 
-    connect(labelBlocksIcon, &GUIUtil::ClickableLabel::clicked, this, &SyscoinGUI::showModalOverlay);
-    connect(progressBar, &GUIUtil::ClickableProgressBar::clicked, this, &SyscoinGUI::showModalOverlay);
+    connect(labelBlocksIcon, &GUIUtil::ClickableLabel::clicked, this, &wentunoGUI::showModalOverlay);
+    connect(progressBar, &GUIUtil::ClickableProgressBar::clicked, this, &wentunoGUI::showModalOverlay);
 
 #ifdef Q_OS_MACOS
     m_app_nap_inhibitor = new CAppNapInhibitor;
@@ -230,7 +230,7 @@ SyscoinGUI::SyscoinGUI(interfaces::Node& node, const PlatformStyle *_platformSty
     GUIUtil::handleCloseWindowShortcut(this);
 }
 
-SyscoinGUI::~SyscoinGUI()
+wentunoGUI::~wentunoGUI()
 {
     // Unsubscribe from notifications from core
     unsubscribeFromCoreSignals();
@@ -247,7 +247,7 @@ SyscoinGUI::~SyscoinGUI()
     delete rpcConsole;
 }
 
-void SyscoinGUI::createActions()
+void wentunoGUI::createActions()
 {
     QActionGroup *tabGroup = new QActionGroup(this);
     connect(modalOverlay, &ModalOverlay::triggered, tabGroup, &QActionGroup::setEnabled);
@@ -260,14 +260,14 @@ void SyscoinGUI::createActions()
     tabGroup->addAction(overviewAction);
 
     sendCoinsAction = new QAction(platformStyle->SingleColorIcon(":/icons/send"), tr("&Send"), this);
-    sendCoinsAction->setStatusTip(tr("Send coins to a Syscoin address"));
+    sendCoinsAction->setStatusTip(tr("Send coins to a wentuno address"));
     sendCoinsAction->setToolTip(sendCoinsAction->statusTip());
     sendCoinsAction->setCheckable(true);
     sendCoinsAction->setShortcut(QKeySequence(QStringLiteral("Alt+2")));
     tabGroup->addAction(sendCoinsAction);
 
     receiveCoinsAction = new QAction(platformStyle->SingleColorIcon(":/icons/receiving_addresses"), tr("&Receive"), this);
-    receiveCoinsAction->setStatusTip(tr("Request payments (generates QR codes and syscoin: URIs)"));
+    receiveCoinsAction->setStatusTip(tr("Request payments (generates QR codes and wentuno: URIs)"));
     receiveCoinsAction->setToolTip(receiveCoinsAction->statusTip());
     receiveCoinsAction->setCheckable(true);
     receiveCoinsAction->setShortcut(QKeySequence(QStringLiteral("Alt+3")));
@@ -281,7 +281,7 @@ void SyscoinGUI::createActions()
     tabGroup->addAction(historyAction);
 
 #ifdef ENABLE_WALLET
-   // SYSCOIN
+   // wentuno
     QSettings settings;
     if (settings.value("fShowMasternodesTab").toBool()) {
         masternodeAction = new QAction(QIcon(":/icons/masternodes"), tr("&Masternodes"), this);
@@ -301,13 +301,13 @@ void SyscoinGUI::createActions()
     // These showNormalIfMinimized are needed because Send Coins and Receive Coins
     // can be triggered from the tray menu, and need to show the GUI to be useful.
     connect(overviewAction, &QAction::triggered, [this]{ showNormalIfMinimized(); });
-    connect(overviewAction, &QAction::triggered, this, &SyscoinGUI::gotoOverviewPage);
+    connect(overviewAction, &QAction::triggered, this, &wentunoGUI::gotoOverviewPage);
     connect(sendCoinsAction, &QAction::triggered, [this]{ showNormalIfMinimized(); });
     connect(sendCoinsAction, &QAction::triggered, [this]{ gotoSendCoinsPage(); });
     connect(receiveCoinsAction, &QAction::triggered, [this]{ showNormalIfMinimized(); });
-    connect(receiveCoinsAction, &QAction::triggered, this, &SyscoinGUI::gotoReceiveCoinsPage);
+    connect(receiveCoinsAction, &QAction::triggered, this, &wentunoGUI::gotoReceiveCoinsPage);
     connect(historyAction, &QAction::triggered, [this]{ showNormalIfMinimized(); });
-    connect(historyAction, &QAction::triggered, this, &SyscoinGUI::gotoHistoryPage);
+    connect(historyAction, &QAction::triggered, this, &wentunoGUI::gotoHistoryPage);
 #endif // ENABLE_WALLET
 
     quitAction = new QAction(tr("E&xit"), this);
@@ -334,13 +334,13 @@ void SyscoinGUI::createActions()
     changePassphraseAction = new QAction(tr("&Change Passphrase…"), this);
     changePassphraseAction->setStatusTip(tr("Change the passphrase used for wallet encryption"));
     signMessageAction = new QAction(tr("Sign &message…"), this);
-    signMessageAction->setStatusTip(tr("Sign messages with your Syscoin addresses to prove you own them"));
+    signMessageAction->setStatusTip(tr("Sign messages with your wentuno addresses to prove you own them"));
     verifyMessageAction = new QAction(tr("&Verify message…"), this);
-    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Syscoin addresses"));
+    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified wentuno addresses"));
     m_load_psbt_action = new QAction(tr("&Load PSBT from file…"), this);
-    m_load_psbt_action->setStatusTip(tr("Load Partially Signed Syscoin Transaction"));
+    m_load_psbt_action->setStatusTip(tr("Load Partially Signed wentuno Transaction"));
     m_load_psbt_clipboard_action = new QAction(tr("Load PSBT from &clipboard…"), this);
-    m_load_psbt_clipboard_action->setStatusTip(tr("Load Partially Signed Syscoin Transaction from clipboard"));
+    m_load_psbt_clipboard_action->setStatusTip(tr("Load Partially Signed wentuno Transaction from clipboard"));
 
     openRPCConsoleAction = new QAction(tr("Node window"), this);
     openRPCConsoleAction->setStatusTip(tr("Open node debugging and diagnostic console"));
@@ -354,7 +354,7 @@ void SyscoinGUI::createActions()
     usedReceivingAddressesAction->setStatusTip(tr("Show the list of used receiving addresses and labels"));
 
     openAction = new QAction(tr("Open &URI…"), this);
-    openAction->setStatusTip(tr("Open a syscoin: URI"));
+    openAction->setStatusTip(tr("Open a wentuno: URI"));
 
     m_open_wallet_action = new QAction(tr("Open Wallet"), this);
     m_open_wallet_action->setEnabled(false);
@@ -383,18 +383,18 @@ void SyscoinGUI::createActions()
 
     showHelpMessageAction = new QAction(tr("&Command-line options"), this);
     showHelpMessageAction->setMenuRole(QAction::NoRole);
-    showHelpMessageAction->setStatusTip(tr("Show the %1 help message to get a list with possible Syscoin command-line options").arg(PACKAGE_NAME));
+    showHelpMessageAction->setStatusTip(tr("Show the %1 help message to get a list with possible wentuno command-line options").arg(PACKAGE_NAME));
 
     m_mask_values_action = new QAction(tr("&Mask values"), this);
     m_mask_values_action->setShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_M));
     m_mask_values_action->setStatusTip(tr("Mask the values in the Overview tab"));
     m_mask_values_action->setCheckable(true);
-    connect(quitAction, &QAction::triggered, this, &SyscoinGUI::quitRequested);
-    connect(aboutAction, &QAction::triggered, this, &SyscoinGUI::aboutClicked);
+    connect(quitAction, &QAction::triggered, this, &wentunoGUI::quitRequested);
+    connect(aboutAction, &QAction::triggered, this, &wentunoGUI::aboutClicked);
     connect(aboutQtAction, &QAction::triggered, qApp, QApplication::aboutQt);
-    connect(optionsAction, &QAction::triggered, this, &SyscoinGUI::optionsClicked);
-    connect(showHelpMessageAction, &QAction::triggered, this, &SyscoinGUI::showHelpMessageClicked);
-    connect(openRPCConsoleAction, &QAction::triggered, this, &SyscoinGUI::showDebugWindow);
+    connect(optionsAction, &QAction::triggered, this, &wentunoGUI::optionsClicked);
+    connect(showHelpMessageAction, &QAction::triggered, this, &wentunoGUI::showHelpMessageClicked);
+    connect(openRPCConsoleAction, &QAction::triggered, this, &wentunoGUI::showDebugWindow);
     // prevents an open debug window from becoming stuck/unusable on client shutdown
     connect(quitAction, &QAction::triggered, rpcConsole, &QWidget::hide);
 
@@ -412,7 +412,7 @@ void SyscoinGUI::createActions()
         connect(verifyMessageAction, &QAction::triggered, [this]{ gotoVerifyMessageTab(); });
         connect(usedSendingAddressesAction, &QAction::triggered, walletFrame, &WalletFrame::usedSendingAddresses);
         connect(usedReceivingAddressesAction, &QAction::triggered, walletFrame, &WalletFrame::usedReceivingAddresses);
-        connect(openAction, &QAction::triggered, this, &SyscoinGUI::openClicked);
+        connect(openAction, &QAction::triggered, this, &wentunoGUI::openClicked);
         connect(m_open_wallet_menu, &QMenu::aboutToShow, [this] {
             m_open_wallet_menu->clear();
             for (const std::pair<const std::string, bool>& i : m_wallet_controller->listWalletDir()) {
@@ -432,7 +432,7 @@ void SyscoinGUI::createActions()
 
                 connect(action, &QAction::triggered, [this, path] {
                     auto activity = new OpenWalletActivity(m_wallet_controller, this);
-                    connect(activity, &OpenWalletActivity::opened, this, &SyscoinGUI::setCurrentWallet, Qt::QueuedConnection);
+                    connect(activity, &OpenWalletActivity::opened, this, &wentunoGUI::setCurrentWallet, Qt::QueuedConnection);
                     connect(activity, &OpenWalletActivity::opened, rpcConsole, &RPCConsole::setCurrentWallet, Qt::QueuedConnection);
                     activity->open(path);
                 });
@@ -462,7 +462,7 @@ void SyscoinGUI::createActions()
             if (!wallet_name_ok || wallet_name.isEmpty()) return;
 
             auto activity = new RestoreWalletActivity(m_wallet_controller, this);
-            connect(activity, &RestoreWalletActivity::restored, this, &SyscoinGUI::setCurrentWallet, Qt::QueuedConnection);
+            connect(activity, &RestoreWalletActivity::restored, this, &wentunoGUI::setCurrentWallet, Qt::QueuedConnection);
             connect(activity, &RestoreWalletActivity::restored, rpcConsole, &RPCConsole::setCurrentWallet, Qt::QueuedConnection);
 
             auto backup_file_path = fs::PathFromString(backup_file.toStdString());
@@ -471,10 +471,10 @@ void SyscoinGUI::createActions()
         connect(m_close_wallet_action, &QAction::triggered, [this] {
             m_wallet_controller->closeWallet(walletFrame->currentWalletModel(), this);
         });
-        // SYSCOIN (keep legacy wallet creation for now)
+        // wentuno (keep legacy wallet creation for now)
         connect(m_create_wallet_action, &QAction::triggered, [this] {
             auto activity = new CreateWalletActivity(m_wallet_controller, this);
-            connect(activity, &CreateWalletActivity::created, this, &SyscoinGUI::setCurrentWallet);
+            connect(activity, &CreateWalletActivity::created, this, &wentunoGUI::setCurrentWallet);
             connect(activity, &CreateWalletActivity::created, rpcConsole, &RPCConsole::setCurrentWallet);
             activity->create();
         });
@@ -483,19 +483,19 @@ void SyscoinGUI::createActions()
         });
         connect(m_migrate_wallet_action, &QAction::triggered, [this] {
             auto activity = new MigrateWalletActivity(m_wallet_controller, this);
-            connect(activity, &MigrateWalletActivity::migrated, this, &SyscoinGUI::setCurrentWallet);
+            connect(activity, &MigrateWalletActivity::migrated, this, &wentunoGUI::setCurrentWallet);
             activity->migrate(walletFrame->currentWalletModel());
         });
-        connect(m_mask_values_action, &QAction::toggled, this, &SyscoinGUI::setPrivacy);
-        connect(m_mask_values_action, &QAction::toggled, this, &SyscoinGUI::enableHistoryAction);
+        connect(m_mask_values_action, &QAction::toggled, this, &wentunoGUI::setPrivacy);
+        connect(m_mask_values_action, &QAction::toggled, this, &wentunoGUI::enableHistoryAction);
     }
 #endif // ENABLE_WALLET
 
-    connect(new QShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_C), this), &QShortcut::activated, this, &SyscoinGUI::showDebugWindowActivateConsole);
-    connect(new QShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_D), this), &QShortcut::activated, this, &SyscoinGUI::showDebugWindow);
+    connect(new QShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_C), this), &QShortcut::activated, this, &wentunoGUI::showDebugWindowActivateConsole);
+    connect(new QShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_D), this), &QShortcut::activated, this, &wentunoGUI::showDebugWindow);
 }
 
-void SyscoinGUI::createMenuBar()
+void wentunoGUI::createMenuBar()
 {
     appMenuBar = menuBar();
 
@@ -589,7 +589,7 @@ void SyscoinGUI::createMenuBar()
     help->addAction(aboutQtAction);
 }
 
-void SyscoinGUI::createToolBars()
+void wentunoGUI::createToolBars()
 {
     if(walletFrame)
     {
@@ -601,7 +601,7 @@ void SyscoinGUI::createToolBars()
         toolbar->addAction(sendCoinsAction);
         toolbar->addAction(receiveCoinsAction);
         toolbar->addAction(historyAction);
-        // SYSCOIN
+        // wentuno
         QSettings settings;
         if (settings.value("fShowMasternodesTab").toBool() && masternodeAction)
         {
@@ -616,7 +616,7 @@ void SyscoinGUI::createToolBars()
 
         m_wallet_selector = new QComboBox();
         m_wallet_selector->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-        connect(m_wallet_selector, qOverload<int>(&QComboBox::currentIndexChanged), this, &SyscoinGUI::setCurrentWalletBySelectorIndex);
+        connect(m_wallet_selector, qOverload<int>(&QComboBox::currentIndexChanged), this, &wentunoGUI::setCurrentWalletBySelectorIndex);
 
         m_wallet_selector_label = new QLabel();
         m_wallet_selector_label->setText(tr("Wallet:") + " ");
@@ -631,12 +631,12 @@ void SyscoinGUI::createToolBars()
     }
 }
 
-void SyscoinGUI::setClientModel(ClientModel *_clientModel, interfaces::BlockAndHeaderTipInfo* tip_info)
+void wentunoGUI::setClientModel(ClientModel *_clientModel, interfaces::BlockAndHeaderTipInfo* tip_info)
 {
     this->clientModel = _clientModel;
     if(_clientModel)
     {
-        // Create system tray menu (or setup the dock menu) that late to prevent users from calling actions,
+        // Create WUNOtem tray menu (or setup the dock menu) that late to prevent users from calling actions,
         // while the client has not yet fully loaded
         createTrayIconMenu();
 
@@ -645,21 +645,21 @@ void SyscoinGUI::setClientModel(ClientModel *_clientModel, interfaces::BlockAndH
         connect(connectionsControl, &GUIUtil::ClickableLabel::clicked, [this] {
             GUIUtil::PopupMenu(m_network_context_menu, QCursor::pos());
         });
-        connect(_clientModel, &ClientModel::numConnectionsChanged, this, &SyscoinGUI::setNumConnections);
-        connect(_clientModel, &ClientModel::networkActiveChanged, this, &SyscoinGUI::setNetworkActive);
+        connect(_clientModel, &ClientModel::numConnectionsChanged, this, &wentunoGUI::setNumConnections);
+        connect(_clientModel, &ClientModel::networkActiveChanged, this, &wentunoGUI::setNetworkActive);
 
         modalOverlay->setKnownBestHeight(tip_info->header_height, QDateTime::fromSecsSinceEpoch(tip_info->header_time), /*presync=*/false);
         setNumBlocks(tip_info->block_height, QDateTime::fromSecsSinceEpoch(tip_info->block_time), tip_info->verification_progress, SyncType::BLOCK_SYNC, SynchronizationState::INIT_DOWNLOAD);
-        connect(_clientModel, &ClientModel::numBlocksChanged, this, &SyscoinGUI::setNumBlocks);
-        // SYSCOIN
-        connect(_clientModel, &ClientModel::additionalDataSyncProgressChanged, this, &SyscoinGUI::setAdditionalDataSyncProgress);
+        connect(_clientModel, &ClientModel::numBlocksChanged, this, &wentunoGUI::setNumBlocks);
+        // wentuno
+        connect(_clientModel, &ClientModel::additionalDataSyncProgressChanged, this, &wentunoGUI::setAdditionalDataSyncProgress);
         // Receive and report messages from client model
         connect(_clientModel, &ClientModel::message, [this](const QString &title, const QString &message, unsigned int style){
             this->message(title, message, style);
         });
 
         // Show progress dialog
-        connect(_clientModel, &ClientModel::showProgress, this, &SyscoinGUI::showProgress);
+        connect(_clientModel, &ClientModel::showProgress, this, &wentunoGUI::showProgress);
 
         rpcConsole->setClientModel(_clientModel, tip_info->block_height, tip_info->block_time, tip_info->verification_progress);
 
@@ -676,7 +676,7 @@ void SyscoinGUI::setClientModel(ClientModel *_clientModel, interfaces::BlockAndH
         OptionsModel* optionsModel = _clientModel->getOptionsModel();
         if (optionsModel && trayIcon) {
             // be aware of the tray icon disable state change reported by the OptionsModel object.
-            connect(optionsModel, &OptionsModel::showTrayIconChanged, trayIcon, &QSystemTrayIcon::setVisible);
+            connect(optionsModel, &OptionsModel::showTrayIconChanged, trayIcon, &QWUNOtemTrayIcon::setVisible);
 
             // initialize the disable state of the tray icon with the current value in the model.
             trayIcon->setVisible(optionsModel->getShowTrayIcon());
@@ -705,13 +705,13 @@ void SyscoinGUI::setClientModel(ClientModel *_clientModel, interfaces::BlockAndH
 }
 
 #ifdef ENABLE_WALLET
-void SyscoinGUI::enableHistoryAction(bool privacy)
+void wentunoGUI::enableHistoryAction(bool privacy)
 {
     historyAction->setEnabled(!privacy);
     if (historyAction->isChecked()) gotoOverviewPage();
 }
 
-void SyscoinGUI::setWalletController(WalletController* wallet_controller, bool show_loading_minimized)
+void wentunoGUI::setWalletController(WalletController* wallet_controller, bool show_loading_minimized)
 {
     assert(!m_wallet_controller);
     assert(wallet_controller);
@@ -723,8 +723,8 @@ void SyscoinGUI::setWalletController(WalletController* wallet_controller, bool s
     m_open_wallet_action->setMenu(m_open_wallet_menu);
     m_restore_wallet_action->setEnabled(true);
 
-    GUIUtil::ExceptionSafeConnect(wallet_controller, &WalletController::walletAdded, this, &SyscoinGUI::addWallet);
-    connect(wallet_controller, &WalletController::walletRemoved, this, &SyscoinGUI::removeWallet);
+    GUIUtil::ExceptionSafeConnect(wallet_controller, &WalletController::walletAdded, this, &wentunoGUI::addWallet);
+    connect(wallet_controller, &WalletController::walletRemoved, this, &wentunoGUI::removeWallet);
     connect(wallet_controller, &WalletController::destroyed, this, [this] {
         // wallet_controller gets destroyed manually, but it leaves our member copy dangling
         m_wallet_controller = nullptr;
@@ -734,12 +734,12 @@ void SyscoinGUI::setWalletController(WalletController* wallet_controller, bool s
     activity->load(show_loading_minimized);
 }
 
-WalletController* SyscoinGUI::getWalletController()
+WalletController* wentunoGUI::getWalletController()
 {
     return m_wallet_controller;
 }
 
-void SyscoinGUI::addWallet(WalletModel* walletModel)
+void wentunoGUI::addWallet(WalletModel* walletModel)
 {
     if (!walletFrame || !m_wallet_controller) return;
 
@@ -754,15 +754,15 @@ void SyscoinGUI::addWallet(WalletModel* walletModel)
         m_wallet_selector_action->setVisible(true);
     }
 
-    connect(wallet_view, &WalletView::outOfSyncWarningClicked, this, &SyscoinGUI::showModalOverlay);
-    connect(wallet_view, &WalletView::transactionClicked, this, &SyscoinGUI::gotoHistoryPage);
-    connect(wallet_view, &WalletView::coinsSent, this, &SyscoinGUI::gotoHistoryPage);
+    connect(wallet_view, &WalletView::outOfSyncWarningClicked, this, &wentunoGUI::showModalOverlay);
+    connect(wallet_view, &WalletView::transactionClicked, this, &wentunoGUI::gotoHistoryPage);
+    connect(wallet_view, &WalletView::coinsSent, this, &wentunoGUI::gotoHistoryPage);
     connect(wallet_view, &WalletView::message, [this](const QString& title, const QString& message, unsigned int style) {
         this->message(title, message, style);
     });
-    connect(wallet_view, &WalletView::encryptionStatusChanged, this, &SyscoinGUI::updateWalletStatus);
-    connect(wallet_view, &WalletView::incomingTransaction, this, &SyscoinGUI::incomingTransaction);
-    connect(this, &SyscoinGUI::setPrivacy, wallet_view, &WalletView::setPrivacy);
+    connect(wallet_view, &WalletView::encryptionStatusChanged, this, &wentunoGUI::updateWalletStatus);
+    connect(wallet_view, &WalletView::incomingTransaction, this, &wentunoGUI::incomingTransaction);
+    connect(this, &wentunoGUI::setPrivacy, wallet_view, &WalletView::setPrivacy);
     const bool privacy = isPrivacyModeActivated();
     wallet_view->setPrivacy(privacy);
     enableHistoryAction(privacy);
@@ -770,7 +770,7 @@ void SyscoinGUI::addWallet(WalletModel* walletModel)
     m_wallet_selector->addItem(display_name, QVariant::fromValue(walletModel));
 }
 
-void SyscoinGUI::removeWallet(WalletModel* walletModel)
+void wentunoGUI::removeWallet(WalletModel* walletModel)
 {
     if (!walletFrame) return;
 
@@ -791,7 +791,7 @@ void SyscoinGUI::removeWallet(WalletModel* walletModel)
     updateWindowTitle();
 }
 
-void SyscoinGUI::setCurrentWallet(WalletModel* wallet_model)
+void wentunoGUI::setCurrentWallet(WalletModel* wallet_model)
 {
     if (!walletFrame || !m_wallet_controller) return;
     walletFrame->setCurrentWallet(wallet_model);
@@ -805,13 +805,13 @@ void SyscoinGUI::setCurrentWallet(WalletModel* wallet_model)
     m_migrate_wallet_action->setEnabled(wallet_model->wallet().isLegacy());
 }
 
-void SyscoinGUI::setCurrentWalletBySelectorIndex(int index)
+void wentunoGUI::setCurrentWalletBySelectorIndex(int index)
 {
     WalletModel* wallet_model = m_wallet_selector->itemData(index).value<WalletModel*>();
     if (wallet_model) setCurrentWallet(wallet_model);
 }
 
-void SyscoinGUI::removeAllWallets()
+void wentunoGUI::removeAllWallets()
 {
     if(!walletFrame)
         return;
@@ -820,7 +820,7 @@ void SyscoinGUI::removeAllWallets()
 }
 #endif // ENABLE_WALLET
 
-void SyscoinGUI::setWalletActionsEnabled(bool enabled)
+void wentunoGUI::setWalletActionsEnabled(bool enabled)
 {
     overviewAction->setEnabled(enabled);
     sendCoinsAction->setEnabled(enabled);
@@ -839,20 +839,20 @@ void SyscoinGUI::setWalletActionsEnabled(bool enabled)
     m_migrate_wallet_action->setEnabled(enabled);
 }
 
-void SyscoinGUI::createTrayIcon()
+void wentunoGUI::createTrayIcon()
 {
-    assert(QSystemTrayIcon::isSystemTrayAvailable());
+    assert(QWUNOtemTrayIcon::isWUNOtemTrayAvailable());
 
 #ifndef Q_OS_MACOS
-    if (QSystemTrayIcon::isSystemTrayAvailable()) {
-        trayIcon = new QSystemTrayIcon(m_network_style->getTrayAndWindowIcon(), this);
+    if (QWUNOtemTrayIcon::isWUNOtemTrayAvailable()) {
+        trayIcon = new QWUNOtemTrayIcon(m_network_style->getTrayAndWindowIcon(), this);
         QString toolTip = tr("%1 client").arg(PACKAGE_NAME) + " " + m_network_style->getTitleAddText();
         trayIcon->setToolTip(toolTip);
     }
 #endif
 }
 
-void SyscoinGUI::createTrayIconMenu()
+void wentunoGUI::createTrayIconMenu()
 {
 #ifndef Q_OS_MACOS
     if (!trayIcon) return;
@@ -862,7 +862,7 @@ void SyscoinGUI::createTrayIconMenu()
     QAction* show_hide_action{nullptr};
 #ifndef Q_OS_MACOS
     // Note: On macOS, the Dock icon's menu already has Show / Hide action.
-    show_hide_action = trayIconMenu->addAction(QString(), this, &SyscoinGUI::toggleHidden);
+    show_hide_action = trayIconMenu->addAction(QString(), this, &wentunoGUI::toggleHidden);
     trayIconMenu->addSeparator();
 #endif // Q_OS_MACOS
 
@@ -888,9 +888,9 @@ void SyscoinGUI::createTrayIconMenu()
     quit_action = trayIconMenu->addAction(quitAction->text(), quitAction, &QAction::trigger);
 
     trayIcon->setContextMenu(trayIconMenu.get());
-    connect(trayIcon, &QSystemTrayIcon::activated, [this](QSystemTrayIcon::ActivationReason reason) {
-        if (reason == QSystemTrayIcon::Trigger) {
-            // Click on system tray icon triggers show/hide of the main window
+    connect(trayIcon, &QWUNOtemTrayIcon::activated, [this](QWUNOtemTrayIcon::ActivationReason reason) {
+        if (reason == QWUNOtemTrayIcon::Trigger) {
+            // Click on WUNOtem tray icon triggers show/hide of the main window
             toggleHidden();
         }
     });
@@ -906,7 +906,7 @@ void SyscoinGUI::createTrayIconMenu()
 #endif // Q_OS_MACOS
 
     connect(
-        // Using QSystemTrayIcon::Context is not reliable.
+        // Using QWUNOtemTrayIcon::Context is not reliable.
         // See https://bugreports.qt.io/browse/QTBUG-91697
         trayIconMenu.get(), &QMenu::aboutToShow,
         [this, show_hide_action, send_action, receive_action, sign_action, verify_action, options_action, node_window_action, quit_action] {
@@ -935,12 +935,12 @@ void SyscoinGUI::createTrayIconMenu()
         });
 }
 
-void SyscoinGUI::optionsClicked()
+void wentunoGUI::optionsClicked()
 {
     openOptionsDialogWithTab(OptionsDialog::TAB_MAIN);
 }
 
-void SyscoinGUI::aboutClicked()
+void wentunoGUI::aboutClicked()
 {
     if(!clientModel)
         return;
@@ -949,24 +949,24 @@ void SyscoinGUI::aboutClicked()
     GUIUtil::ShowModalDialogAsynchronously(dlg);
 }
 
-void SyscoinGUI::showDebugWindow()
+void wentunoGUI::showDebugWindow()
 {
     GUIUtil::bringToFront(rpcConsole);
     Q_EMIT consoleShown(rpcConsole);
 }
-void SyscoinGUI::showDebugWindowActivateConsole()
+void wentunoGUI::showDebugWindowActivateConsole()
 {
     rpcConsole->setTabFocus(RPCConsole::TabTypes::CONSOLE);
     showDebugWindow();
 }
 
-void SyscoinGUI::showHelpMessageClicked()
+void wentunoGUI::showHelpMessageClicked()
 {
     GUIUtil::bringToFront(helpMessageDialog);
 }
 
 #ifdef ENABLE_WALLET
-void SyscoinGUI::openClicked()
+void wentunoGUI::openClicked()
 {
     OpenURIDialog dlg(platformStyle, this);
     if(dlg.exec())
@@ -974,9 +974,9 @@ void SyscoinGUI::openClicked()
         Q_EMIT receivedURI(dlg.getURI());
     }
 }
-// SYSCOIN
+// wentuno
 
-void SyscoinGUI::gotoMasternodePage()
+void wentunoGUI::gotoMasternodePage()
 {
     QSettings settings;
     if (settings.value("fShowMasternodesTab").toBool() && masternodeAction) {
@@ -984,46 +984,46 @@ void SyscoinGUI::gotoMasternodePage()
         if (walletFrame) walletFrame->gotoMasternodePage();
     }
 }
-void SyscoinGUI::gotoOverviewPage()
+void wentunoGUI::gotoOverviewPage()
 {
     overviewAction->setChecked(true);
     if (walletFrame) walletFrame->gotoOverviewPage();
 }
 
-void SyscoinGUI::gotoHistoryPage()
+void wentunoGUI::gotoHistoryPage()
 {
     historyAction->setChecked(true);
     if (walletFrame) walletFrame->gotoHistoryPage();
 }
 
-void SyscoinGUI::gotoReceiveCoinsPage()
+void wentunoGUI::gotoReceiveCoinsPage()
 {
     receiveCoinsAction->setChecked(true);
     if (walletFrame) walletFrame->gotoReceiveCoinsPage();
 }
 
-void SyscoinGUI::gotoSendCoinsPage(QString addr)
+void wentunoGUI::gotoSendCoinsPage(QString addr)
 {
     sendCoinsAction->setChecked(true);
     if (walletFrame) walletFrame->gotoSendCoinsPage(addr);
 }
 
-void SyscoinGUI::gotoSignMessageTab(QString addr)
+void wentunoGUI::gotoSignMessageTab(QString addr)
 {
     if (walletFrame) walletFrame->gotoSignMessageTab(addr);
 }
 
-void SyscoinGUI::gotoVerifyMessageTab(QString addr)
+void wentunoGUI::gotoVerifyMessageTab(QString addr)
 {
     if (walletFrame) walletFrame->gotoVerifyMessageTab(addr);
 }
-void SyscoinGUI::gotoLoadPSBT(bool from_clipboard)
+void wentunoGUI::gotoLoadPSBT(bool from_clipboard)
 {
     if (walletFrame) walletFrame->gotoLoadPSBT(from_clipboard);
 }
 #endif // ENABLE_WALLET
 
-void SyscoinGUI::updateNetworkState()
+void wentunoGUI::updateNetworkState()
 {
     int count = clientModel->getNumConnections();
     QString icon;
@@ -1040,7 +1040,7 @@ void SyscoinGUI::updateNetworkState()
 
     if (m_node.getNetworkActive()) {
         //: A substring of the tooltip.
-        tooltip = tr("%n active connection(s) to Syscoin network.", "", count);
+        tooltip = tr("%n active connection(s) to wentuno network.", "", count);
     } else {
         //: A substring of the tooltip.
         tooltip = tr("Network activity disabled.");
@@ -1056,12 +1056,12 @@ void SyscoinGUI::updateNetworkState()
     connectionsControl->setThemedPixmap(icon, STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE);
 }
 
-void SyscoinGUI::setNumConnections(int count)
+void wentunoGUI::setNumConnections(int count)
 {
     updateNetworkState();
 }
 
-void SyscoinGUI::setNetworkActive(bool network_active)
+void wentunoGUI::setNetworkActive(bool network_active)
 {
     updateNetworkState();
     m_network_context_menu->clear();
@@ -1081,7 +1081,7 @@ void SyscoinGUI::setNetworkActive(bool network_active)
         [this, new_state = !network_active] { m_node.setNetworkActive(new_state); });
 }
 
-void SyscoinGUI::updateHeadersSyncProgressLabel()
+void wentunoGUI::updateHeadersSyncProgressLabel()
 {
     int64_t headersTipTime = clientModel->getHeaderTipTime();
     int headersTipHeight = clientModel->getHeaderTipHeight();
@@ -1090,27 +1090,27 @@ void SyscoinGUI::updateHeadersSyncProgressLabel()
         progressBarLabel->setText(tr("Syncing Headers (%1%)…").arg(QString::number(100.0 / (headersTipHeight+estHeadersLeft)*headersTipHeight, 'f', 1)));
 }
 
-void SyscoinGUI::updateHeadersPresyncProgressLabel(int64_t height, const QDateTime& blockDate)
+void wentunoGUI::updateHeadersPresyncProgressLabel(int64_t height, const QDateTime& blockDate)
 {
     int estHeadersLeft = blockDate.secsTo(QDateTime::currentDateTime()) / Params().GetConsensus().nPowTargetSpacing;
     if (estHeadersLeft > HEADER_HEIGHT_DELTA_SYNC)
         progressBarLabel->setText(tr("Pre-syncing Headers (%1%)…").arg(QString::number(100.0 / (height+estHeadersLeft)*height, 'f', 1)));
 }
 
-void SyscoinGUI::openOptionsDialogWithTab(OptionsDialog::Tab tab)
+void wentunoGUI::openOptionsDialogWithTab(OptionsDialog::Tab tab)
 {
     if (!clientModel || !clientModel->getOptionsModel())
         return;
 
     auto dlg = new OptionsDialog(this, enableWallet);
-    connect(dlg, &OptionsDialog::quitOnReset, this, &SyscoinGUI::quitRequested);
+    connect(dlg, &OptionsDialog::quitOnReset, this, &wentunoGUI::quitRequested);
     dlg->setCurrentTab(tab);
     dlg->setClientModel(clientModel);
     dlg->setModel(clientModel->getOptionsModel());
     GUIUtil::ShowModalDialogAsynchronously(dlg);
 }
 
-void SyscoinGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress, SyncType synctype, SynchronizationState sync_state)
+void wentunoGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress, SyncType synctype, SynchronizationState sync_state)
 {
 // Disabling macOS App Nap on initial sync, disk and reindex operations.
 #ifdef Q_OS_MACOS
@@ -1226,8 +1226,8 @@ void SyscoinGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVer
     progressBarLabel->setToolTip(tooltip);
     progressBar->setToolTip(tooltip);
 }
-// SYSCOIN
-void SyscoinGUI::setAdditionalDataSyncProgress(double nSyncProgress)
+// wentuno
+void wentunoGUI::setAdditionalDataSyncProgress(double nSyncProgress)
 {
     if(!clientModel)
         return;
@@ -1275,7 +1275,7 @@ void SyscoinGUI::setAdditionalDataSyncProgress(double nSyncProgress)
     progressBar->setToolTip(tooltip);
 }
 
-void SyscoinGUI::message(const QString& title, QString message, unsigned int style, bool* ret, const QString& detailed_message)
+void wentunoGUI::message(const QString& title, QString message, unsigned int style, bool* ret, const QString& detailed_message)
 {
     // Default title. On macOS, the window title is ignored (as required by the macOS Guidelines).
     QString strTitle{PACKAGE_NAME};
@@ -1335,7 +1335,7 @@ void SyscoinGUI::message(const QString& title, QString message, unsigned int sty
     }
 }
 
-void SyscoinGUI::changeEvent(QEvent *e)
+void wentunoGUI::changeEvent(QEvent *e)
 {
     if (e->type() == QEvent::PaletteChange) {
         overviewAction->setIcon(platformStyle->SingleColorIcon(QStringLiteral(":/icons/overview")));
@@ -1354,12 +1354,12 @@ void SyscoinGUI::changeEvent(QEvent *e)
             QWindowStateChangeEvent *wsevt = static_cast<QWindowStateChangeEvent*>(e);
             if(!(wsevt->oldState() & Qt::WindowMinimized) && isMinimized())
             {
-                QTimer::singleShot(0, this, &SyscoinGUI::hide);
+                QTimer::singleShot(0, this, &wentunoGUI::hide);
                 e->ignore();
             }
             else if((wsevt->oldState() & Qt::WindowMinimized) && !isMinimized())
             {
-                QTimer::singleShot(0, this, &SyscoinGUI::show);
+                QTimer::singleShot(0, this, &wentunoGUI::show);
                 e->ignore();
             }
         }
@@ -1367,7 +1367,7 @@ void SyscoinGUI::changeEvent(QEvent *e)
 #endif
 }
 
-void SyscoinGUI::closeEvent(QCloseEvent *event)
+void wentunoGUI::closeEvent(QCloseEvent *event)
 {
 #ifndef Q_OS_MACOS // Ignored on Mac
     if(clientModel && clientModel->getOptionsModel())
@@ -1390,7 +1390,7 @@ void SyscoinGUI::closeEvent(QCloseEvent *event)
 #endif
 }
 
-void SyscoinGUI::showEvent(QShowEvent *event)
+void wentunoGUI::showEvent(QShowEvent *event)
 {
     // enable the debug window when the main window shows up
     openRPCConsoleAction->setEnabled(true);
@@ -1399,11 +1399,11 @@ void SyscoinGUI::showEvent(QShowEvent *event)
 }
 
 #ifdef ENABLE_WALLET
-void SyscoinGUI::incomingTransaction(const QString& date, SyscoinUnit unit, const CAmount& amount, const QString& type, const QString& address, const QString& label, const QString& walletName)
+void wentunoGUI::incomingTransaction(const QString& date, wentunoUnit unit, const CAmount& amount, const QString& type, const QString& address, const QString& label, const QString& walletName)
 {
     // On new transaction, make an info balloon
     QString msg = tr("Date: %1\n").arg(date) +
-                  tr("Amount: %1\n").arg(SyscoinUnits::formatWithUnit(unit, amount, true));
+                  tr("Amount: %1\n").arg(wentunoUnits::formatWithUnit(unit, amount, true));
     if (m_node.walletLoader().getWallets().size() > 1 && !walletName.isEmpty()) {
         msg += tr("Wallet: %1\n").arg(walletName);
     }
@@ -1417,14 +1417,14 @@ void SyscoinGUI::incomingTransaction(const QString& date, SyscoinUnit unit, cons
 }
 #endif // ENABLE_WALLET
 
-void SyscoinGUI::dragEnterEvent(QDragEnterEvent *event)
+void wentunoGUI::dragEnterEvent(QDragEnterEvent *event)
 {
     // Accept only URIs
     if(event->mimeData()->hasUrls())
         event->acceptProposedAction();
 }
 
-void SyscoinGUI::dropEvent(QDropEvent *event)
+void wentunoGUI::dropEvent(QDropEvent *event)
 {
     if(event->mimeData()->hasUrls())
     {
@@ -1436,7 +1436,7 @@ void SyscoinGUI::dropEvent(QDropEvent *event)
     event->acceptProposedAction();
 }
 
-bool SyscoinGUI::eventFilter(QObject *object, QEvent *event)
+bool wentunoGUI::eventFilter(QObject *object, QEvent *event)
 {
     // Catch status tip events
     if (event->type() == QEvent::StatusTip)
@@ -1449,7 +1449,7 @@ bool SyscoinGUI::eventFilter(QObject *object, QEvent *event)
 }
 
 #ifdef ENABLE_WALLET
-bool SyscoinGUI::handlePaymentRequest(const SendCoinsRecipient& recipient)
+bool wentunoGUI::handlePaymentRequest(const SendCoinsRecipient& recipient)
 {
     // URI has to be valid
     if (walletFrame && walletFrame->handlePaymentRequest(recipient))
@@ -1461,14 +1461,14 @@ bool SyscoinGUI::handlePaymentRequest(const SendCoinsRecipient& recipient)
     return false;
 }
 
-void SyscoinGUI::setHDStatus(bool privkeyDisabled, int hdEnabled)
+void wentunoGUI::setHDStatus(bool privkeyDisabled, int hdEnabled)
 {
     labelWalletHDStatusIcon->setThemedPixmap(privkeyDisabled ? QStringLiteral(":/icons/eye") : hdEnabled ? QStringLiteral(":/icons/hd_enabled") : QStringLiteral(":/icons/hd_disabled"), STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE);
     labelWalletHDStatusIcon->setToolTip(privkeyDisabled ? tr("Private key <b>disabled</b>") : hdEnabled ? tr("HD key generation is <b>enabled</b>") : tr("HD key generation is <b>disabled</b>"));
     labelWalletHDStatusIcon->show();
 }
 
-void SyscoinGUI::setEncryptionStatus(int status)
+void wentunoGUI::setEncryptionStatus(int status)
 {
     switch(status)
     {
@@ -1503,7 +1503,7 @@ void SyscoinGUI::setEncryptionStatus(int status)
     }
 }
 
-void SyscoinGUI::updateWalletStatus()
+void wentunoGUI::updateWalletStatus()
 {
     assert(walletFrame);
 
@@ -1517,7 +1517,7 @@ void SyscoinGUI::updateWalletStatus()
 }
 #endif // ENABLE_WALLET
 
-void SyscoinGUI::updateProxyIcon()
+void wentunoGUI::updateProxyIcon()
 {
     std::string ip_port;
     bool proxy_enabled = clientModel->getProxyInfo(ip_port);
@@ -1535,7 +1535,7 @@ void SyscoinGUI::updateProxyIcon()
     }
 }
 
-void SyscoinGUI::updateWindowTitle()
+void wentunoGUI::updateWindowTitle()
 {
     QString window_title = PACKAGE_NAME;
 #ifdef ENABLE_WALLET
@@ -1552,7 +1552,7 @@ void SyscoinGUI::updateWindowTitle()
     setWindowTitle(window_title);
 }
 
-void SyscoinGUI::showNormalIfMinimized(bool fToggleHidden)
+void wentunoGUI::showNormalIfMinimized(bool fToggleHidden)
 {
     if(!clientModel)
         return;
@@ -1564,12 +1564,12 @@ void SyscoinGUI::showNormalIfMinimized(bool fToggleHidden)
     }
 }
 
-void SyscoinGUI::toggleHidden()
+void wentunoGUI::toggleHidden()
 {
     showNormalIfMinimized(true);
 }
 
-void SyscoinGUI::detectShutdown()
+void wentunoGUI::detectShutdown()
 {
     if (m_node.shutdownRequested())
     {
@@ -1579,7 +1579,7 @@ void SyscoinGUI::detectShutdown()
     }
 }
 
-void SyscoinGUI::showProgress(const QString &title, int nProgress)
+void wentunoGUI::showProgress(const QString &title, int nProgress)
 {
     if (nProgress == 0) {
         progressDialog = new QProgressDialog(title, QString(), 0, 100);
@@ -1598,13 +1598,13 @@ void SyscoinGUI::showProgress(const QString &title, int nProgress)
     }
 }
 
-void SyscoinGUI::showModalOverlay()
+void wentunoGUI::showModalOverlay()
 {
     if (modalOverlay && (progressBar->isVisible() || modalOverlay->isLayerVisible()))
         modalOverlay->toggleVisibility();
 }
 
-static bool ThreadSafeMessageBox(SyscoinGUI* gui, const bilingual_str& message, const std::string& caption, unsigned int style)
+static bool ThreadSafeMessageBox(wentunoGUI* gui, const bilingual_str& message, const std::string& caption, unsigned int style)
 {
     bool modal = (style & CClientUIInterface::MODAL);
     // The SECURE flag has no effect in the Qt GUI.
@@ -1614,7 +1614,7 @@ static bool ThreadSafeMessageBox(SyscoinGUI* gui, const bilingual_str& message, 
 
     QString detailed_message; // This is original message, in English, for googling and referencing.
     if (message.original != message.translated) {
-        detailed_message = SyscoinGUI::tr("Original message:") + "\n" + QString::fromStdString(message.original);
+        detailed_message = wentunoGUI::tr("Original message:") + "\n" + QString::fromStdString(message.original);
     }
 
     // In case of modal message, use blocking connection to wait for user to click a button
@@ -1629,21 +1629,21 @@ static bool ThreadSafeMessageBox(SyscoinGUI* gui, const bilingual_str& message, 
     return ret;
 }
 
-void SyscoinGUI::subscribeToCoreSignals()
+void wentunoGUI::subscribeToCoreSignals()
 {
     // Connect signals to client
     m_handler_message_box = m_node.handleMessageBox(std::bind(ThreadSafeMessageBox, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
     m_handler_question = m_node.handleQuestion(std::bind(ThreadSafeMessageBox, this, std::placeholders::_1, std::placeholders::_3, std::placeholders::_4));
 }
 
-void SyscoinGUI::unsubscribeFromCoreSignals()
+void wentunoGUI::unsubscribeFromCoreSignals()
 {
     // Disconnect signals from client
     m_handler_message_box->disconnect();
     m_handler_question->disconnect();
 }
 
-bool SyscoinGUI::isPrivacyModeActivated() const
+bool wentunoGUI::isPrivacyModeActivated() const
 {
     assert(m_mask_values_action);
     return m_mask_values_action->isChecked();
@@ -1654,11 +1654,11 @@ UnitDisplayStatusBarControl::UnitDisplayStatusBarControl(const PlatformStyle* pl
 {
     createContextMenu();
     setToolTip(tr("Unit to show amounts in. Click to select another unit."));
-    QList<SyscoinUnit> units = SyscoinUnits::availableUnits();
+    QList<wentunoUnit> units = wentunoUnits::availableUnits();
     int max_width = 0;
     const QFontMetrics fm(font());
-    for (const SyscoinUnit unit : units) {
-        max_width = qMax(max_width, GUIUtil::TextWidth(fm, SyscoinUnits::longName(unit)));
+    for (const wentunoUnit unit : units) {
+        max_width = qMax(max_width, GUIUtil::TextWidth(fm, wentunoUnits::longName(unit)));
     }
     setMinimumSize(max_width, 0);
     setAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -1687,8 +1687,8 @@ void UnitDisplayStatusBarControl::changeEvent(QEvent* e)
 void UnitDisplayStatusBarControl::createContextMenu()
 {
     menu = new QMenu(this);
-    for (const SyscoinUnit u : SyscoinUnits::availableUnits()) {
-        menu->addAction(SyscoinUnits::longName(u))->setData(QVariant::fromValue(u));
+    for (const wentunoUnit u : wentunoUnits::availableUnits()) {
+        menu->addAction(wentunoUnits::longName(u))->setData(QVariant::fromValue(u));
     }
     connect(menu, &QMenu::triggered, this, &UnitDisplayStatusBarControl::onMenuSelection);
 }
@@ -1709,9 +1709,9 @@ void UnitDisplayStatusBarControl::setOptionsModel(OptionsModel *_optionsModel)
 }
 
 /** When Display Units are changed on OptionsModel it will refresh the display text of the control on the status bar */
-void UnitDisplayStatusBarControl::updateDisplayUnit(SyscoinUnit newUnits)
+void UnitDisplayStatusBarControl::updateDisplayUnit(wentunoUnit newUnits)
 {
-    setText(SyscoinUnits::longName(newUnits));
+    setText(wentunoUnits::longName(newUnits));
 }
 
 /** Shows context menu with Display Unit options by the mouse coordinates */

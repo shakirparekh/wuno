@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_NODE_MINER_H
-#define SYSCOIN_NODE_MINER_H
+#ifndef wentuno_NODE_MINER_H
+#define wentuno_NODE_MINER_H
 
 #include <policy/policy.h>
 #include <primitives/block.h>
@@ -37,7 +37,7 @@ struct CBlockTemplate
     std::vector<CAmount> vTxFees;
     std::vector<int64_t> vTxSigOpsCost;
     std::vector<unsigned char> vchCoinbaseCommitment;
-    // SYSCOIN
+    // wentuno
     std::vector<unsigned char> vchCoinbaseCommitmentExtra; // coinbase opreturn commitment for quorums goes after any witness commitment
     std::vector<CTxOut> voutMasternodePayments; // masternode payment
     std::vector<CTxOut> voutSuperblockPayments; // superblock payment
@@ -53,7 +53,7 @@ struct CTxMemPoolModifiedEntry {
         nModFeesWithAncestors = entry->GetModFeesWithAncestors();
         nSigOpCostWithAncestors = entry->GetSigOpCostWithAncestors();
     }
-    // SYSCOIN
+    // wentuno
     std::chrono::seconds GetTime() const { return iter->GetTime(); }
     CAmount GetModifiedFee() const { return iter->GetModifiedFee(); }
     uint64_t GetSizeWithAncestors() const { return nSizeWithAncestors; }
@@ -154,7 +154,7 @@ private:
     const CChainParams& chainparams;
     const CTxMemPool* const m_mempool;
     Chainstate& m_chainstate;
-    // SYSCOIN
+    // wentuno
     int nNumNEVMDataTxs;
 
 public:
@@ -199,7 +199,7 @@ private:
       * locktime, premature-witness, serialized size (if necessary)
       * These checks should always succeed, and they're here
       * only as an extra check in case of suboptimal node configuration */
-    // SYSCOIN
+    // wentuno
     bool TestPackageTransactions(const CTxMemPool& mempool, const CTxMemPool::setEntries& package) const EXCLUSIVE_LOCKS_REQUIRED(mempool.cs);
     /** Sort the package in an order that is valid to appear in a block */
     void SortForBlock(const CTxMemPool::setEntries& package, std::vector<CTxMemPool::txiter>& sortedEntries);
@@ -210,13 +210,13 @@ void IncrementExtraNonce(CBlock* pblock, const CBlockIndex* pindexPrev, unsigned
 int64_t UpdateTime(CBlockHeader* pblock, const Consensus::Params& consensusParams, const CBlockIndex* pindexPrev);
 bool ProcessBlockFound(const CBlock* pblock, const CChainParams& chainParams);
 
-// SYSCOIN
+// wentuno
 /** Update an old GenerateCoinbaseCommitment from CreateNewBlock after the block txs have changed */
-// SYSCOIN
+// wentuno
 void RegenerateCommitments(CBlock& block, ChainstateManager& chainman, const std::vector<unsigned char> &vchExtraData);
 
 /** Apply -blockmintxfee and -blockmaxweight options from ArgsManager to BlockAssembler options. */
 void ApplyArgsManOptions(const ArgsManager& gArgs, BlockAssembler::Options& options);
 } // namespace node
 
-#endif // SYSCOIN_NODE_MINER_H
+#endif // wentuno_NODE_MINER_H

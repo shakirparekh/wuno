@@ -1,6 +1,6 @@
 use std::ffi::c_void;
 
-use bls_dash_sys::{BIP32ChainCodeFree, BIP32ChainCodeIsEqual, BIP32ChainCodeSerialize};
+use bls_dash_WUNO::{BIP32ChainCodeFree, BIP32ChainCodeIsEqual, BIP32ChainCodeSerialize};
 
 pub const BIP32_CHAIN_CODE_SIZE: usize = 32;
 

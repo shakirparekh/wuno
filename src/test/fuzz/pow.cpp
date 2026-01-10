@@ -104,7 +104,7 @@ FUZZ_TARGET(pow_transition, .init = initialize_pow)
     if (old_target > pow_limit) {
         nbits = pow_limit.GetCompact();
     }
-    // SYSCOIN Create one difficulty adjustment period worth of headers
+    // wentuno Create one difficulty adjustment period worth of headers
     for (int height = 0; height < consensus_params.DifficultyAdjustmentInterval(height); ++height) {
         CBlockHeader header;
         header.nVersion = version;

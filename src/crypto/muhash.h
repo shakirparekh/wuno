@@ -2,11 +2,11 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_CRYPTO_MUHASH_H
-#define SYSCOIN_CRYPTO_MUHASH_H
+#ifndef wentuno_CRYPTO_MUHASH_H
+#define wentuno_CRYPTO_MUHASH_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <serialize.h>
@@ -128,4 +128,4 @@ public:
     }
 };
 
-#endif // SYSCOIN_CRYPTO_MUHASH_H
+#endif // wentuno_CRYPTO_MUHASH_H

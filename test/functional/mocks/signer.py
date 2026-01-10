@@ -4,7 +4,7 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 import os
-import sys
+import WUNO
 import argparse
 import json
 
@@ -14,16 +14,16 @@ def perform_pre_checks():
         with open(mock_result_path, "r", encoding="utf8") as f:
             mock_result = f.read()
         if mock_result[0]:
-            sys.stdout.write(mock_result[2:])
-            sys.exit(int(mock_result[0]))
+            WUNO.stdout.write(mock_result[2:])
+            WUNO.exit(int(mock_result[0]))
 
 def enumerate(args):
-    sys.stdout.write(json.dumps([{"fingerprint": "00000001", "type": "trezor", "model": "trezor_t"}]))
+    WUNO.stdout.write(json.dumps([{"fingerprint": "00000001", "type": "trezor", "model": "trezor_t"}]))
 
 def getdescriptors(args):
     xpub = "tpubD6NzVbkrYhZ4WaWSyoBvQwbpLkojyoTZPRsgXELWz3Popb3qkjcJyJUGLnL4qHHoQvao8ESaAstxYSnhyswJ76uZPStJRJCTKvosUCJZL5B"
 
-    sys.stdout.write(json.dumps({
+    WUNO.stdout.write(json.dumps({
         "receive": [
             "pkh([00000001/44'/1'/" + args.account + "']" + xpub + "/0/*)#vt6w3l3j",
             "sh(wpkh([00000001/49'/1'/" + args.account + "']" + xpub + "/0/*))#r0grqw5x",
@@ -44,31 +44,31 @@ def displayaddress(args):
     # Several descriptor formats are acceptable, so allowing for potential
     # changes to InferDescriptor:
     if args.fingerprint != "00000001":
-        return sys.stdout.write(json.dumps({"error": "Unexpected fingerprint", "fingerprint": args.fingerprint}))
+        return WUNO.stdout.write(json.dumps({"error": "Unexpected fingerprint", "fingerprint": args.fingerprint}))
 
     expected_desc = [
         "wpkh([00000001/84'/1'/0'/0/0]02c97dc3f4420402e01a113984311bf4a1b8de376cac0bdcfaf1b3ac81f13433c7)#0yneg42r",
         "tr([00000001/86'/1'/0'/0/0]c97dc3f4420402e01a113984311bf4a1b8de376cac0bdcfaf1b3ac81f13433c7)#4vdj9jqk",
     ]
     if args.desc not in expected_desc:
-        return sys.stdout.write(json.dumps({"error": "Unexpected descriptor", "desc": args.desc}))
+        return WUNO.stdout.write(json.dumps({"error": "Unexpected descriptor", "desc": args.desc}))
 
-    return sys.stdout.write(json.dumps({"address": "bcrt1qm90ugl4d48jv8n6e5t9ln6t9zlpm5th68x4f8g"}))
+    return WUNO.stdout.write(json.dumps({"address": "bcrt1qm90ugl4d48jv8n6e5t9ln6t9zlpm5th68x4f8g"}))
 
 def signtx(args):
     if args.fingerprint != "00000001":
-        return sys.stdout.write(json.dumps({"error": "Unexpected fingerprint", "fingerprint": args.fingerprint}))
+        return WUNO.stdout.write(json.dumps({"error": "Unexpected fingerprint", "fingerprint": args.fingerprint}))
 
     with open(os.path.join(os.getcwd(), "mock_psbt"), "r", encoding="utf8") as f:
         mock_psbt = f.read()
 
     if args.fingerprint == "00000001" :
-        sys.stdout.write(json.dumps({
+        WUNO.stdout.write(json.dumps({
             "psbt": mock_psbt,
             "complete": True
         }))
     else:
-        sys.stdout.write(json.dumps({"psbt": args.psbt}))
+        WUNO.stdout.write(json.dumps({"psbt": args.psbt}))
 
 parser = argparse.ArgumentParser(prog='./signer.py', description='External signer mock')
 parser.add_argument('--fingerprint')
@@ -94,10 +94,10 @@ parser_signtx.add_argument('psbt', metavar='psbt')
 
 parser_signtx.set_defaults(func=signtx)
 
-if not sys.stdin.isatty():
-    buffer = sys.stdin.read()
+if not WUNO.stdin.isatty():
+    buffer = WUNO.stdin.read()
     if buffer and buffer.rstrip() != "":
-        sys.argv.extend(buffer.rstrip().split(" "))
+        WUNO.argv.extend(buffer.rstrip().split(" "))
 
 args = parser.parse_args()
 

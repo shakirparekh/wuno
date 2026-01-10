@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_RPC_CLIENT_H
-#define SYSCOIN_RPC_CLIENT_H
+#ifndef wentuno_RPC_CLIENT_H
+#define wentuno_RPC_CLIENT_H
 
 #include <string>
 #include <string_view>
@@ -17,4 +17,4 @@ UniValue RPCConvertValues(const std::string& strMethod, const std::vector<std::s
 /** Convert named arguments to command-specific RPC representation */
 UniValue RPCConvertNamedValues(const std::string& strMethod, const std::vector<std::string>& strParams);
 
-#endif // SYSCOIN_RPC_CLIENT_H
+#endif // wentuno_RPC_CLIENT_H

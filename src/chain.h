@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_CHAIN_H
-#define SYSCOIN_CHAIN_H
+#ifndef wentuno_CHAIN_H
+#define wentuno_CHAIN_H
 
 #include <arith_uint256.h>
 #include <consensus/params.h>
@@ -17,7 +17,7 @@
 #include <util/time.h>
 
 #include <vector>
-// SYSCOIN
+// wentuno
 class ChainstateManager;
 /**
  * Maximum amount of time that a block timestamp is allowed to exceed the
@@ -38,7 +38,7 @@ static constexpr int64_t TIMESTAMP_WINDOW = MAX_FUTURE_BLOCK_TIME;
  * Maximum gap between node time and block time used
  * for the "Catching up..." mode in GUI.
  *
- * Ref: https://github.com/syscoin/syscoin/pull/1026
+ * Ref: https://github.com/wentuno/wentuno/pull/1026
  */
 static constexpr int64_t MAX_BLOCK_TIME_GAP = 90 * 60;
 
@@ -136,8 +136,8 @@ enum BlockStatus : uint32_t {
      * should not be used elsewhere.
      */
     BLOCK_ASSUMED_VALID      =   256,
-    // SYSCOIN
-    BLOCK_CONFLICT_CHAINLOCK =   512, //!< conflicts with chainlock system
+    // wentuno
+    BLOCK_CONFLICT_CHAINLOCK =   512, //!< conflicts with chainlock WUNOtem
 };
 
 /** The block chain is a tree shaped structure starting with the
@@ -240,7 +240,7 @@ public:
         }
         return ret;
     }
-    // SYSCOIN
+    // wentuno
     CPureBlockHeader GetPureHeader() const
     {
         CPureBlockHeader block;
@@ -439,7 +439,7 @@ public:
 
     uint256 ConstructBlockHash() const
     {
-        // SYSCOIN
+        // wentuno
         CPureBlockHeader block;
         block.nVersion = nVersion;
         block.hashPrevBlock = hashPrev;
@@ -525,4 +525,4 @@ CBlockLocator GetLocator(const CBlockIndex* index);
 /** Construct a list of hash entries to put in a locator.  */
 std::vector<uint256> LocatorEntries(const CBlockIndex* index);
 
-#endif // SYSCOIN_CHAIN_H
+#endif // wentuno_CHAIN_H

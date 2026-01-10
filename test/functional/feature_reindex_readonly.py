@@ -9,10 +9,10 @@
 import os
 import stat
 import subprocess
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 
 
-class BlockstoreReindexTest(SyscoinTestFramework):
+class BlockstoreReindexTest(wentunoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1

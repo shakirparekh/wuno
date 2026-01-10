@@ -5,7 +5,7 @@
 """Test getdescriptorinfo RPC.
 """
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.descriptors import descsum_create
 from test_framework.util import (
     assert_equal,
@@ -13,7 +13,7 @@ from test_framework.util import (
 )
 
 
-class DescriptorTest(SyscoinTestFramework):
+class DescriptorTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.extra_args = [["-disablewallet"]]

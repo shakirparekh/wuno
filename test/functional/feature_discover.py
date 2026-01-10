@@ -6,7 +6,7 @@
 
 import socket
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import assert_equal
 
 
@@ -26,7 +26,7 @@ def is_valid_ipv6_address(address):
     return True
 
 
-class DiscoverTest(SyscoinTestFramework):
+class DiscoverTest(wentunoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.bind_to_localhost_only = False

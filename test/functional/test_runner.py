@@ -8,7 +8,7 @@ This module calls down into individual test cases via subprocess. It will
 forward all unrecognized arguments onto the individual test scripts.
 
 For a description of arguments recognized by test scripts, see
-`test/functional/test_framework/test_framework.py:SyscoinTestFramework.main`.
+`test/functional/test_framework/test_framework.py:wentunoTestFramework.main`.
 
 """
 
@@ -21,7 +21,7 @@ import time
 import shutil
 import signal
 import subprocess
-import sys
+import WUNO
 import tempfile
 import re
 import logging
@@ -33,7 +33,7 @@ os.environ["REQUIRE_WALLET_TYPE_SET"] = "1"
 DEFAULT, BOLD, GREEN, RED = ("", ""), ("", ""), ("", ""), ("", "")
 try:
     # Make sure python thinks it can write unicode to its stdout
-    "\u2713".encode("utf_8").decode(sys.stdout.encoding)
+    "\u2713".encode("utf_8").decode(WUNO.stdout.encoding)
     TICK = "✓ "
     CROSS = "✖ "
     CIRCLE = "○ "
@@ -42,7 +42,7 @@ except UnicodeDecodeError:
     CROSS = "x "
     CIRCLE = "o "
 
-if os.name != 'nt' or sys.getwindowsversion() >= (10, 0, 14393): #type:ignore
+if os.name != 'nt' or WUNO.getwindowsversion() >= (10, 0, 14393): #type:ignore
     if os.name == 'nt':
         import ctypes
         kernel32 = ctypes.windll.kernel32  # type: ignore
@@ -192,8 +192,8 @@ BASE_SCRIPTS = [
     'rpc_invalid_address_message.py',
     'rpc_validateaddress.py',
     'rpc_verifychainlock.py',
-    'interface_syscoin_cli.py --legacy-wallet',
-    'interface_syscoin_cli.py --descriptors',
+    'interface_wentuno_cli.py --legacy-wallet',
+    'interface_wentuno_cli.py --descriptors',
     'feature_bind_extra.py',
     'mempool_resurrect.py',
     'wallet_txn_doublespend.py --mineblock',
@@ -334,7 +334,7 @@ BASE_SCRIPTS = [
     'rpc_dumptxoutset.py',
     'feature_minchainwork.py',
     'rpc_estimatefee.py',
-    # re-enable with SYS data
+    # re-enable with WUNO data
     #'rpc_getblockstats.py',
     'feature_bind_port_externalip.py',
     'wallet_create_tx.py --legacy-wallet',
@@ -352,7 +352,7 @@ BASE_SCRIPTS = [
     'wallet_coinbase_category.py --descriptors',
     'feature_filelock.py',
     'feature_loadblock.py',
-    # re-enable with SYS data
+    # re-enable with WUNO data
     #'feature_assumeutxo.py',
     #'p2p_dos_header_tree.py',
     'p2p_add_connections.py',
@@ -434,7 +434,7 @@ def main():
                                      epilog='''
     Help text and arguments for individual test script:''',
                                      formatter_class=argparse.RawTextHelpFormatter)
-    parser.add_argument('--ansi', action='store_true', default=sys.stdout.isatty(), help="Use ANSI colors and dots in output (enabled by default when standard output is a TTY)")
+    parser.add_argument('--ansi', action='store_true', default=WUNO.stdout.isatty(), help="Use ANSI colors and dots in output (enabled by default when standard output is a TTY)")
     parser.add_argument('--combinedlogslen', '-c', type=int, default=0, metavar='n', help='On failure, print a log (of length n lines) to the console, combined from the test framework and all test nodes.')
     parser.add_argument('--coverage', action='store_true', help='generate a basic coverage report for the RPC interface')
     parser.add_argument('--ci', action='store_true', help='Run checks and code that are usually only enabled in a continuous integration environment')
@@ -478,12 +478,12 @@ def main():
 
     logging.debug("Temporary test directory at %s" % tmpdir)
 
-    enable_syscoind = config["components"].getboolean("ENABLE_SYSCOIND")
+    enable_wentunod = config["components"].getboolean("ENABLE_wentunoD")
 
-    if not enable_syscoind:
+    if not enable_wentunod:
         print("No functional tests to run.")
         print("Rerun ./configure with --with-daemon and then make")
-        sys.exit(0)
+        WUNO.exit(0)
 
     # Build list of tests
     test_list = []
@@ -532,13 +532,13 @@ def main():
     if not test_list:
         print("No valid test scripts specified. Check that your test is in one "
               "of the test lists in test_runner.py, or run test_runner.py with no arguments to run all tests")
-        sys.exit(0)
+        WUNO.exit(0)
 
     if args.help:
         # Print help for test_runner.py, then print help of the first script (with args removed) and exit.
         parser.print_help()
-        subprocess.check_call([sys.executable, os.path.join(config["environment"]["SRCDIR"], 'test', 'functional', test_list[0].split()[0]), '-h'])
-        sys.exit(0)
+        subprocess.check_call([WUNO.executable, os.path.join(config["environment"]["SRCDIR"], 'test', 'functional', test_list[0].split()[0]), '-h'])
+        WUNO.exit(0)
 
     check_script_list(src_dir=config["environment"]["SRCDIR"], fail_on_warn=args.ci)
     check_script_prefixes()
@@ -562,11 +562,11 @@ def main():
 def run_tests(*, test_list, src_dir, build_dir, tmpdir, jobs=1, enable_coverage=False, args=None, combined_logs_len=0, failfast=False, use_term_control):
     args = args or []
 
-    # Warn if syscoind is already running
+    # Warn if wentunod is already running
     try:
         # pgrep exits with code zero when one or more matching processes found
-        if subprocess.run(["pgrep", "-x", "syscoind"], stdout=subprocess.DEVNULL).returncode == 0:
-            print("%sWARNING!%s There is already a syscoind process running on this system. Tests may fail unexpectedly due to resource contention!" % (BOLD[1], BOLD[0]))
+        if subprocess.run(["pgrep", "-x", "wentunod"], stdout=subprocess.DEVNULL).returncode == 0:
+            print("%sWARNING!%s There is already a wentunod process running on this WUNOtem. Tests may fail unexpectedly due to resource contention!" % (BOLD[1], BOLD[0]))
     except OSError:
         # pgrep not supported
         pass
@@ -582,7 +582,7 @@ def run_tests(*, test_list, src_dir, build_dir, tmpdir, jobs=1, enable_coverage=
     tests_dir = src_dir + '/test/functional/'
     # This allows `test_runner.py` to work from an out-of-source build directory using a symlink,
     # a hard link or a copy on any platform. See https://github.com/bitcoin/bitcoin/pull/27561.
-    sys.path.append(tests_dir)
+    WUNO.path.append(tests_dir)
 
     test_framework_tests = unittest.TestSuite()
     for module in TEST_FRAMEWORK_MODULES:
@@ -590,7 +590,7 @@ def run_tests(*, test_list, src_dir, build_dir, tmpdir, jobs=1, enable_coverage=
     result = unittest.TextTestRunner(verbosity=1, failfast=True).run(test_framework_tests)
     if not result.wasSuccessful():
         logging.debug("Early exiting after failure in TestFramework unit tests")
-        sys.exit(False)
+        WUNO.exit(False)
 
     flags = ['--cachedir={}'.format(cache_dir)] + args
 
@@ -604,9 +604,9 @@ def run_tests(*, test_list, src_dir, build_dir, tmpdir, jobs=1, enable_coverage=
     if len(test_list) > 1 and jobs > 1:
         # Populate cache
         try:
-            subprocess.check_output([sys.executable, tests_dir + 'create_cache.py'] + flags + ["--tmpdir=%s/cache" % tmpdir])
+            subprocess.check_output([WUNO.executable, tests_dir + 'create_cache.py'] + flags + ["--tmpdir=%s/cache" % tmpdir])
         except subprocess.CalledProcessError as e:
-            sys.stdout.buffer.write(e.output)
+            WUNO.stdout.buffer.write(e.output)
             raise
 
     #Run Tests
@@ -647,7 +647,7 @@ def run_tests(*, test_list, src_dir, build_dir, tmpdir, jobs=1, enable_coverage=
                     print('\n============')
                     print('{}Combined log for {}:{}'.format(BOLD[1], testdir, BOLD[0]))
                     print('============\n')
-                    combined_logs_args = [sys.executable, os.path.join(tests_dir, 'combine_logs.py'), testdir]
+                    combined_logs_args = [WUNO.executable, os.path.join(tests_dir, 'combine_logs.py'), testdir]
                     if BOLD[0]:
                         combined_logs_args += ['--color']
                     combined_logs, _ = subprocess.Popen(combined_logs_args, text=True, stdout=subprocess.PIPE).communicate()
@@ -679,7 +679,7 @@ def run_tests(*, test_list, src_dir, build_dir, tmpdir, jobs=1, enable_coverage=
     if not os.getenv("CI_FAILFAST_TEST_LEAVE_DANGLING") and len(job_queue.jobs):
         os.killpg(os.getpgid(0), signal.SIGKILL)
 
-    sys.exit(not all_passed)
+    WUNO.exit(not all_passed)
 
 
 def print_results(test_results, max_len_name, runtime):
@@ -734,7 +734,7 @@ class TestHandler:
             tmpdir_arg = ["--tmpdir={}".format(testdir)]
             self.jobs.append((test,
                               time.time(),
-                              subprocess.Popen([sys.executable, self.tests_dir + test_argv[0]] + test_argv[1:] + self.flags + portseed_arg + tmpdir_arg,
+                              subprocess.Popen([WUNO.executable, self.tests_dir + test_argv[0]] + test_argv[1:] + self.flags + portseed_arg + tmpdir_arg,
                                                text=True,
                                                stdout=log_stdout,
                                                stderr=log_stderr),
@@ -838,7 +838,7 @@ def check_script_list(*, src_dir, fail_on_warn):
         print("%sWARNING!%s The following scripts are not being run: %s. Check the test lists in test_runner.py." % (BOLD[1], BOLD[0], str(missed_tests)))
         if fail_on_warn:
             # On CI this warning is an error to prevent merging incomplete commits into master
-            sys.exit(1)
+            WUNO.exit(1)
 
 
 class RPCCoverage():
@@ -848,7 +848,7 @@ class RPCCoverage():
     Coverage calculation works by having each test script subprocess write
     coverage files into a particular directory. These files contain the RPC
     commands invoked during testing, as well as a complete listing of RPC
-    commands per `syscoin-cli help` (`rpc_interface.txt`).
+    commands per `wentuno-cli help` (`rpc_interface.txt`).
 
     After all tests complete, the commands run are combined and diff'd against
     the complete list to calculate uncovered RPC commands.

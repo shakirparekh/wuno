@@ -68,7 +68,7 @@ template std::string base_blob<256>::GetHex() const;
 template std::string base_blob<256>::ToString() const;
 template void base_blob<256>::SetHex(const char*);
 template void base_blob<256>::SetHex(const std::string&);
-// SYSCOIN
+// wentuno
 const uint256 uint256::ZEROV(0);
 const uint256 uint256::ONEV(1);
 const uint256 uint256::TWOV(2);

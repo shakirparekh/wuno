@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_WALLETINITINTERFACE_H
-#define SYSCOIN_WALLETINITINTERFACE_H
+#ifndef wentuno_WALLETINITINTERFACE_H
+#define wentuno_WALLETINITINTERFACE_H
 
 class ArgsManager;
 
@@ -23,7 +23,7 @@ public:
     virtual void Construct(node::NodeContext& node) const = 0;
 
 
-    // Syscoin Specific WalletInitInterface
+    // wentuno Specific WalletInitInterface
     virtual void AutoLockMasternodeCollaterals(node::NodeContext& node) const = 0;
 
     virtual ~WalletInitInterface() {}
@@ -31,4 +31,4 @@ public:
 
 extern const WalletInitInterface& g_wallet_init_interface;
 
-#endif // SYSCOIN_WALLETINITINTERFACE_H
+#endif // wentuno_WALLETINITINTERFACE_H

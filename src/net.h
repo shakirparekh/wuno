@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_NET_H
-#define SYSCOIN_NET_H
+#ifndef wentuno_NET_H
+#define wentuno_NET_H
 
 #include <bip324.h>
 #include <chainparams.h>
@@ -59,14 +59,14 @@ static const bool DEFAULT_WHITELISTFORCERELAY = false;
 
 /** Time after which to disconnect, after waiting for a ping response (or inactivity). */
 static constexpr std::chrono::minutes TIMEOUT_INTERVAL{20};
-// SYSCOIN
+// wentuno
 /** Time to wait since m_connected before disconnecting a probe node. */
 static const auto PROBE_WAIT_INTERVAL{5s};
 /** Run the feeler connection loop once every 2 minutes. **/
 static constexpr auto FEELER_INTERVAL = 2min;
 /** Run the extra block-relay-only connection loop once every 5 minutes. **/
 static constexpr auto EXTRA_BLOCK_RELAY_ONLY_PEER_INTERVAL = 5min;
-// SYSCOIN
+// wentuno
 /**
  * Maximum length of incoming protocol messages (no message over 32 MiB is
  * currently acceptable).  Bitcoin has 4 MiB here, but we need more space
@@ -96,7 +96,7 @@ static const std::string DEFAULT_MAX_UPLOAD_TARGET{"0M"};
 static const bool DEFAULT_BLOCKSONLY = false;
 /** -peertimeout default */
 static const int64_t DEFAULT_PEER_CONNECT_TIMEOUT = 60;
-/** SYSCOIN Eviction protection time for incoming connections  */
+/** wentuno Eviction protection time for incoming connections  */
 static constexpr std::chrono::seconds INBOUND_EVICTION_PROTECTION_TIME{1};
 /** Number of file descriptors required for message capture **/
 static const int NUM_FDS_MESSAGE_CAPTURE = 1;
@@ -104,7 +104,7 @@ static const int NUM_FDS_MESSAGE_CAPTURE = 1;
 static constexpr bool DEFAULT_FORCEDNSSEED{false};
 static constexpr bool DEFAULT_DNSSEED{true};
 static constexpr bool DEFAULT_FIXEDSEEDS{true};
-// SYSCOIN
+// wentuno
 static const size_t DEFAULT_MAXSENDBUFFER    = 25 * 1000;
 static const size_t DEFAULT_MAXRECEIVEBUFFER = 5 * DEFAULT_MAXSENDBUFFER;
 
@@ -149,7 +149,7 @@ struct CSerializedNetMsg {
     /** Compute total memory usage of this object (own memory + any dynamic memory). */
     size_t GetMemoryUsage() const noexcept;
 };
-// SYSCOIN
+// wentuno
 struct CAllNodes {
     bool operator() (const CNode* pNode) const {return pNode != nullptr;}
 };
@@ -191,7 +191,7 @@ bool AddLocal(const CService& addr, int nScore = LOCAL_NONE);
 bool AddLocal(const CNetAddr& addr, int nScore = LOCAL_NONE);
 void RemoveLocal(const CService& addr);
 bool SeenLocal(const CService& addr);
-// SYSCOIN
+// wentuno
 bool IsLocal(const CService& addr);
 bool GetLocal(CService &addr, const CNetAddr *paddrPeer);
 CService GetLocalAddress(const CNode& peer);
@@ -248,7 +248,7 @@ public:
     // Network the peer connected through
     Network m_network;
     uint32_t m_mapped_as;
-    // SYSCOIN In case this is a verified MN, this value is the proTx of the MN
+    // wentuno In case this is a verified MN, this value is the proTx of the MN
     uint256 verifiedProRegTxHash;
     // In case this is a verified MN, this value is the hashed operator pubkey of the MN
     uint256 verifiedPubKeyHash;
@@ -750,7 +750,7 @@ public:
     //! Unix epoch time at peer connection
     const std::chrono::seconds m_connected;
     std::atomic<int64_t> nTimeOffset{0};
-    // SYSCOIN
+    // wentuno
     std::atomic<std::chrono::seconds> nTimeFirstMessageReceived;
     std::atomic<bool> fFirstMessageIsMNAUTH;
     // If 'true' this node will be disconnected on CMasternodeMan::ProcessMasternodeConnections()
@@ -934,7 +934,7 @@ public:
 
     /** Lowest measured round-trip time. Used as an inbound peer eviction
      * criterium in CConnman::AttemptToEvictConnection. */
-    // SYSCOIN
+    // wentuno
     // Challenge sent in VERSION to be answered with MNAUTH (only happens between MNs)
     mutable Mutex cs_mnauth;
     uint256 sentMNAuthChallenge GUARDED_BY(cs_mnauth);
@@ -1010,11 +1010,11 @@ public:
     }
 
     void CloseSocketDisconnect() EXCLUSIVE_LOCKS_REQUIRED(!m_sock_mutex);
-    // SYSCOIN
+    // wentuno
     void CopyStats(CNodeStats& stats) EXCLUSIVE_LOCKS_REQUIRED(!m_subver_mutex, !m_addr_local_mutex, !cs_vSend, !cs_vRecv, !cs_mnauth);
 
 
-    // SYSCOIN
+    // wentuno
     bool CanRelay() const { return !m_masternode_connection || m_masternode_iqr_connection; }
     uint256 GetSentMNAuthChallenge() const  EXCLUSIVE_LOCKS_REQUIRED(!cs_mnauth) {
         LOCK(cs_mnauth);
@@ -1222,7 +1222,7 @@ public:
     bool GetNetworkActive() const { return fNetworkActive; };
     bool GetUseAddrmanOutgoing() const { return m_use_addrman_outgoing; };
     void SetNetworkActive(bool active);
-    // SYSCOIN
+    // wentuno
     enum class MasternodeConn {
         Is_Not_Connection,
         Is_Connection,
@@ -1240,7 +1240,7 @@ public:
     RecursiveMutex& GetNodesMutex() const LOCK_RETURNED(m_nodes_mutex);
 
     void PushMessage(CNode* pnode, CSerializedNetMsg&& msg) EXCLUSIVE_LOCKS_REQUIRED(!m_total_bytes_sent_mutex);
-    // SYSCOIN
+    // wentuno
     template<typename Callable>
     bool ForNode(NodeId id, Callable&& func)
     {
@@ -1382,7 +1382,7 @@ public:
     bool RemoveAddedNode(const std::string& node) EXCLUSIVE_LOCKS_REQUIRED(!m_added_nodes_mutex);
     bool AddedNodesContain(const CAddress& addr) const EXCLUSIVE_LOCKS_REQUIRED(!m_added_nodes_mutex);
     std::vector<AddedNodeInfo> GetAddedNodeInfo() const EXCLUSIVE_LOCKS_REQUIRED(!m_added_nodes_mutex);
-    // SYSCOIN
+    // wentuno
     bool AddPendingMasternode(const uint256& proTxHash);
     void SetMasternodeQuorumRelayMembers(const uint256& quorumHash, const std::unordered_set<uint256, StaticSaltedHasher>& proTxHashes);
     void SetMasternodeQuorumNodes(const uint256& quorumHash, const std::unordered_set<uint256, StaticSaltedHasher>& proTxHashes);
@@ -1452,7 +1452,7 @@ public:
         Works assuming that a single interval is used.
         Variable intervals will result in privacy decrease.
     */
-    // SYSCOIN
+    // wentuno
     bool ForNode(NodeId id, std::function<bool(const CNode* pnode)> cond, std::function<bool(CNode* pnode)> func);
     bool ForNode(const CService& addr, std::function<bool(const CNode* pnode)> cond, std::function<bool(CNode* pnode)> func);
 
@@ -1475,7 +1475,7 @@ public:
     bool ShouldRunInactivityChecks(const CNode& node, std::chrono::seconds now) const;
 
     bool MultipleManualOrFullOutboundConns(Network net) const EXCLUSIVE_LOCKS_REQUIRED(m_nodes_mutex);
-    // SYSCOIN
+    // wentuno
     /**
      * RAII helper to atomically create a copy of `m_nodes` and add a reference
      * to each of the nodes. The nodes are released when this object is destroyed.
@@ -1572,7 +1572,7 @@ private:
 
     void ThreadSocketHandler() EXCLUSIVE_LOCKS_REQUIRED(!m_total_bytes_sent_mutex, !mutexMsgProc, !m_nodes_mutex, !m_reconnections_mutex);
     void ThreadDNSAddressSeed() EXCLUSIVE_LOCKS_REQUIRED(!m_addr_fetches_mutex, !m_nodes_mutex);
-    // SYSCOIN
+    // wentuno
     void ThreadOpenMasternodeConnections() EXCLUSIVE_LOCKS_REQUIRED(!m_unused_i2p_sessions_mutex);
 
     uint64_t CalculateKeyedNetGroup(const CAddress& ad) const;
@@ -1586,7 +1586,7 @@ private:
      * Determine whether we're already connected to a given address, in order to
      * avoid initiating duplicate connections.
      */
-    // SYSCOIN
+    // wentuno
     bool AlreadyConnectedToAddress(const CAddress& addr);
 
     bool AttemptToEvictConnection();
@@ -1617,7 +1617,7 @@ private:
      */
     std::vector<CAddress> GetCurrentBlockRelayOnlyConns() const;
 
-    // SYSCOIN Whether the node should be passed out in ForEach* callbacks
+    // wentuno Whether the node should be passed out in ForEach* callbacks
     // static bool NodeFullyConnected(const CNode* pnode);
     /**
      * Search for a "preferred" network, a reachable network to which we
@@ -1667,7 +1667,7 @@ private:
     std::vector<AddedNodeParams> m_added_node_params GUARDED_BY(m_added_nodes_mutex);
 
     mutable Mutex m_added_nodes_mutex;
-    // SYSCOIN
+    // wentuno
     std::vector<uint256> vPendingMasternodes GUARDED_BY(cs_vPendingMasternodes);
     std::map<uint256, std::unordered_set<uint256, StaticSaltedHasher>> masternodeQuorumNodes GUARDED_BY(cs_vPendingMasternodes);
     std::map<uint256, std::unordered_set<uint256, StaticSaltedHasher>> masternodeQuorumRelayMembers GUARDED_BY(cs_vPendingMasternodes);
@@ -1777,7 +1777,7 @@ private:
     std::thread threadOpenAddedConnections;
     std::thread threadOpenConnections;
     std::thread threadMessageHandler;
-    // SYSCOIN
+    // wentuno
     std::thread threadOpenMasternodeConnections;
     std::thread threadI2PAcceptIncoming;
 
@@ -1825,7 +1825,7 @@ private:
         std::string destination;
         ConnectionType conn_type;
         bool use_v2transport;
-        // SYSCOIN
+        // wentuno
         bool masternode_connection;
         bool masternode_probe_connection;
     };
@@ -1849,7 +1849,7 @@ private:
 
     friend struct ConnmanTestMsg;
 };
-// SYSCOIN
+// wentuno
 class CExplicitNetCleanup
 {
 public:
@@ -1864,4 +1864,4 @@ extern std::function<void(const CAddress& addr,
                           bool is_incoming)>
     CaptureMessage;
 
-#endif // SYSCOIN_NET_H
+#endif // wentuno_NET_H

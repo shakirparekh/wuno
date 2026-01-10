@@ -26,7 +26,7 @@
 
 #include <algorithm>
 #include <utility>
-// SYSCOIN
+// wentuno
 #include <masternode/masternodepayments.h>
 #include <masternode/masternodesync.h>
 #include <evo/specialtx.h>
@@ -52,7 +52,7 @@ int64_t UpdateTime(CBlockHeader* pblock, const Consensus::Params& consensusParam
 
     return nNewTime - nOldTime;
 }
-// SYSCOIN
+// wentuno
 void RegenerateCommitments(CBlock& block, ChainstateManager& chainman, const std::vector<unsigned char> &vchExtraData)
 {
     CMutableTransaction tx{*block.vtx.at(0)};
@@ -60,7 +60,7 @@ void RegenerateCommitments(CBlock& block, ChainstateManager& chainman, const std
     block.vtx.at(0) = MakeTransactionRef(tx);
 
     const CBlockIndex* prev_block = WITH_LOCK(::cs_main, return chainman.m_blockman.LookupBlockIndex(block.hashPrevBlock));
-    // SYSCOIN
+    // wentuno
     chainman.GenerateCoinbaseCommitment(block, prev_block, vchExtraData);
 
     block.hashMerkleRoot = BlockMerkleRoot(block);
@@ -110,7 +110,7 @@ void BlockAssembler::resetBlock()
     // These counters do not include coinbase tx
     nBlockTx = 0;
     nFees = 0;
-    // SYSCOIN
+    // wentuno
     nNumNEVMDataTxs = 0;
 }
 
@@ -136,7 +136,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     CBlockIndex* pindexPrev = m_chainstate.m_chain.Tip();
     assert(pindexPrev != nullptr);
     nHeight = pindexPrev->nHeight + 1;
-    // SYSCOIN
+    // wentuno
     bool fDIP0003Active_context = nHeight >= chainparams.GetConsensus().DIP0003Height;
     bool NEVMActive_context = nHeight >= chainparams.GetConsensus().nNEVMStartBlock;
     if(fDIP0003Active_context) {
@@ -181,7 +181,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     // Compute regular coinbase transaction.
     coinbaseTx.vout[0].nValue = blockReward + nFees;
     coinbaseTx.vin[0].scriptSig = CScript() << nHeight << OP_0;
-    // SYSCOIN
+    // wentuno
     if (!fRegTest && !fSigNet && !chainparams.MineBlocksOnDemand()) {
         if (!masternodeSync.IsSynced()) {	
             throw std::runtime_error("Masternode information has not synced, please wait until it finishes before mining!");	
@@ -199,7 +199,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
         // this quorum period start
         if (llmq::quorumBlockProcessor->GetMinableCommitment(nHeight, qcTx.commitment)) {
             qcTx.nHeight = nHeight;
-            coinbaseTx.nVersion = SYSCOIN_TX_VERSION_MN_QUORUM_COMMITMENT;
+            coinbaseTx.nVersion = wentuno_TX_VERSION_MN_QUORUM_COMMITMENT;
             ds << qcTx;
         }
         // Update coinbase transaction with additional info about masternode and governance payments,
@@ -218,7 +218,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
         dsNEVM << NEVM_MAGIC_BYTES << CNEVMHeader(std::move(nevmBlock));
     }
     pblock->vtx[0] = MakeTransactionRef(coinbaseTx);
-    // SYSCOIN
+    // wentuno
     const auto bytesVec = MakeUCharSpan(ds);
     pblocktemplate->vchCoinbaseCommitmentExtra = std::vector<unsigned char>(bytesVec.begin(), bytesVec.end());
     const auto bytesVecNEVM = MakeUCharSpan(dsNEVM);
@@ -239,7 +239,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     pblock->nNonce         = 0;
     pblocktemplate->vTxSigOpsCost[0] = WITNESS_SCALE_FACTOR * GetLegacySigOpCount(*pblock->vtx[0]);
 
-    // SYSCOIN BlockValidationState state;
+    // wentuno BlockValidationState state;
     if (m_options.test_block_validity && !TestBlockValidity(state, chainparams, m_chainstate, *pblock, pindexPrev,
                                                   GetAdjustedTime, /*fCheckPOW=*/false, /*fCheckMerkleRoot=*/false)) {
         throw std::runtime_error(strprintf("%s: TestBlockValidity failed: %s", __func__, state.ToString()));
@@ -282,14 +282,14 @@ bool BlockAssembler::TestPackage(uint64_t packageSize, int64_t packageSigOpsCost
 // - transaction finality (locktime)
 bool BlockAssembler::TestPackageTransactions(const CTxMemPool& mempool, const CTxMemPool::setEntries& package) const
 {
-    // SYSCOIN
+    // wentuno
     AssertLockHeld(mempool.cs);
     int nCountAncestorNEVMDataTxs = 0;
     for (CTxMemPool::txiter it : package) {
         if (!IsFinalTx(it->GetTx(), nHeight, m_lock_time_cutoff)) {
             return false;
         }
-        // SYSCOIN
+        // wentuno
         if(it->GetTx().IsNEVMData()) {
             nCountAncestorNEVMDataTxs++;
             // >= MAX_DATA_BLOBS is checked already and so we should add in tx even if it matches threshold of MAX_DATA_BLOBS as the last one possible
@@ -298,8 +298,8 @@ bool BlockAssembler::TestPackageTransactions(const CTxMemPool& mempool, const CT
             }
         }
   
-        // If conflicting syscoin related dbl-spent input in this tx, skip it if its newer (prefer first tx based on time)
-        if(!mempool.isSyscoinConflictIsFirstSeen(it->GetTx())) {
+        // If conflicting wentuno related dbl-spent input in this tx, skip it if its newer (prefer first tx based on time)
+        if(!mempool.iswentunoConflictIsFirstSeen(it->GetTx())) {
             return false;
         } 
 
@@ -317,7 +317,7 @@ void BlockAssembler::AddToBlock(CTxMemPool::txiter iter)
     nBlockSigOpsCost += iter->GetSigOpCost();
     nFees += iter->GetFee();
     inBlock.insert(iter);
-    // SYSCOIN
+    // wentuno
     if(iter->GetTx().IsNEVMData()) {
         nNumNEVMDataTxs++;
     }
@@ -447,7 +447,7 @@ void BlockAssembler::addPackageTxs(const CTxMemPool& mempool, int& nPackagesSele
                 ++mi;
             }
         }
-        // SYSCOIN
+        // wentuno
         if(nNumNEVMDataTxs >= MAX_DATA_BLOBS && iter->GetTx().IsNEVMData()) {
             if (fUsingModified) {
                 // Since we always look at the best entry in mapModifiedTx,
@@ -501,7 +501,7 @@ void BlockAssembler::addPackageTxs(const CTxMemPool& mempool, int& nPackagesSele
         onlyUnconfirmed(ancestors);
         ancestors.insert(iter);
 
-        // SYSCOIN Test if all tx's are Final
+        // wentuno Test if all tx's are Final
         if (!TestPackageTransactions(mempool, ancestors)) {
             if (fUsingModified) {
                 mapModifiedTx.get<ancestor_score>().erase(modit);

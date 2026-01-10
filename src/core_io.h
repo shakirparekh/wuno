@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_CORE_IO_H
-#define SYSCOIN_CORE_IO_H
+#ifndef wentuno_CORE_IO_H
+#define wentuno_CORE_IO_H
 
 #include <consensus/amount.h>
 #include <util/result.h>
@@ -49,7 +49,7 @@ bool ParseHashStr(const std::string& strHex, uint256& result);
 [[nodiscard]] util::Result<int> SighashFromStr(const std::string& sighash);
 
 // core_write.cpp
-// SYSCOIN
+// wentuno
 UniValue ValueFromAmount(const CAmount amount);
 std::string FormatScript(const CScript& script);
 std::string EncodeHexTx(const CTransaction& tx, const int serializeFlags = 0);
@@ -57,4 +57,4 @@ std::string SighashToStr(unsigned char sighash_type);
 void ScriptToUniv(const CScript& script, UniValue& out, bool include_hex = true, bool include_address = false, const SigningProvider* provider = nullptr);
 void TxToUniv(const CTransaction& tx, const uint256& block_hash, UniValue& entry, bool include_hex = true, int serialize_flags = 0, const CTxUndo* txundo = nullptr, TxVerbosity verbosity = TxVerbosity::SHOW_DETAILS);
 
-#endif // SYSCOIN_CORE_IO_H
+#endif // wentuno_CORE_IO_H

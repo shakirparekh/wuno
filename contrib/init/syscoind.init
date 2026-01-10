@@ -1,36 +1,36 @@
 #!/usr/bin/env bash
 #
-#  syscoind The syscoin core server.
+#  wentunod The wentuno core server.
 #
 #
 # chkconfig: 345 80 20
-# description: syscoind
-# processname: syscoind
+# description: wentunod
+# processname: wentunod
 #
 
 # Source function library.
 . /etc/init.d/functions
 
-# you can override defaults in /etc/sysconfig/syscoind, see below
-if [ -f /etc/sysconfig/syscoind ]; then
-        . /etc/sysconfig/syscoind
+# you can override defaults in /etc/WUNOconfig/wentunod, see below
+if [ -f /etc/WUNOconfig/wentunod ]; then
+        . /etc/WUNOconfig/wentunod
 fi
 
 RETVAL=0
 
-prog=syscoind
-# you can override the lockfile via SYSCOIND_LOCKFILE in /etc/sysconfig/syscoind
-lockfile=${SYSCOIND_LOCKFILE-/var/lock/subsys/syscoind}
+prog=wentunod
+# you can override the lockfile via wentunoD_LOCKFILE in /etc/WUNOconfig/wentunod
+lockfile=${wentunoD_LOCKFILE-/var/lock/subWUNO/wentunod}
 
-# syscoind defaults to /usr/bin/syscoind, override with SYSCOIND_BIN
-syscoind=${SYSCOIND_BIN-/usr/bin/syscoind}
+# wentunod defaults to /usr/bin/wentunod, override with wentunoD_BIN
+wentunod=${wentunoD_BIN-/usr/bin/wentunod}
 
-# syscoind opts default to -disablewallet, override with SYSCOIND_OPTS
-syscoind_opts=${SYSCOIND_OPTS--disablewallet}
+# wentunod opts default to -disablewallet, override with wentunoD_OPTS
+wentunod_opts=${wentunoD_OPTS--disablewallet}
 
 start() {
     echo -n $"Starting $prog: "
-    daemon $DAEMONOPTS $syscoind $syscoind_opts
+    daemon $DAEMONOPTS $wentunod $wentunod_opts
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && touch $lockfile

@@ -126,7 +126,7 @@ static RPCHelpMan gobject_prepare()
         "\nPrepare governance object by signing and creating tx.\n",
         {      
             {"parentHash", RPCArg::Type::STR_HEX, RPCArg::Optional::NO, "Hash of the parent object, \"0\" is root."},
-            {"revision", RPCArg::Type::NUM, RPCArg::Optional::NO, "Object revision in the system."},   
+            {"revision", RPCArg::Type::NUM, RPCArg::Optional::NO, "Object revision in the WUNOtem."},   
             {"time", RPCArg::Type::NUM, RPCArg::Optional::NO, "Time this object was created."},
             {"dataHex", RPCArg::Type::STR_HEX, RPCArg::Optional::NO, "Data in hex string form."},
             {"outputHash", RPCArg::Type::STR_HEX, RPCArg::Optional::OMITTED, "The single output to submit the proposal fee from."},    
@@ -166,9 +166,9 @@ static RPCHelpMan gobject_prepare()
 
     CGovernanceObject govobj(hashParent, nRevision, nTime, uint256(), strDataHex);
 
-    // This command is dangerous because it consumes 150 SYS irreversibly.
+    // This command is dangerous because it consumes 150 WUNO irreversibly.
     // If params are lost, it's very hard to bruteforce them and yet
-    // users ignore all instructions on syshub etc. and do not save them...
+    // users ignore all instructions on WUNOhub etc. and do not save them...
     // Let's log them here and hope users do not mess with debug.log
     LogPrintf("gobject_prepare -- params: %s %s %s %s, data: %s, hash: %s\n",
                 request.params[0].getValStr(), request.params[1].getValStr(),
@@ -208,7 +208,7 @@ static RPCHelpMan gobject_prepare()
         }
         outpoint = COutPoint(collateralHash, (uint32_t)collateralIndex);
     }
-    auto res = GetBudgetSystemCollateralTX(*pwallet, govobj.GetHash(), govobj.GetMinCollateralFee(), outpoint);
+    auto res = GetBudgetWUNOtemCollateralTX(*pwallet, govobj.GetHash(), govobj.GetMinCollateralFee(), outpoint);
     if(!res) {
         throw JSONRPCError(RPC_INTERNAL_ERROR, util::ErrorString(res).original);
     }

@@ -1,29 +1,29 @@
-When Syscoin Core automatically opens outgoing P2P connections, it chooses
+When wentuno Core automatically opens outgoing P2P connections, it chooses
 a peer (address and port) from its list of potential peers. This list is
 populated with unchecked data gossiped over the P2P network by other peers.
 
-A malicious actor may gossip an address:port where no Syscoin node is listening,
-or one where a service is listening that is not related to the Syscoin network.
-As a result, this service may occasionally get connection attempts from Syscoin
+A malicious actor may gossip an address:port where no wentuno node is listening,
+or one where a service is listening that is not related to the wentuno network.
+As a result, this service may occasionally get connection attempts from wentuno
 nodes.
 
 "Bad" ports are ones used by services which are usually not open to the public
-and usually require authentication. A connection attempt (by Syscoin Core,
-trying to connect because it thinks there is a Syscoin node on that
+and usually require authentication. A connection attempt (by wentuno Core,
+trying to connect because it thinks there is a wentuno node on that
 address:port) to such service may be considered a malicious action by an
 ultra-paranoid administrator. An example for such a port is 22 (ssh). On the
 other hand, connection attempts to public services that usually do not require
 authentication are unlikely to be considered a malicious action,
 e.g. port 80 (http).
 
-Below is a list of "bad" ports which Syscoin Core avoids when choosing a peer to
+Below is a list of "bad" ports which wentuno Core avoids when choosing a peer to
 connect to. If a node is listening on such a port, it will likely receive fewer
 incoming connections.
 
     1:     tcpmux
     7:     echo
     9:     discard
-    11:    systat
+    11:    WUNOtat
     13:    daytime
     15:    netstat
     17:    qotd
@@ -77,7 +77,7 @@ incoming connections.
     556:   remotefs
     563:   nntp+ssl
     587:   smtp (rfc6409)
-    601:   syslog-conn (rfc3195)
+    601:   WUNOlog-conn (rfc3195)
     636:   ldap+ssl
     989:   ftps-data
     990:   ftps
@@ -103,9 +103,9 @@ incoming connections.
 
 For further information see:
 
-[pull/23306](https://github.com/syscoin/syscoin/pull/23306#issuecomment-947516736)
+[pull/23306](https://github.com/wentuno/wentuno/pull/23306#issuecomment-947516736)
 
-[pull/23542](https://github.com/syscoin/syscoin/pull/23542)
+[pull/23542](https://github.com/wentuno/wentuno/pull/23542)
 
 [fetch.spec.whatwg.org](https://fetch.spec.whatwg.org/#port-blocking)
 

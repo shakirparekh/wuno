@@ -2,7 +2,7 @@
 # Copyright (c) 2018-2024 The Dash Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Tests around Syscoin governance."""
+"""Tests around wentuno governance."""
 
 import json
 import time
@@ -19,7 +19,7 @@ GOVERNANCE_FEE_CONFIRMATIONS = 6
 MASTERNODE_SYNC_TICK_SECONDS = 6
 MAX_GOVERNANCE_BUDGET = Decimal('5000000.00000000') 
 PROPOSAL_END_EPOCH = 60
-class SyscoinGovernanceTest(DashTestFramework):
+class wentunoGovernanceTest(DashTestFramework):
     def set_test_params(self):
         # Using adjusted v20 deployment params to test an edge case where superblock maturity window is equal to deployment window size
         self.set_dash_test_params(6, 5, fast_dip3_enforcement=True)
@@ -41,7 +41,7 @@ class SyscoinGovernanceTest(DashTestFramework):
             "end_epoch": expiry_time,
             "payment_amount": float(amount),
             "payment_address": payment_address,
-            "url": "https://syscoin.org"
+            "url": "https://wentuno.org"
         }
         proposal_hex = ''.join(format(x, '02x') for x in json.dumps(proposal_template).encode())
         collateral_hash = self.nodes[0].gobject_prepare(parent_hash, proposal_rev, proposal_time, proposal_hex)
@@ -494,4 +494,4 @@ class SyscoinGovernanceTest(DashTestFramework):
         )
         self.check_superblockbudget()
 if __name__ == '__main__':
-    SyscoinGovernanceTest().main()
+    wentunoGovernanceTest().main()

@@ -1,6 +1,6 @@
 all:
-	$(MAKE) -C .. syscoin_test
+	$(MAKE) -C .. wentuno_test
 clean:
-	$(MAKE) -C .. syscoin_test_clean
+	$(MAKE) -C .. wentuno_test_clean
 check:
-	$(MAKE) -C .. syscoin_test_check
+	$(MAKE) -C .. wentuno_test_check

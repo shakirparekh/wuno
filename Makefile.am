@@ -16,46 +16,46 @@ endif
 
 export PYTHONPATH
 
-if BUILD_SYSCOIN_LIBS
+if BUILD_wentuno_LIBS
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = libsyscoinconsensus.pc
+pkgconfig_DATA = libwentunoconsensus.pc
 endif
 
-SYSCOIND_BIN=$(top_builddir)/src/$(SYSCOIN_DAEMON_NAME)$(EXEEXT)
-SYSCOIN_QT_BIN=$(top_builddir)/src/qt/$(SYSCOIN_GUI_NAME)$(EXEEXT)
-SYSCOIN_CLI_BIN=$(top_builddir)/src/$(SYSCOIN_CLI_NAME)$(EXEEXT)
-SYSCOIN_TX_BIN=$(top_builddir)/src/$(SYSCOIN_TX_NAME)$(EXEEXT)
-SYSCOIN_WALLET_BIN=$(top_builddir)/src/$(SYSCOIN_WALLET_TOOL_NAME)$(EXEEXT)
-SYSCOIN_NODE_BIN=$(top_builddir)/src/$(SYSCOIN_MP_NODE_NAME)$(EXEEXT)
-SYSCOIN_GUI_BIN=$(top_builddir)/src/$(SYSCOIN_MP_GUI_NAME)$(EXEEXT)
-SYSCOIN_WIN_INSTALLER=$(PACKAGE)-$(PACKAGE_VERSION)-win64-setup$(EXEEXT)
+wentunoD_BIN=$(top_builddir)/src/$(wentuno_DAEMON_NAME)$(EXEEXT)
+wentuno_QT_BIN=$(top_builddir)/src/qt/$(wentuno_GUI_NAME)$(EXEEXT)
+wentuno_CLI_BIN=$(top_builddir)/src/$(wentuno_CLI_NAME)$(EXEEXT)
+wentuno_TX_BIN=$(top_builddir)/src/$(wentuno_TX_NAME)$(EXEEXT)
+wentuno_WALLET_BIN=$(top_builddir)/src/$(wentuno_WALLET_TOOL_NAME)$(EXEEXT)
+wentuno_NODE_BIN=$(top_builddir)/src/$(wentuno_MP_NODE_NAME)$(EXEEXT)
+wentuno_GUI_BIN=$(top_builddir)/src/$(wentuno_MP_GUI_NAME)$(EXEEXT)
+wentuno_WIN_INSTALLER=$(PACKAGE)-$(PACKAGE_VERSION)-win64-setup$(EXEEXT)
 if TARGET_WINDOWS
-SYSCOIN_GETH_BIN=
+wentuno_GETH_BIN=
 endif
 if TARGET_X86_64_DARWIN
-SYSCOIN_GETH_BIN=
+wentuno_GETH_BIN=
 endif
 if TARGET_ARM64_DARWIN
-SYSCOIN_GETH_BIN=
+wentuno_GETH_BIN=
 endif
 if TARGET_X86_64_LINUX
-SYSCOIN_GETH_BIN=$(top_builddir)/src/bin/linux/x86_64/$(SYSCOIN_GETH)$(EXEEXT)
+wentuno_GETH_BIN=$(top_builddir)/src/bin/linux/x86_64/$(wentuno_GETH)$(EXEEXT)
 endif
 # if TARGET_ARM_LINUX
-# SYSCOIN_GETH_BIN=$(top_builddir)/src/bin/linux/arm/$(SYSCOIN_GETH)$(EXEEXT)
+# wentuno_GETH_BIN=$(top_builddir)/src/bin/linux/arm/$(wentuno_GETH)$(EXEEXT)
 # endif
 # if TARGET_AARCH64_LINUX
-# SYSCOIN_GETH_BIN=$(top_builddir)/src/bin/linux/aarch64/$(SYSCOIN_GETH)$(EXEEXT)
+# wentuno_GETH_BIN=$(top_builddir)/src/bin/linux/aarch64/$(wentuno_GETH)$(EXEEXT)
 # endif
 
 empty :=
 space := $(empty) $(empty)
 
-OSX_APP=Syscoin-Qt.app
+OSX_APP=wentuno-Qt.app
 OSX_VOLNAME = $(subst $(space),-,$(PACKAGE_NAME))
 OSX_ZIP = $(OSX_VOLNAME).zip
 OSX_DEPLOY_SCRIPT=$(top_srcdir)/contrib/macdeploy/macdeployqtplus
-OSX_INSTALLER_ICONS=$(top_srcdir)/src/qt/res/icons/syscoin.icns
+OSX_INSTALLER_ICONS=$(top_srcdir)/src/qt/res/icons/wentuno.icns
 OSX_PLIST=$(top_builddir)/share/qt/Info.plist #not installed
 
 DIST_CONTRIB = \
@@ -74,7 +74,7 @@ BIN_CHECKS=$(top_srcdir)/contrib/devtools/symbol-check.py \
            $(top_srcdir)/contrib/devtools/security-check.py \
            $(top_srcdir)/contrib/devtools/utils.py
 
-WINDOWS_PACKAGING = $(top_srcdir)/share/pixmaps/syscoin.ico \
+WINDOWS_PACKAGING = $(top_srcdir)/share/pixmaps/wentuno.ico \
   $(top_srcdir)/share/pixmaps/nsis-header.bmp \
   $(top_srcdir)/share/pixmaps/nsis-wizard.bmp \
   $(top_srcdir)/doc/README_windows.txt
@@ -83,26 +83,26 @@ OSX_PACKAGING = $(OSX_DEPLOY_SCRIPT) $(OSX_INSTALLER_ICONS) \
   $(top_srcdir)/contrib/macdeploy/detached-sig-create.sh
 
 COVERAGE_INFO = $(COV_TOOL_WRAPPER) baseline.info \
-  test_syscoin_filtered.info total_coverage.info \
+  test_wentuno_filtered.info total_coverage.info \
   baseline_filtered.info functional_test.info functional_test_filtered.info \
-  test_syscoin_coverage.info test_syscoin.info fuzz.info fuzz_filtered.info fuzz_coverage.info
+  test_wentuno_coverage.info test_wentuno.info fuzz.info fuzz_filtered.info fuzz_coverage.info
 
 dist-hook:
 	-$(GIT) archive --format=tar HEAD -- src/clientversion.cpp | $(AMTAR) -C $(top_distdir) -xf -
 
 if TARGET_WINDOWS
-$(SYSCOIN_WIN_INSTALLER): all-recursive
+$(wentuno_WIN_INSTALLER): all-recursive
 	$(MKDIR_P) $(top_builddir)/release
-	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM) $(SYSCOIND_BIN) $(top_builddir)/release
-	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM) $(SYSCOIN_QT_BIN) $(top_builddir)/release
-	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM) $(SYSCOIN_CLI_BIN) $(top_builddir)/release
-	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM) $(SYSCOIN_TX_BIN) $(top_builddir)/release
-	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM) $(SYSCOIN_WALLET_BIN) $(top_builddir)/release
+	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM) $(wentunoD_BIN) $(top_builddir)/release
+	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM) $(wentuno_QT_BIN) $(top_builddir)/release
+	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM) $(wentuno_CLI_BIN) $(top_builddir)/release
+	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM) $(wentuno_TX_BIN) $(top_builddir)/release
+	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM) $(wentuno_WALLET_BIN) $(top_builddir)/release
 	@test -f $(MAKENSIS) && echo 'OutFile "$@"' | cat $(top_builddir)/share/setup.nsi - | $(MAKENSIS) -V2 - || \
 	  echo error: could not build $@
 	@echo built $@
 
-deploy: $(SYSCOIN_WIN_INSTALLER)
+deploy: $(wentuno_WIN_INSTALLER)
 endif
 
 if TARGET_DARWIN
@@ -118,21 +118,21 @@ $(OSX_APP)/Contents/Info.plist: $(OSX_PLIST)
 	$(MKDIR_P) $(@D)
 	$(INSTALL_DATA) $< $@
 
-$(OSX_APP)/Contents/Resources/syscoin.icns: $(OSX_INSTALLER_ICONS)
+$(OSX_APP)/Contents/Resources/wentuno.icns: $(OSX_INSTALLER_ICONS)
 	$(MKDIR_P) $(@D)
 	$(INSTALL_DATA) $< $@
 
-$(OSX_APP)/Contents/MacOS/Syscoin-Qt: all-recursive
+$(OSX_APP)/Contents/MacOS/wentuno-Qt: all-recursive
 	$(MKDIR_P) $(@D)
-	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM)  $(SYSCOIN_QT_BIN) $@
+	STRIPPROG="$(STRIP)" $(INSTALL_STRIP_PROGRAM)  $(wentuno_QT_BIN) $@
 
 $(OSX_APP)/Contents/Resources/Base.lproj/InfoPlist.strings:
 	$(MKDIR_P) $(@D)
 	echo '{	CFBundleDisplayName = "$(PACKAGE_NAME)"; CFBundleName = "$(PACKAGE_NAME)"; }' > $@
 
 OSX_APP_BUILT=$(OSX_APP)/Contents/PkgInfo $(OSX_APP)/Contents/Resources/empty.lproj \
-  $(OSX_APP)/Contents/Resources/syscoin.icns $(OSX_APP)/Contents/Info.plist \
-  $(OSX_APP)/Contents/MacOS/Syscoin-Qt $(OSX_APP)/Contents/Resources/Base.lproj/InfoPlist.strings
+  $(OSX_APP)/Contents/Resources/wentuno.icns $(OSX_APP)/Contents/Info.plist \
+  $(OSX_APP)/Contents/MacOS/wentuno-Qt $(OSX_APP)/Contents/Resources/Base.lproj/InfoPlist.strings
 
 
 if BUILD_DARWIN
@@ -147,34 +147,34 @@ $(OSX_ZIP): deploydir
 	if [ -n "$(SOURCE_DATE_EPOCH)" ]; then find $(APP_DIST_DIR) -exec touch -d @$(SOURCE_DATE_EPOCH) {} +; fi
 	cd $(APP_DIST_DIR) && find . | sort | $(ZIP) -X@ $@
 
-$(APP_DIST_DIR)/$(OSX_APP)/Contents/MacOS/Syscoin-Qt: $(OSX_APP_BUILT) $(OSX_PACKAGING)
+$(APP_DIST_DIR)/$(OSX_APP)/Contents/MacOS/wentuno-Qt: $(OSX_APP_BUILT) $(OSX_PACKAGING)
 	OBJDUMP=$(OBJDUMP) $(PYTHON) $(OSX_DEPLOY_SCRIPT) $(OSX_APP) $(OSX_VOLNAME) -translations-dir=$(QT_TRANSLATION_DIR)
 
-deploydir: $(APP_DIST_DIR)/$(OSX_APP)/Contents/MacOS/Syscoin-Qt
+deploydir: $(APP_DIST_DIR)/$(OSX_APP)/Contents/MacOS/wentuno-Qt
 endif !BUILD_DARWIN
 
 deploy: $(OSX_ZIP)
 endif
 
-$(SYSCOIN_QT_BIN): FORCE
+$(wentuno_QT_BIN): FORCE
 	$(MAKE) -C src qt/$(@F)
 
-$(SYSCOIND_BIN): FORCE
+$(wentunoD_BIN): FORCE
 	$(MAKE) -C src $(@F)
 
-$(SYSCOIN_CLI_BIN): FORCE
+$(wentuno_CLI_BIN): FORCE
 	$(MAKE) -C src $(@F)
 
-$(SYSCOIN_TX_BIN): FORCE
+$(wentuno_TX_BIN): FORCE
 	$(MAKE) -C src $(@F)
 
-$(SYSCOIN_WALLET_BIN): FORCE
+$(wentuno_WALLET_BIN): FORCE
 	$(MAKE) -C src $(@F)
 
-$(SYSCOIN_NODE_BIN): FORCE
+$(wentuno_NODE_BIN): FORCE
 	$(MAKE) -C src $(@F)
 
-$(SYSCOIN_GUI_BIN): FORCE
+$(wentuno_GUI_BIN): FORCE
 	$(MAKE) -C src $(@F)
 
 if USE_LCOV
@@ -216,16 +216,16 @@ fuzz_filtered.info: fuzz.info
 	$(abs_builddir)/contrib/filter-lcov.py $(LCOV_FILTER_PATTERN) $< $@
 	$(LCOV) -a $@ $(LCOV_OPTS) -o $@
 
-test_syscoin.info: baseline_filtered.info
+test_wentuno.info: baseline_filtered.info
 	$(MAKE) -C src/ check
-	$(LCOV) -c $(LCOV_OPTS) -d $(abs_builddir)/src -t test_syscoin -o $@
+	$(LCOV) -c $(LCOV_OPTS) -d $(abs_builddir)/src -t test_wentuno -o $@
 	$(LCOV) -z $(LCOV_OPTS) -d $(abs_builddir)/src
 
-test_syscoin_filtered.info: test_syscoin.info
+test_wentuno_filtered.info: test_wentuno.info
 	$(abs_builddir)/contrib/filter-lcov.py $(LCOV_FILTER_PATTERN) $< $@
 	$(LCOV) -a $@ $(LCOV_OPTS) -o $@
 
-functional_test.info: test_syscoin_filtered.info
+functional_test.info: test_wentuno_filtered.info
 	@TIMEOUT=15 test/functional/test_runner.py $(EXTENDED_FUNCTIONAL_TESTS)
 	$(LCOV) -c $(LCOV_OPTS) -d $(abs_builddir)/src --t functional-tests -o $@
 	$(LCOV) -z $(LCOV_OPTS) -d $(abs_builddir)/src
@@ -237,17 +237,17 @@ functional_test_filtered.info: functional_test.info
 fuzz_coverage.info: fuzz_filtered.info
 	$(LCOV) -a $(LCOV_OPTS) baseline_filtered.info -a fuzz_filtered.info -o $@ | $(GREP) "\%" | $(AWK) '{ print substr($$3,2,50) "/" $$5 }' > coverage_percent.txt
 
-test_syscoin_coverage.info: baseline_filtered.info test_syscoin_filtered.info
-	$(LCOV) -a $(LCOV_OPTS) baseline_filtered.info -a test_syscoin_filtered.info -o $@
+test_wentuno_coverage.info: baseline_filtered.info test_wentuno_filtered.info
+	$(LCOV) -a $(LCOV_OPTS) baseline_filtered.info -a test_wentuno_filtered.info -o $@
 
-total_coverage.info: test_syscoin_filtered.info functional_test_filtered.info
-	$(LCOV) -a $(LCOV_OPTS) baseline_filtered.info -a test_syscoin_filtered.info -a functional_test_filtered.info -o $@ | $(GREP) "\%" | $(AWK) '{ print substr($$3,2,50) "/" $$5 }' > coverage_percent.txt
+total_coverage.info: test_wentuno_filtered.info functional_test_filtered.info
+	$(LCOV) -a $(LCOV_OPTS) baseline_filtered.info -a test_wentuno_filtered.info -a functional_test_filtered.info -o $@ | $(GREP) "\%" | $(AWK) '{ print substr($$3,2,50) "/" $$5 }' > coverage_percent.txt
 
 fuzz.coverage/.dirstamp: fuzz_coverage.info
 	$(GENHTML) -s $(LCOV_OPTS) $< -o $(@D)
 	@touch $@
 
-test_syscoin.coverage/.dirstamp:  test_syscoin_coverage.info
+test_wentuno.coverage/.dirstamp:  test_wentuno_coverage.info
 	$(GENHTML) -s $(LCOV_OPTS) $< -o $(@D)
 	@touch $@
 
@@ -257,7 +257,7 @@ total.coverage/.dirstamp: total_coverage.info
 
 cov_fuzz: fuzz.coverage/.dirstamp
 
-cov: test_syscoin.coverage/.dirstamp total.coverage/.dirstamp
+cov: test_wentuno.coverage/.dirstamp total.coverage/.dirstamp
 
 endif
 
@@ -271,7 +271,7 @@ EXTRA_DIST += \
 
 EXTRA_DIST += \
     test/util/test_runner.py \
-    test/util/data/syscoin-util-test.json \
+    test/util/data/wentuno-util-test.json \
     test/util/data/blanktxv1.hex \
     test/util/data/blanktxv1.json \
     test/util/data/blanktxv2.hex \
@@ -326,7 +326,7 @@ EXTRA_DIST += \
     test/util/data/txcreatesignv2.hex \
     test/util/rpcauth-test.py
 
-CLEANFILES = $(OSX_ZIP) $(SYSCOIN_WIN_INSTALLER)
+CLEANFILES = $(OSX_ZIP) $(wentuno_WIN_INSTALLER)
 
 DISTCHECK_CONFIGURE_FLAGS = --enable-man
 
@@ -346,7 +346,7 @@ clean-docs:
 	rm -rf doc/doxygen
 
 clean-local: clean-docs
-	rm -rf coverage_percent.txt test_syscoin.coverage/ total.coverage/ fuzz.coverage/ test/tmp/ cache/ $(OSX_APP)
+	rm -rf coverage_percent.txt test_wentuno.coverage/ total.coverage/ fuzz.coverage/ test/tmp/ cache/ $(OSX_APP)
 	rm -rf test/functional/__pycache__ test/functional/test_framework/__pycache__ test/cache share/rpcauth/__pycache__
 	rm -rf dist/
 

@@ -46,7 +46,7 @@ RBFTransactionState IsRBFOptIn(const CTransaction& tx, const CTxMemPool& pool)
     }
     return RBFTransactionState::FINAL;
 }
-// SYSCOIN
+// wentuno
 RBFTransactionState IsRBFOptIn(const CTransaction& tx, const CTxMemPool& pool, CTxMemPool::setEntries &setAncestors)
 {
     AssertLockHeld(pool.cs);
@@ -65,7 +65,7 @@ RBFTransactionState IsRBFOptIn(const CTransaction& tx, const CTxMemPool& pool, C
 
     // signaled for RBF if any unconfirmed parents have signaled.
     const CTxMemPoolEntry entry{*pool.mapTx.find(tx.GetHash())};
-    // SYSCOIN
+    // wentuno
     setAncestors = pool.AssumeCalculateMemPoolAncestors(__func__, entry, CTxMemPool::Limits::NoLimits(),
                                                         /*fSearchForParents=*/false);
 
@@ -141,14 +141,14 @@ std::optional<std::string> HasNoNewUnconfirmed(const CTransaction& tx,
     }
     return std::nullopt;
 }
-// SYSCOIN
+// wentuno
 std::optional<std::string> EntriesAndTxidsDisjoint(const CTxMemPool::setEntries& ancestors,
                                                    const std::set<uint256>& direct_conflicts,
                                                    const std::set<uint256>& direct_conflicts_asset,
                                                    const uint256& txid)
 {
     for (CTxMemPool::txiter ancestorIt : ancestors) {
-        // SYSCOIN
+        // wentuno
         const uint256& hashAncestor = ancestorIt->GetTx().GetHash();
         if (direct_conflicts.count(hashAncestor) || direct_conflicts_asset.count(hashAncestor)) {
             return strprintf("%s spends conflicting transaction %s",

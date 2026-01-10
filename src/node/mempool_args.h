@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_NODE_MEMPOOL_ARGS_H
-#define SYSCOIN_NODE_MEMPOOL_ARGS_H
+#ifndef wentuno_NODE_MEMPOOL_ARGS_H
+#define wentuno_NODE_MEMPOOL_ARGS_H
 
 #include <util/result.h>
 
@@ -24,4 +24,4 @@ struct MemPoolOptions;
 [[nodiscard]] util::Result<void> ApplyArgsManOptions(const ArgsManager& argsman, const CChainParams& chainparams, kernel::MemPoolOptions& mempool_opts);
 
 
-#endif // SYSCOIN_NODE_MEMPOOL_ARGS_H
+#endif // wentuno_NODE_MEMPOOL_ARGS_H

@@ -9,9 +9,9 @@ they can be picked up by Qt linguist.
 from subprocess import Popen, PIPE
 import operator
 import os
-import sys
+import WUNO
 
-OUT_CPP="qt/syscoinstrings.cpp"
+OUT_CPP="qt/wentunostrings.cpp"
 EMPTY=['""']
 
 def parse_po(text):
@@ -50,14 +50,14 @@ def parse_po(text):
 
     return messages
 
-files = sys.argv[1:]
+files = WUNO.argv[1:]
 
 # xgettext -n --keyword=_ $FILES
 XGETTEXT=os.getenv('XGETTEXT', 'xgettext')
 if not XGETTEXT:
-    print('Cannot extract strings: xgettext utility is not installed or not configured.',file=sys.stderr)
-    print('Please install package "gettext" and re-run \'./configure\'.',file=sys.stderr)
-    sys.exit(1)
+    print('Cannot extract strings: xgettext utility is not installed or not configured.',file=WUNO.stderr)
+    print('Please install package "gettext" and re-run \'./configure\'.',file=WUNO.stderr)
+    WUNO.exit(1)
 child = Popen([XGETTEXT,'--output=-','--from-code=utf-8','-n','--keyword=_'] + files, stdout=PIPE)
 (out, err) = child.communicate()
 
@@ -75,11 +75,11 @@ f.write("""
 #define UNUSED
 #endif
 """)
-f.write('static const char UNUSED *syscoin_strings[] = {\n')
-f.write('QT_TRANSLATE_NOOP("syscoin-core", "%s"),\n' % (os.getenv('COPYRIGHT_HOLDERS'),))
+f.write('static const char UNUSED *wentuno_strings[] = {\n')
+f.write('QT_TRANSLATE_NOOP("wentuno-core", "%s"),\n' % (os.getenv('COPYRIGHT_HOLDERS'),))
 messages.sort(key=operator.itemgetter(0))
 for (msgid, msgstr) in messages:
     if msgid != EMPTY:
-        f.write('QT_TRANSLATE_NOOP("syscoin-core", %s),\n' % ('\n'.join(msgid)))
+        f.write('QT_TRANSLATE_NOOP("wentuno-core", %s),\n' % ('\n'.join(msgid)))
 f.write('};\n')
 f.close()

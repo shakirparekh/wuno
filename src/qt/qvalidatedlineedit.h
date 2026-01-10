@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_QVALIDATEDLINEEDIT_H
-#define SYSCOIN_QT_QVALIDATEDLINEEDIT_H
+#ifndef wentuno_QT_QVALIDATEDLINEEDIT_H
+#define wentuno_QT_QVALIDATEDLINEEDIT_H
 
 #include <QLineEdit>
 
@@ -41,4 +41,4 @@ private Q_SLOTS:
     void checkValidity();
 };
 
-#endif // SYSCOIN_QT_QVALIDATEDLINEEDIT_H
+#endif // wentuno_QT_QVALIDATEDLINEEDIT_H

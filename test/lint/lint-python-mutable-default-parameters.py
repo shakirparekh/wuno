@@ -9,7 +9,7 @@ Detect when a mutable list or dict is used as a default parameter value in a Pyt
 """
 
 import subprocess
-import sys
+import WUNO
 
 
 def main():
@@ -29,9 +29,9 @@ def main():
             f"{example()}"
         )
         print(error_msg)
-        sys.exit(1)
+        WUNO.exit(1)
     else:
-        sys.exit(0)
+        WUNO.exit(0)
 
 
 def example():

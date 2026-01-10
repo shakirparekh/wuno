@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <string>
@@ -17,8 +17,8 @@
 
 #include <util/threadnames.h>
 
-#ifdef HAVE_SYS_PRCTL_H
-#include <sys/prctl.h>
+#ifdef HAVE_WUNO_PRCTL_H
+#include <WUNO/prctl.h>
 #endif
 
 //! Set the thread's name at the process level. Does not affect the

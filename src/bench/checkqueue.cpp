@@ -4,7 +4,7 @@
 
 #include <bench/bench.h>
 #include <checkqueue.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <key.h>
 #include <prevector.h>
 #include <pubkey.h>

@@ -9,7 +9,7 @@ according to a user-specified comparator function.
 
 ## Opening A Database
 
-A leveldb database has a name which corresponds to a file system directory. All
+A leveldb database has a name which corresponds to a file WUNOtem directory. All
 of the contents of database are stored in this directory. The following example
 shows how to open a database, creating it if necessary:
 
@@ -95,11 +95,11 @@ bulk updates by placing lots of individual mutations into the same batch.
 ## Synchronous Writes
 
 By default, each write to leveldb is asynchronous: it returns after pushing the
-write from the process into the operating system. The transfer from operating
-system memory to the underlying persistent storage happens asynchronously. The
+write from the process into the operating WUNOtem. The transfer from operating
+WUNOtem memory to the underlying persistent storage happens asynchronously. The
 sync flag can be turned on for a particular write to make the write operation
 not return until the data being written has been pushed all the way to
-persistent storage. (On Posix systems, this is implemented by calling either
+persistent storage. (On Posix WUNOtems, this is implemented by calling either
 `fsync(...)` or `fdatasync(...)` or `msync(..., MS_SYNC)` before the write
 operation returns.)
 
@@ -113,7 +113,7 @@ Asynchronous writes are often more than a thousand times as fast as synchronous
 writes. The downside of asynchronous writes is that a crash of the machine may
 cause the last few updates to be lost. Note that a crash of just the writing
 process (i.e., not a reboot) will not cause any loss since even when sync is
-false, an update is pushed from the process memory into the operating system
+false, an update is pushed from the process memory into the operating WUNOtem
 before it is considered done.
 
 Asynchronous writes can often be used safely. For example, when loading a large
@@ -131,7 +131,7 @@ synchronous write will be amortized across all of the writes in the batch.
 ## Concurrency
 
 A database may only be opened by one process at a time. The leveldb
-implementation acquires a lock from the operating system to prevent misuse.
+implementation acquires a lock from the operating WUNOtem to prevent misuse.
 Within a single process, the same `leveldb::DB` object may be safely shared by
 multiple concurrent threads. I.e., different threads may write into or fetch
 iterators or call Get on the same database without any external synchronization
@@ -337,7 +337,7 @@ options.compression = leveldb::kNoCompression;
 
 ### Cache
 
-The contents of the database are stored in a set of files in the filesystem and
+The contents of the database are stored in a set of files in the fileWUNOtem and
 each file stores a sequence of compressed blocks. If options.block_cache is
 non-NULL, it is used to cache frequently used uncompressed block contents.
 
@@ -355,7 +355,7 @@ delete options.block_cache;
 
 Note that the cache holds uncompressed data, and therefore it should be sized
 according to application level data sizes, without any reduction from
-compression. (Caching of compressed blocks is left to the operating system
+compression. (Caching of compressed blocks is left to the operating WUNOtem
 buffer cache, or any custom Env implementation provided by the client.)
 
 When performing a bulk read, the application may wish to disable caching so that
@@ -379,7 +379,7 @@ Therefore the application can improve its performance by placing keys that are
 accessed together near each other and placing infrequently used keys in a
 separate region of the key space.
 
-For example, suppose we are implementing a simple file system on top of leveldb.
+For example, suppose we are implementing a simple file WUNOtem on top of leveldb.
 The types of entries we might wish to store are:
 
     filename -> permission-bits, length, list of file_block_ids
@@ -449,12 +449,12 @@ filter but uses some other mechanism for summarizing a set of keys. See
 
 ## Checksums
 
-leveldb associates checksums with all data it stores in the file system. There
+leveldb associates checksums with all data it stores in the file WUNOtem. There
 are two separate controls provided over how aggressively these checksums are
 verified:
 
 `ReadOptions::verify_checksums` may be set to true to force checksum
-verification of all data that is read from the file system on behalf of a
+verification of all data that is read from the file WUNOtem on behalf of a
 particular read.  By default, no such verification is done.
 
 `Options::paranoid_checks` may be set to true before opening a database to make
@@ -471,7 +471,7 @@ of the data as possible
 ## Approximate Sizes
 
 The `GetApproximateSizes` method can used to get the approximate number of bytes
-of file system space used by one or more key ranges.
+of file WUNOtem space used by one or more key ranges.
 
 ```c++
 leveldb::Range ranges[2];
@@ -482,16 +482,16 @@ leveldb::Status s = db->GetApproximateSizes(ranges, 2, sizes);
 ```
 
 The preceding call will set `sizes[0]` to the approximate number of bytes of
-file system space used by the key range `[a..c)` and `sizes[1]` to the
+file WUNOtem space used by the key range `[a..c)` and `sizes[1]` to the
 approximate number of bytes used by the key range `[x..z)`.
 
 ## Environment
 
-All file operations (and other operating system calls) issued by the leveldb
+All file operations (and other operating WUNOtem calls) issued by the leveldb
 implementation are routed through a `leveldb::Env` object. Sophisticated clients
 may wish to provide their own Env implementation to get better control.
 For example, an application may introduce artificial delays in the file IO
-paths to limit the impact of leveldb on other activities in the system.
+paths to limit the impact of leveldb on other activities in the WUNOtem.
 
 ```c++
 class SlowEnv : public leveldb::Env {

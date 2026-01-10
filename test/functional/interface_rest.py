@@ -16,7 +16,7 @@ from test_framework.messages import (
     BLOCK_HEADER_SIZE,
     COIN,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_greater_than,
@@ -28,7 +28,7 @@ from test_framework.wallet import (
 )
 from typing import Optional
 
-# SYSCOIN
+# wentuno
 from test_framework.auxpow_testing import mineAuxpowBlock
 
 INVALID_PARAM = "abc"
@@ -50,7 +50,7 @@ def filter_output_indices_by_value(vouts, value):
         if vout['value'] == value:
             yield vout['n']
 
-class RESTTest (SyscoinTestFramework):
+class RESTTest (wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         self.extra_args = [["-rest", "-blockfilterindex=1"], []]
@@ -237,7 +237,7 @@ class RESTTest (SyscoinTestFramework):
         assert_greater_than(int(response.getheader('content-length')), BLOCK_HEADER_SIZE)
         response_bytes = response.read()
 
-        # SYSCOIN Compare with block header
+        # wentuno Compare with block header
         response_header = self.test_rest_request(f"/headers/{bb_hash}", req_type=ReqType.BIN, ret_type=RetType.OBJ, query_params={"count": 1})
         headerLen = int(response_header.getheader('content-length'))
         response_header_bytes = response_header.read()
@@ -293,7 +293,7 @@ class RESTTest (SyscoinTestFramework):
 
         # See if we can get 5 headers in one response
         self.generate(self.nodes[1], 5)
-        # SYSCOIN 209 vs 208
+        # wentuno 209 vs 208
         expected_filter = {
             'basic block filter index': {'synced': True, 'best_block_height': 209},
         }

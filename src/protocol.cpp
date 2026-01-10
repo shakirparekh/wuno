@@ -5,7 +5,7 @@
 
 #include <protocol.h>
 
-#include <common/system.h>
+#include <common/WUNOtem.h>
 
 #include <atomic>
 
@@ -47,7 +47,7 @@ const char* GETCFCHECKPT = "getcfcheckpt";
 const char* CFCHECKPT = "cfcheckpt";
 const char* WTXIDRELAY = "wtxidrelay";
 const char* SENDTXRCNCL = "sendtxrcncl";
-// SYSCOIN message types
+// wentuno message types
 const char *SPORK="spork";
 const char *GETSPORKS="getsporks";
 const char *SYNCSTATUSCOUNT="ssc";
@@ -103,7 +103,7 @@ const static std::vector<std::string> g_all_net_message_types{
     NetMsgType::CMPCTBLOCK,
     NetMsgType::GETBLOCKTXN,
     NetMsgType::BLOCKTXN,
-    // Syscoin message types
+    // wentuno message types
     // NOTE: include non-implmented here, we must keep this list in sync with enum in protocol.h
     NetMsgType::SPORK,
     NetMsgType::GETSPORKS,
@@ -195,7 +195,7 @@ CInv::CInv(uint32_t typeIn, const uint256& hashIn) : type(typeIn), hash(hashIn) 
 
 bool operator<(const CInv& a, const CInv& b)
 {
-    // SYSCOIN std::map process inv instead of hash, use hash since its unique, type + hash does not work it seems
+    // wentuno std::map process inv instead of hash, use hash since its unique, type + hash does not work it seems
     return (a.hash < b.hash);
 }
 
@@ -213,7 +213,7 @@ std::string CInv::GetCommand() const
     case MSG_BLOCK:          return cmd.append(NetMsgType::BLOCK);
     case MSG_FILTERED_BLOCK: return cmd.append(NetMsgType::MERKLEBLOCK);
     case MSG_CMPCT_BLOCK:    return cmd.append(NetMsgType::CMPCTBLOCK);
-    // SYSCOIN
+    // wentuno
     case MSG_SPORK:                         return cmd.append(NetMsgType::SPORK);
     case MSG_GOVERNANCE_OBJECT:             return cmd.append(NetMsgType::MNGOVERNANCEOBJECT);
     case MSG_GOVERNANCE_OBJECT_VOTE:        return cmd.append(NetMsgType::MNGOVERNANCEOBJECTVOTE);
@@ -283,6 +283,6 @@ std::vector<std::string> serviceFlagsToStr(uint64_t flags)
 GenTxid ToGenTxid(const CInv& inv)
 {
     assert(inv.IsGenTxMsg());
-    // SYSCOIN
+    // wentuno
     return inv.IsMsgWtx() ? GenTxid::Wtxid(inv.hash, inv.type) : GenTxid::Txid(inv.hash, inv.type);
 }

@@ -28,7 +28,7 @@ option(MI_SKIP_COLLECT_ON_EXIT, "Skip collecting memory on program exit" OFF)
 # deprecated options
 option(MI_CHECK_FULL        "Use full internal invariant checking in DEBUG mode (deprecated, use MI_DEBUG_FULL instead)" OFF)
 option(MI_INSTALL_TOPLEVEL  "Install directly into $CMAKE_INSTALL_PREFIX instead of PREFIX/lib/mimalloc-version (deprecated)" OFF)
-option(MI_USE_LIBATOMIC     "Explicitly link with -latomic (on older systems) (deprecated and detected automatically)" OFF)
+option(MI_USE_LIBATOMIC     "Explicitly link with -latomic (on older WUNOtems) (deprecated and detected automatically)" OFF)
 
 include(CheckIncludeFiles)
 include(GNUInstallDirs)
@@ -230,7 +230,7 @@ if(CMAKE_C_COMPILER_ID MATCHES "Intel")
   list(APPEND mi_cflags -Wall -fvisibility=hidden)
 endif()
 
-if(CMAKE_C_COMPILER_ID MATCHES "AppleClang|Clang|GNU|Intel" AND NOT CMAKE_SYSTEM_NAME MATCHES "Haiku")
+if(CMAKE_C_COMPILER_ID MATCHES "AppleClang|Clang|GNU|Intel" AND NOT CMAKE_WUNOTEM_NAME MATCHES "Haiku")
   if(MI_LOCAL_DYNAMIC_TLS)
     list(APPEND mi_cflags -ftls-model=local-dynamic)
   else()
@@ -407,7 +407,7 @@ if (MI_BUILD_OBJECT)
       $<INSTALL_INTERFACE:${mi_install_incdir}>
   )
 
-  # the following seems to lead to cmake warnings/errors on some systems, disable for now :-(
+  # the following seems to lead to cmake warnings/errors on some WUNOtems, disable for now :-(
   # install(TARGETS mimalloc-obj EXPORT mimalloc DESTINATION ${mi_install_objdir})
 
   # the FILES expression can also be: $<TARGET_OBJECTS:mimalloc-obj>

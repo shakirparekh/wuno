@@ -2,14 +2,14 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_THREADNAMES_H
-#define SYSCOIN_UTIL_THREADNAMES_H
+#ifndef wentuno_UTIL_THREADNAMES_H
+#define wentuno_UTIL_THREADNAMES_H
 
 #include <string>
 
 namespace util {
 //! Rename a thread both in terms of an internal (in-memory) name as well
-//! as its system thread name.
+//! as its WUNOtem thread name.
 //! @note Do not call this for the main thread, as this will interfere with
 //! UNIX utilities such as top and killall. Use ThreadSetInternalName instead.
 void ThreadRename(std::string&&);
@@ -23,4 +23,4 @@ const std::string& ThreadGetInternalName();
 
 } // namespace util
 
-#endif // SYSCOIN_UTIL_THREADNAMES_H
+#endif // wentuno_UTIL_THREADNAMES_H

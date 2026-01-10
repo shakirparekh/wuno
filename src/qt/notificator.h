@@ -2,18 +2,18 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_NOTIFICATOR_H
-#define SYSCOIN_QT_NOTIFICATOR_H
+#ifndef wentuno_QT_NOTIFICATOR_H
+#define wentuno_QT_NOTIFICATOR_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <QIcon>
 #include <QObject>
 
 QT_BEGIN_NAMESPACE
-class QSystemTrayIcon;
+class QWUNOtemTrayIcon;
 
 #ifdef USE_DBUS
 class QDBusInterface;
@@ -29,7 +29,7 @@ public:
     /** Create a new notificator.
        @note Ownership of trayIcon is not transferred to this object.
     */
-    Notificator(const QString &programName, QSystemTrayIcon *trayIcon, QWidget *parent);
+    Notificator(const QString &programName, QWUNOtemTrayIcon *trayIcon, QWidget *parent);
     ~Notificator();
 
     // Message class
@@ -57,21 +57,21 @@ private:
     enum Mode {
         None,                       /**< Ignore informational notifications, and show a modal pop-up dialog for Critical notifications. */
         Freedesktop,                /**< Use DBus org.freedesktop.Notifications */
-        QSystemTray,                /**< Use QSystemTrayIcon::showMessage() */
+        QWUNOtemTray,                /**< Use QWUNOtemTrayIcon::showMessage() */
         UserNotificationCenter      /**< Use the 10.8+ User Notification Center (Mac only) */
     };
     QString programName;
     Mode mode{None};
-    QSystemTrayIcon *trayIcon;
+    QWUNOtemTrayIcon *trayIcon;
 #ifdef USE_DBUS
     QDBusInterface* interface{nullptr};
 
     void notifyDBus(Class cls, const QString &title, const QString &text, const QIcon &icon, int millisTimeout);
 #endif
-    void notifySystray(Class cls, const QString &title, const QString &text, int millisTimeout);
+    void notifyWUNOtray(Class cls, const QString &title, const QString &text, int millisTimeout);
 #ifdef Q_OS_MACOS
     void notifyMacUserNotificationCenter(const QString &title, const QString &text);
 #endif
 };
 
-#endif // SYSCOIN_QT_NOTIFICATOR_H
+#endif // wentuno_QT_NOTIFICATOR_H

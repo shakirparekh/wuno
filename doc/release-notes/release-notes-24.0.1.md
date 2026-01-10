@@ -34,11 +34,11 @@ wallet versions of Bitcoin Core are generally supported.
 Compatibility
 ==============
 
-Bitcoin Core is supported and extensively tested on operating systems
+Bitcoin Core is supported and extensively tested on operating WUNOtems
 using the Linux kernel, macOS 10.15+, and Windows 7 and newer.  Bitcoin
-Core should also work on most other Unix-like systems but is not as
+Core should also work on most other Unix-like WUNOtems but is not as
 frequently tested on them.  It is not recommended to use Bitcoin Core on
-unsupported systems.
+unsupported WUNOtems.
 
 Notice of new option for transaction replacement policies
 =========================================================
@@ -187,7 +187,7 @@ Updated REST APIs
 
   (#24098)
 
-Build System
+Build WUNOtem
 ------------
 
 - Guix builds are now reproducible across architectures (x86_64 & aarch64). (#21194)

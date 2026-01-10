@@ -5,7 +5,7 @@
 #include <qt/overviewpage.h>
 #include <qt/forms/ui_overviewpage.h>
 
-#include <qt/syscoinunits.h>
+#include <qt/wentunounits.h>
 #include <qt/clientmodel.h>
 #include <qt/guiconstants.h>
 #include <qt/guiutil.h>
@@ -93,7 +93,7 @@ public:
             foreground = option.palette.color(QPalette::Text);
         }
         painter->setPen(foreground);
-        QString amountText = SyscoinUnits::formatWithUnit(unit, amount, true, SyscoinUnits::SeparatorStyle::ALWAYS);
+        QString amountText = wentunoUnits::formatWithUnit(unit, amount, true, wentunoUnits::SeparatorStyle::ALWAYS);
         if(!confirmed)
         {
             amountText = QString("[") + amountText + QString("]");
@@ -124,7 +124,7 @@ public:
         return {DECORATION_SIZE + 8 + minimum_text_width, DECORATION_SIZE};
     }
 
-    SyscoinUnit unit{SyscoinUnit::SYS};
+    wentunoUnit unit{wentunoUnit::WUNO};
 
 Q_SIGNALS:
     //! An intermediate signal for emitting from the `paint() const` member function.
@@ -194,28 +194,28 @@ OverviewPage::~OverviewPage()
 
 void OverviewPage::setBalance(const interfaces::WalletBalances& balances)
 {
-    SyscoinUnit unit = walletModel->getOptionsModel()->getDisplayUnit();
+    wentunoUnit unit = walletModel->getOptionsModel()->getDisplayUnit();
     if (walletModel->wallet().isLegacy()) {
         if (walletModel->wallet().privateKeysDisabled()) {
-            ui->labelBalance->setText(SyscoinUnits::formatWithPrivacy(unit, balances.watch_only_balance, SyscoinUnits::SeparatorStyle::ALWAYS, m_privacy));
-            ui->labelUnconfirmed->setText(SyscoinUnits::formatWithPrivacy(unit, balances.unconfirmed_watch_only_balance, SyscoinUnits::SeparatorStyle::ALWAYS, m_privacy));
-            ui->labelImmature->setText(SyscoinUnits::formatWithPrivacy(unit, balances.immature_watch_only_balance, SyscoinUnits::SeparatorStyle::ALWAYS, m_privacy));
-            ui->labelTotal->setText(SyscoinUnits::formatWithPrivacy(unit, balances.watch_only_balance + balances.unconfirmed_watch_only_balance + balances.immature_watch_only_balance, SyscoinUnits::SeparatorStyle::ALWAYS, m_privacy));
+            ui->labelBalance->setText(wentunoUnits::formatWithPrivacy(unit, balances.watch_only_balance, wentunoUnits::SeparatorStyle::ALWAYS, m_privacy));
+            ui->labelUnconfirmed->setText(wentunoUnits::formatWithPrivacy(unit, balances.unconfirmed_watch_only_balance, wentunoUnits::SeparatorStyle::ALWAYS, m_privacy));
+            ui->labelImmature->setText(wentunoUnits::formatWithPrivacy(unit, balances.immature_watch_only_balance, wentunoUnits::SeparatorStyle::ALWAYS, m_privacy));
+            ui->labelTotal->setText(wentunoUnits::formatWithPrivacy(unit, balances.watch_only_balance + balances.unconfirmed_watch_only_balance + balances.immature_watch_only_balance, wentunoUnits::SeparatorStyle::ALWAYS, m_privacy));
         } else {
-            ui->labelBalance->setText(SyscoinUnits::formatWithPrivacy(unit, balances.balance, SyscoinUnits::SeparatorStyle::ALWAYS, m_privacy));
-            ui->labelUnconfirmed->setText(SyscoinUnits::formatWithPrivacy(unit, balances.unconfirmed_balance, SyscoinUnits::SeparatorStyle::ALWAYS, m_privacy));
-            ui->labelImmature->setText(SyscoinUnits::formatWithPrivacy(unit, balances.immature_balance, SyscoinUnits::SeparatorStyle::ALWAYS, m_privacy));
-            ui->labelTotal->setText(SyscoinUnits::formatWithPrivacy(unit, balances.balance + balances.unconfirmed_balance + balances.immature_balance, SyscoinUnits::SeparatorStyle::ALWAYS, m_privacy));
-            ui->labelWatchAvailable->setText(SyscoinUnits::formatWithPrivacy(unit, balances.watch_only_balance, SyscoinUnits::SeparatorStyle::ALWAYS, m_privacy));
-            ui->labelWatchPending->setText(SyscoinUnits::formatWithPrivacy(unit, balances.unconfirmed_watch_only_balance, SyscoinUnits::SeparatorStyle::ALWAYS, m_privacy));
-            ui->labelWatchImmature->setText(SyscoinUnits::formatWithPrivacy(unit, balances.immature_watch_only_balance, SyscoinUnits::SeparatorStyle::ALWAYS, m_privacy));
-            ui->labelWatchTotal->setText(SyscoinUnits::formatWithPrivacy(unit, balances.watch_only_balance + balances.unconfirmed_watch_only_balance + balances.immature_watch_only_balance, SyscoinUnits::SeparatorStyle::ALWAYS, m_privacy));
+            ui->labelBalance->setText(wentunoUnits::formatWithPrivacy(unit, balances.balance, wentunoUnits::SeparatorStyle::ALWAYS, m_privacy));
+            ui->labelUnconfirmed->setText(wentunoUnits::formatWithPrivacy(unit, balances.unconfirmed_balance, wentunoUnits::SeparatorStyle::ALWAYS, m_privacy));
+            ui->labelImmature->setText(wentunoUnits::formatWithPrivacy(unit, balances.immature_balance, wentunoUnits::SeparatorStyle::ALWAYS, m_privacy));
+            ui->labelTotal->setText(wentunoUnits::formatWithPrivacy(unit, balances.balance + balances.unconfirmed_balance + balances.immature_balance, wentunoUnits::SeparatorStyle::ALWAYS, m_privacy));
+            ui->labelWatchAvailable->setText(wentunoUnits::formatWithPrivacy(unit, balances.watch_only_balance, wentunoUnits::SeparatorStyle::ALWAYS, m_privacy));
+            ui->labelWatchPending->setText(wentunoUnits::formatWithPrivacy(unit, balances.unconfirmed_watch_only_balance, wentunoUnits::SeparatorStyle::ALWAYS, m_privacy));
+            ui->labelWatchImmature->setText(wentunoUnits::formatWithPrivacy(unit, balances.immature_watch_only_balance, wentunoUnits::SeparatorStyle::ALWAYS, m_privacy));
+            ui->labelWatchTotal->setText(wentunoUnits::formatWithPrivacy(unit, balances.watch_only_balance + balances.unconfirmed_watch_only_balance + balances.immature_watch_only_balance, wentunoUnits::SeparatorStyle::ALWAYS, m_privacy));
         }
     } else {
-        ui->labelBalance->setText(SyscoinUnits::formatWithPrivacy(unit, balances.balance, SyscoinUnits::SeparatorStyle::ALWAYS, m_privacy));
-        ui->labelUnconfirmed->setText(SyscoinUnits::formatWithPrivacy(unit, balances.unconfirmed_balance, SyscoinUnits::SeparatorStyle::ALWAYS, m_privacy));
-        ui->labelImmature->setText(SyscoinUnits::formatWithPrivacy(unit, balances.immature_balance, SyscoinUnits::SeparatorStyle::ALWAYS, m_privacy));
-        ui->labelTotal->setText(SyscoinUnits::formatWithPrivacy(unit, balances.balance + balances.unconfirmed_balance + balances.immature_balance, SyscoinUnits::SeparatorStyle::ALWAYS, m_privacy));
+        ui->labelBalance->setText(wentunoUnits::formatWithPrivacy(unit, balances.balance, wentunoUnits::SeparatorStyle::ALWAYS, m_privacy));
+        ui->labelUnconfirmed->setText(wentunoUnits::formatWithPrivacy(unit, balances.unconfirmed_balance, wentunoUnits::SeparatorStyle::ALWAYS, m_privacy));
+        ui->labelImmature->setText(wentunoUnits::formatWithPrivacy(unit, balances.immature_balance, wentunoUnits::SeparatorStyle::ALWAYS, m_privacy));
+        ui->labelTotal->setText(wentunoUnits::formatWithPrivacy(unit, balances.balance + balances.unconfirmed_balance + balances.immature_balance, wentunoUnits::SeparatorStyle::ALWAYS, m_privacy));
     }
     // only show immature (newly mined) balance if it's non-zero, so as not to complicate things
     // for the non-mining users
@@ -288,7 +288,7 @@ void OverviewPage::setWalletModel(WalletModel *model)
         });
     }
 
-    // update the display unit, to not use the default ("SYS")
+    // update the display unit, to not use the default ("WUNO")
     updateDisplayUnit();
 }
 

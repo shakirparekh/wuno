@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2013-2019 The Syscoin Core developers
+﻿// Copyright (c) 2013-2019 The wentuno Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <validation.h>
@@ -104,17 +104,17 @@ static RPCHelpMan assetallocationverifyzdag()
     };
 }
 
-static RPCHelpMan syscoindecoderawtransaction()
+static RPCHelpMan wentunodecoderawtransaction()
 {
-    return RPCHelpMan{"syscoindecoderawtransaction",
-    "\nDecode raw syscoin transaction (serialized, hex-encoded) and display information pertaining to the service that is included in the transactiion data output(OP_RETURN)\n",
+    return RPCHelpMan{"wentunodecoderawtransaction",
+    "\nDecode raw wentuno transaction (serialized, hex-encoded) and display information pertaining to the service that is included in the transactiion data output(OP_RETURN)\n",
     {
         {"hexstring", RPCArg::Type::STR_HEX, RPCArg::Optional::NO, "The transaction hex string."}
     },
     RPCResult{
         RPCResult::Type::OBJ, "", "",
         {
-            {RPCResult::Type::STR, "txtype", "The syscoin transaction type"},
+            {RPCResult::Type::STR, "txtype", "The wentuno transaction type"},
             {RPCResult::Type::STR_HEX, "txid", "The transaction id"},
             {RPCResult::Type::STR_HEX, "blockhash", "Block confirming the transaction, if any"},
             {RPCResult::Type::ARR, "allocations", "(array of json receiver objects)",
@@ -128,8 +128,8 @@ static RPCHelpMan syscoindecoderawtransaction()
             {RPCResult::Type::STR, "nevm_destination", /*optional=*/true, "NEVM destination address"},
         }}, 
     RPCExamples{
-        HelpExampleCli("syscoindecoderawtransaction", "\"hexstring\"")
-        + HelpExampleRpc("syscoindecoderawtransaction", "\"hexstring\"")
+        HelpExampleCli("wentunodecoderawtransaction", "\"hexstring\"")
+        + HelpExampleRpc("wentunodecoderawtransaction", "\"hexstring\"")
     },
     [&](const RPCHelpMan& self, const node::JSONRPCRequest& request) -> UniValue
 {
@@ -156,16 +156,16 @@ static RPCHelpMan syscoindecoderawtransaction()
     rawTx = GetTransaction(blockindex, node.mempool.get(), rawTx->GetHash(), hashBlock, node.chainman->m_blockman);
 
     UniValue output(UniValue::VOBJ);
-    if(rawTx && !DecodeSyscoinRawtransaction(*rawTx, output))
-        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Not a Syscoin transaction");
+    if(rawTx && !DecodewentunoRawtransaction(*rawTx, output))
+        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Not a wentuno transaction");
     return output;
 },
     };
 }
 
-static RPCHelpMan syscoingettxroots()
+static RPCHelpMan wentunogettxroots()
 {
-    return RPCHelpMan{"syscoingettxroots",
+    return RPCHelpMan{"wentunogettxroots",
     "\nGet NEVM transaction and receipt roots based on block hash.\n",
     {
         {"blockhash", RPCArg::Type::STR_HEX, RPCArg::Optional::NO, "The block hash to lookup."}
@@ -177,8 +177,8 @@ static RPCHelpMan syscoingettxroots()
             {RPCResult::Type::STR_HEX, "receiptroot", "The receipt merkle root"},
         }},
     RPCExamples{
-        HelpExampleCli("syscoingettxroots", "0xd8ac75c7b4084c85a89d6e28219ff162661efb8b794d4b66e6e9ea52b4139b10")
-        + HelpExampleRpc("syscoingettxroots", "0xd8ac75c7b4084c85a89d6e28219ff162661efb8b794d4b66e6e9ea52b4139b10")
+        HelpExampleCli("wentunogettxroots", "0xd8ac75c7b4084c85a89d6e28219ff162661efb8b794d4b66e6e9ea52b4139b10")
+        + HelpExampleRpc("wentunogettxroots", "0xd8ac75c7b4084c85a89d6e28219ff162661efb8b794d4b66e6e9ea52b4139b10")
     },
     [&](const RPCHelpMan& self, const node::JSONRPCRequest& request) -> UniValue
 {
@@ -203,12 +203,12 @@ static RPCHelpMan syscoingettxroots()
     };
 }
 
-static RPCHelpMan syscoincheckmint()
+static RPCHelpMan wentunocheckmint()
 {
-    return RPCHelpMan{"syscoincheckmint",
-    "\nGet the Syscoin mint transaction by looking up using NEVM tx hash (This is no the txid, it is the sha3 of the transaction bytes value).\n",
+    return RPCHelpMan{"wentunocheckmint",
+    "\nGet the wentuno mint transaction by looking up using NEVM tx hash (This is no the txid, it is the sha3 of the transaction bytes value).\n",
     {
-        {"nevm_txhash", RPCArg::Type::STR_HEX, RPCArg::Optional::NO, "NEVM Tx Hash used to burn funds to move to Syscoin."}
+        {"nevm_txhash", RPCArg::Type::STR_HEX, RPCArg::Optional::NO, "NEVM Tx Hash used to burn funds to move to wentuno."}
     },
     RPCResult{
         RPCResult::Type::OBJ, "", "",
@@ -216,19 +216,19 @@ static RPCHelpMan syscoincheckmint()
             {RPCResult::Type::STR_HEX, "txid", "The transaction id"},
         }},
     RPCExamples{
-        HelpExampleCli("syscoincheckmint", "d8ac75c7b4084c85a89d6e28219ff162661efb8b794d4b66e6e9ea52b4139b10")
-        + HelpExampleRpc("syscoincheckmint", "d8ac75c7b4084c85a89d6e28219ff162661efb8b794d4b66e6e9ea52b4139b10")
+        HelpExampleCli("wentunocheckmint", "d8ac75c7b4084c85a89d6e28219ff162661efb8b794d4b66e6e9ea52b4139b10")
+        + HelpExampleRpc("wentunocheckmint", "d8ac75c7b4084c85a89d6e28219ff162661efb8b794d4b66e6e9ea52b4139b10")
     },
     [&](const RPCHelpMan& self, const node::JSONRPCRequest& request) -> UniValue
 {
     std::string strTxHash = request.params[0].get_str();
     strTxHash = RemovePrefix(strTxHash, "0x");  // strip 0x
-    uint256 sysTxid;
-    if(!pnevmtxmintdb || !pnevmtxmintdb->Read(uint256S(strTxHash), sysTxid)){
-       throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Could not read Syscoin txid using mint transaction hash");
+    uint256 WUNOTxid;
+    if(!pnevmtxmintdb || !pnevmtxmintdb->Read(uint256S(strTxHash), WUNOTxid)){
+       throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Could not read wentuno txid using mint transaction hash");
     }
     UniValue output(UniValue::VOBJ);
-    output.pushKV("txid", sysTxid.GetHex());
+    output.pushKV("txid", WUNOTxid.GetHex());
     return output;
 },
     };
@@ -238,10 +238,10 @@ static RPCHelpMan syscoincheckmint()
 void RegisterAssetRPCCommands(CRPCTable &t)
 {
     static const CRPCCommand commands[]{
-        {"syscoin", &syscoingettxroots},
-        {"syscoin", &syscoindecoderawtransaction},
-        {"syscoin", &assetallocationverifyzdag},
-        {"syscoin", &syscoincheckmint},
+        {"wentuno", &wentunogettxroots},
+        {"wentuno", &wentunodecoderawtransaction},
+        {"wentuno", &assetallocationverifyzdag},
+        {"wentuno", &wentunocheckmint},
     };
     for (const auto& c : commands) {
         t.appendCommand(c.name, &c);

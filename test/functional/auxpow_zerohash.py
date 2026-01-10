@@ -9,7 +9,7 @@
 # always been the case, but the test just makes sure this is explicitly
 # tested for the future as well.)
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.blocktools import (
   create_block,
   create_coinbase,
@@ -55,7 +55,7 @@ class P2PBlockGetter (P2PInterface):
     return self.block
 
 
-class AuxpowZeroHashTest (SyscoinTestFramework):
+class AuxpowZeroHashTest (wentunoTestFramework):
 
   def set_test_params (self):
     self.num_nodes = 1
@@ -64,7 +64,7 @@ class AuxpowZeroHashTest (SyscoinTestFramework):
 
   def run_test (self):
     node = self.nodes[0]
-    # SYSCOIN
+    # wentuno
     self.generate(node, 20)
     p2pStore = node.add_p2p_connection (P2PDataStore ())
     p2pGetter = node.add_p2p_connection (P2PBlockGetter ())
@@ -128,12 +128,12 @@ class AuxpowZeroHashTest (SyscoinTestFramework):
     newHash = "%064x" % block.sha256
 
     target = b"%064x" % uint256_from_compact (block.nBits)
-    # SYSCOIN
+    # wentuno
     auxpow_height = bestBlock["height"] - (bestBlock["height"] % 10) - 10
     auxpow_tag_hash = self.nodes[0].getblockhash(auxpow_height)
     auxpow_tag_bytes = bytes.fromhex(auxpow_tag_hash)[::-1]
     height_bytes = struct.pack('<I', auxpow_height) 
-    auxpow_scriptPubKey = CScript([OP_RETURN, b"sys" + auxpow_tag_bytes + height_bytes])
+    auxpow_scriptPubKey = CScript([OP_RETURN, b"WUNO" + auxpow_tag_bytes + height_bytes])
     auxpowHex = computeAuxpow (newHash, target, True, auxpow_scriptPubKey.hex())
     block.auxpow = CAuxPow ()
     block.auxpow.deserialize (BytesIO (bytes.fromhex(auxpowHex)))

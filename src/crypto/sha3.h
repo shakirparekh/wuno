@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_CRYPTO_SHA3_H
-#define SYSCOIN_CRYPTO_SHA3_H
+#ifndef wentuno_CRYPTO_SHA3_H
+#define wentuno_CRYPTO_SHA3_H
 
 #include <span.h>
 
@@ -38,4 +38,4 @@ public:
     SHA3_256& Reset();
 };
 
-#endif // SYSCOIN_CRYPTO_SHA3_H
+#endif // wentuno_CRYPTO_SHA3_H

@@ -6,21 +6,21 @@ from decimal import Decimal
 from test_framework.asset_helpers import (
     create_transaction_with_selector,
     verify_tx_outputs,
-    SYSCOIN_TX_VERSION_ALLOCATION_MINT,
+    wentuno_TX_VERSION_ALLOCATION_MINT,
 )
 
 RPC_USER = 'u'
 RPC_PASSWORD = 'p'
-RPC_URL = 'http://127.0.0.1:18370'  # Syscoin Testnet RPC
-SYSX_GUID = 123456
+RPC_URL = 'http://127.0.0.1:18370'  # wentuno Testnet RPC
+WUNOX_GUID = 123456
 DUST_THRESHOLD = Decimal('0.00000546')
 BLOCK_REWARD = Decimal('50')
-def syscoin_tx(node, tx_type, asset_amounts, sys_amount=Decimal('0'), sys_destination=None, nevm_address=None, spv_proof=None):
+def wentuno_tx(node, tx_type, asset_amounts, WUNO_amount=Decimal('0'), WUNO_destination=None, nevm_address=None, spv_proof=None):
     tx_hex = create_transaction_with_selector(
         node=node,
         tx_type=tx_type,
-        sys_amount=sys_amount,
-        sys_destination=sys_destination,
+        WUNO_amount=WUNO_amount,
+        WUNO_destination=WUNO_destination,
         asset_amounts=asset_amounts,
         nevm_address=nevm_address,
         spv_proof=spv_proof
@@ -36,8 +36,8 @@ def syscoin_tx(node, tx_type, asset_amounts, sys_amount=Decimal('0'), sys_destin
     )
     return txid
 
-def allocation_mint(node, asset_amounts, spv_proof, sys_amount=Decimal('0'), sys_destination=None):
-    txid = syscoin_tx(node, SYSCOIN_TX_VERSION_ALLOCATION_MINT, asset_amounts, sys_amount, sys_destination, spv_proof=spv_proof)
+def allocation_mint(node, asset_amounts, spv_proof, WUNO_amount=Decimal('0'), WUNO_destination=None):
+    txid = wentuno_tx(node, wentuno_TX_VERSION_ALLOCATION_MINT, asset_amounts, WUNO_amount, WUNO_destination, spv_proof=spv_proof)
     return txid
 
 def rpc_call(method, params=None):
@@ -97,7 +97,7 @@ if __name__ == "__main__":
 
     asset_guid = 4294967299
     amount = Decimal('10') / Decimal('1e8')
-    destination = "tsys1qw8n9zq4ynqn94spk0vqsqpfukrn2sjuqf5aecp"
+    destination = "tWUNO1qw8n9zq4ynqn94spk0vqsqpfukrn2sjuqf5aecp"
 
     asset_amounts = [
         (asset_guid, amount, destination)

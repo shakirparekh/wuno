@@ -14,8 +14,8 @@
         <translation type="unfinished">&amp;Ny</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the system clipboard</source>
-        <translation type="unfinished">Kopiera den markerade adressen till systemets Urklipp</translation>
+        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <translation type="unfinished">Kopiera den markerade adressen till WUNOtemets Urklipp</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -58,13 +58,13 @@
         <translation type="unfinished">V&amp;älj</translation>
     </message>
     <message>
-        <source>These are your Syscoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished">Detta är dina Syscoin-adresser för att skicka betalningar. Kontrollera alltid belopp och mottagaradress innan du skickar syscoin.</translation>
+        <source>These are your wentuno addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation type="unfinished">Detta är dina wentuno-adresser för att skicka betalningar. Kontrollera alltid belopp och mottagaradress innan du skickar wentuno.</translation>
     </message>
     <message>
-        <source>These are your Syscoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
+        <source>These are your wentuno addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
 Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">Detta är dina Syscoinadresser för att ta emot betalningar. Använd knappen 'Skapa ny mottagaradress' i mottagsfliken för att skapa nya adresser. Signering är bara tillgänglig för adresser av typen 'legacy'</translation>
+        <translation type="unfinished">Detta är dina wentunoadresser för att ta emot betalningar. Använd knappen 'Skapa ny mottagaradress' i mottagsfliken för att skapa nya adresser. Signering är bara tillgänglig för adresser av typen 'legacy'</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -164,8 +164,8 @@ Försök igen.</translation>
         <translation type="unfinished">Bekräfta kryptering av plånbok</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR SYSCOINS&lt;/b&gt;!</source>
-        <translation type="unfinished">VARNING: Om du krypterar din plånbok och glömmer din lösenfras, &lt;b&gt;FÖRLORAR DU ALLA DINA SYSCOIN&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR wentunoS&lt;/b&gt;!</source>
+        <translation type="unfinished">VARNING: Om du krypterar din plånbok och glömmer din lösenfras, &lt;b&gt;FÖRLORAR DU ALLA DINA wentuno&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -184,8 +184,8 @@ Försök igen.</translation>
         <translation type="unfinished">Ange den gamla lösenfrasen och den nya lösenfrasen för plånboken.</translation>
     </message>
     <message>
-        <source>Remember that encrypting your wallet cannot fully protect your syscoins from being stolen by malware infecting your computer.</source>
-        <translation type="unfinished">Kom ihåg att kryptering av din plånbok inte helt kan skydda dig från stöld av dina syscoins om skadlig kod infekterat din dator.</translation>
+        <source>Remember that encrypting your wallet cannot fully protect your wentunos from being stolen by malware infecting your computer.</source>
+        <translation type="unfinished">Kom ihåg att kryptering av din plånbok inte helt kan skydda dig från stöld av dina wentunos om skadlig kod infekterat din dator.</translation>
     </message>
     <message>
         <source>Wallet to be encrypted</source>
@@ -256,7 +256,7 @@ Försök igen.</translation>
     </message>
 </context>
 <context>
-    <name>SyscoinApplication</name>
+    <name>wentunoApplication</name>
     <message>
         <source>Settings file %1 might be corrupt or invalid.</source>
         <translation type="unfinished">Konfigurationsfil %1 verkar vara korrupt</translation>
@@ -307,8 +307,8 @@ Försök igen.</translation>
         <translation type="unfinished">Belopp</translation>
     </message>
     <message>
-        <source>Enter a Syscoin address (e.g. %1)</source>
-        <translation type="unfinished">Ange en Syscoin-adress (t.ex. %1)</translation>
+        <source>Enter a wentuno address (e.g. %1)</source>
+        <translation type="unfinished">Ange en wentuno-adress (t.ex. %1)</translation>
     </message>
     <message>
         <source>Inbound</source>
@@ -386,7 +386,7 @@ Försök igen.</translation>
     </message>
     </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message>
         <source>&amp;Overview</source>
         <translation type="unfinished">&amp;Översikt</translation>
@@ -453,8 +453,8 @@ Försök igen.</translation>
         <translation type="unfinished">Proxy är &lt;b&gt; aktiverad &lt;/b&gt;: %1</translation>
     </message>
     <message>
-        <source>Send coins to a Syscoin address</source>
-        <translation type="unfinished">Skicka syscoin till en Syscoin-adress</translation>
+        <source>Send coins to a wentuno address</source>
+        <translation type="unfinished">Skicka wentuno till en wentuno-adress</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -497,16 +497,16 @@ Försök igen.</translation>
         <translation type="unfinished">Signera &amp;meddelandet...</translation>
     </message>
     <message>
-        <source>Sign messages with your Syscoin addresses to prove you own them</source>
-        <translation type="unfinished">Signera meddelanden med dina Syscoin-adresser för att bevisa att du äger dem</translation>
+        <source>Sign messages with your wentuno addresses to prove you own them</source>
+        <translation type="unfinished">Signera meddelanden med dina wentuno-adresser för att bevisa att du äger dem</translation>
     </message>
     <message>
         <source>&amp;Verify message…</source>
         <translation type="unfinished">&amp;Bekräfta meddelandet…</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Syscoin addresses</source>
-        <translation type="unfinished">Verifiera meddelanden för att vara säker på att de signerades med angivna Syscoin-adresser</translation>
+        <source>Verify messages to ensure they were signed with specified wentuno addresses</source>
+        <translation type="unfinished">Verifiera meddelanden för att vara säker på att de signerades med angivna wentuno-adresser</translation>
     </message>
     <message>
         <source>&amp;Load PSBT from file…</source>
@@ -565,8 +565,8 @@ Försök igen.</translation>
         <translation type="unfinished">Ansluter till noder...</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and syscoin: URIs)</source>
-        <translation type="unfinished">Begär betalningar (skapar QR-koder och syscoin: -URIer)</translation>
+        <source>Request payments (generates QR codes and wentuno: URIs)</source>
+        <translation type="unfinished">Begär betalningar (skapar QR-koder och wentuno: -URIer)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -616,16 +616,16 @@ Försök igen.</translation>
         <translation type="unfinished">Uppdaterad</translation>
     </message>
     <message>
-        <source>Load Partially Signed Syscoin Transaction</source>
-        <translation type="unfinished">Läs in Delvis signerad Syscoin transaktion (PSBT)</translation>
+        <source>Load Partially Signed wentuno Transaction</source>
+        <translation type="unfinished">Läs in Delvis signerad wentuno transaktion (PSBT)</translation>
     </message>
     <message>
         <source>Load PSBT from &amp;clipboard…</source>
         <translation type="unfinished">Ladda PSBT från &amp;urklipp...</translation>
     </message>
     <message>
-        <source>Load Partially Signed Syscoin Transaction from clipboard</source>
-        <translation type="unfinished">Läs in Delvis signerad Syscoin transaktion (PSBT) från urklipp</translation>
+        <source>Load Partially Signed wentuno Transaction from clipboard</source>
+        <translation type="unfinished">Läs in Delvis signerad wentuno transaktion (PSBT) från urklipp</translation>
     </message>
     <message>
         <source>Node window</source>
@@ -644,8 +644,8 @@ Försök igen.</translation>
         <translation type="unfinished">Mottaga&amp;radresser</translation>
     </message>
     <message>
-        <source>Open a syscoin: URI</source>
-        <translation type="unfinished">Öppna en syscoin:-URI</translation>
+        <source>Open a wentuno: URI</source>
+        <translation type="unfinished">Öppna en wentuno:-URI</translation>
     </message>
     <message>
         <source>Open Wallet</source>
@@ -682,8 +682,8 @@ Försök igen.</translation>
         <translation type="unfinished">Migrera en plånbok</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Syscoin command-line options</source>
-        <translation type="unfinished">Visa %1 hjälpmeddelande för att få en lista med möjliga Syscoin kommandoradsalternativ.</translation>
+        <source>Show the %1 help message to get a list with possible wentuno command-line options</source>
+        <translation type="unfinished">Visa %1 hjälpmeddelande för att få en lista med möjliga wentuno kommandoradsalternativ.</translation>
     </message>
     <message>
         <source>&amp;Mask values</source>
@@ -746,11 +746,11 @@ Försök igen.</translation>
         <translation type="unfinished">V&amp;isa</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
-            <numerusform>%n aktiva anslutningar till Syscoin-nätverket.</numerusform>
-            <numerusform>%n aktiva anslutningar till Syscoin-nätverket.</numerusform>
+            <numerusform>%n aktiva anslutningar till wentuno-nätverket.</numerusform>
+            <numerusform>%n aktiva anslutningar till wentuno-nätverket.</numerusform>
         </translation>
     </message>
     <message>
@@ -1213,8 +1213,8 @@ Försök igen.</translation>
         <translation type="unfinished">Redigera avsändaradress</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Syscoin address.</source>
-        <translation type="unfinished">Den angivna adressen "%1" är inte en giltig Syscoin-adress.</translation>
+        <source>The entered address "%1" is not a valid wentuno address.</source>
+        <translation type="unfinished">Den angivna adressen "%1" är inte en giltig wentuno-adress.</translation>
     </message>
     <message>
         <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
@@ -1296,8 +1296,8 @@ Försök igen.</translation>
         </translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Syscoin block chain.</source>
-        <translation type="unfinished">%1 kommer att ladda ner och lagra en kopia av Syscoins blockkedja.</translation>
+        <source>%1 will download and store a copy of the wentuno block chain.</source>
+        <translation type="unfinished">%1 kommer att ladda ner och lagra en kopia av wentunos blockkedja.</translation>
     </message>
     <message>
         <source>The wallet will also be stored in this directory.</source>
@@ -1381,12 +1381,12 @@ Försök igen.</translation>
         <translation type="unfinished">Formulär</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the syscoin network, as detailed below.</source>
-        <translation type="unfinished">Nyligen gjorda transaktioner visas inte korrekt och därför kan din plånboks saldo visas felaktigt. Denna information kommer att visas korrekt så snart din plånbok har synkroniserats med Syscoin-nätverket enligt informationen nedan.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the wentuno network, as detailed below.</source>
+        <translation type="unfinished">Nyligen gjorda transaktioner visas inte korrekt och därför kan din plånboks saldo visas felaktigt. Denna information kommer att visas korrekt så snart din plånbok har synkroniserats med wentuno-nätverket enligt informationen nedan.</translation>
     </message>
     <message>
-        <source>Attempting to spend syscoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation type="unfinished">Att försöka spendera syscoin som påverkas av transaktioner som ännu inte visas kommer inte accepteras av nätverket.</translation>
+        <source>Attempting to spend wentunos that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <translation type="unfinished">Att försöka spendera wentuno som påverkas av transaktioner som ännu inte visas kommer inte accepteras av nätverket.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -1428,8 +1428,8 @@ Försök igen.</translation>
 <context>
     <name>OpenURIDialog</name>
     <message>
-        <source>Open syscoin URI</source>
-        <translation type="unfinished">Öppna syscoin-URI</translation>
+        <source>Open wentuno URI</source>
+        <translation type="unfinished">Öppna wentuno-URI</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
@@ -1448,12 +1448,12 @@ Försök igen.</translation>
         <translation type="unfinished">&amp;Allmänt</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the system.</source>
+        <source>Automatically start %1 after logging in to the WUNOtem.</source>
         <translation type="unfinished">Starta %1 automatiskt efter inloggningen.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on system login</source>
-        <translation type="unfinished">&amp;Starta %1 vid systemlogin</translation>
+        <source>&amp;Start %1 on WUNOtem login</source>
+        <translation type="unfinished">&amp;Starta %1 vid WUNOtemlogin</translation>
     </message>
     <message>
         <source>Size of &amp;database cache</source>
@@ -1543,16 +1543,16 @@ Försök igen.</translation>
         <translation type="unfinished">Extern signerare (e.g. hårdvaruplånbok)</translation>
     </message>
     <message>
-        <source>Automatically open the Syscoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation type="unfinished">Öppna automatiskt Syscoin-klientens port på routern. Detta fungerar endast om din router stödjer UPnP och det är är aktiverat.</translation>
+        <source>Automatically open the wentuno client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation type="unfinished">Öppna automatiskt wentuno-klientens port på routern. Detta fungerar endast om din router stödjer UPnP och det är är aktiverat.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
         <translation type="unfinished">Tilldela port med hjälp av &amp;UPnP</translation>
     </message>
     <message>
-        <source>Automatically open the Syscoin client port on the router. This only works when your router supports NAT-PMP and it is enabled. The external port could be random.</source>
-        <translation type="unfinished">Öppna automatiskt Syscoin-klientens port på routern. Detta fungerar endast om din router stödjer NAT-PMP och det är är aktiverat. Den externa porten kan vara slumpmässig.</translation>
+        <source>Automatically open the wentuno client port on the router. This only works when your router supports NAT-PMP and it is enabled. The external port could be random.</source>
+        <translation type="unfinished">Öppna automatiskt wentuno-klientens port på routern. Detta fungerar endast om din router stödjer NAT-PMP och det är är aktiverat. Den externa porten kan vara slumpmässig.</translation>
     </message>
     <message>
         <source>Accept connections from outside.</source>
@@ -1563,8 +1563,8 @@ Försök igen.</translation>
         <translation type="unfinished">Tillåt inkommande anslutningar</translation>
     </message>
     <message>
-        <source>Connect to the Syscoin network through a SOCKS5 proxy.</source>
-        <translation type="unfinished">Anslut till Syscoin-nätverket genom en SOCKS5-proxy.</translation>
+        <source>Connect to the wentuno network through a SOCKS5 proxy.</source>
+        <translation type="unfinished">Anslut till wentuno-nätverket genom en SOCKS5-proxy.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1587,20 +1587,20 @@ Försök igen.</translation>
         <translation type="unfinished">&amp;Fönster</translation>
     </message>
     <message>
-        <source>Show the icon in the system tray.</source>
-        <translation type="unfinished">Visa ikonen i systemfältet.</translation>
+        <source>Show the icon in the WUNOtem tray.</source>
+        <translation type="unfinished">Visa ikonen i WUNOtemfältet.</translation>
     </message>
     <message>
         <source>&amp;Show tray icon</source>
-        <translation type="unfinished">&amp;Visa ikon i systemfältet</translation>
+        <translation type="unfinished">&amp;Visa ikon i WUNOtemfältet</translation>
     </message>
     <message>
         <source>Show only a tray icon after minimizing the window.</source>
-        <translation type="unfinished">Visa endast en systemfältsikon vid minimering.</translation>
+        <translation type="unfinished">Visa endast en WUNOtemfältsikon vid minimering.</translation>
     </message>
     <message>
         <source>&amp;Minimize to the tray instead of the taskbar</source>
-        <translation type="unfinished">&amp;Minimera till systemfältet istället för aktivitetsfältet</translation>
+        <translation type="unfinished">&amp;Minimera till WUNOtemfältet istället för aktivitetsfältet</translation>
     </message>
     <message>
         <source>M&amp;inimize on close</source>
@@ -1631,8 +1631,8 @@ Försök igen.</translation>
         <translation type="unfinished">Om myntkontrollfunktioner skall visas eller inte</translation>
     </message>
     <message>
-        <source>Connect to the Syscoin network through a separate SOCKS5 proxy for Tor onion services.</source>
-        <translation type="unfinished">Anslut till Syscoin-nätverket genom en separat SOCKS5-proxy för onion-tjänster genom Tor.</translation>
+        <source>Connect to the wentuno network through a separate SOCKS5 proxy for Tor onion services.</source>
+        <translation type="unfinished">Anslut till wentuno-nätverket genom en separat SOCKS5-proxy för onion-tjänster genom Tor.</translation>
     </message>
     <message>
         <source>Use separate SOCKS&amp;5 proxy to reach peers via Tor onion services:</source>
@@ -1711,8 +1711,8 @@ Försök igen.</translation>
         <translation type="unfinished">Formulär</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Syscoin network after a connection is established, but this process has not completed yet.</source>
-        <translation type="unfinished">Den visade informationen kan vara inaktuell. Plånboken synkroniseras automatiskt med Syscoin-nätverket efter att anslutningen är upprättad, men denna process har inte slutförts ännu.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the wentuno network after a connection is established, but this process has not completed yet.</source>
+        <translation type="unfinished">Den visade informationen kan vara inaktuell. Plånboken synkroniseras automatiskt med wentuno-nätverket efter att anslutningen är upprättad, men denna process har inte slutförts ännu.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1889,20 +1889,20 @@ Försök igen.</translation>
         <translation type="unfinished">Fel vid betalningsbegäran</translation>
     </message>
     <message>
-        <source>Cannot start syscoin: click-to-pay handler</source>
-        <translation type="unfinished">Kan inte starta syscoin: klicka-och-betala hanteraren</translation>
+        <source>Cannot start wentuno: click-to-pay handler</source>
+        <translation type="unfinished">Kan inte starta wentuno: klicka-och-betala hanteraren</translation>
     </message>
     <message>
         <source>URI handling</source>
         <translation type="unfinished">URI-hantering</translation>
     </message>
     <message>
-        <source>'syscoin://' is not a valid URI. Use 'syscoin:' instead.</source>
-        <translation type="unfinished">'syscoin://' är inte en accepterad URI. Använd 'syscoin:' istället.</translation>
+        <source>'wentuno://' is not a valid URI. Use 'wentuno:' instead.</source>
+        <translation type="unfinished">'wentuno://' är inte en accepterad URI. Använd 'wentuno:' istället.</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Syscoin address or malformed URI parameters.</source>
-        <translation type="unfinished">URI kan inte parsas! Detta kan orsakas av en ogiltig Syscoin-adress eller felaktiga URI-parametrar.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid wentuno address or malformed URI parameters.</source>
+        <translation type="unfinished">URI kan inte parsas! Detta kan orsakas av en ogiltig wentuno-adress eller felaktiga URI-parametrar.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -2312,8 +2312,8 @@ Försök igen.</translation>
         <translation type="unfinished">&amp;Meddelande:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Syscoin network.</source>
-        <translation type="unfinished">Ett valfritt meddelande att bifoga betalningsbegäran, vilket visas när begäran öppnas. Obs: Meddelandet kommer inte att sändas med betalningen över Syscoin-nätverket.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the wentuno network.</source>
+        <translation type="unfinished">Ett valfritt meddelande att bifoga betalningsbegäran, vilket visas när begäran öppnas. Obs: Meddelandet kommer inte att sändas med betalningen över wentuno-nätverket.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -2474,7 +2474,7 @@ Försök igen.</translation>
     <name>SendCoinsDialog</name>
     <message>
         <source>Send Coins</source>
-        <translation type="unfinished">Skicka Syscoins</translation>
+        <translation type="unfinished">Skicka wentunos</translation>
     </message>
     <message>
         <source>Coin Control Features</source>
@@ -2569,8 +2569,8 @@ Försök igen.</translation>
         <translation type="unfinished">Dölj alternativ för transaktionsavgift</translation>
     </message>
     <message>
-        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for syscoin transactions than the network can process.</source>
-        <translation type="unfinished">När transaktionsvolymen är mindre än utrymmet i blocken kan både brytardatorer och relänoder kräva en minimiavgift. Det är okej att bara betala denna minimiavgift, men du ska vara medveten om att det kan leda till att en transaktion aldrig bekräftas så fort efterfrågan på syscointransaktioner är större än vad nätverket kan hantera.</translation>
+        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for wentuno transactions than the network can process.</source>
+        <translation type="unfinished">När transaktionsvolymen är mindre än utrymmet i blocken kan både brytardatorer och relänoder kräva en minimiavgift. Det är okej att bara betala denna minimiavgift, men du ska vara medveten om att det kan leda till att en transaktion aldrig bekräftas så fort efterfrågan på wentunotransaktioner är större än vad nätverket kan hantera.</translation>
     </message>
     <message>
         <source>A too low fee might result in a never confirming transaction (read the tooltip)</source>
@@ -2637,8 +2637,8 @@ Försök igen.</translation>
         <translation type="unfinished">Sk&amp;apa Osignerad</translation>
     </message>
     <message>
-        <source>Creates a Partially Signed Syscoin Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
-        <translation type="unfinished">Skapar en delvis signerad Syscoin transaktion (PSBT) att använda vid t.ex. en offline %1 plånbok, eller en PSBT-kompatibel hårdvaruplånbok.</translation>
+        <source>Creates a Partially Signed wentuno Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
+        <translation type="unfinished">Skapar en delvis signerad wentuno transaktion (PSBT) att använda vid t.ex. en offline %1 plånbok, eller en PSBT-kompatibel hårdvaruplånbok.</translation>
     </message>
     <message>
         <source> from wallet '%1'</source>
@@ -2674,9 +2674,9 @@ Försök igen.</translation>
         <translation type="unfinished">Du kan höja avgiften senare (signalerar Replace-By-Fee, BIP-125).</translation>
     </message>
     <message>
-        <source>Please, review your transaction proposal. This will produce a Partially Signed Syscoin Transaction (PSBT) which you can save or copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
+        <source>Please, review your transaction proposal. This will produce a Partially Signed wentuno Transaction (PSBT) which you can save or copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
         <extracomment>Text to inform a user attempting to create a transaction of their current options. At this stage, a user can only create a PSBT. This string is displayed when private keys are disabled and an external signer is not available.</extracomment>
-        <translation type="unfinished">Verifiera ditt transaktionsförslag. Det kommer skapas en delvis signerad Syscoin transaktion (PSBT) som du kan spara eller kopiera och sen signera med t.ex. en offline %1 plånbok, eller en PSBT-kompatibel hårdvaruplånbok.</translation>
+        <translation type="unfinished">Verifiera ditt transaktionsförslag. Det kommer skapas en delvis signerad wentuno transaktion (PSBT) som du kan spara eller kopiera och sen signera med t.ex. en offline %1 plånbok, eller en PSBT-kompatibel hårdvaruplånbok.</translation>
     </message>
     <message>
         <source>Please, review your transaction.</source>
@@ -2735,8 +2735,8 @@ Försök igen.</translation>
         </translation>
     </message>
     <message>
-        <source>Warning: Invalid Syscoin address</source>
-        <translation type="unfinished">Varning: Ogiltig Syscoin-adress</translation>
+        <source>Warning: Invalid wentuno address</source>
+        <translation type="unfinished">Varning: Ogiltig wentuno-adress</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -2774,8 +2774,8 @@ Försök igen.</translation>
         <translation type="unfinished">Välj tidigare använda adresser</translation>
     </message>
     <message>
-        <source>The Syscoin address to send the payment to</source>
-        <translation type="unfinished">Syscoin-adress att sända betalning till</translation>
+        <source>The wentuno address to send the payment to</source>
+        <translation type="unfinished">wentuno-adress att sända betalning till</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
@@ -2790,8 +2790,8 @@ Försök igen.</translation>
         <translation type="unfinished">Beloppett att skicka i vald enhet</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less syscoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation type="unfinished">Avgiften dras från beloppet som skickas. Mottagaren kommer att ta emot mindre syscoin än du angivit i beloppsfältet. Om flera mottagare väljs kommer avgiften att fördelas jämt.</translation>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive less wentunos than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <translation type="unfinished">Avgiften dras från beloppet som skickas. Mottagaren kommer att ta emot mindre wentuno än du angivit i beloppsfältet. Om flera mottagare väljs kommer avgiften att fördelas jämt.</translation>
     </message>
     <message>
         <source>S&amp;ubtract fee from amount</source>
@@ -2810,8 +2810,8 @@ Försök igen.</translation>
         <translation type="unfinished">Ange en etikett för denna adress för att lägga till den i listan med använda adresser</translation>
     </message>
     <message>
-        <source>A message that was attached to the syscoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Syscoin network.</source>
-        <translation type="unfinished">Ett meddelande som bifogades syscoin: -URIn och som sparas med transaktionen som referens. Obs: Meddelandet sänds inte över Syscoin-nätverket.</translation>
+        <source>A message that was attached to the wentuno: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the wentuno network.</source>
+        <translation type="unfinished">Ett meddelande som bifogades wentuno: -URIn och som sparas med transaktionen som referens. Obs: Meddelandet sänds inte över wentuno-nätverket.</translation>
     </message>
 </context>
 <context>
@@ -2836,12 +2836,12 @@ Försök igen.</translation>
         <translation type="unfinished">&amp;Signera meddelande</translation>
     </message>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive syscoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation type="unfinished">Du kan signera meddelanden/avtal med dina adresser för att bevisa att du kan ta emot syscoin som skickats till dem. Var försiktig så du inte signerar något oklart eller konstigt, eftersom phishing-angrepp kan försöka få dig att signera över din identitet till dem. Signera endast väldetaljerade meddelanden som du godkänner.</translation>
+        <source>You can sign messages/agreements with your addresses to prove you can receive wentunos sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <translation type="unfinished">Du kan signera meddelanden/avtal med dina adresser för att bevisa att du kan ta emot wentuno som skickats till dem. Var försiktig så du inte signerar något oklart eller konstigt, eftersom phishing-angrepp kan försöka få dig att signera över din identitet till dem. Signera endast väldetaljerade meddelanden som du godkänner.</translation>
     </message>
     <message>
-        <source>The Syscoin address to sign the message with</source>
-        <translation type="unfinished">Syscoin-adress att signera meddelandet med</translation>
+        <source>The wentuno address to sign the message with</source>
+        <translation type="unfinished">wentuno-adress att signera meddelandet med</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2860,12 +2860,12 @@ Försök igen.</translation>
         <translation type="unfinished">Signatur</translation>
     </message>
     <message>
-        <source>Copy the current signature to the system clipboard</source>
-        <translation type="unfinished">Kopiera signaturen till systemets Urklipp</translation>
+        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <translation type="unfinished">Kopiera signaturen till WUNOtemets Urklipp</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Syscoin address</source>
-        <translation type="unfinished">Signera meddelandet för att bevisa att du äger denna Syscoin-adress</translation>
+        <source>Sign the message to prove you own this wentuno address</source>
+        <translation type="unfinished">Signera meddelandet för att bevisa att du äger denna wentuno-adress</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -2888,8 +2888,8 @@ Försök igen.</translation>
         <translation type="unfinished">Ange mottagarens adress, meddelande (kopiera radbrytningar, mellanslag, TAB-tecken, osv. exakt) och signatur nedan, för att verifiera meddelandet. Undvik att läsa in mera information i signaturen än vad som stod i själva det signerade meddelandet, för att undvika ett man-in-the-middle-angrepp. Notera att detta endast bevisar att den signerande parten tar emot med adressen, det bevisar inte vem som skickat transaktionen!</translation>
     </message>
     <message>
-        <source>The Syscoin address the message was signed with</source>
-        <translation type="unfinished">Syscoin-adress som meddelandet signerades med</translation>
+        <source>The wentuno address the message was signed with</source>
+        <translation type="unfinished">wentuno-adress som meddelandet signerades med</translation>
     </message>
     <message>
         <source>The signed message to verify</source>
@@ -2900,8 +2900,8 @@ Försök igen.</translation>
         <translation type="unfinished">Signatur när meddelandet signerades</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Syscoin address</source>
-        <translation type="unfinished">Verifiera meddelandet för att vara säker på att det signerades med angiven Syscoin-adress</translation>
+        <source>Verify the message to ensure it was signed with the specified wentuno address</source>
+        <translation type="unfinished">Verifiera meddelandet för att vara säker på att det signerades med angiven wentuno-adress</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -3406,7 +3406,7 @@ Gå till Fil &gt; Öppna plånbok för att läsa in en plånbok.
     <name>WalletModel</name>
     <message>
         <source>Send Coins</source>
-        <translation type="unfinished">Skicka Syscoins</translation>
+        <translation type="unfinished">Skicka wentunos</translation>
     </message>
     <message>
         <source>Fee bump error</source>
@@ -3499,14 +3499,14 @@ Gå till Fil &gt; Öppna plånbok för att läsa in en plånbok.
     </message>
 </context>
 <context>
-    <name>syscoin-core</name>
+    <name>wentuno-core</name>
     <message>
         <source>The %s developers</source>
         <translation type="unfinished">%s-utvecklarna</translation>
     </message>
     <message>
-        <source>%s corrupt. Try using the wallet tool syscoin-wallet to salvage or restoring a backup.</source>
-        <translation type="unfinished">%s är korrupt. Testa att använda verktyget syscoin-wallet för att rädda eller återställa en backup.</translation>
+        <source>%s corrupt. Try using the wallet tool wentuno-wallet to salvage or restoring a backup.</source>
+        <translation type="unfinished">%s är korrupt. Testa att använda verktyget wentuno-wallet för att rädda eller återställa en backup.</translation>
     </message>
     <message>
         <source>Cannot obtain a lock on data directory %s. %s is probably already running.</source>
@@ -3714,7 +3714,7 @@ Gå till Fil &gt; Öppna plånbok för att läsa in en plånbok.
     </message>
     <message>
         <source>Insufficient funds</source>
-        <translation type="unfinished">Otillräckligt med syscoins</translation>
+        <translation type="unfinished">Otillräckligt med wentunos</translation>
     </message>
     <message>
         <source>Invalid -onion address or hostname: '%s'</source>
@@ -3781,8 +3781,8 @@ Gå till Fil &gt; Öppna plånbok för att läsa in en plånbok.
         <translation type="unfinished">Rensar blockstore...</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
-        <translation type="unfinished">Minskar -maxconnections från %d till %d, på grund av systembegränsningar.</translation>
+        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <translation type="unfinished">Minskar -maxconnections från %d till %d, på grund av WUNOtembegränsningar.</translation>
     </message>
     <message>
         <source>Rescanning…</source>

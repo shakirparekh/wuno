@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_TEST_UTIL_TXMEMPOOL_H
-#define SYSCOIN_TEST_UTIL_TXMEMPOOL_H
+#ifndef wentuno_TEST_UTIL_TXMEMPOOL_H
+#define wentuno_TEST_UTIL_TXMEMPOOL_H
 
 #include <txmempool.h>
 #include <util/time.h>
@@ -36,4 +36,4 @@ struct TestMemPoolEntryHelper {
     TestMemPoolEntryHelper& SigOpsCost(unsigned int _sigopsCost) { sigOpCost = _sigopsCost; return *this; }
 };
 
-#endif // SYSCOIN_TEST_UTIL_TXMEMPOOL_H
+#endif // wentuno_TEST_UTIL_TXMEMPOOL_H

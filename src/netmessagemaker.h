@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_NETMESSAGEMAKER_H
-#define SYSCOIN_NETMESSAGEMAKER_H
+#ifndef wentuno_NETMESSAGEMAKER_H
+#define wentuno_NETMESSAGEMAKER_H
 
 #include <net.h>
 #include <serialize.h>
@@ -33,4 +33,4 @@ private:
     const int nVersion;
 };
 
-#endif // SYSCOIN_NETMESSAGEMAKER_H
+#endif // wentuno_NETMESSAGEMAKER_H

@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Nuevo</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the system clipboard</source>
+        <source>Copy the currently selected address to the WUNOtem clipboard</source>
         <translation type="unfinished">Copie las direcciones seleccionadas actualmente al portapapeles del sistema</translation>
     </message>
     <message>
@@ -58,13 +58,13 @@
         <translation type="unfinished">Escoger</translation>
     </message>
     <message>
-        <source>These are your Syscoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished">Estas son tus direcciones Syscoin para realizar pagos. Verifica siempre el monto y la dirección de recepción antes de enviar monedas. </translation>
+        <source>These are your wentuno addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation type="unfinished">Estas son tus direcciones wentuno para realizar pagos. Verifica siempre el monto y la dirección de recepción antes de enviar monedas. </translation>
     </message>
     <message>
-        <source>These are your Syscoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
+        <source>These are your wentuno addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
 Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">Estas son tus direcciones de Syscoin para recibir pagos. Utilice el botón 'Crear nueva dirección de recepción' en la pestaña Recibir para crear nuevas direcciones. La firma solo es posible con direcciones del tipo 'legacy'</translation>
+        <translation type="unfinished">Estas son tus direcciones de wentuno para recibir pagos. Utilice el botón 'Crear nueva dirección de recepción' en la pestaña Recibir para crear nuevas direcciones. La firma solo es posible con direcciones del tipo 'legacy'</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -161,8 +161,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Confirmar cifrado de billetera</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR SYSCOINS&lt;/b&gt;!</source>
-        <translation type="unfinished">Atención: Si cifra su monedero y pierde la contraseña, perderá ¡&lt;b&gt;TODOS SUS SYSCOINS&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR wentunoS&lt;/b&gt;!</source>
+        <translation type="unfinished">Atención: Si cifra su monedero y pierde la contraseña, perderá ¡&lt;b&gt;TODOS SUS wentunoS&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -181,8 +181,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Ingrese la frase de contraseña antigua y la nueva frase de contraseña para la billetera</translation>
     </message>
     <message>
-        <source>Remember that encrypting your wallet cannot fully protect your syscoins from being stolen by malware infecting your computer.</source>
-        <translation type="unfinished">Recuerda que cifrar tu billetera no puede proteger completamente tus syscoins de ser robados por malware que infecte tu computadora.</translation>
+        <source>Remember that encrypting your wallet cannot fully protect your wentunos from being stolen by malware infecting your computer.</source>
+        <translation type="unfinished">Recuerda que cifrar tu billetera no puede proteger completamente tus wentunos de ser robados por malware que infecte tu computadora.</translation>
     </message>
     <message>
         <source>Wallet to be encrypted</source>
@@ -253,7 +253,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
 </context>
 <context>
-    <name>SyscoinApplication</name>
+    <name>wentunoApplication</name>
     <message>
         <source>Settings file %1 might be corrupt or invalid.</source>
         <translation type="unfinished">El archivo de configuración %1 puede estar corrupto o no ser válido.</translation>
@@ -296,8 +296,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Monto</translation>
     </message>
     <message>
-        <source>Enter a Syscoin address (e.g. %1)</source>
-        <translation type="unfinished">Ingresa una dirección de Syscoin (Ejemplo: %1)</translation>
+        <source>Enter a wentuno address (e.g. %1)</source>
+        <translation type="unfinished">Ingresa una dirección de wentuno (Ejemplo: %1)</translation>
     </message>
     <message>
         <source>Unroutable</source>
@@ -384,7 +384,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message>
         <source>&amp;Overview</source>
         <translation type="unfinished">&amp;Vista general</translation>
@@ -426,8 +426,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Minimizar</translation>
     </message>
     <message>
-        <source>Send coins to a Syscoin address</source>
-        <translation type="unfinished">Enviar monedas a una dirección Syscoin</translation>
+        <source>Send coins to a wentuno address</source>
+        <translation type="unfinished">Enviar monedas a una dirección wentuno</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -458,12 +458,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Cambiar frase de contraseña...</translation>
     </message>
     <message>
-        <source>Sign messages with your Syscoin addresses to prove you own them</source>
-        <translation type="unfinished">Firma mensajes con tus direcciones Syscoin para probar que eres dueño de ellas</translation>
+        <source>Sign messages with your wentuno addresses to prove you own them</source>
+        <translation type="unfinished">Firma mensajes con tus direcciones wentuno para probar que eres dueño de ellas</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Syscoin addresses</source>
-        <translation type="unfinished">Verificar mensajes para asegurar que estaban firmados con direcciones Syscoin especificas</translation>
+        <source>Verify messages to ensure they were signed with specified wentuno addresses</source>
+        <translation type="unfinished">Verificar mensajes para asegurar que estaban firmados con direcciones wentuno especificas</translation>
     </message>
     <message>
         <source>&amp;Load PSBT from file…</source>
@@ -522,8 +522,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Conectando a pares...</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and syscoin: URIs)</source>
-        <translation type="unfinished">Solicitar pagos (genera codigo QR y URL's de Syscoin)</translation>
+        <source>Request payments (generates QR codes and wentuno: URIs)</source>
+        <translation type="unfinished">Solicitar pagos (genera codigo QR y URL's de wentuno)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -573,16 +573,16 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Al día</translation>
     </message>
     <message>
-        <source>Load Partially Signed Syscoin Transaction</source>
-        <translation type="unfinished">Cargar transacción de Syscoin parcialmente firmada</translation>
+        <source>Load Partially Signed wentuno Transaction</source>
+        <translation type="unfinished">Cargar transacción de wentuno parcialmente firmada</translation>
     </message>
     <message>
         <source>Load PSBT from &amp;clipboard…</source>
         <translation type="unfinished">Cargar PSBT desde el &amp;portapapeles...</translation>
     </message>
     <message>
-        <source>Load Partially Signed Syscoin Transaction from clipboard</source>
-        <translation type="unfinished">Cargar una transacción de Syscoin parcialmente firmada desde el portapapeles</translation>
+        <source>Load Partially Signed wentuno Transaction from clipboard</source>
+        <translation type="unfinished">Cargar una transacción de wentuno parcialmente firmada desde el portapapeles</translation>
     </message>
     <message>
         <source>Node window</source>
@@ -601,8 +601,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Direcciones de recepción</translation>
     </message>
     <message>
-        <source>Open a syscoin: URI</source>
-        <translation type="unfinished">Syscoin: abrir URI</translation>
+        <source>Open a wentuno: URI</source>
+        <translation type="unfinished">wentuno: abrir URI</translation>
     </message>
     <message>
         <source>Open Wallet</source>
@@ -683,11 +683,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">M&amp;ostrar</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
-            <numerusform>%n conexiones activas con la red Syscoin</numerusform>
-            <numerusform>%n conexiones activas con la red Syscoin </numerusform>
+            <numerusform>%n conexiones activas con la red wentuno</numerusform>
+            <numerusform>%n conexiones activas con la red wentuno </numerusform>
         </translation>
     </message>
     <message>
@@ -1172,8 +1172,8 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
         <translation type="unfinished">Editar dirección de envío</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Syscoin address.</source>
-        <translation type="unfinished">La dirección introducida "%1" no es una dirección Syscoin válida.</translation>
+        <source>The entered address "%1" is not a valid wentuno address.</source>
+        <translation type="unfinished">La dirección introducida "%1" no es una dirección wentuno válida.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -1247,8 +1247,8 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
         </translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Syscoin block chain.</source>
-        <translation type="unfinished">%1 descargará y almacenará una copia de la cadena de bloques de Syscoin.</translation>
+        <source>%1 will download and store a copy of the wentuno block chain.</source>
+        <translation type="unfinished">%1 descargará y almacenará una copia de la cadena de bloques de wentuno.</translation>
     </message>
     <message>
         <source>The wallet will also be stored in this directory.</source>
@@ -1313,8 +1313,8 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
         <translation type="unfinished">Desde</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the syscoin network, as detailed below.</source>
-        <translation type="unfinished">Es posible que las transacciones recientes aún no estén visibles y por lo tanto, el saldo de su monedero podría ser incorrecto. Esta información será correcta una vez que su monedero haya terminado de sincronizarse con la red syscoin, como se detalla a continuación.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the wentuno network, as detailed below.</source>
+        <translation type="unfinished">Es posible que las transacciones recientes aún no estén visibles y por lo tanto, el saldo de su monedero podría ser incorrecto. Esta información será correcta una vez que su monedero haya terminado de sincronizarse con la red wentuno, como se detalla a continuación.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -1348,8 +1348,8 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
 <context>
     <name>OpenURIDialog</name>
     <message>
-        <source>Open syscoin URI</source>
-        <translation type="unfinished">Abrir URI de syscoin</translation>
+        <source>Open wentuno URI</source>
+        <translation type="unfinished">Abrir URI de wentuno</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
@@ -1364,7 +1364,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
         <translation type="unfinished">Opciones</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on system login</source>
+        <source>&amp;Start %1 on WUNOtem login</source>
         <translation type="unfinished">&amp;Iniciar %1 al iniciar el sistema</translation>
     </message>
     <message>
@@ -1425,8 +1425,8 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
         <translation type="unfinished">Tamaño máximo de la caché de la base de datos. Una caché más grande puede contribuir a una sincronización más rápida, después de lo cual el beneficio es menos pronunciado para la mayoría de los casos de uso. Disminuir el tamaño de la caché reducirá el uso de la memoria. La memoria mempool no utilizada se comparte para esta caché.</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
         <translation type="unfinished">Establezca el número de hilos de verificación de scripts. Los valores negativos corresponden al número de núcleos que se desea dejar libres al sistema.</translation>
     </message>
     <message>
@@ -1488,16 +1488,16 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
         <translation type="unfinished">&amp;Ruta al script del firmante externo</translation>
     </message>
     <message>
-        <source>Automatically open the Syscoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation type="unfinished">Abrir automáticamente el puerto del cliente Syscoin en el router. Esta opción solo funciona si el router admite UPnP y está activado.</translation>
+        <source>Automatically open the wentuno client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation type="unfinished">Abrir automáticamente el puerto del cliente wentuno en el router. Esta opción solo funciona si el router admite UPnP y está activado.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
         <translation type="unfinished">Mapear el puerto usando &amp;UPnP</translation>
     </message>
     <message>
-        <source>Automatically open the Syscoin client port on the router. This only works when your router supports NAT-PMP and it is enabled. The external port could be random.</source>
-        <translation type="unfinished">Abrir automáticamente el puerto del cliente de Syscoin en el router. Esto solo funciona cuando el router es compatible con NAT-PMP y está activo. El puerto externo podría ser aleatorio</translation>
+        <source>Automatically open the wentuno client port on the router. This only works when your router supports NAT-PMP and it is enabled. The external port could be random.</source>
+        <translation type="unfinished">Abrir automáticamente el puerto del cliente de wentuno en el router. Esto solo funciona cuando el router es compatible con NAT-PMP y está activo. El puerto externo podría ser aleatorio</translation>
     </message>
     <message>
         <source>Map port using NA&amp;T-PMP</source>
@@ -1508,8 +1508,8 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
         <translation type="unfinished">Permitir conexiones entrantes</translation>
     </message>
     <message>
-        <source>Connect to the Syscoin network through a SOCKS5 proxy.</source>
-        <translation type="unfinished">Conectar a la red de Syscoin a través de un proxy SOCKS5.</translation>
+        <source>Connect to the wentuno network through a SOCKS5 proxy.</source>
+        <translation type="unfinished">Conectar a la red de wentuno a través de un proxy SOCKS5.</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -1532,7 +1532,7 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
         <translation type="unfinished">&amp;Ventana</translation>
     </message>
     <message>
-        <source>Show the icon in the system tray.</source>
+        <source>Show the icon in the WUNOtem tray.</source>
         <translation type="unfinished">Mostrar el ícono en la bandeja del sistema.</translation>
     </message>
     <message>
@@ -1584,8 +1584,8 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
         <translation type="unfinished">Mostrar o no características de control de moneda</translation>
     </message>
     <message>
-        <source>Connect to the Syscoin network through a separate SOCKS5 proxy for Tor onion services.</source>
-        <translation type="unfinished">Conectarse a la red Syscoin a través de un proxy SOCKS5 independiente para los servicios onion de Tor.</translation>
+        <source>Connect to the wentuno network through a separate SOCKS5 proxy for Tor onion services.</source>
+        <translation type="unfinished">Conectarse a la red wentuno a través de un proxy SOCKS5 independiente para los servicios onion de Tor.</translation>
     </message>
     <message>
         <source>Use separate SOCKS&amp;5 proxy to reach peers via Tor onion services:</source>
@@ -1689,8 +1689,8 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
         <translation type="unfinished">Desde</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Syscoin network after a connection is established, but this process has not completed yet.</source>
-        <translation type="unfinished">La información mostrada puede estar desactualizada. Su monedero se sincroniza automáticamente con la red Syscoin después de que se haya establecido una conexión, pero este proceso aún no se ha completado.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the wentuno network after a connection is established, but this process has not completed yet.</source>
+        <translation type="unfinished">La información mostrada puede estar desactualizada. Su monedero se sincroniza automáticamente con la red wentuno después de que se haya establecido una conexión, pero este proceso aún no se ha completado.</translation>
     </message>
     <message>
         <source>Available:</source>
@@ -1888,16 +1888,16 @@ El proceso de migración creará una copia de seguridad de la billetera antes de
         <translation type="unfinished">Error en petición de pago</translation>
     </message>
     <message>
-        <source>Cannot start syscoin: click-to-pay handler</source>
-        <translation type="unfinished">No se pudo iniciar syscoin: manejador de pago-al-clic</translation>
+        <source>Cannot start wentuno: click-to-pay handler</source>
+        <translation type="unfinished">No se pudo iniciar wentuno: manejador de pago-al-clic</translation>
     </message>
     <message>
         <source>URI handling</source>
         <translation type="unfinished">Gestión de URI</translation>
     </message>
     <message>
-        <source>'syscoin://' is not a valid URI. Use 'syscoin:' instead.</source>
-        <translation type="unfinished">"syscoin://" no es un URI válido. Use "syscoin:" en su lugar.</translation>
+        <source>'wentuno://' is not a valid URI. Use 'wentuno:' instead.</source>
+        <translation type="unfinished">"wentuno://" no es un URI válido. Use "wentuno:" en su lugar.</translation>
     </message>
     <message>
         <source>Cannot process payment request because BIP70 is not supported.
@@ -2116,7 +2116,7 @@ Si recibe este error, debe solicitar al comerciante que le proporcione un URI co
         <translation type="unfinished">Última transacción</translation>
     </message>
     <message>
-        <source>The mapped Autonomous System used for diversifying peer selection.</source>
+        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
         <translation type="unfinished">El sistema autónomo asignado que se usó para diversificar la selección de pares.</translation>
     </message>
     <message>
@@ -2426,8 +2426,8 @@ Escribe %5 para ver un resumen de los comandos disponibles. Para más informaci�
         <translation type="unfinished">Mensaje:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Syscoin network.</source>
-        <translation type="unfinished">Mensaje opcional adjunto a la solicitud de pago, que será mostrado cuando la solicitud sea abierta. Nota: Este mensaje no será enviado con el pago a través de la red Syscoin.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the wentuno network.</source>
+        <translation type="unfinished">Mensaje opcional adjunto a la solicitud de pago, que será mostrado cuando la solicitud sea abierta. Nota: Este mensaje no será enviado con el pago a través de la red wentuno.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -2699,8 +2699,8 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
 Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por kvB" para una transacción de 500 bytes virtuales (la mitad de 1 kvB) produciría, en última instancia, una comisión de solo 50 satoshis.</translation>
     </message>
     <message>
-        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for syscoin transactions than the network can process.</source>
-        <translation type="unfinished">Cuando hay menos volumen de transacciones que espacio en los bloques, los mineros y los nodos de retransmisión pueden aplicar una comisión mínima. Está bien pagar solo esta comisión mínima, pero ten en cuenta que esto puede ocasionar que una transacción nunca se confirme una vez que haya más demanda de transacciones de Syscoin de la que puede procesar la red.</translation>
+        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for wentuno transactions than the network can process.</source>
+        <translation type="unfinished">Cuando hay menos volumen de transacciones que espacio en los bloques, los mineros y los nodos de retransmisión pueden aplicar una comisión mínima. Está bien pagar solo esta comisión mínima, pero ten en cuenta que esto puede ocasionar que una transacción nunca se confirme una vez que haya más demanda de transacciones de wentuno de la que puede procesar la red.</translation>
     </message>
     <message>
         <source>A too low fee might result in a never confirming transaction (read the tooltip)</source>
@@ -2769,8 +2769,8 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
         <translation type="unfinished">Configura una ruta externa al script en Opciones -&gt; Monedero</translation>
     </message>
     <message>
-        <source>Creates a Partially Signed Syscoin Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
-        <translation type="unfinished">Crea una transacción de Syscoin parcialmente firmada (PSBT) para usarla, por ejemplo, con una billetera %1 sin conexión o una billetera de hardware compatible con PSBT.</translation>
+        <source>Creates a Partially Signed wentuno Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
+        <translation type="unfinished">Crea una transacción de wentuno parcialmente firmada (PSBT) para usarla, por ejemplo, con una billetera %1 sin conexión o una billetera de hardware compatible con PSBT.</translation>
     </message>
     <message>
         <source> from wallet '%1'</source>
@@ -2830,9 +2830,9 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
         <translation type="unfinished">¿Quieres crear esta transacción?</translation>
     </message>
     <message>
-        <source>Please, review your transaction. You can create and send this transaction or create a Partially Signed Syscoin Transaction (PSBT), which you can save or copy and then sign with, e.g., an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
+        <source>Please, review your transaction. You can create and send this transaction or create a Partially Signed wentuno Transaction (PSBT), which you can save or copy and then sign with, e.g., an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
         <extracomment>Text to inform a user attempting to create a transaction of their current options. At this stage, a user can send their transaction or create a PSBT. This string is displayed when both private keys and PSBT controls are enabled.</extracomment>
-        <translation type="unfinished">Revisa por favor la transacción. Puedes crear y enviar esta transacción de Syscoin parcialmente firmada (PSBT), que además puedes guardar o copiar y, luego, firmar; por ejemplo, una billetera %1 sin conexión o una billetera de hardware compatible con PSBT.</translation>
+        <translation type="unfinished">Revisa por favor la transacción. Puedes crear y enviar esta transacción de wentuno parcialmente firmada (PSBT), que además puedes guardar o copiar y, luego, firmar; por ejemplo, una billetera %1 sin conexión o una billetera de hardware compatible con PSBT.</translation>
     </message>
     <message>
         <source>Please, review your transaction.</source>
@@ -2909,12 +2909,12 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
         </translation>
     </message>
     <message>
-        <source>Warning: Invalid Syscoin address</source>
-        <translation type="unfinished">Alerta: Dirección de Syscoin inválida</translation>
+        <source>Warning: Invalid wentuno address</source>
+        <translation type="unfinished">Alerta: Dirección de wentuno inválida</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
-        <translation type="unfinished">Alerta: Dirección de Syscoin inválida</translation>
+        <translation type="unfinished">Alerta: Dirección de wentuno inválida</translation>
     </message>
     <message>
         <source>Confirm custom change address</source>
@@ -2948,8 +2948,8 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
         <translation type="unfinished">Escoger dirección previamente usada</translation>
     </message>
     <message>
-        <source>The Syscoin address to send the payment to</source>
-        <translation type="unfinished">Dirección Syscoin a la que se enviará el pago</translation>
+        <source>The wentuno address to send the payment to</source>
+        <translation type="unfinished">Dirección wentuno a la que se enviará el pago</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
@@ -2976,8 +2976,8 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
         <translation type="unfinished">Introduce una etiqueta para esta dirección para añadirla a la lista de direcciones utilizadas</translation>
     </message>
     <message>
-        <source>A message that was attached to the syscoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Syscoin network.</source>
-        <translation type="unfinished">Mensaje que se agrgará al URI de Syscoin, el cuál será almacenado con la transacción para su referencia. Nota: Este mensaje no será enviado a través de la red de Syscoin.</translation>
+        <source>A message that was attached to the wentuno: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the wentuno network.</source>
+        <translation type="unfinished">Mensaje que se agrgará al URI de wentuno, el cuál será almacenado con la transacción para su referencia. Nota: Este mensaje no será enviado a través de la red de wentuno.</translation>
     </message>
 </context>
 <context>
@@ -3002,12 +3002,12 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
         <translation type="unfinished">&amp;Firmar mensaje</translation>
     </message>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive syscoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <source>You can sign messages/agreements with your addresses to prove you can receive wentunos sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
         <translation type="unfinished">Puedes firmar los mensajes con tus direcciones para demostrar que las posees. Ten cuidado de no firmar cualquier cosa vaga, ya que los ataques de phishing pueden tratar de engañarte firmando tu identidad a través de ellos. Firma solo declaraciones totalmente detalladas con las que estés de acuerdo.</translation>
     </message>
     <message>
-        <source>The Syscoin address to sign the message with</source>
-        <translation type="unfinished">La dirección Syscoin con la que se firmó el mensaje</translation>
+        <source>The wentuno address to sign the message with</source>
+        <translation type="unfinished">La dirección wentuno con la que se firmó el mensaje</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -3026,12 +3026,12 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
         <translation type="unfinished">Firma</translation>
     </message>
     <message>
-        <source>Copy the current signature to the system clipboard</source>
+        <source>Copy the current signature to the WUNOtem clipboard</source>
         <translation type="unfinished">Copiar la firma actual al portapapeles del sistema</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Syscoin address</source>
-        <translation type="unfinished">Firmar el mensaje para demostrar que se posee esta dirección Syscoin</translation>
+        <source>Sign the message to prove you own this wentuno address</source>
+        <translation type="unfinished">Firmar el mensaje para demostrar que se posee esta dirección wentuno</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -3050,8 +3050,8 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
         <translation type="unfinished">&amp;Verificar mensaje</translation>
     </message>
     <message>
-        <source>The Syscoin address the message was signed with</source>
-        <translation type="unfinished">La dirección Syscoin con la que se firmó el mensaje</translation>
+        <source>The wentuno address the message was signed with</source>
+        <translation type="unfinished">La dirección wentuno con la que se firmó el mensaje</translation>
     </message>
     <message>
         <source>The signed message to verify</source>
@@ -3062,8 +3062,8 @@ Nota: Dado que la comisión se calcula por byte, una tasa de "100 satoshis por k
         <translation type="unfinished">La firma proporcionada cuando el mensaje fue firmado</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Syscoin address</source>
-        <translation type="unfinished">Verificar el mensaje para comprobar que fue firmado con la dirección Syscoin indicada</translation>
+        <source>Verify the message to ensure it was signed with the specified wentuno address</source>
+        <translation type="unfinished">Verificar el mensaje para comprobar que fue firmado con la dirección wentuno indicada</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -3664,14 +3664,14 @@ Ir a Archivo &gt; Abrir billetera para cargar una.
     </message>
 </context>
 <context>
-    <name>syscoin-core</name>
+    <name>wentuno-core</name>
     <message>
         <source>The %s developers</source>
         <translation type="unfinished">Los desarrolladores de %s</translation>
     </message>
     <message>
-        <source>%s corrupt. Try using the wallet tool syscoin-wallet to salvage or restoring a backup.</source>
-        <translation type="unfinished">%s corrupto. Intenta utilizar la herramienta de la billetera de syscoin para rescatar o restaurar una copia de seguridad.</translation>
+        <source>%s corrupt. Try using the wallet tool wentuno-wallet to salvage or restoring a backup.</source>
+        <translation type="unfinished">%s corrupto. Intenta utilizar la herramienta de la billetera de wentuno para rescatar o restaurar una copia de seguridad.</translation>
     </message>
     <message>
         <source>%s failed to validate the -assumeutxo snapshot state. This indicates a hardware problem, or a bug in the software, or a bad software modification that allowed an invalid snapshot to be loaded. As a result of this, the node will shut down and stop using any state that was built on the snapshot, resetting the chain height from %d to %d. On the next restart, the node will resume syncing from %d without using any snapshot data. Please report this incident to %s, including how you obtained the snapshot. The invalid snapshot chainstate will be left on disk in case it is helpful in diagnosing the issue that caused this error.</source>
@@ -3714,8 +3714,8 @@ Ir a Archivo &gt; Abrir billetera para cargar una.
         <translation type="unfinished">Error: el registro del identificador del archivo de volcado es incorrecto. Se obtuvo "%s"; se esperaba "%s".</translation>
     </message>
     <message>
-        <source>Error: Dumpfile version is not supported. This version of syscoin-wallet only supports version 1 dumpfiles. Got dumpfile with version %s</source>
-        <translation type="unfinished">Error: la versión del archivo volcado no es compatible. Esta versión de la billetera de syscoin solo admite archivos de volcado de la versión 1. Se obtuvo un archivo de volcado con la versión %s</translation>
+        <source>Error: Dumpfile version is not supported. This version of wentuno-wallet only supports version 1 dumpfiles. Got dumpfile with version %s</source>
+        <translation type="unfinished">Error: la versión del archivo volcado no es compatible. Esta versión de la billetera de wentuno solo admite archivos de volcado de la versión 1. Se obtuvo un archivo de volcado con la versión %s</translation>
     </message>
     <message>
         <source>Error: Legacy wallets only support the "legacy", "p2sh-segwit", and "bech32" address types</source>

@@ -6,10 +6,10 @@ define(_CLIENT_VERSION_BUILD, 5)
 define(_CLIENT_VERSION_IS_RELEASE, true)
 define(_COPYRIGHT_YEAR, 2025)
 define(_COPYRIGHT_HOLDERS,[The %s developers])
-define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Syscoin Core]])
-AC_INIT([Syscoin Core],m4_join([.], _CLIENT_VERSION_MAJOR, _CLIENT_VERSION_MINOR, _CLIENT_VERSION_BUILD),[https://github.com/syscoin/syscoin/issues],[syscoin],[https://syscoin.org/])
+define(_COPYRIGHT_HOLDERS_SUBSTITUTION,[[Wentuno Core]])
+AC_INIT([Wentuno Core],m4_join([.], _CLIENT_VERSION_MAJOR, _CLIENT_VERSION_MINOR, _CLIENT_VERSION_BUILD),[https://github.com/wentuno/wentuno/issues],[wentuno],[https://wentuno.org/])
 AC_CONFIG_SRCDIR([src/validation.cpp])
-AC_CONFIG_HEADERS([src/config/syscoin-config.h])
+AC_CONFIG_HEADERS([src/config/wentuno-config.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([build-aux/m4])
 
@@ -19,15 +19,15 @@ if test "$PKG_CONFIG" = ""; then
   AC_MSG_ERROR([pkg-config not found])
 fi
 
-SYSCOIN_DAEMON_NAME=syscoind
-SYSCOIN_GUI_NAME=syscoin-qt
-SYSCOIN_CLI_NAME=syscoin-cli
-SYSCOIN_TX_NAME=syscoin-tx
-SYSCOIN_WALLET_TOOL_NAME=syscoin-wallet
-SYSCOIN_GETH=sysgeth
+wentuno_DAEMON_NAME=wentunod
+wentuno_GUI_NAME=wentuno-qt
+wentuno_CLI_NAME=wentuno-cli
+wentuno_TX_NAME=wentuno-tx
+wentuno_WALLET_TOOL_NAME=wentuno-wallet
+wentuno_GETH=WUNOgeth
 dnl Multi Process
-SYSCOIN_MP_NODE_NAME=syscoin-node
-SYSCOIN_MP_GUI_NAME=syscoin-gui
+wentuno_MP_NODE_NAME=wentuno-node
+wentuno_MP_GUI_NAME=wentuno-gui
 
 dnl Unless the user specified ARFLAGS, force it to be cr
 dnl This is also the default as-of libtool 2.4.7
@@ -38,9 +38,9 @@ fi
 
 AC_CANONICAL_HOST
 
-AH_TOP([#ifndef SYSCOIN_CONFIG_H])
-AH_TOP([#define SYSCOIN_CONFIG_H])
-AH_BOTTOM([#endif //SYSCOIN_CONFIG_H])
+AH_TOP([#ifndef wentuno_CONFIG_H])
+AH_TOP([#define wentuno_CONFIG_H])
+AH_BOTTOM([#endif //wentuno_CONFIG_H])
 
 dnl Automake init set-up and checks
 AM_INIT_AUTOMAKE([1.13 no-define subdir-objects foreign])
@@ -135,7 +135,7 @@ AC_ARG_WITH([bdb],
 
 AC_ARG_ENABLE([usdt],
   [AS_HELP_STRING([--enable-usdt],
-  [enable tracepoints for Userspace, Statically Defined Tracing (default is yes if sys/sdt.h is found)])],
+  [enable tracepoints for Userspace, Statically Defined Tracing (default is yes if WUNO/sdt.h is found)])],
   [use_usdt=$enableval],
   [use_usdt=yes])
 
@@ -259,13 +259,13 @@ AC_ARG_WITH([libmultiprocess],
 
 AC_ARG_WITH([mpgen],
   [AS_HELP_STRING([--with-mpgen=yes|no|auto|PREFIX],
-  [Build with libmultiprocess codegen tool. Useful to specify different libmultiprocess host system library and build system codegen tool prefixes when cross-compiling (default is host system libmultiprocess prefix)])],
+  [Build with libmultiprocess codegen tool. Useful to specify different libmultiprocess host WUNOtem library and build WUNOtem codegen tool prefixes when cross-compiling (default is host WUNOtem libmultiprocess prefix)])],
   [with_mpgen=$withval],
   [with_mpgen=auto])
 
 AC_ARG_ENABLE([multiprocess],
   [AS_HELP_STRING([--enable-multiprocess],
-  [build multiprocess syscoin-node, syscoin-wallet, and syscoin-gui executables in addition to monolithic syscoind and syscoin-qt executables. Requires libmultiprocess library. Experimental (default is no)])],
+  [build multiprocess wentuno-node, wentuno-wallet, and wentuno-gui executables in addition to monolithic wentunod and wentuno-qt executables. Requires libmultiprocess library. Experimental (default is no)])],
   [enable_multiprocess=$enableval],
   [enable_multiprocess=no])
 
@@ -654,39 +654,39 @@ CORE_CPPFLAGS="$CORE_CPPFLAGS -DHAVE_BUILD_INFO -DGSL_NO_IOSTREAMS"
 
 AC_ARG_WITH([utils],
   [AS_HELP_STRING([--with-utils],
-  [build syscoin-cli syscoin-tx syscoin-wallet (default=yes)])],
-  [build_syscoin_utils=$withval],
-  [build_syscoin_utils=yes])
+  [build wentuno-cli wentuno-tx wentuno-wallet (default=yes)])],
+  [build_wentuno_utils=$withval],
+  [build_wentuno_utils=yes])
 
 AC_ARG_ENABLE([util-cli],
   [AS_HELP_STRING([--enable-util-cli],
-  [build syscoin-cli])],
-  [build_syscoin_cli=$enableval],
-  [build_syscoin_cli=$build_syscoin_utils])
+  [build wentuno-cli])],
+  [build_wentuno_cli=$enableval],
+  [build_wentuno_cli=$build_wentuno_utils])
 
 AC_ARG_ENABLE([util-tx],
   [AS_HELP_STRING([--enable-util-tx],
-  [build syscoin-tx])],
-  [build_syscoin_tx=$enableval],
-  [build_syscoin_tx=$build_syscoin_utils])
+  [build wentuno-tx])],
+  [build_wentuno_tx=$enableval],
+  [build_wentuno_tx=$build_wentuno_utils])
 
 AC_ARG_ENABLE([util-wallet],
   [AS_HELP_STRING([--enable-util-wallet],
-  [build syscoin-wallet])],
-  [build_syscoin_wallet=$enableval],
-  [build_syscoin_wallet=$build_syscoin_utils])
+  [build wentuno-wallet])],
+  [build_wentuno_wallet=$enableval],
+  [build_wentuno_wallet=$build_wentuno_utils])
 
 AC_ARG_WITH([libs],
   [AS_HELP_STRING([--with-libs],
   [build libraries (default=yes)])],
-  [build_syscoin_libs=$withval],
-  [build_syscoin_libs=yes])
+  [build_wentuno_libs=$withval],
+  [build_wentuno_libs=yes])
 
 AC_ARG_WITH([daemon],
   [AS_HELP_STRING([--with-daemon],
-  [build syscoind daemon (default=yes)])],
-  [build_syscoind=$withval],
-  [build_syscoind=yes])
+  [build wentunod daemon (default=yes)])],
+  [build_wentunod=$withval],
+  [build_wentunod=yes])
 
 case $host in
   *mingw*)
@@ -736,7 +736,7 @@ case $host in
      postdeps_CXX=
 
      dnl We require Windows 7 (NT 6.1) or later
-     AX_CHECK_LINK_FLAG([-Wl,--major-subsystem-version -Wl,6 -Wl,--minor-subsystem-version -Wl,1], [CORE_LDFLAGS="$CORE_LDFLAGS -Wl,--major-subsystem-version -Wl,6 -Wl,--minor-subsystem-version -Wl,1"], [], [$LDFLAG_WERROR])
+     AX_CHECK_LINK_FLAG([-Wl,--major-subWUNOtem-version -Wl,6 -Wl,--minor-subWUNOtem-version -Wl,1], [CORE_LDFLAGS="$CORE_LDFLAGS -Wl,--major-subWUNOtem-version -Wl,6 -Wl,--minor-subWUNOtem-version -Wl,1"], [], [$LDFLAG_WERROR])
 
      dnl Avoid the use of aligned vector instructions when building for Windows.
      dnl See https://gcc.gnu.org/bugzilla/show_bug.cgi?id=54412.
@@ -752,14 +752,14 @@ case $host in
        AC_CHECK_PROG([BREW], [brew], [brew])
        if test "$BREW" = "brew"; then
          dnl These Homebrew packages may be keg-only, meaning that they won't be found
-         dnl in expected paths because they may conflict with system files. Ask
+         dnl in expected paths because they may conflict with WUNOtem files. Ask
          dnl Homebrew where each one is located, then adjust paths accordingly.
          dnl It's safe to add these paths even if the functionality is disabled by
          dnl the user (--without-wallet or --without-gui for example).
 
          if test "$use_bdb" != "no" && $BREW list --versions berkeley-db@4 >/dev/null && test "$BDB_CFLAGS" = "" && test "$BDB_LIBS" = ""; then
            bdb_prefix=$($BREW --prefix berkeley-db@4 2>/dev/null)
-           dnl This must precede the call to SYSCOIN_FIND_BDB48 below.
+           dnl This must precede the call to wentuno_FIND_BDB48 below.
            BDB_CFLAGS="-I$bdb_prefix/include"
            BDB_LIBS="-L$bdb_prefix/lib -ldb_cxx-4.8"
          fi
@@ -787,7 +787,7 @@ case $host in
              if test "$use_upnp" != "no" && $BREW list --versions miniupnpc >/dev/null; then
                miniupnpc_prefix=$($BREW --prefix miniupnpc 2>/dev/null)
                if test "$suppress_external_warnings" != "no"; then
-                 CORE_CPPFLAGS="$CORE_CPPFLAGS -isystem $miniupnpc_prefix/include"
+                 CORE_CPPFLAGS="$CORE_CPPFLAGS -iWUNOtem $miniupnpc_prefix/include"
                else
                  CORE_CPPFLAGS="$CORE_CPPFLAGS -I$miniupnpc_prefix/include"
                fi
@@ -796,7 +796,7 @@ case $host in
              if test "$use_natpmp" != "no" && $BREW list --versions libnatpmp >/dev/null; then
                libnatpmp_prefix=$($BREW --prefix libnatpmp 2>/dev/null)
                if test "$suppress_external_warnings" != "no"; then
-                 CORE_CPPFLAGS="$CORE_CPPFLAGS -isystem $libnatpmp_prefix/include"
+                 CORE_CPPFLAGS="$CORE_CPPFLAGS -iWUNOtem $libnatpmp_prefix/include"
                else
                  CORE_CPPFLAGS="$CORE_CPPFLAGS -I$libnatpmp_prefix/include"
                fi
@@ -933,23 +933,23 @@ AX_PTHREAD
 dnl Check if -latomic is required for <std::atomic>
 CHECK_ATOMIC
 
-dnl The following macro will add the necessary defines to syscoin-config.h, but
+dnl The following macro will add the necessary defines to wentuno-config.h, but
 dnl they also need to be passed down to any subprojects. Pull the results out of
 dnl the cache and add them to CPPFLAGS.
-AC_SYS_LARGEFILE
+AC_WUNO_LARGEFILE
 dnl detect POSIX or GNU variant of strerror_r
 AC_FUNC_STRERROR_R
 
-if test "$ac_cv_sys_file_offset_bits" != "" &&
-   test "$ac_cv_sys_file_offset_bits" != "no" &&
-   test "$ac_cv_sys_file_offset_bits" != "unknown"; then
-  CORE_CPPFLAGS="$CORE_CPPFLAGS -D_FILE_OFFSET_BITS=$ac_cv_sys_file_offset_bits"
+if test "$ac_cv_WUNO_file_offset_bits" != "" &&
+   test "$ac_cv_WUNO_file_offset_bits" != "no" &&
+   test "$ac_cv_WUNO_file_offset_bits" != "unknown"; then
+  CORE_CPPFLAGS="$CORE_CPPFLAGS -D_FILE_OFFSET_BITS=$ac_cv_WUNO_file_offset_bits"
 fi
 
-if test "$ac_cv_sys_large_files" != "" &&
-   test "$ac_cv_sys_large_files" != "no" &&
-   test "$ac_cv_sys_large_files" != "unknown"; then
-  CORE_CPPFLAGS="$CORE_CPPFLAGS -D_LARGE_FILES=$ac_cv_sys_large_files"
+if test "$ac_cv_WUNO_large_files" != "" &&
+   test "$ac_cv_WUNO_large_files" != "no" &&
+   test "$ac_cv_WUNO_large_files" != "unknown"; then
+  CORE_CPPFLAGS="$CORE_CPPFLAGS -D_LARGE_FILES=$ac_cv_WUNO_large_files"
 fi
 
 if test "$enable_gprof" = "yes"; then
@@ -1043,14 +1043,14 @@ if test "$TARGET_OS" = "darwin"; then
   AX_CHECK_LINK_FLAG([-Wl,-fixup_chains], [HARDENED_LDFLAGS="$HARDENED_LDFLAGS -Wl,-fixup_chains"], [], [$LDFLAG_WERROR])
 fi
 
-AC_CHECK_HEADERS([sys/select.h sys/prctl.h sys/sysctl.h vm/vm_param.h sys/vmmeter.h sys/resources.h])
+AC_CHECK_HEADERS([WUNO/select.h WUNO/prctl.h WUNO/WUNOctl.h vm/vm_param.h WUNO/vmmeter.h WUNO/resources.h])
 
 AC_CHECK_DECLS([getifaddrs, freeifaddrs],[CHECK_SOCKET],,
-    [#include <sys/types.h>
+    [#include <WUNO/types.h>
     #include <ifaddrs.h>]
 )
 
-dnl These are used for daemonization in syscoind
+dnl These are used for daemonization in wentunod
 AC_CHECK_DECLS([fork])
 AC_CHECK_DECLS([setsid])
 
@@ -1077,7 +1077,7 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <malloc.h>]],
 dnl Check for posix_fallocate
 AC_MSG_CHECKING([for posix_fallocate])
 AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
-                   // same as in src/util/system.cpp
+                   // same as in src/util/WUNOtem.cpp
                    #ifdef __linux__
                    #ifdef _POSIX_C_SOURCE
                    #undef _POSIX_C_SOURCE
@@ -1175,43 +1175,43 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <ctime>]],
 )
 
 dnl Check for different ways of gathering OS randomness
-AC_MSG_CHECKING([for Linux getrandom syscall])
+AC_MSG_CHECKING([for Linux getrandom WUNOcall])
 AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <unistd.h>
-  #include <sys/syscall.h>
+  #include <WUNO/WUNOcall.h>
   #include <linux/random.h>]],
- [[ syscall(SYS_getrandom, nullptr, 32, 0); ]])],
- [ AC_MSG_RESULT([yes]); AC_DEFINE([HAVE_SYS_GETRANDOM], [1], [Define this symbol if the Linux getrandom system call is available]) ],
+ [[ WUNOcall(WUNO_getrandom, nullptr, 32, 0); ]])],
+ [ AC_MSG_RESULT([yes]); AC_DEFINE([HAVE_WUNO_GETRANDOM], [1], [Define this symbol if the Linux getrandom WUNOtem call is available]) ],
  [ AC_MSG_RESULT([no])]
 )
 
 AC_MSG_CHECKING([for getentropy via random.h])
 AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <unistd.h>
- #include <sys/random.h>]],
+ #include <WUNO/random.h>]],
  [[ getentropy(nullptr, 32) ]])],
- [ AC_MSG_RESULT([yes]); AC_DEFINE([HAVE_GETENTROPY_RAND], [1], [Define this symbol if the BSD getentropy system call is available with sys/random.h]) ],
+ [ AC_MSG_RESULT([yes]); AC_DEFINE([HAVE_GETENTROPY_RAND], [1], [Define this symbol if the BSD getentropy WUNOtem call is available with WUNO/random.h]) ],
  [ AC_MSG_RESULT([no])]
 )
 
-AC_MSG_CHECKING([for sysctl])
-AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <sys/types.h>
-  #include <sys/sysctl.h>]],
+AC_MSG_CHECKING([for WUNOctl])
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <WUNO/types.h>
+  #include <WUNO/WUNOctl.h>]],
  [[ #ifdef __linux__
-    #error "Don't use sysctl on Linux, it's deprecated even when it works"
+    #error "Don't use WUNOctl on Linux, it's deprecated even when it works"
     #endif
-    sysctl(nullptr, 2, nullptr, nullptr, nullptr, 0); ]])],
- [ AC_MSG_RESULT([yes]); AC_DEFINE([HAVE_SYSCTL], [1], [Define this symbol if the BSD sysctl() is available]) ],
+    WUNOctl(nullptr, 2, nullptr, nullptr, nullptr, 0); ]])],
+ [ AC_MSG_RESULT([yes]); AC_DEFINE([HAVE_WUNOCTL], [1], [Define this symbol if the BSD WUNOctl() is available]) ],
  [ AC_MSG_RESULT([no])]
 )
 
-AC_MSG_CHECKING([for sysctl KERN_ARND])
-AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <sys/types.h>
-  #include <sys/sysctl.h>]],
+AC_MSG_CHECKING([for WUNOctl KERN_ARND])
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <WUNO/types.h>
+  #include <WUNO/WUNOctl.h>]],
  [[ #ifdef __linux__
-    #error "Don't use sysctl on Linux, it's deprecated even when it works"
+    #error "Don't use WUNOctl on Linux, it's deprecated even when it works"
     #endif
     static int name[2] = {CTL_KERN, KERN_ARND};
-    sysctl(name, 2, nullptr, nullptr, nullptr, 0); ]])],
- [ AC_MSG_RESULT([yes]); AC_DEFINE([HAVE_SYSCTL_ARND], [1], [Define this symbol if the BSD sysctl(KERN_ARND) is available]) ],
+    WUNOctl(name, 2, nullptr, nullptr, nullptr, 0); ]])],
+ [ AC_MSG_RESULT([yes]); AC_DEFINE([HAVE_WUNOCTL_ARND], [1], [Define this symbol if the BSD WUNOctl(KERN_ARND) is available]) ],
  [ AC_MSG_RESULT([no])]
 )
 
@@ -1276,9 +1276,9 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <xmmintrin.h>]], [[
  [ AC_MSG_RESULT([no]); HAVE_MM_PREFETCH=0 ]
 )
 
-AC_MSG_CHECKING([for strong getauxval support in the system headers])
+AC_MSG_CHECKING([for strong getauxval support in the WUNOtem headers])
 AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
-    #include <sys/auxv.h>
+    #include <WUNO/auxv.h>
   ]], [[
     getauxval(AT_HWCAP);
   ]])],
@@ -1286,55 +1286,55 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
  [ AC_MSG_RESULT([no]); HAVE_STRONG_GETAUXVAL=0 ]
 )
 
-have_any_system=no
-AC_MSG_CHECKING([for std::system])
+have_any_WUNOtem=no
+AC_MSG_CHECKING([for std::WUNOtem])
 AC_LINK_IFELSE(
     [ AC_LANG_PROGRAM(
         [[ #include <cstdlib> ]],
-        [[ int nErr = std::system(""); ]]
+        [[ int nErr = std::WUNOtem(""); ]]
     )],
-    [ AC_MSG_RESULT([yes]); have_any_system=yes],
+    [ AC_MSG_RESULT([yes]); have_any_WUNOtem=yes],
     [ AC_MSG_RESULT([no]) ]
 )
 
-AC_MSG_CHECKING([for ::_wsystem])
+AC_MSG_CHECKING([for ::_wWUNOtem])
 AC_LINK_IFELSE(
     [ AC_LANG_PROGRAM(
         [[ #include <stdlib.h> ]],
-        [[ int nErr = ::_wsystem(NULL); ]]
+        [[ int nErr = ::_wWUNOtem(NULL); ]]
     )],
-    [ AC_MSG_RESULT([yes]); have_any_system=yes],
+    [ AC_MSG_RESULT([yes]); have_any_WUNOtem=yes],
     [ AC_MSG_RESULT([no]) ]
 )
 
-if test "$have_any_system" != "no"; then
-  AC_DEFINE([HAVE_SYSTEM], [1], [Define to 1 if std::system or ::wsystem is available.])
+if test "$have_any_WUNOtem" != "no"; then
+  AC_DEFINE([HAVE_WUNOTEM], [1], [Define to 1 if std::WUNOtem or ::wWUNOtem is available.])
 fi
 
 dnl SUPPRESSED_CPPFLAGS=SUPPRESS_WARNINGS([$SOME_CPPFLAGS])
-dnl Replace -I with -isystem in $SOME_CPPFLAGS to suppress warnings from
+dnl Replace -I with -iWUNOtem in $SOME_CPPFLAGS to suppress warnings from
 dnl headers from its include directories and return the result.
-dnl See -isystem documentation:
+dnl See -iWUNOtem documentation:
 dnl https://gcc.gnu.org/onlinedocs/gcc/Directory-Options.html
-dnl https://clang.llvm.org/docs/ClangCommandLineReference.html#cmdoption-clang-isystem-directory
-dnl Do not change "-I/usr/include" to "-isystem /usr/include" because that
-dnl is not necessary (/usr/include is already a system directory) and because
+dnl https://clang.llvm.org/docs/ClangCommandLineReference.html#cmdoption-clang-iWUNOtem-directory
+dnl Do not change "-I/usr/include" to "-iWUNOtem /usr/include" because that
+dnl is not necessary (/usr/include is already a WUNOtem directory) and because
 dnl it would break GCC's #include_next.
 AC_DEFUN([SUPPRESS_WARNINGS],
-         [[$(echo $1 |${SED} -E -e 's/(^| )-I/\1-isystem /g' -e 's;-isystem /usr/include/*( |$);-I/usr/include\1;g')]])
+         [[$(echo $1 |${SED} -E -e 's/(^| )-I/\1-iWUNOtem /g' -e 's;-iWUNOtem /usr/include/*( |$);-I/usr/include\1;g')]])
 
 dnl enable-fuzz should disable all other targets
 if test "$enable_fuzz" = "yes"; then
   AC_MSG_WARN([enable-fuzz will disable all other targets and force --enable-fuzz-binary=yes])
-  build_syscoin_utils=no
-  build_syscoin_cli=no
-  build_syscoin_tx=no
-  build_syscoin_wallet=no
-  build_syscoind=no
-  build_syscoin_libs=no
-  syscoin_enable_qt=no
-  syscoin_enable_qt_test=no
-  syscoin_enable_qt_dbus=no
+  build_wentuno_utils=no
+  build_wentuno_cli=no
+  build_wentuno_tx=no
+  build_wentuno_wallet=no
+  build_wentunod=no
+  build_wentuno_libs=no
+  wentuno_enable_qt=no
+  wentuno_enable_qt_test=no
+  wentuno_enable_qt_dbus=no
   enable_wallet=no
   use_bench=no
   use_upnp=no
@@ -1344,10 +1344,10 @@ if test "$enable_fuzz" = "yes"; then
 
   AX_CHECK_PREPROC_FLAG([-DABORT_ON_FAILED_ASSUME], [DEBUG_CPPFLAGS="$DEBUG_CPPFLAGS -DABORT_ON_FAILED_ASSUME"], [], [$CXXFLAG_WERROR])
 else
-    SYSCOIN_QT_INIT
+    wentuno_QT_INIT
 
-    dnl sets $syscoin_enable_qt, $syscoin_enable_qt_test, $syscoin_enable_qt_dbus
-    SYSCOIN_QT_CONFIGURE([5.11.3])
+    dnl sets $wentuno_enable_qt, $wentuno_enable_qt_test, $wentuno_enable_qt_dbus
+    wentuno_QT_CONFIGURE([5.11.3])
 
     dnl Keep a copy of the original $QT_INCLUDES and use it when invoking qt's moc
     QT_INCLUDES_UNSUPPRESSED=$QT_INCLUDES
@@ -1378,7 +1378,7 @@ fi
 if test "$enable_wallet" != "no"; then
     dnl Check for libdb_cxx only if wallet enabled
     if test "$use_bdb" != "no"; then
-      SYSCOIN_FIND_BDB48
+      wentuno_FIND_BDB48
       if test "$suppress_external_warnings" != "no" ; then
         BDB_CPPFLAGS=SUPPRESS_WARNINGS($BDB_CPPFLAGS)
       fi
@@ -1417,7 +1417,7 @@ if test "$use_usdt" != "no"; then
   AC_MSG_CHECKING([whether Userspace, Statically Defined Tracing tracepoints are supported])
   AC_COMPILE_IFELSE([
     AC_LANG_PROGRAM(
-      [#include <sys/sdt.h>],
+      [#include <WUNO/sdt.h>],
       [DTRACE_PROBE(context, event);
        int a, b, c, d, e, f, g;
        DTRACE_PROBE7(context, event, a, b, c, d, e, f, g);]
@@ -1475,7 +1475,7 @@ AM_CONDITIONAL([TARGET_AARCH64_LINUX], [test "$TARGET_ARCH-$TARGET_OS" = "aarch6
 AM_CONDITIONAL([TARGET_X86_64_DARWIN], [test "$TARGET_ARCH-$TARGET_OS" = "x86_64-darwin"])
 AM_CONDITIONAL([TARGET_ARM64_DARWIN], [test "$TARGET_ARCH-$TARGET_OS" = "arm64-darwin"])
 
-if test "$build_syscoin_wallet$build_syscoin_cli$build_syscoin_tx$build_syscoind$syscoin_enable_qt$use_tests$use_bench" = "nonononononono"; then
+if test "$build_wentuno_wallet$build_wentuno_cli$build_wentuno_tx$build_wentunod$wentuno_enable_qt$use_tests$use_bench" = "nonononononono"; then
     use_boost=no
 else
     use_boost=yes
@@ -1486,7 +1486,7 @@ if test "$use_boost" = "yes"; then
 dnl Check for Boost headers
 AX_BOOST_BASE([1.73.0],[],[AC_MSG_ERROR([Boost is not available!])])
 if test "$want_boost" = "no"; then
-    AC_MSG_ERROR([[only libsyscoinconsensus can be built without boost]])
+    AC_MSG_ERROR([[only libwentunoconsensus can be built without boost]])
 fi
 
   dnl we don't use multi_index serialization
@@ -1531,7 +1531,7 @@ fi
 
 dnl libevent check
 
-if test "$build_syscoin_cli$build_syscoind$syscoin_enable_qt$use_tests$use_bench" != "nonononono"; then
+if test "$build_wentuno_cli$build_wentunod$wentuno_enable_qt$use_tests$use_bench" != "nonononono"; then
   PKG_CHECK_MODULES([EVENT], [libevent >= 2.1.8], [use_libevent=yes], [AC_MSG_ERROR([libevent version 2.1.8 or greater not found.])])
   if test "$TARGET_OS" != "windows"; then
     PKG_CHECK_MODULES([EVENT_PTHREADS], [libevent_pthreads >= 2.1.8],, [AC_MSG_ERROR([libevent_pthreads version 2.1.8 or greater not found.])])
@@ -1565,7 +1565,7 @@ fi
 dnl QR Code encoding library check
 
 if test "$use_qr" != "no"; then
-  SYSCOIN_QT_CHECK([PKG_CHECK_MODULES([QR], [libqrencode], [have_qrencode=yes], [have_qrencode=no])])
+  wentuno_QT_CHECK([PKG_CHECK_MODULES([QR], [libqrencode], [have_qrencode=yes], [have_qrencode=no])])
 fi
 
 dnl ZMQ check
@@ -1619,8 +1619,8 @@ else
 fi
 
 AM_CONDITIONAL([BUILD_MULTIPROCESS], [test "$build_multiprocess" = "yes"])
-AM_CONDITIONAL([BUILD_SYSCOIN_NODE], [test "$build_multiprocess" = "yes"])
-AM_CONDITIONAL([BUILD_SYSCOIN_GUI], [test "$build_multiprocess" = "yes"])
+AM_CONDITIONAL([BUILD_wentuno_NODE], [test "$build_multiprocess" = "yes"])
+AM_CONDITIONAL([BUILD_wentuno_GUI], [test "$build_multiprocess" = "yes"])
 
 dnl codegen tools check
 
@@ -1633,29 +1633,29 @@ if test "$build_multiprocess" != "no"; then
   AC_SUBST(MPGEN_PREFIX)
 fi
 
-AC_MSG_CHECKING([whether to build syscoind])
-AM_CONDITIONAL([BUILD_SYSCOIND], [test $build_syscoind = "yes"])
-AC_MSG_RESULT($build_syscoind)
+AC_MSG_CHECKING([whether to build wentunod])
+AM_CONDITIONAL([BUILD_wentunoD], [test $build_wentunod = "yes"])
+AC_MSG_RESULT($build_wentunod)
 
-AC_MSG_CHECKING([whether to build syscoin-cli])
-AM_CONDITIONAL([BUILD_SYSCOIN_CLI], [test $build_syscoin_cli = "yes"])
-AC_MSG_RESULT($build_syscoin_cli)
+AC_MSG_CHECKING([whether to build wentuno-cli])
+AM_CONDITIONAL([BUILD_wentuno_CLI], [test $build_wentuno_cli = "yes"])
+AC_MSG_RESULT($build_wentuno_cli)
 
-AC_MSG_CHECKING([whether to build syscoin-tx])
-AM_CONDITIONAL([BUILD_SYSCOIN_TX], [test $build_syscoin_tx = "yes"])
-AC_MSG_RESULT($build_syscoin_tx)
+AC_MSG_CHECKING([whether to build wentuno-tx])
+AM_CONDITIONAL([BUILD_wentuno_TX], [test $build_wentuno_tx = "yes"])
+AC_MSG_RESULT($build_wentuno_tx)
 
-AC_MSG_CHECKING([whether to build syscoin-wallet])
-AM_CONDITIONAL([BUILD_SYSCOIN_WALLET], [test $build_syscoin_wallet = "yes"])
-AC_MSG_RESULT($build_syscoin_wallet)
+AC_MSG_CHECKING([whether to build wentuno-wallet])
+AM_CONDITIONAL([BUILD_wentuno_WALLET], [test $build_wentuno_wallet = "yes"])
+AC_MSG_RESULT($build_wentuno_wallet)
 
 AC_MSG_CHECKING([whether to build libraries])
-AM_CONDITIONAL([BUILD_SYSCOIN_LIBS], [test $build_syscoin_libs = "yes"])
-if test "$build_syscoin_libs" = "yes"; then
+AM_CONDITIONAL([BUILD_wentuno_LIBS], [test $build_wentuno_libs = "yes"])
+if test "$build_wentuno_libs" = "yes"; then
   AC_DEFINE([HAVE_CONSENSUS_LIB], [1], [Define this symbol if the consensus lib has been built])
-  AC_CONFIG_FILES([libsyscoinconsensus.pc:libsyscoinconsensus.pc.in])
+  AC_CONFIG_FILES([libwentunoconsensus.pc:libwentunoconsensus.pc.in])
 fi
-AC_MSG_RESULT($build_syscoin_libs)
+AC_MSG_RESULT($build_wentuno_libs)
 
 AC_LANG_POP
 
@@ -1734,13 +1734,13 @@ fi
 
 dnl these are only used when qt is enabled
 BUILD_TEST_QT=""
-if test "$syscoin_enable_qt" != "no"; then
+if test "$wentuno_enable_qt" != "no"; then
   dnl enable dbus support
   AC_MSG_CHECKING([whether to build GUI with support for D-Bus])
-  if test "$syscoin_enable_qt_dbus" != "no"; then
+  if test "$wentuno_enable_qt_dbus" != "no"; then
     AC_DEFINE([USE_DBUS], [1], [Define if dbus support should be compiled in])
   fi
-  AC_MSG_RESULT([$syscoin_enable_qt_dbus])
+  AC_MSG_RESULT([$wentuno_enable_qt_dbus])
 
   dnl enable qr support
   AC_MSG_CHECKING([whether to build GUI with support for QR codes])
@@ -1761,8 +1761,8 @@ if test "$syscoin_enable_qt" != "no"; then
     AC_MSG_WARN([xgettext is required to update qt translations])
   fi
 
-  AC_MSG_CHECKING([whether to build test_syscoin-qt])
-  if test "$use_gui_tests$syscoin_enable_qt_test" = "yesyes"; then
+  AC_MSG_CHECKING([whether to build test_wentuno-qt])
+  if test "$use_gui_tests$wentuno_enable_qt_test" = "yesyes"; then
     AC_MSG_RESULT([yes])
     BUILD_TEST_QT="yes"
   else
@@ -1772,7 +1772,7 @@ fi
 
 AM_CONDITIONAL([ENABLE_ZMQ], [test "$use_zmq" = "yes"])
 
-AC_MSG_CHECKING([whether to build test_syscoin])
+AC_MSG_CHECKING([whether to build test_wentuno])
 if test "$use_tests" = "yes"; then
   if test "$enable_fuzz" = "yes"; then
     AC_MSG_RESULT([no, because fuzzing is enabled])
@@ -1804,7 +1804,7 @@ else
 fi
 AC_MSG_RESULT($dsymutil_needs_flat)
 
-if test "$build_syscoin_wallet$build_syscoin_cli$build_syscoin_tx$build_syscoind$syscoin_enable_qt$use_bench$use_tests" = "nonononononono"; then
+if test "$build_wentuno_wallet$build_wentuno_cli$build_wentuno_tx$build_wentunod$wentuno_enable_qt$use_bench$use_tests" = "nonononononono"; then
   AC_MSG_ERROR([No targets! Please specify at least one of: --with-utils --with-libs --with-daemon --with-gui --enable-bench or --enable-tests])
 fi
 
@@ -1818,7 +1818,7 @@ AM_CONDITIONAL([USE_BDB], [test "$use_bdb" = "yes"])
 AM_CONDITIONAL([ENABLE_TESTS], [test "$BUILD_TEST" = "yes"])
 AM_CONDITIONAL([ENABLE_FUZZ], [test "$enable_fuzz" = "yes"])
 AM_CONDITIONAL([ENABLE_FUZZ_BINARY], [test "$enable_fuzz_binary" = "yes"])
-AM_CONDITIONAL([ENABLE_QT], [test "$syscoin_enable_qt" = "yes"])
+AM_CONDITIONAL([ENABLE_QT], [test "$wentuno_enable_qt" = "yes"])
 AM_CONDITIONAL([ENABLE_QT_TESTS], [test "$BUILD_TEST_QT" = "yes"])
 AM_CONDITIONAL([ENABLE_BENCH], [test "$use_bench" = "yes"])
 AM_CONDITIONAL([USE_QRCODE], [test "$use_qr" = "yes"])
@@ -1856,14 +1856,14 @@ AC_SUBST(COPYRIGHT_YEAR, _COPYRIGHT_YEAR)
 AC_SUBST(COPYRIGHT_HOLDERS, "_COPYRIGHT_HOLDERS")
 AC_SUBST(COPYRIGHT_HOLDERS_SUBSTITUTION, "_COPYRIGHT_HOLDERS_SUBSTITUTION")
 AC_SUBST(COPYRIGHT_HOLDERS_FINAL, "_COPYRIGHT_HOLDERS_FINAL")
-AC_SUBST(SYSCOIN_DAEMON_NAME)
-AC_SUBST(SYSCOIN_GUI_NAME)
-AC_SUBST(SYSCOIN_CLI_NAME)
-AC_SUBST(SYSCOIN_TX_NAME)
-AC_SUBST(SYSCOIN_WALLET_TOOL_NAME)
-AC_SUBST(SYSCOIN_GETH)
-AC_SUBST(SYSCOIN_MP_NODE_NAME)
-AC_SUBST(SYSCOIN_MP_GUI_NAME)
+AC_SUBST(wentuno_DAEMON_NAME)
+AC_SUBST(wentuno_GUI_NAME)
+AC_SUBST(wentuno_CLI_NAME)
+AC_SUBST(wentuno_TX_NAME)
+AC_SUBST(wentuno_WALLET_TOOL_NAME)
+AC_SUBST(wentuno_GETH)
+AC_SUBST(wentuno_MP_NODE_NAME)
+AC_SUBST(wentuno_MP_GUI_NAME)
 
 AC_SUBST(RELDFLAGS)
 AC_SUBST(CORE_LDFLAGS)
@@ -1962,21 +1962,21 @@ echo
 echo "Options used to compile and link:"
 echo "  boost process       = $with_boost_process"
 echo "  multiprocess        = $build_multiprocess"
-echo "  with libs           = $build_syscoin_libs"
+echo "  with libs           = $build_wentuno_libs"
 echo "  with wallet         = $enable_wallet"
 if test "$enable_wallet" != "no"; then
     echo "    with sqlite       = $use_sqlite"
     echo "    with bdb          = $use_bdb"
 fi
-echo "  with gui / qt       = $syscoin_enable_qt"
-if test $syscoin_enable_qt != "no"; then
+echo "  with gui / qt       = $wentuno_enable_qt"
+if test $wentuno_enable_qt != "no"; then
     echo "    with qr           = $use_qr"
 fi
 echo "  with zmq            = $use_zmq"
 if test $enable_fuzz = "no"; then
     echo "  with test           = $use_tests"
 else
-    echo "  with test           = not building test_syscoin because fuzzing is enabled"
+    echo "  with test           = not building test_wentuno because fuzzing is enabled"
 fi
 echo "  with fuzz binary    = $enable_fuzz_binary"
 echo "  with bench          = $use_bench"

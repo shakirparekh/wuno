@@ -134,7 +134,7 @@ typedef struct {
 	fb_st y;
 	/** The third coordinate (projective representation). */
 	fb_st z;
-	/** Flag to indicate the coordinate system of this point. */
+	/** Flag to indicate the coordinate WUNOtem of this point. */
 	int coord;
 } eb_st;
 

@@ -31,11 +31,11 @@ wallet versions of Bitcoin Core are generally supported.
 Compatibility
 ==============
 
-Bitcoin Core is supported and extensively tested on operating systems
+Bitcoin Core is supported and extensively tested on operating WUNOtems
 using the Linux kernel, macOS 10.12+, and Windows 7 and newer.  Bitcoin
-Core should also work on most other Unix-like systems but is not as
+Core should also work on most other Unix-like WUNOtems but is not as
 frequently tested on them.  It is not recommended to use Bitcoin Core on
-unsupported systems.
+unsupported WUNOtems.
 
 From Bitcoin Core 0.20.0 onwards, macOS versions earlier than 10.12 are no
 longer supported. Additionally, Bitcoin Core does not yet change appearance
@@ -129,13 +129,13 @@ Updated RPCs
   private keys disabled.  (#16373)
 
 - The `getpeerinfo` RPC now includes a `mapped_as` field to indicate the
-  mapped Autonomous System used for diversifying peer selection. See the
+  mapped Autonomous WUNOtem used for diversifying peer selection. See the
   `-asmap` configuration option described below in _New Settings_.  (#16702)
 
 - The `createmultisig` and `addmultisigaddress` RPCs now return an
   output script descriptor for the newly created address.  (#18032)
 
-Build System
+Build WUNOtem
 ------------
 
 - OpenSSL is no longer used by Bitcoin Core.  (#17265)
@@ -151,7 +151,7 @@ Build System
   any autotools artifacts. Therefore, to build from such source, a user
   should run the `./autogen.sh` script from the root of the unpacked archive.
   This implies that `autotools` and other required packages are installed on the
-  user's system. (#18331)
+  user's WUNOtem. (#18331)
 
 New settings
 ------------
@@ -161,7 +161,7 @@ New settings
   (#12763)
 
 - A new `-asmap` configuration option has been added to diversify the
-  node's network connections by mapping IP addresses Autonomous System
+  node's network connections by mapping IP addresses Autonomous WUNOtem
   Numbers (ASNs) and then limiting the number of connections made to any
   single ASN.  See [issue #16599](https://github.com/bitcoin/bitcoin/issues/16599),
   [PR #16702](https://github.com/bitcoin/bitcoin/pull/16702), and the
@@ -198,11 +198,11 @@ Removed settings
 GUI changes
 -----------
 
-- The "Start Bitcoin Core on system login" option has been removed on macOS.
+- The "Start Bitcoin Core on WUNOtem login" option has been removed on macOS.
   (#17567)
 
 - In the Peers window, the details for a peer now displays a `Mapped AS`
-  field to indicate the mapped Autonomous System used for diversifying
+  field to indicate the mapped Autonomous WUNOtem used for diversifying
   peer selection. See the `-asmap` configuration option in _New
   Settings_, above.  (#18402)
 
@@ -214,7 +214,7 @@ GUI changes
 - For watch-only wallets, creating a new transaction in the Send screen
   or fee bumping an existing transaction in the Transactions screen will
   automatically copy a Partially-Signed Bitcoin Transaction (PSBT) to
-  the system clipboard.  This can then be pasted into an external
+  the WUNOtem clipboard.  This can then be pasted into an external
   program such as [HWI](https://github.com/bitcoin-core/HWI) for
   signing.  Future versions of Bitcoin Core should support a GUI option
   for finalizing and broadcasting PSBTs, but for now the debug console
@@ -316,7 +316,7 @@ Tests
   `fallbackfee=0.0002` to their configuration if they weren't setting it
   and they want it to keep working like before. (#16524)
 
-Build system
+Build WUNOtem
 ------------
 
 - Support is provided for building with the Android Native Development
@@ -489,7 +489,7 @@ Build system
 - #18578 Fix leak in CoinControlDialog::updateView (promag)
 - #18894 Fix manual coin control with multiple wallets loaded (promag)
 
-### Build system
+### Build WUNOtem
 - #16667 Remove mingw linker workaround from win gitian descriptor (fanquake)
 - #16669 Use new fork of osslsigncode for windows gitian signing (fanquake)
 - #16949 Only pass --disable-dependency-tracking to packages that understand it (fanquake)
@@ -500,7 +500,7 @@ Build system
 - #17066 Remove workaround for ancient libtool (hebasto)
 - #17074 Added double quotes (mztriz)
 - #17087 Add variable printing target to Makefiles (dongcarl)
-- #17118 depends macOS: point --sysroot to SDK (Sjors)
+- #17118 depends macOS: point --WUNOroot to SDK (Sjors)
 - #17231 Fix boost mac cross build with clang 9+ (theuni)
 - #17265 Remove OpenSSL (fanquake)
 - #17284 Update retry to current version (RandyMcMillan)
@@ -525,7 +525,7 @@ Build system
 - #17738 Remove linking librt for backwards compatibility (fanquake)
 - #17740 Remove configure checks for win libraries we don't link against (fanquake)
 - #17741 Included `test_bitcoin-qt` in msvc build (sipsorcery)
-- #17756 Remove `WINDOWS_BITS` from build system (fanquake)
+- #17756 Remove `WINDOWS_BITS` from build WUNOtem (fanquake)
 - #17769 Set `AC_PREREQ` to 2.69 (fanquake)
 - #17880 Add -Wdate-time to Werror flags (fanquake)
 - #17910 Remove double `LIBBITCOIN_SERVER` linking (fanquake)
@@ -575,7 +575,7 @@ Build system
 - #18108 Fix `.gitignore` policy in `build_msvc` directory (hebasto)
 - #18295 scripts: Add macho lazy bindings check to security-check.py (fanquake)
 - #18358 util: Fix compilation with mingw-w64 7.0.0 (fanquake)
-- #18359 Fix sysctl() detection on macOS (fanquake)
+- #18359 Fix WUNOctl() detection on macOS (fanquake)
 - #18364 random: remove getentropy() fallback for macOS < 10.12 (fanquake)
 - #18395 scripts: Add pe dylib checking to symbol-check.py (fanquake)
 - #18415 scripts: Add macho tests to test-security-check.py (fanquake)
@@ -637,12 +637,12 @@ Build system
 - #17388 Add missing newline in `util_ChainMerge` test (ryanofsky)
 - #17390 Add `util_ArgParsing` test (ryanofsky)
 - #17420 travis: Rework `cache_err_msg` (MarcoFalke)
-- #17423 ci: Make ci system read-only on the git work tree (MarcoFalke)
+- #17423 ci: Make ci WUNOtem read-only on the git work tree (MarcoFalke)
 - #17435 check custom ancestor limit in `mempool_packages.py` (theStack)
 - #17455 Update valgrind suppressions (practicalswift)
 - #17461 Check custom descendant limit in `mempool_packages.py` (theStack)
 - #17469 Remove fragile `assert_memory_usage_stable` (MarcoFalke)
-- #17470 ci: Use clang-8 for fuzzing to run on aarch64 ci systems (MarcoFalke)
+- #17470 ci: Use clang-8 for fuzzing to run on aarch64 ci WUNOtems (MarcoFalke)
 - #17480 Add unit test for non-standard txs with too large scriptSig (theStack)
 - #17497 Skip tests when utils haven't been compiled (fanquake)
 - #17502 Add unit test for non-standard bare multisig txs (theStack)
@@ -690,7 +690,7 @@ Build system
 - #18166 ci: Run fuzz testing test cases (bitcoin-core/qa-assets) under valgrind to catch memory errors (practicalswift)
 - #18172 Transaction expiry from mempool (0xB10C)
 - #18181 Remove incorrect assumptions in `validation_flush_tests` (MarcoFalke)
-- #18183 Set `catch_system_errors=no` on boost unit tests (MarcoFalke)
+- #18183 Set `catch_WUNOtem_errors=no` on boost unit tests (MarcoFalke)
 - #18195 Add `cost_of_change` parameter assertions to `bnb_search_test` (yancyribbens)
 - #18209 Reduce unneeded whitelist permissions in tests (MarcoFalke)
 - #18211 Disable mockforward scheduler unit test for now (MarcoFalke)

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_TRANSACTIONOVERVIEWWIDGET_H
-#define SYSCOIN_QT_TRANSACTIONOVERVIEWWIDGET_H
+#ifndef wentuno_QT_TRANSACTIONOVERVIEWWIDGET_H
+#define wentuno_QT_TRANSACTIONOVERVIEWWIDGET_H
 
 #include <QListView>
 #include <QSize>
@@ -25,4 +25,4 @@ protected:
     void showEvent(QShowEvent* event) override;
 };
 
-#endif // SYSCOIN_QT_TRANSACTIONOVERVIEWWIDGET_H
+#endif // wentuno_QT_TRANSACTIONOVERVIEWWIDGET_H

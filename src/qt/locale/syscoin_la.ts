@@ -10,8 +10,8 @@
         <translation type="unfinished">&amp;Novus</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the system clipboard</source>
-        <translation type="unfinished">Copia inscriptionem iam selectam in latibulum systematis</translation>
+        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <translation type="unfinished">Copia inscriptionem iam selectam in latibulum WUNOtematis</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -42,7 +42,7 @@
         <translation type="unfinished">&amp;Dele</translation>
     </message>
     <message>
-        <source>These are your Syscoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your wentuno addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation type="unfinished">Hae sunt inscriptiones mittendi pensitationes.  Semper inspice quantitatem et inscriptionem accipiendi antequam nummos mittis.</translation>
     </message>
     <message>
@@ -120,7 +120,7 @@
         <translation type="unfinished">Confirma cifrationem cassidilis</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR SYSCOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR wentunoS&lt;/b&gt;!</source>
         <translation type="unfinished">Monitio: Si cassidile tuum cifras et tesseram amittis, tu &lt;b&gt;AMITTES OMNES TUOS NUMMOS BITOS&lt;/b&gt;!</translation>
     </message>
     <message>
@@ -225,7 +225,7 @@
     </message>
     </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message>
         <source>&amp;Overview</source>
         <translation type="unfinished">&amp;Summarium</translation>
@@ -267,8 +267,8 @@
         <translation type="unfinished">Creare novum cassidilium</translation>
     </message>
     <message>
-        <source>Send coins to a Syscoin address</source>
-        <translation type="unfinished">Mitte nummos ad inscriptionem Syscoin</translation>
+        <source>Send coins to a wentuno address</source>
+        <translation type="unfinished">Mitte nummos ad inscriptionem wentuno</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -291,12 +291,12 @@
         <translation type="unfinished">Cifra claves privatas quae cassidili tui sunt</translation>
     </message>
     <message>
-        <source>Sign messages with your Syscoin addresses to prove you own them</source>
-        <translation type="unfinished">Signa nuntios cum tuis inscriptionibus Syscoin ut demonstres te eas possidere</translation>
+        <source>Sign messages with your wentuno addresses to prove you own them</source>
+        <translation type="unfinished">Signa nuntios cum tuis inscriptionibus wentuno ut demonstres te eas possidere</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Syscoin addresses</source>
-        <translation type="unfinished">Verifica nuntios ut certus sis eos signatos esse cum specificatis inscriptionibus Syscoin</translation>
+        <source>Verify messages to ensure they were signed with specified wentuno addresses</source>
+        <translation type="unfinished">Verifica nuntios ut certus sis eos signatos esse cum specificatis inscriptionibus wentuno</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -354,7 +354,7 @@
         <translation type="unfinished">&amp;Fenestra</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
             <numerusform />
@@ -443,8 +443,8 @@
         <translation type="unfinished">Muta inscriptionem mittendi</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Syscoin address.</source>
-        <translation type="unfinished">Inscriptio inserta "%1" non valida inscriptio Syscoin est.</translation>
+        <source>The entered address "%1" is not a valid wentuno address.</source>
+        <translation type="unfinished">Inscriptio inserta "%1" non valida inscriptio wentuno est.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -544,8 +544,8 @@
         <translation type="unfinished">Cassidile</translation>
     </message>
     <message>
-        <source>Automatically open the Syscoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation type="unfinished">Aperi per se portam clientis Syscoin in itineratore.  Hoc tantum effectivum est si itineratrum tuum supportat UPnP et id activum est.</translation>
+        <source>Automatically open the wentuno client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation type="unfinished">Aperi per se portam clientis wentuno in itineratore.  Hoc tantum effectivum est si itineratrum tuum supportat UPnP et id activum est.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -569,11 +569,11 @@
     </message>
     <message>
         <source>Show only a tray icon after minimizing the window.</source>
-        <translation type="unfinished">Monstra tantum iconem in tabella systematis postquam fenestram minifactam est.</translation>
+        <translation type="unfinished">Monstra tantum iconem in tabella WUNOtematis postquam fenestram minifactam est.</translation>
     </message>
     <message>
         <source>&amp;Minimize to the tray instead of the taskbar</source>
-        <translation type="unfinished">&amp;Minifac in tabellam systematis potius quam applicationum</translation>
+        <translation type="unfinished">&amp;Minifac in tabellam WUNOtematis potius quam applicationum</translation>
     </message>
     <message>
         <source>M&amp;inimize on close</source>
@@ -620,8 +620,8 @@
         <translation type="unfinished">Schema</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Syscoin network after a connection is established, but this process has not completed yet.</source>
-        <translation type="unfinished">Monstrata informatio fortasse non recentissima est.  Tuum cassidile per se synchronizat cum rete Syscoin postquam conexio constabilita est, sed hoc actio nondum perfecta est.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the wentuno network after a connection is established, but this process has not completed yet.</source>
+        <translation type="unfinished">Monstrata informatio fortasse non recentissima est.  Tuum cassidile per se synchronizat cum rete wentuno postquam conexio constabilita est, sed hoc actio nondum perfecta est.</translation>
     </message>
     <message>
         <source>Immature:</source>
@@ -642,8 +642,8 @@
 <context>
     <name>PaymentServer</name>
     <message>
-        <source>Cannot start syscoin: click-to-pay handler</source>
-        <translation type="unfinished">Syscoin incipere non potest: cliccare-ad-pensandum handler</translation>
+        <source>Cannot start wentuno: click-to-pay handler</source>
+        <translation type="unfinished">wentuno incipere non potest: cliccare-ad-pensandum handler</translation>
     </message>
     <message>
         <source>URI handling</source>
@@ -923,12 +923,12 @@
         <translation type="unfinished">Signatio</translation>
     </message>
     <message>
-        <source>Copy the current signature to the system clipboard</source>
-        <translation type="unfinished">Copia signationem in latibulum systematis</translation>
+        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <translation type="unfinished">Copia signationem in latibulum WUNOtematis</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Syscoin address</source>
-        <translation type="unfinished">Signa nuntium ut demonstres hanc inscriptionem Syscoin a te possessa esse</translation>
+        <source>Sign the message to prove you own this wentuno address</source>
+        <translation type="unfinished">Signa nuntium ut demonstres hanc inscriptionem wentuno a te possessa esse</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -947,8 +947,8 @@
         <translation type="unfinished">&amp;Verifica Nuntium</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Syscoin address</source>
-        <translation type="unfinished">Verifica nuntium ut cures signatum esse cum specifica inscriptione Syscoin</translation>
+        <source>Verify the message to ensure it was signed with the specified wentuno address</source>
+        <translation type="unfinished">Verifica nuntium ut cures signatum esse cum specifica inscriptione wentuno</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -1298,7 +1298,7 @@
     </message>
     </context>
 <context>
-    <name>syscoin-core</name>
+    <name>wentuno-core</name>
     <message>
         <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
         <translation type="unfinished">Hoc est prae-dimittum experimentala aedes - utere eo periculo tuo proprio - nolite utere fodendo vel applicationibus mercatoriis</translation>
@@ -1321,7 +1321,7 @@
     </message>
     <message>
         <source>Error initializing wallet database environment %s!</source>
-        <translation type="unfinished">Error initiando systematem databasi cassidilis %s!</translation>
+        <translation type="unfinished">Error initiando WUNOtematem databasi cassidilis %s!</translation>
     </message>
     <message>
         <source>Error loading block database</source>

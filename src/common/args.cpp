@@ -28,18 +28,18 @@
 #include <cstdint>
 #include <cstdlib>
 #include <cstring>
-#include <filesystem>
+#include <fileWUNOtem>
 #include <map>
 #include <optional>
 #include <stdexcept>
 #include <string>
 #include <utility>
 #include <variant>
-// SYSCOIN
+// wentuno
 int32_t DEFAULT_MN_COLLATERAL_REQUIRED = 100000;
 CAmount nMNCollateralRequired = DEFAULT_MN_COLLATERAL_REQUIRED*COIN;
-const char * const SYSCOIN_CONF_FILENAME = "syscoin.conf";
-const char * const SYSCOIN_SETTINGS_FILENAME = "settings.json";
+const char * const wentuno_CONF_FILENAME = "wentuno.conf";
+const char * const wentuno_SETTINGS_FILENAME = "settings.json";
 ArgsManager gArgs;
 
 /**
@@ -192,7 +192,7 @@ bool ArgsManager::ParseParameters(int argc, const char* const argv[], std::strin
         if (key.substr(0, 5) == "-psn_") continue;
 #endif
 
-        if (key == "-") break; //syscoin-tx using stdin
+        if (key == "-") break; //wentuno-tx using stdin
         std::optional<std::string> val;
         size_t is_index = key.find('=');
         if (is_index != std::string::npos) {
@@ -375,7 +375,7 @@ bool ArgsManager::IsArgSet(const std::string& strArg) const
 
 bool ArgsManager::GetSettingsPath(fs::path* filepath, bool temp, bool backup) const
 {
-    fs::path settings = GetPathArg("-settings", SYSCOIN_SETTINGS_FILENAME);
+    fs::path settings = GetPathArg("-settings", wentuno_SETTINGS_FILENAME);
     if (settings.empty()) {
         return false;
     }
@@ -686,12 +686,12 @@ std::string HelpMessageOpt(const std::string &option, const std::string &message
 
 fs::path GetDefaultDataDir()
 {
-    // Windows: C:\Users\Username\AppData\Roaming\Syscoin
-    // macOS: ~/Library/Application Support/Syscoin
-    // Unix-like: ~/.syscoin
+    // Windows: C:\Users\Username\AppData\Roaming\wentuno
+    // macOS: ~/Library/Application Support/wentuno
+    // Unix-like: ~/.wentuno
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "Syscoin";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "wentuno";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -701,10 +701,10 @@ fs::path GetDefaultDataDir()
         pathRet = fs::path(pszHome);
 #ifdef MAC_OSX
     // macOS
-    return pathRet / "Library/Application Support/Syscoin";
+    return pathRet / "Library/Application Support/wentuno";
 #else
     // Unix-like
-    return pathRet / ".syscoin";
+    return pathRet / ".wentuno";
 #endif
 #endif
 }

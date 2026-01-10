@@ -10,7 +10,7 @@
 #include <cstdint>
 #include <optional>
 #include <vector>
-// SYSCOIN
+// wentuno
 #include <chainparams.h>
 void initialize_chain()
 {

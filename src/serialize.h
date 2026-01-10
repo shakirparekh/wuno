@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SERIALIZE_H
-#define SYSCOIN_SERIALIZE_H
+#ifndef wentuno_SERIALIZE_H
+#define wentuno_SERIALIZE_H
 
 #include <attributes.h>
 #include <compat/endian.h>
@@ -24,7 +24,7 @@
 
 #include <prevector.h>
 #include <span.h>
-// SYSCOIN
+// wentuno
 #include <list>
 #include <unordered_map>
 #include <unordered_set>
@@ -51,7 +51,7 @@ static const unsigned int MAX_VECTOR_ALLOCATE = 5000000;
  */
 struct deserialize_type {};
 constexpr deserialize_type deserialize {};
-// SYSCOIN
+// wentuno
 /**
  * Used to bypass the rule against non-const reference to temporary
  * where it makes sense with wrappers such as CFlatData or CTxDB
@@ -145,7 +145,7 @@ enum
     // primary actions
     SER_NETWORK         = (1 << 0),
     SER_DISK            = (1 << 1),
-    // SYSCOIN
+    // wentuno
     SER_GETHASH         = (1 << 2),
     SER_SIZE            = (1 << 3),
     SER_NO_PODA         = (1 << 4),
@@ -324,7 +324,7 @@ template <typename Stream, typename B> void Unserialize(Stream& s, Span<B> span)
 
 template <typename Stream> inline void Serialize(Stream& s, bool a) { uint8_t f = a; ser_writedata8(s, f); }
 template <typename Stream> inline void Unserialize(Stream& s, bool& a) { uint8_t f = ser_readdata8(s); a = f; }
-// SYSCOIN
+// wentuno
 template <typename S, typename T> size_t GetSerializeSize(const S& s, const T& t);
 // clang-format on
 
@@ -680,7 +680,7 @@ static inline Wrapper<Formatter, T&> Using(T&& t) { return Wrapper<Formatter, T&
 #define COMPACTSIZE(obj) Using<CompactSizeFormatter<true>>(obj)
 #define LIMITED_STRING(obj,n) Using<LimitedStringFormatter<n>>(obj)
 
-// SYSCOIN
+// wentuno
 #define DYNBITSET(obj) Using<DynamicBitSetFormatter>(obj)
 #define AUTOBITSET(obj) Using<AutoBitSetFormatter>(obj)
 
@@ -961,7 +961,7 @@ template<typename Stream, typename T> void Unserialize(Stream& os, std::shared_p
 template<typename Stream, typename T> void Serialize(Stream& os, const std::unique_ptr<const T>& p);
 template<typename Stream, typename T> void Unserialize(Stream& os, std::unique_ptr<const T>& p);
 
-// SYSCOIN
+// wentuno
 /**
  * unordered_set
  */
@@ -1135,7 +1135,7 @@ void Unserialize(Stream& is, std::pair<K, T>& item)
     Unserialize(is, item.second);
 }
 
-// SYSCOIN
+// wentuno
 /**
  * tuple
  */
@@ -1236,7 +1236,7 @@ void Unserialize(Stream& is, std::set<K, Pred, A>& m)
     }
 }
 
-// SYSCOIN
+// wentuno
 /**
  * unordered_set
  */
@@ -1436,12 +1436,12 @@ class CSizeComputer
 {
 protected:
     size_t nSize{0};
-    // SYSCOIN
+    // wentuno
     const int nProtocol{SER_SIZE};
     const int nVersion;
     int nTxVersion{0};
 public:
-    // SYSCOIN
+    // wentuno
     explicit CSizeComputer(int nVersionIn, int nProtocolIn = SER_SIZE, int nTxVersionIn = 0) : nProtocol(nProtocolIn), nVersion(nVersionIn), nTxVersion(nTxVersionIn) {}
 
     void write(Span<const std::byte> src)
@@ -1468,7 +1468,7 @@ public:
 
     int GetVersion() const { return nVersion; }
     int GetType() const { return nProtocol; }
-    // SYSCOIN
+    // wentuno
     const void* GetParams() const { return nullptr; }
     void SetTxVersion(int nTxVersionIn) { nTxVersion = nTxVersionIn; }
     int GetTxVersion() const { return nTxVersion; }
@@ -1490,7 +1490,7 @@ size_t GetSerializeSize(const T& t, int nVersion = 0, int nProtocol = SER_SIZE)
 {
     return (CSizeComputer(nVersion, nProtocol) << t).size();
 }
-// SYSCOIN
+// wentuno
 template <typename T>
 size_t GetSerializeSize(const T& t, int nVersion, int nProtocol, int nTxVersion)
 {
@@ -1526,7 +1526,7 @@ public:
     void ignore(size_t num) { m_substream.ignore(num); }
     bool eof() const { return m_substream.eof(); }
     size_t size() const { return m_substream.size(); }
-    // SYSCOIN
+    // wentuno
     const Params* GetParams() const { return &m_params; }
     int GetVersion() = delete; // Deprecated with Params usage
     int GetType() = delete;    // Deprecated with Params usage
@@ -1580,4 +1580,4 @@ static auto WithParams(const Params& params, T&& t)
     template <typename T> \
     auto operator()(T&& t) const { return WithParams(*this, t); }
 
-#endif // SYSCOIN_SERIALIZE_H
+#endif // wentuno_SERIALIZE_H

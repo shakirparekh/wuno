@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_NODE_CHAINSTATE_H
-#define SYSCOIN_NODE_CHAINSTATE_H
+#ifndef wentuno_NODE_CHAINSTATE_H
+#define wentuno_NODE_CHAINSTATE_H
 
 #include <util/translation.h>
 #include <validation.h>
@@ -12,7 +12,7 @@
 #include <functional>
 #include <tuple>
 
-// SYSCOIN
+// wentuno
 class CConnman;
 class BanMan;
 class PeerManager;
@@ -38,7 +38,7 @@ struct ChainstateLoadOptions {
     int64_t check_level{DEFAULT_CHECKLEVEL};
     std::function<bool()> check_interrupt;
     std::function<void()> coins_error_cb;
-    // SYSCOIN
+    // wentuno
     CConnman* connman{nullptr};
     BanMan* banman{nullptr};
     PeerManager* peerman{nullptr};
@@ -79,4 +79,4 @@ ChainstateLoadResult LoadChainstate(ChainstateManager& chainman, const CacheSize
 ChainstateLoadResult VerifyLoadedChainstate(ChainstateManager& chainman, const ChainstateLoadOptions& options);
 } // namespace node
 
-#endif // SYSCOIN_NODE_CHAINSTATE_H
+#endif // wentuno_NODE_CHAINSTATE_H

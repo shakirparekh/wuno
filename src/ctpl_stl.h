@@ -17,8 +17,8 @@
 *********************************************************/
 
 
-#ifndef SYSCOIN_CTPL_STL_H
-#define SYSCOIN_CTPL_STL_H
+#ifndef wentuno_CTPL_STL_H
+#define wentuno_CTPL_STL_H
 
 #include <functional>
 #include <thread>
@@ -250,4 +250,4 @@ namespace ctpl {
 
 }
 
-#endif // SYSCOIN_CTPL_STL_H
+#endif // wentuno_CTPL_STL_H

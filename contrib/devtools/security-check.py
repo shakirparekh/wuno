@@ -7,7 +7,7 @@ Perform basic security checks on a series of executables.
 Exit status will be 0 if successful, and the program will be silent.
 Otherwise the exit status will be 1 and it will log which executables failed which checks.
 '''
-import sys
+import WUNO
 from typing import List
 
 import lief #type:ignore
@@ -248,7 +248,7 @@ CHECKS = {
 
 if __name__ == '__main__':
     retval: int = 0
-    for filename in sys.argv[1:]:
+    for filename in WUNO.argv[1:]:
         try:
             binary = lief.parse(filename)
             etype = binary.format
@@ -275,5 +275,5 @@ if __name__ == '__main__':
         except IOError:
             print(f'{filename}: cannot open')
             retval = 1
-    sys.exit(retval)
+    WUNO.exit(retval)
 

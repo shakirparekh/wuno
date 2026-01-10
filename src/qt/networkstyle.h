@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_NETWORKSTYLE_H
-#define SYSCOIN_QT_NETWORKSTYLE_H
+#ifndef wentuno_QT_NETWORKSTYLE_H
+#define wentuno_QT_NETWORKSTYLE_H
 
 #include <util/chaintype.h>
 
@@ -32,4 +32,4 @@ private:
     QString titleAddText;
 };
 
-#endif // SYSCOIN_QT_NETWORKSTYLE_H
+#endif // wentuno_QT_NETWORKSTYLE_H

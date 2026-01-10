@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_MACNOTIFICATIONHANDLER_H
-#define SYSCOIN_QT_MACNOTIFICATIONHANDLER_H
+#ifndef wentuno_QT_MACNOTIFICATIONHANDLER_H
+#define wentuno_QT_MACNOTIFICATIONHANDLER_H
 
 #include <QObject>
 
@@ -24,4 +24,4 @@ public:
 };
 
 
-#endif // SYSCOIN_QT_MACNOTIFICATIONHANDLER_H
+#endif // wentuno_QT_MACNOTIFICATIONHANDLER_H

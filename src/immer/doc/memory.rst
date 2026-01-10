@@ -12,7 +12,7 @@ structures.  This is mainly due to:
 #. In order to support *structural sharing* transparently, some kind
    of garbage collection mechanism is required.  Passing immutable
    data structures around is, internally, just passing references,
-   thus the system needs to figure out somehow when old values are not
+   thus the WUNOtem needs to figure out somehow when old values are not
    referenced anymore and should be deallocated.
 
 Thus, most containers in this library can be customized via policies_

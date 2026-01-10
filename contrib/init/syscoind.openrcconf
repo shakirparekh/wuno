@@ -1,33 +1,33 @@
-# /etc/conf.d/syscoind: config file for /etc/init.d/syscoind
+# /etc/conf.d/wentunod: config file for /etc/init.d/wentunod
 
 # Config file location
-#SYSCOIND_CONFIGFILE="/etc/syscoin/syscoin.conf"
+#wentunoD_CONFIGFILE="/etc/wentuno/wentuno.conf"
 
-# What directory to write pidfile to?  (created and owned by $SYSCOIND_USER)
-#SYSCOIND_PIDDIR="/var/run/syscoind"
+# What directory to write pidfile to?  (created and owned by $wentunoD_USER)
+#wentunoD_PIDDIR="/var/run/wentunod"
 
 # What filename to give the pidfile
-#SYSCOIND_PIDFILE="${SYSCOIND_PIDDIR}/syscoind.pid"
+#wentunoD_PIDFILE="${wentunoD_PIDDIR}/wentunod.pid"
 
-# Where to write syscoind data (be mindful that the blockchain is large)
-#SYSCOIND_DATADIR="/var/lib/syscoind"
+# Where to write wentunod data (be mindful that the blockchain is large)
+#wentunoD_DATADIR="/var/lib/wentunod"
 
-# User and group to own syscoind process
-#SYSCOIND_USER="syscoin"
-#SYSCOIND_GROUP="syscoin"
+# User and group to own wentunod process
+#wentunoD_USER="wentuno"
+#wentunoD_GROUP="wentuno"
 
-# Path to syscoind executable
-#SYSCOIND_BIN="/usr/bin/syscoind"
+# Path to wentunod executable
+#wentunoD_BIN="/usr/bin/wentunod"
 
-# Nice value to run syscoind under
-#SYSCOIND_NICE=0
+# Nice value to run wentunod under
+#wentunoD_NICE=0
 
 # Additional options (avoid -conf and -datadir, use flags above)
-#SYSCOIND_OPTS=""
+#wentunoD_OPTS=""
 
-# The timeout in seconds OpenRC will wait for syscoind to terminate
+# The timeout in seconds OpenRC will wait for wentunod to terminate
 # after a SIGTERM has been raised.
 # Note that this will be mapped as argument to start-stop-daemon's
 # '--retry' option, which means you can specify a retry schedule
 # here. For more information see man 8 start-stop-daemon.
-SYSCOIND_SIGTERM_TIMEOUT=600
+wentunoD_SIGTERM_TIMEOUT=600

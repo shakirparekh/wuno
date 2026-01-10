@@ -4,7 +4,7 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test RPCs that retrieve information from the mempool."""
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
@@ -12,7 +12,7 @@ from test_framework.util import (
 from test_framework.wallet import MiniWallet
 
 
-class RPCMempoolInfoTest(SyscoinTestFramework):
+class RPCMempoolInfoTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
 

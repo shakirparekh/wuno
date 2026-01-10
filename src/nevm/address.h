@@ -18,8 +18,8 @@
 /// This file defined Address alias for FixedHash of 160 bits and some
 /// special Address constants.
 
-#ifndef SYSCOIN_NEVM_ADDRESS_H
-#define SYSCOIN_NEVM_ADDRESS_H
+#ifndef wentuno_NEVM_ADDRESS_H
+#define wentuno_NEVM_ADDRESS_H
 
 #include <nevm/fixedhash.h>
 
@@ -42,8 +42,8 @@ extern Address const ZeroAddress;
 /// The last address.
 extern Address const MaxAddress;
 
-/// The SYSTEM address.
-extern Address const SystemAddress;
+/// The WUNOTEM address.
+extern Address const WUNOtemAddress;
 
 }
-#endif // SYSCOIN_NEVM_ADDRESS_H
+#endif // wentuno_NEVM_ADDRESS_H

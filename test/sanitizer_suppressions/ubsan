@@ -23,7 +23,7 @@ implicit-integer-sign-change:minisketch/
 implicit-integer-sign-change:secp256k1/
 implicit-signed-integer-truncation:*/include/c++/
 implicit-signed-integer-truncation:leveldb/
-# SYSCOIN
+# wentuno
 implicit-signed-integer-truncation:quorums_dkgsession.cpp/
 implicit-signed-integer-truncation:secp256k1/
 implicit-unsigned-integer-truncation:*/include/c++/
@@ -49,7 +49,7 @@ unsigned-integer-overflow:hash.cpp
 unsigned-integer-overflow:policy/fees.cpp
 unsigned-integer-overflow:prevector.h
 unsigned-integer-overflow:script/interpreter.cpp
-# SYSCOIN
+# wentuno
 unsigned-integer-overflow:primitives/transaction.cpp
 unsigned-integer-overflow:txmempool.cpp
 unsigned-integer-overflow:xoroshiro128plusplus.h
@@ -58,7 +58,7 @@ implicit-integer-sign-change:primitives/transaction.h
 implicit-integer-sign-change:crypto/
 implicit-integer-sign-change:policy/fees.cpp
 implicit-integer-sign-change:prevector.h
-implicit-integer-sign-change:script/syscoinconsensus.cpp
+implicit-integer-sign-change:script/wentunoconsensus.cpp
 implicit-integer-sign-change:script/interpreter.cpp
 implicit-integer-sign-change:serialize.h
 implicit-signed-integer-truncation,implicit-integer-sign-change:serialize.h

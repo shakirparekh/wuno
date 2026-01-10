@@ -54,23 +54,23 @@ template <typename ProTx>
 static bool CheckService(const ProTx& proTx, TxValidationState& state, bool fJustCheck)
 {
     if (!proTx.addr.IsValid()) {
-        return FormatSyscoinErrorMessage(state, "bad-protx-ipaddr", fJustCheck);
+        return FormatwentunoErrorMessage(state, "bad-protx-ipaddr", fJustCheck);
     }
     if (Params().RequireRoutableExternalIP() && !proTx.addr.IsRoutable()) {
-        return FormatSyscoinErrorMessage(state, "bad-protx-ipaddr", fJustCheck);
+        return FormatwentunoErrorMessage(state, "bad-protx-ipaddr", fJustCheck);
     }
     ArgsManager args;
     static int mainnetDefaultPort = CreateChainParams(args, ChainType::MAIN)->GetDefaultPort();
     if (Params().GetChainType() == ChainType::MAIN) {
         if (proTx.addr.GetPort() != mainnetDefaultPort) {
-            return FormatSyscoinErrorMessage(state, "bad-protx-ipaddr-port", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-ipaddr-port", fJustCheck);
         }
     } else if (proTx.addr.GetPort() == mainnetDefaultPort) {
-        return FormatSyscoinErrorMessage(state, "bad-protx-ipaddr-port", fJustCheck);
+        return FormatwentunoErrorMessage(state, "bad-protx-ipaddr-port", fJustCheck);
     }
 
     if (!proTx.addr.IsIPv4()) {
-        return FormatSyscoinErrorMessage(state, "bad-protx-ipaddr", fJustCheck);
+        return FormatwentunoErrorMessage(state, "bad-protx-ipaddr", fJustCheck);
     }
 
     return true;
@@ -80,7 +80,7 @@ template <typename ProTx>
 static bool CheckHashSig(const ProTx& proTx, const CKeyID& keyID, TxValidationState& state, bool fJustCheck)
 {
     if (!CHashSigner::VerifyHash(::SerializeHash(proTx), keyID, proTx.vchSig)) {
-        return FormatSyscoinErrorMessage(state, "bad-protx-hash-sig", fJustCheck);
+        return FormatwentunoErrorMessage(state, "bad-protx-hash-sig", fJustCheck);
     }
     return true;
 }
@@ -89,7 +89,7 @@ template <typename ProTx>
 static bool CheckStringSig(const ProTx& proTx, const CKeyID& keyID, TxValidationState& state, bool fJustCheck)
 {
     if (!CMessageSigner::VerifyMessage(keyID, proTx.vchSig, proTx.MakeSignString())) {
-        return FormatSyscoinErrorMessage(state, "bad-protx-message-sig", fJustCheck);
+        return FormatwentunoErrorMessage(state, "bad-protx-message-sig", fJustCheck);
     }
     return true;
 }
@@ -98,7 +98,7 @@ template <typename ProTx>
 static bool CheckHashSig(const ProTx& proTx, const CBLSPublicKey& pubKey, TxValidationState& state, bool fJustCheck)
 {
     if (!proTx.sig.VerifyInsecure(pubKey, ::SerializeHash(proTx))) {
-        return FormatSyscoinErrorMessage(state, "bad-protx-bls-sig", fJustCheck);
+        return FormatwentunoErrorMessage(state, "bad-protx-bls-sig", fJustCheck);
     }
     return true;
 }
@@ -108,7 +108,7 @@ static bool CheckInputsHash(const CTransaction& tx, const ProTx& proTx, TxValida
 {
     uint256 inputsHash = CalcTxInputsHash(tx);
     if (inputsHash != proTx.inputsHash) {
-        return FormatSyscoinErrorMessage(state, "bad-protx-inputs-hash", fJustCheck);
+        return FormatwentunoErrorMessage(state, "bad-protx-inputs-hash", fJustCheck);
     }
 
     return true;
@@ -117,17 +117,17 @@ static bool CheckInputsHash(const CTransaction& tx, const ProTx& proTx, TxValida
 bool CheckProRegTx(const CTransaction& tx, const CBlockIndex* pindexPrev, TxValidationState& state, CCoinsViewCache& view, bool fJustCheck, bool check_sigs)
 {
     AssertLockHeld(cs_main);
-    if (tx.nVersion != SYSCOIN_TX_VERSION_MN_REGISTER) {
-        return FormatSyscoinErrorMessage(state, "bad-protx-type", fJustCheck);
+    if (tx.nVersion != wentuno_TX_VERSION_MN_REGISTER) {
+        return FormatwentunoErrorMessage(state, "bad-protx-type", fJustCheck);
     }
 
     CProRegTx ptx;
     if (!GetTxPayload(tx, ptx)) {
-        return FormatSyscoinErrorMessage(state, "bad-protx-payload", fJustCheck);
+        return FormatwentunoErrorMessage(state, "bad-protx-payload", fJustCheck);
     }
 
     if (!ptx.IsTriviallyValid(state, llmq::CLLMQUtils::IsV19Active(pindexPrev->nHeight))) {
-        return FormatSyscoinErrorMessage(state, state.GetRejectReason(), fJustCheck);
+        return FormatwentunoErrorMessage(state, state.GetRejectReason(), fJustCheck);
     }
 
     // It's allowed to set addr to 0, which will put the MN into PoSe-banned state and require a ProUpServTx to be issues later
@@ -144,11 +144,11 @@ bool CheckProRegTx(const CTransaction& tx, const CBlockIndex* pindexPrev, TxVali
     if (!ptx.collateralOutpoint.hash.IsNull()) {
         Coin coin;
         if (!view.GetCoin(ptx.collateralOutpoint, coin) || coin.IsSpent() || coin.out.nValue != nMNCollateralRequired) {
-            return FormatSyscoinErrorMessage(state, "bad-protx-collateral", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-collateral", fJustCheck);
         }
 
         if (!ExtractDestination(coin.out.scriptPubKey, collateralTxDest)) {
-            return FormatSyscoinErrorMessage(state, "bad-protx-collateral-dest", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-collateral-dest", fJustCheck);
         }
 
         // Extract key from collateral. This only works for P2PK and P2PKH collaterals and will fail for P2SH.
@@ -160,20 +160,20 @@ bool CheckProRegTx(const CTransaction& tx, const CBlockIndex* pindexPrev, TxVali
             keyForPayloadSig = ToKeyID(*key_id);
         }	
         if (keyForPayloadSig.IsNull()) {
-            return FormatSyscoinErrorMessage(state, "bad-protx-collateral-pkh", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-collateral-pkh", fJustCheck);
         }
 
         collateralOutpoint = ptx.collateralOutpoint;
     } else {
         if (ptx.collateralOutpoint.n >= tx.vout.size()) {
-            return FormatSyscoinErrorMessage(state, "bad-protx-collateral-index", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-collateral-index", fJustCheck);
         }
         if (tx.vout[ptx.collateralOutpoint.n].nValue != nMNCollateralRequired) {
-            return FormatSyscoinErrorMessage(state, "bad-protx-collateral", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-collateral", fJustCheck);
         }
 
         if (!ExtractDestination(tx.vout[ptx.collateralOutpoint.n].scriptPubKey, collateralTxDest)) {
-            return FormatSyscoinErrorMessage(state, "bad-protx-collateral-dest", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-collateral-dest", fJustCheck);
         }
 
         collateralOutpoint = COutPoint(tx.GetHash(), ptx.collateralOutpoint.n);
@@ -182,7 +182,7 @@ bool CheckProRegTx(const CTransaction& tx, const CBlockIndex* pindexPrev, TxVali
     // don't allow reuse of collateral key for other keys (don't allow people to put the collateral key onto an online server)
     // this check applies to internal and external collateral, but internal collaterals are not necessarily a P2PKH
     if (collateralTxDest == CTxDestination(WitnessV0KeyHash(ptx.keyIDOwner)) || collateralTxDest == CTxDestination(WitnessV0KeyHash(ptx.keyIDVoting))) {
-        return FormatSyscoinErrorMessage(state, "bad-protx-collateral-reuse", fJustCheck);
+        return FormatwentunoErrorMessage(state, "bad-protx-collateral-reuse", fJustCheck);
     }
 
     if (pindexPrev) {
@@ -190,12 +190,12 @@ bool CheckProRegTx(const CTransaction& tx, const CBlockIndex* pindexPrev, TxVali
 
         // only allow reusing of addresses when it's for the same collateral (which replaces the old MN)
         if (mnList.HasUniqueProperty(ptx.addr) && mnList.GetUniquePropertyMN(ptx.addr)->collateralOutpoint != collateralOutpoint) {
-            return FormatSyscoinErrorMessage(state, "bad-protx-dup-addr", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-dup-addr", fJustCheck);
         }
 
         // never allow duplicate keys, even if this ProTx would replace an existing MN
         if (mnList.HasUniqueProperty(ptx.keyIDOwner) || mnList.HasUniqueProperty(ptx.pubKeyOperator)) {
-            return FormatSyscoinErrorMessage(state, "bad-protx-dup-key", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-dup-key", fJustCheck);
         }
 
     }
@@ -213,7 +213,7 @@ bool CheckProRegTx(const CTransaction& tx, const CBlockIndex* pindexPrev, TxVali
     } else {
         // collateral is part of this ProRegTx, so we know the collateral is owned by the issuer
         if (!ptx.vchSig.empty()) {
-            return FormatSyscoinErrorMessage(state, "bad-protx-sig", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-sig", fJustCheck);
         }
     }
 
@@ -222,17 +222,17 @@ bool CheckProRegTx(const CTransaction& tx, const CBlockIndex* pindexPrev, TxVali
 
 bool CheckProUpServTx(const CTransaction& tx, const CBlockIndex* pindexPrev, TxValidationState& state, bool fJustCheck, bool check_sigs)
 {
-    if (tx.nVersion != SYSCOIN_TX_VERSION_MN_UPDATE_SERVICE) {
-        return FormatSyscoinErrorMessage(state, "bad-protx-type", fJustCheck);
+    if (tx.nVersion != wentuno_TX_VERSION_MN_UPDATE_SERVICE) {
+        return FormatwentunoErrorMessage(state, "bad-protx-type", fJustCheck);
     }
 
     CProUpServTx ptx;
     if (!GetTxPayload(tx, ptx)) {
-        return FormatSyscoinErrorMessage(state, "bad-protx-payload", fJustCheck);
+        return FormatwentunoErrorMessage(state, "bad-protx-payload", fJustCheck);
     }
 
     if (!ptx.IsTriviallyValid(state, llmq::CLLMQUtils::IsV19Active(pindexPrev->nHeight))) {
-        return FormatSyscoinErrorMessage(state, state.GetRejectReason(), fJustCheck);
+        return FormatwentunoErrorMessage(state, state.GetRejectReason(), fJustCheck);
     }
 
     if (!CheckService(ptx, state, fJustCheck)) {
@@ -244,30 +244,30 @@ bool CheckProUpServTx(const CTransaction& tx, const CBlockIndex* pindexPrev, TxV
         auto mnList = deterministicMNManager->GetListForBlock(pindexPrev);
         auto mn = mnList.GetMN(ptx.proTxHash);
         if (!mn) {
-            return FormatSyscoinErrorMessage(state, "bad-protx-hash", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-hash", fJustCheck);
         }
 
         // don't allow updating to addresses already used by other MNs
         if (mnList.HasUniqueProperty(ptx.addr) && mnList.GetUniquePropertyMN(ptx.addr)->proTxHash != ptx.proTxHash) {
-            return FormatSyscoinErrorMessage(state, "bad-protx-dup-addr", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-dup-addr", fJustCheck);
         }
         
         if(ptx.vchNEVMAddress != mn->pdmnState->vchNEVMAddress) {
             if (mn->pdmnState->confirmedHash.IsNull()) {
-                return FormatSyscoinErrorMessage(state, "bad-protx-unconfirmed-nevm-address", fJustCheck);
+                return FormatwentunoErrorMessage(state, "bad-protx-unconfirmed-nevm-address", fJustCheck);
             }
             if(mn->pdmnState->IsBanned()) {
-                return FormatSyscoinErrorMessage(state, "bad-protx-banned-nevm-address", fJustCheck);
+                return FormatwentunoErrorMessage(state, "bad-protx-banned-nevm-address", fJustCheck);
             }
         }
         if(!ptx.vchNEVMAddress.empty()) {
             if (ptx.vchNEVMAddress.size() != 20) {
-                return FormatSyscoinErrorMessage(state, "bad-protx-invalid-nevmaddress-size", fJustCheck);
+                return FormatwentunoErrorMessage(state, "bad-protx-invalid-nevmaddress-size", fJustCheck);
             }
             if (mnList.HasUniqueProperty(ptx.vchNEVMAddress)) {
                 auto otherDmn = mnList.GetUniquePropertyMN(ptx.vchNEVMAddress);
                 if (ptx.proTxHash != otherDmn->proTxHash) {
-                    return FormatSyscoinErrorMessage(state, "bad-protx-dup-nevm-address", fJustCheck);
+                    return FormatwentunoErrorMessage(state, "bad-protx-dup-nevm-address", fJustCheck);
                 }
             }
         }
@@ -275,12 +275,12 @@ bool CheckProUpServTx(const CTransaction& tx, const CBlockIndex* pindexPrev, TxV
         if (ptx.scriptOperatorPayout != CScript()) {
             if (mn->nOperatorReward == 0) {
                 // don't allow to set operator reward payee in case no operatorReward was set
-                return FormatSyscoinErrorMessage(state, "bad-protx-operator-payee", fJustCheck);
+                return FormatwentunoErrorMessage(state, "bad-protx-operator-payee", fJustCheck);
             }
             CTxDestination payoutDest;
             if (!ExtractDestination(ptx.scriptOperatorPayout, payoutDest)) {
                 // should not happen as we checked script types before
-                return FormatSyscoinErrorMessage(state, "bad-protx-operator-payee", fJustCheck);
+                return FormatwentunoErrorMessage(state, "bad-protx-operator-payee", fJustCheck);
             }
         }
 
@@ -300,56 +300,56 @@ bool CheckProUpServTx(const CTransaction& tx, const CBlockIndex* pindexPrev, TxV
 
 bool CheckProUpRegTx(const CTransaction& tx, const CBlockIndex* pindexPrev, TxValidationState& state, CCoinsViewCache& view, bool fJustCheck, bool check_sigs)
 {
-    if (tx.nVersion != SYSCOIN_TX_VERSION_MN_UPDATE_REGISTRAR) {
-        return FormatSyscoinErrorMessage(state, "bad-protx-type", fJustCheck);
+    if (tx.nVersion != wentuno_TX_VERSION_MN_UPDATE_REGISTRAR) {
+        return FormatwentunoErrorMessage(state, "bad-protx-type", fJustCheck);
     }
 
     CProUpRegTx ptx;
     if (!GetTxPayload(tx, ptx)) {
-        return FormatSyscoinErrorMessage(state, "bad-protx-payload", fJustCheck);
+        return FormatwentunoErrorMessage(state, "bad-protx-payload", fJustCheck);
     }
     if (!ptx.IsTriviallyValid(state, llmq::CLLMQUtils::IsV19Active(pindexPrev->nHeight))) {
-        return FormatSyscoinErrorMessage(state, state.GetRejectReason(), fJustCheck);
+        return FormatwentunoErrorMessage(state, state.GetRejectReason(), fJustCheck);
     }
     
 
     CTxDestination payoutDest;
     if (!ExtractDestination(ptx.scriptPayout, payoutDest)) {
         // should not happen as we checked script types before
-        return FormatSyscoinErrorMessage(state, "bad-protx-payee-dest", fJustCheck);
+        return FormatwentunoErrorMessage(state, "bad-protx-payee-dest", fJustCheck);
     }
 
     if (pindexPrev) {
         auto mnList = deterministicMNManager->GetListForBlock(pindexPrev);
         auto dmn = mnList.GetMN(ptx.proTxHash);
         if (!dmn) {
-            return FormatSyscoinErrorMessage(state, "bad-protx-hash", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-hash", fJustCheck);
         }
 
         // don't allow reuse of payee key for other keys (don't allow people to put the payee key onto an online server)
         if (payoutDest == CTxDestination(WitnessV0KeyHash(dmn->pdmnState->keyIDOwner)) || payoutDest == CTxDestination(WitnessV0KeyHash(ptx.keyIDVoting))) {
-            return FormatSyscoinErrorMessage(state, "bad-protx-payee-reuse", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-payee-reuse", fJustCheck);
         }
 
         Coin coin;
         if (!view.GetCoin(dmn->collateralOutpoint, coin) || coin.IsSpent()) {
             // this should never happen (there would be no dmn otherwise)
-            return FormatSyscoinErrorMessage(state, "bad-protx-collateral", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-collateral", fJustCheck);
         }
 
         // don't allow reuse of collateral key for other keys (don't allow people to put the collateral key onto an online server)
         CTxDestination collateralTxDest;
         if (!ExtractDestination(coin.out.scriptPubKey, collateralTxDest)) {
-            return FormatSyscoinErrorMessage(state, "bad-protx-collateral-dest", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-collateral-dest", fJustCheck);
         }
         if (collateralTxDest == CTxDestination(WitnessV0KeyHash(dmn->pdmnState->keyIDOwner)) || collateralTxDest == CTxDestination(WitnessV0KeyHash(ptx.keyIDVoting))) {
-            return FormatSyscoinErrorMessage(state, "bad-protx-collateral-reuse", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-collateral-reuse", fJustCheck);
         }
 
         if (mnList.HasUniqueProperty(ptx.pubKeyOperator)) {
             auto otherDmn = mnList.GetUniquePropertyMN(ptx.pubKeyOperator);
             if (ptx.proTxHash != otherDmn->proTxHash) {
-                return FormatSyscoinErrorMessage(state, "bad-protx-dup-key", fJustCheck);
+                return FormatwentunoErrorMessage(state, "bad-protx-dup-key", fJustCheck);
             }
         }
  
@@ -369,24 +369,24 @@ bool CheckProUpRegTx(const CTransaction& tx, const CBlockIndex* pindexPrev, TxVa
 
 bool CheckProUpRevTx(const CTransaction& tx, const CBlockIndex* pindexPrev, TxValidationState& state, bool fJustCheck, bool check_sigs)
 {
-    if (tx.nVersion != SYSCOIN_TX_VERSION_MN_UPDATE_REVOKE) {
-        return FormatSyscoinErrorMessage(state, "bad-protx-type", fJustCheck);
+    if (tx.nVersion != wentuno_TX_VERSION_MN_UPDATE_REVOKE) {
+        return FormatwentunoErrorMessage(state, "bad-protx-type", fJustCheck);
     }
 
     CProUpRevTx ptx;
     if (!GetTxPayload(tx, ptx)) {
-        return FormatSyscoinErrorMessage(state, "bad-protx-payload", fJustCheck);
+        return FormatwentunoErrorMessage(state, "bad-protx-payload", fJustCheck);
     }
 
     if (!ptx.IsTriviallyValid(state, llmq::CLLMQUtils::IsV19Active(pindexPrev->nHeight))) {
-        return FormatSyscoinErrorMessage(state, state.GetRejectReason(), fJustCheck);
+        return FormatwentunoErrorMessage(state, state.GetRejectReason(), fJustCheck);
     }
 
     if (pindexPrev) {
         auto mnList = deterministicMNManager->GetListForBlock(pindexPrev);
         auto dmn = mnList.GetMN(ptx.proTxHash);
         if (!dmn)
-            return FormatSyscoinErrorMessage(state, "bad-protx-hash", fJustCheck);
+            return FormatwentunoErrorMessage(state, "bad-protx-hash", fJustCheck);
 
         if (!CheckInputsHash(tx, ptx, state, fJustCheck)) {
             // pass the state returned by the function above

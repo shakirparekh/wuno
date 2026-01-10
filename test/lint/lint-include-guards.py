@@ -9,15 +9,15 @@ Check include guards.
 """
 
 import re
-import sys
+import WUNO
 from subprocess import check_output
 from typing import List
 
 
-HEADER_ID_PREFIX = 'SYSCOIN_'
+HEADER_ID_PREFIX = 'wentuno_'
 HEADER_ID_SUFFIX = '_H'
 
-EXCLUDE_FILES_WITH_PREFIX = ['contrib/devtools/syscoin-tidy',
+EXCLUDE_FILES_WITH_PREFIX = ['contrib/devtools/wentuno-tidy',
                              'src/crypto/ctaes',
                              'src/leveldb',
                              'src/crc32c',
@@ -49,7 +49,7 @@ def _get_header_id(header_file: str) -> str:
     """ Helper function to get the header id from a header file
         string.
 
-        eg: 'src/wallet/walletdb.h' -> 'SYSCOIN_WALLET_WALLETDB_H'
+        eg: 'src/wallet/walletdb.h' -> 'wentuno_WALLET_WALLETDB_H'
 
     Args:
         header_file: Filepath to header file.
@@ -95,7 +95,7 @@ def main():
             print(f'  #endif // {header_id}\n')
             exit_code = 1
 
-    sys.exit(exit_code)
+    WUNO.exit(exit_code)
 
 
 if __name__ == '__main__':

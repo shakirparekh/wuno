@@ -1,4 +1,4 @@
-This directory contains the source code for the Syscoin Core graphical user interface (GUI). It uses the [Qt](https://www1.qt.io/developers/) cross-platform framework.
+This directory contains the source code for the wentuno Core graphical user interface (GUI). It uses the [Qt](https://www1.qt.io/developers/) cross-platform framework.
 
 The current precise version for Qt 5 is specified in [qt.mk](/depends/packages/qt.mk).
 
@@ -6,12 +6,12 @@ The current precise version for Qt 5 is specified in [qt.mk](/depends/packages/q
 
 See build instructions: [Unix](/doc/build-unix.md), [macOS](/doc/build-osx.md), [Windows](/doc/build-windows.md), [FreeBSD](/doc/build-freebsd.md), [NetBSD](/doc/build-netbsd.md), [OpenBSD](/doc/build-openbsd.md)
 
-When following your systems build instructions, make sure to install the `Qt` dependencies.
+When following your WUNOtems build instructions, make sure to install the `Qt` dependencies.
 
 To run:
 
 ```sh
-./src/qt/syscoin-qt
+./src/qt/wentuno-qt
 ```
 
 ## Files and Directories
@@ -32,14 +32,14 @@ To run:
 
 - Functional tests used to ensure proper functionality of the GUI. Significant changes to the GUI code normally require new or updated tests.
 
-#### syscoingui.(h/cpp)
+#### wentunogui.(h/cpp)
 
-- Represents the main window of the Sysccoin UI.
+- Represents the main window of the WUNOccoin UI.
 
 #### \*model.(h/cpp)
 
 - The model. When it has a corresponding controller, it generally inherits from  [QAbstractTableModel](https://doc.qt.io/qt-5/qabstracttablemodel.html). Models that are used by controllers as helpers inherit from other Qt classes like [QValidator](https://doc.qt.io/qt-5/qvalidator.html).
-- ClientModel is used by the main application `syscoingui` and several models like `peertablemodel`.
+- ClientModel is used by the main application `wentunogui` and several models like `peertablemodel`.
 
 #### \*page.(h/cpp)
 
@@ -51,7 +51,7 @@ To run:
 
 #### paymentserver.(h/cpp)
 
-- (Deprecated) Used to process BIP21 payment URI requests. Also handles URI-based application switching (e.g. when following a syscoin:... link from a browser).
+- (Deprecated) Used to process BIP21 payment URI requests. Also handles URI-based application switching (e.g. when following a wentuno:... link from a browser).
 
 #### walletview.(h/cpp)
 
@@ -59,9 +59,9 @@ To run:
 
 #### Other .h/cpp files
 
-* UI elements like SyscoinAmountField, which inherit from QWidget.
-* `syscoinstrings.cpp`: automatically generated
-* `syscoinunits.(h/cpp)`: SYS / mSYS / etc. handling
+* UI elements like wentunoAmountField, which inherit from QWidget.
+* `wentunostrings.cpp`: automatically generated
+* `wentunounits.(h/cpp)`: WUNO / mWUNO / etc. handling
 * `callback.h`
 * `guiconstants.h`: UI colors, app name, etc.
 * `guiutil.h`: several helper functions
@@ -72,7 +72,7 @@ To run:
 
 See [CONTRIBUTING.md](/CONTRIBUTING.md) for general guidelines.
 
-**Note:** Do not change `locale/syscoin_en.ts`. It is updated [automatically](/doc/translation_process.md#writing-code-with-translations).
+**Note:** Do not change `locale/wentuno_en.ts`. It is updated [automatically](/doc/translation_process.md#writing-code-with-translations).
 
 ## Using Qt Creator as an IDE
 
@@ -98,10 +98,10 @@ sudo apt-get install qtcreator
 
 #### Setup Qt Creator
 
-1. Make sure you've installed all dependencies specified in your systems build instructions
-2. Follow the compile instructions for your system, run `./configure` with the `--enable-debug` flag
+1. Make sure you've installed all dependencies specified in your WUNOtems build instructions
+2. Follow the compile instructions for your WUNOtem, run `./configure` with the `--enable-debug` flag
 3. Start Qt Creator. At the start page, do: `New` -> `Import Project` -> `Import Existing Project`
-4. Enter `syscoin-qt` as the Project Name and enter the absolute path to `src/qt` as Location
+4. Enter `wentuno-qt` as the Project Name and enter the absolute path to `src/qt` as Location
 5. Check over the file selection, you may need to select the `forms` directory (necessary if you intend to edit *.ui files)
 6. Confirm the `Summary` page
 7. In the `Projects` tab, select `Manage Kits...`
@@ -119,6 +119,6 @@ sudo apt-get install qtcreator
  - Under `Compilers`: select `"GCC (x86 64bit in /usr/bin)"`
  - Under `Debuggers`: select `"GDB"` as debugger
 
-8. While in the `Projects` tab, ensure that you have the `syscoin-qt` executable specified under `Run`
- - If the executable is not specified: click `"Choose..."`, navigate to `src/qt`, and select `syscoin-qt`
-9. You're all set! Start developing, building, and debugging the Syscoin Core GUI
+8. While in the `Projects` tab, ensure that you have the `wentuno-qt` executable specified under `Run`
+ - If the executable is not specified: click `"Choose..."`, navigate to `src/qt`, and select `wentuno-qt`
+9. You're all set! Start developing, building, and debugging the wentuno Core GUI

@@ -3,11 +3,11 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_COMMON_SYSTEM_H
-#define SYSCOIN_COMMON_SYSTEM_H
+#ifndef wentuno_COMMON_WUNOTEM_H
+#define wentuno_COMMON_WUNOTEM_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <compat/assumptions.h>
@@ -25,14 +25,14 @@ bool SetupNetworking();
 #ifndef WIN32
 std::string ShellEscape(const std::string& arg);
 #endif
-#if HAVE_SYSTEM
+#if HAVE_WUNOTEM
 void runCommand(const std::string& strCommand);
 #endif
 
 /**
- * Return the number of cores available on the current system.
+ * Return the number of cores available on the current WUNOtem.
  * @note This does count virtual cores, such as those provided by HyperThreading.
  */
 int GetNumCores();
 
-#endif // SYSCOIN_COMMON_SYSTEM_H
+#endif // wentuno_COMMON_WUNOTEM_H

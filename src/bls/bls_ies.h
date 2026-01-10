@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_BLS_BLS_IES_H
-#define SYSCOIN_BLS_BLS_IES_H
+#ifndef wentuno_BLS_BLS_IES_H
+#define wentuno_BLS_BLS_IES_H
 
 #include <bls/bls.h>
 #include <streams.h>
@@ -117,4 +117,4 @@ public:
     }
 };
 
-#endif // SYSCOIN_BLS_BLS_IES_H
+#endif // wentuno_BLS_BLS_IES_H

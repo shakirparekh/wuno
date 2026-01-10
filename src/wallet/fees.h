@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_WALLET_FEES_H
-#define SYSCOIN_WALLET_FEES_H
+#ifndef wentuno_WALLET_FEES_H
+#define wentuno_WALLET_FEES_H
 
 #include <consensus/amount.h>
 
@@ -45,4 +45,4 @@ CFeeRate GetMinimumFeeRate(const CWallet& wallet, const CCoinControl& coin_contr
 CFeeRate GetDiscardRate(const CWallet& wallet);
 } // namespace wallet
 
-#endif // SYSCOIN_WALLET_FEES_H
+#endif // wentuno_WALLET_FEES_H

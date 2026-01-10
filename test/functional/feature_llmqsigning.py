@@ -42,7 +42,7 @@ class LLMQSigningTest(DashTestFramework):
             assert self.mninfo[0].node.getconnectioncount() == self.llmq_size
 
         id = "0000000000000000000000000000000000000000000000000000000000000001"
-        # SYSCOIN messages have to exist and be part of the chain atleast SIGN_HEIGHT_OFFSET blocks back from tip
+        # wentuno messages have to exist and be part of the chain atleast SIGN_HEIGHT_OFFSET blocks back from tip
         msgHash = self.generate(self.nodes[0], 5)[-1]
         msgHashConflict = self.generate(self.nodes[0], 5)[-1]
 
@@ -122,7 +122,7 @@ class LLMQSigningTest(DashTestFramework):
         assert node.quorum_verify(id, msgHash, recsig["sig"])
         assert node.quorum_verify(id, msgHash, recsig["sig"], "", height)
         assert not node.quorum_verify(id, msgHashConflict, recsig["sig"])
-        # SYSCOIN will find the right quorum based on latching to dkgInterval from height_bad passed in to ScanQuorums
+        # wentuno will find the right quorum based on latching to dkgInterval from height_bad passed in to ScanQuorums
         assert node.quorum_verify(id, msgHash, recsig["sig"], "", height_bad)
         # Use specific quorum
         assert node.quorum_verify(id, msgHash, recsig["sig"], recsig["quorumHash"])

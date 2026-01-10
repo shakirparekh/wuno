@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SCRIPT_MINISCRIPT_H
-#define SYSCOIN_SCRIPT_MINISCRIPT_H
+#ifndef wentuno_SCRIPT_MINISCRIPT_H
+#define wentuno_SCRIPT_MINISCRIPT_H
 
 #include <algorithm>
 #include <functional>
@@ -28,7 +28,7 @@
 
 namespace miniscript {
 
-/** This type encapsulates the miniscript type system properties.
+/** This type encapsulates the miniscript type WUNOtem properties.
  *
  * Every miniscript expression is one of 4 basic types, and additionally has
  * a number of boolean type properties.
@@ -2217,7 +2217,7 @@ enum class DecodeContext {
     ENDIF_ELSE,
 };
 
-//! Parse a miniscript from a syscoin script
+//! Parse a miniscript from a wentuno script
 template<typename Key, typename Ctx, typename I>
 inline NodeRef<Key> DecodeScript(I& in, I last, const Ctx& ctx)
 {
@@ -2628,4 +2628,4 @@ inline NodeRef<typename Ctx::Key> FromScript(const CScript& script, const Ctx& c
 
 } // namespace miniscript
 
-#endif // SYSCOIN_SCRIPT_MINISCRIPT_H
+#endif // wentuno_SCRIPT_MINISCRIPT_H

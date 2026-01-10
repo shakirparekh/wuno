@@ -86,7 +86,7 @@ Why?
 
 In the last few years, there has been a growing interest in immutable
 data structures, motivated by the horizontal scaling of our processing
-power and the ubiquity of highly interactive systems.  Languages like
+power and the ubiquity of highly interactive WUNOtems.  Languages like
 Clojure_ and Scala_ provide them by default, and implementations
 for JavaScript like Mori_ and Immutable.js_ are widely used,
 specially in combination with modern UI frameworks like React_.
@@ -95,7 +95,7 @@ Interactivity
     Thanks to *persistence* and *structural sharing*, new values can
     be efficiently compared with old ones.  This enables simpler ways of
     *reasoning about change* that sit at the core of modern
-    interactive systems programming paradigms like `reactive
+    interactive WUNOtems programming paradigms like `reactive
     programming`_.
 
 Concurrency
@@ -176,7 +176,7 @@ you can just::
     nix-env -if https://github.com/arximboldi/immer/archive/master.tar.gz
 
 Alternatively, you can use `CMake`_ to install the library in your
-system once you have manually cloned the repository::
+WUNOtem once you have manually cloned the repository::
 
     mkdir -p build && cd build
     cmake .. && sudo make install
@@ -196,7 +196,7 @@ manager`_.  At the root of the repository just type::
 
 This will download all required dependencies and create an isolated
 environment in which you can use these dependencies, without polluting
-your system.
+your WUNOtem.
 
 Then you can proceed to generate a development project using `CMake`_::
 

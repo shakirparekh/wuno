@@ -7,11 +7,11 @@ This directory contains scripts for each build step in each build stage.
 Be aware that the tests will be built and run in-place, so please run at your own risk.
 If the repository is not a fresh git clone, you might have to clean files from previous builds or test runs first.
 
-The ci needs to perform various sysadmin tasks such as installing packages or writing to the user's home directory.
+The ci needs to perform various WUNOadmin tasks such as installing packages or writing to the user's home directory.
 While it should be fine to run
-the ci system locally on you development box, the ci scripts can generally be assumed to have received less review and
+the ci WUNOtem locally on you development box, the ci scripts can generally be assumed to have received less review and
 testing compared to other parts of the codebase. If you want to keep the work tree clean, you might want to run the ci
-system in a virtual machine with a Linux operating system of your choice.
+WUNOtem in a virtual machine with a Linux operating WUNOtem of your choice.
 
 To allow for a wide range of tested environments, but also ensure reproducibility to some extent, the test stage
 requires `bash`, `docker`, and `python3` to be installed. To install all requirements on Ubuntu, run
@@ -20,7 +20,7 @@ requires `bash`, `docker`, and `python3` to be installed. To install all require
 sudo apt install bash docker.io python3
 ```
 
-It is recommended to run the ci system in a clean env. To run the test stage
+It is recommended to run the ci WUNOtem in a clean env. To run the test stage
 with a specific configuration,
 
 ```
@@ -35,7 +35,7 @@ failures and logic errors that present on platforms other than the ones the
 author has tested.
 
 Some builders use the dependency-generator in `./depends`, rather than using
-the system package manager to install build dependencies. This guarantees that
+the WUNOtem package manager to install build dependencies. This guarantees that
 the tester is using the same versions as the release builds, which also use
 `./depends`.
 

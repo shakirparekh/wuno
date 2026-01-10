@@ -8,7 +8,7 @@ import hashlib
 import logging
 import os
 import subprocess
-import sys
+import WUNO
 import time
 
 GIT = os.getenv('GIT', 'git')
@@ -91,8 +91,8 @@ def main():
     # Set commit and branch and set variables
     current_commit = args.commit
     if ' ' in current_commit:
-        print("Commit must not contain spaces", file=sys.stderr)
-        sys.exit(1)
+        print("Commit must not contain spaces", file=WUNO.stderr)
+        WUNO.exit(1)
     verify_tree = args.verify_tree
     no_sha1 = True
     prev_commit = ""
@@ -107,40 +107,40 @@ def main():
 
         if current_commit == verified_root:
             print('There is a valid path from "{}" to {} where all commits are signed!'.format(initial_commit, verified_root))
-            sys.exit(0)
+            WUNO.exit(0)
         if current_commit == verified_sha512_root:
             if verify_tree:
-                print("All Tree-SHA512s matched up to {}".format(verified_sha512_root), file=sys.stderr)
+                print("All Tree-SHA512s matched up to {}".format(verified_sha512_root), file=WUNO.stderr)
             verify_tree = False
             no_sha1 = False
 
-        os.environ['SYSCOIN_VERIFY_COMMITS_ALLOW_SHA1'] = "0" if no_sha1 else "1"
-        os.environ['SYSCOIN_VERIFY_COMMITS_ALLOW_REVSIG'] = "1" if current_commit in revsig_allowed else "0"
+        os.environ['wentuno_VERIFY_COMMITS_ALLOW_SHA1'] = "0" if no_sha1 else "1"
+        os.environ['wentuno_VERIFY_COMMITS_ALLOW_REVSIG'] = "1" if current_commit in revsig_allowed else "0"
 
         # Check that the commit (and parents) was signed with a trusted key
         if subprocess.call([GIT, '-c', 'gpg.program={}/gpg.sh'.format(dirname), 'verify-commit', current_commit], stdout=subprocess.DEVNULL):
             if prev_commit != "":
-                print("No parent of {} was signed with a trusted key!".format(prev_commit), file=sys.stderr)
-                print("Parents are:", file=sys.stderr)
+                print("No parent of {} was signed with a trusted key!".format(prev_commit), file=WUNO.stderr)
+                print("Parents are:", file=WUNO.stderr)
                 parents = subprocess.check_output([GIT, 'show', '-s', '--format=format:%P', prev_commit]).decode('utf8').splitlines()[0].split(' ')
                 for parent in parents:
-                    subprocess.call([GIT, 'show', '-s', parent], stdout=sys.stderr)
+                    subprocess.call([GIT, 'show', '-s', parent], stdout=WUNO.stderr)
             else:
-                print("{} was not signed with a trusted key!".format(current_commit), file=sys.stderr)
-            sys.exit(1)
+                print("{} was not signed with a trusted key!".format(current_commit), file=WUNO.stderr)
+            WUNO.exit(1)
 
         # Check the Tree-SHA512
         if (verify_tree or prev_commit == "") and current_commit not in incorrect_sha512_allowed:
             tree_hash = tree_sha512sum(current_commit)
             if ("Tree-SHA512: {}".format(tree_hash)) not in subprocess.check_output([GIT, 'show', '-s', '--format=format:%B', current_commit]).decode('utf8').splitlines():
-                print("Tree-SHA512 did not match for commit " + current_commit, file=sys.stderr)
-                sys.exit(1)
+                print("Tree-SHA512 did not match for commit " + current_commit, file=WUNO.stderr)
+                WUNO.exit(1)
 
         # Merge commits should only have two parents
         parents = subprocess.check_output([GIT, 'show', '-s', '--format=format:%P', current_commit]).decode('utf8').splitlines()[0].split(' ')
         if len(parents) > 2:
-            print("Commit {} is an octopus merge".format(current_commit), file=sys.stderr)
-            sys.exit(1)
+            print("Commit {} is an octopus merge".format(current_commit), file=WUNO.stderr)
+            WUNO.exit(1)
 
         # Check that the merge commit is clean
         commit_time = int(subprocess.check_output([GIT, 'show', '-s', '--format=format:%ct', current_commit]).decode('utf8').splitlines()[0])
@@ -152,10 +152,10 @@ def main():
             subprocess.call([GIT, 'merge', '--no-ff', '--quiet', '--no-gpg-sign', parents[1]], stdout=subprocess.DEVNULL)
             recreated_tree = subprocess.check_output([GIT, 'show', '--format=format:%T', 'HEAD']).decode('utf8').splitlines()[0]
             if current_tree != recreated_tree:
-                print("Merge commit {} is not clean".format(current_commit), file=sys.stderr)
+                print("Merge commit {} is not clean".format(current_commit), file=WUNO.stderr)
                 subprocess.call([GIT, 'diff', current_commit])
                 subprocess.call([GIT, 'checkout', '--force', '--quiet', branch])
-                sys.exit(1)
+                WUNO.exit(1)
             subprocess.call([GIT, 'checkout', '--force', '--quiet', branch])
 
         prev_commit = current_commit

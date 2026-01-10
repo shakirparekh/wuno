@@ -2,7 +2,7 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <qt/syscoinunits.h>
+#include <qt/wentunounits.h>
 
 #include <consensus/amount.h>
 
@@ -10,80 +10,80 @@
 
 #include <cassert>
 
-static constexpr auto MAX_DIGITS_SYS = 16;
+static constexpr auto MAX_DIGITS_WUNO = 16;
 
-SyscoinUnits::SyscoinUnits(QObject *parent):
+wentunoUnits::wentunoUnits(QObject *parent):
         QAbstractListModel(parent),
         unitlist(availableUnits())
 {
 }
 
-QList<SyscoinUnit> SyscoinUnits::availableUnits()
+QList<wentunoUnit> wentunoUnits::availableUnits()
 {
-    QList<SyscoinUnit> unitlist;
-    unitlist.append(Unit::SYS);
-    unitlist.append(Unit::mSYS);
-    unitlist.append(Unit::uSYS);
+    QList<wentunoUnit> unitlist;
+    unitlist.append(Unit::WUNO);
+    unitlist.append(Unit::mWUNO);
+    unitlist.append(Unit::uWUNO);
     unitlist.append(Unit::SAT);
     return unitlist;
 }
 
-QString SyscoinUnits::longName(Unit unit)
+QString wentunoUnits::longName(Unit unit)
 {
     switch (unit) {
-    case Unit::SYS: return QString("SYS");
-    case Unit::mSYS: return QString("mSYS");
-    case Unit::uSYS: return QString::fromUtf8("µSYS (bits)");
+    case Unit::WUNO: return QString("WUNO");
+    case Unit::mWUNO: return QString("mWUNO");
+    case Unit::uWUNO: return QString::fromUtf8("µWUNO (bits)");
     case Unit::SAT: return QString("Satoshi (sat)");
     } // no default case, so the compiler can warn about missing cases
     assert(false);
 }
 
-QString SyscoinUnits::shortName(Unit unit)
+QString wentunoUnits::shortName(Unit unit)
 {
     switch (unit) {
-    case Unit::SYS: return longName(unit);
-    case Unit::mSYS: return longName(unit);
-    case Unit::uSYS: return QString("bits");
+    case Unit::WUNO: return longName(unit);
+    case Unit::mWUNO: return longName(unit);
+    case Unit::uWUNO: return QString("bits");
     case Unit::SAT: return QString("sat");
     } // no default case, so the compiler can warn about missing cases
     assert(false);
 }
 
-QString SyscoinUnits::description(Unit unit)
+QString wentunoUnits::description(Unit unit)
 {
     switch (unit) {
-    case Unit::SYS: return QString("Syscoins");
-    case Unit::mSYS: return QString("Milli-Syscoins (1 / 1" THIN_SP_UTF8 "000)");
-    case Unit::uSYS: return QString("Micro-Syscoins (bits) (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case Unit::WUNO: return QString("wentunos");
+    case Unit::mWUNO: return QString("Milli-wentunos (1 / 1" THIN_SP_UTF8 "000)");
+    case Unit::uWUNO: return QString("Micro-wentunos (bits) (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     case Unit::SAT: return QString("Satoshi (sat) (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     } // no default case, so the compiler can warn about missing cases
     assert(false);
 }
 
-qint64 SyscoinUnits::factor(Unit unit)
+qint64 wentunoUnits::factor(Unit unit)
 {
     switch (unit) {
-    case Unit::SYS: return 100'000'000;
-    case Unit::mSYS: return 100'000;
-    case Unit::uSYS: return 100;
+    case Unit::WUNO: return 100'000'000;
+    case Unit::mWUNO: return 100'000;
+    case Unit::uWUNO: return 100;
     case Unit::SAT: return 1;
     } // no default case, so the compiler can warn about missing cases
     assert(false);
 }
 
-int SyscoinUnits::decimals(Unit unit)
+int wentunoUnits::decimals(Unit unit)
 {
     switch (unit) {
-    case Unit::SYS: return 8;
-    case Unit::mSYS: return 5;
-    case Unit::uSYS: return 2;
+    case Unit::WUNO: return 8;
+    case Unit::mWUNO: return 5;
+    case Unit::uWUNO: return 2;
     case Unit::SAT: return 0;
     } // no default case, so the compiler can warn about missing cases
     assert(false);
 }
 
-QString SyscoinUnits::format(Unit unit, const CAmount& nIn, bool fPlus, SeparatorStyle separators, bool justify)
+QString wentunoUnits::format(Unit unit, const CAmount& nIn, bool fPlus, SeparatorStyle separators, bool justify)
 {
     // Note: not using straight sprintf here because we do NOT want
     // localized number formatting.
@@ -94,7 +94,7 @@ QString SyscoinUnits::format(Unit unit, const CAmount& nIn, bool fPlus, Separato
     qint64 quotient = n_abs / coin;
     QString quotient_str = QString::number(quotient);
     if (justify) {
-        quotient_str = quotient_str.rightJustified(MAX_DIGITS_SYS - num_decimals, ' ');
+        quotient_str = quotient_str.rightJustified(MAX_DIGITS_WUNO - num_decimals, ' ');
     }
 
     // Use SI-style thin space separators as these are locale independent and can't be
@@ -128,19 +128,19 @@ QString SyscoinUnits::format(Unit unit, const CAmount& nIn, bool fPlus, Separato
 // Please take care to use formatHtmlWithUnit instead, when
 // appropriate.
 
-QString SyscoinUnits::formatWithUnit(Unit unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
+QString wentunoUnits::formatWithUnit(Unit unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
 {
     return format(unit, amount, plussign, separators) + QString(" ") + shortName(unit);
 }
 
-QString SyscoinUnits::formatHtmlWithUnit(Unit unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
+QString wentunoUnits::formatHtmlWithUnit(Unit unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
 {
     QString str(formatWithUnit(unit, amount, plussign, separators));
     str.replace(QChar(THIN_SP_CP), QString(THIN_SP_HTML));
     return QString("<span style='white-space: nowrap;'>%1</span>").arg(str);
 }
 
-QString SyscoinUnits::formatWithPrivacy(Unit unit, const CAmount& amount, SeparatorStyle separators, bool privacy)
+QString wentunoUnits::formatWithPrivacy(Unit unit, const CAmount& amount, SeparatorStyle separators, bool privacy)
 {
     assert(amount >= 0);
     QString value;
@@ -152,7 +152,7 @@ QString SyscoinUnits::formatWithPrivacy(Unit unit, const CAmount& amount, Separa
     return value + QString(" ") + shortName(unit);
 }
 
-bool SyscoinUnits::parse(Unit unit, const QString& value, CAmount* val_out)
+bool wentunoUnits::parse(Unit unit, const QString& value, CAmount* val_out)
 {
     if (value.isEmpty()) {
         return false; // Refuse to parse invalid unit or empty string
@@ -192,18 +192,18 @@ bool SyscoinUnits::parse(Unit unit, const QString& value, CAmount* val_out)
     return ok;
 }
 
-QString SyscoinUnits::getAmountColumnTitle(Unit unit)
+QString wentunoUnits::getAmountColumnTitle(Unit unit)
 {
     return QObject::tr("Amount") + " (" + shortName(unit) + ")";
 }
 
-int SyscoinUnits::rowCount(const QModelIndex &parent) const
+int wentunoUnits::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
     return unitlist.size();
 }
 
-QVariant SyscoinUnits::data(const QModelIndex &index, int role) const
+QVariant wentunoUnits::data(const QModelIndex &index, int role) const
 {
     int row = index.row();
     if(row >= 0 && row < unitlist.size())
@@ -223,41 +223,41 @@ QVariant SyscoinUnits::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-CAmount SyscoinUnits::maxMoney()
+CAmount wentunoUnits::maxMoney()
 {
     return MAX_MONEY;
 }
 
 namespace {
-qint8 ToQint8(SyscoinUnit unit)
+qint8 ToQint8(wentunoUnit unit)
 {
     switch (unit) {
-    case SyscoinUnit::SYS: return 0;
-    case SyscoinUnit::mSYS: return 1;
-    case SyscoinUnit::uSYS: return 2;
-    case SyscoinUnit::SAT: return 3;
+    case wentunoUnit::WUNO: return 0;
+    case wentunoUnit::mWUNO: return 1;
+    case wentunoUnit::uWUNO: return 2;
+    case wentunoUnit::SAT: return 3;
     } // no default case, so the compiler can warn about missing cases
     assert(false);
 }
 
-SyscoinUnit FromQint8(qint8 num)
+wentunoUnit FromQint8(qint8 num)
 {
     switch (num) {
-    case 0: return SyscoinUnit::SYS;
-    case 1: return SyscoinUnit::mSYS;
-    case 2: return SyscoinUnit::uSYS;
-    case 3: return SyscoinUnit::SAT;
+    case 0: return wentunoUnit::WUNO;
+    case 1: return wentunoUnit::mWUNO;
+    case 2: return wentunoUnit::uWUNO;
+    case 3: return wentunoUnit::SAT;
     }
     assert(false);
 }
 } // namespace
 
-QDataStream& operator<<(QDataStream& out, const SyscoinUnit& unit)
+QDataStream& operator<<(QDataStream& out, const wentunoUnit& unit)
 {
     return out << ToQint8(unit);
 }
 
-QDataStream& operator>>(QDataStream& in, SyscoinUnit& unit)
+QDataStream& operator>>(QDataStream& in, wentunoUnit& unit)
 {
     qint8 input;
     in >> input;

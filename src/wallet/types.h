@@ -10,8 +10,8 @@
 //! separate header files. More complicated wallet public types like
 //! CCoinControl that are used externally can have separate headers.
 
-#ifndef SYSCOIN_WALLET_TYPES_H
-#define SYSCOIN_WALLET_TYPES_H
+#ifndef wentuno_WALLET_TYPES_H
+#define wentuno_WALLET_TYPES_H
 
 #include <type_traits>
 
@@ -64,4 +64,4 @@ enum class AddressPurpose {
 };
 } // namespace wallet
 
-#endif // SYSCOIN_WALLET_TYPES_H
+#endif // wentuno_WALLET_TYPES_H

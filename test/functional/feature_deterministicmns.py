@@ -8,12 +8,12 @@
 #
 from test_framework.blocktools import create_block, create_coinbase, get_masternode_payment, add_witness_commitment
 from test_framework.messages import CTransaction, from_hex, COIN, CTxOut
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import p2p_port, Decimal, force_finish_mnsync, assert_equal, MAX_INITIAL_BROADCAST_DELAY
 class Masternode(object):
     pass
 
-class DIP3Test(SyscoinTestFramework):
+class DIP3Test(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
 
@@ -55,7 +55,7 @@ class DIP3Test(SyscoinTestFramework):
         self.log.info("funding controller node")
         while self.nodes[0].getbalance() < (self.num_initial_mn + 3) * 100:
             self.generatetoaddress(self.nodes[0], 10, self.nodes[0].getnewaddress()) # generate enough for collaterals
-        self.log.info("controller node has {} syscoin".format(self.nodes[0].getbalance()))
+        self.log.info("controller node has {} wentuno".format(self.nodes[0].getbalance()))
 
         # Make sure we're below block 432 (which activates dip3)
         self.log.info("testing rejection of ProTx before dip3 activation")
@@ -281,7 +281,7 @@ class DIP3Test(SyscoinTestFramework):
 
     def start_mn(self, mn):
         start_idx = len(self.nodes) - 1
-        # SYSCOIN add offset and add nodes individually with offset and custom args
+        # wentuno add offset and add nodes individually with offset and custom args
         for idx in range(start_idx, mn.idx):
             self.add_nodes(1, offset=idx+1)
 

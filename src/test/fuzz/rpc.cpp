@@ -130,15 +130,15 @@ const std::vector<std::string> RPC_COMMANDS_SAFE_FOR_FUZZING{
     "gobject_submit",
     "createauxblock",
     "submitauxblock",
-    "syscoingettxroots",
-    "syscoingetspvproof",
-    "syscoindecoderawtransaction",
+    "wentunogettxroots",
+    "wentunogetspvproof",
+    "wentunodecoderawtransaction",
     "getnevmblobdata",
     "listnevmblobdata",
     "assetallocationverifyzdag",
-    "syscoinstopgeth",
-    "syscoinstartgeth",
-    "syscoincheckmint",
+    "wentunostopgeth",
+    "wentunostartgeth",
+    "wentunocheckmint",
     "analyzepsbt",
     "clearbanned",
     "combinepsbt",
@@ -232,8 +232,8 @@ const std::vector<std::string> RPC_COMMANDS_SAFE_FOR_FUZZING{
     "waitforblock",
     "waitforblockheight",
     "waitfornewblock",
-    "syscoincreatenevmblob",
-    "syscoincreaterawnevmblob",
+    "wentunocreatenevmblob",
+    "wentunocreaterawnevmblob",
     "protx_update_service",
     "protx_register",
     "protx_register_prepare",
@@ -332,7 +332,7 @@ std::string ConsumeScalarRPCArgument(FuzzedDataProvider& fuzzed_data_provider)
             if (!opt_block_header) {
                 return;
             }
-            // SYSCOIN
+            // wentuno
             CDataStream data_stream{SER_NETWORK, PROTOCOL_VERSION};
             data_stream << *opt_block_header;
             r = HexStr(data_stream);

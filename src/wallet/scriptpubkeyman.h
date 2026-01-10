@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_WALLET_SCRIPTPUBKEYMAN_H
-#define SYSCOIN_WALLET_SCRIPTPUBKEYMAN_H
+#ifndef wentuno_WALLET_SCRIPTPUBKEYMAN_H
+#define wentuno_WALLET_SCRIPTPUBKEYMAN_H
 
 #include <addresstype.h>
 #include <logging.h>
@@ -62,7 +62,7 @@ std::vector<CKeyID> GetAffectedKeys(const CScript& spk, const SigningProvider& p
  * are sets of keys that have not yet been used to provide addresses or receive
  * change.
  *
- * The Syscoin Core wallet was originally a collection of unrelated private
+ * The wentuno Core wallet was originally a collection of unrelated private
  * keys with their associated addresses. If a non-HD wallet generated a
  * key/address, gave that address out and then restored a backup from before
  * that key's generation, then any funds sent to that address would be
@@ -235,7 +235,7 @@ public:
     virtual bool SignTransaction(CMutableTransaction& tx, const std::map<COutPoint, Coin>& coins, int sighash, std::map<int, bilingual_str>& input_errors) const { return false; }
     /** Sign a message with the given script */
     virtual SigningResult SignMessage(const std::string& message, const PKHash& pkhash, std::string& str_sig) const { return SigningResult::SIGNING_FAILED; };
-    // SYSCOIN
+    // wentuno
     virtual SigningResult SignMessage(const std::string& message, const CTxDestination& dest, std::string& str_sig) const { return SigningResult::SIGNING_FAILED; };
     /** Adds script and derivation path information to a PSBT, and optionally signs it. */
     virtual TransactionError FillPSBT(PartiallySignedTransaction& psbt, const PrecomputedTransactionData& txdata, int sighash_type = SIGHASH_DEFAULT, bool sign = true, bool bip32derivs = false, int* n_signed = nullptr, bool finalize = true) const { return TransactionError::INVALID_PSBT; }
@@ -415,7 +415,7 @@ public:
 
     bool SignTransaction(CMutableTransaction& tx, const std::map<COutPoint, Coin>& coins, int sighash, std::map<int, bilingual_str>& input_errors) const override;
     SigningResult SignMessage(const std::string& message, const PKHash& pkhash, std::string& str_sig) const override;
-    // SYSCOIN
+    // wentuno
     SigningResult SignMessage(const std::string& message, const CTxDestination& dest, std::string& str_sig) const override;
     TransactionError FillPSBT(PartiallySignedTransaction& psbt, const PrecomputedTransactionData& txdata, int sighash_type = SIGHASH_DEFAULT, bool sign = true, bool bip32derivs = false, int* n_signed = nullptr, bool finalize = true) const override;
 
@@ -646,7 +646,7 @@ public:
 
     bool SignTransaction(CMutableTransaction& tx, const std::map<COutPoint, Coin>& coins, int sighash, std::map<int, bilingual_str>& input_errors) const override;
     SigningResult SignMessage(const std::string& message, const PKHash& pkhash, std::string& str_sig) const override;
-    // SYSCOIN
+    // wentuno
     SigningResult SignMessage(const std::string& message, const CTxDestination& dest, std::string& str_sig) const override;
     TransactionError FillPSBT(PartiallySignedTransaction& psbt, const PrecomputedTransactionData& txdata, int sighash_type = SIGHASH_DEFAULT, bool sign = true, bool bip32derivs = false, int* n_signed = nullptr, bool finalize = true) const override;
 
@@ -686,4 +686,4 @@ struct MigrationData
 
 } // namespace wallet
 
-#endif // SYSCOIN_WALLET_SCRIPTPUBKEYMAN_H
+#endif // wentuno_WALLET_SCRIPTPUBKEYMAN_H

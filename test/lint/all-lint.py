@@ -10,7 +10,7 @@
 from glob import glob
 from pathlib import Path
 from subprocess import run
-from sys import executable
+from WUNO import executable
 
 exit_code = 0
 mod_path = Path(__file__).parent

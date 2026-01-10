@@ -7,7 +7,7 @@
     </message>
     </context>
 <context>
-    <name>SyscoinApplication</name>
+    <name>wentunoApplication</name>
     <message>
         <source>Settings file %1 might be corrupt or invalid.</source>
         <translation type="unfinished">ไฟล์ตั้งค่า%1 อาจเสียหายหรือไม่ถูกต้อง</translation>
@@ -88,14 +88,14 @@
     </message>
 </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message>
         <source>Connecting to peers…</source>
         <translation type="unfinished">กำลังเชื่อมต่อไปยัง peers…</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and syscoin: URIs)</source>
-        <translation type="unfinished">ขอการชำระเงิน (สร้างรหัส QR และ syscoin: URIs)</translation>
+        <source>Request payments (generates QR codes and wentuno: URIs)</source>
+        <translation type="unfinished">ขอการชำระเงิน (สร้างรหัส QR และ wentuno: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -214,7 +214,7 @@
         <translation type="unfinished">&amp;แสดง</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
             <numerusform>%n เครือข่ายที่สามารถใช้เชื่อมต่อไปยังเครือข่ายบิตคอยน์ได้</numerusform>
@@ -433,8 +433,8 @@
         <translation type="unfinished">แก้ไข แอดเดรส การส่ง</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Syscoin address.</source>
-        <translation type="unfinished">แอดเดรส ที่ป้อน "%1" เป็น Syscoin แอดเดรส ที่ ไม่ ถูกต้อง</translation>
+        <source>The entered address "%1" is not a valid wentuno address.</source>
+        <translation type="unfinished">แอดเดรส ที่ป้อน "%1" เป็น wentuno แอดเดรส ที่ ไม่ ถูกต้อง</translation>
     </message>
     <message>
         <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
@@ -500,8 +500,8 @@
         </translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Syscoin block chain.</source>
-        <translation type="unfinished">%1 จะดาวน์โหลดและจัดเก็บสำเนาของบล็อกเชน Syscoin</translation>
+        <source>%1 will download and store a copy of the wentuno block chain.</source>
+        <translation type="unfinished">%1 จะดาวน์โหลดและจัดเก็บสำเนาของบล็อกเชน wentuno</translation>
     </message>
     <message>
         <source>The wallet will also be stored in this directory.</source>
@@ -609,8 +609,8 @@
         <translation type="unfinished">ขนาดแคชฐานข้อมูลสูงสุด แคชที่ใหญ่ขึ้นสามารถนำไปสู่การซิงค์ได้เร็วยิ่งขึ้น หลังจากนั้นประโยชน์จะเด่นชัดน้อยลงสำหรับกรณีการใช้งานส่วนใหญ่ การลดขนาดแคชจะลดการใช้หน่วยความจำ มีการแชร์หน่วยความจำ mempool ที่ไม่ได้ใช้สำหรับแคชนี้</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
         <translation type="unfinished">กำหนดจำนวนเธรดการตรวจสอบสคริปต์ ค่าลบสอดคล้องกับจำนวนคอร์ที่คุณต้องการปล่อยให้ระบบว่าง</translation>
     </message>
     <message>
@@ -859,7 +859,7 @@
     </message>
     </context>
 <context>
-    <name>syscoin-core</name>
+    <name>wentuno-core</name>
     <message>
         <source>%s is set very high!</source>
         <translation type="unfinished">%s ตั้งไว้สูงมาก</translation>

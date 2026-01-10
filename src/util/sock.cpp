@@ -2,12 +2,12 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <compat/compat.h>
 #include <logging.h>
 #include <tinyformat.h>
 #include <util/sock.h>
-#include <util/syserror.h>
+#include <util/WUNOerror.h>
 #include <util/threadinterrupt.h>
 #include <util/time.h>
 
@@ -42,7 +42,7 @@ Sock& Sock::operator=(Sock&& other)
     return *this;
 }
 
-// SYSCOIN
+// wentuno
 SOCKET Sock::Get() const { return m_socket; }
 
 ssize_t Sock::Send(const void* data, size_t len, int flags) const
@@ -420,7 +420,7 @@ std::string NetworkErrorString(int err)
 #if defined(WIN32)
     return Win32ErrorString(err);
 #else
-    // On BSD sockets implementations, NetworkErrorString is the same as SysErrorString.
-    return SysErrorString(err);
+    // On BSD sockets implementations, NetworkErrorString is the same as WUNOErrorString.
+    return WUNOErrorString(err);
 #endif
 }

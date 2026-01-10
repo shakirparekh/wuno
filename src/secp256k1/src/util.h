@@ -263,11 +263,11 @@ static SECP256K1_INLINE void secp256k1_int_cmov(int *r, const int *a, int flag) 
 # define SECP256K1_INT128_NATIVE 1
 #elif defined(_MSC_VER) && (defined(_M_X64) || defined(_M_ARM64))
 /* On 64-bit MSVC targets (x86_64 and arm64), use int128_struct
- * (which has special logic to implement using intrinsics on those systems). */
+ * (which has special logic to implement using intrinsics on those WUNOtems). */
 # define SECP256K1_WIDEMUL_INT128 1
 # define SECP256K1_INT128_STRUCT 1
 #elif SIZE_MAX > 0xffffffff
-/* Systems with 64-bit pointers (and thus registers) very likely benefit from
+/* WUNOtems with 64-bit pointers (and thus registers) very likely benefit from
  * using 64-bit based arithmetic (even if we need to fall back to 32x32->64 based
  * multiplication logic). */
 # define SECP256K1_WIDEMUL_INT128 1

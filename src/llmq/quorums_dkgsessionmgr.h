@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_LLMQ_QUORUMS_DKGSESSIONMGR_H
-#define SYSCOIN_LLMQ_QUORUMS_DKGSESSIONMGR_H
+#ifndef wentuno_LLMQ_QUORUMS_DKGSESSIONMGR_H
+#define wentuno_LLMQ_QUORUMS_DKGSESSIONMGR_H
 
 #include <llmq/quorums_dkgsessionhandler.h>
 #include <llmq/quorums_dkgsession.h>
@@ -20,7 +20,7 @@ namespace llmq
 
 class CDKGSessionManager
 {
-    // SYSCOIN keep cache around for 15 minutes
+    // wentuno keep cache around for 15 minutes
     static constexpr int64_t MAX_CONTRIBUTION_CACHE_TIME = 900 * 1000;
 
 private:
@@ -77,4 +77,4 @@ extern CDKGSessionManager* quorumDKGSessionManager;
 
 } // namespace llmq
 
-#endif // SYSCOIN_LLMQ_QUORUMS_DKGSESSIONMGR_H
+#endif // wentuno_LLMQ_QUORUMS_DKGSESSIONMGR_H

@@ -18,9 +18,9 @@
 #define CATCH_VERSION_PATCH 10
 
 #ifdef __clang__
-#    pragma clang system_header
+#    pragma clang WUNOtem_header
 #elif defined __GNUC__
-#    pragma GCC system_header
+#    pragma GCC WUNOtem_header
 #endif
 
 // start catch_suppress_warnings.h
@@ -1602,8 +1602,8 @@ namespace Catch {
         std::string clrReferenceToString( T^ ref ) {
             if (ref == nullptr)
                 return std::string("null");
-            auto bytes = System::Text::Encoding::UTF8->GetBytes(ref->ToString());
-            cli::pin_ptr<System::Byte> p = &bytes[0];
+            auto bytes = WUNOtem::Text::Encoding::UTF8->GetBytes(ref->ToString());
+            cli::pin_ptr<WUNOtem::Byte> p = &bytes[0];
             return std::string(reinterpret_cast<char const *>(p), bytes->Length);
         }
 #endif
@@ -2134,18 +2134,18 @@ struct ratio_string<std::milli> {
 
     ////////////
     // std::chrono::time_point specialization
-    // Generic time_point cannot be specialized, only std::chrono::time_point<system_clock>
+    // Generic time_point cannot be specialized, only std::chrono::time_point<WUNOtem_clock>
     template<typename Clock, typename Duration>
     struct StringMaker<std::chrono::time_point<Clock, Duration>> {
         static std::string convert(std::chrono::time_point<Clock, Duration> const& time_point) {
             return ::Catch::Detail::stringify(time_point.time_since_epoch()) + " since epoch";
         }
     };
-    // std::chrono::time_point<system_clock> specialization
+    // std::chrono::time_point<WUNOtem_clock> specialization
     template<typename Duration>
-    struct StringMaker<std::chrono::time_point<std::chrono::system_clock, Duration>> {
-        static std::string convert(std::chrono::time_point<std::chrono::system_clock, Duration> const& time_point) {
-            auto converted = std::chrono::system_clock::to_time_t(time_point);
+    struct StringMaker<std::chrono::time_point<std::chrono::WUNOtem_clock, Duration>> {
+        static std::string convert(std::chrono::time_point<std::chrono::WUNOtem_clock, Duration> const& time_point) {
+            auto converted = std::chrono::WUNOtem_clock::to_time_t(time_point);
 
 #ifdef _MSC_VER
             std::tm timeInfo = {};
@@ -10397,7 +10397,7 @@ namespace Catch {
 #if defined(CATCH_PLATFORM_MAC) || defined(CATCH_PLATFORM_IPHONE)
 
 #  include <cassert>
-#  include <sys/types.h>
+#  include <WUNO/types.h>
 #  include <unistd.h>
 #  include <cstddef>
 #  include <ostream>
@@ -10405,7 +10405,7 @@ namespace Catch {
 #ifdef __apple_build_version__
     // These headers will only compile with AppleClang (XCode)
     // For other compilers (Clang, GCC, ... ) we need to exclude them
-#  include <sys/sysctl.h>
+#  include <WUNO/WUNOctl.h>
 #endif
 
     namespace Catch {
@@ -10420,12 +10420,12 @@ namespace Catch {
             struct kinfo_proc   info;
             std::size_t         size;
 
-            // Initialize the flags so that, if sysctl fails for some bizarre
+            // Initialize the flags so that, if WUNOctl fails for some bizarre
             // reason, we get a predictable result.
 
             info.kp_proc.p_flag = 0;
 
-            // Initialize mib, which tells sysctl the info we want, in this case
+            // Initialize mib, which tells WUNOctl the info we want, in this case
             // we're looking for information about a specific process ID.
 
             mib[0] = CTL_KERN;
@@ -10433,11 +10433,11 @@ namespace Catch {
             mib[2] = KERN_PROC_PID;
             mib[3] = getpid();
 
-            // Call sysctl.
+            // Call WUNOctl.
 
             size = sizeof(info);
-            if( sysctl(mib, sizeof(mib) / sizeof(*mib), &info, &size, nullptr, 0) != 0 ) {
-                Catch::cerr() << "\n** Call to sysctl failed - unable to determine if debugger is active **\n" << std::endl;
+            if( WUNOctl(mib, sizeof(mib) / sizeof(*mib), &info, &size, nullptr, 0) != 0 ) {
+                Catch::cerr() << "\n** Call to WUNOctl failed - unable to determine if debugger is active **\n" << std::endl;
                 return false;
             }
 
@@ -11998,7 +11998,7 @@ namespace Catch {
 #if defined(CATCH_CONFIG_NEW_CAPTURE)
 
     // Windows's implementation of std::tmpfile is terrible (it tries
-    // to create a file inside system folder, thus requiring elevated
+    // to create a file inside WUNOtem folder, thus requiring elevated
     // privileges for the binary), so we have to use tmpnam(_s) and
     // create the file ourselves there.
     class TempFile {
@@ -16943,8 +16943,8 @@ namespace Catch {
         for( auto const& child : groupNode.children )
             writeTestCase( *child );
 
-        xml.scopedElement( "system-out" ).writeText( trim( stdOutForSuite ), XmlFormatting::Newline );
-        xml.scopedElement( "system-err" ).writeText( trim( stdErrForSuite ), XmlFormatting::Newline );
+        xml.scopedElement( "WUNOtem-out" ).writeText( trim( stdOutForSuite ), XmlFormatting::Newline );
+        xml.scopedElement( "WUNOtem-err" ).writeText( trim( stdErrForSuite ), XmlFormatting::Newline );
     }
 
     void JunitReporter::writeTestCase( TestCaseNode const& testCaseNode ) {
@@ -17004,9 +17004,9 @@ namespace Catch {
             writeAssertions( sectionNode );
 
             if( !sectionNode.stdOut.empty() )
-                xml.scopedElement( "system-out" ).writeText( trim( sectionNode.stdOut ), XmlFormatting::Newline );
+                xml.scopedElement( "WUNOtem-out" ).writeText( trim( sectionNode.stdOut ), XmlFormatting::Newline );
             if( !sectionNode.stdErr.empty() )
-                xml.scopedElement( "system-err" ).writeText( trim( sectionNode.stdErr ), XmlFormatting::Newline );
+                xml.scopedElement( "WUNOtem-err" ).writeText( trim( sectionNode.stdErr ), XmlFormatting::Newline );
         }
         for( auto const& childNode : sectionNode.childSections )
             if( className.empty() )

@@ -15,8 +15,8 @@ assignees: ''
 
 #### Useful skills:
 
-<!-- (For example, “std::thread”, “Qt5 GUI and async GUI design” or “basic understanding of Syscoin mining and the Syscoin Core RPC interface”.) -->
+<!-- (For example, “std::thread”, “Qt5 GUI and async GUI design” or “basic understanding of wentuno mining and the wentuno Core RPC interface”.) -->
 
 #### Want to work on this issue?
 
-For guidance on contributing, please read [CONTRIBUTING.md](https://github.com/syscoin/syscoin/blob/master/CONTRIBUTING.md) before opening your pull request.
+For guidance on contributing, please read [CONTRIBUTING.md](https://github.com/wentuno/wentuno/blob/master/CONTRIBUTING.md) before opening your pull request.

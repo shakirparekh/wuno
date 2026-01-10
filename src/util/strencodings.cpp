@@ -11,7 +11,7 @@
 #include <cstring>
 #include <limits>
 #include <optional>
-// SYSCOIN
+// wentuno
 #include <tinyformat.h>
 #include <math.h>
 #include <errno.h>
@@ -278,7 +278,7 @@ bool ParseUInt32(std::string_view str, uint32_t* out)
 {
     return ParseIntegral<uint32_t>(str, out);
 }
-// SYSCOIN
+// wentuno
 [[nodiscard]] static bool ParsePrechecks(const std::string& str)
 {
     if (str.empty()) // No empty string allowed

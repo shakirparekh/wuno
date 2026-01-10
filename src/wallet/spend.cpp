@@ -4,7 +4,7 @@
 
 #include <algorithm>
 #include <common/args.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <consensus/amount.h>
 #include <consensus/validation.h>
 #include <interfaces/chain.h>
@@ -143,7 +143,7 @@ TxSize CalculateMaximumSignedTxSize(const CTransaction &tx, const CWallet *walle
     // Segwit marker and flag
     if (is_segwit) weight += 2;
 
-    // SYSCOIN Add the size of the transaction outputs.
+    // wentuno Add the size of the transaction outputs.
     for (const auto& txo : tx.vout) weight += GetSerializeSize(txo, PROTOCOL_VERSION, SER_SIZE, tx.nVersion) * WITNESS_SCALE_FACTOR;
 
     // Add the size of the transaction inputs as if they were signed.
@@ -975,7 +975,7 @@ static util::Result<CreatedTransactionResult> CreateTransactionInternal(
 
     FastRandomContext rng_fast;
     CMutableTransaction txNew; // The resulting transaction that we make
-    // SYSCOIN
+    // wentuno
     txNew.nVersion = coin_control.m_version;
     CoinSelectionParams coin_selection_params{rng_fast}; // Parameters for coin selection, init with dummy
     coin_selection_params.m_avoid_partial_spends = coin_control.m_avoid_partial_spends;
@@ -1079,7 +1079,7 @@ static util::Result<CreatedTransactionResult> CreateTransactionInternal(
     // vouts to the payees
     for (const auto& recipient : vecSend)
     {
-        // SYSCOIN
+        // wentuno
         const auto &destination = GetScriptForDestination(recipient.dest);
         CTxOut txout(recipient.nAmount, destination);
         // add poda data to opreturn output
@@ -1088,7 +1088,7 @@ static util::Result<CreatedTransactionResult> CreateTransactionInternal(
         }
 
         // Include the fee cost for outputs.
-        // SYSCOIN need to account for CNEVMData data size for PoDA fees
+        // wentuno need to account for CNEVMData data size for PoDA fees
         coin_selection_params.tx_noinputs_size += ::GetSerializeSize(txout, PROTOCOL_VERSION, SER_SIZE, txNew.nVersion);
 
         if (IsDust(txout, wallet.chain().relayDustFee())) {
@@ -1334,7 +1334,7 @@ bool FundTransaction(CWallet& wallet, CMutableTransaction& tx, CAmount& nFeeRet,
     // Turn the txout set into a CRecipient vector.
     for (size_t idx = 0; idx < tx.vout.size(); idx++) {
         const CTxOut& txOut = tx.vout[idx];
-        // SYSCOIN
+        // wentuno
         if(coinControl.m_nevmdata.empty() && !txOut.vchNEVMData.empty()) {
             coinControl.m_nevmdata = txOut.vchNEVMData;
         }
@@ -1365,7 +1365,7 @@ bool FundTransaction(CWallet& wallet, CMutableTransaction& tx, CAmount& nFeeRet,
             error = _("Unable to find UTXO for external input");
             return false;
         } else {
-            // SYSCOIN The input was not in the wallet, but is in the UTXO set, so select as external
+            // wentuno The input was not in the wallet, but is in the UTXO set, so select as external
             coinControl.SelectExternal(outPoint, CTxOut(coins[outPoint].out.nValue,coins[outPoint].out.scriptPubKey));
         }
     }
@@ -1404,8 +1404,8 @@ bool FundTransaction(CWallet& wallet, CMutableTransaction& tx, CAmount& nFeeRet,
 
     return true;
 }
-// SYSCOIN
-util::Result<CreatedTransactionResult> GetBudgetSystemCollateralTX(CWallet& wallet, uint256 hash, CAmount amount, const COutPoint& outpoint)
+// wentuno
+util::Result<CreatedTransactionResult> GetBudgetWUNOtemCollateralTX(CWallet& wallet, uint256 hash, CAmount amount, const COutPoint& outpoint)
 {
 
     CScript scriptChange;

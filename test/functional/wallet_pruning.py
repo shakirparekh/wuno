@@ -11,7 +11,7 @@ from test_framework.blocktools import (
     create_block
 )
 from test_framework.blocktools import create_coinbase
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 
 from test_framework.script import (
     CScript,
@@ -19,7 +19,7 @@ from test_framework.script import (
     OP_TRUE,
 )
 
-class WalletPruningTest(SyscoinTestFramework):
+class WalletPruningTest(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser, descriptors=False)
 
@@ -27,7 +27,7 @@ class WalletPruningTest(SyscoinTestFramework):
         self.setup_clean_chain = True
         self.num_nodes = 2
         self.wallet_names = []
-        # SYSCOIN
+        # wentuno
         self.extra_args = [
             ['-dip3params=2000:2000'], # node dedicated to mining
             ['-dip3params=2000:2000', '-prune=550'], # node dedicated to testing pruning
@@ -58,7 +58,7 @@ class WalletPruningTest(SyscoinTestFramework):
             previousblockhash = block.sha256
             height += 1
 
-            # SYSCOIN Simulate 2.5 minutes of work time per block
+            # wentuno Simulate 2.5 minutes of work time per block
             # Important for matching a timestamp with a block +- some window
             self.nTime += 150
         self.sync_all()
@@ -90,7 +90,7 @@ class WalletPruningTest(SyscoinTestFramework):
         # Verify that the block at wallet's birthheight is not available at the pruned node
         assert_raises_rpc_error(-1, "Block not available (pruned data)", self.nodes[1].getblock, self.nodes[1].getblockhash(wallet_birthheight))
 
-        # SYSCOIN Make sure wallet cannot be imported because of missing blocks
+        # wentuno Make sure wallet cannot be imported because of missing blocks
         # This will try to rescan blocks `TIMESTAMP_WINDOW` (2h) before the wallet birthheight.
         # There are 24 blocks an hour, so 47 blocks (excluding birthheight).
         assert_raises_rpc_error(-4, f"Pruned blocks from height {wallet_birthheight - 47} required to import keys. Use RPC call getblockchaininfo to determine your pruned height.", self.nodes[1].importwallet, self.nodes[0].datadir_path / wallet_file)

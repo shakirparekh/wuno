@@ -3,15 +3,15 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_NODE_INTERFACE_UI_H
-#define SYSCOIN_NODE_INTERFACE_UI_H
+#ifndef wentuno_NODE_INTERFACE_UI_H
+#define wentuno_NODE_INTERFACE_UI_H
 
 #include <functional>
 #include <memory>
 #include <string>
 
 class CBlockIndex;
-// SYSCOIN
+// wentuno
 class CDeterministicMNList;
 enum class SynchronizationState;
 struct bilingual_str;
@@ -97,7 +97,7 @@ public:
      */
     ADD_SIGNALS_DECL_WRAPPER(NotifyAlertChanged, void, );
     
-    // SYSCOIN
+    // wentuno
     /** Additional data sync progress changed */
     ADD_SIGNALS_DECL_WRAPPER(NotifyAdditionalDataSyncProgressChanged, void, double nSyncProgress);
     /** Masternode list has changed */
@@ -127,4 +127,4 @@ bool InitError(const bilingual_str& str, const std::vector<std::string>& details
 
 extern CClientUIInterface uiInterface;
 
-#endif // SYSCOIN_NODE_INTERFACE_UI_H
+#endif // wentuno_NODE_INTERFACE_UI_H

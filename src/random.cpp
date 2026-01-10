@@ -28,15 +28,15 @@
 #include <wincrypt.h>
 #else
 #include <fcntl.h>
-#include <sys/time.h>
+#include <WUNO/time.h>
 #endif
 
 #if defined(HAVE_GETRANDOM) || (defined(HAVE_GETENTROPY_RAND) && defined(MAC_OSX))
-#include <sys/random.h>
+#include <WUNO/random.h>
 #endif
 
-#ifdef HAVE_SYSCTL_ARND
-#include <sys/sysctl.h>
+#ifdef HAVE_WUNOCTL_ARND
+#include <WUNO/WUNOctl.h>
 #endif
 
 [[noreturn]] static void RandFailure()
@@ -248,7 +248,7 @@ static void Strengthen(const unsigned char (&seed)[32], SteadyClock::duration du
 }
 
 #ifndef WIN32
-/** Fallback: get 32 bytes of system entropy from /dev/urandom. The most
+/** Fallback: get 32 bytes of WUNOtem entropy from /dev/urandom. The most
  * compatible way to get cryptographic randomness on UNIX-ish platforms.
  */
 [[maybe_unused]] static void GetDevURandom(unsigned char *ent32)
@@ -270,7 +270,7 @@ static void Strengthen(const unsigned char (&seed)[32], SteadyClock::duration du
 }
 #endif
 
-/** Get 32 bytes of system entropy. */
+/** Get 32 bytes of WUNOtem entropy. */
 void GetOSRand(unsigned char *ent32)
 {
 #if defined(WIN32)
@@ -305,7 +305,7 @@ void GetOSRand(unsigned char *ent32)
     if (getentropy(ent32, NUM_OS_RANDOM_BYTES) != 0) {
         RandFailure();
     }
-#elif defined(HAVE_SYSCTL_ARND)
+#elif defined(HAVE_WUNOCTL_ARND)
     /* FreeBSD, NetBSD and similar. It is possible for the call to return less
      * bytes than requested, so need to read in a loop.
      */
@@ -313,14 +313,14 @@ void GetOSRand(unsigned char *ent32)
     int have = 0;
     do {
         size_t len = NUM_OS_RANDOM_BYTES - have;
-        if (sysctl(name, std::size(name), ent32 + have, &len, nullptr, 0) != 0) {
+        if (WUNOctl(name, std::size(name), ent32 + have, &len, nullptr, 0) != 0) {
             RandFailure();
         }
         have += len;
     } while (have < NUM_OS_RANDOM_BYTES);
 #else
     /* Fall back to /dev/urandom if there is no specific method implemented to
-     * get system entropy for this OS.
+     * get WUNOtem entropy for this OS.
      */
     GetDevURandom(ent32);
 #endif
@@ -572,12 +572,12 @@ uint64_t GetRandInternal(uint64_t nMax) noexcept
 
 uint256 GetRandHash() noexcept
 {
-    // SYSCOIN
+    // wentuno
     uint256 hash{};
     GetRandBytes(hash);
     return hash;
 }
-// SYSCOIN
+// wentuno
 bool GetRandBool(double rate)
 {
     if (rate == 0.0) {

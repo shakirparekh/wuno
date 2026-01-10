@@ -6,7 +6,7 @@
 
 #include <random.h>
 
-#ifndef BUILD_SYSCOIN_INTERNAL
+#ifndef BUILD_wentuno_INTERNAL
 #include <support/allocators/mt_pooled_secure.h>
 #endif
 
@@ -58,7 +58,7 @@ CBLSSecretKey CBLSSecretKey::AggregateInsecure(Span<CBLSSecretKey> sks)
     return ret;
 }
 
-#ifndef BUILD_SYSCOIN_INTERNAL
+#ifndef BUILD_wentuno_INTERNAL
 void CBLSSecretKey::MakeNewKey()
 {
     unsigned char buf[SerSize];
@@ -385,7 +385,7 @@ bool CBLSSignature::Recover(Span<CBLSSignature> sigs, Span<CBLSId> ids)
     return true;
 }
 
-#ifndef BUILD_SYSCOIN_INTERNAL
+#ifndef BUILD_wentuno_INTERNAL
 
 static std::once_flag init_flag;
 static mt_pooled_secure_allocator<uint8_t>* secure_allocator_instance;
@@ -427,7 +427,7 @@ static void secure_free(void* p)
 
 bool BLSInit()
 {
-#ifndef BUILD_SYSCOIN_INTERNAL
+#ifndef BUILD_wentuno_INTERNAL
     bls::BLS::SetSecureAllocator(secure_allocate, secure_free);
 #endif
     return true;

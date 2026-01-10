@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_UTILITYDIALOG_H
-#define SYSCOIN_QT_UTILITYDIALOG_H
+#ifndef wentuno_QT_UTILITYDIALOG_H
+#define wentuno_QT_UTILITYDIALOG_H
 
 #include <QDialog>
 #include <QWidget>
@@ -50,4 +50,4 @@ protected:
     void closeEvent(QCloseEvent *event) override;
 };
 
-#endif // SYSCOIN_QT_UTILITYDIALOG_H
+#endif // wentuno_QT_UTILITYDIALOG_H

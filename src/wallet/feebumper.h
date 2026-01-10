@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_WALLET_FEEBUMPER_H
-#define SYSCOIN_WALLET_FEEBUMPER_H
+#ifndef wentuno_WALLET_FEEBUMPER_H
+#define wentuno_WALLET_FEEBUMPER_H
 
 #include <consensus/consensus.h>
 #include <script/interpreter.h>
@@ -124,4 +124,4 @@ public:
 } // namespace feebumper
 } // namespace wallet
 
-#endif // SYSCOIN_WALLET_FEEBUMPER_H
+#endif // wentuno_WALLET_FEEBUMPER_H

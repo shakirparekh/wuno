@@ -67,7 +67,7 @@ bool IsDust(const CTxOut& txout, const CFeeRate& dustRelayFeeIn)
     return (txout.nValue < GetDustThreshold(txout, dustRelayFeeIn));
 }
 
-bool IsStandard(const CScript& scriptPubKey, const std::optional<unsigned>& max_datacarrier_bytes, TxoutType& whichType, bool isSysTx)
+bool IsStandard(const CScript& scriptPubKey, const std::optional<unsigned>& max_datacarrier_bytes, TxoutType& whichType, bool isWUNOTx)
 {
     std::vector<std::vector<unsigned char> > vSolutions;
     whichType = Solver(scriptPubKey, vSolutions);
@@ -82,9 +82,9 @@ bool IsStandard(const CScript& scriptPubKey, const std::optional<unsigned>& max_
             return false;
         if (m < 1 || m > n)
             return false;
-    // SYSCOIN MAX_SCRIPT_SIZE vs max_datacarrier_bytes
+    // wentuno MAX_SCRIPT_SIZE vs max_datacarrier_bytes
     } else if (whichType == TxoutType::NULL_DATA) {
-        if (!max_datacarrier_bytes || scriptPubKey.size() > (isSysTx? MAX_SCRIPT_SIZE: *max_datacarrier_bytes) ) {
+        if (!max_datacarrier_bytes || scriptPubKey.size() > (isWUNOTx? MAX_SCRIPT_SIZE: *max_datacarrier_bytes) ) {
             return false;
         }
     }
@@ -93,17 +93,17 @@ bool IsStandard(const CScript& scriptPubKey, const std::optional<unsigned>& max_
 }
 bool IsStandardTx(const CTransaction& tx, const std::optional<unsigned>& max_datacarrier_bytes, bool permit_bare_multisig, const CFeeRate& dust_relay_fee, std::string& reason)
 {
-    // SYSCOIN
-    const bool isSysTx = tx.HasAssets();
+    // wentuno
+    const bool isWUNOTx = tx.HasAssets();
     const bool IsMnTx = tx.IsMnTx();
     const bool IsNEVMDataTx = tx.IsNEVMData();
-    if(!isSysTx && !IsMnTx && !IsNEVMDataTx){
+    if(!isWUNOTx && !IsMnTx && !IsNEVMDataTx){
         if (tx.nVersion > TX_MAX_STANDARD_VERSION || tx.nVersion < 1) {
             reason = "version";
             return false;
         }
     }
-    else if (tx.nVersion > TX_MAX_SYSCOIN_STANDARD_VERSION || tx.nVersion < 1) {
+    else if (tx.nVersion > TX_MAX_wentuno_STANDARD_VERSION || tx.nVersion < 1) {
         reason = "version";
         return false;
     }
@@ -141,8 +141,8 @@ bool IsStandardTx(const CTransaction& tx, const std::optional<unsigned>& max_dat
     unsigned int nDataOut = 0;
     TxoutType whichType;
     for (const CTxOut& txout : tx.vout) {
-        // SYSCOIN
-        if (!::IsStandard(txout.scriptPubKey, max_datacarrier_bytes, whichType, isSysTx || IsMnTx)) {
+        // wentuno
+        if (!::IsStandard(txout.scriptPubKey, max_datacarrier_bytes, whichType, isWUNOTx || IsMnTx)) {
             reason = "scriptpubkey";
             return false;
         }

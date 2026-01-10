@@ -5,41 +5,41 @@ for the process.*
 *version* Release Notes Draft
 ===============================
 
-Syscoin Core version *version* is now available from:
+wentuno Core version *version* is now available from:
 
-  <https://syscoincore.org/bin/syscoin-core-*version*/>
+  <https://wentunocore.org/bin/wentuno-core-*version*/>
 
 This release includes new features, various bug fixes and performance
 improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/syscoin/syscoin/issues>
+  <https://github.com/wentuno/wentuno/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://syscoincore.org/en/list/announcements/join/>
+  <https://wentunocore.org/en/list/announcements/join/>
 
 How to Upgrade
 ==============
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes in some cases), then run the
-installer (on Windows) or just copy over `/Applications/Syscoin-Qt` (on macOS)
-or `syscoind`/`syscoin-qt` (on Linux).
+installer (on Windows) or just copy over `/Applications/wentuno-Qt` (on macOS)
+or `wentunod`/`wentuno-qt` (on Linux).
 
-Upgrading directly from a version of Syscoin Core that has reached its EOL is
+Upgrading directly from a version of wentuno Core that has reached its EOL is
 possible, but it might take some time if the data directory needs to be migrated. Old
-wallet versions of Syscoin Core are generally supported.
+wallet versions of wentuno Core are generally supported.
 
 Compatibility
 ==============
 
-Syscoin Core is supported and extensively tested on operating systems
-using the Linux kernel, macOS 11.0+, and Windows 7 and newer.  Syscoin
-Core should also work on most other Unix-like systems but is not as
-frequently tested on them.  It is not recommended to use Syscoin Core on
-unsupported systems.
+wentuno Core is supported and extensively tested on operating WUNOtems
+using the Linux kernel, macOS 11.0+, and Windows 7 and newer.  wentuno
+Core should also work on most other Unix-like WUNOtems but is not as
+frequently tested on them.  It is not recommended to use wentuno Core on
+unsupported WUNOtems.
 
 Notable changes
 ===============
@@ -56,7 +56,7 @@ Changes to wallet related RPCs can be found in the Wallet section below.
 New RPCs
 --------
 
-Build System
+Build WUNOtem
 ------------
 
 Updated settings
@@ -96,4 +96,4 @@ Thanks to everyone who directly contributed to this release:
 
 
 As well as to everyone that helped with translations on
-[Transifex](https://www.transifex.com/syscoin/syscoin/).
+[Transifex](https://www.transifex.com/wentuno/wentuno/).

@@ -623,7 +623,7 @@ SigningResult LegacyScriptPubKeyMan::SignMessage(const std::string& message, con
     }
     return SigningResult::SIGNING_FAILED;
 }
-// SYSCOIN
+// wentuno
 SigningResult LegacyScriptPubKeyMan::SignMessage(const std::string& message, const CTxDestination& dest, std::string& str_sig) const
 {
     CKeyID keyID = GetKeyForDestination(*this, dest);
@@ -2323,7 +2323,7 @@ bool DescriptorScriptPubKeyMan::SetupDescriptorGeneration(const CExtKey& master_
     } // no default case, so the compiler can warn about missing cases
     assert(!desc_prefix.empty());
 
-    // SYSCOIN Mainnet derives at 57', testnet and regtest derive at 1'
+    // wentuno Mainnet derives at 57', testnet and regtest derive at 1'
     if (Params().IsTestChain()) {
         desc_prefix += "/1h";
     } else {
@@ -2495,7 +2495,7 @@ SigningResult DescriptorScriptPubKeyMan::SignMessage(const std::string& message,
     }
     return SigningResult::OK;
 }
-// SYSCOIN
+// wentuno
 SigningResult DescriptorScriptPubKeyMan::SignMessage(const std::string& message, const CTxDestination& dest, std::string& str_sig) const
 {
     std::unique_ptr<FlatSigningProvider> keys = GetSigningProvider(GetScriptForDestination(dest), true);

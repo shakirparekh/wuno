@@ -8,7 +8,7 @@ $(package)_patches+=fix_mingw_link.patch
 $(package)_build_subdir=build
 
 # When building for Windows, we set _WIN32_WINNT to target the same Windows
-# version as we do in configure. Due to quirks in libevents build system, this
+# version as we do in configure. Due to quirks in libevents build WUNOtem, this
 # is also required to enable support for ipv6. See #19375.
 define $(package)_set_vars
   $(package)_config_opts=-DEVENT__DISABLE_BENCHMARK=ON -DEVENT__DISABLE_OPENSSL=ON

@@ -1,25 +1,25 @@
-Syscoin Core version 0.16.1 is now available from:
+wentuno Core version 0.16.1 is now available from:
 
-  <https://syscoincore.org/bin/syscoin-core-0.16.1/>
+  <https://wentunocore.org/bin/wentuno-core-0.16.1/>
 
 This is a new minor version release, with various bugfixes
 as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/syscoin/syscoin/issues>
+  <https://github.com/wentuno/wentuno/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://syscoincore.org/en/list/announcements/join/>
+  <https://wentunocore.org/en/list/announcements/join/>
 
 How to Upgrade
 ==============
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over `/Applications/Syscoin-Qt` (on Mac)
-or `syscoind`/`syscoin-qt` (on Linux).
+installer (on Windows) or just copy over `/Applications/wentuno-Qt` (on Mac)
+or `wentunod`/`wentuno-qt` (on Linux).
 
 The first time you run version 0.15.0 or newer, your chainstate database will be converted to a
 new format, which will take anywhere from a few minutes to half an hour,
@@ -40,10 +40,10 @@ wallets that were created with older versions are not affected by this.
 Compatibility
 ==============
 
-Syscoin Core is extensively tested on multiple operating systems using
+wentuno Core is extensively tested on multiple operating WUNOtems using
 the Linux kernel, macOS 10.8+, and Windows Vista and later. Windows XP is not supported.
 
-Syscoin Core should also work on most other Unix-like systems but is not
+wentuno Core should also work on most other Unix-like WUNOtems but is not
 frequently tested on them.
 
 Notable changes
@@ -82,8 +82,8 @@ weights.
 - #12650 `f118a7a` Fix issue: "default port not shown correctly in settings dialog" (251Labs)
 - #13251 `ea487f9` Rephrase Bech32 checkbox texts, and enable it with legacy address default (fanquake)
 
-### Build system
-- #12474 `b0f692f` Allow depends system to support armv7l (hkjn)
+### Build WUNOtem
+- #12474 `b0f692f` Allow depends WUNOtem to support armv7l (hkjn)
 - #12585 `72a3290` depends: Switch to downloading expat from GitHub (fanquake)
 - #12648 `46ca8f3` test: Update trusted git root (MarcoFalke)
 - #11995 `686cb86` depends: Fix Qt build with Xcode 9 (fanquake)
@@ -97,11 +97,11 @@ weights.
 - #12804 `4bdb0ce` Fix intermittent rpc_net.py failure. (jnewbery)
 - #12553 `0e98f96` Prefer wait_until over polling with time.sleep (Empact)
 - #12486 `cfebd40` Round target fee to 8 decimals in assert_fee_amount (kallewoof)
-- #12843 `df38b13` Test starting syscoind with -h and -version (jnewbery)
+- #12843 `df38b13` Test starting wentunod with -h and -version (jnewbery)
 - #12475 `41c29f6` Fix python TypeError in script.py (MarcoFalke)
 - #12638 `0a76ed2` Cache only chain and wallet for regtest datadir (MarcoFalke)
 - #12902 `7460945` Handle potential cookie race when starting node (sdaftuar)
-- #12904 `6c26df0` Ensure syscoind processes are cleaned up when tests end (sdaftuar)
+- #12904 `6c26df0` Ensure wentunod processes are cleaned up when tests end (sdaftuar)
 - #13049 `9ea62a3` Backports (MarcoFalke)
 - #13201 `b8aacd6` Handle disconnect_node race (sdaftuar)
 
@@ -142,4 +142,4 @@ Thanks to everyone who directly contributed to this release:
 - Tamas Blummer
 - Wladimir J. van der Laan
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/syscoin/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/wentuno/).

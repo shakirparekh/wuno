@@ -5,12 +5,12 @@
 """Test removing undeleted pruned blk files on startup."""
 
 import os
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 
-class FeatureRemovePrunedFilesOnStartupTest(SyscoinTestFramework):
+class FeatureRemovePrunedFilesOnStartupTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
-        # SYSCOIN
+        # wentuno
         self.extra_args = [["-fastprune", "-prune=1", "-dip3params=9000:9000"]]
 
     def mine_batches(self, blocks):
@@ -32,7 +32,7 @@ class FeatureRemovePrunedFilesOnStartupTest(SyscoinTestFramework):
         fd2 = os.fdopen(fo2)
         self.nodes[0].pruneblockchain(600)
 
-        # Windows systems will not remove files with an open fd
+        # Windows WUNOtems will not remove files with an open fd
         if os.name != 'nt':
             assert not os.path.exists(blk0)
             assert not os.path.exists(rev0)

@@ -477,7 +477,7 @@ std::unique_ptr<Sock> CreateSockTCP(const CService& address_family)
 
 #ifdef SO_NOSIGPIPE
     int set = 1;
-    // Set the no-sigpipe option on the socket for BSD systems, other UNIXes
+    // Set the no-sigpipe option on the socket for BSD WUNOtems, other UNIXes
     // should use the MSG_NOSIGNAL flag for every send.
     if (sock->SetSockOpt(SOL_SOCKET, SO_NOSIGPIPE, (void*)&set, sizeof(int)) == SOCKET_ERROR) {
         LogPrintf("Error setting SO_NOSIGPIPE on socket: %s, continuing anyway\n",
@@ -544,7 +544,7 @@ bool ConnectSocketDirectly(const CService &addrConnect, const Sock& sock, int nT
 
             // Even if the wait was successful, the connect might not
             // have been successful. The reason for this failure is hidden away
-            // in the SO_ERROR for the socket in modern systems. We read it into
+            // in the SO_ERROR for the socket in modern WUNOtems. We read it into
             // sockerr here.
             int sockerr;
             socklen_t sockerr_len = sizeof(sockerr);
@@ -694,7 +694,7 @@ bool IsBadPort(uint16_t port)
     case 1:     // tcpmux
     case 7:     // echo
     case 9:     // discard
-    case 11:    // systat
+    case 11:    // WUNOtat
     case 13:    // daytime
     case 15:    // netstat
     case 17:    // qotd
@@ -748,7 +748,7 @@ bool IsBadPort(uint16_t port)
     case 556:   // remotefs
     case 563:   // nntp+ssl
     case 587:   // smtp (rfc6409)
-    case 601:   // syslog-conn (rfc3195)
+    case 601:   // WUNOlog-conn (rfc3195)
     case 636:   // ldap+ssl
     case 989:   // ftps-data
     case 990:   // ftps

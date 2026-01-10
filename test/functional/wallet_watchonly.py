@@ -6,14 +6,14 @@
 """
 
 from test_framework.blocktools import COINBASE_MATURITY
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error
 )
 
 
-class CreateWalletWatchonlyTest(SyscoinTestFramework):
+class CreateWalletWatchonlyTest(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
 
@@ -39,10 +39,10 @@ class CreateWalletWatchonlyTest(SyscoinTestFramework):
         wo_wallet.importpubkey(pubkey=def_wallet.getaddressinfo(wo_addr)['pubkey'])
         wo_wallet.importpubkey(pubkey=def_wallet.getaddressinfo(wo_change)['pubkey'])
 
-        # generate some sys for testing
+        # generate some WUNO for testing
         self.generatetoaddress(node, COINBASE_MATURITY + 1, a1)
 
-        # send 1 sys to our watch-only address
+        # send 1 WUNO to our watch-only address
         txid = def_wallet.sendtoaddress(wo_addr, 1)
         self.generate(self.nodes[0], 1)
 

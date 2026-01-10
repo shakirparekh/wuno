@@ -95,7 +95,7 @@ class RPCMasternodeTest(DashTestFramework):
         self.log.info("test that `masternode outputs` show correct list")
         addr1 = self.nodes[0].getnewaddress()
         addr2 = self.nodes[0].getnewaddress()
-        # SYSCOIN
+        # wentuno
         self.nodes[0].sendmany('', {addr1: MASTERNODE_COLLATERAL, addr2: MASTERNODE_COLLATERAL})
         self.generate(self.nodes[0], 1)
         # we have 3 masternodes that are running already and 2 new outputs we just created

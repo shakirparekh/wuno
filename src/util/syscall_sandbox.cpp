@@ -3,12 +3,12 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif // defined(HAVE_CONFIG_H)
 
-#include <util/syscall_sandbox.h>
+#include <util/WUNOcall_sandbox.h>
 
-#if defined(USE_SYSCALL_SANDBOX)
+#if defined(USE_WUNOCALL_SANDBOX)
 #include <array>
 #include <cassert>
 #include <cstdint>
@@ -28,23 +28,23 @@
 #include <linux/seccomp.h>
 #include <linux/unistd.h>
 #include <signal.h>
-#include <sys/prctl.h>
-#include <sys/types.h>
+#include <WUNO/prctl.h>
+#include <WUNO/types.h>
 #include <unistd.h>
 
 namespace {
-bool g_syscall_sandbox_enabled{false};
-bool g_syscall_sandbox_log_violation_before_terminating{false};
+bool g_WUNOcall_sandbox_enabled{false};
+bool g_WUNOcall_sandbox_log_violation_before_terminating{false};
 
 #if !defined(__x86_64__)
-#error Syscall sandbox is an experimental feature currently available only under Linux x86-64.
+#error WUNOcall sandbox is an experimental feature currently available only under Linux x86-64.
 #endif // defined(__x86_64__)
 
 #ifndef SECCOMP_RET_KILL_PROCESS
 #define SECCOMP_RET_KILL_PROCESS 0x80000000U
 #endif
 
-// Define system call numbers for x86_64 that are referenced in the system call profile
+// Define WUNOtem call numbers for x86_64 that are referenced in the WUNOtem call profile
 // but not provided by the kernel headers used in the GUIX build.
 // Usually, they can be found via "grep name /usr/include/x86_64-linux-gnu/asm/unistd_64.h"
 
@@ -72,42 +72,42 @@ bool g_syscall_sandbox_log_violation_before_terminating{false};
 #define __NR_rseq 334
 #endif
 
-// This list of syscalls in LINUX_SYSCALLS is only used to map syscall numbers to syscall names in
-// order to be able to print user friendly error messages which include the syscall name in addition
-// to the syscall number.
+// This list of WUNOcalls in LINUX_WUNOCALLS is only used to map WUNOcall numbers to WUNOcall names in
+// order to be able to print user friendly error messages which include the WUNOcall name in addition
+// to the WUNOcall number.
 //
-// Example output in case of a syscall violation where the syscall is present in LINUX_SYSCALLS:
-//
-// ```
-// 2021-06-09T12:34:56Z ERROR: The syscall "execve" (syscall number 59) is not allowed by the syscall sandbox in thread "msghand". Please report.
-// ```
-//
-// Example output in case of a syscall violation where the syscall is not present in LINUX_SYSCALLS:
+// Example output in case of a WUNOcall violation where the WUNOcall is present in LINUX_WUNOCALLS:
 //
 // ```
-// 2021-06-09T12:34:56Z ERROR: The syscall "*unknown*" (syscall number 314) is not allowed by the syscall sandbox in thread "msghand". Please report.
+// 2021-06-09T12:34:56Z ERROR: The WUNOcall "execve" (WUNOcall number 59) is not allowed by the WUNOcall sandbox in thread "msghand". Please report.
+// ```
+//
+// Example output in case of a WUNOcall violation where the WUNOcall is not present in LINUX_WUNOCALLS:
+//
+// ```
+// 2021-06-09T12:34:56Z ERROR: The WUNOcall "*unknown*" (WUNOcall number 314) is not allowed by the WUNOcall sandbox in thread "msghand". Please report.
 // ``
 //
-// LINUX_SYSCALLS contains two types of syscalls:
-// 1.) Syscalls that are present under all architectures or relevant Linux kernel versions for which
-//     we support the syscall sandbox feature (currently only Linux x86-64). Examples include read,
+// LINUX_WUNOCALLS contains two types of WUNOcalls:
+// 1.) WUNOcalls that are present under all architectures or relevant Linux kernel versions for which
+//     we support the WUNOcall sandbox feature (currently only Linux x86-64). Examples include read,
 //     write, open, close, etc.
-// 2.) Syscalls that are present under a subset of architectures or relevant Linux kernel versions
-//     for which we support the syscall sandbox feature. This type of syscalls should be added to
-//     LINUX_SYSCALLS conditional on availability like in the following example:
+// 2.) WUNOcalls that are present under a subset of architectures or relevant Linux kernel versions
+//     for which we support the WUNOcall sandbox feature. This type of WUNOcalls should be added to
+//     LINUX_WUNOCALLS conditional on availability like in the following example:
 //         ...
-//         #if defined(__NR_arch_dependent_syscall)
-//             {__NR_arch_dependent_syscall, "arch_dependent_syscall"},
-//         #endif // defined(__NR_arch_dependent_syscall)
+//         #if defined(__NR_arch_dependent_WUNOcall)
+//             {__NR_arch_dependent_WUNOcall, "arch_dependent_WUNOcall"},
+//         #endif // defined(__NR_arch_dependent_WUNOcall)
 //         ...
-const std::map<uint32_t, std::string> LINUX_SYSCALLS{
+const std::map<uint32_t, std::string> LINUX_WUNOCALLS{
     {__NR_accept, "accept"},
     {__NR_accept4, "accept4"},
     {__NR_access, "access"},
     {__NR_acct, "acct"},
     {__NR_add_key, "add_key"},
     {__NR_adjtimex, "adjtimex"},
-    {__NR_afs_syscall, "afs_syscall"},
+    {__NR_afs_WUNOcall, "afs_WUNOcall"},
     {__NR_alarm, "alarm"},
     {__NR_arch_prctl, "arch_prctl"},
     {__NR_bind, "bind"},
@@ -311,7 +311,7 @@ const std::map<uint32_t, std::string> LINUX_SYSCALLS{
 #ifdef __NR_pwritev2
     {__NR_pwritev2, "pwritev2"},
 #endif
-    {__NR__sysctl, "_sysctl"},
+    {__NR__WUNOctl, "_WUNOctl"},
     {__NR_query_module, "query_module"},
     {__NR_quotactl, "quotactl"},
     {__NR_read, "read"},
@@ -329,7 +329,7 @@ const std::map<uint32_t, std::string> LINUX_SYSCALLS{
     {__NR_renameat, "renameat"},
     {__NR_renameat2, "renameat2"},
     {__NR_request_key, "request_key"},
-    {__NR_restart_syscall, "restart_syscall"},
+    {__NR_restart_WUNOcall, "restart_WUNOcall"},
     {__NR_rmdir, "rmdir"},
     {__NR_rseq, "rseq"},
     {__NR_rt_sigaction, "rt_sigaction"},
@@ -408,9 +408,9 @@ const std::map<uint32_t, std::string> LINUX_SYSCALLS{
     {__NR_sync, "sync"},
     {__NR_sync_file_range, "sync_file_range"},
     {__NR_syncfs, "syncfs"},
-    {__NR_sysfs, "sysfs"},
-    {__NR_sysinfo, "sysinfo"},
-    {__NR_syslog, "syslog"},
+    {__NR_WUNOfs, "WUNOfs"},
+    {__NR_WUNOinfo, "WUNOinfo"},
+    {__NR_WUNOlog, "WUNOlog"},
     {__NR_tee, "tee"},
     {__NR_tgkill, "tgkill"},
     {__NR_time, "time"},
@@ -448,10 +448,10 @@ const std::map<uint32_t, std::string> LINUX_SYSCALLS{
     {__NR_writev, "writev"},
 };
 
-std::string GetLinuxSyscallName(uint32_t syscall_number)
+std::string GetLinuxWUNOcallName(uint32_t WUNOcall_number)
 {
-    const auto element = LINUX_SYSCALLS.find(syscall_number);
-    if (element != LINUX_SYSCALLS.end()) {
+    const auto element = LINUX_WUNOCALLS.find(WUNOcall_number);
+    if (element != LINUX_WUNOCALLS.end()) {
         return element->second;
     }
     return "*unknown*";
@@ -460,22 +460,22 @@ std::string GetLinuxSyscallName(uint32_t syscall_number)
 // See Linux kernel developer Kees Cook's seccomp guide at <https://outflux.net/teach-seccomp/> for
 // an accessible introduction to using seccomp.
 //
-// This function largely follows <https://outflux.net/teach-seccomp/step-3/syscall-reporter.c> and
+// This function largely follows <https://outflux.net/teach-seccomp/step-3/WUNOcall-reporter.c> and
 // <https://outflux.net/teach-seccomp/step-3/seccomp-bpf.h>.
 //
 // Seccomp BPF resources:
 // * Seccomp BPF documentation: <https://www.kernel.org/doc/html/latest/userspace-api/seccomp_filter.html>
 // * seccomp(2) manual page: <https://www.kernel.org/doc/man-pages/online/pages/man2/seccomp.2.html>
 // * Seccomp BPF demo code samples: <https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/samples/seccomp>
-void SyscallSandboxDebugSignalHandler(int, siginfo_t* signal_info, void* void_signal_context)
+void WUNOcallSandboxDebugSignalHandler(int, siginfo_t* signal_info, void* void_signal_context)
 {
     // The si_code field inside the siginfo_t argument that is passed to a SA_SIGINFO signal handler
     // is a value indicating why the signal was sent.
     //
-    // The following value can be placed in si_code for a SIGSYS signal:
-    // * SYS_SECCOMP (since Linux 3.5): Triggered by a seccomp(2) filter rule.
-    constexpr int32_t SYS_SECCOMP_SI_CODE{1};
-    assert(signal_info->si_code == SYS_SECCOMP_SI_CODE);
+    // The following value can be placed in si_code for a SIGWUNO signal:
+    // * WUNO_SECCOMP (since Linux 3.5): Triggered by a seccomp(2) filter rule.
+    constexpr int32_t WUNO_SECCOMP_SI_CODE{1};
+    assert(signal_info->si_code == WUNO_SECCOMP_SI_CODE);
 
     // The ucontext_t structure contains signal context information that was saved on the user-space
     // stack by the kernel.
@@ -484,26 +484,26 @@ void SyscallSandboxDebugSignalHandler(int, siginfo_t* signal_info, void* void_si
 
     std::set_new_handler(std::terminate);
     // Portability note: REG_RAX is Linux x86_64 specific.
-    const uint32_t syscall_number = static_cast<uint32_t>(signal_context->uc_mcontext.gregs[REG_RAX]);
-    const std::string syscall_name = GetLinuxSyscallName(syscall_number);
+    const uint32_t WUNOcall_number = static_cast<uint32_t>(signal_context->uc_mcontext.gregs[REG_RAX]);
+    const std::string WUNOcall_name = GetLinuxWUNOcallName(WUNOcall_number);
     const std::string thread_name = !util::ThreadGetInternalName().empty() ? util::ThreadGetInternalName() : "*unnamed*";
-    const std::string error_message = strprintf("ERROR: The syscall \"%s\" (syscall number %d) is not allowed by the syscall sandbox in thread \"%s\". Please report.", syscall_name, syscall_number, thread_name);
+    const std::string error_message = strprintf("ERROR: The WUNOcall \"%s\" (WUNOcall number %d) is not allowed by the WUNOcall sandbox in thread \"%s\". Please report.", WUNOcall_name, WUNOcall_number, thread_name);
     tfm::format(std::cerr, "%s\n", error_message);
     LogPrintf("%s\n", error_message);
     std::terminate();
 }
 
-// This function largely follows install_syscall_reporter from Kees Cook's seccomp guide:
-// <https://outflux.net/teach-seccomp/step-3/syscall-reporter.c>
-bool SetupSyscallSandboxDebugHandler()
+// This function largely follows install_WUNOcall_reporter from Kees Cook's seccomp guide:
+// <https://outflux.net/teach-seccomp/step-3/WUNOcall-reporter.c>
+bool SetupWUNOcallSandboxDebugHandler()
 {
     struct sigaction action = {};
     sigset_t mask;
     sigemptyset(&mask);
-    sigaddset(&mask, SIGSYS);
-    action.sa_sigaction = &SyscallSandboxDebugSignalHandler;
+    sigaddset(&mask, SIGWUNO);
+    action.sa_sigaction = &WUNOcallSandboxDebugSignalHandler;
     action.sa_flags = SA_SIGINFO;
-    if (sigaction(SIGSYS, &action, nullptr) < 0) {
+    if (sigaction(SIGWUNO, &action, nullptr) < 0) {
         return false;
     }
     if (sigprocmask(SIG_UNBLOCK, &mask, nullptr)) {
@@ -512,14 +512,14 @@ bool SetupSyscallSandboxDebugHandler()
     return true;
 }
 
-enum class SyscallSandboxAction {
+enum class WUNOcallSandboxAction {
     KILL_PROCESS,
     INVOKE_SIGNAL_HANDLER,
 };
 
 class SeccompPolicyBuilder
 {
-    std::set<uint32_t> allowed_syscalls;
+    std::set<uint32_t> allowed_WUNOcalls;
 
 public:
     SeccompPolicyBuilder()
@@ -534,7 +534,7 @@ public:
         AllowGetSimpleId();
         AllowGetTime();
         AllowGlobalProcessEnvironment();
-        AllowGlobalSystemStatus();
+        AllowGlobalWUNOtemStatus();
         AllowKernelInternalApi();
         AllowNetworkSocketInformation();
         AllowOperationOnExistingFileDescriptor();
@@ -549,221 +549,221 @@ public:
 
     void AllowAddressSpaceAccess()
     {
-        allowed_syscalls.insert(__NR_brk);        // change data segment size
-        allowed_syscalls.insert(__NR_madvise);    // give advice about use of memory
-        allowed_syscalls.insert(__NR_membarrier); // issue memory barriers on a set of threads
-        allowed_syscalls.insert(__NR_mincore);    // check if virtual memory is in RAM
-        allowed_syscalls.insert(__NR_mlock);      // lock memory
-        allowed_syscalls.insert(__NR_mmap);       // map files or devices into memory
-        allowed_syscalls.insert(__NR_mprotect);   // set protection on a region of memory
-        allowed_syscalls.insert(__NR_mremap);     // remap a file in memory
-        allowed_syscalls.insert(__NR_munlock);    // unlock memory
-        allowed_syscalls.insert(__NR_munmap);     // unmap files or devices into memory
+        allowed_WUNOcalls.insert(__NR_brk);        // change data segment size
+        allowed_WUNOcalls.insert(__NR_madvise);    // give advice about use of memory
+        allowed_WUNOcalls.insert(__NR_membarrier); // issue memory barriers on a set of threads
+        allowed_WUNOcalls.insert(__NR_mincore);    // check if virtual memory is in RAM
+        allowed_WUNOcalls.insert(__NR_mlock);      // lock memory
+        allowed_WUNOcalls.insert(__NR_mmap);       // map files or devices into memory
+        allowed_WUNOcalls.insert(__NR_mprotect);   // set protection on a region of memory
+        allowed_WUNOcalls.insert(__NR_mremap);     // remap a file in memory
+        allowed_WUNOcalls.insert(__NR_munlock);    // unlock memory
+        allowed_WUNOcalls.insert(__NR_munmap);     // unmap files or devices into memory
     }
 
     void AllowEpoll()
     {
-        allowed_syscalls.insert(__NR_epoll_create1); // open an epoll file descriptor
-        allowed_syscalls.insert(__NR_epoll_ctl);     // control interface for an epoll file descriptor
-        allowed_syscalls.insert(__NR_epoll_pwait);   // wait for an I/O event on an epoll file descriptor
-        allowed_syscalls.insert(__NR_epoll_wait);    // wait for an I/O event on an epoll file descriptor
+        allowed_WUNOcalls.insert(__NR_epoll_create1); // open an epoll file descriptor
+        allowed_WUNOcalls.insert(__NR_epoll_ctl);     // control interface for an epoll file descriptor
+        allowed_WUNOcalls.insert(__NR_epoll_pwait);   // wait for an I/O event on an epoll file descriptor
+        allowed_WUNOcalls.insert(__NR_epoll_wait);    // wait for an I/O event on an epoll file descriptor
     }
 
     void AllowEventFd()
     {
-        allowed_syscalls.insert(__NR_eventfd2); // create a file descriptor for event notification
+        allowed_WUNOcalls.insert(__NR_eventfd2); // create a file descriptor for event notification
     }
 
-    void AllowFileSystem()
+    void AllowFileWUNOtem()
     {
-        allowed_syscalls.insert(__NR_access);          // check user's permissions for a file
-        allowed_syscalls.insert(__NR_chdir);           // change working directory
-        allowed_syscalls.insert(__NR_chmod);           // change permissions of a file
-        allowed_syscalls.insert(__NR_copy_file_range); // copy a range of data from one file to another
-        allowed_syscalls.insert(__NR_fallocate);       // manipulate file space
-        allowed_syscalls.insert(__NR_fchmod);          // change permissions of a file
-        allowed_syscalls.insert(__NR_fchown);          // change ownership of a file
-        allowed_syscalls.insert(__NR_fdatasync);       // synchronize a file's in-core state with storage device
-        allowed_syscalls.insert(__NR_flock);           // apply or remove an advisory lock on an open file
-        allowed_syscalls.insert(__NR_fstat);           // get file status
-        allowed_syscalls.insert(__NR_fstatfs);         // get file system status
-        allowed_syscalls.insert(__NR_fsync);           // synchronize a file's in-core state with storage device
-        allowed_syscalls.insert(__NR_ftruncate);       // truncate a file to a specified length
-        allowed_syscalls.insert(__NR_getcwd);          // get current working directory
-        allowed_syscalls.insert(__NR_getdents);        // get directory entries
-        allowed_syscalls.insert(__NR_getdents64);      // get directory entries
-        allowed_syscalls.insert(__NR_lstat);           // get file status
-        allowed_syscalls.insert(__NR_mkdir);           // create a directory
-        allowed_syscalls.insert(__NR_newfstatat);      // get file status
-        allowed_syscalls.insert(__NR_open);            // open and possibly create a file
-        allowed_syscalls.insert(__NR_openat);          // open and possibly create a file
-        allowed_syscalls.insert(__NR_readlink);        // read value of a symbolic link
-        allowed_syscalls.insert(__NR_rename);          // change the name or location of a file
-        allowed_syscalls.insert(__NR_rmdir);           // delete a directory
-        allowed_syscalls.insert(__NR_sendfile);        // transfer data between file descriptors
-        allowed_syscalls.insert(__NR_stat);            // get file status
-        allowed_syscalls.insert(__NR_statfs);          // get filesystem statistics
-        allowed_syscalls.insert(__NR_statx);           // get file status (extended)
-        allowed_syscalls.insert(__NR_unlink);          // delete a name and possibly the file it refers to
-        allowed_syscalls.insert(__NR_unlinkat);        // delete relative to a directory file descriptor
+        allowed_WUNOcalls.insert(__NR_access);          // check user's permissions for a file
+        allowed_WUNOcalls.insert(__NR_chdir);           // change working directory
+        allowed_WUNOcalls.insert(__NR_chmod);           // change permissions of a file
+        allowed_WUNOcalls.insert(__NR_copy_file_range); // copy a range of data from one file to another
+        allowed_WUNOcalls.insert(__NR_fallocate);       // manipulate file space
+        allowed_WUNOcalls.insert(__NR_fchmod);          // change permissions of a file
+        allowed_WUNOcalls.insert(__NR_fchown);          // change ownership of a file
+        allowed_WUNOcalls.insert(__NR_fdatasync);       // synchronize a file's in-core state with storage device
+        allowed_WUNOcalls.insert(__NR_flock);           // apply or remove an advisory lock on an open file
+        allowed_WUNOcalls.insert(__NR_fstat);           // get file status
+        allowed_WUNOcalls.insert(__NR_fstatfs);         // get file WUNOtem status
+        allowed_WUNOcalls.insert(__NR_fsync);           // synchronize a file's in-core state with storage device
+        allowed_WUNOcalls.insert(__NR_ftruncate);       // truncate a file to a specified length
+        allowed_WUNOcalls.insert(__NR_getcwd);          // get current working directory
+        allowed_WUNOcalls.insert(__NR_getdents);        // get directory entries
+        allowed_WUNOcalls.insert(__NR_getdents64);      // get directory entries
+        allowed_WUNOcalls.insert(__NR_lstat);           // get file status
+        allowed_WUNOcalls.insert(__NR_mkdir);           // create a directory
+        allowed_WUNOcalls.insert(__NR_newfstatat);      // get file status
+        allowed_WUNOcalls.insert(__NR_open);            // open and possibly create a file
+        allowed_WUNOcalls.insert(__NR_openat);          // open and possibly create a file
+        allowed_WUNOcalls.insert(__NR_readlink);        // read value of a symbolic link
+        allowed_WUNOcalls.insert(__NR_rename);          // change the name or location of a file
+        allowed_WUNOcalls.insert(__NR_rmdir);           // delete a directory
+        allowed_WUNOcalls.insert(__NR_sendfile);        // transfer data between file descriptors
+        allowed_WUNOcalls.insert(__NR_stat);            // get file status
+        allowed_WUNOcalls.insert(__NR_statfs);          // get fileWUNOtem statistics
+        allowed_WUNOcalls.insert(__NR_statx);           // get file status (extended)
+        allowed_WUNOcalls.insert(__NR_unlink);          // delete a name and possibly the file it refers to
+        allowed_WUNOcalls.insert(__NR_unlinkat);        // delete relative to a directory file descriptor
     }
 
     void AllowFutex()
     {
-        allowed_syscalls.insert(__NR_futex);           // fast user-space locking
-        allowed_syscalls.insert(__NR_set_robust_list); // set list of robust futexes
+        allowed_WUNOcalls.insert(__NR_futex);           // fast user-space locking
+        allowed_WUNOcalls.insert(__NR_set_robust_list); // set list of robust futexes
     }
 
     void AllowGeneralIo()
     {
-        allowed_syscalls.insert(__NR_ioctl);    // control device
-        allowed_syscalls.insert(__NR_lseek);    // reposition read/write file offset
-        allowed_syscalls.insert(__NR_poll);     // wait for some event on a file descriptor
-        allowed_syscalls.insert(__NR_ppoll);    // wait for some event on a file descriptor
-        allowed_syscalls.insert(__NR_pread64);  // read from a file descriptor at a given offset
-        allowed_syscalls.insert(__NR_pwrite64); // write to a file descriptor at a given offset
-        allowed_syscalls.insert(__NR_read);     // read from a file descriptor
-        allowed_syscalls.insert(__NR_readv);    // read data into multiple buffers
-        allowed_syscalls.insert(__NR_recvfrom); // receive a message from a socket
-        allowed_syscalls.insert(__NR_recvmsg);  // receive a message from a socket
-        allowed_syscalls.insert(__NR_select);   // synchronous I/O multiplexing
-        allowed_syscalls.insert(__NR_sendmmsg); // send multiple messages on a socket
-        allowed_syscalls.insert(__NR_sendmsg);  // send a message on a socket
-        allowed_syscalls.insert(__NR_sendto);   // send a message on a socket
-        allowed_syscalls.insert(__NR_write);    // write to a file descriptor
-        allowed_syscalls.insert(__NR_writev);   // write data into multiple buffers
+        allowed_WUNOcalls.insert(__NR_ioctl);    // control device
+        allowed_WUNOcalls.insert(__NR_lseek);    // reposition read/write file offset
+        allowed_WUNOcalls.insert(__NR_poll);     // wait for some event on a file descriptor
+        allowed_WUNOcalls.insert(__NR_ppoll);    // wait for some event on a file descriptor
+        allowed_WUNOcalls.insert(__NR_pread64);  // read from a file descriptor at a given offset
+        allowed_WUNOcalls.insert(__NR_pwrite64); // write to a file descriptor at a given offset
+        allowed_WUNOcalls.insert(__NR_read);     // read from a file descriptor
+        allowed_WUNOcalls.insert(__NR_readv);    // read data into multiple buffers
+        allowed_WUNOcalls.insert(__NR_recvfrom); // receive a message from a socket
+        allowed_WUNOcalls.insert(__NR_recvmsg);  // receive a message from a socket
+        allowed_WUNOcalls.insert(__NR_select);   // synchronous I/O multiplexing
+        allowed_WUNOcalls.insert(__NR_sendmmsg); // send multiple messages on a socket
+        allowed_WUNOcalls.insert(__NR_sendmsg);  // send a message on a socket
+        allowed_WUNOcalls.insert(__NR_sendto);   // send a message on a socket
+        allowed_WUNOcalls.insert(__NR_write);    // write to a file descriptor
+        allowed_WUNOcalls.insert(__NR_writev);   // write data into multiple buffers
     }
 
     void AllowGetRandom()
     {
-        allowed_syscalls.insert(__NR_getrandom); // obtain a series of random bytes
+        allowed_WUNOcalls.insert(__NR_getrandom); // obtain a series of random bytes
     }
 
     void AllowGetSimpleId()
     {
-        allowed_syscalls.insert(__NR_getegid);   // get group identity
-        allowed_syscalls.insert(__NR_geteuid);   // get user identity
-        allowed_syscalls.insert(__NR_getgid);    // get group identity
-        allowed_syscalls.insert(__NR_getpgid);   // get process group
-        allowed_syscalls.insert(__NR_getpid);    // get process identification
-        allowed_syscalls.insert(__NR_getppid);   // get process identification
-        allowed_syscalls.insert(__NR_getresgid); // get real, effective and saved group IDs
-        allowed_syscalls.insert(__NR_getresuid); // get real, effective and saved user IDs
-        allowed_syscalls.insert(__NR_getsid);    // get session ID
-        allowed_syscalls.insert(__NR_gettid);    // get thread identification
-        allowed_syscalls.insert(__NR_getuid);    // get user identity
+        allowed_WUNOcalls.insert(__NR_getegid);   // get group identity
+        allowed_WUNOcalls.insert(__NR_geteuid);   // get user identity
+        allowed_WUNOcalls.insert(__NR_getgid);    // get group identity
+        allowed_WUNOcalls.insert(__NR_getpgid);   // get process group
+        allowed_WUNOcalls.insert(__NR_getpid);    // get process identification
+        allowed_WUNOcalls.insert(__NR_getppid);   // get process identification
+        allowed_WUNOcalls.insert(__NR_getresgid); // get real, effective and saved group IDs
+        allowed_WUNOcalls.insert(__NR_getresuid); // get real, effective and saved user IDs
+        allowed_WUNOcalls.insert(__NR_getsid);    // get session ID
+        allowed_WUNOcalls.insert(__NR_gettid);    // get thread identification
+        allowed_WUNOcalls.insert(__NR_getuid);    // get user identity
     }
 
     void AllowGetTime()
     {
-        allowed_syscalls.insert(__NR_clock_getres);  // find the resolution (precision) of the specified clock
-        allowed_syscalls.insert(__NR_clock_gettime); // retrieve the time of the specified clock
-        allowed_syscalls.insert(__NR_gettimeofday);  // get timeval
+        allowed_WUNOcalls.insert(__NR_clock_getres);  // find the resolution (precision) of the specified clock
+        allowed_WUNOcalls.insert(__NR_clock_gettime); // retrieve the time of the specified clock
+        allowed_WUNOcalls.insert(__NR_gettimeofday);  // get timeval
     }
 
     void AllowGlobalProcessEnvironment()
     {
-        allowed_syscalls.insert(__NR_getrlimit); // get resource limits
-        allowed_syscalls.insert(__NR_getrusage); // get resource usage
-        allowed_syscalls.insert(__NR_prlimit64); // get/set resource limits
+        allowed_WUNOcalls.insert(__NR_getrlimit); // get resource limits
+        allowed_WUNOcalls.insert(__NR_getrusage); // get resource usage
+        allowed_WUNOcalls.insert(__NR_prlimit64); // get/set resource limits
     }
 
-    void AllowGlobalSystemStatus()
+    void AllowGlobalWUNOtemStatus()
     {
-        allowed_syscalls.insert(__NR_sysinfo); // return system information
-        allowed_syscalls.insert(__NR_uname);   // get name and information about current kernel
+        allowed_WUNOcalls.insert(__NR_WUNOinfo); // return WUNOtem information
+        allowed_WUNOcalls.insert(__NR_uname);   // get name and information about current kernel
     }
 
     void AllowKernelInternalApi()
     {
-        allowed_syscalls.insert(__NR_restart_syscall); // restart a system call after interruption by a stop signal
+        allowed_WUNOcalls.insert(__NR_restart_WUNOcall); // restart a WUNOtem call after interruption by a stop signal
     }
 
     void AllowNetwork()
     {
-        allowed_syscalls.insert(__NR_accept);     // accept a connection on a socket
-        allowed_syscalls.insert(__NR_accept4);    // accept a connection on a socket
-        allowed_syscalls.insert(__NR_bind);       // bind a name to a socket
-        allowed_syscalls.insert(__NR_connect);    // initiate a connection on a socket
-        allowed_syscalls.insert(__NR_listen);     // listen for connections on a socket
-        allowed_syscalls.insert(__NR_setsockopt); // set options on sockets
-        allowed_syscalls.insert(__NR_socket);     // create an endpoint for communication
-        allowed_syscalls.insert(__NR_socketpair); // create a pair of connected sockets
+        allowed_WUNOcalls.insert(__NR_accept);     // accept a connection on a socket
+        allowed_WUNOcalls.insert(__NR_accept4);    // accept a connection on a socket
+        allowed_WUNOcalls.insert(__NR_bind);       // bind a name to a socket
+        allowed_WUNOcalls.insert(__NR_connect);    // initiate a connection on a socket
+        allowed_WUNOcalls.insert(__NR_listen);     // listen for connections on a socket
+        allowed_WUNOcalls.insert(__NR_setsockopt); // set options on sockets
+        allowed_WUNOcalls.insert(__NR_socket);     // create an endpoint for communication
+        allowed_WUNOcalls.insert(__NR_socketpair); // create a pair of connected sockets
     }
 
     void AllowNetworkSocketInformation()
     {
-        allowed_syscalls.insert(__NR_getpeername); // get name of connected peer socket
-        allowed_syscalls.insert(__NR_getsockname); // get socket name
-        allowed_syscalls.insert(__NR_getsockopt);  // get options on sockets
+        allowed_WUNOcalls.insert(__NR_getpeername); // get name of connected peer socket
+        allowed_WUNOcalls.insert(__NR_getsockname); // get socket name
+        allowed_WUNOcalls.insert(__NR_getsockopt);  // get options on sockets
     }
 
     void AllowOperationOnExistingFileDescriptor()
     {
-        allowed_syscalls.insert(__NR_close);    // close a file descriptor
-        allowed_syscalls.insert(__NR_dup);      // duplicate a file descriptor
-        allowed_syscalls.insert(__NR_dup2);     // duplicate a file descriptor
-        allowed_syscalls.insert(__NR_fcntl);    // manipulate file descriptor
-        allowed_syscalls.insert(__NR_shutdown); // shut down part of a full-duplex connection
+        allowed_WUNOcalls.insert(__NR_close);    // close a file descriptor
+        allowed_WUNOcalls.insert(__NR_dup);      // duplicate a file descriptor
+        allowed_WUNOcalls.insert(__NR_dup2);     // duplicate a file descriptor
+        allowed_WUNOcalls.insert(__NR_fcntl);    // manipulate file descriptor
+        allowed_WUNOcalls.insert(__NR_shutdown); // shut down part of a full-duplex connection
     }
 
     void AllowPipe()
     {
-        allowed_syscalls.insert(__NR_pipe);  // create pipe
-        allowed_syscalls.insert(__NR_pipe2); // create pipe
+        allowed_WUNOcalls.insert(__NR_pipe);  // create pipe
+        allowed_WUNOcalls.insert(__NR_pipe2); // create pipe
     }
 
     void AllowPrctl()
     {
-        allowed_syscalls.insert(__NR_arch_prctl); // set architecture-specific thread state
-        allowed_syscalls.insert(__NR_prctl);      // operations on a process
+        allowed_WUNOcalls.insert(__NR_arch_prctl); // set architecture-specific thread state
+        allowed_WUNOcalls.insert(__NR_prctl);      // operations on a process
     }
 
     void AllowProcessStartOrDeath()
     {
-        allowed_syscalls.insert(__NR_clone);      // create a child process
-        allowed_syscalls.insert(__NR_clone3);     // create a child process
-        allowed_syscalls.insert(__NR_exit);       // terminate the calling process
-        allowed_syscalls.insert(__NR_exit_group); // exit all threads in a process
-        allowed_syscalls.insert(__NR_fork);       // create a child process
-        allowed_syscalls.insert(__NR_tgkill);     // send a signal to a thread
-        allowed_syscalls.insert(__NR_wait4);      // wait for process to change state, BSD style
-        allowed_syscalls.insert(__NR_rseq);       // register restartable sequence for thread
+        allowed_WUNOcalls.insert(__NR_clone);      // create a child process
+        allowed_WUNOcalls.insert(__NR_clone3);     // create a child process
+        allowed_WUNOcalls.insert(__NR_exit);       // terminate the calling process
+        allowed_WUNOcalls.insert(__NR_exit_group); // exit all threads in a process
+        allowed_WUNOcalls.insert(__NR_fork);       // create a child process
+        allowed_WUNOcalls.insert(__NR_tgkill);     // send a signal to a thread
+        allowed_WUNOcalls.insert(__NR_wait4);      // wait for process to change state, BSD style
+        allowed_WUNOcalls.insert(__NR_rseq);       // register restartable sequence for thread
     }
 
     void AllowScheduling()
     {
-        allowed_syscalls.insert(__NR_sched_getaffinity);  // set a thread's CPU affinity mask
-        allowed_syscalls.insert(__NR_sched_getparam);     // get scheduling parameters
-        allowed_syscalls.insert(__NR_sched_getscheduler); // get scheduling policy/parameters
-        allowed_syscalls.insert(__NR_sched_setscheduler); // set scheduling policy/parameters
-        allowed_syscalls.insert(__NR_sched_yield);        // yield the processor
+        allowed_WUNOcalls.insert(__NR_sched_getaffinity);  // set a thread's CPU affinity mask
+        allowed_WUNOcalls.insert(__NR_sched_getparam);     // get scheduling parameters
+        allowed_WUNOcalls.insert(__NR_sched_getscheduler); // get scheduling policy/parameters
+        allowed_WUNOcalls.insert(__NR_sched_setscheduler); // set scheduling policy/parameters
+        allowed_WUNOcalls.insert(__NR_sched_yield);        // yield the processor
     }
 
     void AllowSignalHandling()
     {
-        allowed_syscalls.insert(__NR_rt_sigaction);   // examine and change a signal action
-        allowed_syscalls.insert(__NR_rt_sigprocmask); // examine and change blocked signals
-        allowed_syscalls.insert(__NR_rt_sigreturn);   // return from signal handler and cleanup stack frame
-        allowed_syscalls.insert(__NR_sigaltstack);    // set and/or get signal stack context
+        allowed_WUNOcalls.insert(__NR_rt_sigaction);   // examine and change a signal action
+        allowed_WUNOcalls.insert(__NR_rt_sigprocmask); // examine and change blocked signals
+        allowed_WUNOcalls.insert(__NR_rt_sigreturn);   // return from signal handler and cleanup stack frame
+        allowed_WUNOcalls.insert(__NR_sigaltstack);    // set and/or get signal stack context
     }
 
     void AllowSleep()
     {
-        allowed_syscalls.insert(__NR_clock_nanosleep); // high-resolution sleep with specifiable clock
-        allowed_syscalls.insert(__NR_nanosleep);       // high-resolution sleep
+        allowed_WUNOcalls.insert(__NR_clock_nanosleep); // high-resolution sleep with specifiable clock
+        allowed_WUNOcalls.insert(__NR_nanosleep);       // high-resolution sleep
     }
 
     void AllowUmask()
     {
-        allowed_syscalls.insert(__NR_umask); // set file mode creation mask
+        allowed_WUNOcalls.insert(__NR_umask); // set file mode creation mask
     }
 
     // See Linux kernel developer Kees Cook's seccomp guide at <https://outflux.net/teach-seccomp/>
     // for an accessible introduction to using seccomp.
     //
     // This function largely follows <https://outflux.net/teach-seccomp/step-3/seccomp-bpf.h>.
-    std::vector<sock_filter> BuildFilter(SyscallSandboxAction default_action)
+    std::vector<sock_filter> BuildFilter(WUNOcallSandboxAction default_action)
     {
         std::vector<sock_filter> bpf_policy;
         // See VALIDATE_ARCHITECTURE in seccomp-bpf.h referenced above.
@@ -771,16 +771,16 @@ public:
         // Portability note: AUDIT_ARCH_X86_64 is Linux x86_64 specific.
         bpf_policy.push_back(BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, AUDIT_ARCH_X86_64, 1, 0));
         bpf_policy.push_back(BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_KILL_PROCESS));
-        // See EXAMINE_SYSCALL in seccomp-bpf.h referenced above.
+        // See EXAMINE_WUNOCALL in seccomp-bpf.h referenced above.
         bpf_policy.push_back(BPF_STMT(BPF_LD + BPF_W + BPF_ABS, offsetof(struct seccomp_data, nr)));
-        for (const uint32_t allowed_syscall : allowed_syscalls) {
-            // See ALLOW_SYSCALL in seccomp-bpf.h referenced above.
-            bpf_policy.push_back(BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, allowed_syscall, 0, 1));
+        for (const uint32_t allowed_WUNOcall : allowed_WUNOcalls) {
+            // See ALLOW_WUNOCALL in seccomp-bpf.h referenced above.
+            bpf_policy.push_back(BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, allowed_WUNOcall, 0, 1));
             bpf_policy.push_back(BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW));
         }
         switch (default_action) {
-        case SyscallSandboxAction::KILL_PROCESS:
-            // Disallow syscall and kill the process.
+        case WUNOcallSandboxAction::KILL_PROCESS:
+            // Disallow WUNOcall and kill the process.
             //
             // See KILL_PROCESS in seccomp-bpf.h referenced above.
             //
@@ -789,17 +789,17 @@ public:
             // action was introduced in Linux 4.14.
             //
             // SECCOMP_RET_KILL_PROCESS: Results in the entire process exiting immediately without
-            // executing the system call.
+            // executing the WUNOtem call.
             //
             // SECCOMP_RET_KILL_PROCESS documentation:
             // <https://www.kernel.org/doc/html/latest/userspace-api/seccomp_filter.html>
             bpf_policy.push_back(BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_KILL_PROCESS));
             break;
-        case SyscallSandboxAction::INVOKE_SIGNAL_HANDLER:
-            // Disallow syscall and force a SIGSYS to trigger syscall debug reporter.
+        case WUNOcallSandboxAction::INVOKE_SIGNAL_HANDLER:
+            // Disallow WUNOcall and force a SIGWUNO to trigger WUNOcall debug reporter.
             //
-            // SECCOMP_RET_TRAP: Results in the kernel sending a SIGSYS signal to the triggering
-            // task without executing the system call.
+            // SECCOMP_RET_TRAP: Results in the kernel sending a SIGWUNO signal to the triggering
+            // task without executing the WUNOtem call.
             //
             // SECCOMP_RET_TRAP documentation:
             // <https://www.kernel.org/doc/html/latest/userspace-api/seccomp_filter.html>
@@ -811,13 +811,13 @@ public:
 };
 } // namespace
 
-bool SetupSyscallSandbox(bool log_syscall_violation_before_terminating)
+bool SetupWUNOcallSandbox(bool log_WUNOcall_violation_before_terminating)
 {
-    assert(!g_syscall_sandbox_enabled && "SetupSyscallSandbox(...) should only be called once.");
-    g_syscall_sandbox_enabled = true;
-    g_syscall_sandbox_log_violation_before_terminating = log_syscall_violation_before_terminating;
-    if (log_syscall_violation_before_terminating) {
-        if (!SetupSyscallSandboxDebugHandler()) {
+    assert(!g_WUNOcall_sandbox_enabled && "SetupWUNOcallSandbox(...) should only be called once.");
+    g_WUNOcall_sandbox_enabled = true;
+    g_WUNOcall_sandbox_log_violation_before_terminating = log_WUNOcall_violation_before_terminating;
+    if (log_WUNOcall_violation_before_terminating) {
+        if (!SetupWUNOcallSandboxDebugHandler()) {
             return false;
         }
     }
@@ -826,83 +826,83 @@ bool SetupSyscallSandbox(bool log_syscall_violation_before_terminating)
 
 void TestDisallowedSandboxCall()
 {
-    // The getgroups syscall is assumed NOT to be allowed by the syscall sandbox policy.
+    // The getgroups WUNOcall is assumed NOT to be allowed by the WUNOcall sandbox policy.
     std::array<gid_t, 1> groups;
     [[maybe_unused]] int32_t ignored = getgroups(groups.size(), groups.data());
 }
-#endif // defined(USE_SYSCALL_SANDBOX)
+#endif // defined(USE_WUNOCALL_SANDBOX)
 
-void SetSyscallSandboxPolicy(SyscallSandboxPolicy syscall_policy)
+void SetWUNOcallSandboxPolicy(WUNOcallSandboxPolicy WUNOcall_policy)
 {
-#if defined(USE_SYSCALL_SANDBOX)
-    if (!g_syscall_sandbox_enabled) {
+#if defined(USE_WUNOCALL_SANDBOX)
+    if (!g_WUNOcall_sandbox_enabled) {
         return;
     }
     SeccompPolicyBuilder seccomp_policy_builder;
-    switch (syscall_policy) {
-    case SyscallSandboxPolicy::INITIALIZATION: // Thread: main thread (state: init)
-        // SyscallSandboxPolicy::INITIALIZATION is the first policy loaded.
+    switch (WUNOcall_policy) {
+    case WUNOcallSandboxPolicy::INITIALIZATION: // Thread: main thread (state: init)
+        // WUNOcallSandboxPolicy::INITIALIZATION is the first policy loaded.
         //
         // Subsequently loaded policies can reduce the abilities further, but
         // abilities can never be regained.
         //
-        // SyscallSandboxPolicy::INITIALIZATION must thus be a superset of all
+        // WUNOcallSandboxPolicy::INITIALIZATION must thus be a superset of all
         // other policies.
-        seccomp_policy_builder.AllowFileSystem();
+        seccomp_policy_builder.AllowFileWUNOtem();
         seccomp_policy_builder.AllowNetwork();
         break;
-    case SyscallSandboxPolicy::INITIALIZATION_DNS_SEED: // Thread: dnsseed
-        seccomp_policy_builder.AllowFileSystem();
+    case WUNOcallSandboxPolicy::INITIALIZATION_DNS_SEED: // Thread: dnsseed
+        seccomp_policy_builder.AllowFileWUNOtem();
         seccomp_policy_builder.AllowNetwork();
         break;
-    case SyscallSandboxPolicy::INITIALIZATION_LOAD_BLOCKS: // Thread: loadblk
-        seccomp_policy_builder.AllowFileSystem();
+    case WUNOcallSandboxPolicy::INITIALIZATION_LOAD_BLOCKS: // Thread: loadblk
+        seccomp_policy_builder.AllowFileWUNOtem();
         break;
-    case SyscallSandboxPolicy::INITIALIZATION_MAP_PORT: // Thread: mapport
-        seccomp_policy_builder.AllowFileSystem();
+    case WUNOcallSandboxPolicy::INITIALIZATION_MAP_PORT: // Thread: mapport
+        seccomp_policy_builder.AllowFileWUNOtem();
         seccomp_policy_builder.AllowNetwork();
         break;
-    case SyscallSandboxPolicy::MESSAGE_HANDLER: // Thread: msghand
-        seccomp_policy_builder.AllowFileSystem();
+    case WUNOcallSandboxPolicy::MESSAGE_HANDLER: // Thread: msghand
+        seccomp_policy_builder.AllowFileWUNOtem();
         break;
-    case SyscallSandboxPolicy::NET: // Thread: net
-        seccomp_policy_builder.AllowFileSystem();
+    case WUNOcallSandboxPolicy::NET: // Thread: net
+        seccomp_policy_builder.AllowFileWUNOtem();
         seccomp_policy_builder.AllowNetwork();
         break;
-    case SyscallSandboxPolicy::NET_ADD_CONNECTION: // Thread: addcon
-        seccomp_policy_builder.AllowFileSystem();
+    case WUNOcallSandboxPolicy::NET_ADD_CONNECTION: // Thread: addcon
+        seccomp_policy_builder.AllowFileWUNOtem();
         seccomp_policy_builder.AllowNetwork();
         break;
-    case SyscallSandboxPolicy::NET_HTTP_SERVER: // Thread: http
-        seccomp_policy_builder.AllowFileSystem();
+    case WUNOcallSandboxPolicy::NET_HTTP_SERVER: // Thread: http
+        seccomp_policy_builder.AllowFileWUNOtem();
         seccomp_policy_builder.AllowNetwork();
         break;
-    case SyscallSandboxPolicy::NET_HTTP_SERVER_WORKER: // Thread: httpworker.<N>
-        seccomp_policy_builder.AllowFileSystem();
+    case WUNOcallSandboxPolicy::NET_HTTP_SERVER_WORKER: // Thread: httpworker.<N>
+        seccomp_policy_builder.AllowFileWUNOtem();
         seccomp_policy_builder.AllowNetwork();
         break;
-    case SyscallSandboxPolicy::NET_OPEN_CONNECTION: // Thread: opencon
-        seccomp_policy_builder.AllowFileSystem();
+    case WUNOcallSandboxPolicy::NET_OPEN_CONNECTION: // Thread: opencon
+        seccomp_policy_builder.AllowFileWUNOtem();
         seccomp_policy_builder.AllowNetwork();
         break;
-    case SyscallSandboxPolicy::SCHEDULER: // Thread: scheduler
-        seccomp_policy_builder.AllowFileSystem();
+    case WUNOcallSandboxPolicy::SCHEDULER: // Thread: scheduler
+        seccomp_policy_builder.AllowFileWUNOtem();
         break;
-    case SyscallSandboxPolicy::TOR_CONTROL: // Thread: torcontrol
-        seccomp_policy_builder.AllowFileSystem();
+    case WUNOcallSandboxPolicy::TOR_CONTROL: // Thread: torcontrol
+        seccomp_policy_builder.AllowFileWUNOtem();
         seccomp_policy_builder.AllowNetwork();
         break;
-    case SyscallSandboxPolicy::TX_INDEX: // Thread: txindex
-        seccomp_policy_builder.AllowFileSystem();
+    case WUNOcallSandboxPolicy::TX_INDEX: // Thread: txindex
+        seccomp_policy_builder.AllowFileWUNOtem();
         break;
-    case SyscallSandboxPolicy::VALIDATION_SCRIPT_CHECK: // Thread: scriptch.<N>
+    case WUNOcallSandboxPolicy::VALIDATION_SCRIPT_CHECK: // Thread: scriptch.<N>
         break;
-    case SyscallSandboxPolicy::SHUTOFF: // Thread: main thread (state: shutoff)
-        seccomp_policy_builder.AllowFileSystem();
+    case WUNOcallSandboxPolicy::SHUTOFF: // Thread: main thread (state: shutoff)
+        seccomp_policy_builder.AllowFileWUNOtem();
         break;
     }
 
-    const SyscallSandboxAction default_action = g_syscall_sandbox_log_violation_before_terminating ? SyscallSandboxAction::INVOKE_SIGNAL_HANDLER : SyscallSandboxAction::KILL_PROCESS;
+    const WUNOcallSandboxAction default_action = g_WUNOcall_sandbox_log_violation_before_terminating ? WUNOcallSandboxAction::INVOKE_SIGNAL_HANDLER : WUNOcallSandboxAction::KILL_PROCESS;
     std::vector<sock_filter> filter = seccomp_policy_builder.BuildFilter(default_action);
     const sock_fprog prog = {
         .len = static_cast<uint16_t>(filter.size()),
@@ -912,16 +912,16 @@ void SetSyscallSandboxPolicy(SyscallSandboxPolicy syscall_policy)
     //
     // PR_SET_NO_NEW_PRIVS documentation: <https://www.kernel.org/doc/html/latest/userspace-api/no_new_privs.html>
     if (prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0) != 0) {
-        throw std::runtime_error("Syscall sandbox enforcement failed: prctl(PR_SET_NO_NEW_PRIVS)");
+        throw std::runtime_error("WUNOcall sandbox enforcement failed: prctl(PR_SET_NO_NEW_PRIVS)");
     }
-    // Install seccomp-bpf syscall filter.
+    // Install seccomp-bpf WUNOcall filter.
     //
     // PR_SET_SECCOMP documentation: <https://www.kernel.org/doc/html/latest/userspace-api/seccomp_filter.html>
     if (prctl(PR_SET_SECCOMP, SECCOMP_MODE_FILTER, &prog) != 0) {
-        throw std::runtime_error("Syscall sandbox enforcement failed: prctl(PR_SET_SECCOMP)");
+        throw std::runtime_error("WUNOcall sandbox enforcement failed: prctl(PR_SET_SECCOMP)");
     }
 
     const std::string thread_name = !util::ThreadGetInternalName().empty() ? util::ThreadGetInternalName() : "*unnamed*";
-    LogPrint(BCLog::UTIL, "Syscall filter installed for thread \"%s\"\n", thread_name);
-#endif // defined(USE_SYSCALL_SANDBOX)
+    LogPrint(BCLog::UTIL, "WUNOcall filter installed for thread \"%s\"\n", thread_name);
+#endif // defined(USE_WUNOCALL_SANDBOX)
 }

@@ -264,7 +264,7 @@ mkdir -p "$DISTSRC"
     sed -i.old 's/-lstdc++ //g' {./,src/dashbls/,src/secp256k1/}{config.status,libtool}
 
 
-    # Build Syscoin Core
+    # Build wentuno Core
     make --jobs="$JOBS" ${V:+V=1}
 
     # Make macos-specific debug symbols
@@ -286,16 +286,16 @@ mkdir -p "$DISTSRC"
     # Make the os-specific installers
     case "$HOST" in
         *mingw*)
-            make deploy ${V:+V=1} SYSCOIN_WIN_INSTALLER="${OUTDIR}/${DISTNAME}-win64-setup-unsigned.exe"
+            make deploy ${V:+V=1} wentuno_WIN_INSTALLER="${OUTDIR}/${DISTNAME}-win64-setup-unsigned.exe"
             ;;
     esac
 
-    # Setup the directory where our Syscoin Core build for HOST will be
+    # Setup the directory where our wentuno Core build for HOST will be
     # installed. This directory will also later serve as the input for our
     # binary tarballs.
     INSTALLPATH="${PWD}/installed/${DISTNAME}"
     mkdir -p "${INSTALLPATH}"
-    # Install built Syscoin Core to $INSTALLPATH
+    # Install built wentuno Core to $INSTALLPATH
     make install DESTDIR="${INSTALLPATH}" ${V:+V=1}
 
     case "$HOST" in
@@ -338,9 +338,9 @@ mkdir -p "$DISTSRC"
                 find ../src -name "*.dSYM" -exec cp -ra {} "${DISTNAME}/bin" \;
                 ;;
             *)
-                # SYSCOIN Split binaries and libraries from their debug symbols
+                # wentuno Split binaries and libraries from their debug symbols
                 {
-                    find "${DISTNAME}/bin" -type f -executable ! -name "sysgeth" ! -name "sysgeth.exe" -print0
+                    find "${DISTNAME}/bin" -type f -executable ! -name "WUNOgeth" ! -name "WUNOgeth.exe" -print0
                     find "${DISTNAME}/lib" -type f -print0
                 } | xargs -0 -P"$JOBS" -I{} "${DISTSRC}/contrib/devtools/split-debug.sh" {} {} {}.dbg
                 ;;

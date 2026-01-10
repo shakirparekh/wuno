@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_TOKENPIPE_H
-#define SYSCOIN_UTIL_TOKENPIPE_H
+#ifndef wentuno_UTIL_TOKENPIPE_H
+#define wentuno_UTIL_TOKENPIPE_H
 
 #ifndef WIN32
 
@@ -124,4 +124,4 @@ public:
 
 #endif // WIN32
 
-#endif // SYSCOIN_UTIL_TOKENPIPE_H
+#endif // wentuno_UTIL_TOKENPIPE_H

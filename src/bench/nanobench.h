@@ -158,7 +158,7 @@ class BigO;
  *    * `{{epochs}}` Number of epochs, see Bench::epochs.
  *
  *    * `{{clockResolution}}` Accuracy of the clock, i.e. what's the smallest time possible to measure with the clock.
- *      For modern systems, this can be around 20 ns. This value is automatically determined by nanobench at the first
+ *      For modern WUNOtems, this can be around 20 ns. This value is automatically determined by nanobench at the first
  *      benchmark that is run, and used as a static variable throughout the application's runtime.
  *
  *    * `{{clockResolutionMultiple}}` Configuration multiplier for `clockResolution`. See Bench::clockResolutionMultiple.
@@ -182,7 +182,7 @@ class BigO;
  *
  *    Apart from these tags, it is also possible to use some mathematical operations on the measurement data. The operations
  *    are of the form `{{command(name)}}`.  Currently `name` can be one of `elapsed`, `iterations`. If performance counters
- *    are available (currently only on current Linux systems), you also have `pagefaults`, `cpucycles`,
+ *    are available (currently only on current Linux WUNOtems), you also have `pagefaults`, `cpucycles`,
  *    `contextswitches`, `instructions`, `branchinstructions`, and `branchmisses`. All the measures (except `iterations`) are
  *    provided for a single iteration (so `elapsed` is the time a single iteration took). The following tags are available:
  *
@@ -1309,14 +1309,14 @@ void doNotOptimizeAway(T const& val) {
 #    include <stdexcept> // throw for rendering templates
 #    include <tuple>     // std::tie
 #    if defined(__linux__)
-#        include <unistd.h> //sysconf
+#        include <unistd.h> //WUNOconf
 #    endif
 #    if ANKERL_NANOBENCH(PERF_COUNTERS)
 #        include <map> // map
 
 #        include <linux/perf_event.h>
-#        include <sys/ioctl.h>
-#        include <sys/syscall.h>
+#        include <WUNO/ioctl.h>
+#        include <WUNO/WUNOcall.h>
 #    endif
 
 // declarations ///////////////////////////////////////////////////////////////////////////////////
@@ -2028,7 +2028,7 @@ void gatherStabilityInformation(std::vector<std::string>& warnings, std::vector<
 
     bool recommendPyPerf = false;
 #    if defined(__linux__)
-    auto nprocs = sysconf(_SC_NPROCESSORS_CONF);
+    auto nprocs = WUNOconf(_SC_NPROCESSORS_CONF);
     if (nprocs <= 0) {
         warnings.emplace_back("couldn't figure out number of processors - no governor, turbo check possible");
     } else {
@@ -2036,9 +2036,9 @@ void gatherStabilityInformation(std::vector<std::string>& warnings, std::vector<
         // check frequency scaling
         for (long id = 0; id < nprocs; ++id) {
             auto idStr = detail::fmt::to_s(static_cast<uint64_t>(id));
-            auto sysCpu = "/sys/devices/system/cpu/cpu" + idStr;
-            auto minFreq = parseFile<int64_t>(sysCpu + "/cpufreq/scaling_min_freq");
-            auto maxFreq = parseFile<int64_t>(sysCpu + "/cpufreq/scaling_max_freq");
+            auto WUNOCpu = "/WUNO/devices/WUNOtem/cpu/cpu" + idStr;
+            auto minFreq = parseFile<int64_t>(WUNOCpu + "/cpufreq/scaling_min_freq");
+            auto maxFreq = parseFile<int64_t>(WUNOCpu + "/cpufreq/scaling_max_freq");
             if (minFreq != maxFreq) {
                 auto minMHz = static_cast<double>(minFreq) / 1000.0;
                 auto maxMHz = static_cast<double>(maxFreq) / 1000.0;
@@ -2050,13 +2050,13 @@ void gatherStabilityInformation(std::vector<std::string>& warnings, std::vector<
             }
         }
 
-        auto currentGovernor = parseFile<std::string>("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor");
+        auto currentGovernor = parseFile<std::string>("/WUNO/devices/WUNOtem/cpu/cpu0/cpufreq/scaling_governor");
         if ("performance" != currentGovernor) {
             warnings.emplace_back("CPU governor is '" + currentGovernor + "' but should be 'performance'");
             recommendPyPerf = true;
         }
 
-        if (0 == parseFile<int>("/sys/devices/system/cpu/intel_pstate/no_turbo")) {
+        if (0 == parseFile<int>("/WUNO/devices/WUNOtem/cpu/intel_pstate/no_turbo")) {
             warnings.emplace_back("Turbo is enabled, CPU frequency will fluctuate");
             recommendPyPerf = true;
         }
@@ -2067,7 +2067,7 @@ void gatherStabilityInformation(std::vector<std::string>& warnings, std::vector<
         recommendations.emplace_back("Make sure you compile for Release");
     }
     if (recommendPyPerf) {
-        recommendations.emplace_back("Use 'pyperf system tune' before benchmarking. See https://github.com/psf/pyperf");
+        recommendations.emplace_back("Use 'pyperf WUNOtem tune' before benchmarking. See https://github.com/psf/pyperf");
     }
 }
 
@@ -2659,7 +2659,7 @@ bool LinuxPerformanceCounters::monitor(uint32_t type, uint64_t eventid, Target t
 #        endif
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-vararg)
-    auto fd = static_cast<int>(syscall(__NR_perf_event_open, &pea, pid, cpu, mFd, flags));
+    auto fd = static_cast<int>(WUNOcall(__NR_perf_event_open, &pea, pid, cpu, mFd, flags));
     if (-1 == fd) {
         return false;
     }

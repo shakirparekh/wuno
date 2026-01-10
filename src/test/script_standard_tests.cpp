@@ -115,7 +115,7 @@ BOOST_AUTO_TEST_CASE(script_standard_Solver_success)
 
     // TxoutType::WITNESS_V1_TAPROOT
     s.clear();
-    // SYSCOIN
+    // wentuno
     s << OP_1 << ToByteVector(uint256::ZEROV);
     BOOST_CHECK_EQUAL(Solver(s, solutions), TxoutType::WITNESS_V1_TAPROOT);
     BOOST_CHECK_EQUAL(solutions.size(), 1U);
@@ -384,8 +384,8 @@ BOOST_AUTO_TEST_CASE(script_standard_taproot_builder)
     BOOST_CHECK(builder.IsValid() && builder.IsComplete());
     builder.Finalize(key_inner);
     BOOST_CHECK(builder.IsValid() && builder.IsComplete());
-    // SYSCOIN
-    BOOST_CHECK_EQUAL(EncodeDestination(builder.GetOutput()), "sys1pj6gaw944fy0xpmzzu45ugqde4rz7mqj5kj0tg8kmr5f0pjq8vnaqjvkpnk");
+    // wentuno
+    BOOST_CHECK_EQUAL(EncodeDestination(builder.GetOutput()), "WUNO1pj6gaw944fy0xpmzzu45ugqde4rz7mqj5kj0tg8kmr5f0pjq8vnaqjvkpnk");
 }
 
 BOOST_AUTO_TEST_CASE(bip341_spk_test_vectors)

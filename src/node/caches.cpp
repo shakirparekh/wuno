@@ -29,7 +29,7 @@ CacheSizes CalculateCacheSizes(const ArgsManager& args, size_t n_indexes)
     sizes.coins_db = std::min(sizes.coins_db, nMaxCoinsDBCache << 20); // cap total coins db cache
     nTotalCache -= sizes.coins_db;
     sizes.coins = nTotalCache; // the rest goes to in-memory cache
-    // SYSCOIN
+    // wentuno
     sizes.evo_dmn_db = 1024 * 1024 * 64;
     sizes.evo_poda_db = 1024 * 1024 * 128;
     sizes.evo_qc_db = 1024 * 1024 * 64;

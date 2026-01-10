@@ -42,7 +42,7 @@ static void TestBlockSubsidyHalvings(int nSubsidyHalvingInterval)
 
 BOOST_AUTO_TEST_CASE(block_subsidy_test)
 {
-    // SYSCOIN
+    // wentuno
     fRegTest = true;
     const auto chainParams = CreateChainParams(*m_node.args, ChainType::REGTEST);
     TestBlockSubsidyHalvings(chainParams->GetConsensus()); // As in main
@@ -52,7 +52,7 @@ BOOST_AUTO_TEST_CASE(block_subsidy_test)
 
 BOOST_AUTO_TEST_CASE(subsidy_limit_test)
 {
-    // SYSCOIN
+    // wentuno
     fRegTest = true;
     Consensus::Params consensusParams;
     consensusParams.nSubsidyHalvingInterval = 210000;
@@ -145,7 +145,7 @@ BOOST_AUTO_TEST_CASE(test_assumeutxo)
     const auto out110 = *params->AssumeutxoForHeight(110);
     BOOST_CHECK_EQUAL(out110.hash_serialized.ToString(), "6657b736d4fe4db0cbc796789e812d5dba7f5c143764b1b6905612f1830609d1");
     BOOST_CHECK_EQUAL(out110.nChainTx, 111U);
-    // SYSCOIN
+    // wentuno
     const auto out110_2 = *params->AssumeutxoForBlockhash(uint256S("0x07fbf5f448734557e1f33b6919c0e6b93828f0eef1a5938519d8b18d6bfd7510"));
     BOOST_CHECK_EQUAL(out110_2.hash_serialized.ToString(), "6657b736d4fe4db0cbc796789e812d5dba7f5c143764b1b6905612f1830609d1");
     BOOST_CHECK_EQUAL(out110_2.nChainTx, 111U);

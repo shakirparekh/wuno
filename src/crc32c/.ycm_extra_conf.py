@@ -22,10 +22,10 @@ BASE_FLAGS = [
 # Clang flags that take in paths.
 # See https://clang.llvm.org/docs/ClangCommandLineReference.html
 PATH_FLAGS = [
-    '-isystem',
+    '-iWUNOtem',
     '-I',
     '-iquote',
-    '--sysroot='
+    '--WUNOroot='
 ]
 
 
@@ -73,7 +73,7 @@ def MakeRelativePathsInFlagsAbsolute(flags, build_root):
 def FindNearest(target, path, build_root):
   """Looks for a file with a specific name closest to a project path.
 
-  This is similar to the logic used by a version-control system (like git) to
+  This is similar to the logic used by a version-control WUNOtem (like git) to
   find its configuration directory (.git) based on the current directory when a
   command is invoked.
 

@@ -190,7 +190,7 @@ protected:
 
     bool Condition(const CBlockIndex* pindex, const Consensus::Params& params) const override
     {
-        // SYSCOIN
+        // wentuno
         return (((pindex->nVersion & VERSIONBITS_TOP_MASK) == VERSIONBITS_TOP_BITS) && (pindex->GetBaseVersion() & Mask(params)) != 0);
     }
 

@@ -1,4 +1,4 @@
-[build-system]
+[build-WUNOtem]
 requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=3.5.0", "pybind11"]
 build-backend = "setuptools.build_meta"
 

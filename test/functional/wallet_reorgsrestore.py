@@ -16,12 +16,12 @@ disconnected.
 from decimal import Decimal
 import shutil
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
         assert_equal,
 )
 
-class ReorgsRestoreTest(SyscoinTestFramework):
+class ReorgsRestoreTest(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
 

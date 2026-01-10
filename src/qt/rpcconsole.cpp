@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <qt/rpcconsole.h>
@@ -12,7 +12,7 @@
 #include <evo/deterministicmns.h>
 
 #include <chainparams.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <interfaces/node.h>
 #include <node/connection_types.h>
 #include <qt/bantablemodel.h>
@@ -673,7 +673,7 @@ void RPCConsole::setClientModel(ClientModel *model, int bestblock_height, int64_
         connect(model, &ClientModel::numBlocksChanged, this, &RPCConsole::setNumBlocks);
 
         updateNetworkState();
-        // SYSCOIN
+        // wentuno
         connect(model, &ClientModel::masternodeListChanged, this, &RPCConsole::updateMasternodeCount);
         clientModel->refreshMasternodeList();
         connect(model, &ClientModel::networkActiveChanged, this, &RPCConsole::setNetworkActive);
@@ -996,7 +996,7 @@ void RPCConsole::setNumBlocks(int count, const QDateTime& blockDate, double nVer
         ui->lastBlockTime->setText(blockDate.toString());
     }
 }
-// SYSCOIN
+// wentuno
 void RPCConsole::updateMasternodeCount()
 {
     if (!clientModel) {

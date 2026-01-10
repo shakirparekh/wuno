@@ -1,9 +1,9 @@
 # Disable files from being included in completions by default
-complete --command syscoin-tx --no-files
+complete --command wentuno-tx --no-files
 
 # Modified version of __fish_seen_subcommand_from
 # Uses regex to detect cmd= syntax
-function __fish_syscoin_seen_cmd
+function __fish_wentuno_seen_cmd
     set -l cmd (commandline -oc)
     set -e cmd[1]
     for i in $cmd
@@ -17,7 +17,7 @@ function __fish_syscoin_seen_cmd
 end
 
 # Extract options
-function __fish_syscoin_tx_get_options
+function __fish_wentuno_tx_get_options
     set --local cmd (commandline -oc)[1]
     if string match --quiet --regex -- '^-help$|-\?$' $cmd
         return
@@ -29,7 +29,7 @@ function __fish_syscoin_tx_get_options
 end
 
 # Extract commands
-function __fish_syscoin_tx_get_commands
+function __fish_wentuno_tx_get_commands
     argparse 'commandsonly' -- $argv
     set --local cmd (commandline -oc)[1]
     set --local commands
@@ -47,19 +47,19 @@ end
 
 # Add options
 complete \
-    --command syscoin-tx \
-    --condition "not __fish_syscoin_seen_cmd (__fish_syscoin_tx_get_commands --commandsonly)" \
-    --arguments "(__fish_syscoin_tx_get_options)" \
+    --command wentuno-tx \
+    --condition "not __fish_wentuno_seen_cmd (__fish_wentuno_tx_get_commands --commandsonly)" \
+    --arguments "(__fish_wentuno_tx_get_options)" \
     --no-files
 
 # Add commands
 complete \
-    --command syscoin-tx \
-    --arguments "(__fish_syscoin_tx_get_commands)" \
+    --command wentuno-tx \
+    --arguments "(__fish_wentuno_tx_get_commands)" \
     --no-files
 
 # Add file completions for load and set commands
 complete \
-    --command syscoin-tx \
+    --command wentuno-tx \
     --condition 'string match --regex -- "(load|set)=" (commandline -pt)' \
     --force-files

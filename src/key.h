@@ -4,8 +4,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_KEY_H
-#define SYSCOIN_KEY_H
+#ifndef wentuno_KEY_H
+#define wentuno_KEY_H
 
 #include <pubkey.h>
 #include <serialize.h>
@@ -237,4 +237,4 @@ void ECC_Stop();
 /** Check that required EC support is available at runtime. */
 bool ECC_InitSanityCheck();
 
-#endif // SYSCOIN_KEY_H
+#endif // wentuno_KEY_H

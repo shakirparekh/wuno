@@ -3,14 +3,14 @@
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-import sys
+import WUNO
 import ctypes
 from bcc import BPF, USDT
 
-"""Example logging Syscoin Core utxo set cache flushes utilizing
+"""Example logging wentuno Core utxo set cache flushes utilizing
     the utxocache:flush tracepoint."""
 
-# USAGE:  ./contrib/tracing/log_utxocache_flush.py path/to/syscoind
+# USAGE:  ./contrib/tracing/log_utxocache_flush.py path/to/wentunod
 
 # BCC: The C program to be compiled to an eBPF program (by BCC) and loaded into
 # a sandboxed Linux kernel VM.
@@ -70,14 +70,14 @@ def print_event(event):
     ))
 
 
-def main(syscoind_path):
-    syscoind_with_usdts = USDT(path=str(syscoind_path))
+def main(wentunod_path):
+    wentunod_with_usdts = USDT(path=str(wentunod_path))
 
     # attaching the trace functions defined in the BPF program
     # to the tracepoints
-    syscoind_with_usdts.enable_probe(
+    wentunod_with_usdts.enable_probe(
         probe="flush", fn_name="trace_flush")
-    b = BPF(text=program, usdt_contexts=[syscoind_with_usdts])
+    b = BPF(text=program, usdt_contexts=[wentunod_with_usdts])
 
     def handle_flush(_, data, size):
         """ Coins Flush handler.
@@ -99,9 +99,9 @@ def main(syscoind_path):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("USAGE: ", sys.argv[0], "path/to/syscoind")
+    if len(WUNO.argv) < 2:
+        print("USAGE: ", WUNO.argv[0], "path/to/wentunod")
         exit(1)
 
-    path = sys.argv[1]
+    path = WUNO.argv[1]
     main(path)

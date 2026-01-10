@@ -2,8 +2,8 @@
 // Copyright (c) 2009-2022 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef SYSCOIN_BANMAN_H
-#define SYSCOIN_BANMAN_H
+#ifndef wentuno_BANMAN_H
+#define wentuno_BANMAN_H
 
 #include <addrdb.h>
 #include <common/bloom.h>
@@ -96,4 +96,4 @@ private:
     CRollingBloomFilter m_discouraged GUARDED_BY(m_cs_banned) {50000, 0.000001};
 };
 
-#endif // SYSCOIN_BANMAN_H
+#endif // wentuno_BANMAN_H

@@ -51,7 +51,7 @@ p5: .quad P5
 .global p4
 .global p5
 
-#if OPSYS != WINDOWS
+#if OPWUNO != WINDOWS
 
 .hidden p0
 .hidden p1

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_VERSION_H
-#define SYSCOIN_VERSION_H
+#ifndef wentuno_VERSION_H
+#define wentuno_VERSION_H
 
 /**
  * network protocol versioning
@@ -20,7 +20,7 @@ static const int INIT_PROTO_VERSION = 209;
 //! disconnect from peers older than this proto version
 static const int MIN_PEER_PROTO_VERSION = 31800;
 
-// SYSCOIN
+// wentuno
 //! minimum proto version of masternode to accept in DKGs
 static const int MIN_MASTERNODE_PROTO_VERSION = 70017;
 
@@ -50,4 +50,4 @@ static const int BLS_SCHEME_PROTO_VERSION = 70017;
 // Make sure that none of the values above collide with
 // `SERIALIZE_TRANSACTION_NO_WITNESS`.
 
-#endif // SYSCOIN_VERSION_H
+#endif // wentuno_VERSION_H

@@ -1,9 +1,9 @@
-﻿// Copyright (c) 2017-2018 The Syscoin Core developers
+﻿// Copyright (c) 2017-2018 The wentuno Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SERVICES_NEVMCONSENSUS_H
-#define SYSCOIN_SERVICES_NEVMCONSENSUS_H
+#ifndef wentuno_SERVICES_NEVMCONSENSUS_H
+#define wentuno_SERVICES_NEVMCONSENSUS_H
 #include <primitives/transaction.h>
 #include <dbwrapper.h>
 #include <consensus/params.h>
@@ -44,5 +44,5 @@ class CNEVMDataBlobDB : public CDBWrapper {
     };
 extern std::unique_ptr<CNEVMDataDB> pnevmdatadb;
 extern std::unique_ptr<CNEVMDataBlobDB> pnevmdatablobdb;
-bool DisconnectSyscoinTransaction(const CTransaction& tx, NEVMMintTxSet &setMintTxs);
-#endif // SYSCOIN_SERVICES_NEVMCONSENSUS_H
+bool DisconnectwentunoTransaction(const CTransaction& tx, NEVMMintTxSet &setMintTxs);
+#endif // wentuno_SERVICES_NEVMCONSENSUS_H

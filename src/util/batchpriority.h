@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_BATCHPRIORITY_H
-#define SYSCOIN_UTIL_BATCHPRIORITY_H
+#ifndef wentuno_UTIL_BATCHPRIORITY_H
+#define wentuno_UTIL_BATCHPRIORITY_H
 
 /**
  * On platforms that support it, tell the kernel the calling thread is
@@ -12,4 +12,4 @@
  */
 void ScheduleBatchPriority();
 
-#endif // SYSCOIN_UTIL_BATCHPRIORITY_H
+#endif // wentuno_UTIL_BATCHPRIORITY_H

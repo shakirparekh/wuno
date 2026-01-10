@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or https://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_ADDRESSTYPE_H
-#define SYSCOIN_ADDRESSTYPE_H
+#ifndef wentuno_ADDRESSTYPE_H
+#define wentuno_ADDRESSTYPE_H
 
 #include <pubkey.h>
 #include <script/script.h>
@@ -150,4 +150,4 @@ bool ExtractDestination(const CScript& scriptPubKey, CTxDestination& addressRet)
  */
 CScript GetScriptForDestination(const CTxDestination& dest);
 
-#endif // SYSCOIN_ADDRESSTYPE_H
+#endif // wentuno_ADDRESSTYPE_H

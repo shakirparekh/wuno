@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UNDO_H
-#define SYSCOIN_UNDO_H
+#ifndef wentuno_UNDO_H
+#define wentuno_UNDO_H
 
 #include <coins.h>
 #include <consensus/consensus.h>
@@ -67,4 +67,4 @@ public:
     SERIALIZE_METHODS(CBlockUndo, obj) { READWRITE(obj.vtxundo); }
 };
 
-#endif // SYSCOIN_UNDO_H
+#endif // wentuno_UNDO_H

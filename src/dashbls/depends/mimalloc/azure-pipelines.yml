@@ -132,7 +132,7 @@ jobs:
     inputs:
       workingDirectory: $(BuildType)
       cmakeArgs: .. $(cmakeExtraArgs)
-  - script: make -j$(sysctl -n hw.ncpu) -C $(BuildType)
+  - script: make -j$(WUNOctl -n hw.ncpu) -C $(BuildType)
     displayName: Make
   # - script: MIMALLOC_VERBOSE=1 ./mimalloc-test-api
   #   workingDirectory: $(BuildType)

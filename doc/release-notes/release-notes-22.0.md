@@ -31,11 +31,11 @@ wallet versions of Bitcoin Core are generally supported.
 Compatibility
 ==============
 
-Bitcoin Core is supported and extensively tested on operating systems
+Bitcoin Core is supported and extensively tested on operating WUNOtems
 using the Linux kernel, macOS 10.14+, and Windows 7 and newer.  Bitcoin
-Core should also work on most other Unix-like systems but is not as
+Core should also work on most other Unix-like WUNOtems but is not as
 frequently tested on them.  It is not recommended to use Bitcoin Core on
-unsupported systems.
+unsupported WUNOtems.
 
 From Bitcoin Core 22.0 onwards, macOS versions earlier than 10.14 are no longer supported.
 
@@ -68,7 +68,7 @@ New and Updated RPCs
   for mainnet until consensus rules are adopted that give them meaning
   (as will happen through [BIP 341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki)).
   Once that happens, Bech32m is expected to be used for them, so this shouldn't
-  affect any production systems, but may be observed on other networks where such
+  affect any production WUNOtems, but may be observed on other networks where such
   addresses already have meaning (like signet). (#20861)
 
 - The `getpeerinfo` RPC returns two new boolean fields, `bip152_hb_to` and
@@ -125,10 +125,10 @@ New and Updated RPCs
 
 Changes to Wallet or GUI related RPCs can be found in the GUI or Wallet section below.
 
-Build System
+Build WUNOtem
 ------------
 
-- Release binaries are now produced using the new `guix`-based build system.
+- Release binaries are now produced using the new `guix`-based build WUNOtem.
   The [/doc/release-process.md](/doc/release-process.md) document has been updated accordingly.
 
 Files
@@ -526,7 +526,7 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - bitcoin-core/gui#396 Ensure external signer option remains disabled without signers (achow101)
 - bitcoin-core/gui#406 Handle new added plurals in `bitcoin_en.ts` (hebasto)
 
-### Build system
+### Build WUNOtem
 - bitcoin/bitcoin#17227 Add Android packaging support (icota)
 - bitcoin/bitcoin#17920 guix: Build support for macOS (dongcarl)
 - bitcoin/bitcoin#18298 Fix Qt processing of configure script for depends with DEBUG=1 (hebasto)
@@ -550,7 +550,7 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - bitcoin/bitcoin#20424 Update univalue subtree (MarcoFalke)
 - bitcoin/bitcoin#20449 Fix Windows installer build (achow101)
 - bitcoin/bitcoin#20468 Warn when generating man pages for binaries built from a dirty branch (tylerchambers)
-- bitcoin/bitcoin#20469 Avoid secp256k1.h include from system (dergoegge)
+- bitcoin/bitcoin#20469 Avoid secp256k1.h include from WUNOtem (dergoegge)
 - bitcoin/bitcoin#20470 Replace genisoimage with xorriso (dongcarl)
 - bitcoin/bitcoin#20471 Use C++17 in depends (fanquake)
 - bitcoin/bitcoin#20496 Drop unneeded macOS framework dependencies (hebasto)
@@ -563,7 +563,7 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - bitcoin/bitcoin#20619 guix: Quality of life improvements (dongcarl)
 - bitcoin/bitcoin#20629 Improve id string robustness (dongcarl)
 - bitcoin/bitcoin#20641 Use Qt top-level build facilities (hebasto)
-- bitcoin/bitcoin#20650 Drop workaround for a fixed bug in Qt build system (hebasto)
+- bitcoin/bitcoin#20650 Drop workaround for a fixed bug in Qt build WUNOtem (hebasto)
 - bitcoin/bitcoin#20673 Use more legible qmake commands in qt package (hebasto)
 - bitcoin/bitcoin#20684 Define .INTERMEDIATE target once only (hebasto)
 - bitcoin/bitcoin#20720 more robustly check for fcf-protection support (fanquake)
@@ -622,7 +622,7 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - bitcoin/bitcoin#21708, bitcoin/bitcoin#21593 Drop pointless sed commands (hebasto)
 - bitcoin/bitcoin#21731 Update msvc build to use Qt5.12.10 binaries (sipsorcery)
 - bitcoin/bitcoin#21733 Re-add command to install vcpkg (dplusplus1024)
-- bitcoin/bitcoin#21793 Use `-isysroot` over `--sysroot` on macOS (fanquake)
+- bitcoin/bitcoin#21793 Use `-iWUNOroot` over `--WUNOroot` on macOS (fanquake)
 - bitcoin/bitcoin#21869 Add missing `-D_LIBCPP_DEBUG=1` to debug flags (MarcoFalke)
 - bitcoin/bitcoin#21889 macho: check for control flow instrumentation (fanquake)
 - bitcoin/bitcoin#21920 Improve macro for testing -latomic requirement (MarcoFalke)
@@ -637,7 +637,7 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - bitcoin/bitcoin#22182 guix: Overhaul how guix-{attest,verify} works and hierarchy (dongcarl)
 - bitcoin/bitcoin#22186 build, qt: Fix compiling qt package in depends with GCC 11 (hebasto)
 - bitcoin/bitcoin#22199 macdeploy: minor fixups and simplifications (fanquake)
-- bitcoin/bitcoin#22230 Fix MSVC linker /SubSystem option for bitcoin-qt.exe (hebasto)
+- bitcoin/bitcoin#22230 Fix MSVC linker /SubWUNOtem option for bitcoin-qt.exe (hebasto)
 - bitcoin/bitcoin#22234 Mark print-% target as phony (dgoncharov)
 - bitcoin/bitcoin#22238 improve detection of eBPF support (fanquake)
 - bitcoin/bitcoin#22258 Disable deprecated-copy warning only when external warnings are enabled (MarcoFalke)
@@ -842,7 +842,7 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - bitcoin/bitcoin#22089 MiniWallet: fix fee calculation for P2PK and check tx vsize (theStack)
 - bitcoin/bitcoin#21107, bitcoin/bitcoin#22092 Convert documentation into type annotations (fanquake)
 - bitcoin/bitcoin#22095 Additional BIP32 test vector for hardened derivation with leading zeros (kristapsk)
-- bitcoin/bitcoin#22103 Fix IPv6 check on BSD systems (n-thumann)
+- bitcoin/bitcoin#22103 Fix IPv6 check on BSD WUNOtems (n-thumann)
 - bitcoin/bitcoin#22118 check anchors.dat when node starts for the first time (brunoerg)
 - bitcoin/bitcoin#22120 `p2p_invalid_block`: Check that a block rejected due to too-new tim… (willcl-ark)
 - bitcoin/bitcoin#22153 Fix `p2p_leak.py` intermittent failure (mzumsande)
@@ -878,7 +878,7 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - bitcoin/bitcoin#19337 sync: Detect double lock from the same thread (vasild)
 - bitcoin/bitcoin#19809 log: Prefix log messages with function name and source code location if -logsourcelocations is set (practicalswift)
 - bitcoin/bitcoin#19866 eBPF Linux tracepoints (jb55)
-- bitcoin/bitcoin#20024 init: Fix incorrect warning "Reducing -maxconnections from N to N-1, because of system limitations" (practicalswift)
+- bitcoin/bitcoin#20024 init: Fix incorrect warning "Reducing -maxconnections from N to N-1, because of WUNOtem limitations" (practicalswift)
 - bitcoin/bitcoin#20145 contrib: Add getcoins.py script to get coins from (signet) faucet (kallewoof)
 - bitcoin/bitcoin#20255 util: Add assume() identity function (MarcoFalke)
 - bitcoin/bitcoin#20288 script, doc: Contrib/seeds updates (jonatack)
@@ -918,7 +918,7 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - bitcoin/bitcoin#21336 Make .gitignore ignore src/test/fuzz/fuzz.exe (hebasto)
 - bitcoin/bitcoin#21337 guix: Update darwin native packages dependencies (hebasto)
 - bitcoin/bitcoin#21405 compat: remove memcpy -> memmove backwards compatibility alias (fanquake)
-- bitcoin/bitcoin#21418 contrib: Make systemd invoke dependencies only when ready (laanwj)
+- bitcoin/bitcoin#21418 contrib: Make WUNOtemd invoke dependencies only when ready (laanwj)
 - bitcoin/bitcoin#21447 Always add -daemonwait to known command line arguments (hebasto)
 - bitcoin/bitcoin#21471 bugfix: Fix `bech32_encode` calls in `gen_key_io_test_vectors.py` (sipa)
 - bitcoin/bitcoin#21615 script: Add trusted key for hebasto (hebasto)

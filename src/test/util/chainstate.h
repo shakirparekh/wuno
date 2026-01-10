@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 //
-#ifndef SYSCOIN_TEST_UTIL_CHAINSTATE_H
-#define SYSCOIN_TEST_UTIL_CHAINSTATE_H
+#ifndef wentuno_TEST_UTIL_CHAINSTATE_H
+#define wentuno_TEST_UTIL_CHAINSTATE_H
 
 #include <clientversion.h>
 #include <logging.h>
@@ -129,4 +129,4 @@ CreateAndActivateUTXOSnapshot(
 }
 
 
-#endif // SYSCOIN_TEST_UTIL_CHAINSTATE_H
+#endif // wentuno_TEST_UTIL_CHAINSTATE_H

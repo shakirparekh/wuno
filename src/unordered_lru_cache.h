@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UNORDERED_LRU_CACHE_H
-#define SYSCOIN_UNORDERED_LRU_CACHE_H
+#ifndef wentuno_UNORDERED_LRU_CACHE_H
+#define wentuno_UNORDERED_LRU_CACHE_H
 
 #include <algorithm>
 #include <cassert>
@@ -112,4 +112,4 @@ private:
     }
 };
 
-#endif // SYSCOIN_UNORDERED_LRU_CACHE_H
+#endif // wentuno_UNORDERED_LRU_CACHE_H

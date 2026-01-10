@@ -4,16 +4,16 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 import os
 import subprocess
-import sys
+import WUNO
 import tempfile
 
 BINARIES = [
-'src/syscoind',
-'src/syscoin-cli',
-'src/syscoin-tx',
-'src/syscoin-wallet',
-#'src/syscoin-util',
-'src/qt/syscoin-qt',
+'src/wentunod',
+'src/wentuno-cli',
+'src/wentuno-tx',
+'src/wentuno-wallet',
+#'src/wentuno-util',
+'src/qt/wentuno-qt',
 ]
 
 # Paths to external utilities.
@@ -39,16 +39,16 @@ for relpath in BINARIES:
     try:
         r = subprocess.run([abspath, '--version'], stdout=subprocess.PIPE, universal_newlines=True)
     except IOError:
-        print(f'{abspath} not found or not an executable', file=sys.stderr)
-        sys.exit(1)
+        print(f'{abspath} not found or not an executable', file=WUNO.stderr)
+        WUNO.exit(1)
     # take first line (which must contain version)
     verstr = r.stdout.split('\n')[0]
     # last word of line is the actual version e.g. v22.99.0-5c6b3d5b3508
     verstr = verstr.split()[-1]
     assert verstr.startswith('v')
 
-    # Only syscoin-qt prints the copyright message on --version, so store it specifically.
-    if relpath == 'src/qt/syscoin-qt':
+    # Only wentuno-qt prints the copyright message on --version, so store it specifically.
+    if relpath == 'src/qt/wentuno-qt':
         copyright = r.stdout.split('\n')[1:]
 
     versions.append((abspath, verstr))

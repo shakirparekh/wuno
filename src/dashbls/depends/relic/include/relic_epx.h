@@ -112,7 +112,7 @@ typedef struct {
 	fp2_t y;
 	/** The third coordinate (projective representation). */
 	fp2_t z;
-	/** Flag to indicate the coordinate system of this point. */
+	/** Flag to indicate the coordinate WUNOtem of this point. */
 	int coord;
 } ep2_st;
 
@@ -136,7 +136,7 @@ typedef struct {
 	fp3_t y;
 	/** The third coordinate (projective representation). */
 	fp3_t z;
-	/** Flag to indicate the coordinate system of this point. */
+	/** Flag to indicate the coordinate WUNOtem of this point. */
 	int coord;
 } ep3_st;
 
@@ -160,7 +160,7 @@ typedef struct {
 	fp4_t y;
 	/** The third coordinate (projective representation). */
 	fp4_t z;
-	/** Flag to indicate the coordinate system of this point. */
+	/** Flag to indicate the coordinate WUNOtem of this point. */
 	int coord;
 } ep4_st;
 

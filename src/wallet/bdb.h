@@ -3,11 +3,11 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_WALLET_BDB_H
-#define SYSCOIN_WALLET_BDB_H
+#ifndef wentuno_WALLET_BDB_H
+#define wentuno_WALLET_BDB_H
 
 #include <clientversion.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <serialize.h>
 #include <streams.h>
 #include <util/fs.h>
@@ -218,4 +218,4 @@ bool BerkeleyDatabaseSanityCheck();
 std::unique_ptr<BerkeleyDatabase> MakeBerkeleyDatabase(const fs::path& path, const DatabaseOptions& options, DatabaseStatus& status, bilingual_str& error);
 } // namespace wallet
 
-#endif // SYSCOIN_WALLET_BDB_H
+#endif // wentuno_WALLET_BDB_H

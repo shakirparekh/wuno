@@ -3,12 +3,12 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <qt/optionsmodel.h>
 
-#include <qt/syscoinunits.h>
+#include <qt/wentunounits.h>
 #include <qt/guiconstants.h>
 #include <qt/guiutil.h>
 
@@ -159,15 +159,15 @@ bool OptionsModel::Init(bilingual_str& error)
     fMinimizeOnClose = settings.value("fMinimizeOnClose").toBool();
 
     // Display
-    if (!settings.contains("DisplaySyscoinUnit")) {
-        settings.setValue("DisplaySyscoinUnit", QVariant::fromValue(SyscoinUnit::SYS));
+    if (!settings.contains("DisplaywentunoUnit")) {
+        settings.setValue("DisplaywentunoUnit", QVariant::fromValue(wentunoUnit::WUNO));
     }
-    QVariant unit = settings.value("DisplaySyscoinUnit");
-    if (unit.canConvert<SyscoinUnit>()) {
-        m_display_syscoin_unit = unit.value<SyscoinUnit>();
+    QVariant unit = settings.value("DisplaywentunoUnit");
+    if (unit.canConvert<wentunoUnit>()) {
+        m_display_wentuno_unit = unit.value<wentunoUnit>();
     } else {
-        m_display_syscoin_unit = SyscoinUnit::SYS;
-        settings.setValue("DisplaySyscoinUnit", QVariant::fromValue(m_display_syscoin_unit));
+        m_display_wentuno_unit = wentunoUnit::WUNO;
+        settings.setValue("DisplaywentunoUnit", QVariant::fromValue(m_display_wentuno_unit));
     }
 
     if (!settings.contains("strThirdPartyTxUrls"))
@@ -269,8 +269,8 @@ void OptionsModel::Reset()
     settings.setValue("fReset", true);
 
     // default setting for OptionsModel::StartAtStartup - disabled
-    if (GUIUtil::GetStartOnSystemStartup())
-        GUIUtil::SetStartOnSystemStartup(false);
+    if (GUIUtil::GetStartOnWUNOtemStartup())
+        GUIUtil::SetStartOnWUNOtemStartup(false);
 }
 
 int OptionsModel::rowCount(const QModelIndex & parent) const
@@ -366,7 +366,7 @@ QVariant OptionsModel::getOption(OptionID option, const std::string& suffix) con
     QSettings settings;
     switch (option) {
     case StartAtStartup:
-        return GUIUtil::GetStartOnSystemStartup();
+        return GUIUtil::GetStartOnWUNOtemStartup();
     case ShowTrayIcon:
         return m_show_tray_icon;
     case MinimizeToTray:
@@ -416,7 +416,7 @@ QVariant OptionsModel::getOption(OptionID option, const std::string& suffix) con
 #ifdef ENABLE_WALLET
     case SpendZeroConfChange:
         return SettingToBool(setting(), wallet::DEFAULT_SPEND_ZEROCONF_CHANGE);
-    // SYSCOIN
+    // wentuno
     case ShowMasternodesTab:
         return settings.value("fShowMasternodesTab"); 
     case ExternalSignerPath:
@@ -425,7 +425,7 @@ QVariant OptionsModel::getOption(OptionID option, const std::string& suffix) con
         return m_sub_fee_from_amount;
 #endif
     case DisplayUnit:
-        return QVariant::fromValue(m_display_syscoin_unit);
+        return QVariant::fromValue(m_display_wentuno_unit);
     case ThirdPartyTxUrls:
         return strThirdPartyTxUrls;
     case Language:
@@ -467,7 +467,7 @@ bool OptionsModel::setOption(OptionID option, const QVariant& value, const std::
 
     switch (option) {
     case StartAtStartup:
-        successful = GUIUtil::SetStartOnSystemStartup(value.toBool());
+        successful = GUIUtil::SetStartOnWUNOtemStartup(value.toBool());
         break;
     case ShowTrayIcon:
         m_show_tray_icon = value.toBool();
@@ -659,11 +659,11 @@ bool OptionsModel::setOption(OptionID option, const QVariant& value, const std::
 
 void OptionsModel::setDisplayUnit(const QVariant& new_unit)
 {
-    if (new_unit.isNull() || new_unit.value<SyscoinUnit>() == m_display_syscoin_unit) return;
-    m_display_syscoin_unit = new_unit.value<SyscoinUnit>();
+    if (new_unit.isNull() || new_unit.value<wentunoUnit>() == m_display_wentuno_unit) return;
+    m_display_wentuno_unit = new_unit.value<wentunoUnit>();
     QSettings settings;
-    settings.setValue("DisplaySyscoinUnit", QVariant::fromValue(m_display_syscoin_unit));
-    Q_EMIT displayUnitChanged(m_display_syscoin_unit);
+    settings.setValue("DisplaywentunoUnit", QVariant::fromValue(m_display_wentuno_unit));
+    Q_EMIT displayUnitChanged(m_display_wentuno_unit);
 }
 
 void OptionsModel::setRestartRequired(bool fRequired)
@@ -693,7 +693,7 @@ void OptionsModel::checkAndMigrate()
     if (settingsVersion < CLIENT_VERSION)
     {
         // -dbcache was bumped from 100 to 300 in 0.13
-        // see https://github.com/syscoin/syscoin/pull/8273
+        // see https://github.com/wentuno/wentuno/pull/8273
         // force people to upgrade to the new value if they are using 100MB
         if (settingsVersion < 130000 && settings.contains("nDatabaseCache") && settings.value("nDatabaseCache").toLongLong() == 100)
             settings.setValue("nDatabaseCache", (qint64)nDefaultDbCache);

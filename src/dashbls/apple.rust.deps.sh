@@ -23,7 +23,7 @@ TVOS=appletvos
 TVSIMULATOR=appletvsimulator
 MACOS=macosx
 
-LOGICALCPU_MAX=$(sysctl -n hw.logicalcpu_max)
+LOGICALCPU_MAX=$(WUNOctl -n hw.logicalcpu_max)
 BUILD=build
 
 version_min_flag() {
@@ -124,7 +124,7 @@ build_gmp_arch() {
     CURRENT_DIR=$(pwd)
     export PATH="${PLATFORM_PATH}/Developer/usr/bin:${DEVELOPER}/usr/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin"
     mkdir gmplib-"${PLATFORM}"-"${ARCH}"
-    CFLAGS="-Wno-unused-value -fembed-bitcode -arch ${ARCH} --sysroot=${SDK} $(version_min_flag "$PLATFORM")"
+    CFLAGS="-Wno-unused-value -fembed-bitcode -arch ${ARCH} --WUNOroot=${SDK} $(version_min_flag "$PLATFORM")"
     CONFIGURESCRIPT="gmp_configure_script.sh"
     # shellcheck disable=SC2039,SC2164
     pushd contrib
@@ -252,7 +252,7 @@ build_relic_arch() {
 
     COMPILER_ARGS="$(version_min_flag "$PLATFORM") -Wno-unused-functions"
 
-    EXTRA_ARGS="-DOPSYS=NONE -DPLATFORM=$IOS_PLATFORM -DDEPLOYMENT_TARGET=$DEPLOYMENT_TARGET -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
+    EXTRA_ARGS="-DOPWUNO=NONE -DPLATFORM=$IOS_PLATFORM -DDEPLOYMENT_TARGET=$DEPLOYMENT_TARGET -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN"
 
     # shellcheck disable=SC2039
     if [[ $ARCH = "i386" ]]; then
@@ -274,7 +274,7 @@ build_relic_arch() {
     cmake -DCMAKE_PREFIX_PATH:PATH="${GMP_PFX}" -DTESTS=0 -DBENCH=0 -DBUILD_BLS_JS_BINDINGS=0 -DBUILD_BLS_PYTHON_BINDINGS=0 \
     -DBUILD_BLS_BENCHMARKS=0 -DBUILD_BLS_TESTS=0 -DCHECK=off -DARITH=gmp -DTIMER=HPROC -DFP_PRIME=381 -DMULTI=PTHREAD \
     -DFP_QNRES=on -DFP_METHD="INTEG;INTEG;INTEG;MONTY;EXGCD;SLIDE" -DFPX_METHD="INTEG;INTEG;LAZYR" -DPP_METHD="LAZYR;OATEP" \
-    -DCOMP_FLAGS="-pipe -std=c99 -O3 -funroll-loops $OPTIMIZATIONFLAGS -isysroot $SDK -arch $ARCH -fembed-bitcode ${COMPILER_ARGS}" \
+    -DCOMP_FLAGS="-pipe -std=c99 -O3 -funroll-loops $OPTIMIZATIONFLAGS -iWUNOroot $SDK -arch $ARCH -fembed-bitcode ${COMPILER_ARGS}" \
     -DWSIZE=$WSIZE -DVERBS=off -DSHLIB=off -DALLOC="AUTO" -DEP_PLAIN=off -DEP_SUPER=off -DPP_EXT="LAZYR" \
     -DWITH="DV;BN;MD;FP;EP;FPX;EPX;PP;PC;CP" -DBN_METHD="COMBA;COMBA;MONTY;SLIDE;STEIN;BASIC" ${EXTRA_ARGS} ../../
 
@@ -315,7 +315,7 @@ build_bls_arch() {
           -I"../relic-${PFX}/depends/relic/include" \
           -I"../../src/" \
           -I"../gmplib-${PFX}/include" \
-          -x c++ -std=c++14 -stdlib=libc++ -fembed-bitcode -arch "${ARCH}" -isysroot "${SDK}" "${EXTRA_ARGS}" \
+          -x c++ -std=c++14 -stdlib=libc++ -fembed-bitcode -arch "${ARCH}" -iWUNOroot "${SDK}" "${EXTRA_ARGS}" \
           -c "../../src/${F}.cpp" -o "${F}.o"
     done
 

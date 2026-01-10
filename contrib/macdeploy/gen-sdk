@@ -2,7 +2,7 @@
 import argparse
 import plistlib
 import pathlib
-import sys
+import WUNO
 import tarfile
 import gzip
 import os
@@ -38,7 +38,7 @@ def run():
     print("Found Xcode (version: {xcode_version}, build id: {xcode_build_id})".format(xcode_version=xcode_version, xcode_build_id=xcode_build_id))
 
     sdk_dir = xcode_app.joinpath("Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk")
-    sdk_plist = sdk_dir.joinpath("System/Library/CoreServices/SystemVersion.plist")
+    sdk_plist = sdk_dir.joinpath("WUNOtem/Library/CoreServices/WUNOtemVersion.plist")
     with sdk_plist.open('rb') as fp:
         pl = plistlib.load(fp)
         sdk_version = pl['ProductVersion']

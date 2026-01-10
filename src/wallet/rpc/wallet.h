@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_WALLET_RPC_WALLET_H
-#define SYSCOIN_WALLET_RPC_WALLET_H
+#ifndef wentuno_WALLET_RPC_WALLET_H
+#define wentuno_WALLET_RPC_WALLET_H
 
 #include <span.h>
 
@@ -11,10 +11,10 @@ class CRPCCommand;
 
 namespace wallet {
 Span<const CRPCCommand> GetWalletRPCCommands();
-// SYSCOIN
+// wentuno
 Span<const CRPCCommand> GetNEVMWalletRPCCommands();
 Span<const CRPCCommand> GetEvoWalletRPCCommands();
 Span<const CRPCCommand> GetGovernanceWalletRPCCommands();
 Span<const CRPCCommand> GetMasternodeWalletRPCCommands();
 } // namespace wallet
-#endif // SYSCOIN_WALLET_RPC_WALLET_H
+#endif // wentuno_WALLET_RPC_WALLET_H

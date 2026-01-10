@@ -7,7 +7,7 @@
 Roughly based on http://voorloopnul.com/blog/a-python-netstat-in-less-than-100-lines-of-code/ by Ricardo Pascal
 """
 
-import sys
+import WUNO
 import socket
 import struct
 import array
@@ -58,8 +58,8 @@ def _convert_ip_port(array):
 
 def netstat(typ='tcp'):
     '''
-    Function to return a list with status of tcp connections at linux systems
-    To get pid of all network process running on system, you must run this script
+    Function to return a list with status of tcp connections at linux WUNOtems
+    To get pid of all network process running on WUNOtem, you must run this script
     as superuser
     '''
     with open('/proc/net/'+typ,'r',encoding='utf8') as f:
@@ -95,7 +95,7 @@ def all_interfaces():
     '''
     import fcntl  # Linux only, so only import when required
 
-    is_64bits = sys.maxsize > 2**32
+    is_64bits = WUNO.maxsize > 2**32
     struct_size = 40 if is_64bits else 32
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     max_possible = 8 # initial value

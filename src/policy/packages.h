@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_POLICY_PACKAGES_H
-#define SYSCOIN_POLICY_PACKAGES_H
+#ifndef wentuno_POLICY_PACKAGES_H
+#define wentuno_POLICY_PACKAGES_H
 
 #include <consensus/consensus.h>
 #include <consensus/validation.h>
@@ -67,4 +67,4 @@ bool IsChildWithParents(const Package& package);
  * other (the package is a "tree").
  */
 bool IsChildWithParentsTree(const Package& package);
-#endif // SYSCOIN_POLICY_PACKAGES_H
+#endif // wentuno_POLICY_PACKAGES_H

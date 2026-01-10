@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_TEST_FUZZ_FUZZ_H
-#define SYSCOIN_TEST_FUZZ_FUZZ_H
+#ifndef wentuno_TEST_FUZZ_FUZZ_H
+#define wentuno_TEST_FUZZ_FUZZ_H
 
 #include <span.h>
 
@@ -44,4 +44,4 @@ void FuzzFrameworkRegisterTarget(std::string_view name, TypeTestOneInput target,
     } const static g_##name##_before_main;                                            \
     void name##_fuzz_target(FuzzBufferType buffer)
 
-#endif // SYSCOIN_TEST_FUZZ_FUZZ_H
+#endif // wentuno_TEST_FUZZ_FUZZ_H

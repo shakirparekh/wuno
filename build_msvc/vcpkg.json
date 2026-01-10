@@ -1,5 +1,5 @@
 {
-  "name": "syscoin-core",
+  "name": "wentuno-core",
   "version-string": "1",
   "dependencies": [
     "berkeleydb",

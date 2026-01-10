@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_WALLET_SPEND_H
-#define SYSCOIN_WALLET_SPEND_H
+#ifndef wentuno_WALLET_SPEND_H
+#define wentuno_WALLET_SPEND_H
 
 #include <consensus/amount.h>
 #include <policy/fees.h> // for FeeCalculation
@@ -225,8 +225,8 @@ util::Result<CreatedTransactionResult> CreateTransaction(CWallet& wallet, const 
  * calling CreateTransaction();
  */
 bool FundTransaction(CWallet& wallet, CMutableTransaction& tx, CAmount& nFeeRet, int& nChangePosInOut, bilingual_str& error, bool lockUnspents, const std::set<int>& setSubtractFeeFromOutputs, CCoinControl);
-// SYSCOIN
-util::Result<CreatedTransactionResult> GetBudgetSystemCollateralTX(CWallet& wallet, uint256 hash, CAmount amount, const COutPoint& outpoint);
+// wentuno
+util::Result<CreatedTransactionResult> GetBudgetWUNOtemCollateralTX(CWallet& wallet, uint256 hash, CAmount amount, const COutPoint& outpoint);
 } // namespace wallet
 
-#endif // SYSCOIN_WALLET_SPEND_H
+#endif // wentuno_WALLET_SPEND_H

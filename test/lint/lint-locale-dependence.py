@@ -3,28 +3,28 @@
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #
-# Be aware that syscoind and bitcoin-qt differ in terms of localization: Qt
+# Be aware that wentunod and bitcoin-qt differ in terms of localization: Qt
 # opts in to POSIX localization by running setlocale(LC_ALL, "") on startup,
-# whereas no such call is made in syscoind.
+# whereas no such call is made in wentunod.
 #
 # Qt runs setlocale(LC_ALL, "") on initialization. This installs the locale
 # specified by the user's LC_ALL (or LC_*) environment variable as the new
 # C locale.
 #
-# In contrast, syscoind does not opt in to localization -- no call to
+# In contrast, wentunod does not opt in to localization -- no call to
 # setlocale(LC_ALL, "") is made and the environment variables LC_* are
 # thus ignored.
 #
-# This results in situations where syscoind is guaranteed to be running
+# This results in situations where wentunod is guaranteed to be running
 # with the classic locale ("C") whereas the locale of bitcoin-qt will vary
 # depending on the user's environment variables.
 #
 # An example: Assuming the environment variable LC_ALL=de_DE then the
-# call std::to_string(1.23) will return "1.230000" in syscoind but
+# call std::to_string(1.23) will return "1.230000" in wentunod but
 # "1,230000" in bitcoin-qt.
 #
 # From the Qt documentation:
-# "On Unix/Linux Qt is configured to use the system locale settings by default.
+# "On Unix/Linux Qt is configured to use the WUNOtem locale settings by default.
 #  This can cause a conflict when using POSIX functions, for instance, when
 #  converting between data types such as floats and strings, since the notation
 #  may differ between locales. To get around this problem, call the POSIX function
@@ -36,7 +36,7 @@
 # https://stackoverflow.com/a/34878283 for more details.
 
 import re
-import sys
+import WUNO
 
 from subprocess import check_output, CalledProcessError
 
@@ -48,7 +48,7 @@ KNOWN_VIOLATIONS = [
     "src/rpc/blockchain.cpp:.*fprintf",
     "src/util/strencodings.cpp:.*strtoul",
     "src/wallet/bdb.cpp:.*DbEnv::strerror",  # False positive
-    "src/util/syserror.cpp:.*strerror",      # Outside this function use `SysErrorString`
+    "src/util/WUNOerror.cpp:.*strerror",      # Outside this function use `WUNOErrorString`
 ]
 
 REGEXP_EXTERNAL_DEPENDENCIES_EXCLUSIONS = [
@@ -250,9 +250,9 @@ def main():
 
     if exit_code == 1:
         print("Unnecessary locale dependence can cause bugs that are very tricky to isolate and fix. Please avoid using locale-dependent functions if possible.\n")
-        print(f"Advice not applicable in this specific case? Add an exception by updating the ignore list in {sys.argv[0]}")
+        print(f"Advice not applicable in this specific case? Add an exception by updating the ignore list in {WUNO.argv[0]}")
 
-    sys.exit(exit_code)
+    WUNO.exit(exit_code)
 
 
 if __name__ == "__main__":

@@ -24,51 +24,51 @@ check_PROGRAMS =
 TESTS =
 BENCHMARKS =
 
-SYSCOIN_INCLUDES=-I$(builddir) -I$(srcdir)/$(MINISKETCH_INCLUDE_DIR_INT) -I$(srcdir)/secp256k1/include -I$(srcdir)/$(UNIVALUE_INCLUDE_DIR_INT)
-SYSCOIN_INCLUDES+=-I$(srcdir)/dashbls/include -I$(srcdir)/dashbls/depends/relic/include -I$(srcdir)/dashbls/depends/mimalloc/include
-SYSCOIN_INCLUDES+=-I$(srcdir)/immer
+wentuno_INCLUDES=-I$(builddir) -I$(srcdir)/$(MINISKETCH_INCLUDE_DIR_INT) -I$(srcdir)/secp256k1/include -I$(srcdir)/$(UNIVALUE_INCLUDE_DIR_INT)
+wentuno_INCLUDES+=-I$(srcdir)/dashbls/include -I$(srcdir)/dashbls/depends/relic/include -I$(srcdir)/dashbls/depends/mimalloc/include
+wentuno_INCLUDES+=-I$(srcdir)/immer
 
 
-LIBSYSCOIN_NODE=libsyscoin_node.a
-LIBSYSCOIN_COMMON=libsyscoin_common.a
-LIBSYSCOIN_CONSENSUS=libsyscoin_consensus.a
-LIBSYSCOIN_CLI=libsyscoin_cli.a
-LIBSYSCOIN_UTIL=libsyscoin_util.a
-LIBSYSCOIN_CRYPTO_BASE=crypto/libsyscoin_crypto_base.la
-LIBSYSCOINQT=qt/libsyscoinqt.a
+LIBwentuno_NODE=libwentuno_node.a
+LIBwentuno_COMMON=libwentuno_common.a
+LIBwentuno_CONSENSUS=libwentuno_consensus.a
+LIBwentuno_CLI=libwentuno_cli.a
+LIBwentuno_UTIL=libwentuno_util.a
+LIBwentuno_CRYPTO_BASE=crypto/libwentuno_crypto_base.la
+LIBwentunoQT=qt/libwentunoqt.a
 LIBDASHBLS=dashbls/libdashbls.la
 LIBSECP256K1=secp256k1/libsecp256k1.la
 LIBNEVM=nevm/libnevm.a
 if ENABLE_ZMQ
-LIBSYSCOIN_ZMQ=libsyscoin_zmq.a
+LIBwentuno_ZMQ=libwentuno_zmq.a
 endif
-if BUILD_SYSCOIN_LIBS
-LIBSYSCOINCONSENSUS=libsyscoinconsensus.la
+if BUILD_wentuno_LIBS
+LIBwentunoCONSENSUS=libwentunoconsensus.la
 endif
 
 if ENABLE_WALLET
-LIBSYSCOIN_WALLET=libsyscoin_wallet.a
-LIBSYSCOIN_WALLET_TOOL=libsyscoin_wallet_tool.a
+LIBwentuno_WALLET=libwentuno_wallet.a
+LIBwentuno_WALLET_TOOL=libwentuno_wallet_tool.a
 endif
 
-LIBSYSCOIN_CRYPTO= $(LIBSYSCOIN_CRYPTO_BASE)
+LIBwentuno_CRYPTO= $(LIBwentuno_CRYPTO_BASE)
 if ENABLE_SSE41
-LIBSYSCOIN_CRYPTO_SSE41 = crypto/libsyscoin_crypto_sse41.la
-LIBSYSCOIN_CRYPTO += $(LIBSYSCOIN_CRYPTO_SSE41)
+LIBwentuno_CRYPTO_SSE41 = crypto/libwentuno_crypto_sse41.la
+LIBwentuno_CRYPTO += $(LIBwentuno_CRYPTO_SSE41)
 endif
 if ENABLE_AVX2
-LIBSYSCOIN_CRYPTO_AVX2 = crypto/libsyscoin_crypto_avx2.la
-LIBSYSCOIN_CRYPTO += $(LIBSYSCOIN_CRYPTO_AVX2)
+LIBwentuno_CRYPTO_AVX2 = crypto/libwentuno_crypto_avx2.la
+LIBwentuno_CRYPTO += $(LIBwentuno_CRYPTO_AVX2)
 endif
 if ENABLE_X86_SHANI
-LIBSYSCOIN_CRYPTO_X86_SHANI = crypto/libsyscoin_crypto_x86_shani.la
-LIBSYSCOIN_CRYPTO += $(LIBSYSCOIN_CRYPTO_X86_SHANI)
+LIBwentuno_CRYPTO_X86_SHANI = crypto/libwentuno_crypto_x86_shani.la
+LIBwentuno_CRYPTO += $(LIBwentuno_CRYPTO_X86_SHANI)
 endif
 if ENABLE_ARM_SHANI
-LIBSYSCOIN_CRYPTO_ARM_SHANI = crypto/libsyscoin_crypto_arm_shani.la
-LIBSYSCOIN_CRYPTO += $(LIBSYSCOIN_CRYPTO_ARM_SHANI)
+LIBwentuno_CRYPTO_ARM_SHANI = crypto/libwentuno_crypto_arm_shani.la
+LIBwentuno_CRYPTO += $(LIBwentuno_CRYPTO_ARM_SHANI)
 endif
-noinst_LTLIBRARIES += $(LIBSYSCOIN_CRYPTO)
+noinst_LTLIBRARIES += $(LIBwentuno_CRYPTO)
 
 $(LIBDASHBLS):
 	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C $(@D)
@@ -79,43 +79,43 @@ $(LIBSECP256K1): $(wildcard secp256k1/src/*.h) $(wildcard secp256k1/src/*.c) $(w
 # Make is not made aware of per-object dependencies to avoid limiting building parallelization
 # But to build the less dependent modules first, we manually select their order here:
 EXTRA_LIBRARIES += \
-  $(LIBSYSCOIN_UTIL) \
-  $(LIBSYSCOIN_COMMON) \
-  $(LIBSYSCOIN_CONSENSUS) \
-  $(LIBSYSCOIN_NODE) \
-  $(LIBSYSCOIN_CLI) \
-  $(LIBSYSCOIN_IPC) \
-  $(LIBSYSCOIN_WALLET) \
-  $(LIBSYSCOIN_WALLET_TOOL) \
-  $(LIBSYSCOIN_ZMQ) \
+  $(LIBwentuno_UTIL) \
+  $(LIBwentuno_COMMON) \
+  $(LIBwentuno_CONSENSUS) \
+  $(LIBwentuno_NODE) \
+  $(LIBwentuno_CLI) \
+  $(LIBwentuno_IPC) \
+  $(LIBwentuno_WALLET) \
+  $(LIBwentuno_WALLET_TOOL) \
+  $(LIBwentuno_ZMQ) \
   $(LIBNEVM)
 
 
-if BUILD_SYSCOIND
-  bin_PROGRAMS += syscoind
+if BUILD_wentunoD
+  bin_PROGRAMS += wentunod
 endif
 
-if BUILD_SYSCOIN_NODE
-  bin_PROGRAMS += syscoin-node
+if BUILD_wentuno_NODE
+  bin_PROGRAMS += wentuno-node
 endif
 
-if BUILD_SYSCOIN_CLI
-  bin_PROGRAMS += syscoin-cli
+if BUILD_wentuno_CLI
+  bin_PROGRAMS += wentuno-cli
 endif
 
-if BUILD_SYSCOIN_TX
-  bin_PROGRAMS += syscoin-tx
+if BUILD_wentuno_TX
+  bin_PROGRAMS += wentuno-tx
 endif
 
 if ENABLE_WALLET
-if BUILD_SYSCOIN_WALLET
-  bin_PROGRAMS += syscoin-wallet
+if BUILD_wentuno_WALLET
+  bin_PROGRAMS += wentuno-wallet
 endif
 endif
 
 .PHONY: FORCE check-symbols check-security
-# syscoin core #
-SYSCOIN_CORE_H = \
+# wentuno core #
+wentuno_CORE_H = \
   addresstype.h \
   services/nevmconsensus.h \
   services/assetconsensus.h \
@@ -177,7 +177,7 @@ SYSCOIN_CORE_H = \
   compat/cpuid.h \
   compat/endian.h \
   common/settings.h \
-  common/system.h \
+  common/WUNOtem.h \
   node/connection_types.h \
   consensus/consensus.h \
   consensus/tx_check.h \
@@ -373,7 +373,7 @@ SYSCOIN_CORE_H = \
   util/sock.h \
   util/spanparsing.h \
   util/string.h \
-  util/syserror.h \
+  util/WUNOerror.h \
   util/thread.h \
   util/threadinterrupt.h \
   util/threadnames.h \
@@ -426,11 +426,11 @@ obj/build.h: FORCE
 	$(AM_V_GEN) $(top_srcdir)/share/genbuild.sh "$(abs_top_builddir)/src/obj/build.h" \
 	  "$(abs_top_srcdir)"
 
-libsyscoin_util_a-clientversion.$(OBJEXT): obj/build.h
+libwentuno_util_a-clientversion.$(OBJEXT): obj/build.h
 
 
  # nevm
- nevm_libnevm_a_CPPFLAGS = $(AM_CPPFLAGS) $(SYSCOIN_INCLUDES)
+ nevm_libnevm_a_CPPFLAGS = $(AM_CPPFLAGS) $(wentuno_INCLUDES)
  nevm_libnevm_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
  nevm_libnevm_a_SOURCES = \
   nevm/address.cpp \
@@ -453,9 +453,9 @@ libsyscoin_util_a-clientversion.$(OBJEXT): obj/build.h
 
 
 # node #
-libsyscoin_node_a_CPPFLAGS = $(AM_CPPFLAGS) $(SYSCOIN_INCLUDES) $(LEVELDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(MINIUPNPC_CPPFLAGS) $(NATPMP_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
-libsyscoin_node_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libsyscoin_node_a_SOURCES = \
+libwentuno_node_a_CPPFLAGS = $(AM_CPPFLAGS) $(wentuno_INCLUDES) $(LEVELDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(MINIUPNPC_CPPFLAGS) $(NATPMP_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
+libwentuno_node_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libwentuno_node_a_SOURCES = \
   services/nevmconsensus.cpp \
   services/rpc/nevmrpc.cpp \
   services/assetconsensus.cpp \
@@ -591,22 +591,22 @@ libsyscoin_node_a_SOURCES = \
   validation.cpp \
   validationinterface.cpp \
   versionbits.cpp \
-  $(SYSCOIN_CORE_H)
+  $(wentuno_CORE_H)
 
 if ENABLE_WALLET
-libsyscoin_node_a_SOURCES += wallet/init.cpp
-libsyscoin_node_a_CPPFLAGS += $(BDB_CPPFLAGS)
+libwentuno_node_a_SOURCES += wallet/init.cpp
+libwentuno_node_a_CPPFLAGS += $(BDB_CPPFLAGS)
 endif
 if !ENABLE_WALLET
-libsyscoin_node_a_SOURCES += dummywallet.cpp
+libwentuno_node_a_SOURCES += dummywallet.cpp
 endif
 #
 
 # zmq #
 if ENABLE_ZMQ
-libsyscoin_zmq_a_CPPFLAGS = $(AM_CPPFLAGS) $(SYSCOIN_INCLUDES) $(ZMQ_CFLAGS)
-libsyscoin_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libsyscoin_zmq_a_SOURCES = \
+libwentuno_zmq_a_CPPFLAGS = $(AM_CPPFLAGS) $(wentuno_INCLUDES) $(ZMQ_CFLAGS)
+libwentuno_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libwentuno_zmq_a_SOURCES = \
   zmq/zmqabstractnotifier.cpp \
   zmq/zmqnotificationinterface.cpp \
   zmq/zmqpublishnotifier.cpp \
@@ -617,9 +617,9 @@ endif
 
 
 # wallet #
-libsyscoin_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(SYSCOIN_INCLUDES) $(BOOST_CPPFLAGS) $(BDB_CPPFLAGS) $(SQLITE_CFLAGS)
-libsyscoin_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libsyscoin_wallet_a_SOURCES = \
+libwentuno_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(wentuno_INCLUDES) $(BOOST_CPPFLAGS) $(BDB_CPPFLAGS) $(SQLITE_CFLAGS)
+libwentuno_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libwentuno_wallet_a_SOURCES = \
   wallet/coincontrol.cpp \
   wallet/context.cpp \
   wallet/crypter.cpp \
@@ -656,34 +656,34 @@ libsyscoin_wallet_a_SOURCES = \
   wallet/rpcevo.cpp \
   wallet/rpcgovernance.cpp \
   wallet/rpcmasternode.cpp \
-  $(SYSCOIN_CORE_H)
+  $(wentuno_CORE_H)
 
 if USE_SQLITE
-libsyscoin_wallet_a_SOURCES += wallet/sqlite.cpp
+libwentuno_wallet_a_SOURCES += wallet/sqlite.cpp
 endif
 if USE_BDB
-libsyscoin_wallet_a_SOURCES += wallet/bdb.cpp wallet/salvage.cpp
+libwentuno_wallet_a_SOURCES += wallet/bdb.cpp wallet/salvage.cpp
 endif
 #
 
 # wallet tool #
-libsyscoin_wallet_tool_a_CPPFLAGS = $(AM_CPPFLAGS) $(SYSCOIN_INCLUDES) $(BOOST_CPPFLAGS)
-libsyscoin_wallet_tool_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libsyscoin_wallet_tool_a_SOURCES = \
+libwentuno_wallet_tool_a_CPPFLAGS = $(AM_CPPFLAGS) $(wentuno_INCLUDES) $(BOOST_CPPFLAGS)
+libwentuno_wallet_tool_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libwentuno_wallet_tool_a_SOURCES = \
   wallet/wallettool.cpp \
-  $(SYSCOIN_CORE_H)
+  $(wentuno_CORE_H)
 
 # crypto #
-crypto_libsyscoin_crypto_base_la_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libwentuno_crypto_base_la_CPPFLAGS = $(AM_CPPFLAGS)
 
 # Specify -static in both CXXFLAGS and LDFLAGS so libtool will only build a
 # static version of this library. We don't need a dynamic version, and a dynamic
 # version can't be used on windows anyway because the library doesn't currently
 # export DLL symbols.
-crypto_libsyscoin_crypto_base_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) -static
-crypto_libsyscoin_crypto_base_la_LDFLAGS = $(AM_LDFLAGS) -static
+crypto_libwentuno_crypto_base_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) -static
+crypto_libwentuno_crypto_base_la_LDFLAGS = $(AM_LDFLAGS) -static
 
-crypto_libsyscoin_crypto_base_la_SOURCES = \
+crypto_libwentuno_crypto_base_la_SOURCES = \
   crypto/aes.cpp \
   crypto/aes.h \
   crypto/chacha20.h \
@@ -715,49 +715,49 @@ crypto_libsyscoin_crypto_base_la_SOURCES = \
   crypto/siphash.h
 
 if USE_ASM
-crypto_libsyscoin_crypto_base_la_SOURCES += crypto/sha256_sse4.cpp
+crypto_libwentuno_crypto_base_la_SOURCES += crypto/sha256_sse4.cpp
 endif
 
-# See explanation for -static in crypto_libsyscoin_crypto_base_la's LDFLAGS and
+# See explanation for -static in crypto_libwentuno_crypto_base_la's LDFLAGS and
 # CXXFLAGS above
-crypto_libsyscoin_crypto_sse41_la_LDFLAGS = $(AM_LDFLAGS) -static
-crypto_libsyscoin_crypto_sse41_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) -static
-crypto_libsyscoin_crypto_sse41_la_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libsyscoin_crypto_sse41_la_CXXFLAGS += $(SSE41_CXXFLAGS)
-crypto_libsyscoin_crypto_sse41_la_CPPFLAGS += -DENABLE_SSE41
-crypto_libsyscoin_crypto_sse41_la_SOURCES = crypto/sha256_sse41.cpp
+crypto_libwentuno_crypto_sse41_la_LDFLAGS = $(AM_LDFLAGS) -static
+crypto_libwentuno_crypto_sse41_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) -static
+crypto_libwentuno_crypto_sse41_la_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libwentuno_crypto_sse41_la_CXXFLAGS += $(SSE41_CXXFLAGS)
+crypto_libwentuno_crypto_sse41_la_CPPFLAGS += -DENABLE_SSE41
+crypto_libwentuno_crypto_sse41_la_SOURCES = crypto/sha256_sse41.cpp
 
-# See explanation for -static in crypto_libsyscoin_crypto_base_la's LDFLAGS and
+# See explanation for -static in crypto_libwentuno_crypto_base_la's LDFLAGS and
 # CXXFLAGS above
-crypto_libsyscoin_crypto_avx2_la_LDFLAGS = $(AM_LDFLAGS) -static
-crypto_libsyscoin_crypto_avx2_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) -static
-crypto_libsyscoin_crypto_avx2_la_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libsyscoin_crypto_avx2_la_CXXFLAGS += $(AVX2_CXXFLAGS)
-crypto_libsyscoin_crypto_avx2_la_CPPFLAGS += -DENABLE_AVX2
-crypto_libsyscoin_crypto_avx2_la_SOURCES = crypto/sha256_avx2.cpp
+crypto_libwentuno_crypto_avx2_la_LDFLAGS = $(AM_LDFLAGS) -static
+crypto_libwentuno_crypto_avx2_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) -static
+crypto_libwentuno_crypto_avx2_la_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libwentuno_crypto_avx2_la_CXXFLAGS += $(AVX2_CXXFLAGS)
+crypto_libwentuno_crypto_avx2_la_CPPFLAGS += -DENABLE_AVX2
+crypto_libwentuno_crypto_avx2_la_SOURCES = crypto/sha256_avx2.cpp
 
-# See explanation for -static in crypto_libsyscoin_crypto_base_la's LDFLAGS and
+# See explanation for -static in crypto_libwentuno_crypto_base_la's LDFLAGS and
 # CXXFLAGS above
-crypto_libsyscoin_crypto_x86_shani_la_LDFLAGS = $(AM_LDFLAGS) -static
-crypto_libsyscoin_crypto_x86_shani_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) -static
-crypto_libsyscoin_crypto_x86_shani_la_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libsyscoin_crypto_x86_shani_la_CXXFLAGS += $(X86_SHANI_CXXFLAGS)
-crypto_libsyscoin_crypto_x86_shani_la_CPPFLAGS += -DENABLE_X86_SHANI
-crypto_libsyscoin_crypto_x86_shani_la_SOURCES = crypto/sha256_x86_shani.cpp
+crypto_libwentuno_crypto_x86_shani_la_LDFLAGS = $(AM_LDFLAGS) -static
+crypto_libwentuno_crypto_x86_shani_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) -static
+crypto_libwentuno_crypto_x86_shani_la_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libwentuno_crypto_x86_shani_la_CXXFLAGS += $(X86_SHANI_CXXFLAGS)
+crypto_libwentuno_crypto_x86_shani_la_CPPFLAGS += -DENABLE_X86_SHANI
+crypto_libwentuno_crypto_x86_shani_la_SOURCES = crypto/sha256_x86_shani.cpp
 
-# See explanation for -static in crypto_libsyscoin_crypto_base_la's LDFLAGS and
+# See explanation for -static in crypto_libwentuno_crypto_base_la's LDFLAGS and
 # CXXFLAGS above
-crypto_libsyscoin_crypto_arm_shani_la_LDFLAGS = $(AM_LDFLAGS) -static
-crypto_libsyscoin_crypto_arm_shani_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) -static
-crypto_libsyscoin_crypto_arm_shani_la_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libsyscoin_crypto_arm_shani_la_CXXFLAGS += $(ARM_SHANI_CXXFLAGS)
-crypto_libsyscoin_crypto_arm_shani_la_CPPFLAGS += -DENABLE_ARM_SHANI
-crypto_libsyscoin_crypto_arm_shani_la_SOURCES = crypto/sha256_arm_shani.cpp
+crypto_libwentuno_crypto_arm_shani_la_LDFLAGS = $(AM_LDFLAGS) -static
+crypto_libwentuno_crypto_arm_shani_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) -static
+crypto_libwentuno_crypto_arm_shani_la_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libwentuno_crypto_arm_shani_la_CXXFLAGS += $(ARM_SHANI_CXXFLAGS)
+crypto_libwentuno_crypto_arm_shani_la_CPPFLAGS += -DENABLE_ARM_SHANI
+crypto_libwentuno_crypto_arm_shani_la_SOURCES = crypto/sha256_arm_shani.cpp
 
 # consensus #
-libsyscoin_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(SYSCOIN_INCLUDES)
-libsyscoin_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libsyscoin_consensus_a_SOURCES = \
+libwentuno_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(wentuno_INCLUDES)
+libwentuno_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libwentuno_consensus_a_SOURCES = \
   arith_uint256.cpp \
   arith_uint256.h \
   bls/bls.cpp \
@@ -779,7 +779,7 @@ libsyscoin_consensus_a_SOURCES = \
   primitives/transaction.h \
   pubkey.cpp \
   pubkey.h \
-  script/syscoinconsensus.cpp \
+  script/wentunoconsensus.cpp \
   script/interpreter.cpp \
   script/interpreter.h \
   script/script.cpp \
@@ -797,9 +797,9 @@ libsyscoin_consensus_a_SOURCES = \
 #
 
 # common #
-libsyscoin_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(SYSCOIN_INCLUDES) $(LEVELDB_CPPFLAGS)  $(BOOST_CPPFLAGS)
-libsyscoin_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libsyscoin_common_a_SOURCES = \
+libwentuno_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(wentuno_INCLUDES) $(LEVELDB_CPPFLAGS)  $(BOOST_CPPFLAGS)
+libwentuno_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libwentuno_common_a_SOURCES = \
   addresstype.cpp \
   services/nevmconsensus.cpp \
   services/assetconsensus.cpp \
@@ -815,7 +815,7 @@ libsyscoin_common_a_SOURCES = \
   common/interfaces.cpp \
   common/run_command.cpp \
   common/settings.cpp \
-  common/system.cpp \
+  common/WUNOtem.cpp \
   core_read.cpp \
   core_write.cpp \
   dbwrapper.cpp \
@@ -850,18 +850,18 @@ libsyscoin_common_a_SOURCES = \
   script/solver.cpp \
   sync.cpp \
   warnings.cpp \
-  $(SYSCOIN_CORE_H)
+  $(wentuno_CORE_H)
 
 if USE_LIBEVENT
-libsyscoin_common_a_CPPFLAGS += $(EVENT_CFLAGS)
-libsyscoin_common_a_SOURCES += common/url.cpp
+libwentuno_common_a_CPPFLAGS += $(EVENT_CFLAGS)
+libwentuno_common_a_SOURCES += common/url.cpp
 endif
 #
 
 # util #
-libsyscoin_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(SYSCOIN_INCLUDES)
-libsyscoin_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libsyscoin_util_a_SOURCES = \
+libwentuno_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(wentuno_INCLUDES)
+libwentuno_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libwentuno_util_a_SOURCES = \
   bls/bls_batchverifier.h \
   bls/bls_ies.cpp \
   bls/bls_ies.h \
@@ -889,7 +889,7 @@ libsyscoin_util_a_SOURCES = \
   util/fs_helpers.cpp \
   util/hasher.cpp \
   util/sock.cpp \
-  util/syserror.cpp \
+  util/WUNOerror.cpp \
   util/message.cpp \
   util/moneystr.cpp \
   util/rbf.cpp \
@@ -904,97 +904,97 @@ libsyscoin_util_a_SOURCES = \
   util/string.cpp \
   util/time.cpp \
   util/tokenpipe.cpp \
-  $(SYSCOIN_CORE_H)
+  $(wentuno_CORE_H)
 #
 
 # cli #
-libsyscoin_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(SYSCOIN_INCLUDES)
-libsyscoin_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libsyscoin_cli_a_SOURCES = \
+libwentuno_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(wentuno_INCLUDES)
+libwentuno_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libwentuno_cli_a_SOURCES = \
   compat/stdin.h \
   compat/stdin.cpp \
   rpc/client.cpp \
-  $(SYSCOIN_CORE_H)
+  $(wentuno_CORE_H)
 
-nodist_libsyscoin_util_a_SOURCES = $(srcdir)/obj/build.h
+nodist_libwentuno_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
-# syscoind & syscoin-node binaries #
-syscoin_daemon_sources = syscoind.cpp
-syscoin_bin_cppflags = $(AM_CPPFLAGS) $(SYSCOIN_INCLUDES)
-syscoin_bin_cxxflags = $(AM_CXXFLAGS) $(PIE_FLAGS)
-syscoin_bin_ldflags = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
+# wentunod & wentuno-node binaries #
+wentuno_daemon_sources = wentunod.cpp
+wentuno_bin_cppflags = $(AM_CPPFLAGS) $(wentuno_INCLUDES)
+wentuno_bin_cxxflags = $(AM_CXXFLAGS) $(PIE_FLAGS)
+wentuno_bin_ldflags = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
 
 if TARGET_WINDOWS
-syscoin_daemon_sources += syscoind-res.rc
+wentuno_daemon_sources += wentunod-res.rc
 endif
-# SYSCOIN need getauxwork and mempool stuff inside of wallet so server needs linking here for now but order has to be after wallet
-syscoin_bin_ldadd = \
-  $(LIBSYSCOIN_WALLET) \
-  $(LIBSYSCOIN_NODE) \
-  $(LIBSYSCOIN_COMMON) \
-  $(LIBSYSCOIN_UTIL) \
+# wentuno need getauxwork and mempool stuff inside of wallet so server needs linking here for now but order has to be after wallet
+wentuno_bin_ldadd = \
+  $(LIBwentuno_WALLET) \
+  $(LIBwentuno_NODE) \
+  $(LIBwentuno_COMMON) \
+  $(LIBwentuno_UTIL) \
   $(LIBUNIVALUE) \
-  $(LIBSYSCOIN_ZMQ) \
-  $(LIBSYSCOIN_CONSENSUS) \
-  $(LIBSYSCOIN_CRYPTO) \
+  $(LIBwentuno_ZMQ) \
+  $(LIBwentuno_CONSENSUS) \
+  $(LIBwentuno_CRYPTO) \
   $(LIBDASHBLS) \
   $(LIBLEVELDB) \
   $(LIBMEMENV) \
   $(LIBSECP256K1) \
   $(LIBNEVM)
 
-syscoin_bin_ldadd += $(BDB_LIBS) $(MINIUPNPC_LIBS) $(NATPMP_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS) $(SQLITE_LIBS) $(GMP_LIBS)
+wentuno_bin_ldadd += $(BDB_LIBS) $(MINIUPNPC_LIBS) $(NATPMP_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS) $(SQLITE_LIBS) $(GMP_LIBS)
 
-syscoind_SOURCES = $(syscoin_daemon_sources) init/syscoind.cpp
-syscoind_CPPFLAGS = $(syscoin_bin_cppflags)
-syscoind_CXXFLAGS = $(syscoin_bin_cxxflags)
-syscoind_LDFLAGS = $(syscoin_bin_ldflags)
-syscoind_LDADD = $(syscoin_bin_ldadd)
+wentunod_SOURCES = $(wentuno_daemon_sources) init/wentunod.cpp
+wentunod_CPPFLAGS = $(wentuno_bin_cppflags)
+wentunod_CXXFLAGS = $(wentuno_bin_cxxflags)
+wentunod_LDFLAGS = $(wentuno_bin_ldflags)
+wentunod_LDADD = $(wentuno_bin_ldadd)
 
-syscoin_node_SOURCES = $(syscoin_daemon_sources) init/syscoin-node.cpp
-syscoin_node_CPPFLAGS = $(syscoin_bin_cppflags)
-syscoin_node_CXXFLAGS = $(syscoin_bin_cxxflags)
-syscoin_node_LDFLAGS = $(syscoin_bin_ldflags)
-syscoin_node_LDADD = $(syscoin_bin_ldadd) $(LIBSYSCOIN_IPC) $(LIBMULTIPROCESS_LIBS)
+wentuno_node_SOURCES = $(wentuno_daemon_sources) init/wentuno-node.cpp
+wentuno_node_CPPFLAGS = $(wentuno_bin_cppflags)
+wentuno_node_CXXFLAGS = $(wentuno_bin_cxxflags)
+wentuno_node_LDFLAGS = $(wentuno_bin_ldflags)
+wentuno_node_LDADD = $(wentuno_bin_ldadd) $(LIBwentuno_IPC) $(LIBMULTIPROCESS_LIBS)
 
-# syscoin-cli binary #
-syscoin_cli_SOURCES = syscoin-cli.cpp
-syscoin_cli_CPPFLAGS = $(AM_CPPFLAGS) $(SYSCOIN_INCLUDES) $(EVENT_CFLAGS)
-syscoin_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-syscoin_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
+# wentuno-cli binary #
+wentuno_cli_SOURCES = wentuno-cli.cpp
+wentuno_cli_CPPFLAGS = $(AM_CPPFLAGS) $(wentuno_INCLUDES) $(EVENT_CFLAGS)
+wentuno_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+wentuno_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
 
 if TARGET_WINDOWS
-syscoin_cli_SOURCES += syscoin-cli-res.rc
+wentuno_cli_SOURCES += wentuno-cli-res.rc
 endif
 
 
-syscoin_cli_LDADD = \
-  $(LIBSYSCOIN_CLI) \
+wentuno_cli_LDADD = \
+  $(LIBwentuno_CLI) \
   $(LIBUNIVALUE) \
-  $(LIBSYSCOIN_COMMON) \
-  $(LIBSYSCOIN_UTIL) \
-  $(LIBSYSCOIN_CRYPTO)
+  $(LIBwentuno_COMMON) \
+  $(LIBwentuno_UTIL) \
+  $(LIBwentuno_CRYPTO)
 
-syscoin_cli_LDADD += $(EVENT_LIBS) $(LIBDASHBLS)
+wentuno_cli_LDADD += $(EVENT_LIBS) $(LIBDASHBLS)
 #
 
-# syscoin-tx binary #
-syscoin_tx_SOURCES = syscoin-tx.cpp
-syscoin_tx_CPPFLAGS = $(AM_CPPFLAGS) $(SYSCOIN_INCLUDES)
-syscoin_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-syscoin_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
+# wentuno-tx binary #
+wentuno_tx_SOURCES = wentuno-tx.cpp
+wentuno_tx_CPPFLAGS = $(AM_CPPFLAGS) $(wentuno_INCLUDES)
+wentuno_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+wentuno_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
 
 if TARGET_WINDOWS
-syscoin_tx_SOURCES += syscoin-tx-res.rc
+wentuno_tx_SOURCES += wentuno-tx-res.rc
 endif
 
-syscoin_tx_LDADD = \
+wentuno_tx_LDADD = \
   $(LIBUNIVALUE) \
-  $(LIBSYSCOIN_COMMON) \
-  $(LIBSYSCOIN_UTIL) \
-  $(LIBSYSCOIN_CONSENSUS) \
-  $(LIBSYSCOIN_CRYPTO) \
+  $(LIBwentuno_COMMON) \
+  $(LIBwentuno_UTIL) \
+  $(LIBwentuno_CONSENSUS) \
+  $(LIBwentuno_CRYPTO) \
   $(LIBLEVELDB) \
   $(LIBMEMENV) \
   $(LIBDASHBLS) \
@@ -1003,56 +1003,56 @@ syscoin_tx_LDADD = \
   $(GMP_LIBS)
 #
 
-# syscoin-wallet binary #
-syscoin_wallet_SOURCES = syscoin-wallet.cpp
-syscoin_wallet_SOURCES += init/syscoin-wallet.cpp
-syscoin_wallet_CPPFLAGS = $(syscoin_bin_cppflags)
-syscoin_wallet_CXXFLAGS = $(syscoin_bin_cxxflags)
-syscoin_wallet_LDFLAGS = $(syscoin_bin_ldflags)
-syscoin_wallet_LDADD = $(LIBSYSCOIN_WALLET_TOOL) $(syscoin_bin_ldadd)
+# wentuno-wallet binary #
+wentuno_wallet_SOURCES = wentuno-wallet.cpp
+wentuno_wallet_SOURCES += init/wentuno-wallet.cpp
+wentuno_wallet_CPPFLAGS = $(wentuno_bin_cppflags)
+wentuno_wallet_CXXFLAGS = $(wentuno_bin_cxxflags)
+wentuno_wallet_LDFLAGS = $(wentuno_bin_ldflags)
+wentuno_wallet_LDADD = $(LIBwentuno_WALLET_TOOL) $(wentuno_bin_ldadd)
 
 if TARGET_WINDOWS
-syscoin_wallet_SOURCES += syscoin-wallet-res.rc
+wentuno_wallet_SOURCES += wentuno-wallet-res.rc
 endif
 #
 
-# syscoinconsensus library #
-if BUILD_SYSCOIN_LIBS
-lib_LTLIBRARIES += $(LIBSYSCOINCONSENSUS)
+# wentunoconsensus library #
+if BUILD_wentuno_LIBS
+lib_LTLIBRARIES += $(LIBwentunoCONSENSUS)
 
-include_HEADERS = script/syscoinconsensus.h
-libsyscoinconsensus_la_SOURCES = support/cleanse.cpp $(crypto_libsyscoin_crypto_base_la_SOURCES) $(libsyscoin_consensus_a_SOURCES)
+include_HEADERS = script/wentunoconsensus.h
+libwentunoconsensus_la_SOURCES = support/cleanse.cpp $(crypto_libwentuno_crypto_base_la_SOURCES) $(libwentuno_consensus_a_SOURCES)
 
 
-libsyscoinconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
-libsyscoinconsensus_la_LIBADD = $(LIBDASHBLS) $(LIBSECP256K1) $(GMP_LIBS)
-libsyscoinconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_SYSCOIN_INTERNAL
-libsyscoinconsensus_la_CPPFLAGS += -I$(srcdir)/dashbls/include -I$(srcdir)/dashbls/depends/relic/include -I$(srcdir)/dashbls/depends/mimalloc/include
-libsyscoinconsensus_la_CPPFLAGS += -I$(srcdir)/immer
-libsyscoinconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libwentunoconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
+libwentunoconsensus_la_LIBADD = $(LIBDASHBLS) $(LIBSECP256K1) $(GMP_LIBS)
+libwentunoconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_wentuno_INTERNAL
+libwentunoconsensus_la_CPPFLAGS += -I$(srcdir)/dashbls/include -I$(srcdir)/dashbls/depends/relic/include -I$(srcdir)/dashbls/depends/mimalloc/include
+libwentunoconsensus_la_CPPFLAGS += -I$(srcdir)/immer
+libwentunoconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
 endif
 
 #
-# syscoin pre-built binaries #
+# wentuno pre-built binaries #
 dist_bin_SCRIPTS =
 # if TARGET_WINDOWS
-# dist_bin_SCRIPTS += bin/windows/sysgeth.exe
+# dist_bin_SCRIPTS += bin/windows/WUNOgeth.exe
 # endif
 # if TARGET_X86_64_DARWIN
-# dist_bin_SCRIPTS += bin/darwin/x86_64/sysgeth
+# dist_bin_SCRIPTS += bin/darwin/x86_64/WUNOgeth
 # endif
 # if TARGET_ARM64_DARWIN
-# dist_bin_SCRIPTS += bin/darwin/arm64/sysgeth
+# dist_bin_SCRIPTS += bin/darwin/arm64/WUNOgeth
 # endif
 if TARGET_X86_64_LINUX
-dist_bin_SCRIPTS += bin/linux/x86_64/sysgeth
+dist_bin_SCRIPTS += bin/linux/x86_64/WUNOgeth
 endif
 # if TARGET_ARM_LINUX
-# dist_bin_SCRIPTS += bin/linux/arm/sysgeth
+# dist_bin_SCRIPTS += bin/linux/arm/WUNOgeth
 # endif
 # if TARGET_AARCH64_LINUX
-# dist_bin_SCRIPTS += bin/linux/aarch64/sysgeth
+# dist_bin_SCRIPTS += bin/linux/aarch64/WUNOgeth
 # endif
 
 
@@ -1093,12 +1093,12 @@ EXTRA_DIST = \
   $(IMMER_DIST)   \
   $(LIBDASHBLS_DIST)
 
-config/syscoin-config.h: config/stamp-h1
+config/wentuno-config.h: config/stamp-h1
 	@$(MAKE) -C $(top_builddir) $(subdir)/$(@)
-config/stamp-h1: $(top_srcdir)/$(subdir)/config/syscoin-config.h.in $(top_builddir)/config.status
+config/stamp-h1: $(top_srcdir)/$(subdir)/config/wentuno-config.h.in $(top_builddir)/config.status
 	$(AM_V_at)$(MAKE) -C $(top_builddir) $(subdir)/$(@)
-$(top_srcdir)/$(subdir)/config/syscoin-config.h.in:  $(am__configure_deps)
-	$(AM_V_at)$(MAKE) -C $(top_srcdir) $(subdir)/config/syscoin-config.h.in
+$(top_srcdir)/$(subdir)/config/wentuno-config.h.in:  $(am__configure_deps)
+	$(AM_V_at)$(MAKE) -C $(top_srcdir) $(subdir)/config/wentuno-config.h.in
 
 clean-local:
 	-$(MAKE) -C dashbls clean
@@ -1126,19 +1126,19 @@ endif
 osx_debug: $(bin_PROGRAMS)
 	for i in $(bin_PROGRAMS); do mkdir -p $$i.dSYM/Contents/Resources/DWARF && $(DSYMUTIL_FLAT) -o $$i.dSYM/Contents/Resources/DWARF/$$(basename $$i) $$i &> /dev/null ; done
 
-libsyscoin_ipc_mpgen_input = \
+libwentuno_ipc_mpgen_input = \
   ipc/capnp/echo.capnp \
   ipc/capnp/init.capnp
-EXTRA_DIST += $(libsyscoin_ipc_mpgen_input)
+EXTRA_DIST += $(libwentuno_ipc_mpgen_input)
 %.capnp:
 
 # Explicitly list dependencies on generated headers as described in
 # https://www.gnu.org/software/automake/manual/html_node/Built-Sources-Example.html#Recording-Dependencies-manually
-ipc/capnp/libsyscoin_ipc_a-protocol.$(OBJEXT): $(libsyscoin_ipc_mpgen_input:=.h)
+ipc/capnp/libwentuno_ipc_a-protocol.$(OBJEXT): $(libwentuno_ipc_mpgen_input:=.h)
 
 if BUILD_MULTIPROCESS
-LIBSYSCOIN_IPC=libsyscoin_ipc.a
-libsyscoin_ipc_a_SOURCES = \
+LIBwentuno_IPC=libwentuno_ipc.a
+libwentuno_ipc_a_SOURCES = \
   ipc/capnp/context.h \
   ipc/capnp/init-types.h \
   ipc/capnp/protocol.cpp \
@@ -1149,20 +1149,20 @@ libsyscoin_ipc_a_SOURCES = \
   ipc/process.cpp \
   ipc/process.h \
   ipc/protocol.h
-libsyscoin_ipc_a_CPPFLAGS = $(AM_CPPFLAGS) $(SYSCOIN_INCLUDES)
-libsyscoin_ipc_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) $(LIBMULTIPROCESS_CFLAGS)
+libwentuno_ipc_a_CPPFLAGS = $(AM_CPPFLAGS) $(wentuno_INCLUDES)
+libwentuno_ipc_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) $(LIBMULTIPROCESS_CFLAGS)
 
 include $(MPGEN_PREFIX)/include/mpgen.mk
-libsyscoin_ipc_mpgen_output = \
-  $(libsyscoin_ipc_mpgen_input:=.c++) \
-  $(libsyscoin_ipc_mpgen_input:=.h) \
-  $(libsyscoin_ipc_mpgen_input:=.proxy-client.c++) \
-  $(libsyscoin_ipc_mpgen_input:=.proxy-server.c++) \
-  $(libsyscoin_ipc_mpgen_input:=.proxy-types.c++) \
-  $(libsyscoin_ipc_mpgen_input:=.proxy-types.h) \
-  $(libsyscoin_ipc_mpgen_input:=.proxy.h)
-nodist_libsyscoin_ipc_a_SOURCES = $(libsyscoin_ipc_mpgen_output)
-CLEANFILES += $(libsyscoin_ipc_mpgen_output)
+libwentuno_ipc_mpgen_output = \
+  $(libwentuno_ipc_mpgen_input:=.c++) \
+  $(libwentuno_ipc_mpgen_input:=.h) \
+  $(libwentuno_ipc_mpgen_input:=.proxy-client.c++) \
+  $(libwentuno_ipc_mpgen_input:=.proxy-server.c++) \
+  $(libwentuno_ipc_mpgen_input:=.proxy-types.c++) \
+  $(libwentuno_ipc_mpgen_input:=.proxy-types.h) \
+  $(libwentuno_ipc_mpgen_input:=.proxy.h)
+nodist_libwentuno_ipc_a_SOURCES = $(libwentuno_ipc_mpgen_output)
+CLEANFILES += $(libwentuno_ipc_mpgen_output)
 endif
 
 include Makefile.minisketch.include

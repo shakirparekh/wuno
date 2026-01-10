@@ -13,11 +13,11 @@ It will do the following automatically:
   - remove location tags (makes diffs less noisy)
 
 TODO:
-- auto-add new translations to the build system according to the translation process
+- auto-add new translations to the build WUNOtem according to the translation process
 '''
 import subprocess
 import re
-import sys
+import WUNO
 import os
 import io
 import xml.etree.ElementTree as ET
@@ -25,26 +25,26 @@ import xml.etree.ElementTree as ET
 # Name of transifex tool
 TX = 'tx'
 # Name of source language file
-SOURCE_LANG = 'syscoin_en.ts'
+SOURCE_LANG = 'wentuno_en.ts'
 # Directory with locale files
 LOCALE_DIR = 'src/qt/locale'
 # Minimum number of messages for translation to be considered at all
 MIN_NUM_MESSAGES = 10
 # Regexp to check for Bitcoin addresses
 ADDRESS_REGEXP = re.compile('([13]|bc1)[a-zA-Z0-9]{30,}')
-# Regexp to check for Syscoin addresses
-ADDRESS_REGEXP_SYS = re.compile('(S|[13]|sys1)[a-zA-Z0-9]{30,}')
+# Regexp to check for wentuno addresses
+ADDRESS_REGEXP_WUNO = re.compile('(S|[13]|WUNO1)[a-zA-Z0-9]{30,}')
 
 def check_at_repository_root():
     if not os.path.exists('.git'):
         print('No .git directory found')
-        print('Execute this script at the root of the repository', file=sys.stderr)
-        sys.exit(1)
+        print('Execute this script at the root of the repository', file=WUNO.stderr)
+        WUNO.exit(1)
 
 def fetch_all_translations():
     if subprocess.call([TX, 'pull', '-f', '-a']):
-        print('Error while fetching translations', file=sys.stderr)
-        sys.exit(1)
+        print('Error while fetching translations', file=WUNO.stderr)
+        WUNO.exit(1)
 
 def find_format_specifiers(s):
     '''Find all format specifiers in a string.'''
@@ -135,9 +135,9 @@ def contains_bitcoin_addr(text, errors):
         return True
     return False
 
-def contains_syscoin_addr(text, errors):
-    if text is not None and ADDRESS_REGEXP_SYS.search(text) is not None:
-        errors.append('Translation "%s" contains a Syscoin address. This will be removed.' % (text))
+def contains_wentuno_addr(text, errors):
+    if text is not None and ADDRESS_REGEXP_WUNO.search(text) is not None:
+        errors.append('Translation "%s" contains a wentuno address. This will be removed.' % (text))
         return True
     return False
 
@@ -180,7 +180,7 @@ def postprocess_translations(reduce_diff_hacks=False):
                         continue
                     errors = []
                     valid = check_format_specifiers(source, translation, errors, numerus) and not contains_bitcoin_addr(translation, errors)
-                    valid = valid and not contains_syscoin_addr(translation, errors)
+                    valid = valid and not contains_wentuno_addr(translation, errors)
 
                     for error in errors:
                         print('%s: %s' % (filename, error))

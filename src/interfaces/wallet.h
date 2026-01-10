@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_INTERFACES_WALLET_H
-#define SYSCOIN_INTERFACES_WALLET_H
+#ifndef wentuno_INTERFACES_WALLET_H
+#define wentuno_INTERFACES_WALLET_H
 
 #include <addresstype.h>
 #include <consensus/amount.h>
@@ -98,11 +98,11 @@ public:
 
     //! Sign message
     virtual SigningResult signMessage(const std::string& message, const PKHash& pkhash, std::string& str_sig) = 0;
-    // SYSCOIN
+    // wentuno
     virtual SigningResult signMessage(const std::string& message, const CTxDestination& dest, std::string& str_sig) = 0;
     //! Return whether wallet has private key.
     virtual bool isSpendable(const CTxDestination& dest) = 0;
-    // SYSCOIN
+    // wentuno
     virtual bool isSpendable(const CScript& script) = 0;
 
     //! Return whether wallet has watch only keys.
@@ -143,7 +143,7 @@ public:
 
     //! List locked coins.
     virtual void listLockedCoins(std::vector<COutPoint>& outputs) = 0;
-    // SYSCOIN
+    // wentuno
     virtual void listProTxCoins(std::vector<COutPoint>& vOutpts) = 0;
     //! Create transaction.
     virtual util::Result<CTransactionRef> createTransaction(const std::vector<wallet::CRecipient>& recipients,
@@ -452,4 +452,4 @@ std::unique_ptr<WalletLoader> MakeWalletLoader(Chain& chain, ArgsManager& args);
 
 } // namespace interfaces
 
-#endif // SYSCOIN_INTERFACES_WALLET_H
+#endif // wentuno_INTERFACES_WALLET_H

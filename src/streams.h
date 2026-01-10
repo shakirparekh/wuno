@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_STREAMS_H
-#define SYSCOIN_STREAMS_H
+#ifndef wentuno_STREAMS_H
+#define wentuno_STREAMS_H
 
 #include <serialize.h>
 #include <span.h>
@@ -51,13 +51,13 @@ class OverrideStream
     Stream* stream;
 
     const int nVersion;
-    // SYSCOIN
+    // wentuno
     int nType{0};
     int nTxVersion{0};
 
 public:
     OverrideStream(Stream* stream_, int nVersion_) : stream{stream_}, nVersion{nVersion_} {}
-    // SYSCOIN
+    // wentuno
     OverrideStream(Stream* stream_, int nType_, int nVersion_) : stream(stream_), nType(nType_), nVersion(nVersion_) {}
     template<typename T>
     OverrideStream<Stream>& operator<<(const T& obj)
@@ -86,7 +86,7 @@ public:
     int GetVersion() const { return nVersion; }
     size_t size() const { return stream->size(); }
     void ignore(size_t size) { return stream->ignore(size); }
-    // SYSCOIN
+    // wentuno
     int GetType() const { return nType; }
     const void* GetParams() const { return nullptr; }
     void SetTxVersion(int nTxVersionIn) { nTxVersion = nTxVersionIn; }
@@ -114,7 +114,7 @@ class CVectorWriter
         if(nPos > vchData.size())
             vchData.resize(nPos);
     }
-    // SYSCOIN
+    // wentuno
     CVectorWriter(int nTypeIn, int nVersionIn, std::vector<unsigned char>& vchDataIn, size_t nPosIn) : nType(nTypeIn), nVersion(nVersionIn), vchData(vchDataIn), nPos(nPosIn)
     {
         if(nPos > vchData.size())
@@ -130,7 +130,7 @@ class CVectorWriter
     {
         ::SerializeMany(*this, std::forward<Args>(args)...);
     }
-    // SYSCOIN
+    // wentuno
     template <typename... Args>
     CVectorWriter(int nTypeIn, int nVersionIn, std::vector<unsigned char>& vchDataIn, size_t nPosIn, Args&&... args) : CVectorWriter{nTypeIn, nVersionIn, vchDataIn, nPosIn}
     {
@@ -158,7 +158,7 @@ class CVectorWriter
     {
         return nVersion;
     }
-    // SYSCOIN
+    // wentuno
     int GetType() const { return nType; }
     const void* GetParams() const { return nullptr; }
     void SetTxVersion(int nTxVersionIn) { nTxVersion = nTxVersionIn; }
@@ -166,7 +166,7 @@ class CVectorWriter
     void seek(size_t _nSize) {return;}
 
 private:
-    // SYSCOIN
+    // wentuno
     int nType{0};
 
     const int nVersion;
@@ -182,7 +182,7 @@ class SpanReader
 private:
     const int m_version;
     Span<const unsigned char> m_data;
-    // SYSCOIN
+    // wentuno
     const int m_type{0};
     int nTxVersion{0};
 public:
@@ -192,7 +192,7 @@ public:
      */
     SpanReader(int version, Span<const unsigned char> data)
         : m_version{version}, m_data{data} {}
-    // SYSCOIN
+    // wentuno
     SpanReader(int type, int version, Span<const unsigned char> data)
         : m_version(version), m_data(data), m_type(type) {}
 
@@ -204,7 +204,7 @@ public:
     }
 
     int GetVersion() const { return m_version; }
-    // SYSCOIN
+    // wentuno
     int GetType() const { return m_type; }
     const void* GetParams() const { return nullptr; }
     void SetTxVersion(int nTxVersionIn) { nTxVersion = nTxVersionIn; }
@@ -240,7 +240,7 @@ protected:
     using vector_type = SerializeData;
     vector_type vch;
     vector_type::size_type m_read_pos{0};
-    // SYSCOIN
+    // wentuno
     int nType{0};
     int nTxVersion{0};
 public:
@@ -253,7 +253,7 @@ public:
     typedef vector_type::iterator         iterator;
     typedef vector_type::const_iterator   const_iterator;
     typedef vector_type::reverse_iterator reverse_iterator;
-    // SYSCOIN
+    // wentuno
     explicit DataStream(int nTypeIn = 0) {nType = nTypeIn;}
     explicit DataStream(Span<const uint8_t> sp, int nTypeIn = 0) : DataStream{AsBytes(sp), nTypeIn} {}
     explicit DataStream(Span<const value_type> sp, int nTypeIn = 0) : vch(sp.data(), sp.data() + sp.size()), nType(nTypeIn) {}
@@ -378,7 +378,7 @@ public:
     {
         util::Xor(MakeWritableByteSpan(*this), MakeByteSpan(key));
     }
-    // SYSCOIN
+    // wentuno
     void SetTxVersion(int nTxVersionIn) { nTxVersion = nTxVersionIn; }
     int GetTxVersion()           { return nTxVersion; }
     int GetType() const          { return nType; }
@@ -401,7 +401,7 @@ public:
           nVersion{nVersionIn} {}
 
     int GetType() const          { return nType; }
-    // SYSCOIN
+    // wentuno
     const void* GetParams() const { return nullptr; }
     void SetVersion(int n)       { nVersion = n; }
     int GetVersion() const       { return nVersion; }
@@ -604,7 +604,7 @@ private:
     const int nVersion;
     int nTxVersion{0};
 public:
-    // SYSCOIN
+    // wentuno
     explicit CAutoFile(std::FILE* file, int version, std::vector<std::byte> data_xor = {}) : AutoFile{file, std::move(data_xor)}, nType{SER_DISK}, nVersion{version} {}
     int GetType() const          { return nType; }
     int GetVersion() const       { return nVersion; }
@@ -622,7 +622,7 @@ public:
         ::Unserialize(*this, obj);
         return (*this);
     }
-    // SYSCOIN
+    // wentuno
     const void* GetParams() const { return nullptr; }
     void SetTxVersion(int nTxVersionIn) { nTxVersion = nTxVersionIn; }
     int GetTxVersion()           { return nTxVersion; }
@@ -696,7 +696,7 @@ public:
 
     int GetVersion() const { return m_src.GetVersion(); }
     int GetType() const { return nType; }
-    // SYSCOIN
+    // wentuno
     const void* GetParams() const { return nullptr; }
     void SetTxVersion(int nTxVersionIn) { nTxVersion = nTxVersionIn; }
     int GetTxVersion()           { return nTxVersion; }
@@ -786,4 +786,4 @@ public:
     }
 };
 
-#endif // SYSCOIN_STREAMS_H
+#endif // wentuno_STREAMS_H

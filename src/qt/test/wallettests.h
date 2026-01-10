@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_TEST_WALLETTESTS_H
-#define SYSCOIN_QT_TEST_WALLETTESTS_H
+#ifndef wentuno_QT_TEST_WALLETTESTS_H
+#define wentuno_QT_TEST_WALLETTESTS_H
 
 #include <QObject>
 #include <QTest>
@@ -24,4 +24,4 @@ private Q_SLOTS:
     void walletTests();
 };
 
-#endif // SYSCOIN_QT_TEST_WALLETTESTS_H
+#endif // wentuno_QT_TEST_WALLETTESTS_H

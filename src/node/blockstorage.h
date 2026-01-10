@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_NODE_BLOCKSTORAGE_H
-#define SYSCOIN_NODE_BLOCKSTORAGE_H
+#ifndef wentuno_NODE_BLOCKSTORAGE_H
+#define wentuno_NODE_BLOCKSTORAGE_H
 
 #include <attributes.h>
 #include <chain.h>
@@ -36,7 +36,7 @@ class CBlockUndo;
 class CChainParams;
 class Chainstate;
 class ChainstateManager;
-// SYSCOIN
+// wentuno
 class CDSNotificationInterface;
 class CDeterministicMNManager;
 class CActiveMasternodeManager;
@@ -70,7 +70,7 @@ public:
 } // namespace kernel
 
 namespace node {
-// SYSCOIN
+// wentuno
 struct NodeContext;
 using kernel::BlockTreeDB;
 
@@ -268,7 +268,7 @@ public:
     std::atomic<bool> m_importing{false};
 
     BlockMap m_block_index GUARDED_BY(cs_main);
-    // SYSCOIN
+    // wentuno
     PrevBlockMap m_prev_block_index GUARDED_BY(cs_main);
 
     /**
@@ -301,12 +301,12 @@ public:
 
     /**
      * Remove any pruned block & undo files that are still on disk.
-     * This could happen on some systems if the file was still being read while unlinked,
+     * This could happen on some WUNOtems if the file was still being read while unlinked,
      * or if we crash before unlinking.
      */
     void ScanAndUnlinkAlreadyPrunedFiles() EXCLUSIVE_LOCKS_REQUIRED(::cs_main);
 
-    // SYSCOIN
+    // wentuno
     CBlockIndex* AddToBlockIndex(const CBlockHeader& block, CBlockIndex*& best_header, enum BlockStatus nStatus = BLOCK_VALID_TREE) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
     /** Create a new block index entry for a given block hash */
     CBlockIndex* InsertBlockIndex(const uint256& hash) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
@@ -315,7 +315,7 @@ public:
 
     CBlockIndex* LookupBlockIndex(const uint256& hash) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
     const CBlockIndex* LookupBlockIndex(const uint256& hash) const EXCLUSIVE_LOCKS_REQUIRED(cs_main);
-    // SYSCOIN
+    // wentuno
     std::pair<PrevBlockMap::iterator,PrevBlockMap::iterator> LookupBlockIndexPrev(const uint256& hash) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
 
     /** Get block file info entry for one block file */
@@ -364,7 +364,7 @@ public:
     /** Open a block file (blk?????.dat) */
     CAutoFile OpenBlockFile(const FlatFilePos& pos, bool fReadOnly = false) const;
 
-    /** Translation to a filesystem path */
+    /** Translation to a fileWUNOtem path */
     fs::path GetBlockPosFilename(const FlatFilePos& pos) const;
 
     /**
@@ -386,8 +386,8 @@ public:
     template<typename T>
     bool ReadBlockOrHeader(T& block, const CBlockIndex& pindex) const;
 };
-// SYSCOIN
+// wentuno
 void ImportBlocks(ChainstateManager& chainman, std::vector<fs::path> vImportFiles, CDSNotificationInterface* pdsNotificationInterface, std::unique_ptr<CDeterministicMNManager> &deterministicMNManager, std::unique_ptr<CActiveMasternodeManager> &activeMasternodeManager, const WalletInitInterface &g_wallet_init_interface, NodeContext& node);
 } // namespace node
 
-#endif // SYSCOIN_NODE_BLOCKSTORAGE_H
+#endif // wentuno_NODE_BLOCKSTORAGE_H

@@ -40,7 +40,7 @@ void CheckAndWriteBudget(const CAmount& nSuperblockPayment, const CAmount& nPaym
 *   Determine if coinbase outgoing created money is the correct value
 *
 *   Why is this needed?
-*   - In Syscoin some blocks are superblocks, which output much higher amounts of coins
+*   - In wentuno some blocks are superblocks, which output much higher amounts of coins
 *   - Other blocks are lower in outgoing value, so in total, no extra coins are created
 *   - When non-superblocks are detected, the normal schedule should be maintained
 */
@@ -149,10 +149,10 @@ bool IsBlockPayeeValid(CChain& activeChain, const CTransaction& txNew, int nBloc
     const Consensus::Params& consensusParams = Params().GetConsensus();
 
     if(nBlockHeight < consensusParams.nSuperblockStartBlock) {
-        // NOTE: old budget system is disabled since 12.1 and we should never enter this branch
+        // NOTE: old budget WUNOtem is disabled since 12.1 and we should never enter this branch
         // anymore when sync is finished (on mainnet). We have no old budget data but these blocks
         // have tons of confirmations and can be safely accepted without payee verification
-        LogPrint(BCLog::GOBJECT, "%s -- WARNING: Client synced but old budget system is disabled, accepting any payee\n", __func__);
+        LogPrint(BCLog::GOBJECT, "%s -- WARNING: Client synced but old budget WUNOtem is disabled, accepting any payee\n", __func__);
         return true;
     }
     const CAmount nHalfFee = fees / 2;

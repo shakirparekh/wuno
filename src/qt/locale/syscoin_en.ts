@@ -20,8 +20,8 @@
     </message>
     <message>
         <location line="+14"/>
-        <source>Copy the currently selected address to the system clipboard</source>
-        <translation>Copy the currently selected address to the system clipboard</translation>
+        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <translation>Copy the currently selected address to the WUNOtem clipboard</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -76,12 +76,12 @@
     </message>
     <message>
         <location line="+6"/>
-        <source>These are your Syscoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your wentuno addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+5"/>
-        <source>These are your Syscoin addresses for receiving payments. Use the &apos;Create new receiving address&apos; button in the receive tab to create new addresses.
+        <source>These are your wentuno addresses for receiving payments. Use the &apos;Create new receiving address&apos; button in the receive tab to create new addresses.
 Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -205,7 +205,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR SYSCOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR wentunoS&lt;/b&gt;!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -231,7 +231,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     </message>
     <message>
         <location line="+54"/>
-        <source>Remember that encrypting your wallet cannot fully protect your syscoins from being stolen by malware infecting your computer.</source>
+        <source>Remember that encrypting your wallet cannot fully protect your wentunos from being stolen by malware infecting your computer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -327,9 +327,9 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     </message>
 </context>
 <context>
-    <name>SyscoinApplication</name>
+    <name>wentunoApplication</name>
     <message>
-        <location filename="../syscoin.cpp" line="+275"/>
+        <location filename="../wentuno.cpp" line="+275"/>
         <source>Settings file %1 might be corrupt or invalid.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -355,9 +355,9 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     </message>
 </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message>
-        <location filename="../syscoingui.cpp" line="+250"/>
+        <location filename="../wentunogui.cpp" line="+250"/>
         <source>&amp;Overview</source>
         <translation>&amp;Overview</translation>
     </message>
@@ -439,8 +439,8 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     </message>
     <message>
         <location line="-1194"/>
-        <source>Send coins to a Syscoin address</source>
-        <translation>Send coins to a Syscoin address</translation>
+        <source>Send coins to a wentuno address</source>
+        <translation>Send coins to a wentuno address</translation>
     </message>
     <message>
         <location line="+53"/>
@@ -494,8 +494,8 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Sign messages with your Syscoin addresses to prove you own them</source>
-        <translation>Sign messages with your Syscoin addresses to prove you own them</translation>
+        <source>Sign messages with your wentuno addresses to prove you own them</source>
+        <translation>Sign messages with your wentuno addresses to prove you own them</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -504,8 +504,8 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Verify messages to ensure they were signed with specified Syscoin addresses</source>
-        <translation>Verify messages to ensure they were signed with specified Syscoin addresses</translation>
+        <source>Verify messages to ensure they were signed with specified wentuno addresses</source>
+        <translation>Verify messages to ensure they were signed with specified wentuno addresses</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -579,7 +579,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     </message>
     <message>
         <location line="-852"/>
-        <source>Request payments (generates QR codes and syscoin: URIs)</source>
+        <source>Request payments (generates QR codes and wentuno: URIs)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -652,7 +652,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     </message>
     <message>
         <location line="+26"/>
-        <source>Load Partially Signed Syscoin Transaction</source>
+        <source>Load Partially Signed wentuno Transaction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -662,7 +662,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Load Partially Signed Syscoin Transaction from clipboard</source>
+        <source>Load Partially Signed wentuno Transaction from clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -687,7 +687,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     </message>
     <message>
         <location line="+4"/>
-        <source>Open a syscoin: URI</source>
+        <source>Open a wentuno: URI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -734,7 +734,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     </message>
     <message>
         <location line="+4"/>
-        <source>Show the %1 help message to get a list with possible Syscoin command-line options</source>
+        <source>Show the %1 help message to get a list with possible wentuno command-line options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -818,11 +818,11 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     </message>
     <message numerus="yes">
         <location line="+117"/>
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
-            <numerusform>%n active connection to Syscoin network.</numerusform>
-            <numerusform>%n active connections to Syscoin network.</numerusform>
+            <numerusform>%n active connection to wentuno network.</numerusform>
+            <numerusform>%n active connections to wentuno network.</numerusform>
         </translation>
     </message>
     <message>
@@ -1283,7 +1283,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     </message>
     <message>
         <location line="+77"/>
-        <source>The entered address &quot;%1&quot; is not a valid Syscoin address.</source>
+        <source>The entered address &quot;%1&quot; is not a valid wentuno address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1412,8 +1412,8 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     </message>
     <message>
         <location filename="../intro.cpp" line="+30"/>
-        <source>Syscoin</source>
-        <translation type="unfinished">Syscoin</translation>
+        <source>wentuno</source>
+        <translation type="unfinished">wentuno</translation>
     </message>
     <message numerus="yes">
         <location line="+162"/>
@@ -1465,7 +1465,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     </message>
     <message>
         <location line="+2"/>
-        <source>%1 will download and store a copy of the Syscoin block chain.</source>
+        <source>%1 will download and store a copy of the wentuno block chain.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1565,12 +1565,12 @@ The migration process will create a backup of the wallet before migrating. This 
     </message>
     <message>
         <location line="+119"/>
-        <source>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the syscoin network, as detailed below.</source>
+        <source>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the wentuno network, as detailed below.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+19"/>
-        <source>Attempting to spend syscoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <source>Attempting to spend wentunos that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1641,7 +1641,7 @@ The migration process will create a backup of the wallet before migrating. This 
     <name>OpenURIDialog</name>
     <message>
         <location filename="../forms/openuridialog.ui" line="+14"/>
-        <source>Open syscoin URI</source>
+        <source>Open wentuno URI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1700,12 +1700,12 @@ The migration process will create a backup of the wallet before migrating. This 
     </message>
     <message>
         <location line="+6"/>
-        <source>Automatically start %1 after logging in to the system.</source>
+        <source>Automatically start %1 after logging in to the WUNOtem.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Start %1 on system login</source>
+        <source>&amp;Start %1 on WUNOtem login</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1804,8 +1804,8 @@ The migration process will create a backup of the wallet before migrating. This 
     </message>
     <message>
         <location line="+27"/>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1886,8 +1886,8 @@ The migration process will create a backup of the wallet before migrating. This 
     </message>
     <message>
         <location line="+42"/>
-        <source>Automatically open the Syscoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Automatically open the Syscoin client port on the router. This only works when your router supports UPnP and it is enabled.</translation>
+        <source>Automatically open the wentuno client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Automatically open the wentuno client port on the router. This only works when your router supports UPnP and it is enabled.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1896,7 +1896,7 @@ The migration process will create a backup of the wallet before migrating. This 
     </message>
     <message>
         <location line="+7"/>
-        <source>Automatically open the Syscoin client port on the router. This only works when your router supports NAT-PMP and it is enabled. The external port could be random.</source>
+        <source>Automatically open the wentuno client port on the router. This only works when your router supports NAT-PMP and it is enabled. The external port could be random.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1916,7 +1916,7 @@ The migration process will create a backup of the wallet before migrating. This 
     </message>
     <message>
         <location line="+7"/>
-        <source>Connect to the Syscoin network through a SOCKS5 proxy.</source>
+        <source>Connect to the wentuno network through a SOCKS5 proxy.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1969,7 +1969,7 @@ The migration process will create a backup of the wallet before migrating. This 
     </message>
     <message>
         <location line="+6"/>
-        <source>Show the icon in the system tray.</source>
+        <source>Show the icon in the WUNOtem tray.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2035,7 +2035,7 @@ The migration process will create a backup of the wallet before migrating. This 
     </message>
     <message>
         <location line="+300"/>
-        <source>Connect to the Syscoin network through a separate SOCKS5 proxy for Tor onion services.</source>
+        <source>Connect to the wentuno network through a separate SOCKS5 proxy for Tor onion services.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2170,8 +2170,8 @@ The migration process will create a backup of the wallet before migrating. This 
     <message>
         <location line="+62"/>
         <location line="+335"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Syscoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>The displayed information may be out of date. Your wallet automatically synchronizes with the Syscoin network after a connection is established, but this process has not completed yet.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the wentuno network after a connection is established, but this process has not completed yet.</source>
+        <translation>The displayed information may be out of date. Your wallet automatically synchronizes with the wentuno network after a connection is established, but this process has not completed yet.</translation>
     </message>
     <message>
         <location line="-127"/>
@@ -2437,7 +2437,7 @@ The migration process will create a backup of the wallet before migrating. This 
     </message>
     <message>
         <location line="+1"/>
-        <source>Cannot start syscoin: click-to-pay handler</source>
+        <source>Cannot start wentuno: click-to-pay handler</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2450,7 +2450,7 @@ The migration process will create a backup of the wallet before migrating. This 
     </message>
     <message>
         <location line="-29"/>
-        <source>&apos;syscoin://&apos; is not a valid URI. Use &apos;syscoin:&apos; instead.</source>
+        <source>&apos;wentuno://&apos; is not a valid URI. Use &apos;wentuno:&apos; instead.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2463,7 +2463,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
     </message>
     <message>
         <location line="-10"/>
-        <source>URI cannot be parsed! This can be caused by an invalid Syscoin address or malformed URI parameters.</source>
+        <source>URI cannot be parsed! This can be caused by an invalid wentuno address or malformed URI parameters.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2550,13 +2550,13 @@ If you are receiving this error you should request the merchant provide a BIP21 
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../syscoinunits.cpp" line="+197"/>
+        <location filename="../wentunounits.cpp" line="+197"/>
         <source>Amount</source>
         <translation type="unfinished">Amount</translation>
     </message>
     <message>
         <location filename="../guiutil.cpp" line="+133"/>
-        <source>Enter a Syscoin address (e.g. %1)</source>
+        <source>Enter a wentuno address (e.g. %1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2763,7 +2763,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../syscoin.cpp" line="-282"/>
+        <location filename="../wentuno.cpp" line="-282"/>
         <source>Do you want to reset settings to default values, or to abort without making changes?</source>
         <extracomment>Explanatory text shown on startup when the settings file cannot be read. Prompts user to make a choice between resetting or aborting.</extracomment>
         <translation type="unfinished"></translation>
@@ -3051,7 +3051,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
     </message>
     <message>
         <location line="+210"/>
-        <source>The mapped Autonomous System used for diversifying peer selection.</source>
+        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3515,7 +3515,7 @@ For more information on using this console, type %6.
     </message>
     <message>
         <location line="-3"/>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Syscoin network.</source>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the wentuno network.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3936,7 +3936,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
     </message>
     <message>
         <location line="+35"/>
-        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for syscoin transactions than the network can process.</source>
+        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for wentuno transactions than the network can process.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4043,7 +4043,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
     </message>
     <message>
         <location line="+1"/>
-        <source>Creates a Partially Signed Syscoin Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
+        <source>Creates a Partially Signed wentuno Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4117,7 +4117,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
     </message>
     <message>
         <location line="-31"/>
-        <source>Please, review your transaction proposal. This will produce a Partially Signed Syscoin Transaction (PSBT) which you can save or copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
+        <source>Please, review your transaction proposal. This will produce a Partially Signed wentuno Transaction (PSBT) which you can save or copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
         <extracomment>Text to inform a user attempting to create a transaction of their current options. At this stage, a user can only create a PSBT. This string is displayed when private keys are disabled and an external signer is not available.</extracomment>
         <translation type="unfinished"></translation>
     </message>
@@ -4129,7 +4129,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
     </message>
     <message>
         <location line="+11"/>
-        <source>Please, review your transaction. You can create and send this transaction or create a Partially Signed Syscoin Transaction (PSBT), which you can save or copy and then sign with, e.g., an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
+        <source>Please, review your transaction. You can create and send this transaction or create a Partially Signed wentuno Transaction (PSBT), which you can save or copy and then sign with, e.g., an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
         <extracomment>Text to inform a user attempting to create a transaction of their current options. At this stage, a user can send their transaction or create a PSBT. This string is displayed when both private keys and PSBT controls are enabled.</extracomment>
         <translation type="unfinished"></translation>
     </message>
@@ -4239,7 +4239,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
     </message>
     <message>
         <location line="+95"/>
-        <source>Warning: Invalid Syscoin address</source>
+        <source>Warning: Invalid wentuno address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4287,7 +4287,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
     </message>
     <message>
         <location line="-7"/>
-        <source>The Syscoin address to send the payment to</source>
+        <source>The wentuno address to send the payment to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4317,7 +4317,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
     </message>
     <message>
         <location line="+7"/>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less syscoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive less wentunos than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4343,7 +4343,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
     </message>
     <message>
         <location line="+58"/>
-        <source>A message that was attached to the syscoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Syscoin network.</source>
+        <source>A message that was attached to the wentuno: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the wentuno network.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4387,12 +4387,12 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
     </message>
     <message>
         <location line="+6"/>
-        <source>You can sign messages/agreements with your addresses to prove you can receive syscoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <source>You can sign messages/agreements with your addresses to prove you can receive wentunos sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+18"/>
-        <source>The Syscoin address to sign the message with</source>
+        <source>The wentuno address to sign the message with</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4430,13 +4430,13 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
     </message>
     <message>
         <location line="+30"/>
-        <source>Copy the current signature to the system clipboard</source>
-        <translation>Copy the current signature to the system clipboard</translation>
+        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <translation>Copy the current signature to the WUNOtem clipboard</translation>
     </message>
     <message>
         <location line="+21"/>
-        <source>Sign the message to prove you own this Syscoin address</source>
-        <translation>Sign the message to prove you own this Syscoin address</translation>
+        <source>Sign the message to prove you own this wentuno address</source>
+        <translation>Sign the message to prove you own this wentuno address</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -4466,7 +4466,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
     </message>
     <message>
         <location line="+21"/>
-        <source>The Syscoin address the message was signed with</source>
+        <source>The wentuno address the message was signed with</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4483,8 +4483,8 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
     </message>
     <message>
         <location line="+9"/>
-        <source>Verify the message to ensure it was signed with the specified Syscoin address</source>
-        <translation>Verify the message to ensure it was signed with the specified Syscoin address</translation>
+        <source>Verify the message to ensure it was signed with the specified wentuno address</source>
+        <translation>Verify the message to ensure it was signed with the specified wentuno address</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -5152,7 +5152,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <location filename="../syscoingui.cpp" line="+39"/>
+        <location filename="../wentunogui.cpp" line="+39"/>
         <source>Unit to show amounts in. Click to select another unit.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5371,15 +5371,15 @@ Go to File &gt; Open Wallet to load a wallet.
     </message>
 </context>
 <context>
-    <name>syscoin-core</name>
+    <name>wentuno-core</name>
     <message>
-        <location filename="../syscoinstrings.cpp" line="+12"/>
+        <location filename="../wentunostrings.cpp" line="+12"/>
         <source>The %s developers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>%s corrupt. Try using the wallet tool syscoin-wallet to salvage or restoring a backup.</source>
+        <source>%s corrupt. Try using the wallet tool wentuno-wallet to salvage or restoring a backup.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5439,7 +5439,7 @@ Go to File &gt; Open Wallet to load a wallet.
     </message>
     <message>
         <location line="+2"/>
-        <source>Error: Dumpfile version is not supported. This version of syscoin-wallet only supports version 1 dumpfiles. Got dumpfile with version %s</source>
+        <source>Error: Dumpfile version is not supported. This version of wentuno-wallet only supports version 1 dumpfiles. Got dumpfile with version %s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6183,7 +6183,7 @@ Unable to restore backup of wallet.</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

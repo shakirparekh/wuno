@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_CREATEWALLETDIALOG_H
-#define SYSCOIN_QT_CREATEWALLETDIALOG_H
+#ifndef wentuno_QT_CREATEWALLETDIALOG_H
+#define wentuno_QT_CREATEWALLETDIALOG_H
 
 #include <QDialog>
 
@@ -43,4 +43,4 @@ private:
     bool m_has_signers = false;
 };
 
-#endif // SYSCOIN_QT_CREATEWALLETDIALOG_H
+#endif // wentuno_QT_CREATEWALLETDIALOG_H

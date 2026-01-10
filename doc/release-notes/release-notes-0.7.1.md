@@ -1,23 +1,23 @@
-Syscoin version 0.7.1 is now available from:
-  http://sourceforge.net/projects/syscoin/files/Syscoin/syscoin-0.7.1/
+wentuno version 0.7.1 is now available from:
+  http://sourceforge.net/projects/wentuno/files/wentuno/wentuno-0.7.1/
 
 This is a bug-fix minor release.
 
 Please report bugs using the issue tracker at github:
-  https://github.com/syscoin/syscoin/issues
+  https://github.com/wentuno/wentuno/issues
 
 Project source code is hosted at github; you can get
 source-only tarballs/zipballs directly from there:
-  https://github.com/syscoin/syscoin/tarball/v0.7.1  # .tar.gz
-  https://github.com/syscoin/syscoin/zipball/v0.7.1  # .zip
+  https://github.com/wentuno/wentuno/tarball/v0.7.1  # .tar.gz
+  https://github.com/wentuno/wentuno/zipball/v0.7.1  # .zip
 
 Ubuntu Linux users can use the "Personal Package Archive" (PPA)
 maintained by Matt Corallo to automatically keep 
 up-to-date.  Just type:
-  sudo apt-add-repository ppa:syscoin/syscoin
+  sudo apt-add-repository ppa:wentuno/wentuno
   sudo apt-get update
-in your terminal, then install the syscoin-qt package:
-  sudo apt-get install syscoin-qt
+in your terminal, then install the wentuno-qt package:
+  sudo apt-get install wentuno-qt
 
 KNOWN ISSUES
 ------------
@@ -30,7 +30,7 @@ How to Upgrade
 If you are running an older version, shut it down. Wait
 until it has completely shut down (which might take a few minutes for older
 versions), then run the installer (on Windows) or just copy over
-/Applications/Syscoin-Qt (on Mac) or syscoind/syscoin-qt (on Linux).
+/Applications/wentuno-Qt (on Mac) or wentunod/wentuno-qt (on Linux).
 
 If you were running on Linux with a version that might have been compiled
 with a different version of Berkeley DB (for example, if you were using an
@@ -75,7 +75,7 @@ Dependency changes
 Bug fixes
 ---------
 
-* Clicking on a syscoin: URI on Windows should now launch Syscoin-Qt properly.
+* Clicking on a wentuno: URI on Windows should now launch wentuno-Qt properly.
 
 * When running -testnet, use RPC port 18370 by default.
 

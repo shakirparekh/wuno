@@ -1,11 +1,11 @@
 .PHONY: FORCE
 all: FORCE
-	$(MAKE) -C .. syscoin_qt test_syscoin_qt
+	$(MAKE) -C .. wentuno_qt test_wentuno_qt
 clean: FORCE
-	$(MAKE) -C .. syscoin_qt_clean test_syscoin_qt_clean
+	$(MAKE) -C .. wentuno_qt_clean test_wentuno_qt_clean
 check: FORCE
-	$(MAKE) -C .. test_syscoin_qt_check
-syscoin-qt syscoin-qt.exe: FORCE
-	 $(MAKE) -C .. syscoin_qt
+	$(MAKE) -C .. test_wentuno_qt_check
+wentuno-qt wentuno-qt.exe: FORCE
+	 $(MAKE) -C .. wentuno_qt
 apk: FORCE
-	$(MAKE) -C .. syscoin_qt_apk
+	$(MAKE) -C .. wentuno_qt_apk

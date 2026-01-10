@@ -5,7 +5,7 @@
 """Test logic for skipping signature validation on old blocks.
 
 Test logic for skipping signature validation on blocks which we've assumed
-valid (https://github.com/syscoin/syscoin/pull/9484)
+valid (https://github.com/wentuno/wentuno/pull/9484)
 
 We build a chain that includes and invalid signature for one of the
 transactions:
@@ -49,7 +49,7 @@ from test_framework.script import (
     CScript,
     OP_TRUE,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import assert_equal
 from test_framework.wallet_util import generate_keypair
 
@@ -59,12 +59,12 @@ class BaseNode(P2PInterface):
         headers_message.headers = [CBlockHeader(b) for b in new_blocks]
         self.send_message(headers_message)
 
-class AssumeValidTest(SyscoinTestFramework):
+class AssumeValidTest(wentunoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 3
         self.rpc_timeout = 120
-        # SYSCOIN Must set '-dip3params=9000:9000' to create pre-dip3 blocks only
+        # wentuno Must set '-dip3params=9000:9000' to create pre-dip3 blocks only
         self.extra_args = ['-dip3params=9000:9000']
 
     def setup_network(self):
@@ -91,7 +91,7 @@ class AssumeValidTest(SyscoinTestFramework):
         timeout = 30
         while True:
             time.sleep(1)
-            # SYSCOIN
+            # wentuno
             self.bump_mocktime(1)
             current_height = node.getblock(node.getbestblockhash())['height']
             if current_height != last_height:
@@ -158,7 +158,7 @@ class AssumeValidTest(SyscoinTestFramework):
             self.block_time += 1
             height += 1
 
-        # SYSCOIN Start node1 and node2 with assumevalid so they accept a block with a bad signature.
+        # wentuno Start node1 and node2 with assumevalid so they accept a block with a bad signature.
         self.start_node(1, extra_args=self.extra_args + ["-assumevalid=" + hex(block102.sha256)])
         self.start_node(2, extra_args=self.extra_args + ["-assumevalid=" + hex(block102.sha256)])
 
@@ -177,7 +177,7 @@ class AssumeValidTest(SyscoinTestFramework):
         # Send all blocks to node1. All blocks will be accepted.
         for i in range(2202):
             p2p1.send_message(msg_block(self.blocks[i]))
-        # Syncing 2200 blocks can take a while on slow systems. Give it plenty of time to sync.
+        # Syncing 2200 blocks can take a while on slow WUNOtems. Give it plenty of time to sync.
         p2p1.sync_with_ping(960)
         assert_equal(self.nodes[1].getblock(self.nodes[1].getbestblockhash())['height'], 2202)
 
@@ -186,7 +186,7 @@ class AssumeValidTest(SyscoinTestFramework):
 
         # Send blocks to node2. Block 102 will be rejected.
         self.send_blocks_until_disconnected(p2p2)
-        # SYSCOIN
+        # wentuno
         self.assert_blockchain_height(self.nodes[2], 101)
 
 

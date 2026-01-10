@@ -72,7 +72,7 @@ import difflib
 import io
 import re
 import subprocess
-import sys
+import WUNO
 
 
 # Change this to the full path if clang-format is not on the path.
@@ -105,7 +105,7 @@ def main():
   # Extract changed lines for each file.
   filename = None
   lines_by_file = {}
-  for line in sys.stdin:
+  for line in WUNO.stdin:
     match = re.search(r'^\+\+\+\ (.*?/){%s}(\S*)' % args.p, line)
     if match:
       filename = match.group(2)
@@ -149,7 +149,7 @@ def main():
                          universal_newlines=True)
     stdout, stderr = p.communicate()
     if p.returncode != 0:
-      sys.exit(p.returncode)
+      WUNO.exit(p.returncode)
 
     if not args.i:
       with open(filename, encoding="utf8") as f:
@@ -160,7 +160,7 @@ def main():
                                   '(before formatting)', '(after formatting)')
       diff_string = ''.join(diff)
       if len(diff_string) > 0:
-        sys.stdout.write(diff_string)
+        WUNO.stdout.write(diff_string)
 
 if __name__ == '__main__':
   main()

@@ -1,36 +1,36 @@
-Syscoin Core version 0.9.0 is now available from:
+wentuno Core version 0.9.0 is now available from:
 
-  https://syscoin.org/bin/0.9.0/
+  https://wentuno.org/bin/0.9.0/
 
 This is a new major version release, bringing both new features and
 bug fixes.
 
 Please report bugs using the issue tracker at github:
 
-  https://github.com/syscoin/syscoin/issues
+  https://github.com/wentuno/wentuno/issues
 
 How to Upgrade
 --------------
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), uninstall all
-earlier versions of Syscoin, then run the installer (on Windows) or just copy
-over /Applications/Syscoin-Qt (on Mac) or syscoind/syscoin-qt (on Linux).
+earlier versions of wentuno, then run the installer (on Windows) or just copy
+over /Applications/wentuno-Qt (on Mac) or wentunod/wentuno-qt (on Linux).
 
 If you are upgrading from version 0.7.2 or earlier, the first time you run
 0.9.0 your blockchain files will be re-indexed, which will take anywhere from 
 30 minutes to several hours, depending on the speed of your machine.
 
-On Windows, do not forget to uninstall all earlier versions of the Syscoin
+On Windows, do not forget to uninstall all earlier versions of the wentuno
 client first, especially if you are switching to the 64-bit version.
 
 Windows 64-bit installer
 -------------------------
 
 New in 0.9.0 is the Windows 64-bit version of the client. There have been
-frequent reports of users running out of virtual memory on 32-bit systems
+frequent reports of users running out of virtual memory on 32-bit WUNOtems
 during the initial sync. Because of this it is recommended to install the
-64-bit version if your system supports it.
+64-bit version if your WUNOtem supports it.
 
 NOTE: Release candidate 2 Windows binaries are not code-signed; use PGP
 and the SHA256SUMS.asc file to make sure your binaries are correct.
@@ -59,11 +59,11 @@ Also, the first time you run a 0.8.x release on a 0.9 wallet it will rescan
 the blockchain for missing spent coins, which will take a long time (tens
 of minutes on a typical machine).
 
-Rebranding to Syscoin Core
+Rebranding to wentuno Core
 ---------------------------
 
-To reduce confusion between Syscoin-the-network and Syscoin-the-software we
-have renamed the reference client to Syscoin Core.
+To reduce confusion between wentuno-the-network and wentuno-the-software we
+have renamed the reference client to wentuno Core.
 
 
 OP_RETURN and data in the block chain
@@ -74,31 +74,31 @@ blockchain.  This change is not an endorsement of storing data in the
 blockchain.  The OP_RETURN change creates a provably-prunable output,
 to avoid data storage schemes -- some of which were already deployed --
 that were storing arbitrary data such as images as forever-unspendable
-TX outputs, bloating syscoin's UTXO database.
+TX outputs, bloating wentuno's UTXO database.
 
 Storing arbitrary data in the blockchain is still a bad idea; it is less
 costly and far more efficient to store non-currency data elsewhere.
 
-Autotools build system
+Autotools build WUNOtem
 -----------------------
 
-For 0.9.0 we switched to an autotools-based build system instead of individual
+For 0.9.0 we switched to an autotools-based build WUNOtem instead of individual
 (q)makefiles.
 
-Using the standard "./autogen.sh; ./configure; make" to build Syscoin-Qt and
-syscoind makes it easier for experienced open source developers to contribute 
+Using the standard "./autogen.sh; ./configure; make" to build wentuno-Qt and
+wentunod makes it easier for experienced open source developers to contribute 
 to the project.
 
 Be sure to check doc/build-*.md for your platform before building from source.
 
-Syscoin-cli
+wentuno-cli
 -------------
 
-Another change in the 0.9 release is moving away from the syscoind executable
+Another change in the 0.9 release is moving away from the wentunod executable
 functioning both as a server and as a RPC client. The RPC client functionality
-("tell the running syscoin daemon to do THIS") was split into a separate
-executable, 'syscoin-cli'. The RPC client code will eventually be removed from
-syscoind, but will be kept for backwards compatibility for a release or two.
+("tell the running wentuno daemon to do THIS") was split into a separate
+executable, 'wentuno-cli'. The RPC client code will eventually be removed from
+wentunod, but will be kept for backwards compatibility for a release or two.
 
 `walletpassphrase` RPC
 -----------------------
@@ -143,7 +143,7 @@ Transaction Fees
 
 This release drops the default fee required to relay transactions across the
 network and for miners to consider the transaction in their blocks to
-0.01mSYS per kilobyte.
+0.01mWUNO per kilobyte.
 
 Note that getting a transaction relayed across the network does NOT guarantee
 that the transaction will be accepted by a miner; by default, miners fill
@@ -156,7 +156,7 @@ the mintxfee setting to determine which low-priority transactions should
 be considered for inclusion in blocks.
 
 The wallet code still uses a default fee for low-priority transactions of
-0.1mSYS per kilobyte. During periods of heavy transaction volume, even this
+0.1mWUNO per kilobyte. During periods of heavy transaction volume, even this
 fee may not be enough to get transactions confirmed quickly; the mintxfee
 option may be used to override the default.
 
@@ -197,13 +197,13 @@ Command-line options:
 - New option: -nospendzeroconfchange to never spend unconfirmed change outputs
 - New option: -zapwallettxes to rebuild the wallet's transaction information
 - Rename option '-tor' to '-onion' to better reflect what it does
-- Add '-disablewallet' mode to let syscoind run entirely without wallet (when
+- Add '-disablewallet' mode to let wentunod run entirely without wallet (when
   built with wallet)
 - Update default '-rpcsslciphers' to include TLSv1.2
 - make '-logtimestamps' default on and rework help-message
 - RPC client option: '-rpcwait', to wait for server start
 - Remove '-logtodebugger'
-- Allow `-noserver` with syscoind
+- Allow `-noserver` with wentunod
 
 Block-chain handling and storage:
 
@@ -239,7 +239,7 @@ Mining:
 
 Protocol and network:
 
-- Drop the fee required to relay a transaction to 0.01mSYS per kilobyte
+- Drop the fee required to relay a transaction to 0.01mWUNO per kilobyte
 - Send tx relay flag with version
 - New 'reject' P2P message (BIP 0061, see
   https://gist.github.com/gavinandresen/7079034 for draft)
@@ -254,7 +254,7 @@ Protocol and network:
 - Improve logging of failed connections
 - Bump protocol version to 70002
 - Add some additional logging to give extra network insight
-- Added new DNS seed from syscoinstats.com
+- Added new DNS seed from wentunostats.com
 
 Validation:
 
@@ -267,9 +267,9 @@ Validation:
 - Reject dust amounts during validation
 - Accept nLockTime transactions that finalize in the next block
 
-Build system:
+Build WUNOtem:
 
-- Switch to autotools-based build system
+- Switch to autotools-based build WUNOtem
 - Build without wallet by passing `--disable-wallet` to configure, this 
   removes the BerkeleyDB dependency
 - Upgrade gitian dependencies (libpng, libz, libupnpc, boost, openssl) to more
@@ -295,18 +295,18 @@ GUI:
 - Add Coin Control Features
 - Improve receive coins workflow: make the 'Receive' tab into a form to request
   payments, and move historical address list functionality to File menu.
-- Rebrand to `Syscoin Core`
+- Rebrand to `wentuno Core`
 - Move initialization/shutdown to a thread. This prevents "Not responding"
   messages during startup. Also show a window during shutdown.
 - Don't regenerate autostart link on every client startup
-- Show and store message of normal syscoin:URI
+- Show and store message of normal wentuno:URI
 - Fix richtext detection hang issue on very old Qt versions
 - OS X: Make use of the 10.8+ user notification center to display Growl-like 
   notifications
 - OS X: Added NSHighResolutionCapable flag to Info.plist for better font
   rendering on Retina displays.
-- OS X: Fix syscoin-qt startup crash when clicking dock icon
-- Linux: Fix Gnome syscoin: URI handler
+- OS X: Fix wentuno-qt startup crash when clicking dock icon
+- Linux: Fix Gnome wentuno: URI handler
 
 Miscellaneous:
 
@@ -314,7 +314,7 @@ Miscellaneous:
 - Add '-regtest' mode, similar to testnet but private with instant block
   generation with 'setgenerate' RPC.
 - Add 'linearize.py' script to contrib, for creating bootstrap.dat
-- Add separate syscoin-cli client
+- Add separate wentuno-cli client
 
 Credits
 --------
@@ -378,7 +378,7 @@ Thanks to everyone who contributed to this release:
 - paveljanik
 - Peter Todd
 - phantomcircuit
-- phelixsys
+- phelixWUNO
 - Philip Kaufmann
 - Pieter Wuille
 - Rav3nPL

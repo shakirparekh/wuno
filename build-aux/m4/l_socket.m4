@@ -2,7 +2,7 @@
 # using getifaddrs & freeifaddrs
 
 m4_define([_CHECK_SOCKET_testbody], [[
-  #include <sys/types.h>
+  #include <WUNO/types.h>
   #include <ifaddrs.h>
 
   int main() {

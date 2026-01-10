@@ -158,7 +158,7 @@ void TestBIP324PacketVector(
 
 }  // namespace
 /*
-// SYSCOIN TODO: get test vectors for mainnet
+// wentuno TODO: get test vectors for mainnet
 BOOST_FIXTURE_TEST_SUITE(bip324_tests, BasicTestingSetup)
 BOOST_AUTO_TEST_CASE(packet_test_vectors) {
     // BIP324 key derivation uses network magic in the HKDF process. We use mainnet params here
@@ -167,7 +167,7 @@ BOOST_AUTO_TEST_CASE(packet_test_vectors) {
 
     // The test vectors are converted using the following Python code in the BIP bip-0324/ directory:
     //
-    // import sys
+    // import WUNO
     // import csv
     // with open('packet_encoding_test_vectors.csv', newline='', encoding='utf-8') as csvfile:
     //     reader = csv.DictReader(csvfile)

@@ -199,7 +199,7 @@ static RPCHelpMan protx_register()
                     {"collateralIndex", RPCArg::Type::NUM, RPCArg::Optional::NO, "The collateral transaction output index."},
                     {"ipAndPort", RPCArg::Type::STR, RPCArg::Optional::NO, "IP and port in the form \"IP:PORT\".\n"
                                         "Must be unique on the network. Can be set to 0, which will require a ProUpServTx afterwards."},
-                    {"ownerAddress", RPCArg::Type::STR, RPCArg::Optional::NO, "The Syscoin address to use for payee updates and proposal voting.\n"
+                    {"ownerAddress", RPCArg::Type::STR, RPCArg::Optional::NO, "The wentuno address to use for payee updates and proposal voting.\n"
                                         "The corresponding private key does not have to be known by your wallet.\n"
                                         "The address must be unused and must differ from the collateralAddress."},
                     {"operatorPubKey", RPCArg::Type::STR_HEX, RPCArg::Optional::NO, "The operator BLS public key. The BLS private key does not have to be known.\n"
@@ -209,7 +209,7 @@ static RPCHelpMan protx_register()
                                         "If set to an empty string, ownerAddress will be used.\n"},
                     {"operatorReward", RPCArg::Type::NUM, RPCArg::Optional::NO, "The fraction in %% to share with the operator. The value must be\n"
                                         "between 0.00 and 100.00."},
-                    {"payoutAddress", RPCArg::Type::STR, RPCArg::Optional::NO, "The Syscoin address to use for masternode reward payments."},
+                    {"payoutAddress", RPCArg::Type::STR, RPCArg::Optional::NO, "The wentuno address to use for masternode reward payments."},
                     {"fundAddress", RPCArg::Type::STR, RPCArg::Default{""}, "If specified wallet will only use coins from this address to fund ProTx.\n"
                                         "If not specified, payoutAddress is the one that is going to be used.\n"
                                         "The private key belonging to this address must be known in your wallet."},
@@ -218,8 +218,8 @@ static RPCHelpMan protx_register()
                 },
                 RPCResult{RPCResult::Type::STR_HEX, "", "The transaction hash in hex"},
                 RPCExamples{
-                    HelpExampleCli("protx_register", "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d 0 173.249.49.9:18369 tsys1q2j57a4rtserh9022a63pvk3jqmg7un55stux0v 003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63 tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r 5 tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r")
-                + HelpExampleRpc("protx_register", "\"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d\", 0, \"173.249.49.9:18369\", \"tsys1q2j57a4rtserh9022a63pvk3jqmg7un55stux0v\", \"003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63\", \"tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\", 5, \"tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\"")
+                    HelpExampleCli("protx_register", "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d 0 173.249.49.9:18369 tWUNO1q2j57a4rtserh9022a63pvk3jqmg7un55stux0v 003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63 tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r 5 tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r")
+                + HelpExampleRpc("protx_register", "\"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d\", 0, \"173.249.49.9:18369\", \"tWUNO1q2j57a4rtserh9022a63pvk3jqmg7un55stux0v\", \"003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63\", \"tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\", 5, \"tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\"")
                 },
         [&](const RPCHelpMan& self, const node::JSONRPCRequest& request) -> UniValue
 {
@@ -234,7 +234,7 @@ static RPCHelpMan protx_register()
     size_t paramIdx = 0;
 
     CMutableTransaction tx;
-    tx.nVersion = SYSCOIN_TX_VERSION_MN_REGISTER;
+    tx.nVersion = wentuno_TX_VERSION_MN_REGISTER;
 
     CProRegTx ptx;
     bool v19active;
@@ -307,7 +307,7 @@ static RPCHelpMan protx_register()
         if (!request.params[paramIdx + 6].isNull()) {
             fundDest = DecodeDestination(request.params[paramIdx + 6].get_str());
             if (!IsValidDestination(fundDest))
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Syscoin address: ") + request.params[paramIdx + 6].get_str());
+                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid wentuno address: ") + request.params[paramIdx + 6].get_str());
         }
     }
     bool fSubmit{true};
@@ -358,14 +358,14 @@ static RPCHelpMan protx_register()
 static RPCHelpMan protx_register_fund()
 {
         return RPCHelpMan{"protx_register_fund",
-                "\nCreates, funds and sends a ProTx to the network. The resulting transaction will move 100000 Syscoin\n"
+                "\nCreates, funds and sends a ProTx to the network. The resulting transaction will move 100000 wentuno\n"
                 "to the address specified by collateralAddress and will then function as the collateral of your\n"
                 "masternode.\n",
                 {
-                    {"collateralAddress", RPCArg::Type::STR, RPCArg::Optional::NO, "The Syscoin address to send the collateral to."},
+                    {"collateralAddress", RPCArg::Type::STR, RPCArg::Optional::NO, "The wentuno address to send the collateral to."},
                     {"ipAndPort", RPCArg::Type::STR, RPCArg::Optional::NO, "IP and port in the form \"IP:PORT\".\n"
                                         "Must be unique on the network. Can be set to 0, which will require a ProUpServTx afterwards."},
-                    {"ownerAddress", RPCArg::Type::STR, RPCArg::Optional::NO, "The Syscoin address to use for payee updates and proposal voting.\n"
+                    {"ownerAddress", RPCArg::Type::STR, RPCArg::Optional::NO, "The wentuno address to use for payee updates and proposal voting.\n"
                                         "The corresponding private key does not have to be known by your wallet.\n"
                                         "The address must be unused and must differ from the collateralAddress."},
                     {"operatorPubKey", RPCArg::Type::STR_HEX, RPCArg::Optional::NO, "The operator BLS public key. The BLS private key does not have to be known.\n"
@@ -375,7 +375,7 @@ static RPCHelpMan protx_register_fund()
                                         "If set to an empty string, ownerAddress will be used.\n"},
                     {"operatorReward", RPCArg::Type::NUM, RPCArg::Optional::NO, "The fraction in %% to share with the operator. The value must be\n"
                                         "between 0.00 and 100.00."},
-                    {"payoutAddress", RPCArg::Type::STR, RPCArg::Optional::NO, "The Syscoin address to use for masternode reward payments."},
+                    {"payoutAddress", RPCArg::Type::STR, RPCArg::Optional::NO, "The wentuno address to use for masternode reward payments."},
                     {"fundAddress", RPCArg::Type::STR, RPCArg::Default{""}, "If specified wallet will only use coins from this address to fund ProTx.\n"
                                         "If not specified, payoutAddress is the one that is going to be used.\n"
                                         "The private key belonging to this address must be known in your wallet."},
@@ -384,8 +384,8 @@ static RPCHelpMan protx_register_fund()
                 },
                 RPCResult{RPCResult::Type::STR_HEX, "", "The transaction hash in hex"},
                 RPCExamples{
-                    HelpExampleCli("protx_register_fund", "\"tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\" 173.249.49.9:18369 tsys1q2j57a4rtserh9022a63pvk3jqmg7un55stux0v 003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63 tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r 5 tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r")
-            + HelpExampleRpc("protx_register_fund", "\"tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\", \"173.249.49.9:18369\", \"tsys1q2j57a4rtserh9022a63pvk3jqmg7un55stux0v\", \"003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63\", \"tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\", 5, \"tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\"")
+                    HelpExampleCli("protx_register_fund", "\"tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\" 173.249.49.9:18369 tWUNO1q2j57a4rtserh9022a63pvk3jqmg7un55stux0v 003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63 tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r 5 tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r")
+            + HelpExampleRpc("protx_register_fund", "\"tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\", \"173.249.49.9:18369\", \"tWUNO1q2j57a4rtserh9022a63pvk3jqmg7un55stux0v\", \"003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63\", \"tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\", 5, \"tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\"")
                 },
         [&](const RPCHelpMan& self, const node::JSONRPCRequest& request) -> UniValue
 {
@@ -401,7 +401,7 @@ static RPCHelpMan protx_register_fund()
 
 
     CMutableTransaction tx;
-    tx.nVersion = SYSCOIN_TX_VERSION_MN_REGISTER;
+    tx.nVersion = wentuno_TX_VERSION_MN_REGISTER;
     bool v19active;
     {
         LOCK(cs_main);
@@ -469,7 +469,7 @@ static RPCHelpMan protx_register_fund()
     if (!request.params[paramIdx + 6].isNull()) {
         fundDest = DecodeDestination(request.params[paramIdx + 6].get_str());
         if (!IsValidDestination(fundDest))
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Syscoin address: ") + request.params[paramIdx + 6].get_str());
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid wentuno address: ") + request.params[paramIdx + 6].get_str());
     }
 
     FundSpecialTx(*pwallet, tx, ptx, fundDest);
@@ -512,7 +512,7 @@ static RPCHelpMan protx_register_prepare()
                 {"collateralIndex", RPCArg::Type::NUM, RPCArg::Optional::NO, "The collateral transaction output index."},
                 {"ipAndPort", RPCArg::Type::STR, RPCArg::Optional::NO, "IP and port in the form \"IP:PORT\".\n"
                                     "Must be unique on the network. Can be set to 0, which will require a ProUpServTx afterwards."},
-                {"ownerAddress", RPCArg::Type::STR, RPCArg::Optional::NO, "The Syscoin address to use for payee updates and proposal voting.\n"
+                {"ownerAddress", RPCArg::Type::STR, RPCArg::Optional::NO, "The wentuno address to use for payee updates and proposal voting.\n"
                                     "The corresponding private key does not have to be known by your wallet.\n"
                                     "The address must be unused and must differ from the collateralAddress."},
                 {"operatorPubKey", RPCArg::Type::STR_HEX, RPCArg::Optional::NO, "The operator BLS public key. The BLS private key does not have to be known.\n"
@@ -522,7 +522,7 @@ static RPCHelpMan protx_register_prepare()
                                     "If set to an empty string, ownerAddress will be used.\n"},
                 {"operatorReward", RPCArg::Type::NUM, RPCArg::Optional::NO, "The fraction in %% to share with the operator. The value must be\n"
                                     "between 0.00 and 100.00."},
-                {"payoutAddress", RPCArg::Type::STR, RPCArg::Optional::NO, "The Syscoin address to use for masternode reward payments."},
+                {"payoutAddress", RPCArg::Type::STR, RPCArg::Optional::NO, "The wentuno address to use for masternode reward payments."},
                 {"fundAddress", RPCArg::Type::STR, RPCArg::Default{""}, "If specified wallet will only use coins from this address to fund ProTx.\n"
                                     "If not specified, payoutAddress is the one that is going to be used.\n"
                                     "The private key belonging to this address must be known in your wallet."},
@@ -530,8 +530,8 @@ static RPCHelpMan protx_register_prepare()
             },
             RPCResult{RPCResult::Type::ANY, "", "Unsigned ProTX transaction object"},
             RPCExamples{
-                HelpExampleCli("protx_register_prepare", "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d 0 173.249.49.9:18369 tsys1q2j57a4rtserh9022a63pvk3jqmg7un55stux0v 003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63 tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r 5 tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r")
-            + HelpExampleRpc("protx_register_prepare", "\"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d\", 0, \"173.249.49.9:18369\", \"tsys1q2j57a4rtserh9022a63pvk3jqmg7un55stux0v\", \"003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63\", \"tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\", 5, \"tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\"")
+                HelpExampleCli("protx_register_prepare", "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d 0 173.249.49.9:18369 tWUNO1q2j57a4rtserh9022a63pvk3jqmg7un55stux0v 003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63 tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r 5 tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r")
+            + HelpExampleRpc("protx_register_prepare", "\"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d\", 0, \"173.249.49.9:18369\", \"tWUNO1q2j57a4rtserh9022a63pvk3jqmg7un55stux0v\", \"003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63\", \"tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\", 5, \"tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\"")
             },
     [&](const RPCHelpMan& self, const node::JSONRPCRequest& request) -> UniValue
 {
@@ -544,7 +544,7 @@ static RPCHelpMan protx_register_prepare()
     size_t paramIdx = 0;
 
     CMutableTransaction tx;
-    tx.nVersion = SYSCOIN_TX_VERSION_MN_REGISTER;
+    tx.nVersion = wentuno_TX_VERSION_MN_REGISTER;
     bool v19active;
     {
         LOCK(cs_main);
@@ -618,7 +618,7 @@ static RPCHelpMan protx_register_prepare()
         if (!request.params[paramIdx + 6].isNull()) {
             fundDest = DecodeDestination(request.params[paramIdx + 6].get_str());
             if (!IsValidDestination(fundDest))
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Syscoin address: ") + request.params[paramIdx + 6].get_str());
+                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid wentuno address: ") + request.params[paramIdx + 6].get_str());
         }
     }
     FundSpecialTx(*pwallet, tx, ptx, fundDest);
@@ -683,7 +683,7 @@ static RPCHelpMan protx_register_submit()
     if (!DecodeHexTx(tx, request.params[0].get_str())) {
         throw JSONRPCError(RPC_INVALID_PARAMETER, "transaction not deserializable");
     }
-    if (tx.nVersion != SYSCOIN_TX_VERSION_MN_REGISTER) {
+    if (tx.nVersion != wentuno_TX_VERSION_MN_REGISTER) {
         throw JSONRPCError(RPC_INVALID_PARAMETER, "transaction not a ProRegTx");
     }
     CProRegTx ptx;
@@ -730,8 +730,8 @@ static RPCHelpMan protx_update_service()
         },
         RPCResult{RPCResult::Type::STR_HEX, "", "The transaction hash in hex"},
         RPCExamples{
-            HelpExampleCli("protx_update_service", "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d 173.249.49.9:18369 <NEVM address> 003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63 tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r")
-            + HelpExampleRpc("protx_update_service", "\"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d\", \"173.249.49.9:18369\", \"<NEVM Address>\", \"003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63\", \"tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\")")
+            HelpExampleCli("protx_update_service", "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d 173.249.49.9:18369 <NEVM address> 003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63 tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r")
+            + HelpExampleRpc("protx_update_service", "\"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d\", \"173.249.49.9:18369\", \"<NEVM Address>\", \"003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63\", \"tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\")")
         },
     [&](const RPCHelpMan& self, const node::JSONRPCRequest& request) -> UniValue
 {
@@ -775,7 +775,7 @@ static RPCHelpMan protx_update_service()
     }
 
     CMutableTransaction tx;
-    tx.nVersion = SYSCOIN_TX_VERSION_MN_UPDATE_SERVICE;
+    tx.nVersion = wentuno_TX_VERSION_MN_UPDATE_SERVICE;
 
     if (!request.params[3].isNull()) {
         std::string nevmAddressStr = request.params[3].get_str();
@@ -817,7 +817,7 @@ static RPCHelpMan protx_update_service()
     if (!request.params[5].isNull()) {
         feeSource = DecodeDestination(request.params[5].get_str());
         if (!IsValidDestination(feeSource))
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Syscoin address: ") + request.params[5].get_str());
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid wentuno address: ") + request.params[5].get_str());
     } else {
         if (ptx.scriptOperatorPayout != CScript()) {
             // use operator reward address as default source for fees
@@ -852,7 +852,7 @@ static RPCHelpMan protx_update_service()
                     {"votingAddress", RPCArg::Type::STR, RPCArg::Optional::NO, "The voting key address. The private key does not have to be known by your wallet.\n"
                                     "It has to match the private key which is later used when voting on proposals.\n"
                                     "If set to an empty string, the currently active voting key address is reused."}, 
-                    {"payoutAddress", RPCArg::Type::STR, RPCArg::Optional::NO, "The Syscoin address to use for masternode reward payments.\n"
+                    {"payoutAddress", RPCArg::Type::STR, RPCArg::Optional::NO, "The wentuno address to use for masternode reward payments.\n"
                                     "If set to an empty string, the currently active payout address is reused."}, 
                     {"feeSourceAddress", RPCArg::Type::STR, RPCArg::Default{""}, "If specified wallet will only use coins from this address to fund ProTx.\n"
                                         "If not specified, payoutAddress is the one that is going to be used.\n"
@@ -861,8 +861,8 @@ static RPCHelpMan protx_update_service()
                 },
                 RPCResult{RPCResult::Type::STR_HEX, "", "The transaction hash in hex"},
                 RPCExamples{
-                        HelpExampleCli("protx_update_registrar", "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d 003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63 tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r")
-                    + HelpExampleRpc("protx_update_registrar", "\"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d\", \"003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63\", \"tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\", \"tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\"")
+                        HelpExampleCli("protx_update_registrar", "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d 003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63 tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r")
+                    + HelpExampleRpc("protx_update_registrar", "\"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d\", \"003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63\", \"tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\", \"tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\"")
                 },
         [&](const RPCHelpMan& self, const node::JSONRPCRequest& request) -> UniValue
     {
@@ -927,7 +927,7 @@ static RPCHelpMan protx_update_service()
         }
 
         CMutableTransaction tx;
-        tx.nVersion = SYSCOIN_TX_VERSION_MN_UPDATE_REGISTRAR;
+        tx.nVersion = wentuno_TX_VERSION_MN_UPDATE_REGISTRAR;
 
         // make sure we get anough fees added
         ptx.vchSig.resize(65);
@@ -936,7 +936,7 @@ static RPCHelpMan protx_update_service()
         if (!request.params[4].isNull()) {
             feeSourceDest = DecodeDestination(request.params[4].get_str());
             if (!IsValidDestination(feeSourceDest))
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Syscoin address: ") + request.params[5].get_str());
+                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid wentuno address: ") + request.params[5].get_str());
         }
         FundSpecialTx(*pwallet, tx, ptx, feeSourceDest);
         SignSpecialTxPayloadByHash(tx, ptx, keyOwner);
@@ -967,8 +967,8 @@ static RPCHelpMan protx_revoke()
             },
             RPCResult{RPCResult::Type::STR_HEX, "", "The transaction hash in hex"},
             RPCExamples{
-                    HelpExampleCli("protx_revoke", "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d 003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63 0 tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r")
-                + HelpExampleRpc("protx_revoke", "\"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d\", \"003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63\", 0, \"tsys1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\"")
+                    HelpExampleCli("protx_revoke", "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d 003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63 0 tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r")
+                + HelpExampleRpc("protx_revoke", "\"1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d\", \"003bc97fcd6023996f8703b4da34dedd1641bd45ed12ac7a4d74a529dd533ecb99d4fb8ddb04853bb110f0d747ee8e63\", 0, \"tWUNO1qxh8am0c9w0q9kv7h7f9q2c4jrfjg63yawrgm0r\"")
             },
     [&](const RPCHelpMan& self, const node::JSONRPCRequest& request) -> UniValue
 {
@@ -1017,12 +1017,12 @@ static RPCHelpMan protx_revoke()
     }
 
     CMutableTransaction tx;
-    tx.nVersion = SYSCOIN_TX_VERSION_MN_UPDATE_REVOKE;
+    tx.nVersion = wentuno_TX_VERSION_MN_UPDATE_REVOKE;
 
     if (!request.params[3].isNull()) {
         CTxDestination feeSourceDest = DecodeDestination(request.params[3].get_str());
         if (!IsValidDestination(feeSourceDest))
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Syscoin address: ") + request.params[3].get_str());
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid wentuno address: ") + request.params[3].get_str());
         FundSpecialTx(*pwallet, tx, ptx, feeSourceDest);
     } else if (dmn->pdmnState->scriptOperatorPayout != CScript()) {
         // Using funds from previousely specified operator payout address

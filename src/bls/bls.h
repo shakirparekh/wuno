@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_BLS_BLS_H
-#define SYSCOIN_BLS_BLS_H
+#ifndef wentuno_BLS_BLS_H
+#define wentuno_BLS_BLS_H
 
 #include <hash.h>
 #include <serialize.h>
@@ -281,7 +281,7 @@ public:
     void AggregateInsecure(const CBLSSecretKey& o);
     static CBLSSecretKey AggregateInsecure(Span<CBLSSecretKey> sks);
 
-#ifndef BUILD_SYSCOIN_INTERNAL
+#ifndef BUILD_wentuno_INTERNAL
     //! MakeNewKey() is invariant to BLS scheme
     void MakeNewKey();
 #endif
@@ -383,7 +383,7 @@ public:
     }
 };
 
-#ifndef BUILD_SYSCOIN_INTERNAL
+#ifndef BUILD_wentuno_INTERNAL
 template<typename BLSObject>
 class CBLSLazyWrapper
 {
@@ -592,4 +592,4 @@ using BLSVerificationVectorPtr = std::shared_ptr<std::vector<CBLSPublicKey>>;
 
 bool BLSInit();
 
-#endif // SYSCOIN_BLS_BLS_H
+#endif // wentuno_BLS_BLS_H

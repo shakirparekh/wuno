@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;အသစ်</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the system clipboard</source>
+        <source>Copy the currently selected address to the WUNOtem clipboard</source>
         <translation type="unfinished">လက်ရှိရွေးထားတဲ့ လိပ်စာကို clipboard ပေါ်တင်မယ်။</translation>
     </message>
     <message>
@@ -121,7 +121,7 @@
     </message>
     </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
         <translation type="unfinished">
@@ -149,7 +149,7 @@
         <translation type="unfinished">ချဲ့</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
             <numerusform />

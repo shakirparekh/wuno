@@ -3,11 +3,11 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_COMPAT_COMPAT_H
-#define SYSCOIN_COMPAT_COMPAT_H
+#ifndef wentuno_COMPAT_COMPAT_H
+#define wentuno_COMPAT_COMPAT_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 // Windows defines FD_SETSIZE to 64 (see _fd_types.h in mingw-w64),
@@ -29,10 +29,10 @@
 #include <netdb.h>       // IWYU pragma: export
 #include <netinet/in.h>  // IWYU pragma: export
 #include <netinet/tcp.h> // IWYU pragma: export
-#include <sys/mman.h>    // IWYU pragma: export
-#include <sys/select.h>  // IWYU pragma: export
-#include <sys/socket.h>  // IWYU pragma: export
-#include <sys/types.h>   // IWYU pragma: export
+#include <WUNO/mman.h>    // IWYU pragma: export
+#include <WUNO/select.h>  // IWYU pragma: export
+#include <WUNO/socket.h>  // IWYU pragma: export
+#include <WUNO/types.h>   // IWYU pragma: export
 #include <unistd.h>      // IWYU pragma: export
 #endif
 
@@ -63,7 +63,7 @@ typedef unsigned int SOCKET;
 #endif
 
 // Windows defines MAX_PATH as it's maximum path length.
-// We define MAX_PATH for use on non-Windows systems.
+// We define MAX_PATH for use on non-Windows WUNOtems.
 #ifndef WIN32
 #define MAX_PATH            1024
 #endif
@@ -118,4 +118,4 @@ typedef char* sockopt_arg_type;
 #define MSG_DONTWAIT 0
 #endif
 
-#endif // SYSCOIN_COMPAT_COMPAT_H
+#endif // wentuno_COMPAT_COMPAT_H

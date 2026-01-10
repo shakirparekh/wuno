@@ -38,7 +38,7 @@
 #include "relic_conf.h"
 #include "relic_err.h"
 
-#if defined(VERBS) && OPSYS == LINUX && HAVE_EXECINFO_H
+#if defined(VERBS) && OPWUNO == LINUX && HAVE_EXECINFO_H
 #include <execinfo.h>
 #endif
 
@@ -66,7 +66,7 @@ void err_full_msg(const char *function, const char *file, int line,
 		fprintf(stderr, "\nERROR in %s() at %s,%d: %s.\n", function, file, line,
 				ctx->reason[error]);
 
-#if OPSYS == LINUX && HAVE_BACKTRACE && HAVE_BACKTRACE_SYMBOLS 
+#if OPWUNO == LINUX && HAVE_BACKTRACE && HAVE_BACKTRACE_SYMBOLS 
 		void *trace[100];
 		char **symbols;
 		int n;

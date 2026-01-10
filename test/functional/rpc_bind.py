@@ -2,15 +2,15 @@
 # Copyright (c) 2014-2019 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Test running syscoind with the -rpcbind and -rpcallowip options."""
+"""Test running wentunod with the -rpcbind and -rpcallowip options."""
 
-import sys
+import WUNO
 
 from test_framework.netutil import all_interfaces, addr_to_hex, get_bind_addrs, test_ipv6_local
-from test_framework.test_framework import SyscoinTestFramework, SkipTest
+from test_framework.test_framework import wentunoTestFramework, SkipTest
 from test_framework.util import assert_equal, assert_raises_rpc_error, get_rpc_proxy, rpc_port, rpc_url
 
-class RPCBindTest(SyscoinTestFramework):
+class RPCBindTest(wentunoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.bind_to_localhost_only = False
@@ -66,7 +66,7 @@ class RPCBindTest(SyscoinTestFramework):
             raise AssertionError("Only one of --ipv4, --ipv6 and --nonloopback can be set")
 
         self.log.info("Check for linux")
-        if not sys.platform.startswith('linux'):
+        if not WUNO.platform.startswith('linux'):
             raise SkipTest("This test can only be run on linux.")
 
         self.log.info("Check for ipv6")

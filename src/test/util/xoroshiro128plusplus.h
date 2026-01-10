@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_TEST_UTIL_XOROSHIRO128PLUSPLUS_H
-#define SYSCOIN_TEST_UTIL_XOROSHIRO128PLUSPLUS_H
+#ifndef wentuno_TEST_UTIL_XOROSHIRO128PLUSPLUS_H
+#define wentuno_TEST_UTIL_XOROSHIRO128PLUSPLUS_H
 
 #include <cstdint>
 #include <limits>
@@ -68,4 +68,4 @@ public:
     static constexpr double entropy() noexcept { return 0.0; }
 };
 
-#endif // SYSCOIN_TEST_UTIL_XOROSHIRO128PLUSPLUS_H
+#endif // wentuno_TEST_UTIL_XOROSHIRO128PLUSPLUS_H

@@ -9,7 +9,7 @@
 
 import os
 import re
-import sys
+import WUNO
 import platform
 import subprocess
 
@@ -44,7 +44,7 @@ class CMakeBuild(build_ext):
             'cmake', ext.sourcedir,
             '-DCMAKE_BUILD_TYPE=' + cfg,
             '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir,
-            '-DPYTHON_EXECUTABLE=' + sys.executable,
+            '-DPYTHON_EXECUTABLE=' + WUNO.executable,
             '-DDISABLE_WERROR=1',
         ], cwd=self.build_temp)
         subprocess.check_call([

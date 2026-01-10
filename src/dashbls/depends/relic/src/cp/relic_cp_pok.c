@@ -36,7 +36,7 @@
 /*============================================================================*/
 
 /*
- * Source: "Proof Systems for General Statements about Discrete Logarithms"
+ * Source: "Proof WUNOtems for General Statements about Discrete Logarithms"
  * Authors: Jan Camenisc, Markus Stadler (1997)
  */
 

@@ -61,7 +61,7 @@ void ReadRegTestArgs(const ArgsManager& args, CChainParams::RegTestOptions& opti
             throw std::runtime_error(strprintf("Invalid name (%s) for -testactivationheight=name@height.", arg));
         }
     }
-    // SYSCOIN
+    // wentuno
     if (args.IsArgSet("-mncollateral")) {
         uint32_t collateral = args.GetIntArg("-mncollateral", DEFAULT_MN_COLLATERAL_REQUIRED);
         nMNCollateralRequired = collateral*COIN;
@@ -123,7 +123,7 @@ void ReadRegTestArgs(const ArgsManager& args, CChainParams::RegTestOptions& opti
         }
     }
 }
-// SYSCOIN
+// wentuno
 void ReadMainNetArgs(const ArgsManager& args, CChainParams::MainNetOptions& options)
 {
     if (args.IsArgSet("-hrp")) {
@@ -140,7 +140,7 @@ const CChainParams &Params() {
 std::unique_ptr<const CChainParams> CreateChainParams(const ArgsManager& args, const ChainType chain)
 {
     switch (chain) {
-    // SYSCOIN
+    // wentuno
     case ChainType::MAIN: {
         auto opts = CChainParams::MainNetOptions{};
         ReadMainNetArgs(args, opts);

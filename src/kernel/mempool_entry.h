@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_KERNEL_MEMPOOL_ENTRY_H
-#define SYSCOIN_KERNEL_MEMPOOL_ENTRY_H
+#ifndef wentuno_KERNEL_MEMPOOL_ENTRY_H
+#define wentuno_KERNEL_MEMPOOL_ENTRY_H
 
 #include <consensus/amount.h>
 #include <consensus/validation.h>
@@ -174,10 +174,10 @@ public:
 
     mutable size_t vTxHashesIdx; //!< Index in mempool's vTxHashes
     mutable Epoch::Marker m_epoch_marker; //!< epoch when last touched, useful for graph algorithms
-    // SYSCOIN
+    // wentuno
     // If this is a proTx, this will be the hash of the key for which this ProTx was valid
     mutable uint256 validForProTxKey;
     mutable bool isKeyChangeProTx{false};
 };
 
-#endif // SYSCOIN_KERNEL_MEMPOOL_ENTRY_H
+#endif // wentuno_KERNEL_MEMPOOL_ENTRY_H

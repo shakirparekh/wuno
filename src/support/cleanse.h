@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SUPPORT_CLEANSE_H
-#define SYSCOIN_SUPPORT_CLEANSE_H
+#ifndef wentuno_SUPPORT_CLEANSE_H
+#define wentuno_SUPPORT_CLEANSE_H
 
 #include <cstdlib>
 
@@ -12,4 +12,4 @@
  * operation will not be optimized out by the compiler. */
 void memory_cleanse(void *ptr, size_t len);
 
-#endif // SYSCOIN_SUPPORT_CLEANSE_H
+#endif // wentuno_SUPPORT_CLEANSE_H

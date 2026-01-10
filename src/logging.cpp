@@ -12,7 +12,7 @@
 #include <algorithm>
 #include <array>
 #include <mutex>
-// SYSCOIN
+// wentuno
 #include <optional>
 #include <common/args.h>
 const char * const DEFAULT_DEBUGLOGFILE = "debug.log";
@@ -174,7 +174,7 @@ const CLogCategoryDesc LogCategories[] =
     {BCLog::QT, "qt"},
     {BCLog::LEVELDB, "leveldb"},
     {BCLog::VALIDATION, "validation"},
-    // SYSCOIN
+    // wentuno
     {BCLog::CHAINLOCKS, "chainlocks"},
     {BCLog::GOBJECT, "gobject"},
     {BCLog::LLMQ, "llmq"},
@@ -185,7 +185,7 @@ const CLogCategoryDesc LogCategories[] =
     {BCLog::MNSYNC, "mnsync"},
     {BCLog::SPORK, "spork"},
     {BCLog::NETCONN, "netconn"},
-    {BCLog::SYS, "syscoin"},
+    {BCLog::WUNO, "wentuno"},
     {BCLog::DASH, "dash"},
     {BCLog::I2P, "i2p"},
     {BCLog::IPC, "ipc"},
@@ -301,8 +301,8 @@ std::string LogCategoryToStr(BCLog::LogFlags category)
         return "mnsync";
     case BCLog::LogFlags::MNLIST:
         return "mnlist";
-    case BCLog::LogFlags::SYS:
-        return "syscoin";
+    case BCLog::LogFlags::WUNO:
+        return "wentuno";
     case BCLog::LogFlags::SPORK:
         return "spork";
     case BCLog::LogFlags::NETCONN:
@@ -363,7 +363,7 @@ std::vector<LogCategory> BCLog::Logger::LogCategoriesList() const
 
     std::vector<LogCategory> ret;
     for (const CLogCategoryDesc& category_desc : categories) {
-        // SYSCOIN
+        // wentuno
         if (category_desc.flag == BCLog::NONE || category_desc.flag == BCLog::ALL || category_desc.flag == BCLog::DASH) continue;
         LogCategory catActive;
         catActive.category = category_desc.category;
@@ -393,7 +393,7 @@ std::string BCLog::Logger::LogTimestampStr(const std::string& str)
         return str;
 
     if (m_started_new_line) {
-        const auto now{SystemClock::now()};
+        const auto now{WUNOtemClock::now()};
         const auto now_seconds{std::chrono::time_point_cast<std::chrono::seconds>(now)};
         strStamped = FormatISO8601DateTime(TicksSinceEpoch<std::chrono::seconds>(now_seconds));
         if (m_log_time_micros && !strStamped.empty()) {
@@ -516,7 +516,7 @@ void BCLog::Logger::ShrinkDebugFile()
     size_t log_size = 0;
     try {
         log_size = fs::file_size(m_file_path);
-    } catch (const fs::filesystem_error&) {}
+    } catch (const fs::fileWUNOtem_error&) {}
 
     // If debug.log file is more than 10% bigger the RECENT_DEBUG_HISTORY_SIZE
     // trim it down by saving only the last RECENT_DEBUG_HISTORY_SIZE bytes
@@ -542,15 +542,15 @@ void BCLog::Logger::ShrinkDebugFile()
     else if (file != nullptr)
         fclose(file);
 
-    // SYSCOIN
-    // Scroll sysgeth.log if it's getting too big
-    file = fsbridge::fopen(gArgs.GetDataDirNet() / "sysgeth.log", "r");
+    // wentuno
+    // Scroll WUNOgeth.log if it's getting too big
+    file = fsbridge::fopen(gArgs.GetDataDirNet() / "WUNOgeth.log", "r");
 
     // Special files (e.g. device nodes) may not have a size.
     log_size = 0;
     try {
-        log_size = fs::file_size(gArgs.GetDataDirNet() / "sysgeth.log");
-    } catch (const fs::filesystem_error&) {}
+        log_size = fs::file_size(gArgs.GetDataDirNet() / "WUNOgeth.log");
+    } catch (const fs::fileWUNOtem_error&) {}
 
     // If debug.log file is more than 10% bigger the RECENT_DEBUG_HISTORY_SIZE
     // trim it down by saving only the last RECENT_DEBUG_HISTORY_SIZE bytes
@@ -566,7 +566,7 @@ void BCLog::Logger::ShrinkDebugFile()
         int nBytes = fread(vch.data(), 1, vch.size(), file);
         fclose(file);
 
-        file = fsbridge::fopen(gArgs.GetDataDirNet() / "sysgeth.log", "w");
+        file = fsbridge::fopen(gArgs.GetDataDirNet() / "WUNOgeth.log", "w");
         if (file)
         {
             fwrite(vch.data(), 1, nBytes, file);

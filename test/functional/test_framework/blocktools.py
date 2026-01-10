@@ -50,21 +50,21 @@ MAX_BLOCK_SIGOPS = 20000
 MAX_BLOCK_SIGOPS_WEIGHT = MAX_BLOCK_SIGOPS * WITNESS_SCALE_FACTOR
 
 # Genesis block time (regtest)
-# SYSCOIN
+# wentuno
 TIME_GENESIS_BLOCK = 1553040331
-SYSCOIN_TX_VERSION_MN_REGISTER = 80
-SYSCOIN_TX_VERSION_MN_UPDATE_SERVICE = 81
-SYSCOIN_TX_VERSION_MN_UPDATE_REGISTRAR = 82
-SYSCOIN_TX_VERSION_MN_UPDATE_REVOKE = 83
-SYSCOIN_TX_VERSION_MN_QUORUM_COMMITMENT = 85
+wentuno_TX_VERSION_MN_REGISTER = 80
+wentuno_TX_VERSION_MN_UPDATE_SERVICE = 81
+wentuno_TX_VERSION_MN_UPDATE_REGISTRAR = 82
+wentuno_TX_VERSION_MN_UPDATE_REVOKE = 83
+wentuno_TX_VERSION_MN_QUORUM_COMMITMENT = 85
 
-SYSCOIN_TX_VERSION_NEVM_DATA_SHA3 = 137
+wentuno_TX_VERSION_NEVM_DATA_SHA3 = 137
 
-SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN = 138
-SYSCOIN_TX_VERSION_SYSCOIN_BURN_TO_ALLOCATION = 139
-SYSCOIN_TX_VERSION_ALLOCATION_MINT = 140
-SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_NEVM = 141
-SYSCOIN_TX_VERSION_ALLOCATION_SEND = 142
+wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno = 138
+wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION = 139
+wentuno_TX_VERSION_ALLOCATION_MINT = 140
+wentuno_TX_VERSION_ALLOCATION_BURN_TO_NEVM = 141
+wentuno_TX_VERSION_ALLOCATION_SEND = 142
 
 
 MAX_FUTURE_BLOCK_TIME = 2 * 60 * 60
@@ -84,7 +84,7 @@ def create_block(hashprev=None, coinbase=None, ntime=None, *, version=None, tmpl
     block = CBlock()
     if tmpl is None:
         tmpl = {}
-    # SYSCOIN
+    # wentuno
     if version or tmpl.get('version'):
         block.nVersion = version or tmpl.get('version') or VERSIONBITS_LAST_OLD_BLOCK_VERSION
     else:
@@ -128,7 +128,7 @@ def add_witness_commitment(block, nonce=0):
     block.vtx[0].wit.vtxinwit = [CTxInWitness()]
     block.vtx[0].wit.vtxinwit[0].scriptWitness.stack = [ser_uint256(witness_nonce)]
 
-    # SYSCOIN witness commitment is the last OP_RETURN output in coinbase
+    # wentuno witness commitment is the last OP_RETURN output in coinbase
     block.vtx[0].vout.append(CTxOut(0, get_witness_script(witness_root, witness_nonce, extraData=block.vtx[0].extraData)))
     block.vtx[0].rehash()
     block.hashMerkleRoot = block.calc_merkle_root()
@@ -249,7 +249,7 @@ def send_to_witness(use_p2wsh, node, utxo, pubkey, encode_p2sh, amount, sign=Tru
 
     return node.sendrawtransaction(tx_to_witness)
 
-# SYSCOIN
+# wentuno
 # Identical to GetBlockMNSubsidy in C++ code
 def get_masternode_payment(nHeight, nBlockReward, nStartHeight):
     nSubsidy = nBlockReward*0.75

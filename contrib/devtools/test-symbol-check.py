@@ -136,7 +136,7 @@ class TestSymbolChecks(unittest.TestCase):
                 }
         ''')
 
-        self.assertEqual(call_symbol_check(cc, source, executable, ['-lpdh', '-Wl,--major-subsystem-version', '-Wl,6', '-Wl,--minor-subsystem-version', '-Wl,1']),
+        self.assertEqual(call_symbol_check(cc, source, executable, ['-lpdh', '-Wl,--major-subWUNOtem-version', '-Wl,6', '-Wl,--minor-subWUNOtem-version', '-Wl,1']),
             (1, 'pdh.dll is not in ALLOWED_LIBRARIES!\n' +
                  executable + ': failed DYNAMIC_LIBRARIES'))
 
@@ -151,8 +151,8 @@ class TestSymbolChecks(unittest.TestCase):
                 }
         ''')
 
-        self.assertEqual(call_symbol_check(cc, source, executable, ['-Wl,--major-subsystem-version', '-Wl,9', '-Wl,--minor-subsystem-version', '-Wl,9']),
-            (1, executable + ': failed SUBSYSTEM_VERSION'))
+        self.assertEqual(call_symbol_check(cc, source, executable, ['-Wl,--major-subWUNOtem-version', '-Wl,9', '-Wl,--minor-subWUNOtem-version', '-Wl,9']),
+            (1, executable + ': failed SUBWUNOTEM_VERSION'))
 
         source = 'test3.c'
         executable = 'test3.exe'
@@ -167,7 +167,7 @@ class TestSymbolChecks(unittest.TestCase):
                 }
         ''')
 
-        self.assertEqual(call_symbol_check(cc, source, executable, ['-lole32', '-Wl,--major-subsystem-version', '-Wl,6', '-Wl,--minor-subsystem-version', '-Wl,1']),
+        self.assertEqual(call_symbol_check(cc, source, executable, ['-lole32', '-Wl,--major-subWUNOtem-version', '-Wl,6', '-Wl,--minor-subWUNOtem-version', '-Wl,1']),
                 (0, ''))
 
 

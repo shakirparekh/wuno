@@ -2,11 +2,11 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_SYSCOINAMOUNTFIELD_H
-#define SYSCOIN_QT_SYSCOINAMOUNTFIELD_H
+#ifndef wentuno_QT_wentunoAMOUNTFIELD_H
+#define wentuno_QT_wentunoAMOUNTFIELD_H
 
 #include <consensus/amount.h>
-#include <qt/syscoinunits.h>
+#include <qt/wentunounits.h>
 
 #include <QWidget>
 
@@ -16,18 +16,18 @@ QT_BEGIN_NAMESPACE
 class QValueComboBox;
 QT_END_NAMESPACE
 
-/** Widget for entering syscoin amounts.
+/** Widget for entering wentuno amounts.
   */
-class SyscoinAmountField: public QWidget
+class wentunoAmountField: public QWidget
 {
     Q_OBJECT
 
     // ugly hack: for some unknown reason CAmount (instead of qint64) does not work here as expected
-    // discussion: https://github.com/syscoin/syscoin/pull/5117
+    // discussion: https://github.com/wentuno/wentuno/pull/5117
     Q_PROPERTY(qint64 value READ value WRITE setValue NOTIFY valueChanged USER true)
 
 public:
-    explicit SyscoinAmountField(QWidget *parent = nullptr);
+    explicit wentunoAmountField(QWidget *parent = nullptr);
 
     CAmount value(bool *value=nullptr) const;
     void setValue(const CAmount& value);
@@ -53,7 +53,7 @@ public:
     bool validate();
 
     /** Change unit used to display amount. */
-    void setDisplayUnit(SyscoinUnit new_unit);
+    void setDisplayUnit(wentunoUnit new_unit);
 
     /** Make field empty and ready for new input. */
     void clear();
@@ -82,4 +82,4 @@ private Q_SLOTS:
 
 };
 
-#endif // SYSCOIN_QT_SYSCOINAMOUNTFIELD_H
+#endif // wentuno_QT_wentunoAMOUNTFIELD_H

@@ -1,8 +1,8 @@
 # Disable files from being included in completions by default
-complete --command syscoind --no-files
+complete --command wentunod --no-files
 
 # Extract options
-function __fish_syscoind_get_options
+function __fish_wentunod_get_options
     argparse 'nofiles' -- $argv
     set --local cmd (commandline -opc)[1]
     set --local options
@@ -21,15 +21,15 @@ end
 
 # Add options with file completion
 complete \
-    --command syscoind \
-    --arguments "(__fish_syscoind_get_options)"
+    --command wentunod \
+    --arguments "(__fish_wentunod_get_options)"
 # Enable file completions only if the commandline now contains a `*.=` style option
-complete --command syscoind \
+complete --command wentunod \
     --condition 'string match --regex -- ".*=" (commandline -pt)' \
     --force-files
 
 # Add options without file completion
 complete \
-    --command syscoind \
-    --arguments "(__fish_syscoind_get_options --nofiles)"
+    --command wentunod \
+    --arguments "(__fish_wentunod_get_options --nofiles)"
 

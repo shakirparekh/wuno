@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_FLATFILE_H
-#define SYSCOIN_FLATFILE_H
+#ifndef wentuno_FLATFILE_H
+#define wentuno_FLATFILE_H
 
 #include <string>
 
@@ -86,4 +86,4 @@ public:
     bool Flush(const FlatFilePos& pos, bool finalize = false);
 };
 
-#endif // SYSCOIN_FLATFILE_H
+#endif // wentuno_FLATFILE_H

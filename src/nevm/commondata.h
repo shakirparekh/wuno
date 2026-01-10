@@ -20,8 +20,8 @@
  *
  * Shared algorithms and data types.
  */
-#ifndef SYSCOIN_NEVM_COMMONDATA_H
-#define SYSCOIN_NEVM_COMMONDATA_H
+#ifndef wentuno_NEVM_COMMONDATA_H
+#define wentuno_NEVM_COMMONDATA_H
 
 #include <vector>
 #include <algorithm>
@@ -368,4 +368,4 @@ bool contains(T const& _t, V const& _v)
 }
 
 }
-#endif // SYSCOIN_NEVM_COMMONDATA_H
+#endif // wentuno_NEVM_COMMONDATA_H

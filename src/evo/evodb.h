@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_EVO_EVODB_H
-#define SYSCOIN_EVO_EVODB_H
+#ifndef wentuno_EVO_EVODB_H
+#define wentuno_EVO_EVODB_H
 
 #include <dbwrapper.h>
 #include <sync.h>
@@ -41,7 +41,7 @@ public:
         LOCK(cs);
         if(bFlushOnNextRead) {
             bFlushOnNextRead = false;
-            LogPrint(BCLog::SYS, "Evodb::ReadCache flushing cache before read\n");
+            LogPrint(BCLog::WUNO, "Evodb::ReadCache flushing cache before read\n");
             FlushCacheToDisk();
         }
         auto it = mapCache.find(key);
@@ -55,7 +55,7 @@ public:
         LOCK(cs);
         if(bFlushOnNextRead) {
             bFlushOnNextRead = false;
-            LogPrint(BCLog::SYS, "Evodb::ReadCache flushing cache before read\n");
+            LogPrint(BCLog::WUNO, "Evodb::ReadCache flushing cache before read\n");
             FlushCacheToDisk();
         }
         std::unordered_map<K, V, Hasher> cacheCopy;
@@ -118,7 +118,7 @@ public:
         LOCK(cs);
         if(bFlushOnNextRead) {
             bFlushOnNextRead = false;
-            LogPrint(BCLog::SYS, "Evodb::ReadCache flushing cache before read\n");
+            LogPrint(BCLog::WUNO, "Evodb::ReadCache flushing cache before read\n");
             FlushCacheToDisk();
         }
         return (mapCache.find(key) != mapCache.end() || Exists(key));
@@ -178,7 +178,7 @@ public:
         if (!flush()) return false;
         setEraseCache.clear();
 
-        LogPrint(BCLog::SYS,
+        LogPrint(BCLog::WUNO,
                 "Flushed %zu items to cache (%s) in %zu-item chunks (sync_each=1)\n",
                 count, GetName().c_str(), CHUNK_ITEMS);
         return true;
@@ -188,7 +188,7 @@ public:
         try {
             std::unique_ptr<CDBIterator> pcursor(NewIterator());
             if (!pcursor) {
-                 LogPrint(BCLog::SYS, "CEvoDB::%s -- Failed to create DB iterator\n", __func__);
+                 LogPrint(BCLog::WUNO, "CEvoDB::%s -- Failed to create DB iterator\n", __func__);
                  return -1; // Indicate error
             }
             int64_t count = 0;
@@ -200,10 +200,10 @@ public:
             }
             return count;
         } catch (const std::exception& e) {
-             LogPrint(BCLog::SYS, "CEvoDB::%s -- Exception during iteration: %s\n", __func__, e.what());
+             LogPrint(BCLog::WUNO, "CEvoDB::%s -- Exception during iteration: %s\n", __func__, e.what());
             return -1; // Indicate error
         } catch (...) {
-             LogPrint(BCLog::SYS, "CEvoDB::%s -- Unknown exception during iteration\n", __func__);
+             LogPrint(BCLog::WUNO, "CEvoDB::%s -- Unknown exception during iteration\n", __func__);
             return -1; // Indicate error
         }
     }
@@ -226,4 +226,4 @@ public:
 
 };
 
-#endif // SYSCOIN_EVO_EVODB_H
+#endif // wentuno_EVO_EVODB_H

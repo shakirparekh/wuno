@@ -5,41 +5,41 @@ for the process.*
 *version* Release Notes Draft
 ===============================
 
-Syscoin Core version *version* is now available from:
+wentuno Core version *version* is now available from:
 
-  <https://syscoincore.org/bin/syscoin-core-*version*/>
+  <https://wentunocore.org/bin/wentuno-core-*version*/>
 
 This release includes new features, various bug fixes and performance
 improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/syscoin/syscoin/issues>
+  <https://github.com/wentuno/wentuno/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://syscoincore.org/en/list/announcements/join/>
+  <https://wentunocore.org/en/list/announcements/join/>
 
 How to Upgrade
 ==============
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes in some cases), then run the
-installer (on Windows) or just copy over `/Applications/Syscoin-Qt` (on Mac)
-or `syscoind`/`syscoin-qt` (on Linux).
+installer (on Windows) or just copy over `/Applications/wentuno-Qt` (on Mac)
+or `wentunod`/`wentuno-qt` (on Linux).
 
-Upgrading directly from a version of Syscoin Core that has reached its EOL is
+Upgrading directly from a version of wentuno Core that has reached its EOL is
 possible, but it might take some time if the data directory needs to be migrated. Old
-wallet versions of Syscoin Core are generally supported.
+wallet versions of wentuno Core are generally supported.
 
 Compatibility
 ==============
 
-Syscoin Core is supported and extensively tested on operating systems
-using the Linux kernel, macOS 11.0+, and Windows 10 and newer.  Syscoin
-Core should also work on most other Unix-like systems but is not as
-frequently tested on them.  It is not recommended to use Syscoin Core on
-unsupported systems.
+wentuno Core is supported and extensively tested on operating WUNOtems
+using the Linux kernel, macOS 11.0+, and Windows 10 and newer.  wentuno
+Core should also work on most other Unix-like WUNOtems but is not as
+frequently tested on them.  It is not recommended to use wentuno Core on
+unsupported WUNOtems.
 
 Notable changes
 ===============
@@ -101,7 +101,7 @@ New RPCs
   Meanwhile, the original chainstate will complete the initial block download process in
   the background, eventually validating up to the block that the snapshot is based upon.
 
-  The result is a usable syscoind instance that is current with the network tip in a
+  The result is a usable wentunod instance that is current with the network tip in a
   matter of minutes rather than hours. UTXO snapshot are typically obtained via
   third-party sources (HTTP, torrent, etc.) which is reasonable since their contents
   are always checked by hash.
@@ -145,13 +145,13 @@ mempool minimum feerate (but not minimum relay feerate). (#27609)
 Updated settings
 ----------------
 
-- `syscoind` and `syscoin-qt` will now raise an error on startup
- if a datadir that is being used contains a syscoin.conf file that
+- `wentunod` and `wentuno-qt` will now raise an error on startup
+ if a datadir that is being used contains a wentuno.conf file that
  will be ignored, which can happen when a datadir= line is used in
- a syscoin.conf file. The error message is just a diagnostic intended
+ a wentuno.conf file. The error message is just a diagnostic intended
  to prevent accidental misconfiguration, and it can be disabled to
  restore the previous behavior of using the datadir while ignoring
- the syscoin.conf contained in it. (#27302)
+ the wentuno.conf contained in it. (#27302)
 
 - Passing an invalid `-debug`, `-debugexclude`, or `-loglevel` logging configuration
   option now raises an error, rather than logging an easily missed warning. (#27632)
@@ -164,8 +164,8 @@ New settings
 Tools and Utilities
 -------------------
 
-- A new `syscoinconsensus_verify_script_with_spent_outputs` function is available in libconsensus which optionally accepts the spent outputs of the transaction being verified.
-- A new `syscoinconsensus_SCRIPT_FLAGS_VERIFY_TAPROOT` flag is available in libconsensus that will verify scripts with the Taproot spending rules.
+- A new `wentunoconsensus_verify_script_with_spent_outputs` function is available in libconsensus which optionally accepts the spent outputs of the transaction being verified.
+- A new `wentunoconsensus_SCRIPT_FLAGS_VERIFY_TAPROOT` flag is available in libconsensus that will verify scripts with the Taproot spending rules.
 
 Wallet
 ------
@@ -173,7 +173,7 @@ Wallet
 - Wallet loading has changed in this release. Wallets with some corrupted records that could be
   previously loaded (with warnings) may no longer load. For example, wallets with corrupted
   address book entries may no longer load. If this happens, it is recommended
-  load the wallet in a previous version of Syscoin Core and import the data into a new wallet.
+  load the wallet in a previous version of wentuno Core and import the data into a new wallet.
   Please also report an issue to help improve the software and make wallet loading more robust
   in these cases. (#24914)
 
@@ -211,13 +211,13 @@ Wallet
 This means it is possible make calls like:
 
 ```sh
-src/syscoin-cli -named bumpfee txid fee_rate=100
+src/wentuno-cli -named bumpfee txid fee_rate=100
 ```
 
 instead of
 
 ```sh
-src/syscoin-cli -named bumpfee txid options='{"fee_rate": 100}'
+src/wentuno-cli -named bumpfee txid options='{"fee_rate": 100}'
 ```
 
 - The `deprecatedrpc=walletwarningfield` configuration option has been removed.
@@ -265,4 +265,4 @@ Credits
 Thanks to everyone who directly contributed to this release:
 
 As well as to everyone that helped with translations on
-[Transifex](https://www.transifex.com/syscoin/syscoin/).
+[Transifex](https://www.transifex.com/wentuno/wentuno/).

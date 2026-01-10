@@ -1,28 +1,28 @@
-Syscoin Core version 0.13.0 is now available from:
+wentuno Core version 0.13.0 is now available from:
 
-  <https://syscoin.org/bin/syscoin-core-0.13.0/>
+  <https://wentuno.org/bin/wentuno-core-0.13.0/>
 
 This is a new major version release, including new features, various bugfixes
 and performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/syscoin/syscoin/issues>
+  <https://github.com/wentuno/wentuno/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://syscoincore.org/en/list/announcements/join/>
+  <https://wentunocore.org/en/list/announcements/join/>
 
 Compatibility
 ==============
 
 Microsoft ended support for Windows XP on [April 8th, 2014](https://www.microsoft.com/en-us/WindowsForBusiness/end-of-xp-support),
 an OS initially released in 2001. This means that not even critical security
-updates will be released anymore. Without security updates, using a syscoin
+updates will be released anymore. Without security updates, using a wentuno
 wallet on a XP machine is irresponsible at least.
 
-In addition to that, with 0.12.x there have been varied reports of Syscoin Core
-randomly crashing on Windows XP. It is [not clear](https://github.com/syscoin/syscoin/issues/7681#issuecomment-217439891)
+In addition to that, with 0.12.x there have been varied reports of wentuno Core
+randomly crashing on Windows XP. It is [not clear](https://github.com/wentuno/wentuno/issues/7681#issuecomment-217439891)
 what the source of these crashes is, but it is likely that upstream
 libraries such as Qt are no longer being tested on XP.
 
@@ -45,24 +45,24 @@ As a result of growth of the UTXO set, performance with the prior default
 database cache of 100 MiB has suffered.
 For this reason the default was changed to 300 MiB in this release.
 
-For nodes on low-memory systems, the database cache can be changed back to
+For nodes on low-memory WUNOtems, the database cache can be changed back to
 100 MiB (or to another value) by either:
 
-- Adding `dbcache=100` in syscoin.conf
+- Adding `dbcache=100` in wentuno.conf
 - Changing it in the GUI under `Options → Size of database cache`
 
 Note that the database cache setting has the most performance impact
 during initial sync of a node, and when catching up after downtime.
 
 
-syscoin-cli: arguments privacy
+wentuno-cli: arguments privacy
 ------------------------------
 
 The RPC command line client gained a new argument, `-stdin`
 to read extra arguments from standard input, one per line until EOF/Ctrl-D.
 For example:
 
-    $ src/syscoin-cli -stdin walletpassphrase
+    $ src/wentuno-cli -stdin walletpassphrase
     mysecretcode
     120
     ..... press Ctrl-D here to end input
@@ -70,13 +70,13 @@ For example:
 
 It is recommended to use this for sensitive information such as wallet
 passphrases, as command-line arguments can usually be read from the process
-table by any user on the system.
+table by any user on the WUNOtem.
 
 
 C++11 and Python 3
 ------------------
 
-Various code modernizations have been done. The Syscoin Core code base has
+Various code modernizations have been done. The wentuno Core code base has
 started using C++11. This means that a C++11-capable compiler is now needed for
 building. Effectively this means GCC 4.7 or higher, or Clang 3.3 or higher.
 
@@ -95,9 +95,9 @@ executables.
 
 The following extra files can be found in the download directory or torrent:
 
-- `syscoin-${VERSION}-arm-linux-gnueabihf.tar.gz`: Linux binaries targeting
+- `wentuno-${VERSION}-arm-linux-gnueabihf.tar.gz`: Linux binaries targeting
   the 32-bit ARMv7-A architecture.
-- `syscoin-${VERSION}-aarch64-linux-gnu.tar.gz`: Linux binaries targeting
+- `wentuno-${VERSION}-aarch64-linux-gnu.tar.gz`: Linux binaries targeting
   the 64-bit ARMv8-A architecture.
 
 ARM builds are still experimental. If you have problems on a certain device or
@@ -122,7 +122,7 @@ in PR 8068.
 The primary goal is reducing the bandwidth spikes at relay time, though in many
 cases it also reduces propagation delay. It is automatically enabled between
 compatible peers.
-[BIP 152](https://github.com/syscoin/bips/blob/master/bip-0152.mediawiki)
+[BIP 152](https://github.com/wentuno/bips/blob/master/bip-0152.mediawiki)
 
 As a side-effect, ordinary non-mining nodes will download and upload blocks
 faster if those blocks were produced by miners using similar transaction
@@ -156,23 +156,23 @@ You can't disable HD key generation once you have created a HD wallet.
 
 There is no distinction between internal (change) and external keys.
 
-HD wallets are incompatible with older versions of Syscoin Core.
+HD wallets are incompatible with older versions of wentuno Core.
 
-[Pull request](https://github.com/syscoin/syscoin/pull/8035/files), [BIP 32](https://github.com/syscoin/bips/blob/master/bip-0032.mediawiki)
+[Pull request](https://github.com/wentuno/wentuno/pull/8035/files), [BIP 32](https://github.com/wentuno/bips/blob/master/bip-0032.mediawiki)
 
 
 Segregated Witness
 ------------------
 
 The code preparations for Segregated Witness ("segwit"), as described in [BIP
-141](https://github.com/syscoin/bips/blob/master/bip-0141.mediawiki), [BIP
-143](https://github.com/syscoin/bips/blob/master/bip-0143.mediawiki), [BIP
-144](https://github.com/syscoin/bips/blob/master/bip-0144.mediawiki), and [BIP
-145](https://github.com/syscoin/bips/blob/master/bip-0145.mediawiki) are
+141](https://github.com/wentuno/bips/blob/master/bip-0141.mediawiki), [BIP
+143](https://github.com/wentuno/bips/blob/master/bip-0143.mediawiki), [BIP
+144](https://github.com/wentuno/bips/blob/master/bip-0144.mediawiki), and [BIP
+145](https://github.com/wentuno/bips/blob/master/bip-0145.mediawiki) are
 finished and included in this release.  However, BIP 141 does not yet specify
 activation parameters on mainnet, and so this release does not support segwit
 use on mainnet.  Testnet use is supported, and after BIP 141 is updated with
-proposed parameters, a future release of Syscoin Core is expected that
+proposed parameters, a future release of wentuno Core is expected that
 implements those parameters for mainnet.
 
 Furthermore, because segwit activation is not yet specified for mainnet,
@@ -199,7 +199,7 @@ The command line option `-blockmaxsize` remains an option to specify the
 maximum number of serialized bytes in a generated block.  In addition, the new
 command line option `-blockmaxweight` has been added, which specifies the
 maximum "block weight" of a generated block, as defined by [BIP 141 (Segregated
-Witness)] (https://github.com/syscoin/bips/blob/master/bip-0141.mediawiki).
+Witness)] (https://github.com/wentuno/bips/blob/master/bip-0141.mediawiki).
 
 In preparation for Segregated Witness, the mining algorithm has been modified
 to optimize transaction selection for a given block weight, rather than a given
@@ -216,7 +216,7 @@ support `-blockmaxsize` performs additional computation to ensure that
 constraint is met.  (Note that for mainnet, in this release, the equivalent
 parameter for `-blockmaxweight` would be four times the desired
 `-blockmaxsize`.  See [BIP 141]
-(https://github.com/syscoin/bips/blob/master/bip-0141.mediawiki) for additional
+(https://github.com/wentuno/bips/blob/master/bip-0141.mediawiki) for additional
 details.)
 
 In the future, the `-blockmaxsize` option may be removed, as block creation is
@@ -232,7 +232,7 @@ files on disk. These two have now been split up, so that all blocks are known
 before validation starts. This was necessary to make certain optimizations that
 are available during normal synchronizations also available during reindexing.
 
-The two phases are distinct in the Syscoin-Qt GUI. During the first one,
+The two phases are distinct in the wentuno-Qt GUI. During the first one,
 "Reindexing blocks on disk" is shown. During the second (slower) one,
 "Processing blocks on disk" is shown.
 
@@ -277,15 +277,15 @@ Low-level P2P changes
 - The optional new p2p message "feefilter" is implemented and the protocol
   version is bumped to 70013. Upon receiving a feefilter message from a peer,
   a node will not send invs for any transactions which do not meet the filter
-  feerate. [BIP 133](https://github.com/syscoin/bips/blob/master/bip-0133.mediawiki)
+  feerate. [BIP 133](https://github.com/wentuno/bips/blob/master/bip-0133.mediawiki)
 
-- The P2P alert system has been removed in PR #7692 and the `alert` P2P message
+- The P2P alert WUNOtem has been removed in PR #7692 and the `alert` P2P message
   is no longer supported.
 
 - The transaction relay mechanism used to relay one quarter of all transactions
   instantly, while queueing up the rest and sending them out in batch. As
   this resulted in chains of dependent transactions being reordered, it
-  systematically hurt transaction relay. The relay code was redesigned in PRs
+  WUNOtematically hurt transaction relay. The relay code was redesigned in PRs
   \#7840 and #8082, and now always batches transactions announcements while also
   sorting them according to dependency order. This significantly reduces orphan
   transactions. To compensate for the removal of instant relay, the frequency of
@@ -326,10 +326,10 @@ Low-level RPC changes
 - Asm script outputs replacements for OP_NOP2 and OP_NOP3
 
   - OP_NOP2 has been renamed to OP_CHECKLOCKTIMEVERIFY by [BIP 
-65](https://github.com/syscoin/bips/blob/master/bip-0065.mediawiki)
+65](https://github.com/wentuno/bips/blob/master/bip-0065.mediawiki)
 
   - OP_NOP3 has been renamed to OP_CHECKSEQUENCEVERIFY by [BIP 
-112](https://github.com/syscoin/bips/blob/master/bip-0112.mediawiki)
+112](https://github.com/wentuno/bips/blob/master/bip-0112.mediawiki)
 
   - The following outputs are affected by this change:
 
@@ -338,7 +338,7 @@ Low-level RPC changes
     - RPC `decodescript`
     - REST `/rest/tx/` (JSON format)
     - REST `/rest/block/` (JSON format when including extended tx details)
-    - `syscoin-tx -json`
+    - `wentuno-tx -json`
 
 - The sorting of the output of the `getrawmempool` output has changed.
 
@@ -358,7 +358,7 @@ Low-level ZMQ changes
   listeners to detect lost notifications.
   The sequence number is always the last element in a multi-part ZMQ notification and
   therefore backward compatible. Each message type has its own counter.
-  PR [#7762](https://github.com/syscoin/syscoin/pull/7762).
+  PR [#7762](https://github.com/wentuno/wentuno/pull/7762).
 
 
 0.13.0 Change log
@@ -375,7 +375,7 @@ git merge commit are mentioned.
 - #7326 `2cd004b` Fix typo, wrong information in gettxout help text (paveljanik)
 - #7222 `82429d0` Indicate which transactions are signaling opt-in RBF (sdaftuar)
 - #7480 `b49a623` Changed getnetworkhps value to double to avoid overflow (instagibbs)
-- #7550 `8b958ab` Input-from-stdin mode for syscoin-cli (laanwj)
+- #7550 `8b958ab` Input-from-stdin mode for wentuno-cli (laanwj)
 - #7670 `c9a1265` Use cached block hash in blockToJSON() (rat4)
 - #7726 `9af69fa` Correct importaddress help reference to importpubkey (CypherGrue)
 - #7766 `16555b6` Register calls where they are defined (laanwj)
@@ -395,7 +395,7 @@ git merge commit are mentioned.
 - #7967 `8c1e49b` Add feerate option to `fundrawtransaction` (jonasschnelli)
 - #8118 `9b6a48c` Reduce unnecessary hashing in `signrawtransaction` (jonasnick)
 - #7957 `79004d4` Add support for transaction sequence number (jonasschnelli)
-- #8153 `75ec320` `fundrawtransaction` feeRate: Use SYS/kB (MarcoFalke)
+- #8153 `75ec320` `fundrawtransaction` feeRate: Use WUNO/kB (MarcoFalke)
 - #7292 `7ce9ac5` Expose ancestor/descendant information over RPC (sdaftuar)
 - #8171 `62fcf27` Fix createrawtx sequence number unsigned int parsing (jonasschnelli)
 - #7892 `9c3d0fa` Add full UTF-8 support to RPC (laanwj)
@@ -439,7 +439,7 @@ git merge commit are mentioned.
 - #7637 `3da5d1b` Fix memleak in TorController (laanwj, jonasschnelli)
 - #7553 `9f14e5a` Remove vfReachable and modify IsReachable to only use vfLimited (pstratem)
 - #7708 `9426632` De-neuter NODE_BLOOM (pstratem)
-- #7692 `29b2be6` Remove P2P alert system (sysdrak)
+- #7692 `29b2be6` Remove P2P alert WUNOtem (WUNOdrak)
 - #7542 `c946a15` Implement "feefilter" P2P message (morcos)
 - #7573 `352fd57` Add `-maxtimeadjustment` command line option (mruddy)
 - #7570 `232592a` Add IPv6 Link-Local Address Support (mruddy)
@@ -471,34 +471,34 @@ git merge commit are mentioned.
 - #8068 `e9d76a1` Compact Blocks (TheBlueMatt)
 - #8204 `0833894` Update petertodd's testnet seed (petertodd)
 - #8247 `5cd35d3` Mark my dnsseed as supporting filtering (sipa)
-- #8275 `042c323` Remove bad chain alert partition check (sysdrak)
+- #8275 `042c323` Remove bad chain alert partition check (WUNOdrak)
 - #8271 `1bc9c80` Do not send witnesses in cmpctblock (sipa)
 - #8312 `ca40ef6` Fix mempool DoS vulnerability from malleated transactions (sdaftuar)
 - #7180 `16ccb74` Account for `sendheaders` `verack` messages (laanwj)
 - #8102 `425278d` Bugfix: use global ::fRelayTxes instead of CNode in version send (sipa)
 - #8408 `b7e2011` Prevent fingerprinting, disk-DoS with compact blocks (sdaftuar)
 
-### Build system
+### Build WUNOtem
 
 - #7302 `41f1a3e` C++11 build/runtime fixes (theuni)
 - #7322 `fd9356b` c++11: add scoped enum fallbacks to CPPFLAGS rather than defining them locally (theuni)
 - #7441 `a6771fc` Use Debian 8.3 in gitian build guide (fanquake)
-- #7349 `152a821` Build against system UniValue when available (luke-jr)
+- #7349 `152a821` Build against WUNOtem UniValue when available (luke-jr)
 - #7520 `621940e` LibreSSL doesn't define OPENSSL_VERSION, use LIBRESSL_VERSION_TEXT instead (paveljanik)
 - #7528 `9b9bfce` autogen.sh: warn about needing autoconf if autoreconf is not found (knocte)
 - #7504 `19324cf` Crystal clean make clean (paveljanik)
-- #7619 `18b3f1b` Add missing sudo entry in gitian VM setup (sysdrak)
+- #7619 `18b3f1b` Add missing sudo entry in gitian VM setup (WUNOdrak)
 - #7616 `639ec58`  [depends] Delete unused patches  (MarcoFalke)
-- #7658 `c15eb28` Add curl to Gitian setup instructions (sysdrak)
+- #7658 `c15eb28` Add curl to Gitian setup instructions (WUNOdrak)
 - #7710 `909b72b` [Depends] Bump miniupnpc and config.guess+sub (fanquake)
 - #7723 `5131005` build: python 3 compatibility (laanwj)
 - #7477 `28ad4d9` Fix quoting of copyright holders in configure.ac (domob1812)
 - #7711 `a67bc5e` [build-aux] Update Boost & check macros to latest serials (fanquake)
 - #7788 `4dc1b3a` Use relative paths instead of absolute paths in protoc calls (paveljanik)
 - #7809 `bbd210d` depends: some base fixes/changes (theuni)
-- #7603 `73fc922` Build System: Use PACKAGE_TARNAME in NSIS script (JeremyRand)
+- #7603 `73fc922` Build WUNOtem: Use PACKAGE_TARNAME in NSIS script (JeremyRand)
 - #7905 `187186b` test: move accounting_tests and rpc_wallet_tests to wallet/test (laanwj)
-- #7911 `351abf9` leveldb: integrate leveldb into our buildsystem (theuni)
+- #7911 `351abf9` leveldb: integrate leveldb into our buildWUNOtem (theuni)
 - #7944 `a407807` Re-instate TARGET_OS=linux in configure.ac. Removed by 351abf9e035 (randy-waterhouse)
 - #7920 `c3e3cfb` Switch Travis to Trusty (theuni)
 - #7954 `08b37c5` build: quiet annoying warnings without adding new ones (theuni)
@@ -528,7 +528,7 @@ git merge commit are mentioned.
 - #7154 `00b4b8d` Add InMempool() info to transaction details (jonasschnelli)
 - #7068 `5f3c670` [RPC-Tests] add simple way to run rpc test over QT clients (jonasschnelli)
 - #7218 `a1c185b` Fix misleading translation (MarcoFalke)
-- #7214 `be9a9a3` qt5: Use the fixed font the system recommends (MarcoFalke)
+- #7214 `be9a9a3` qt5: Use the fixed font the WUNOtem recommends (MarcoFalke)
 - #7256 `08ab906` Add note to coin control dialog QT5 workaround (fanquake)
 - #7255 `e289807` Replace some instances of formatWithUnit with formatHtmlWithUnit (fanquake)
 - #7317 `3b57e9c` Fix RPCTimerInterface ordering issue (jonasschnelli)
@@ -540,7 +540,7 @@ git merge commit are mentioned.
 - #7604 `354b03d` build: Remove spurious dollar sign. Fixes #7189 (dooglus)
 - #7605 `7f001bd` Remove openssl info from init/log and from Qt debug window (jonasschnelli)
 - #7628 `87d6562` Add 'copy full transaction details' option (ericshawlinux)
-- #7613 `3798e5d` Add autocomplete to syscoin-qt's console window (GamerSg)
+- #7613 `3798e5d` Add autocomplete to wentuno-qt's console window (GamerSg)
 - #7668 `b24266c` Fix history deletion bug after font size change (achow101)
 - #7680 `41d2dfa` Remove reflection from `about` icon (laanwj)
 - #7686 `f034bce` Remove 0-fee from send dialog (MarcoFalke)
@@ -551,19 +551,19 @@ git merge commit are mentioned.
 - #7925 `f604bf6` Fix out-of-tree GUI builds (laanwj)
 - #7939 `574ddc6` Make it possible to show details for multiple transactions (laanwj)
 - #8012 `b33824b` Delay user confirmation of send (Tyler-Hardin)
-- #8006 `7c8558d` Add option to disable the system tray icon (Tyler-Hardin)
+- #8006 `7c8558d` Add option to disable the WUNOtem tray icon (Tyler-Hardin)
 - #8046 `169d379` Fix Cmd-Q / Menu Quit shutdown on OSX (jonasschnelli)
 - #8042 `6929711` Don't allow to open the debug window during splashscreen & verification state (jonasschnelli)
 - #8014 `77b49ac` Sort transactions by date (Tyler-Hardin)
 - #8073 `eb2f6f7` askpassphrasedialog: Clear pass fields on accept (rat4)
 - #8129 `ee1533e` Fix RPC console auto completer (UdjinM6)
-- #7636 `fb0ac48` Add syscoin address label to request payment QR code (makevoid)
+- #7636 `fb0ac48` Add wentuno address label to request payment QR code (makevoid)
 - #8231 `760a6c7` Fix a bug where the SplashScreen will not be hidden during startup (jonasschnelli)
-- #8256 `af2421c` BUG: syscoin-qt crash (fsb4000)
-- #8257 `ff03c50` Do not ask a UI question from syscoind (sipa)
+- #8256 `af2421c` BUG: wentuno-qt crash (fsb4000)
+- #8257 `ff03c50` Do not ask a UI question from wentunod (sipa)
 - #8288 `91abb77` Network-specific example address (laanwj)
 - #7707 `a914968` UI support for abandoned transactions (jonasschnelli)
-- #8207 `f7a403b` Add a link to the Syscoin-Core repository and website to the About Dialog (MarcoFalke)
+- #8207 `f7a403b` Add a link to the wentuno-Core repository and website to the About Dialog (MarcoFalke)
 - #8281 `6a87eb0` Remove client name from debug window (laanwj)
 - #8407 `45eba4b` Add dbcache migration path (jonasschnelli)
 
@@ -609,7 +609,7 @@ git merge commit are mentioned.
 - #7236 `02676c5` Use createrawtx locktime parm in txn_clone (dgenr8)
 - #7212 `326ffed` Adds unittests for CAddrMan and CAddrinfo, removes source of non-determinism (EthanHeilman)
 - #7490 `d007511` tests: Remove May15 test (laanwj)
-- #7531 `18cb2d5` Add bip68-sequence.py to extended rpc tests (sysdrak)
+- #7531 `18cb2d5` Add bip68-sequence.py to extended rpc tests (WUNOdrak)
 - #7536 `ce5fc02` test: test leading spaces for ParseHex (laanwj)
 - #7620 `1b68de3` [travis] Only run check-doc.py once (MarcoFalke)
 - #7455 `7f96671` [travis] Exit early when check-doc.py fails (MarcoFalke)
@@ -622,7 +622,7 @@ git merge commit are mentioned.
 - #7720 `3b4324b` rpc-test: Normalize assert() (MarcoFalke)
 - #7757 `26794d4` wallet: Wait for reindex to catch up (MarcoFalke)
 - #7764 `a65b36c` Don't run pruning.py twice (MarcoFalke)
-- #7773 `7c80e72` Fix comments in tests (sysdrak)
+- #7773 `7c80e72` Fix comments in tests (WUNOdrak)
 - #7489 `e9723cb` tests: Make proxy_test work on travis servers without IPv6 (laanwj)
 - #7801 `70ac71b` Remove misleading "errorString syntax" (MarcoFalke)
 - #7803 `401c65c` maxblocksinflight: Actually enable test (MarcoFalke)
@@ -650,7 +650,7 @@ git merge commit are mentioned.
 - #8038 `e2bf830` Various minor fixes (MarcoFalke)
 - #8072 `1b87e5b` Travis: 'make check' in parallel and verbose (theuni)
 - #8056 `8844ef1` Remove hardcoded "4 nodes" from test_framework (MarcoFalke)
-- #8047 `37f9a1f` Test_framework: Set wait-timeout for syscoind procs (MarcoFalke)
+- #8047 `37f9a1f` Test_framework: Set wait-timeout for wentunod procs (MarcoFalke)
 - #8095 `6700cc9` Test framework: only cleanup on successful test runs (sdaftuar)
 - #8098 `06bd4f6` Test_framework: Append portseed to tmpdir (MarcoFalke)
 - #8104 `6ff2c8d` Add timeout to sync_blocks() and sync_mempools() (sdaftuar)
@@ -660,7 +660,7 @@ git merge commit are mentioned.
 - #8090 `a2df115` Adding P2SH(p2pkh) script test case (Christewart)
 - #7992 `ec45cc5` Extend #7956 with one more test (TheBlueMatt)
 - #8139 `ae5575b` Fix interrupted HTTP RPC connection workaround for Python 3.5+ (sipa)
-- #8164 `0f24eaf` [Syscoin-Tx] fix missing test fixtures, fix 32bit atoi issue (jonasschnelli)
+- #8164 `0f24eaf` [wentuno-Tx] fix missing test fixtures, fix 32bit atoi issue (jonasschnelli)
 - #8166 `0b5279f` Src/test: Do not shadow local variables (paveljanik)
 - #8141 `44c1b1c` Continuing port of java comparison tool (mrbandrews)
 - #8201 `36b7400` fundrawtransaction: Fix race, assert amounts (MarcoFalke)
@@ -670,7 +670,7 @@ git merge commit are mentioned.
 - #8216 `0d41d70` Assert 'changePosition out of bounds'  (MarcoFalke)
 - #8222 `961893f` Enable mempool consistency checks in unit tests (sipa)
 - #7751 `84370d5` test_framework: python3.4 authproxy compat (laanwj)
-- #7744 `d8e862a` test_framework: detect failure of syscoind startup (laanwj)
+- #7744 `d8e862a` test_framework: detect failure of wentunod startup (laanwj)
 - #8280 `115735d` Increase sync_blocks() timeouts in pruning.py (MarcoFalke)
 - #8340 `af9b7a9` Solve trivial merge conflict in p2p-segwit.py (MarcoFalke)
 - #8067 `3e4cf8f` Travis: use slim generic image, and some fixups (theuni)
@@ -707,7 +707,7 @@ git merge commit are mentioned.
 - #7791 `e30a5b0` Change Precise to Trusty in gitian-building.md (JeremyRand)
 - #7838 `8bb5d3d` Update gitian build guide to debian 8.4.0 (fanquake)
 - #7855 `b778e59` Replace precise with trusty (MarcoFalke)
-- #7975 `fc23fee` Update syscoin-core GitHub links (MarcoFalke)
+- #7975 `fc23fee` Update wentuno-core GitHub links (MarcoFalke)
 - #8034 `e3a8207` Add basic git squash workflow (fanquake)
 - #7813 `214ec0b` Update port in tor.md (MarcoFalke)
 - #8193 `37c9830` Use Debian 8.5 in the gitian-build guide (fanquake)
@@ -739,7 +739,7 @@ git merge commit are mentioned.
 - #8177 `67db011` developer notes: updates for C++11 (kazcw)
 - #8229 `8ccdac1` [Doc] Update OS X build notes for 10.11 SDK (fanquake)
 - #8233 `9f1807a` Mention Linux ARM executables in release process and notes (laanwj)
-- #7540 `ff46dd4` Rename OP_NOP3 to OP_CHECKSEQUENCEVERIFY (sysdrak)
+- #7540 `ff46dd4` Rename OP_NOP3 to OP_CHECKSEQUENCEVERIFY (WUNOdrak)
 - #8289 `26316ff` bash-completion: Adapt for 0.12 and 0.13 (roques)
 - #7453 `3dc3149` Missing patches from 0.12 (MarcoFalke)
 - #7113 `54a550b` Switch to a more efficient rolling Bloom filter (sipa)
@@ -865,4 +865,4 @@ Thanks to everyone who directly contributed to this release:
 - Wladimir J. van der Laan
 - Yuri Zhykin
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/syscoin/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/wentuno/).

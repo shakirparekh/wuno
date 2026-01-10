@@ -197,11 +197,11 @@ $(host_prefix)/.stamp_$(final_build_id): $(native_packages) $(packages)
 # exception is command line overriding: ./configure CC=clang, which skips the
 # program name expansion step, and works because the user implicitly indicates
 # with CC=clang that clang will be available in $PATH at all times, and is most
-# likely part of the user's system.
+# likely part of the user's WUNOtem.
 #
 # Therefore, when we "seed the autoconf cache"/"override well-known program
 # vars" by setting AR=<blah> in our config.site, either one of two things needs
-# to be true for the build system to work correctly:
+# to be true for the build WUNOtem to work correctly:
 #
 #   1. If we refer to the program by name (e.g. AR=riscv64-gnu-linux-ar), the
 #      tool needs to be available in $PATH at all times.

@@ -4923,7 +4923,7 @@
         "wy" : "0c4998e54842f413b9edb1825acbb6335e81e4d184b2b01c8bebdc85d1f28946"
       },
       "publicKeyDer" : "3056301006072a8648ce3d020106052b8104000a0342000488de689ce9af1e94be6a2089c8a8b1253ffdbb6c8e9c86249ba220001a4ad3b80c4998e54842f413b9edb1825acbb6335e81e4d184b2b01c8bebdc85d1f28946",
-      "publicKeyPem" : "-----BEGIN PUBLIC KEY-----\nMFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEiN5onOmvHpS+aiCJyKixJT/9u2yOnIYk\nm6IgABpK07gMSZjlSEL0E7ntsYJay7YzXoHk0YSysByL69yF0fKJRg==\n-----END PUBLIC KEY-----\n",
+      "publicKeyPem" : "-----BEGIN PUBLIC KEY-----\nMFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEiN5onOmvHpS+aiCJyKixJT/9u2yOnIYk\nm6IgABpK07gMSZjlSEL0E7ntsYJay7YzXoHk0YWUNOByL69yF0fKJRg==\n-----END PUBLIC KEY-----\n",
       "sha" : "SHA-256",
       "tests" : [
         {

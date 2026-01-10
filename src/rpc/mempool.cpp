@@ -71,11 +71,11 @@ static RPCHelpMan sendrawtransaction()
             if (!DecodeHexTx(mtx, request.params[0].get_str())) {
                 throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "TX decode failed. Make sure the tx has at least one input.");
             }
-            // SYSCOIN
-            if(IsSyscoinNEVMDataTx(mtx.nVersion)) {
+            // wentuno
+            if(IswentunoNEVMDataTx(mtx.nVersion)) {
                 CNEVMData nevmData(CTransaction(mtx), PROTOCOL_VERSION | SERIALIZE_TRANSACTION_PODA);
                 if(nevmData.vchNEVMData && nevmData.vchNEVMData->size() > 0) {
-                    auto nOut = GetSyscoinDataOutput(mtx);
+                    auto nOut = GetwentunoDataOutput(mtx);
                     if (nOut != -1) {
                         mtx.vout[nOut].vchNEVMData = *nevmData.vchNEVMData;
                     }
@@ -88,8 +88,8 @@ static RPCHelpMan sendrawtransaction()
                     // clear memory allocated for vchNEVMData
                     nevmData.SetNull();
                 }
-            // SYSCOIN we actively burn to allocation here so we want to avoid checking for default burn exceeded
-            } else if(mtx.nVersion != SYSCOIN_TX_VERSION_SYSCOIN_BURN_TO_ALLOCATION) {
+            // wentuno we actively burn to allocation here so we want to avoid checking for default burn exceeded
+            } else if(mtx.nVersion != wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION) {
                 for (const auto& out : mtx.vout) {
                     if((out.scriptPubKey.IsUnspendable() || !out.scriptPubKey.HasValidOps()) && out.nValue > max_burn_amount) {
                         throw JSONRPCTransactionError(TransactionError::MAX_BURN_EXCEEDED);
@@ -751,7 +751,7 @@ static RPCHelpMan importmempool()
              "",
              {
                  {"use_current_time", RPCArg::Type::BOOL, RPCArg::Default{true},
-                  "Whether to use the current system time or use the entry time metadata from the mempool file.\n"
+                  "Whether to use the current WUNOtem time or use the entry time metadata from the mempool file.\n"
                   "Warning: Importing untrusted metadata may lead to unexpected issues and undesirable behavior."},
                  {"apply_fee_delta_priority", RPCArg::Type::BOOL, RPCArg::Default{false},
                   "Whether to apply the fee delta metadata from the mempool file.\n"

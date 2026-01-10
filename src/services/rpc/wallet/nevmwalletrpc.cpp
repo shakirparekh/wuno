@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2013-2019 The Syscoin Core developers
+﻿// Copyright (c) 2013-2019 The wentuno Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <messagesigner.h>
@@ -25,7 +25,7 @@ static RPCHelpMan signmessagebech32()
                 "\nSign a message with the private key of an address (p2pkh or p2wpkh)" +
         HELP_REQUIRING_PASSPHRASE,
                 {
-                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The syscoin address to use for the private key."},
+                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The wentuno address to use for the private key."},
                     {"message", RPCArg::Type::STR, RPCArg::Optional::NO, "Message to sign."},
                 },
                 RPCResult{
@@ -82,9 +82,9 @@ static RPCHelpMan signmessagebech32()
 } 
 
 
-static RPCHelpMan syscoincreaterawnevmblob()
+static RPCHelpMan wentunocreaterawnevmblob()
 {
-    return RPCHelpMan{"syscoincreaterawnevmblob",
+    return RPCHelpMan{"wentunocreaterawnevmblob",
         "\nCreate NEVM blob data used by rollups via a custom raw parameters\n",
         {
             {"versionhash", RPCArg::Type::STR_HEX, RPCArg::Optional::NO, "Version hash of the blob"},
@@ -96,8 +96,8 @@ static RPCHelpMan syscoincreaterawnevmblob()
         },
         RPCResult{RPCResult::Type::ANY, "", ""},
         RPCExamples{
-            HelpExampleCli("syscoincreaterawnevmblob", "\"versionhash\" \"data\" 6 economical 25")
-            + HelpExampleRpc("syscoincreaterawnevmblob", "\"versionhash\" \"data\" 6 economical 25")
+            HelpExampleCli("wentunocreaterawnevmblob", "\"versionhash\" \"data\" 6 economical 25")
+            + HelpExampleRpc("wentunocreaterawnevmblob", "\"versionhash\" \"data\" 6 economical 25")
         },
     [&](const RPCHelpMan& self, const node::JSONRPCRequest& request) -> UniValue
 { 
@@ -120,7 +120,7 @@ static RPCHelpMan syscoincreaterawnevmblob()
     CScript scriptData;
     scriptData << OP_RETURN << data;
     CCoinControl coin_control;
-    coin_control.m_version = SYSCOIN_TX_VERSION_NEVM_DATA_SHA3;
+    coin_control.m_version = wentuno_TX_VERSION_NEVM_DATA_SHA3;
     coin_control.m_nevmdata = vchData;
     CTxDestination dest;
     ExtractDestination(scriptData, dest);
@@ -131,9 +131,9 @@ static RPCHelpMan syscoincreaterawnevmblob()
     };
 }
 
-static RPCHelpMan syscoincreatenevmblob()
+static RPCHelpMan wentunocreatenevmblob()
 {
-    return RPCHelpMan{"syscoincreatenevmblob",
+    return RPCHelpMan{"wentunocreatenevmblob",
         "\nCreate NEVM blob data used by rollups\n",
         {
             {"data", RPCArg::Type::STR_HEX, RPCArg::Optional::NO, "blob in hex"},
@@ -145,8 +145,8 @@ static RPCHelpMan syscoincreatenevmblob()
         },
         RPCResult{RPCResult::Type::ANY, "", ""},
         RPCExamples{
-            HelpExampleCli("syscoincreatenevmblob", "\"data\"")
-            + HelpExampleRpc("syscoincreatenevmblob", "\"data\"")
+            HelpExampleCli("wentunocreatenevmblob", "\"data\"")
+            + HelpExampleRpc("wentunocreatenevmblob", "\"data\"")
         },
     [&](const RPCHelpMan& self, const node::JSONRPCRequest& request) -> UniValue
 { 
@@ -184,7 +184,7 @@ static RPCHelpMan syscoincreatenevmblob()
     requestSend.context = request.context;
     requestSend.params = paramsSend;
     requestSend.URI = request.URI;
-    UniValue resObj = syscoincreaterawnevmblob().HandleRequest(requestSend);
+    UniValue resObj = wentunocreaterawnevmblob().HandleRequest(requestSend);
     if(!resObj.isNull()) {
         if(!resObj.find_value("txid").isNull()) {
             UniValue resRet(UniValue::VOBJ);
@@ -332,7 +332,7 @@ static RPCHelpMan getauxblock()
                             {RPCResult::Type::NUM, "chainid", "chain ID for this block"},
                             {RPCResult::Type::STR_HEX, "previousblockhash", "hash of the previous block"},
                             {RPCResult::Type::NUM, "coinbasevalue", "value of the block's coinbase"},
-                            {RPCResult::Type::STR_HEX, "coinbasescript", "The full scriptPubKey of the parent coinbase output for Syscoin AuxPoW tag commitment"},
+                            {RPCResult::Type::STR_HEX, "coinbasescript", "The full scriptPubKey of the parent coinbase output for wentuno AuxPoW tag commitment"},
                             {RPCResult::Type::STR, "bits", "compressed target of the block"},
                             {RPCResult::Type::NUM, "height", "height of the block"},
                             {RPCResult::Type::STR_HEX, "_target", "target in reversed byte order, deprecated"},
@@ -384,11 +384,11 @@ static RPCHelpMan getauxblock()
 Span<const CRPCCommand> wallet::GetNEVMWalletRPCCommands()
 {
     static const CRPCCommand commands[]{ 
-        {"syscoinwallet", &signmessagebech32},
-        {"syscoinwallet", &syscoincreatenevmblob},
-        {"syscoinwallet", &syscoincreaterawnevmblob},
+        {"wentunowallet", &signmessagebech32},
+        {"wentunowallet", &wentunocreatenevmblob},
+        {"wentunowallet", &wentunocreaterawnevmblob},
         /** Auxpow wallet functions */
-        {"syscoinwallet", &getauxblock},
+        {"wentunowallet", &getauxblock},
     };
 // clang-format on
     return commands;

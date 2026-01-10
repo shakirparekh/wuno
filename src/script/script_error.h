@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SCRIPT_SCRIPT_ERROR_H
-#define SYSCOIN_SCRIPT_SCRIPT_ERROR_H
+#ifndef wentuno_SCRIPT_SCRIPT_ERROR_H
+#define wentuno_SCRIPT_SCRIPT_ERROR_H
 
 #include <string>
 
@@ -89,4 +89,4 @@ typedef enum ScriptError_t
 
 std::string ScriptErrorString(const ScriptError error);
 
-#endif // SYSCOIN_SCRIPT_SCRIPT_ERROR_H
+#endif // wentuno_SCRIPT_SCRIPT_ERROR_H

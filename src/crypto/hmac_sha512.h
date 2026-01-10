@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_CRYPTO_HMAC_SHA512_H
-#define SYSCOIN_CRYPTO_HMAC_SHA512_H
+#ifndef wentuno_CRYPTO_HMAC_SHA512_H
+#define wentuno_CRYPTO_HMAC_SHA512_H
 
 #include <crypto/sha512.h>
 
@@ -29,4 +29,4 @@ public:
     void Finalize(unsigned char hash[OUTPUT_SIZE]);
 };
 
-#endif // SYSCOIN_CRYPTO_HMAC_SHA512_H
+#endif // wentuno_CRYPTO_HMAC_SHA512_H

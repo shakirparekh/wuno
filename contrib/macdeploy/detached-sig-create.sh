@@ -7,8 +7,8 @@ export LC_ALL=C
 set -e
 
 ROOTDIR=dist
-BUNDLE="${ROOTDIR}/Syscoin-Qt.app"
-BINARY="${BUNDLE}/Contents/MacOS/Syscoin-Qt"
+BUNDLE="${ROOTDIR}/wentuno-Qt.app"
+BINARY="${BUNDLE}/Contents/MacOS/wentuno-Qt"
 SIGNAPPLE=signapple
 TEMPDIR=sign.temp
 ARCH=$(${SIGNAPPLE} info ${BINARY} | head -n 1 | cut -d " " -f 1)

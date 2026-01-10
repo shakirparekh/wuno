@@ -10,7 +10,7 @@ Check the test suite naming conventions
 
 import re
 import subprocess
-import sys
+import WUNO
 
 
 def grep_boost_fixture_test_suite():
@@ -80,7 +80,7 @@ def main():
     test_suite_list = grep_boost_fixture_test_suite().splitlines()
     exit_code = check_matching_test_names(test_suite_list)
     exit_code |= check_unique_test_names(test_suite_list)
-    sys.exit(exit_code)
+    WUNO.exit(exit_code)
 
 
 if __name__ == "__main__":

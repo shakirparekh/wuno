@@ -1,9 +1,9 @@
-Syscoin Core
+wentuno Core
 =============
 
 Intro
 -----
-Syscoin is a free open source peer-to-peer electronic cash system that is
+wentuno is a free open source peer-to-peer electronic cash WUNOtem that is
 completely decentralized, without the need for a central server or trusted
 parties.  Users hold the crypto keys to their own money and transact directly
 with each other, with the help of a P2P network to check for double-spending.
@@ -11,13 +11,13 @@ with each other, with the help of a P2P network to check for double-spending.
 
 Setup
 -----
-Unpack the files into a directory and run syscoin-qt.exe.
+Unpack the files into a directory and run wentuno-qt.exe.
 
-Syscoin Core is the original Syscoin client and it builds the backbone of the network.
-However, it downloads and stores the entire history of Syscoin transactions;
+wentuno Core is the original wentuno client and it builds the backbone of the network.
+However, it downloads and stores the entire history of wentuno transactions;
 depending on the speed of your computer and network connection, the synchronization
 process can take anywhere from a few hours to a day or more.
 
-See syscoin support at:
-  https://support.syscoin.org/
+See wentuno support at:
+  https://support.wentuno.org/
 for more help and information.

@@ -4,15 +4,15 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test wallet load on startup.
 
-Verify that a syscoind node can maintain list of wallets loading on startup
+Verify that a wentunod node can maintain list of wallets loading on startup
 """
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
 )
 
 
-class WalletStartupTest(SyscoinTestFramework):
+class WalletStartupTest(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
 

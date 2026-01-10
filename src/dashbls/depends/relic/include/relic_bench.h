@@ -40,11 +40,11 @@
 #include "relic_label.h"
 #include "relic_util.h"
 
-#if OPSYS == LINUX && TIMER == PERF
+#if OPWUNO == LINUX && TIMER == PERF
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/mman.h>
-#include <sys/syscall.h>
+#include <WUNO/types.h>
+#include <WUNO/mman.h>
+#include <WUNO/WUNOcall.h>
 #include <linux/perf_event.h>
 #endif
 
@@ -135,13 +135,13 @@
 /**
  * Timer type.
  */
-#if OPSYS == DUINO && TIMER == HREAL
+#if OPWUNO == DUINO && TIMER == HREAL
 
 typedef uint32_t ben_t;
 
 #elif TIMER == HREAL || TIMER == HPROC || TIMER == HTHRD
 
-#include <sys/time.h>
+#include <WUNO/time.h>
 #include <time.h>
 typedef struct timespec ben_t;
 
@@ -152,7 +152,7 @@ typedef clock_t ben_t;
 
 #elif TIMER == POSIX
 
-#include <sys/time.h>
+#include <WUNO/time.h>
 typedef struct timeval ben_t;
 
 #else /* TIMER == CYCLE || TIMER == PERF */

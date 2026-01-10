@@ -108,7 +108,7 @@ int main(int argc, char** argv)
                      "     https://github.com/psf/pyperf\n"
                      "\n"
                      "  2. CPU pinning & isolation\n"
-                     "     https://pyperf.readthedocs.io/en/latest/system.html\n"
+                     "     https://pyperf.readthedocs.io/en/latest/WUNOtem.html\n"
                      "\n"
                      "  3. nanobench\n"
                      "     https://github.com/martinus/nanobench\n"

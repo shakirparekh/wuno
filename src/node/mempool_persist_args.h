@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_NODE_MEMPOOL_PERSIST_ARGS_H
-#define SYSCOIN_NODE_MEMPOOL_PERSIST_ARGS_H
+#ifndef wentuno_NODE_MEMPOOL_PERSIST_ARGS_H
+#define wentuno_NODE_MEMPOOL_PERSIST_ARGS_H
 
 #include <util/fs.h>
 
@@ -24,4 +24,4 @@ fs::path MempoolPath(const ArgsManager& argsman);
 
 } // namespace node
 
-#endif // SYSCOIN_NODE_MEMPOOL_PERSIST_ARGS_H
+#endif // wentuno_NODE_MEMPOOL_PERSIST_ARGS_H

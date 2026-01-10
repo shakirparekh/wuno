@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_LLMQ_QUORUMS_SIGNING_H
-#define SYSCOIN_LLMQ_QUORUMS_SIGNING_H
+#ifndef wentuno_LLMQ_QUORUMS_SIGNING_H
+#define wentuno_LLMQ_QUORUMS_SIGNING_H
 
 #include <bls/bls.h>
 #include <protocol.h>
@@ -261,4 +261,4 @@ bool IsQuorumActive(const uint256& quorumHash);
 extern CSigningManager* quorumSigningManager;
 } // namespace llmq
 
-#endif // SYSCOIN_LLMQ_QUORUMS_SIGNING_H
+#endif // wentuno_LLMQ_QUORUMS_SIGNING_H

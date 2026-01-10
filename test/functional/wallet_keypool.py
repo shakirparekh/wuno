@@ -7,13 +7,13 @@
 import time
 from decimal import Decimal
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import assert_equal, assert_raises_rpc_error
 from test_framework.wallet_util import WalletUnlock
 from test_framework.auxpow import reverseHex
 from test_framework.auxpow_testing import computeAuxpow
 
-class KeyPoolTest(SyscoinTestFramework):
+class KeyPoolTest(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
 
@@ -247,7 +247,7 @@ def test_auxpow(self, nodes):
         assert_equal (nodes[0].getwalletinfo()['keypoolsize'], 0)
 
     target = reverseHex(auxblock['_target'])
-    # SYSCOIN
+    # wentuno
     solved = computeAuxpow(auxblock['hash'], target, True, auxblock['coinbasescript'])
     res = nodes[0].getauxblock(auxblock['hash'], solved)
     assert res

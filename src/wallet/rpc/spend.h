@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_WALLET_RPC_SPEND_H
-#define SYSCOIN_WALLET_RPC_SPEND_H
+#ifndef wentuno_WALLET_RPC_SPEND_H
+#define wentuno_WALLET_RPC_SPEND_H
 #include <vector>
 class RPCHelpMan;
 class UniValue;
@@ -11,8 +11,8 @@ namespace wallet {
     class CWallet;
     class CCoinControl;
 RPCHelpMan signrawtransactionwithwallet();
-// SYSCOIN
+// wentuno
 RPCHelpMan send();
 UniValue SendMoney(CWallet& wallet, const CCoinControl &coin_control, std::vector<CRecipient> &recipients, mapValue_t map_value, bool verbose);
 }
-#endif // SYSCOIN_WALLET_RPC_SPEND_H
+#endif // wentuno_WALLET_RPC_SPEND_H

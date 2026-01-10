@@ -35,14 +35,14 @@ static RPCHelpMan masternode_list()
             "  json           - Print info in JSON format (can be additionally filtered, partial match)\n"
             "  lastpaidblock  - Print the last block height a node was paid on the network\n"
             "  lastpaidtime   - Print the last time a node was paid on the network\n"
-            "  owneraddress   - Print the masternode owner Syscoin address\n"
-            "  nevmaddress    - Print the masternode registered Syscoin NEVM address\n"
-            "  payee          - Print the masternode payout Syscoin address (can be additionally filtered,\n"
+            "  owneraddress   - Print the masternode owner wentuno address\n"
+            "  nevmaddress    - Print the masternode registered wentuno NEVM address\n"
+            "  payee          - Print the masternode payout wentuno address (can be additionally filtered,\n"
             "                   partial match)\n"
             "  pubKeyOperator - Print the masternode operator public key\n"
             "  status         - Print masternode status: ENABLED / POSE_BANNED\n"
             "                   (can be additionally filtered, partial match)\n"
-            "  votingaddress  - Print the masternode voting Syscoin address\n"},     
+            "  votingaddress  - Print the masternode voting wentuno address\n"},     
             {"filter", RPCArg::Type::STR, RPCArg::Optional::OMITTED, "Filter results. Partial match by outpoint by default in all modes,\n"
                             "additional matches in some modes are also available.\n"},           
         },
@@ -269,7 +269,7 @@ static RPCHelpMan getevodbstats()
                 {RPCResult::Type::NUM, "estimated_disk_size_bytes", "Estimated total disk size occupied by the database files."},
                 {RPCResult::Type::NUM, "cache_entries", "Number of list entries currently held in the in-memory write cache."},
                 {RPCResult::Type::NUM, "erase_cache_entries", "Number of list entries currently marked for deletion in the in-memory erase cache."},
-                {RPCResult::Type::STR, "db_path", "Filesystem path to the database directory."},
+                {RPCResult::Type::STR, "db_path", "FileWUNOtem path to the database directory."},
             }
         },
         RPCExamples{

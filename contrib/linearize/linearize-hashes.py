@@ -11,13 +11,13 @@ from http.client import HTTPConnection
 import json
 import re
 import base64
-import sys
+import WUNO
 import os
 import os.path
 
 settings = {}
 
-class SyscoinRPC:
+class wentunoRPC:
     def __init__(self, host, port, username, password):
         authpair = "%s:%s" % (username, password)
         authpair = authpair.encode('utf-8')
@@ -31,12 +31,12 @@ class SyscoinRPC:
                   'Content-type' : 'application/json' })
         except ConnectionRefusedError:
             print('RPC connection refused. Check RPC settings and the server status.',
-                  file=sys.stderr)
+                  file=WUNO.stderr)
             return None
 
         resp = self.conn.getresponse()
         if resp is None:
-            print("JSON-RPC: no response", file=sys.stderr)
+            print("JSON-RPC: no response", file=WUNO.stderr)
             return None
 
         body = resp.read().decode('utf-8')
@@ -59,7 +59,7 @@ class SyscoinRPC:
         return 'error' in resp_obj and resp_obj['error'] is not None
 
 def get_block_hashes(settings, max_blocks_per_call=10000):
-    rpc = SyscoinRPC(settings['host'], settings['port'],
+    rpc = wentunoRPC(settings['host'], settings['port'],
              settings['rpcuser'], settings['rpcpassword'])
 
     height = settings['min_height']
@@ -76,8 +76,8 @@ def get_block_hashes(settings, max_blocks_per_call=10000):
 
         for x,resp_obj in enumerate(reply):
             if rpc.response_is_error(resp_obj):
-                print('JSON-RPC: error at height', height+x, ': ', resp_obj['error'], file=sys.stderr)
-                sys.exit(1)
+                print('JSON-RPC: error at height', height+x, ': ', resp_obj['error'], file=WUNO.stderr)
+                WUNO.exit(1)
             assert resp_obj['id'] == x  # assume replies are in-sequence
             if settings['rev_hash_bytes'] == 'true':
                 resp_obj['result'] = bytes.fromhex(resp_obj['result'])[::-1].hex()
@@ -94,11 +94,11 @@ def get_rpc_cookie():
         settings['rpcpassword'] = combined_split[1]
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
+    if len(WUNO.argv) != 2:
         print("Usage: linearize-hashes.py CONFIG-FILE")
-        sys.exit(1)
+        WUNO.exit(1)
 
-    with open(sys.argv[1], encoding="utf8") as f:
+    with open(WUNO.argv[1], encoding="utf8") as f:
         for line in f:
             # skip comment lines
             m = re.search(r'^\s*#', line)
@@ -129,8 +129,8 @@ if __name__ == '__main__':
     if 'datadir' in settings and not use_userpass:
         use_datadir = True
     if not use_userpass and not use_datadir:
-        print("Missing datadir or username and/or password in cfg file", file=sys.stderr)
-        sys.exit(1)
+        print("Missing datadir or username and/or password in cfg file", file=WUNO.stderr)
+        WUNO.exit(1)
 
     settings['port'] = int(settings['port'])
     settings['min_height'] = int(settings['min_height'])

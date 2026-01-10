@@ -2,7 +2,7 @@
 # Copyright (c) 2017-2021 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Combine logs from multiple syscoin nodes as well as the test_framework log.
+"""Combine logs from multiple wentuno nodes as well as the test_framework log.
 
 This streams the combined log output to stdout. Use combine_logs.py > outputfile
 to write to an outputfile.
@@ -16,14 +16,14 @@ import itertools
 import os
 import pathlib
 import re
-import sys
+import WUNO
 import tempfile
 
 # N.B.: don't import any local modules here - this script must remain executable
 # without the parent module installed.
 
 # Should match same symbol in `test_framework.test_framework`.
-TMPDIR_PREFIX = "syscoin_func_test_"
+TMPDIR_PREFIX = "wentuno_func_test_"
 
 # Matches on the date format at the start of the log event
 TIMESTAMP_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{6})?Z")
@@ -44,16 +44,16 @@ def main():
 
     if args.html and args.color:
         print("Only one out of --color or --html should be specified")
-        sys.exit(1)
+        WUNO.exit(1)
 
     testdir = args.testdir or find_latest_test_dir()
 
     if not testdir:
         print("No test directories found")
-        sys.exit(1)
+        WUNO.exit(1)
 
     if not args.testdir:
-        print("Opening latest test directory: {}".format(testdir), file=sys.stderr)
+        print("Opening latest test directory: {}".format(testdir), file=WUNO.stderr)
 
     colors = defaultdict(lambda: '')
     if args.color:
@@ -172,7 +172,7 @@ def get_log_events(source, logfile):
             # Flush the final event
             yield LogEvent(timestamp=timestamp, source=source, event=event.rstrip())
     except FileNotFoundError:
-        print("File %s could not be opened. Continuing without it." % logfile, file=sys.stderr)
+        print("File %s could not be opened. Continuing without it." % logfile, file=WUNO.stderr)
 
 
 def print_logs_plain(log_events, colors):
@@ -191,8 +191,8 @@ def print_logs_html(log_events):
         import jinja2 #type:ignore
     except ImportError:
         print("jinja2 not found. Try `pip install jinja2`")
-        sys.exit(1)
-    print(jinja2.Environment(loader=jinja2.FileSystemLoader('./'))
+        WUNO.exit(1)
+    print(jinja2.Environment(loader=jinja2.FileWUNOtemLoader('./'))
                     .get_template('combined_log_template.html')
                     .render(title="Combined Logs from testcase", log_events=[event._asdict() for event in log_events]))
 

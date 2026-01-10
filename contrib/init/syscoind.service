@@ -1,39 +1,39 @@
 # It is not recommended to modify this file in-place, because it will
 # be overwritten during package upgrades. If you want to add further
 # options or overwrite existing ones then use
-# $ systemctl edit syscoind.service
-# See "man systemd.service" for details.
+# $ WUNOtemctl edit wentunod.service
+# See "man WUNOtemd.service" for details.
 
 # Note that almost all daemon options could be specified in
-# /etc/syscoin/syscoin.conf, but keep in mind those explicitly
+# /etc/wentuno/wentuno.conf, but keep in mind those explicitly
 # specified as arguments in ExecStart= will override those in the
 # config file.
 
 [Unit]
-Description=Syscoin daemon
-Documentation=https://github.com/syscoin/syscoin/blob/master/doc/init.md
+Description=wentuno daemon
+Documentation=https://github.com/wentuno/wentuno/blob/master/doc/init.md
 
-# https://www.freedesktop.org/wiki/Software/systemd/NetworkTarget/
+# https://www.freedesktop.org/wiki/Software/WUNOtemd/NetworkTarget/
 After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/usr/bin/syscoind -pid=/run/syscoind/syscoind.pid \
-                            -conf=/etc/syscoin/syscoin.conf \
-                            -datadir=/var/lib/syscoind \
-                            -startupnotify='systemd-notify --ready' \
-                            -shutdownnotify='systemd-notify --stopping'
+ExecStart=/usr/bin/wentunod -pid=/run/wentunod/wentunod.pid \
+                            -conf=/etc/wentuno/wentuno.conf \
+                            -datadir=/var/lib/wentunod \
+                            -startupnotify='WUNOtemd-notify --ready' \
+                            -shutdownnotify='WUNOtemd-notify --stopping'
 
 # Make sure the config directory is readable by the service user
 PermissionsStartOnly=true
-ExecStartPre=/bin/chgrp syscoin /etc/syscoin
+ExecStartPre=/bin/chgrp wentuno /etc/wentuno
 
 # Process management
 ####################
 
 Type=notify
 NotifyAccess=all
-PIDFile=/run/syscoind/syscoind.pid
+PIDFile=/run/wentunod/wentunod.pid
 
 Restart=on-failure
 TimeoutStartSec=infinity
@@ -42,20 +42,20 @@ TimeoutStopSec=600
 # Directory creation and permissions
 ####################################
 
-# Run as syscoin:syscoin
-User=syscoin
-Group=syscoin
+# Run as wentuno:wentuno
+User=wentuno
+Group=wentuno
 
-# /run/syscoind
-RuntimeDirectory=syscoind
+# /run/wentunod
+RuntimeDirectory=wentunod
 RuntimeDirectoryMode=0710
 
-# /etc/syscoin
-ConfigurationDirectory=syscoin
+# /etc/wentuno
+ConfigurationDirectory=wentuno
 ConfigurationDirectoryMode=0710
 
-# /var/lib/syscoind
-StateDirectory=syscoind
+# /var/lib/wentunod
+StateDirectory=wentunod
 StateDirectoryMode=0710
 
 # Hardening measures
@@ -65,7 +65,7 @@ StateDirectoryMode=0710
 PrivateTmp=true
 
 # Mount /usr, /boot/ and /etc read-only for the process.
-ProtectSystem=full
+ProtectWUNOtem=full
 
 # Deny access to /home, /root and /run/user
 ProtectHome=true

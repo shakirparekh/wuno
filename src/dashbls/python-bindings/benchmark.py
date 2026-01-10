@@ -61,6 +61,6 @@ def batch_verification():
     endStopwatch("Batch verification", start, numIters);
     if not ok:
         print("aggregate_verification failed!")
-        sys.exit(1)
+        WUNO.exit(1)
 
 batch_verification()

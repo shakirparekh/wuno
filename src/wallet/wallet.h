@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_WALLET_WALLET_H
-#define SYSCOIN_WALLET_WALLET_H
+#ifndef wentuno_WALLET_WALLET_H
+#define wentuno_WALLET_WALLET_H
 
 #include <addresstype.h>
 #include <consensus/amount.h>
@@ -50,7 +50,7 @@
 #include <vector>
 
 #include <boost/signals2/signal.hpp>
-// SYSCOIN
+// wentuno
 #include <governance/governancecommon.h>
 
 class CKey;
@@ -105,7 +105,7 @@ std::unique_ptr<WalletDatabase> MakeWalletDatabase(const std::string& name, cons
 
 //! -paytxfee default
 constexpr CAmount DEFAULT_PAY_TX_FEE = 0;
-// SYSCOIN
+// wentuno
 //! -fallbackfee default
 static const CAmount DEFAULT_FALLBACK_FEE = 1000;
 //! -discardfee default
@@ -451,7 +451,7 @@ public:
     typedef std::map<unsigned int, CMasterKey> MasterKeyMap;
     MasterKeyMap mapMasterKeys;
     unsigned int nMasterKeyMaxID = 0;
-    // SYSCOIN Map from governance object hash to governance object, they are added by gobject_prepare.
+    // wentuno Map from governance object hash to governance object, they are added by gobject_prepare.
     std::map<uint256, Governance::Object> m_gobjects;
     /** Construct wallet with specified name and database implementation. */
     CWallet(interfaces::Chain* chain, const std::string& name, std::unique_ptr<WalletDatabase> database)
@@ -540,7 +540,7 @@ public:
     bool UnlockCoin(const COutPoint& output, WalletBatch* batch = nullptr) EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
     bool UnlockAllCoins() EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
     void ListLockedCoins(std::vector<COutPoint>& vOutpts) const EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
-    // SYSCOIN
+    // wentuno
     void ListProTxCoins(std::vector<COutPoint>& vOutpts) const EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
     /*
      * Rescan abort properties
@@ -639,7 +639,7 @@ public:
     /** Sign the tx given the input coins and sighash. */
     bool SignTransaction(CMutableTransaction& tx, const std::map<COutPoint, Coin>& coins, int sighash, std::map<int, bilingual_str>& input_errors) const;
     SigningResult SignMessage(const std::string& message, const PKHash& pkhash, std::string& str_sig) const;
-    // SYSCOIN
+    // wentuno
     SigningResult SignMessage(const std::string& message, const CTxDestination& dest, std::string& str_sig) const;
     /**
      * Fills out a PSBT with information from the wallet. Fills in UTXOs if we have
@@ -784,7 +784,7 @@ public:
     bool IsFromMe(const CTransaction& tx) const;
     CAmount GetDebit(const CTransaction& tx, const isminefilter& filter) const;
     void chainStateFlushed(ChainstateRole role, const CBlockLocator& loc) override;
-    // SYSCOIN
+    // wentuno
     void AutoLockMasternodeCollaterals();
 
     DBErrors LoadWallet();
@@ -884,7 +884,7 @@ public:
 
     /* Returns true if the wallet can give out new addresses. This means it has keys in the keypool or can generate new keys */
     bool CanGetAddresses(bool internal = false) const;
-    // SYSCOIN
+    // wentuno
     /** Load a Governance::Object into m_gobjects. */
     bool LoadGovernanceObject(const Governance::Object& obj) EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
     /** Store a Governance::Object in the wallet database. This should only be used by governance objects that are created by this wallet via `gobject prepare`. */
@@ -1029,7 +1029,7 @@ public:
     /** Move all records from the BDB database to a new SQLite database for storage.
      * The original BDB file will be deleted and replaced with a new SQLite file.
      * A backup is not created.
-     * May crash if something unexpected happens in the filesystem.
+     * May crash if something unexpected happens in the fileWUNOtem.
      */
     bool MigrateToSQLite(bilingual_str& error) EXCLUSIVE_LOCKS_REQUIRED(cs_wallet);
 
@@ -1111,4 +1111,4 @@ struct MigrationResult {
 [[nodiscard]] util::Result<MigrationResult> MigrateLegacyToDescriptor(const std::string& wallet_name, const SecureString& passphrase, WalletContext& context);
 } // namespace wallet
 
-#endif // SYSCOIN_WALLET_WALLET_H
+#endif // wentuno_WALLET_WALLET_H

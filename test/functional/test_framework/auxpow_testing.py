@@ -10,7 +10,7 @@
 import binascii
 
 from test_framework import auxpow
-# SYSCOIN
+# wentuno
 def computeAuxpow (block, target, ok, auxpowtag_script):
   """
   Build an auxpow object (serialised as hex string) that solves
@@ -43,7 +43,7 @@ def mineAuxpowBlockWithMethods (create, submit):
 
   auxblock = create ()
   target = auxpow.reverseHex (auxblock['_target'])
-  # SYSCOIN
+  # wentuno
   apow = computeAuxpow (auxblock['hash'], target, True, auxblock['coinbasescript'])
   res = submit (auxblock['hash'], apow)
   assert res

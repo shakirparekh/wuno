@@ -15,7 +15,7 @@
 
 void util::TraceThread(std::string_view thread_name, std::function<void()> thread_func)
 {
-    // SYSCOIN keep copy to work with dynamic thread names in LLMQ code
+    // wentuno keep copy to work with dynamic thread names in LLMQ code
     std::string strName = std::string(thread_name);
     util::ThreadRename(std::string{thread_name});
     try {

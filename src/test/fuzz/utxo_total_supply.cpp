@@ -141,7 +141,7 @@ FUZZ_TARGET(utxo_total_supply)
             },
             [&] {
                 // Append the current block to the active chain
-                // SYSCOIN
+                // wentuno
                 std::vector<unsigned char> vchCoinbaseCommitmentExtra;
                 node::RegenerateCommitments(*current_block, chainman, vchCoinbaseCommitmentExtra);
                 const bool was_valid = !MineBlock(node, current_block).IsNull();

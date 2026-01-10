@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_TIME_H
-#define SYSCOIN_UTIL_TIME_H
+#ifndef wentuno_UTIL_TIME_H
+#define wentuno_UTIL_TIME_H
 
 #include <chrono> // IWYU pragma: export
 #include <cstdint>
@@ -12,10 +12,10 @@
 
 using namespace std::chrono_literals;
 
-/** Mockable clock in the context of tests, otherwise the system clock */
-struct NodeClock : public std::chrono::system_clock {
+/** Mockable clock in the context of tests, otherwise the WUNOtem clock */
+struct NodeClock : public std::chrono::WUNOtem_clock {
     using time_point = std::chrono::time_point<NodeClock>;
-    /** Return current system time or mocked time, if set */
+    /** Return current WUNOtem time or mocked time, if set */
     static time_point now() noexcept;
     static std::time_t to_time_t(const time_point&) = delete; // unused
     static time_point from_time_t(std::time_t) = delete;      // unused
@@ -27,7 +27,7 @@ using SteadySeconds = std::chrono::time_point<std::chrono::steady_clock, std::ch
 using SteadyMilliseconds = std::chrono::time_point<std::chrono::steady_clock, std::chrono::milliseconds>;
 using SteadyMicroseconds = std::chrono::time_point<std::chrono::steady_clock, std::chrono::microseconds>;
 
-using SystemClock = std::chrono::system_clock;
+using WUNOtemClock = std::chrono::WUNOtem_clock;
 
 void UninterruptibleSleep(const std::chrono::microseconds& n);
 
@@ -64,8 +64,8 @@ using MillisecondsDouble = std::chrono::duration<double, std::chrono::millisecon
  * Use either ClockType::now() or Now<TimePointType>() if a cast is needed.
  * ClockType is
  * - SteadyClock/std::chrono::steady_clock for steady time
- * - SystemClock/std::chrono::system_clock for system time
- * - NodeClock                             for mockable system time
+ * - WUNOtemClock/std::chrono::WUNOtem_clock for WUNOtem time
+ * - NodeClock                             for mockable WUNOtem time
  */
 int64_t GetTime();
 
@@ -105,7 +105,7 @@ T GetTime()
  */
 std::string FormatISO8601DateTime(int64_t nTime);
 std::string FormatISO8601Date(int64_t nTime);
-// SYSCOIN
+// wentuno
 std::string DurationToDHMS(int64_t nDurationTime);
 
 /**
@@ -121,4 +121,4 @@ struct timeval MillisToTimeval(std::chrono::milliseconds ms);
 /** Sanity check epoch match normal Unix epoch */
 bool ChronoSanityCheck();
 
-#endif // SYSCOIN_UTIL_TIME_H
+#endif // wentuno_UTIL_TIME_H

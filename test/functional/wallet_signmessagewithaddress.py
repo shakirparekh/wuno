@@ -4,12 +4,12 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test Wallet commands for signing and verifying messages."""
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_raises_rpc_error,
 )
 
-class SignMessagesWithAddressTest(SyscoinTestFramework):
+class SignMessagesWithAddressTest(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
 

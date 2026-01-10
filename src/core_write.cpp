@@ -4,7 +4,7 @@
 
 #include <core_io.h>
 
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <consensus/amount.h>
 #include <consensus/consensus.h>
 #include <consensus/validation.h>
@@ -18,7 +18,7 @@
 #include <univalue.h>
 #include <util/check.h>
 #include <util/strencodings.h>
-// SYSCOIN
+// wentuno
 #include <evo/providertx.h>
 #include <evo/specialtx.h>
 #include <llmq/quorums_commitment.h>
@@ -37,48 +37,48 @@ UniValue ValueFromAmount(const CAmount amount)
             strprintf("%s%d.%08d", amount < 0 ? "-" : "", quotient, remainder));
 }
 bool AssetAllocationTxToJSON(const CTransaction &tx, UniValue &entry) {
-    entry.pushKV("txtype", stringFromSyscoinTx(tx.nVersion));
-    if(tx.nVersion == SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_NEVM){
-         CBurnSyscoin burnSyscoin(tx);
-         entry.pushKV("nevm_destination", "0x" + HexStr(burnSyscoin.vchNEVMAddress));
+    entry.pushKV("txtype", stringFromwentunoTx(tx.nVersion));
+    if(tx.nVersion == wentuno_TX_VERSION_ALLOCATION_BURN_TO_NEVM){
+         CBurnwentuno burnwentuno(tx);
+         entry.pushKV("nevm_destination", "0x" + HexStr(burnwentuno.vchNEVMAddress));
     }
     return true;
 }
 
 bool AssetMintTxToJson(const CTransaction& tx, const uint256& txHash, UniValue &entry) {
-    CMintSyscoin mintSyscoin(tx);
-    if (!mintSyscoin.IsNull()) {
+    CMintwentuno mintwentuno(tx);
+    if (!mintwentuno.IsNull()) {
         AssetAllocationTxToJSON(tx, entry);
         UniValue oSPVProofObj(UniValue::VOBJ);
-        oSPVProofObj.pushKV("txhash", mintSyscoin.nTxHash.GetHex());  
-        oSPVProofObj.pushKV("blockhash", mintSyscoin.nBlockHash.GetHex());  
-        oSPVProofObj.pushKV("postx", mintSyscoin.posTx);
-        oSPVProofObj.pushKV("txroot", mintSyscoin.nTxRoot.GetHex()); 
-        oSPVProofObj.pushKV("txparentnodes", HexStr(mintSyscoin.vchTxParentNodes)); 
-        oSPVProofObj.pushKV("txpath", HexStr(mintSyscoin.vchTxPath)); 
-        oSPVProofObj.pushKV("posReceipt", mintSyscoin.posReceipt);  
-        oSPVProofObj.pushKV("receiptroot", mintSyscoin.nReceiptRoot.GetHex());  
-        oSPVProofObj.pushKV("receiptparentnodes", HexStr(mintSyscoin.vchReceiptParentNodes));  
+        oSPVProofObj.pushKV("txhash", mintwentuno.nTxHash.GetHex());  
+        oSPVProofObj.pushKV("blockhash", mintwentuno.nBlockHash.GetHex());  
+        oSPVProofObj.pushKV("postx", mintwentuno.posTx);
+        oSPVProofObj.pushKV("txroot", mintwentuno.nTxRoot.GetHex()); 
+        oSPVProofObj.pushKV("txparentnodes", HexStr(mintwentuno.vchTxParentNodes)); 
+        oSPVProofObj.pushKV("txpath", HexStr(mintwentuno.vchTxPath)); 
+        oSPVProofObj.pushKV("posReceipt", mintwentuno.posReceipt);  
+        oSPVProofObj.pushKV("receiptroot", mintwentuno.nReceiptRoot.GetHex());  
+        oSPVProofObj.pushKV("receiptparentnodes", HexStr(mintwentuno.vchReceiptParentNodes));  
         entry.pushKV("spv_proof", oSPVProofObj);
         return true;
     } 
     return false;
 }
 
-bool SysTxToJSON(const CTransaction& tx, UniValue& output) {
+bool WUNOTxToJSON(const CTransaction& tx, UniValue& output) {
     bool found = false;
     if (IsAssetAllocationTx(tx.nVersion))
         found = AssetAllocationTxToJSON(tx, output);
     return found;
 }
 
-bool DecodeSyscoinRawtransaction(const CTransaction& rawTx, UniValue& output) {
+bool DecodewentunoRawtransaction(const CTransaction& rawTx, UniValue& output) {
     bool found = false;
-    if(IsSyscoinMintTx(rawTx.nVersion)) {
+    if(IswentunoMintTx(rawTx.nVersion)) {
         found = AssetMintTxToJson(rawTx, rawTx.GetHash(), output);
     }
     else if (IsAssetAllocationTx(rawTx.nVersion)) {
-        found = SysTxToJSON(rawTx, output);
+        found = WUNOTxToJSON(rawTx, output);
     }
     
     return found;
@@ -190,7 +190,7 @@ std::string ScriptToAsmStr(const CScript& script, const bool fAttemptSighashDeco
 
 std::string EncodeHexTx(const CTransaction& tx, const int serializeFlags)
 {
-    // SYSCOIN
+    // wentuno
     CDataStream ssTx(SER_NETWORK | SER_NO_PODA, PROTOCOL_VERSION | serializeFlags);
     ssTx << tx;
     return HexStr(ssTx);
@@ -238,7 +238,7 @@ void TxToUniv(const CTransaction& tx, const uint256& block_hash, UniValue& entry
     const bool have_undo = txundo != nullptr;
     CAmount amt_total_in = 0;
     CAmount amt_total_out = 0;
-    // SYSCOIN
+    // wentuno
     if(have_undo) {
         amt_total_out = tx.GetValueOut();
     }
@@ -297,48 +297,48 @@ void TxToUniv(const CTransaction& tx, const uint256& block_hash, UniValue& entry
         UniValue o(UniValue::VOBJ);
         ScriptToUniv(txout.scriptPubKey, /*out=*/o, /*include_hex=*/true, /*include_address=*/true);
         out.pushKV("scriptPubKey", o);
-        // SYSCOIN
+        // wentuno
         if(!txout.assetInfo.IsNull()) {
             out.pushKV("asset_guid", txout.assetInfo.nAsset);
             out.pushKV("asset_value", ValueFromAmount(txout.assetInfo.nValue));
         }
         vout.push_back(out);
-        // SYSCOIN
+        // wentuno
         /*if (have_undo) {
             amt_total_out += txout.nValue;
         }*/
     }
     entry.pushKV("vout", vout);
-    // SYSCOIN
-    if (tx.nVersion == SYSCOIN_TX_VERSION_MN_REGISTER) {
+    // wentuno
+    if (tx.nVersion == wentuno_TX_VERSION_MN_REGISTER) {
         CProRegTx proTx;
         if (GetTxPayload(tx, proTx)) {
             UniValue obj;
             proTx.ToJson(obj);
             entry.pushKV("proRegTx", obj);
         }
-    } else if (tx.nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_SERVICE) {
+    } else if (tx.nVersion == wentuno_TX_VERSION_MN_UPDATE_SERVICE) {
         CProUpServTx proTx;
         if (GetTxPayload(tx, proTx)) {
             UniValue obj;
             proTx.ToJson(obj);
             entry.pushKV("proUpServTx", obj);
         }
-    } else if (tx.nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_REGISTRAR) {
+    } else if (tx.nVersion == wentuno_TX_VERSION_MN_UPDATE_REGISTRAR) {
         CProUpRegTx proTx;
         if (GetTxPayload(tx, proTx)) {
             UniValue obj;
             proTx.ToJson(obj);
             entry.pushKV("proUpRegTx", obj);
         }
-    } else if (tx.nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_REVOKE) {
+    } else if (tx.nVersion == wentuno_TX_VERSION_MN_UPDATE_REVOKE) {
         CProUpRevTx proTx;
         if (GetTxPayload(tx, proTx)) {
             UniValue obj;
             proTx.ToJson(obj);
             entry.pushKV("proUpRevTx", obj);
         }
-    } else if (tx.nVersion == SYSCOIN_TX_VERSION_MN_QUORUM_COMMITMENT) {
+    } else if (tx.nVersion == wentuno_TX_VERSION_MN_QUORUM_COMMITMENT) {
         llmq::CFinalCommitmentTxPayload qcTx;
         if (GetTxPayload(tx, qcTx)) {
             UniValue obj;
@@ -347,8 +347,8 @@ void TxToUniv(const CTransaction& tx, const uint256& block_hash, UniValue& entry
         }
     }
     UniValue output(UniValue::VOBJ);
-    if(DecodeSyscoinRawtransaction(tx, output))
-        entry.pushKV("systx", output);
+    if(DecodewentunoRawtransaction(tx, output))
+        entry.pushKV("WUNOtx", output);
 
     if (have_undo) {
         const CAmount fee = amt_total_in - amt_total_out;

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SCRIPT_KEYORIGIN_H
-#define SYSCOIN_SCRIPT_KEYORIGIN_H
+#ifndef wentuno_SCRIPT_KEYORIGIN_H
+#define wentuno_SCRIPT_KEYORIGIN_H
 
 #include <serialize.h>
 #include <vector>
@@ -46,4 +46,4 @@ struct KeyOriginInfo
     }
 };
 
-#endif // SYSCOIN_SCRIPT_KEYORIGIN_H
+#endif // wentuno_SCRIPT_KEYORIGIN_H

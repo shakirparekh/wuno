@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_EVO_PROVIDERTX_H
-#define SYSCOIN_EVO_PROVIDERTX_H
+#ifndef wentuno_EVO_PROVIDERTX_H
+#define wentuno_EVO_PROVIDERTX_H
 
 #include <bls/bls.h>
 #include <consensus/validation.h>
@@ -21,7 +21,7 @@ class CCoinsViewCache;
 class CProRegTx
 {
 public:
-    static constexpr auto SPECIALTX_TYPE = SYSCOIN_TX_VERSION_MN_REGISTER;
+    static constexpr auto SPECIALTX_TYPE = wentuno_TX_VERSION_MN_REGISTER;
     static constexpr uint16_t LEGACY_BLS_VERSION = 1;
     static constexpr uint16_t BASIC_BLS_VERSION = 2;
 
@@ -100,7 +100,7 @@ public:
 class CProUpServTx
 {
 public:
-    static constexpr auto SPECIALTX_TYPE = SYSCOIN_TX_VERSION_MN_UPDATE_SERVICE;
+    static constexpr auto SPECIALTX_TYPE = wentuno_TX_VERSION_MN_UPDATE_SERVICE;
     static constexpr uint16_t LEGACY_BLS_VERSION = 1;
     static constexpr uint16_t BASIC_BLS_VERSION = 2;
     static constexpr uint16_t UPDATE_NEVM_VERSION = 3;
@@ -167,7 +167,7 @@ public:
 class CProUpRegTx
 {
 public:
-    static constexpr auto SPECIALTX_TYPE = SYSCOIN_TX_VERSION_MN_UPDATE_REGISTRAR;
+    static constexpr auto SPECIALTX_TYPE = wentuno_TX_VERSION_MN_UPDATE_REGISTRAR;
     static constexpr uint16_t LEGACY_BLS_VERSION = 1;
     static constexpr uint16_t BASIC_BLS_VERSION = 2;
 
@@ -233,7 +233,7 @@ public:
 class CProUpRevTx
 {
 public:
-    static constexpr auto SPECIALTX_TYPE = SYSCOIN_TX_VERSION_MN_UPDATE_REVOKE;
+    static constexpr auto SPECIALTX_TYPE = wentuno_TX_VERSION_MN_UPDATE_REVOKE;
     static constexpr uint16_t LEGACY_BLS_VERSION = 1;
     static constexpr uint16_t BASIC_BLS_VERSION = 2;
 
@@ -300,4 +300,4 @@ bool CheckProUpServTx(const CTransaction& tx, const CBlockIndex* pindexPrev, TxV
 bool CheckProUpRegTx(const CTransaction& tx, const CBlockIndex* pindexPrev, TxValidationState& state, CCoinsViewCache& view, bool fJustCheck, bool check_sigs) EXCLUSIVE_LOCKS_REQUIRED(::cs_main);
 bool CheckProUpRevTx(const CTransaction& tx, const CBlockIndex* pindexPrev, TxValidationState& state, bool fJustCheck, bool check_sigs) EXCLUSIVE_LOCKS_REQUIRED(::cs_main);
 
-#endif // SYSCOIN_EVO_PROVIDERTX_H
+#endif // wentuno_EVO_PROVIDERTX_H

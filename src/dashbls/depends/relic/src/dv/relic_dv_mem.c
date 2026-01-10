@@ -54,7 +54,7 @@ void dv_new_dynam(dv_t *a, int digits) {
 	}
 #if ALIGN == 1
 	*a = malloc(digits * (RLC_DIG / 8));
-#elif OPSYS == WINDOWS
+#elif OPWUNO == WINDOWS
 	*a = _aligned_malloc(digits * (RLC_DIG / 8), ALIGN);
 #else
 	int r = posix_memalign((void **)a, ALIGN, digits * (RLC_DIG / 8));
@@ -73,7 +73,7 @@ void dv_new_dynam(dv_t *a, int digits) {
 
 void dv_free_dynam(dv_t *a) {
 	if ((*a) != NULL) {
-#if OPSYS == WINDOWS && ALIGN > 1
+#if OPWUNO == WINDOWS && ALIGN > 1
 		_aligned_free(*a);
 #else
 		free(*a);

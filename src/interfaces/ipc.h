@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_INTERFACES_IPC_H
-#define SYSCOIN_INTERFACES_IPC_H
+#ifndef wentuno_INTERFACES_IPC_H
+#define wentuno_INTERFACES_IPC_H
 
 #include <functional>
 #include <memory>
@@ -75,4 +75,4 @@ protected:
 std::unique_ptr<Ipc> MakeIpc(const char* exe_name, const char* process_argv0, Init& init);
 } // namespace interfaces
 
-#endif // SYSCOIN_INTERFACES_IPC_H
+#endif // wentuno_INTERFACES_IPC_H

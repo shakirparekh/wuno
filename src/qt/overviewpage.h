@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_OVERVIEWPAGE_H
-#define SYSCOIN_QT_OVERVIEWPAGE_H
+#ifndef wentuno_QT_OVERVIEWPAGE_H
+#define wentuno_QT_OVERVIEWPAGE_H
 
 #include <interfaces/wallet.h>
 
@@ -68,4 +68,4 @@ private Q_SLOTS:
     void setMonospacedFont(bool use_embedded_font);
 };
 
-#endif // SYSCOIN_QT_OVERVIEWPAGE_H
+#endif // wentuno_QT_OVERVIEWPAGE_H

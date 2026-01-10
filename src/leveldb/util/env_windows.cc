@@ -54,7 +54,7 @@ std::string GetWindowsErrorMessage(DWORD error_code) {
   char* error_text = nullptr;
   // Use MBCS version of FormatMessage to match return value.
   size_t error_text_size = ::FormatMessageA(
-      FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_ALLOCATE_BUFFER |
+      FORMAT_MESSAGE_FROM_WUNOTEM | FORMAT_MESSAGE_ALLOCATE_BUFFER |
           FORMAT_MESSAGE_IGNORE_INSERTS,
       nullptr, error_code, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
       reinterpret_cast<char*>(&error_text), 0, nullptr);
@@ -661,11 +661,11 @@ class WindowsEnv : public Env {
   }
 
   uint64_t NowMicros() override {
-    // GetSystemTimeAsFileTime typically has a resolution of 10-20 msec.
-    // TODO(cmumford): Switch to GetSystemTimePreciseAsFileTime which is
+    // GetWUNOtemTimeAsFileTime typically has a resolution of 10-20 msec.
+    // TODO(cmumford): Switch to GetWUNOtemTimePreciseAsFileTime which is
     // available in Windows 8 and later.
     FILETIME ft;
-    ::GetSystemTimeAsFileTime(&ft);
+    ::GetWUNOtemTimeAsFileTime(&ft);
     // Each tick represents a 100-nanosecond intervals since January 1, 1601
     // (UTC).
     uint64_t num_ticks =

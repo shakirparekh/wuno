@@ -16,7 +16,7 @@
 
 #include <cassert>
 #include <stdexcept>
-// SYSCOIN
+// wentuno
 #include <streams.h>
 #include <pubkey.h>
 #include <logging.h>
@@ -32,12 +32,12 @@ std::string COutPoint::ToString() const
 {
     return strprintf("COutPoint(%s, %u)", hash.ToString().substr(0,10), n);
 }
-// SYSCOIN
+// wentuno
 std::string COutPoint::ToStringShort() const
 {
     return strprintf("%s-%u", hash.ToString().substr(0,64), n);
 }
-// SYSCOIN
+// wentuno
 CTxIn::CTxIn(const COutPoint &prevoutIn, const CScript &scriptSigIn, uint32_t nSequenceIn)
 {
     prevout = prevoutIn;
@@ -66,7 +66,7 @@ std::string CTxIn::ToString() const
     str += ")";
     return str;
 }
-// SYSCOIN
+// wentuno
 CTxOut::CTxOut(const CAmount& nValueIn,  const CScript &scriptPubKeyIn)
 {
     nValue = nValueIn;
@@ -111,8 +111,8 @@ CAmount CTransaction::GetValueOut() const
     for (const auto& tx_out : vout) {
         if (!MoneyRange(tx_out.nValue) || !MoneyRange(nValueOut + tx_out.nValue))
             throw std::runtime_error(std::string(__func__) + ": value out of range");
-        // SYSCOIN
-        if(bFirstOutput && (nVersion == SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN || nVersion == SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN_LEGACY || nVersion == SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN_LEGACY1)){
+        // wentuno
+        if(bFirstOutput && (nVersion == wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno || nVersion == wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno_LEGACY || nVersion == wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno_LEGACY1)){
             bFirstOutput = false;
             continue;
         }
@@ -145,7 +145,7 @@ std::string CTransaction::ToString() const
     return str;
 }
 
-// SYSCOIN
+// wentuno
 /*
  * These check for scripts for which a special case with a shorter encoding is defined.
  * They are implemented separately from the CScript test, as these test for exact byte
@@ -331,19 +331,19 @@ uint64_t DecompressAmount(uint64_t x)
 
 bool CTransaction::HasAssets() const
 {
-    return IsSyscoinTx(nVersion);
+    return IswentunoTx(nVersion);
 }
 bool CTransaction::IsNEVMData() const
 {
-    return IsSyscoinNEVMDataTx(nVersion);
+    return IswentunoNEVMDataTx(nVersion);
 }
 bool CMutableTransaction::HasAssets() const
 {
-    return IsSyscoinTx(nVersion);
+    return IswentunoTx(nVersion);
 }
 bool CMutableTransaction::IsNEVMData() const
 {
-    return IsSyscoinNEVMDataTx(nVersion);
+    return IswentunoNEVMDataTx(nVersion);
 }
 bool CTransaction::IsMnTx() const
 {
@@ -407,70 +407,70 @@ bool CTransaction::GetAssetValueOut(CAssetsMap &mapAssetOut, std::string &err) c
 }
 
 
-bool IsSyscoinMintTx(const int &nVersion) {
-    return nVersion == SYSCOIN_TX_VERSION_ALLOCATION_MINT;
+bool IswentunoMintTx(const int &nVersion) {
+    return nVersion == wentuno_TX_VERSION_ALLOCATION_MINT;
 }
 
 bool IsAssetAllocationTx(const int &nVersion) {
-    return nVersion == SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_NEVM || nVersion == SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN || nVersion == SYSCOIN_TX_VERSION_SYSCOIN_BURN_TO_ALLOCATION ||
-        nVersion == SYSCOIN_TX_VERSION_ALLOCATION_SEND;
+    return nVersion == wentuno_TX_VERSION_ALLOCATION_BURN_TO_NEVM || nVersion == wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno || nVersion == wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION ||
+        nVersion == wentuno_TX_VERSION_ALLOCATION_SEND;
 }
 
-bool IsSyscoinNEVMDataTx(const int &nVersion) {
-    return nVersion == SYSCOIN_TX_VERSION_NEVM_DATA_SHA3;
+bool IswentunoNEVMDataTx(const int &nVersion) {
+    return nVersion == wentuno_TX_VERSION_NEVM_DATA_SHA3;
 }
 
 bool IsZdagTx(const int &nVersion) {
-    return nVersion == SYSCOIN_TX_VERSION_ALLOCATION_SEND;
+    return nVersion == wentuno_TX_VERSION_ALLOCATION_SEND;
 }
 
-bool IsSyscoinTx(const int &nVersion) {
-    return IsAssetAllocationTx(nVersion) || IsSyscoinMintTx(nVersion);
+bool IswentunoTx(const int &nVersion) {
+    return IsAssetAllocationTx(nVersion) || IswentunoMintTx(nVersion);
 }
 bool IsMasternodeTx(const int &nVersion) {
     return 
-     nVersion == SYSCOIN_TX_VERSION_MN_REGISTER ||
-     nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_SERVICE ||
-     nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_REGISTRAR ||
-     nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_REVOKE;
+     nVersion == wentuno_TX_VERSION_MN_REGISTER ||
+     nVersion == wentuno_TX_VERSION_MN_UPDATE_SERVICE ||
+     nVersion == wentuno_TX_VERSION_MN_UPDATE_REGISTRAR ||
+     nVersion == wentuno_TX_VERSION_MN_UPDATE_REVOKE;
 }
 
-int GetSyscoinDataOutput(const CTransaction& tx) {
+int GetwentunoDataOutput(const CTransaction& tx) {
 	for (unsigned int i = 0; i<tx.vout.size(); i++) {
 		if (tx.vout[i].scriptPubKey.IsUnspendable())
 			return i;
 	}
 	return -1;
 }
-int GetSyscoinDataOutput(const CMutableTransaction& mtx) {
+int GetwentunoDataOutput(const CMutableTransaction& mtx) {
 	for (unsigned int i = 0; i<mtx.vout.size(); i++) {
 		if (mtx.vout[i].scriptPubKey.IsUnspendable())
 			return i;
 	}
 	return -1;
 }
-bool GetSyscoinData(const CTransaction &tx, std::vector<unsigned char> &vchData, int& nOut)
+bool GetwentunoData(const CTransaction &tx, std::vector<unsigned char> &vchData, int& nOut)
 {
-	nOut = GetSyscoinDataOutput(tx);
+	nOut = GetwentunoDataOutput(tx);
 	if (nOut == -1) {
 		return false;
     }
 
 	const CScript &scriptPubKey = tx.vout[nOut].scriptPubKey;
-	return GetSyscoinData(scriptPubKey, vchData);
+	return GetwentunoData(scriptPubKey, vchData);
 }
-bool GetSyscoinData(const CMutableTransaction &mtx, std::vector<unsigned char> &vchData, int& nOut)
+bool GetwentunoData(const CMutableTransaction &mtx, std::vector<unsigned char> &vchData, int& nOut)
 {
-	nOut = GetSyscoinDataOutput(mtx);
+	nOut = GetwentunoDataOutput(mtx);
 	if (nOut == -1) {
 		return false;
     }
 
 	const CScript &scriptPubKey = mtx.vout[nOut].scriptPubKey;
-	return GetSyscoinData(scriptPubKey, vchData);
+	return GetwentunoData(scriptPubKey, vchData);
 }
 
-bool GetSyscoinData(const CScript &scriptPubKey, std::vector<unsigned char> &vchData)
+bool GetwentunoData(const CScript &scriptPubKey, std::vector<unsigned char> &vchData)
 {
 	CScript::const_iterator pc = scriptPubKey.begin();
 	opcodetype opcode;
@@ -502,19 +502,19 @@ CAssetAllocation::CAssetAllocation(const CMutableTransaction &mtx) {
     SetNull();
     UnserializeFromTx(mtx);
 }
-CMintSyscoin::CMintSyscoin(const CTransaction &tx) {
+CMintwentuno::CMintwentuno(const CTransaction &tx) {
     SetNull();
     UnserializeFromTx(tx);
 }
-CMintSyscoin::CMintSyscoin(const CMutableTransaction &mtx) {
+CMintwentuno::CMintwentuno(const CMutableTransaction &mtx) {
     SetNull();
     UnserializeFromTx(mtx);
 }
-CBurnSyscoin::CBurnSyscoin(const CTransaction &tx) {
+CBurnwentuno::CBurnwentuno(const CTransaction &tx) {
     SetNull();
     UnserializeFromTx(tx);
 }
-CBurnSyscoin::CBurnSyscoin(const CMutableTransaction &mtx) {
+CBurnwentuno::CBurnwentuno(const CMutableTransaction &mtx) {
     SetNull();
     UnserializeFromTx(mtx);
 }
@@ -531,13 +531,13 @@ int CAssetAllocation::UnserializeFromData(const std::vector<unsigned char> &vchD
 bool CAssetAllocation::UnserializeFromTx(const CTransaction &tx) {
 	std::vector<unsigned char> vchData;
 	int nOut;
-    if (!GetSyscoinData(tx, vchData, nOut))
+    if (!GetwentunoData(tx, vchData, nOut))
     {
         SetNull();
         return false;
     }
     const int bytesLeft = UnserializeFromData(vchData);
-    const bool allocationMemoThreshold = IsAssetAllocationTx(tx.nVersion) && tx.nVersion != SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_NEVM && tx.nVersion != SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN;
+    const bool allocationMemoThreshold = IsAssetAllocationTx(tx.nVersion) && tx.nVersion != wentuno_TX_VERSION_ALLOCATION_BURN_TO_NEVM && tx.nVersion != wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno;
 	if(bytesLeft == -1 || (bytesLeft > MAX_MEMO && allocationMemoThreshold))
 	{	
 		SetNull();
@@ -549,13 +549,13 @@ bool CAssetAllocation::UnserializeFromTx(const CTransaction &tx) {
 bool CAssetAllocation::UnserializeFromTx(const CMutableTransaction &mtx) {
 	std::vector<unsigned char> vchData;
 	int nOut;
-    if (!GetSyscoinData(mtx, vchData, nOut))
+    if (!GetwentunoData(mtx, vchData, nOut))
     {
         SetNull();
         return false;
     }
     const int bytesLeft = UnserializeFromData(vchData);
-    const bool allocationMemoThreshold =  IsAssetAllocationTx(mtx.nVersion) && mtx.nVersion != SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_NEVM && mtx.nVersion != SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN;
+    const bool allocationMemoThreshold =  IsAssetAllocationTx(mtx.nVersion) && mtx.nVersion != wentuno_TX_VERSION_ALLOCATION_BURN_TO_NEVM && mtx.nVersion != wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno;
 	if(bytesLeft == -1 || (bytesLeft > MAX_MEMO && allocationMemoThreshold))
 	{	
 		SetNull();
@@ -563,7 +563,7 @@ bool CAssetAllocation::UnserializeFromTx(const CMutableTransaction &mtx) {
 	}
     return true;
 }
-int CMintSyscoin::UnserializeFromData(const std::vector<unsigned char> &vchData) {
+int CMintwentuno::UnserializeFromData(const std::vector<unsigned char> &vchData) {
     try {
         CDataStream dsMS(vchData, SER_NETWORK, PROTOCOL_VERSION);
         Unserialize(dsMS);
@@ -575,10 +575,10 @@ int CMintSyscoin::UnserializeFromData(const std::vector<unsigned char> &vchData)
     return -1;
 }
 
-bool CMintSyscoin::UnserializeFromTx(const CTransaction &tx) {
+bool CMintwentuno::UnserializeFromTx(const CTransaction &tx) {
     std::vector<unsigned char> vchData;
     int nOut;
-    if (!GetSyscoinData(tx, vchData, nOut))
+    if (!GetwentunoData(tx, vchData, nOut))
     {
         SetNull();
         return false;
@@ -590,10 +590,10 @@ bool CMintSyscoin::UnserializeFromTx(const CTransaction &tx) {
 	}
     return true;
 }
-bool CMintSyscoin::UnserializeFromTx(const CMutableTransaction &mtx) {
+bool CMintwentuno::UnserializeFromTx(const CMutableTransaction &mtx) {
     std::vector<unsigned char> vchData;
     int nOut;
-    if (!GetSyscoinData(mtx, vchData, nOut))
+    if (!GetwentunoData(mtx, vchData, nOut))
     {
         SetNull();
         return false;
@@ -606,7 +606,7 @@ bool CMintSyscoin::UnserializeFromTx(const CMutableTransaction &mtx) {
     return true;
 }
 
-int CBurnSyscoin::UnserializeFromData(const std::vector<unsigned char> &vchData) {
+int CBurnwentuno::UnserializeFromData(const std::vector<unsigned char> &vchData) {
     try {
         CDataStream dsMS(vchData, SER_NETWORK, PROTOCOL_VERSION);
         Unserialize(dsMS);
@@ -617,10 +617,10 @@ int CBurnSyscoin::UnserializeFromData(const std::vector<unsigned char> &vchData)
     return -1;
 }
 
-bool CBurnSyscoin::UnserializeFromTx(const CTransaction &tx) {
+bool CBurnwentuno::UnserializeFromTx(const CTransaction &tx) {
     std::vector<unsigned char> vchData;
     int nOut;
-    if (!GetSyscoinData(tx, vchData, nOut))
+    if (!GetwentunoData(tx, vchData, nOut))
     {
         SetNull();
         return false;
@@ -632,10 +632,10 @@ bool CBurnSyscoin::UnserializeFromTx(const CTransaction &tx) {
 	} 
     return true;
 }
-bool CBurnSyscoin::UnserializeFromTx(const CMutableTransaction &mtx) {
+bool CBurnwentuno::UnserializeFromTx(const CMutableTransaction &mtx) {
     std::vector<unsigned char> vchData;
     int nOut;
-    if (!GetSyscoinData(mtx, vchData, nOut))
+    if (!GetwentunoData(mtx, vchData, nOut))
     {
         SetNull();
         return false;
@@ -654,14 +654,14 @@ void CAssetAllocation::SerializeData( std::vector<unsigned char> &vchData) {
 	vchData = std::vector<unsigned char>(bytesVec.begin(), bytesVec.end());
 
 }
-void CMintSyscoin::SerializeData( std::vector<unsigned char> &vchData) {
+void CMintwentuno::SerializeData( std::vector<unsigned char> &vchData) {
     CDataStream dsMint(SER_NETWORK, PROTOCOL_VERSION);
     Serialize(dsMint);
     const auto &bytesVec = MakeUCharSpan(dsMint);
     vchData = std::vector<unsigned char>(bytesVec.begin(), bytesVec.end());
 }
 
-void CBurnSyscoin::SerializeData( std::vector<unsigned char> &vchData) {
+void CBurnwentuno::SerializeData( std::vector<unsigned char> &vchData) {
     CDataStream dsBurn(SER_NETWORK, PROTOCOL_VERSION);
     Serialize(dsBurn);
     const auto &bytesVec = MakeUCharSpan(dsBurn);
@@ -698,7 +698,7 @@ CNEVMData::CNEVMData(const CScript &script) {
 bool CNEVMData::UnserializeFromTx(const CTransaction &tx, const int nVersion) {
 	std::vector<unsigned char> vchData;
 	int nOut;
-	if (!GetSyscoinData(tx, vchData, nOut))
+	if (!GetwentunoData(tx, vchData, nOut))
 	{
 		SetNull();
 		return false;
@@ -720,7 +720,7 @@ bool CNEVMData::UnserializeFromTx(const CTransaction &tx, const int nVersion) {
 }
 bool CNEVMData::UnserializeFromScript(const CScript &scriptPubKey) {
 	std::vector<unsigned char> vchData;
-	if (!GetSyscoinData(scriptPubKey, vchData))
+	if (!GetwentunoData(scriptPubKey, vchData))
 	{
 		SetNull();
 		return false;

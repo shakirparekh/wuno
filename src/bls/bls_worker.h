@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_BLS_BLS_WORKER_H
-#define SYSCOIN_BLS_BLS_WORKER_H
+#ifndef wentuno_BLS_BLS_WORKER_H
+#define wentuno_BLS_BLS_WORKER_H
 
 #include <bls/bls.h>
 
@@ -184,4 +184,4 @@ private:
     }
 };
 
-#endif // SYSCOIN_BLS_BLS_WORKER_H
+#endif // wentuno_BLS_BLS_WORKER_H

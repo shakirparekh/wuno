@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_FS_HELPERS_H
-#define SYSCOIN_UTIL_FS_HELPERS_H
+#ifndef wentuno_UTIL_FS_HELPERS_H
+#define wentuno_UTIL_FS_HELPERS_H
 
 #include <util/fs.h>
 
@@ -80,4 +80,4 @@ std::optional<fs::perms> InterpretPermString(const std::string& s);
 fs::path GetSpecialFolderPath(int nFolder, bool fCreate = true);
 #endif
 
-#endif // SYSCOIN_UTIL_FS_HELPERS_H
+#endif // wentuno_UTIL_FS_HELPERS_H

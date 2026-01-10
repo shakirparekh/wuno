@@ -7,7 +7,7 @@
 #include <tinyformat.h>
 #include <util/time.h>
 #include <node/blockstorage.h>
-// SYSCOIN
+// wentuno
 #include <validation.h>
 /* Moved here from the header, because we need auxpow and the logic
    becomes more involved.  */

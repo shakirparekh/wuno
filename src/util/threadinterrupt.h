@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_THREADINTERRUPT_H
-#define SYSCOIN_UTIL_THREADINTERRUPT_H
+#ifndef wentuno_UTIL_THREADINTERRUPT_H
+#define wentuno_UTIL_THREADINTERRUPT_H
 
 #include <sync.h>
 #include <threadsafety.h>
@@ -39,4 +39,4 @@ private:
     std::atomic<bool> flag;
 };
 
-#endif // SYSCOIN_UTIL_THREADINTERRUPT_H
+#endif // wentuno_UTIL_THREADINTERRUPT_H

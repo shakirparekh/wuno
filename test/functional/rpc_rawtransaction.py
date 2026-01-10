@@ -29,7 +29,7 @@ from test_framework.script import (
     OP_INVALIDOPCODE,
     OP_RETURN,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
@@ -61,7 +61,7 @@ class multidict(dict):
         return self.x
 
 
-class RawTransactionsTest(SyscoinTestFramework):
+class RawTransactionsTest(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser, descriptors=False)
 
@@ -102,7 +102,7 @@ class RawTransactionsTest(SyscoinTestFramework):
 
         for n in [0, 2]:
             self.log.info(f"Test getrawtransaction {'with' if n == 0 else 'without'} -txindex")
-            # SYSCOIN
+            # wentuno
             # With -txindex.
             # 1. valid parameters - only supply txid
             assert_equal(self.nodes[n].getrawtransaction(txId), tx['hex'])
@@ -150,7 +150,7 @@ class RawTransactionsTest(SyscoinTestFramework):
             for v in [1,2]:
                 gottx = self.nodes[n].getrawtransaction(txid=tx, verbosity=v)
                 assert_equal(gottx['txid'], tx)
-                # SYSCOIN
+                # wentuno
                 assert 'in_active_chain' in gottx
             # We should not get the tx if we provide an unrelated block
             assert_raises_rpc_error(-5, "No such transaction found", self.nodes[n].getrawtransaction, txid=tx, blockhash=block2)
@@ -278,7 +278,7 @@ class RawTransactionsTest(SyscoinTestFramework):
         self.nodes[0].createrawtransaction(inputs=[], outputs={})  # Should not throw for backwards compatibility
         self.nodes[0].createrawtransaction(inputs=[], outputs=[])
         assert_raises_rpc_error(-8, "Data must be hexadecimal string", self.nodes[0].createrawtransaction, [], {'data': 'foo'})
-        assert_raises_rpc_error(-5, "Invalid Syscoin address", self.nodes[0].createrawtransaction, [], {'foo': 0})
+        assert_raises_rpc_error(-5, "Invalid wentuno address", self.nodes[0].createrawtransaction, [], {'foo': 0})
         assert_raises_rpc_error(-3, "Invalid amount", self.nodes[0].createrawtransaction, [], {address: 'foo'})
         assert_raises_rpc_error(-3, "Amount out of range", self.nodes[0].createrawtransaction, [], {address: -1})
         assert_raises_rpc_error(-8, "Invalid parameter, duplicated address: %s" % address, self.nodes[0].createrawtransaction, [], multidict([(address, 1), (address, 1)]))
@@ -388,7 +388,7 @@ class RawTransactionsTest(SyscoinTestFramework):
         fee_exceeds_max = "Fee exceeds maximum configured by user (e.g. -maxtxfee, maxfeerate)"
 
         # Test a transaction with a small fee.
-        # Fee rate is 0.00100000 SYS/kvB
+        # Fee rate is 0.00100000 WUNO/kvB
         tx = self.wallet.create_self_transfer(fee_rate=Decimal('0.00100000'))
         # Thus, testmempoolaccept should reject
         testres = self.nodes[2].testmempoolaccept([tx['hex']], 0.00001000)[0]
@@ -402,7 +402,7 @@ class RawTransactionsTest(SyscoinTestFramework):
         self.nodes[2].sendrawtransaction(hexstring=tx['hex'])
 
         # Test a transaction with a large fee.
-        # Fee rate is 0.20000000 SYS/kvB
+        # Fee rate is 0.20000000 WUNO/kvB
         tx = self.wallet.create_self_transfer(fee_rate=Decimal("0.20000000"))
         # Thus, testmempoolaccept should reject
         testres = self.nodes[2].testmempoolaccept([tx['hex']])[0]
@@ -486,7 +486,7 @@ class RawTransactionsTest(SyscoinTestFramework):
         # use balance deltas instead of absolute values
         bal = self.nodes[2].getbalance()
 
-        # send 1.2 SYS to msig adr
+        # send 1.2 WUNO to msig adr
         txId = self.nodes[0].sendtoaddress(mSigObj, 1.2)
         self.sync_all()
         self.generate(self.nodes[0], 1)

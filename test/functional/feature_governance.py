@@ -9,7 +9,7 @@ from test_framework.test_framework import DashTestFramework
 from test_framework.util import assert_equal, satoshi_round, wait_until_helper_internal
 from decimal import Decimal
 
-class SyscoinGovernanceTest (DashTestFramework):
+class wentunoGovernanceTest (DashTestFramework):
     def set_test_params(self):
         # using adjusted v20 deployment params to test an edge case where superblock maturity window is equal to deployment window size
         self.set_dash_test_params(6, 5, fast_dip3_enforcement=True)
@@ -31,7 +31,7 @@ class SyscoinGovernanceTest (DashTestFramework):
             "end_epoch": proposal_time + 24 * 60 * 60,
             "payment_amount": float(amount),
             "payment_address": payment_address,
-            "url": "https://syscoin.org"
+            "url": "https://wentuno.org"
         }
         proposal_hex = ''.join(format(x, '02x') for x in json.dumps(proposal_template).encode())
         collateral_hash = self.nodes[0].gobject_prepare(parent_hash, proposal_rev, proposal_time, proposal_hex)
@@ -402,4 +402,4 @@ class SyscoinGovernanceTest (DashTestFramework):
 
 
 if __name__ == '__main__':
-    SyscoinGovernanceTest().main()
+    wentunoGovernanceTest().main()

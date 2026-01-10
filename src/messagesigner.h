@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_MESSAGESIGNER_H
-#define SYSCOIN_MESSAGESIGNER_H
+#ifndef wentuno_MESSAGESIGNER_H
+#define wentuno_MESSAGESIGNER_H
 
 #include <key.h>
 
@@ -36,4 +36,4 @@ public:
     static bool VerifyHash(const uint256& hash, const CKeyID& keyID, const std::vector<unsigned char>& vchSig);
 };
 
-#endif // SYSCOIN_MESSAGESIGNER_H
+#endif // wentuno_MESSAGESIGNER_H

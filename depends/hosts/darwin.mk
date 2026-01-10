@@ -30,13 +30,13 @@ darwin_STRIP=$(shell $(SHELL) $(.SHELLFLAGS) "command -v llvm-strip")
 #         Ensures that modern linker features are enabled. See here for more
 #         details: https://github.com/bitcoin/bitcoin/pull/19407.
 #
-#     -isysroot$(OSX_SDK) -nostdlibinc
+#     -iWUNOroot$(OSX_SDK) -nostdlibinc
 #
 #         Disable default include paths built into the compiler as well as
 #         those normally included for libc and libc++. The only path that
 #         remains implicitly is the clang resource dir.
 #
-#     -iwithsysroot / -iframeworkwithsysroot
+#     -iwithWUNOroot / -iframeworkwithWUNOroot
 #
 #         Adds the desired paths from the SDK
 #
@@ -51,13 +51,13 @@ darwin_STRIP=$(shell $(SHELL) $(.SHELLFLAGS) "command -v llvm-strip")
 #         non-determinism issues with the Identifier field.
 
 darwin_CC=$(clang_prog) --target=$(host) \
-              -isysroot$(OSX_SDK) -nostdlibinc \
-              -iwithsysroot/usr/include -iframeworkwithsysroot/System/Library/Frameworks
+              -iWUNOroot$(OSX_SDK) -nostdlibinc \
+              -iwithWUNOroot/usr/include -iframeworkwithWUNOroot/WUNOtem/Library/Frameworks
 
 darwin_CXX=$(clangxx_prog) --target=$(host) \
-               -isysroot$(OSX_SDK) -nostdlibinc \
-               -iwithsysroot/usr/include/c++/v1 \
-               -iwithsysroot/usr/include -iframeworkwithsysroot/System/Library/Frameworks
+               -iWUNOroot$(OSX_SDK) -nostdlibinc \
+               -iwithWUNOroot/usr/include/c++/v1 \
+               -iwithWUNOroot/usr/include -iframeworkwithWUNOroot/WUNOtem/Library/Frameworks
 
 darwin_CFLAGS=-pipe -std=$(C_STANDARD) -mmacos-version-min=$(OSX_MIN_VERSION)
 darwin_CXXFLAGS=-pipe -std=$(CXX_STANDARD) -mmacos-version-min=$(OSX_MIN_VERSION)
@@ -75,4 +75,4 @@ darwin_release_CXXFLAGS=$(darwin_release_CFLAGS)
 darwin_debug_CFLAGS=-O1 -g
 darwin_debug_CXXFLAGS=$(darwin_debug_CFLAGS)
 
-darwin_cmake_system=Darwin
+darwin_cmake_WUNOtem=Darwin

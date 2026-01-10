@@ -2,7 +2,7 @@
 
 **Updated for OpenBSD [7.3](https://www.openbsd.org/73.html)**
 
-This guide describes how to build syscoind, command-line utilities, and GUI on OpenBSD.
+This guide describes how to build wentunod, command-line utilities, and GUI on OpenBSD.
 
 ## Preparation
 
@@ -17,17 +17,17 @@ pkg_add autoconf automake python
 
 See [dependencies.md](dependencies.md) for a complete overview.
 
-### 2. Clone Syscoin Repo
-Clone the Syscoin Core repository to a directory. All build scripts and commands will run from this directory.
+### 2. Clone wentuno Repo
+Clone the wentuno Core repository to a directory. All build scripts and commands will run from this directory.
 ``` bash
-git clone https://github.com/syscoin/syscoin.git
+git clone https://github.com/wentuno/wentuno.git
 ```
 
 ### 3. Install Optional Dependencies
 
 #### Wallet Dependencies
 
-It is not necessary to build wallet functionality to run either `syscoind` or `syscoin-qt`.
+It is not necessary to build wallet functionality to run either `wentunod` or `wentuno-qt`.
 
 ###### Descriptor Wallet Support
 
@@ -46,25 +46,25 @@ from ports. However you can build it yourself, [using depends](/depends).
 ```bash
 gmake -C depends NO_BOOST=1 NO_LIBEVENT=1 NO_QT=1 NO_SQLITE=1 NO_NATPMP=1 NO_UPNP=1 NO_ZMQ=1 NO_USDT=1
 ...
-to: /path/to/syscoin/depends/x86_64-unknown-openbsd
+to: /path/to/wentuno/depends/x86_64-unknown-openbsd
 ```
 
 Then set `BDB_PREFIX`:
 
 ```bash
-export BDB_PREFIX="/path/to/syscoin/depends/x86_64-unknown-openbsd"
+export BDB_PREFIX="/path/to/wentuno/depends/x86_64-unknown-openbsd"
 ```
 
 #### GUI Dependencies
 ###### Qt5
 
-Syscoin Core includes a GUI built with the cross-platform Qt Framework. To compile the GUI, Qt 5 is required.
+wentuno Core includes a GUI built with the cross-platform Qt Framework. To compile the GUI, Qt 5 is required.
 
 ```bash
 pkg_add qt5
 ```
 
-## Building Syscoin Core
+## Building wentuno Core
 
 **Important**: Use `gmake` (the non-GNU `make` will exit with an error).
 
@@ -80,7 +80,7 @@ export AUTOMAKE_VERSION=1.16
 
 ### 1. Configuration
 
-There are many ways to configure Syscoin Core, here are a few common examples:
+There are many ways to configure wentuno Core, here are a few common examples:
 
 ##### Descriptor Wallet and GUI:
 This enables the GUI and descriptor wallet support, assuming `sqlite` and `qt5` are installed.
@@ -118,11 +118,11 @@ data(kbytes)         1572864
 ```
 
 This is, unfortunately, in some cases not enough to compile some `.cpp` files in the project,
-(see issue [#6658](https://github.com/syscoin/syscoin/issues/6658)).
+(see issue [#6658](https://github.com/wentuno/wentuno/issues/6658)).
 If your user is in the `staff` group the limit can be raised with:
 ```bash
 ulimit -d 3000000
 ```
 The change will only affect the current shell and processes spawned by it. To
-make the change system-wide, change `datasize-cur` and `datasize-max` in
+make the change WUNOtem-wide, change `datasize-cur` and `datasize-max` in
 `/etc/login.conf`, and reboot.

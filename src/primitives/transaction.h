@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_PRIMITIVES_TRANSACTION_H
-#define SYSCOIN_PRIMITIVES_TRANSACTION_H
+#ifndef wentuno_PRIMITIVES_TRANSACTION_H
+#define wentuno_PRIMITIVES_TRANSACTION_H
 
 #include <consensus/amount.h>
 #include <prevector.h>
@@ -24,7 +24,7 @@
 #include <vector>
 #include <consensus/consensus.h>
 #include <saltedhasher.h>
-// SYSCOIN
+// wentuno
 class TxValidationState;
 class CHashWriter;
 class UniValue;
@@ -45,26 +45,26 @@ using CompressedScript = prevector<33, unsigned char>;
  * or with `ADDRV2_FORMAT`.
  */
 static const int SERIALIZE_TRANSACTION_NO_WITNESS = 0x40000000;
-// SYSCOIN
+// wentuno
 static const int SERIALIZE_TRANSACTION_PODA = 0x04000000;
 static const float NEVM_DATA_SCALE_FACTOR = 0.01;
 
 
-const int SYSCOIN_TX_VERSION_MN_REGISTER = 80;
-const int SYSCOIN_TX_VERSION_MN_UPDATE_SERVICE = 81;
-const int SYSCOIN_TX_VERSION_MN_UPDATE_REGISTRAR = 82;
-const int SYSCOIN_TX_VERSION_MN_UPDATE_REVOKE = 83;
-const int SYSCOIN_TX_VERSION_MN_QUORUM_COMMITMENT = 85;
+const int wentuno_TX_VERSION_MN_REGISTER = 80;
+const int wentuno_TX_VERSION_MN_UPDATE_SERVICE = 81;
+const int wentuno_TX_VERSION_MN_UPDATE_REGISTRAR = 82;
+const int wentuno_TX_VERSION_MN_UPDATE_REVOKE = 83;
+const int wentuno_TX_VERSION_MN_QUORUM_COMMITMENT = 85;
 
-const int SYSCOIN_TX_VERSION_NEVM_DATA_SHA3 = 137;
-const int SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN = 138;
-const int SYSCOIN_TX_VERSION_SYSCOIN_BURN_TO_ALLOCATION = 139;
-const int SYSCOIN_TX_VERSION_ALLOCATION_MINT = 140;
-const int SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_NEVM = 141;
-const int SYSCOIN_TX_VERSION_ALLOCATION_SEND = 142;
+const int wentuno_TX_VERSION_NEVM_DATA_SHA3 = 137;
+const int wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno = 138;
+const int wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION = 139;
+const int wentuno_TX_VERSION_ALLOCATION_MINT = 140;
+const int wentuno_TX_VERSION_ALLOCATION_BURN_TO_NEVM = 141;
+const int wentuno_TX_VERSION_ALLOCATION_SEND = 142;
 
-const int SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN_LEGACY = 0x7400;
-const int SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN_LEGACY1 = 128;
+const int wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno_LEGACY = 0x7400;
+const int wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno_LEGACY1 = 128;
 const int MAX_MEMO = 256;
 const int MAX_NEVM_DATA_BLOB = 2097152; // 2MB
 const int MAX_DATA_BLOBS = 32;
@@ -115,10 +115,10 @@ public:
     }
 
     std::string ToString() const;
-    // SYSCOIN
+    // wentuno
     std::string ToStringShort() const;
 };
-// SYSCOIN
+// wentuno
 static CScript emptyScript;
 /** An input of a transaction.  It contains the location of the previous
  * transaction's output that it claims and a signature that matches the
@@ -183,7 +183,7 @@ public:
     {
         nSequence = SEQUENCE_FINAL;
     }
-    // SYSCOIN
+    // wentuno
     explicit CTxIn(const COutPoint &prevoutIn, const CScript &scriptSigIn=emptyScript, uint32_t nSequenceIn=SEQUENCE_FINAL);
     CTxIn(const uint256 &hashPrevTx, uint32_t nOut, const CScript &scriptSigIn=emptyScript, uint32_t nSequenceIn=SEQUENCE_FINAL);
 
@@ -260,7 +260,7 @@ inline void UnserializeTransaction(TxType& tx, Stream& s) {
         throw std::ios_base::failure("Unknown transaction optional data");
     }
     s >> tx.nLockTime;
-    // SYSCOIN
+    // wentuno
     tx.LoadAssets();
 }
 template<typename Stream, typename TxType>
@@ -291,7 +291,7 @@ inline void SerializeTransaction(const TxType& tx, Stream& s) {
     }
     s << tx.nLockTime;
 }
-// SYSCOIN
+// wentuno
 
 bool CompressScript(const CScript& script, CompressedScript &out);
 unsigned int GetSpecialScriptSize(unsigned int nSize);
@@ -423,7 +423,7 @@ public:
     inline bool IsNull() const { return nAsset == 0;}
 };
 class CTransaction;
-bool IsSyscoinNEVMDataTx(const int &nVersion);
+bool IswentunoNEVMDataTx(const int &nVersion);
 class CNEVMData {
 public:
     std::vector<uint8_t> vchVersionHash;
@@ -489,21 +489,21 @@ class CTxOut
 public:
     CAmount nValue;
     CScript scriptPubKey;
-    // SYSCOIN
+    // wentuno
     CAssetCoinInfo assetInfo;
     std::vector<uint8_t> vchNEVMData;
     CTxOut()
     {
         SetNull();
     }
-    // SYSCOIN
+    // wentuno
     CTxOut(const CAmount& nValueIn, const CScript &scriptPubKeyIn);
     CTxOut(const CAmount& nValueIn, const CScript &scriptPubKeyIn, const CAssetCoinInfo &assetInfoIn) : nValue(nValueIn), scriptPubKey(scriptPubKeyIn), assetInfo(assetInfoIn) {}
     CTxOut(const CAmount& nValueIn, const CScript &scriptPubKeyIn, const std::vector<uint8_t> &vchNEVMDataIn)  : nValue(nValueIn), scriptPubKey(scriptPubKeyIn), vchNEVMData(vchNEVMDataIn) {}
     SERIALIZE_METHODS(CTxOut, obj)
     {
         READWRITE(obj.nValue, obj.scriptPubKey);
-        if (obj.scriptPubKey.IsUnspendable() && IsSyscoinNEVMDataTx(s.GetTxVersion())) {
+        if (obj.scriptPubKey.IsUnspendable() && IswentunoNEVMDataTx(s.GetTxVersion())) {
             if (!(s.GetType() & SER_NO_PODA) && s.GetType() & SER_NETWORK) {
                 READWRITE(obj.vchNEVMData);
             } else if(s.GetType() == SER_SIZE) {
@@ -651,7 +651,7 @@ public:
 
     // Return sum of txouts.
     CAmount GetValueOut() const;
-    // SYSCOIN
+    // wentuno
     CAmount GetAssetValueOut(const std::vector<CAssetOutValue> &vecVout) const;
     bool GetAssetValueOut(CAssetsMap &mapAssetOut, std::string& err) const;
     /**
@@ -687,7 +687,7 @@ public:
         }
         return false;
     }
-    // SYSCOIN
+    // wentuno
     bool HasAssets() const;
     bool IsNEVMData() const;
     bool IsMnTx() const;
@@ -734,7 +734,7 @@ struct CMutableTransaction
         }
         return false;
     }
-    // SYSCOIN
+    // wentuno
     bool HasAssets() const;
     bool IsNEVMData() const;
     bool IsMnTx() const;
@@ -777,7 +777,7 @@ public:
 	void SerializeData(std::vector<unsigned char>& vchData);
 };
 
-class CMintSyscoin: public CAssetAllocation {
+class CMintwentuno: public CAssetAllocation {
 public:
     // where in vchTxParentNodes the vchTxValue can be found as an offset
     uint16_t posTx;
@@ -791,13 +791,13 @@ public:
     uint256 nTxHash;
     uint256 nBlockHash;
 
-    CMintSyscoin() {
+    CMintwentuno() {
         SetNull();
     }
-    explicit CMintSyscoin(const CTransaction &tx);
-    explicit CMintSyscoin(const CMutableTransaction &mtx);
+    explicit CMintwentuno(const CTransaction &tx);
+    explicit CMintwentuno(const CMutableTransaction &mtx);
 
-    SERIALIZE_METHODS(CMintSyscoin, obj) {
+    SERIALIZE_METHODS(CMintwentuno, obj) {
         READWRITE(AsBase<CAssetAllocation>(obj));
         READWRITE(obj.nTxHash, obj.nBlockHash, obj.posTx,
         obj.vchTxParentNodes, obj.vchTxPath, obj.posReceipt,
@@ -812,16 +812,16 @@ public:
     void SerializeData(std::vector<unsigned char>& vchData);
 };
 
-class CBurnSyscoin: public CAssetAllocation {
+class CBurnwentuno: public CAssetAllocation {
 public:
     std::vector<unsigned char> vchNEVMAddress;
-    CBurnSyscoin() {
+    CBurnwentuno() {
         SetNull();
     }
-    explicit CBurnSyscoin(const CTransaction &tx);
-    explicit CBurnSyscoin(const CMutableTransaction &mtx);
+    explicit CBurnwentuno(const CTransaction &tx);
+    explicit CBurnwentuno(const CMutableTransaction &mtx);
 
-    SERIALIZE_METHODS(CBurnSyscoin, obj) {
+    SERIALIZE_METHODS(CBurnwentuno, obj) {
         
         READWRITE(AsBase<CAssetAllocation>(obj));
         READWRITE(obj.vchNEVMAddress);
@@ -872,21 +872,21 @@ class CNEVMBlock: public CNEVMHeader {
     }
 };
 
-bool IsSyscoinTx(const int &nVersion);
+bool IswentunoTx(const int &nVersion);
 bool IsMasternodeTx(const int &nVersion);
 bool IsAssetAllocationTx(const int &nVersion);
 bool IsZdagTx(const int &nVersion);
-bool IsSyscoinMintTx(const int &nVersion);
-int GetSyscoinDataOutput(const CTransaction& tx);
-int GetSyscoinDataOutput(const CMutableTransaction& mtx);
-bool GetSyscoinData(const CTransaction &tx, std::vector<unsigned char> &vchData, int& nOut);
-bool GetSyscoinData(const CMutableTransaction &mtx, std::vector<unsigned char> &vchData, int& nOut);
-bool GetSyscoinData(const CScript &scriptPubKey, std::vector<unsigned char> &vchData);
+bool IswentunoMintTx(const int &nVersion);
+int GetwentunoDataOutput(const CTransaction& tx);
+int GetwentunoDataOutput(const CMutableTransaction& mtx);
+bool GetwentunoData(const CTransaction &tx, std::vector<unsigned char> &vchData, int& nOut);
+bool GetwentunoData(const CMutableTransaction &mtx, std::vector<unsigned char> &vchData, int& nOut);
+bool GetwentunoData(const CScript &scriptPubKey, std::vector<unsigned char> &vchData);
 typedef std::vector<std::vector<uint8_t> > NEVMDataVec;
 typedef std::unordered_map<uint256, NEVMTxRoot, StaticSaltedHasher> NEVMTxRootMap;
 typedef std::map<std::vector<uint8_t>, MapPoDAPayloadMeta > PoDAMAPMemory;
 /** A generic txid reference (txid or wtxid). */
-// SYSCOIN
+// wentuno
 class GenTxid
 {
     bool m_is_wtxid;
@@ -898,7 +898,7 @@ class GenTxid
 public:
     static GenTxid Txid(const uint256& hash) { return GenTxid{false, hash}; }
     static GenTxid Wtxid(const uint256& hash) { return GenTxid{true, hash}; }
-    // SYSCOIN
+    // wentuno
     static GenTxid Txid(const uint256& hash, const uint32_t& type) { return GenTxid{false, hash, type}; }
     static GenTxid Wtxid(const uint256& hash, const uint32_t& type) { return GenTxid{true, hash, type}; }
     bool IsWtxid() const { return m_is_wtxid; }
@@ -908,4 +908,4 @@ public:
     friend bool operator<(const GenTxid& a, const GenTxid& b) { return std::tie(a.m_is_wtxid, a.m_hash) < std::tie(b.m_is_wtxid, b.m_hash); }
 };
 extern bool fTestNet;
-#endif // SYSCOIN_PRIMITIVES_TRANSACTION_H
+#endif // wentuno_PRIMITIVES_TRANSACTION_H

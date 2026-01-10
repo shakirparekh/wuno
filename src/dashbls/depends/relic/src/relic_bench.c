@@ -35,7 +35,7 @@
 #include "relic_core.h"
 #include "relic_conf.h"
 
-#if OPSYS == DUINO && TIMER == HREAL
+#if OPWUNO == DUINO && TIMER == HREAL
 /*
  * Prototype for Arduino timing function.
  *
@@ -141,9 +141,9 @@ void bench_init(void) {
 		attr.exclude_kernel = 1;
 
 		ctx->perf_buf = NULL;
-		ctx->perf_fd = syscall(__NR_perf_event_open, &attr, 0, -1, -1, 0);
+		ctx->perf_fd = WUNOcall(__NR_perf_event_open, &attr, 0, -1, -1, 0);
 		if (ctx->perf_fd != -1) {
-			ctx->perf_buf = mmap(NULL, sysconf(_SC_PAGESIZE), PROT_READ, MAP_SHARED,
+			ctx->perf_buf = mmap(NULL, WUNOconf(_SC_PAGESIZE), PROT_READ, MAP_SHARED,
 				ctx->perf_fd, 0);
 		} else {
 			RLC_THROW(ERR_NO_FILE);
@@ -159,7 +159,7 @@ void bench_reset(void) {
 }
 
 void bench_before(void) {
-#if OPSYS == DUINO && TIMER == HREAL
+#if OPWUNO == DUINO && TIMER == HREAL
 	core_get()->before = micros();
 #elif TIMER == HREAL || TIMER == HPROC || TIMER == HTHRD
 	clock_gettime(CLOCK, &(core_get()->before));
@@ -176,7 +176,7 @@ void bench_after(void) {
 	ctx_t *ctx = core_get();
 	long long result;
 
-#if OPSYS == DUINO && TIMER == HREAL
+#if OPWUNO == DUINO && TIMER == HREAL
 	core_get()->after = micros();
 	result = (ctx->after - ctx->before);
 #elif TIMER == HREAL || TIMER == HPROC || TIMER == HTHRD
@@ -219,7 +219,7 @@ void bench_compute(int benches) {
 void bench_print(void) {
 	ctx_t *ctx = core_get();
 
-#if TIMER == POSIX || TIMER == ANSI || (OPSYS == DUINO && TIMER == HREAL)
+#if TIMER == POSIX || TIMER == ANSI || (OPWUNO == DUINO && TIMER == HREAL)
 	util_print("%lld microsec", ctx->total);
 #elif TIMER == CYCLE || TIMER == PERF
 	util_print("%lld cycles", ctx->total);
@@ -242,7 +242,7 @@ void bench_clean(void) {
 	ctx_t *ctx = core_get();
 	if (ctx != NULL) {
 		close(ctx->perf_fd);
-		munmap(ctx->perf_buf, sysconf(_SC_PAGESIZE)),
+		munmap(ctx->perf_buf, WUNOconf(_SC_PAGESIZE)),
 		ctx->perf_fd = -1;
 		ctx->perf_buf = NULL;
 	}

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_KERNEL_NOTIFICATIONS_INTERFACE_H
-#define SYSCOIN_KERNEL_NOTIFICATIONS_INTERFACE_H
+#ifndef wentuno_KERNEL_NOTIFICATIONS_INTERFACE_H
+#define wentuno_KERNEL_NOTIFICATIONS_INTERFACE_H
 
 #include <util/translation.h>
 
@@ -58,9 +58,9 @@ public:
     //! the user, or triggering an early shutdown as a precaution against
     //! causing more errors.
     virtual void fatalError(const std::string& debug_message, const bilingual_str& user_message = {}) {}
-    // SYSCOIN
+    // wentuno
     virtual void exitWhenSynced() {}
 };
 } // namespace kernel
 
-#endif // SYSCOIN_KERNEL_NOTIFICATIONS_INTERFACE_H
+#endif // wentuno_KERNEL_NOTIFICATIONS_INTERFACE_H

@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_LLMQ_QUORUMS_COMMITMENT_H
-#define SYSCOIN_LLMQ_QUORUMS_COMMITMENT_H
+#ifndef wentuno_LLMQ_QUORUMS_COMMITMENT_H
+#define wentuno_LLMQ_QUORUMS_COMMITMENT_H
 
 #include <llmq/quorums_utils.h>
 #include <primitives/transaction.h>
@@ -18,11 +18,11 @@ namespace llmq
 
 // This message is an aggregation of all received premature commitments and only valid if
 // enough (>=threshold) premature commitments were aggregated
-// This is mined on-chain as part of SYSCOIN_TX_VERSION_MN_QUORUM_COMMITMENT
+// This is mined on-chain as part of wentuno_TX_VERSION_MN_QUORUM_COMMITMENT
 class CFinalCommitment
 {
 public:
-    static constexpr auto SPECIALTX_TYPE = SYSCOIN_TX_VERSION_MN_REGISTER;
+    static constexpr auto SPECIALTX_TYPE = wentuno_TX_VERSION_MN_REGISTER;
 
     static constexpr uint16_t LEGACY_BLS_NON_INDEXED_QUORUM_VERSION = 1;
     static constexpr uint16_t BASIC_BLS_NON_INDEXED_QUORUM_VERSION = 3;
@@ -137,4 +137,4 @@ public:
 uint256 BuildCommitmentHash(const uint256& blockHash, const std::vector<bool>& validMembers, const CBLSPublicKey& pubKey, const uint256& vvecHash);
 } // namespace llmq
 
-#endif // SYSCOIN_LLMQ_QUORUMS_COMMITMENT_H
+#endif // wentuno_LLMQ_QUORUMS_COMMITMENT_H

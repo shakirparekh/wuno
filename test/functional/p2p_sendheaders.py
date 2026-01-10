@@ -101,7 +101,7 @@ from test_framework.p2p import (
     msg_inv,
     msg_sendheaders,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
 )
@@ -195,7 +195,7 @@ class BaseNode(P2PInterface):
             self.block_announced = False
             self.last_message.pop("inv", None)
 
-class SendHeadersTest(SyscoinTestFramework):
+class SendHeadersTest(wentunoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2

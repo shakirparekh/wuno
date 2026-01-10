@@ -19,7 +19,7 @@ AST_MATCHER(clang::StringLiteral, unterminated)
 }
 } // namespace
 
-namespace syscoin {
+namespace wentuno {
 
 void LogPrintfCheck::registerMatchers(clang::ast_matchers::MatchFinder* finder)
 {
@@ -57,4 +57,4 @@ void LogPrintfCheck::check(const clang::ast_matchers::MatchFinder::MatchResult& 
     }
 }
 
-} // namespace syscoin
+} // namespace wentuno

@@ -1,5 +1,5 @@
-#ifndef SYSCOIN_NEVM_VECTOR_REF_H
-#define SYSCOIN_NEVM_VECTOR_REF_H
+#ifndef wentuno_NEVM_VECTOR_REF_H
+#define wentuno_NEVM_VECTOR_REF_H
 
 #include <cstring>
 #include <cassert>
@@ -122,4 +122,4 @@ template<class _T> vector_ref<_T const> ref(std::vector<_T> const& _t) { return 
 template<class _T> vector_ref<_T> ref(std::vector<_T>& _t) { return vector_ref<_T>(&_t); }
 
 }
-#endif // SYSCOIN_NEVM_VECTOR_REF_H
+#endif // wentuno_NEVM_VECTOR_REF_H

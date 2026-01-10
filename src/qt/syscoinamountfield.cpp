@@ -2,9 +2,9 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <qt/syscoinamountfield.h>
+#include <qt/wentunoamountfield.h>
 
-#include <qt/syscoinunits.h>
+#include <qt/wentunounits.h>
 #include <qt/guiconstants.h>
 #include <qt/guiutil.h>
 #include <qt/qvaluecombobox.h>
@@ -59,7 +59,7 @@ public:
 
         if (valid) {
             val = qBound(m_min_amount, val, m_max_amount);
-            input = SyscoinUnits::format(currentUnit, val, false, SyscoinUnits::SeparatorStyle::ALWAYS);
+            input = wentunoUnits::format(currentUnit, val, false, wentunoUnits::SeparatorStyle::ALWAYS);
             lineEdit()->setText(input);
         }
     }
@@ -71,7 +71,7 @@ public:
 
     void setValue(const CAmount& value)
     {
-        lineEdit()->setText(SyscoinUnits::format(currentUnit, value, false, SyscoinUnits::SeparatorStyle::ALWAYS));
+        lineEdit()->setText(wentunoUnits::format(currentUnit, value, false, wentunoUnits::SeparatorStyle::ALWAYS));
         Q_EMIT valueChanged();
     }
 
@@ -99,13 +99,13 @@ public:
         setValue(val);
     }
 
-    void setDisplayUnit(SyscoinUnit unit)
+    void setDisplayUnit(wentunoUnit unit)
     {
         bool valid = false;
         CAmount val = value(&valid);
 
         currentUnit = unit;
-        lineEdit()->setPlaceholderText(SyscoinUnits::format(currentUnit, m_min_amount, false, SyscoinUnits::SeparatorStyle::ALWAYS));
+        lineEdit()->setPlaceholderText(wentunoUnits::format(currentUnit, m_min_amount, false, wentunoUnits::SeparatorStyle::ALWAYS));
         if(valid)
             setValue(val);
         else
@@ -125,7 +125,7 @@ public:
 
             const QFontMetrics fm(fontMetrics());
             int h = lineEdit()->minimumSizeHint().height();
-            int w = GUIUtil::TextWidth(fm, SyscoinUnits::format(SyscoinUnit::SYS, SyscoinUnits::maxMoney(), false, SyscoinUnits::SeparatorStyle::ALWAYS));
+            int w = GUIUtil::TextWidth(fm, wentunoUnits::format(wentunoUnit::WUNO, wentunoUnits::maxMoney(), false, wentunoUnits::SeparatorStyle::ALWAYS));
             w += 2; // cursor blinking space
 
             QStyleOptionSpinBox opt;
@@ -150,12 +150,12 @@ public:
     }
 
 private:
-    SyscoinUnit currentUnit{SyscoinUnit::SYS};
+    wentunoUnit currentUnit{wentunoUnit::WUNO};
     CAmount singleStep{CAmount(100000)}; // satoshis
     mutable QSize cachedMinimumSizeHint;
     bool m_allow_empty{true};
     CAmount m_min_amount{CAmount(0)};
-    CAmount m_max_amount{SyscoinUnits::maxMoney()};
+    CAmount m_max_amount{wentunoUnits::maxMoney()};
 
     /**
      * Parse a string into a number of base monetary units and
@@ -165,10 +165,10 @@ private:
     CAmount parse(const QString &text, bool *valid_out=nullptr) const
     {
         CAmount val = 0;
-        bool valid = SyscoinUnits::parse(currentUnit, text, &val);
+        bool valid = wentunoUnits::parse(currentUnit, text, &val);
         if(valid)
         {
-            if(val < 0 || val > SyscoinUnits::maxMoney())
+            if(val < 0 || val > wentunoUnits::maxMoney())
                 valid = false;
         }
         if(valid_out)
@@ -215,9 +215,9 @@ Q_SIGNALS:
     void valueChanged();
 };
 
-#include <qt/syscoinamountfield.moc>
+#include <qt/wentunoamountfield.moc>
 
-SyscoinAmountField::SyscoinAmountField(QWidget* parent)
+wentunoAmountField::wentunoAmountField(QWidget* parent)
     : QWidget(parent)
 {
     amount = new AmountSpinBox(this);
@@ -228,7 +228,7 @@ SyscoinAmountField::SyscoinAmountField(QWidget* parent)
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->addWidget(amount);
     unit = new QValueComboBox(this);
-    unit->setModel(new SyscoinUnits(this));
+    unit->setModel(new wentunoUnits(this));
     layout->addWidget(unit);
     layout->addStretch(1);
     layout->setContentsMargins(0,0,0,0);
@@ -239,26 +239,26 @@ SyscoinAmountField::SyscoinAmountField(QWidget* parent)
     setFocusProxy(amount);
 
     // If one if the widgets changes, the combined content changes as well
-    connect(amount, &AmountSpinBox::valueChanged, this, &SyscoinAmountField::valueChanged);
-    connect(unit, qOverload<int>(&QComboBox::currentIndexChanged), this, &SyscoinAmountField::unitChanged);
+    connect(amount, &AmountSpinBox::valueChanged, this, &wentunoAmountField::valueChanged);
+    connect(unit, qOverload<int>(&QComboBox::currentIndexChanged), this, &wentunoAmountField::unitChanged);
 
     // Set default based on configuration
     unitChanged(unit->currentIndex());
 }
 
-void SyscoinAmountField::clear()
+void wentunoAmountField::clear()
 {
     amount->clear();
     unit->setCurrentIndex(0);
 }
 
-void SyscoinAmountField::setEnabled(bool fEnabled)
+void wentunoAmountField::setEnabled(bool fEnabled)
 {
     amount->setEnabled(fEnabled);
     unit->setEnabled(fEnabled);
 }
 
-bool SyscoinAmountField::validate()
+bool wentunoAmountField::validate()
 {
     bool valid = false;
     value(&valid);
@@ -266,7 +266,7 @@ bool SyscoinAmountField::validate()
     return valid;
 }
 
-void SyscoinAmountField::setValid(bool valid)
+void wentunoAmountField::setValid(bool valid)
 {
     if (valid)
         amount->setStyleSheet("");
@@ -274,7 +274,7 @@ void SyscoinAmountField::setValid(bool valid)
         amount->setStyleSheet(STYLE_INVALID);
 }
 
-bool SyscoinAmountField::eventFilter(QObject *object, QEvent *event)
+bool wentunoAmountField::eventFilter(QObject *object, QEvent *event)
 {
     if (event->type() == QEvent::FocusIn)
     {
@@ -284,60 +284,60 @@ bool SyscoinAmountField::eventFilter(QObject *object, QEvent *event)
     return QWidget::eventFilter(object, event);
 }
 
-QWidget *SyscoinAmountField::setupTabChain(QWidget *prev)
+QWidget *wentunoAmountField::setupTabChain(QWidget *prev)
 {
     QWidget::setTabOrder(prev, amount);
     QWidget::setTabOrder(amount, unit);
     return unit;
 }
 
-CAmount SyscoinAmountField::value(bool *valid_out) const
+CAmount wentunoAmountField::value(bool *valid_out) const
 {
     return amount->value(valid_out);
 }
 
-void SyscoinAmountField::setValue(const CAmount& value)
+void wentunoAmountField::setValue(const CAmount& value)
 {
     amount->setValue(value);
 }
 
-void SyscoinAmountField::SetAllowEmpty(bool allow)
+void wentunoAmountField::SetAllowEmpty(bool allow)
 {
     amount->SetAllowEmpty(allow);
 }
 
-void SyscoinAmountField::SetMinValue(const CAmount& value)
+void wentunoAmountField::SetMinValue(const CAmount& value)
 {
     amount->SetMinValue(value);
 }
 
-void SyscoinAmountField::SetMaxValue(const CAmount& value)
+void wentunoAmountField::SetMaxValue(const CAmount& value)
 {
     amount->SetMaxValue(value);
 }
 
-void SyscoinAmountField::setReadOnly(bool fReadOnly)
+void wentunoAmountField::setReadOnly(bool fReadOnly)
 {
     amount->setReadOnly(fReadOnly);
 }
 
-void SyscoinAmountField::unitChanged(int idx)
+void wentunoAmountField::unitChanged(int idx)
 {
     // Use description tooltip for current unit for the combobox
     unit->setToolTip(unit->itemData(idx, Qt::ToolTipRole).toString());
 
     // Determine new unit ID
-    QVariant new_unit = unit->currentData(SyscoinUnits::UnitRole);
+    QVariant new_unit = unit->currentData(wentunoUnits::UnitRole);
     assert(new_unit.isValid());
-    amount->setDisplayUnit(new_unit.value<SyscoinUnit>());
+    amount->setDisplayUnit(new_unit.value<wentunoUnit>());
 }
 
-void SyscoinAmountField::setDisplayUnit(SyscoinUnit new_unit)
+void wentunoAmountField::setDisplayUnit(wentunoUnit new_unit)
 {
     unit->setValue(QVariant::fromValue(new_unit));
 }
 
-void SyscoinAmountField::setSingleStep(const CAmount& step)
+void wentunoAmountField::setSingleStep(const CAmount& step)
 {
     amount->setSingleStep(step);
 }

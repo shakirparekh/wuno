@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_EVO_MNAUTH_H
-#define SYSCOIN_EVO_MNAUTH_H
+#ifndef wentuno_EVO_MNAUTH_H
+#define wentuno_EVO_MNAUTH_H
 
 #include <bls/bls.h>
 #include <serialize.h>
@@ -54,4 +54,4 @@ public:
 };
 
 
-#endif // SYSCOIN_EVO_MNAUTH_H
+#endif // wentuno_EVO_MNAUTH_H

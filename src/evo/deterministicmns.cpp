@@ -676,7 +676,7 @@ bool CDeterministicMNManager::UndoBlock(const CBlockIndex* pindex, CDeterministi
         if(inversedDiff.HasChanges()) {
             GetMainSignals().NotifyMasternodeListChanged(true, prevList, inversedDiff);
         }
-        // SYSCOIN always update interface
+        // wentuno always update interface
         uiInterface.NotifyMasternodeListChanged(prevList);
     }
     return true;
@@ -694,7 +694,7 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
 
     bool decreasePoSE = false;
     if(!fRegTest) {
-        // in sys we only run one quorum so we need to be more sure in this service we will catch a bad MN within around 1 payment round
+        // in WUNO we only run one quorum so we need to be more sure in this service we will catch a bad MN within around 1 payment round
         if((nHeight % 3) == 0) {
             decreasePoSE = true;
         }
@@ -747,7 +747,7 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
         const CTransaction& tx = *block.vtx[i];
 
         switch(tx.nVersion) {
-            case(SYSCOIN_TX_VERSION_MN_REGISTER): {
+            case(wentuno_TX_VERSION_MN_REGISTER): {
                 CProRegTx proTx;
                 if (!GetTxPayload(tx, proTx)) {
                     return _state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-protx-payload");
@@ -813,7 +813,7 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
                         __func__, tx.GetHash().ToString(), nHeight, proTx.ToString());
                 break;
             } 
-            case(SYSCOIN_TX_VERSION_MN_UPDATE_SERVICE): {
+            case(wentuno_TX_VERSION_MN_UPDATE_SERVICE): {
                 CProUpServTx proTx;
                 if (!GetTxPayload(tx, proTx)) {
                     return _state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-protx-payload");
@@ -865,7 +865,7 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
                         __func__, proTx.proTxHash.ToString(), nHeight, proTx.ToString());
                 break;
             } 
-            case(SYSCOIN_TX_VERSION_MN_UPDATE_REGISTRAR): {
+            case(wentuno_TX_VERSION_MN_UPDATE_REGISTRAR): {
                 CProUpRegTx proTx;
                 if (!GetTxPayload(tx, proTx)) {
                     return _state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-protx-payload");
@@ -898,7 +898,7 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
                          __func__, proTx.proTxHash.ToString(), nHeight, proTx.ToString());
                 break;
             }            
-            case(SYSCOIN_TX_VERSION_MN_UPDATE_REVOKE): {
+            case(wentuno_TX_VERSION_MN_UPDATE_REVOKE): {
                 CProUpRevTx proTx;
                 if (!GetTxPayload(tx, proTx)) {
                     return _state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-protx-payload");
@@ -1019,7 +1019,7 @@ void CDeterministicMNManager::UpdatedBlockTip(const CBlockIndex* pindex) {
 
 bool CDeterministicMNManager::IsProTxWithCollateral(const CTransactionRef& tx, uint32_t n)
 {
-    if (tx->nVersion != SYSCOIN_TX_VERSION_MN_REGISTER) {
+    if (tx->nVersion != wentuno_TX_VERSION_MN_REGISTER) {
         return false;
     }
     CProRegTx proTx;
@@ -1049,7 +1049,7 @@ bool CDeterministicMNManager::DoMaintenance(bool bForceFlush) {
     if (m_evoDb->IsCacheFull()) {
         m_evoDb->ResetDB();
         bForceFlush = true;
-        LogPrint(BCLog::SYS, "CDeterministicMNManager::DoMaintenance Database successfully wiped and recreated.\n");
+        LogPrint(BCLog::WUNO, "CDeterministicMNManager::DoMaintenance Database successfully wiped and recreated.\n");
     }
     if(bForceFlush) {
         if(!m_evoDb->FlushCacheToDisk()) {
@@ -1079,7 +1079,7 @@ bool CDeterministicMNManager::GetEvoDBStats(EvoDBStats& stats)
         // Calculate disk size by iterating directory
         stats.estimatedDiskSizeBytes = 0; // Initialize size
         if (!stats.dbPath.empty() && fs::is_directory(stats.dbPath)) {
-            try { // Add inner try-catch for filesystem iteration errors
+            try { // Add inner try-catch for fileWUNOtem iteration errors
                 for (const auto& dir_entry : fs::recursive_directory_iterator(stats.dbPath)) {
                     if (fs::is_regular_file(dir_entry.path())) {
                         std::error_code ec;
@@ -1092,8 +1092,8 @@ bool CDeterministicMNManager::GetEvoDBStats(EvoDBStats& stats)
                         }
                     }
                 }
-            } catch (const fs::filesystem_error& e) {
-                 LogPrint(BCLog::MNLIST, "CDeterministicMNManager::%s -- Filesystem error while iterating %s: %s\n", __func__, stats.dbPath, e.what());
+            } catch (const fs::fileWUNOtem_error& e) {
+                 LogPrint(BCLog::MNLIST, "CDeterministicMNManager::%s -- FileWUNOtem error while iterating %s: %s\n", __func__, stats.dbPath, e.what());
                  // Can't reliably estimate size, maybe return false or keep size 0
                  return false; // Indicate failure if iteration fails
             }

@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_LLMQ_QUORUMS_SIGNING_SHARES_H
-#define SYSCOIN_LLMQ_QUORUMS_SIGNING_SHARES_H
+#ifndef wentuno_LLMQ_QUORUMS_SIGNING_SHARES_H
+#define wentuno_LLMQ_QUORUMS_SIGNING_SHARES_H
 
 #include <llmq/quorums_signing.h>
 
@@ -473,4 +473,4 @@ extern CSigSharesManager* quorumSigSharesManager;
 
 } // namespace llmq
 
-#endif // SYSCOIN_LLMQ_QUORUMS_SIGNING_SHARES_H
+#endif // wentuno_LLMQ_QUORUMS_SIGNING_SHARES_H

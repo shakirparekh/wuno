@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE(basic_allocating)
     BOOST_TEST(1 == PoolResourceTester::FreeListSizes(resource)[1]);
     BOOST_TEST(expected_bytes_available == PoolResourceTester::AvailableMemoryFromChunk(resource));
 
-    // can't use resource because alignment is too big, allocate system memory
+    // can't use resource because alignment is too big, allocate WUNOtem memory
     b = resource.Allocate(8, 16);
     BOOST_TEST(b != block);
     block = b;

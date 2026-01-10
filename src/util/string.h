@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_STRING_H
-#define SYSCOIN_UTIL_STRING_H
+#ifndef wentuno_UTIL_STRING_H
+#define wentuno_UTIL_STRING_H
 
 #include <util/spanparsing.h>
 
@@ -125,4 +125,4 @@ template <typename T1, size_t PREFIX_LEN>
            std::equal(std::begin(prefix), std::end(prefix), std::begin(obj));
 }
 
-#endif // SYSCOIN_UTIL_STRING_H
+#endif // wentuno_UTIL_STRING_H

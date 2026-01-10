@@ -7,9 +7,9 @@ To run linters locally with the same versions as the CI environment, use the inc
 Dockerfile:
 
 ```sh
-DOCKER_BUILDKIT=1 docker build -t syscoin-linter --file "./ci/lint_imagefile" ./
+DOCKER_BUILDKIT=1 docker build -t wentuno-linter --file "./ci/lint_imagefile" ./
 
-docker run --rm -v $(pwd):/syscoin -it syscoin-linter
+docker run --rm -v $(pwd):/wentuno -it wentuno-linter
 ```
 
 After building the container once, you can simply run the last command any time you
@@ -23,7 +23,7 @@ Check for missing documentation of command line options.
 commit-script-check.sh
 ======================
 Verification of [scripted diffs](/doc/developer-notes.md#scripted-diffs).
-Scripted diffs are only assumed to run on the latest LTS release of Ubuntu. Running them on other operating systems
+Scripted diffs are only assumed to run on the latest LTS release of Ubuntu. Running them on other operating WUNOtems
 might require installing GNU tools, such as GNU sed.
 
 git-subtree-check.sh

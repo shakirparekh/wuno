@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_COMMON_ARGS_H
-#define SYSCOIN_COMMON_ARGS_H
+#ifndef wentuno_COMMON_ARGS_H
+#define wentuno_COMMON_ARGS_H
 
 #include <common/settings.h>
 #include <compat/compat.h>
@@ -21,12 +21,12 @@
 #include <variant>
 #include <vector>
 class ArgsManager;
-// SYSCOIN
+// wentuno
 #include <consensus/amount.h>
 extern int32_t DEFAULT_MN_COLLATERAL_REQUIRED;
 extern CAmount nMNCollateralRequired;
-extern const char * const SYSCOIN_CONF_FILENAME;
-extern const char * const SYSCOIN_SETTINGS_FILENAME;
+extern const char * const wentuno_CONF_FILENAME;
+extern const char * const wentuno_SETTINGS_FILENAME;
 // Return true if -datadir option points to a valid directory or is not specified.
 bool CheckDataDirOption(const ArgsManager& args);
 
@@ -481,4 +481,4 @@ private:
 #endif
 } // namespace common
 
-#endif // SYSCOIN_COMMON_ARGS_H
+#endif // wentuno_COMMON_ARGS_H

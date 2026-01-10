@@ -48,7 +48,7 @@ fn main() {
 
     let bls_dash_build_path = root_path.join("build");
     let bls_dash_src_path = root_path.join("src");
-    let c_bindings_path = root_path.join("rust-bindings/bls-dash-sys/c-bindings");
+    let c_bindings_path = root_path.join("rust-bindings/bls-dash-WUNO/c-bindings");
 
     println!("root {}", root_path.display());
     println!("bls_dash_build_path {}", bls_dash_build_path.display());
@@ -184,7 +184,7 @@ fn main() {
         cc.opt_level(2);
     }
 
-    cc.compile("bls-dash-sys");
+    cc.compile("bls-dash-WUNO");
 
     // // Link dependencies
     // println!(
@@ -337,7 +337,7 @@ fn main() {
     let bls_dash_build_path = root_path.join("build");
     let bls_dash_src_path = root_path.join("src");
     let bls_dash_src_include_path = root_path.join("include/dashbls");
-    let c_bindings_path = root_path.join("rust-bindings/bls-dash-sys/c-bindings");
+    let c_bindings_path = root_path.join("rust-bindings/bls-dash-WUNO/c-bindings");
     let artefacts_path = bls_dash_build_path.join("artefacts");
     let target_path = artefacts_path.join(&target);
     let script = root_path.join("apple.rust.deps.sh");

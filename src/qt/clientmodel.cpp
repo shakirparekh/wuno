@@ -13,7 +13,7 @@
 
 #include <clientversion.h>
 #include <common/args.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <interfaces/handler.h>
 #include <interfaces/node.h>
 #include <net.h>
@@ -64,7 +64,7 @@ ClientModel::ClientModel(interfaces::Node& node, OptionsModel *_optionsModel, QO
         util::ThreadRename("qt-clientmodl");
     });
 
-    // SYSCOIN
+    // wentuno
     mnListCached = std::make_shared<CDeterministicMNList>();
     subscribeToCoreSignals();
 }
@@ -99,7 +99,7 @@ void ClientModel::setMasternodeList(const CDeterministicMNList& mnList)
     mnListCached = std::make_shared<CDeterministicMNList>(mnList);
     Q_EMIT masternodeListChanged();
 }
-// SYSCOIN
+// wentuno
 CDeterministicMNList ClientModel::getMasternodeList() const
 {
     LOCK(cs_mnlinst);
@@ -236,7 +236,7 @@ QString ClientModel::blocksDir() const
     return GUIUtil::PathToQString(gArgs.GetBlocksDirPath());
 }
 
-// SYSCOIN
+// wentuno
 static void NotifyMasternodeListChanged(ClientModel *clientmodel, const CDeterministicMNList& newList)
 {
     clientmodel->setMasternodeList(newList);
@@ -303,7 +303,7 @@ void ClientModel::subscribeToCoreSignals()
         [this](SynchronizationState sync_state, interfaces::BlockTip tip, bool presync) {
             TipChanged(sync_state, tip, /*verification_progress=*/0.0, presync ? SyncType::HEADER_PRESYNC : SyncType::HEADER_SYNC);
         });
-    // SYSCOIN
+    // wentuno
     m_handler_additional_data_sync_progress_changed = m_node.handleNotifyAdditionalDataSyncProgressChanged(std::bind(NotifyAdditionalDataSyncProgressChanged, this, std::placeholders::_1));
     m_handler_masternodelist_changed = m_node.handleNotifyMasternodeListChanged(std::bind(NotifyMasternodeListChanged, this, std::placeholders::_1));
 }
@@ -317,7 +317,7 @@ void ClientModel::unsubscribeFromCoreSignals()
     m_handler_banned_list_changed->disconnect();
     m_handler_notify_block_tip->disconnect();
     m_handler_notify_header_tip->disconnect();
-     // SYSCOIN
+     // wentuno
     m_handler_additional_data_sync_progress_changed->disconnect();   
     m_handler_masternodelist_changed->disconnect();
 }

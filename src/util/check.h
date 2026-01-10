@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_CHECK_H
-#define SYSCOIN_UTIL_CHECK_H
+#ifndef wentuno_UTIL_CHECK_H
+#define wentuno_UTIL_CHECK_H
 
 #include <attributes.h>
 
@@ -97,4 +97,4 @@ T&& inline_assertion_check(LIFETIMEBOUND T&& val, [[maybe_unused]] const char* f
 
 // NOLINTEND(bugprone-lambda-function-name)
 
-#endif // SYSCOIN_UTIL_CHECK_H
+#endif // wentuno_UTIL_CHECK_H

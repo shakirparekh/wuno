@@ -7,13 +7,13 @@
 import re
 
 from test_framework.blocktools import COINBASE_MATURITY
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
 )
 
 
-class WalletChangeAddressTest(SyscoinTestFramework):
+class WalletChangeAddressTest(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
 

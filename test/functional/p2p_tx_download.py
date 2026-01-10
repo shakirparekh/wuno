@@ -19,7 +19,7 @@ from test_framework.p2p import (
     P2PInterface,
     p2p_lock,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
 )
@@ -51,7 +51,7 @@ NUM_INBOUND = 10
 MAX_GETDATA_INBOUND_WAIT = GETDATA_TX_INTERVAL + INBOUND_PEER_TX_DELAY + TXID_RELAY_DELAY
 
 
-class TxDownloadTest(SyscoinTestFramework):
+class TxDownloadTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
 
@@ -255,7 +255,7 @@ class TxDownloadTest(SyscoinTestFramework):
         self.test_large_inv_batch()
         self.test_spurious_notfound()
 
-        # Run each test against new syscoind instances, as setting mocktimes has long-term effects on when
+        # Run each test against new wentunod instances, as setting mocktimes has long-term effects on when
         # the next trickle relay event happens.
         for test in [self.test_in_flight_max, self.test_inv_block, self.test_tx_requests]:
             self.stop_nodes()

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_INTERFACES_ECHO_H
-#define SYSCOIN_INTERFACES_ECHO_H
+#ifndef wentuno_INTERFACES_ECHO_H
+#define wentuno_INTERFACES_ECHO_H
 
 #include <memory>
 #include <string>
@@ -23,4 +23,4 @@ public:
 std::unique_ptr<Echo> MakeEcho();
 } // namespace interfaces
 
-#endif // SYSCOIN_INTERFACES_ECHO_H
+#endif // wentuno_INTERFACES_ECHO_H

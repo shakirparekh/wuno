@@ -2,11 +2,11 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_OPTIONSMODEL_H
-#define SYSCOIN_QT_OPTIONSMODEL_H
+#ifndef wentuno_QT_OPTIONSMODEL_H
+#define wentuno_QT_OPTIONSMODEL_H
 
 #include <cstdint>
-#include <qt/syscoinunits.h>
+#include <qt/wentunounits.h>
 #include <qt/guiconstants.h>
 
 #include <QAbstractListModel>
@@ -57,7 +57,7 @@ public:
         ProxyUseTor,            // bool
         ProxyIPTor,             // QString
         ProxyPortTor,           // int
-        DisplayUnit,            // SyscoinUnit
+        DisplayUnit,            // wentunoUnit
         ThirdPartyTxUrls,       // QString
         Language,               // QString
         UseEmbeddedMonospacedFont, // bool
@@ -92,7 +92,7 @@ public:
     bool getShowTrayIcon() const { return m_show_tray_icon; }
     bool getMinimizeToTray() const { return fMinimizeToTray; }
     bool getMinimizeOnClose() const { return fMinimizeOnClose; }
-    SyscoinUnit getDisplayUnit() const { return m_display_syscoin_unit; }
+    wentunoUnit getDisplayUnit() const { return m_display_wentuno_unit; }
     QString getThirdPartyTxUrls() const { return strThirdPartyTxUrls; }
     bool getUseEmbeddedMonospacedFont() const { return m_use_embedded_monospaced_font; }
     bool getCoinControlFeatures() const { return fCoinControlFeatures; }
@@ -119,7 +119,7 @@ private:
     bool fMinimizeToTray;
     bool fMinimizeOnClose;
     QString language;
-    SyscoinUnit m_display_syscoin_unit;
+    wentunoUnit m_display_wentuno_unit;
     QString strThirdPartyTxUrls;
     bool m_use_embedded_monospaced_font;
     bool fCoinControlFeatures;
@@ -137,10 +137,10 @@ private:
     void checkAndMigrate();
 
 Q_SIGNALS:
-    void displayUnitChanged(SyscoinUnit unit);
+    void displayUnitChanged(wentunoUnit unit);
     void coinControlFeaturesChanged(bool);
     void showTrayIconChanged(bool);
     void useEmbeddedMonospacedFontChanged(bool);
 };
 
-#endif // SYSCOIN_QT_OPTIONSMODEL_H
+#endif // wentuno_QT_OPTIONSMODEL_H

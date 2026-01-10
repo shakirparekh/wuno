@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_INTERFACES_CHAIN_H
-#define SYSCOIN_INTERFACES_CHAIN_H
+#ifndef wentuno_INTERFACES_CHAIN_H
+#define wentuno_INTERFACES_CHAIN_H
 
 #include <blockfilter.h>
 #include <common/settings.h>
@@ -25,7 +25,7 @@ class CRPCCommand;
 class CScheduler;
 class Coin;
 class uint256;
-// SYSCOIN
+// wentuno
 class CDeterministicMNList;
 enum class MemPoolRemovalReason;
 enum class RBFTransactionState;
@@ -102,13 +102,13 @@ struct BlockInfo {
 //! estimate fees, and submit transactions.
 //!
 //! TODO: Current chain methods are too low level, exposing too much of the
-//! internal workings of the syscoin node, and not being very convenient to use.
+//! internal workings of the wentuno node, and not being very convenient to use.
 //! Chain methods should be cleaned up and simplified over time. Examples:
 //!
 //! * The initMessages() and showProgress() methods which the wallet uses to send
 //!   notifications to the GUI should go away when GUI and wallet can directly
 //!   communicate with each other without going through the node
-//!   (https://github.com/syscoin/syscoin/pull/15288#discussion_r253321096).
+//!   (https://github.com/wentuno/wentuno/pull/15288#discussion_r253321096).
 //!
 //! * The handleRpc, registerRpcs, rpcEnableDeprecated methods and other RPC
 //!   methods can go away if wallets listen for HTTP requests on their own
@@ -150,7 +150,7 @@ public:
     //! or one of its ancestors.
     virtual std::optional<int> findLocatorFork(const CBlockLocator& locator) = 0;
 
-    // SYSCOIN
+    // wentuno
     //! Get masternode list for a specific block height.
     virtual CDeterministicMNList getMNList(int height) = 0;
     //! Returns whether a block filter index is available.
@@ -407,4 +407,4 @@ std::unique_ptr<Chain> MakeChain(node::NodeContext& node);
 
 } // namespace interfaces
 
-#endif // SYSCOIN_INTERFACES_CHAIN_H
+#endif // wentuno_INTERFACES_CHAIN_H

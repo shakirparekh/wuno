@@ -2,11 +2,11 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_SYSCOIN_H
-#define SYSCOIN_QT_SYSCOIN_H
+#ifndef wentuno_QT_wentuno_H
+#define wentuno_QT_wentuno_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <interfaces/node.h>
@@ -18,7 +18,7 @@
 
 #include <QApplication>
 
-class SyscoinGUI;
+class wentunoGUI;
 class ClientModel;
 class NetworkStyle;
 class OptionsModel;
@@ -32,13 +32,13 @@ class Init;
 } // namespace interfaces
 
 
-/** Main Syscoin application object */
-class SyscoinApplication: public QApplication
+/** Main wentuno application object */
+class wentunoApplication: public QApplication
 {
     Q_OBJECT
 public:
-    explicit SyscoinApplication();
-    ~SyscoinApplication();
+    explicit wentunoApplication();
+    ~wentunoApplication();
 
 #ifdef ENABLE_WALLET
     /// Create payment server
@@ -62,7 +62,7 @@ public:
     /// Request core initialization
     void requestInitialize();
 
-    /// Get window identifier of QMainWindow (SyscoinGUI)
+    /// Get window identifier of QMainWindow (wentunoGUI)
     WId getMainWinId() const;
 
     /// Setup platform style
@@ -86,7 +86,7 @@ public Q_SLOTS:
 Q_SIGNALS:
     void requestedInitialize();
     void requestedShutdown();
-    void windowShown(SyscoinGUI* window);
+    void windowShown(wentunoGUI* window);
 
 protected:
     bool event(QEvent* e) override;
@@ -95,7 +95,7 @@ private:
     std::optional<InitExecutor> m_executor;
     OptionsModel* optionsModel{nullptr};
     ClientModel* clientModel{nullptr};
-    SyscoinGUI* window{nullptr};
+    wentunoGUI* window{nullptr};
     QTimer* pollShutdownTimer{nullptr};
 #ifdef ENABLE_WALLET
     PaymentServer* paymentServer{nullptr};
@@ -111,4 +111,4 @@ private:
 
 int GuiMain(int argc, char* argv[]);
 
-#endif // SYSCOIN_QT_SYSCOIN_H
+#endif // wentuno_QT_wentuno_H

@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SYNC_H
-#define SYSCOIN_SYNC_H
+#ifndef wentuno_SYNC_H
+#define wentuno_SYNC_H
 
 #ifdef DEBUG_LOCKCONTENTION
 #include <logging.h>
@@ -428,4 +428,4 @@ public:
     }
 };
 
-#endif // SYSCOIN_SYNC_H
+#endif // wentuno_SYNC_H

@@ -34,7 +34,7 @@ NON_DETERMINISTIC_TESTS=(
     "wallet_tests/wallet_disableprivkeys"                     # validation.cpp: if (GetMainSignals().CallbacksPending() > 10)
 )
 
-TEST_SYSCOIN_BINARY="src/test/test_syscoin"
+TEST_wentuno_BINARY="src/test/test_wentuno"
 
 print_usage() {
     echo "Usage: $0 [custom test filter (default: all but known non-deterministic tests)] [number of test runs (default: 2)]"
@@ -80,8 +80,8 @@ if ! command -v gcovr > /dev/null; then
     exit 1
 fi
 
-if [[ ! -e ${TEST_SYSCOIN_BINARY} ]]; then
-    echo "Error: Executable ${TEST_SYSCOIN_BINARY} not found. Run \"./configure --enable-lcov\" and compile."
+if [[ ! -e ${TEST_wentuno_BINARY} ]]; then
+    echo "Error: Executable ${TEST_wentuno_BINARY} not found. Run \"./configure --enable-lcov\" and compile."
     exit 1
 fi
 
@@ -108,7 +108,7 @@ while [[ ${TEST_RUN_ID} -lt ${N_TEST_RUNS} ]]; do
         exit 1
     fi
     TEST_OUTPUT_TEMPFILE=$(mktemp)
-    if ! BOOST_TEST_RUN_FILTERS="${BOOST_TEST_RUN_FILTERS}" ${TEST_SYSCOIN_BINARY} > "${TEST_OUTPUT_TEMPFILE}" 2>&1; then
+    if ! BOOST_TEST_RUN_FILTERS="${BOOST_TEST_RUN_FILTERS}" ${TEST_wentuno_BINARY} > "${TEST_OUTPUT_TEMPFILE}" 2>&1; then
         cat "${TEST_OUTPUT_TEMPFILE}"
         rm "${TEST_OUTPUT_TEMPFILE}"
         exit 1

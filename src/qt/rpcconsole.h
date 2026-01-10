@@ -2,11 +2,11 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_RPCCONSOLE_H
-#define SYSCOIN_QT_RPCCONSOLE_H
+#ifndef wentuno_QT_RPCCONSOLE_H
+#define wentuno_QT_RPCCONSOLE_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <qt/clientmodel.h>
@@ -39,7 +39,7 @@ class QMenu;
 class QItemSelection;
 QT_END_NAMESPACE
 
-/** Local Syscoin RPC console. */
+/** Local wentuno RPC console. */
 class RPCConsole: public QWidget
 {
     Q_OBJECT
@@ -121,7 +121,7 @@ public Q_SLOTS:
     void setNumConnections(int count);
     /** Set network state shown in the UI */
     void setNetworkActive(bool networkActive);
-    /** SYSCOIN Update number of masternodes shown in the UI */
+    /** wentuno Update number of masternodes shown in the UI */
     void updateMasternodeCount();
     /** Set number of blocks and last block date shown in the UI */
     void setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress, SyncType synctype);
@@ -152,7 +152,7 @@ private:
 
     void startExecutor();
     void setTrafficGraphRange(int mins);
-    // SYSCOIN
+    // wentuno
     /** Build parameter list for restart */
     void buildParameterlist(QString arg);
     enum ColumnWidths
@@ -198,4 +198,4 @@ private Q_SLOTS:
     void updateAlerts(const QString& warnings);
 };
 
-#endif // SYSCOIN_QT_RPCCONSOLE_H
+#endif // wentuno_QT_RPCCONSOLE_H

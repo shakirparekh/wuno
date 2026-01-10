@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SCRIPT_SCRIPT_H
-#define SYSCOIN_SCRIPT_SCRIPT_H
+#ifndef wentuno_SCRIPT_SCRIPT_H
+#define wentuno_SCRIPT_SCRIPT_H
 
 #include <attributes.h>
 #include <crypto/common.h>
@@ -49,7 +49,7 @@ static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20
 // checking is disabled (by setting all input sequence numbers to
 // SEQUENCE_FINAL).
 static const uint32_t LOCKTIME_MAX = 0xFFFFFFFFU;
-// SYSCOIN
+// wentuno
 typedef std::vector<unsigned char> valtype;
 // Tag for input annex. If there are at least two witness elements for a transaction input,
 // and the first byte of the last element is 0x50, this last element is called annex, and
@@ -519,7 +519,7 @@ public:
     }
 
     /**
-     * Pre-version-0.6, Syscoin always counted CHECKMULTISIGs
+     * Pre-version-0.6, wentuno always counted CHECKMULTISIGs
      * as 20 sigops. With pay-to-script-hash, that changed:
      * CHECKMULTISIGs serialized in scriptSigs are
      * counted more accurately, assuming they are of the form
@@ -618,4 +618,4 @@ CScript BuildScript(Ts&&... inputs)
     return ret;
 }
 
-#endif // SYSCOIN_SCRIPT_SCRIPT_H
+#endif // wentuno_SCRIPT_SCRIPT_H

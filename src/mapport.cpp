@@ -3,13 +3,13 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <mapport.h>
 
 #include <clientversion.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <logging.h>
 #include <net.h>
 #include <netaddress.h>

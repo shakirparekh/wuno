@@ -20,7 +20,7 @@ from test_framework.p2p import (
     p2p_lock,
     P2P_SERVICES,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_greater_than,
@@ -83,7 +83,7 @@ class AddrReceiver(P2PInterface):
         return self.message_count['getaddr'] > 0
 
 
-class AddrTest(SyscoinTestFramework):
+class AddrTest(wentunoTestFramework):
     counter = 0
     mock_time = int(time.time())
 
@@ -225,7 +225,7 @@ class AddrTest(SyscoinTestFramework):
         # addr_source sends 2 addresses to node0
         msg = self.setup_addr_msg(2)
         addr_source.send_and_ping(msg)
-        # SYSCOIN
+        # wentuno
         self.mock_time += 30 * 60
         self.nodes[0].setmocktime(self.mock_time)
         receiver_peer.sync_with_ping()
@@ -315,7 +315,7 @@ class AddrTest(SyscoinTestFramework):
     def blocksonly_mode_tests(self):
         self.log.info('Test addr relay in -blocksonly mode')
         self.restart_node(0, ["-blocksonly", "-whitelist=addr@127.0.0.1"])
-        # SYSCOIN
+        # wentuno
         self.mock_time = int(time.time())
 
         self.log.info('Check that we send getaddr messages')

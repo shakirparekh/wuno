@@ -20,7 +20,7 @@ fi
 
 VERSION=$1
 
-echo "=== Full notarization process for Syscoin v${VERSION} ==="
+echo "=== Full notarization process for wentuno v${VERSION} ==="
 echo ""
 
 # Step 1: Sign

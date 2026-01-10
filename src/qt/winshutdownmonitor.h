@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_WINSHUTDOWNMONITOR_H
-#define SYSCOIN_QT_WINSHUTDOWNMONITOR_H
+#ifndef wentuno_QT_WINSHUTDOWNMONITOR_H
+#define wentuno_QT_WINSHUTDOWNMONITOR_H
 
 #ifdef WIN32
 #include <QByteArray>
@@ -24,4 +24,4 @@ public:
 };
 #endif
 
-#endif // SYSCOIN_QT_WINSHUTDOWNMONITOR_H
+#endif // wentuno_QT_WINSHUTDOWNMONITOR_H

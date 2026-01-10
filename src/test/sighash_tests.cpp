@@ -2,7 +2,7 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <consensus/tx_check.h>
 #include <consensus/validation.h>
 #include <hash.h>
@@ -160,7 +160,7 @@ BOOST_AUTO_TEST_CASE(sighash_test)
 }
 
 // Goal: check that SignatureHash generates correct hash
-// SYSCOIN
+// wentuno
 /*BOOST_AUTO_TEST_CASE(sighash_from_data)
 {
     UniValue tests = read_json(json_tests::sighash);

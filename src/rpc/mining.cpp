@@ -5,7 +5,7 @@
 
 #include <chain.h>
 #include <chainparams.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <consensus/amount.h>
 #include <consensus/consensus.h>
 #include <consensus/params.h>
@@ -40,7 +40,7 @@
 
 #include <memory>
 #include <stdint.h>
-// SYSCOIN
+// wentuno
 #include <governance/governanceclasses.h>
 #include <masternode/masternodepayments.h>
 #include <masternode/masternodesync.h>
@@ -122,7 +122,7 @@ static RPCHelpMan getnetworkhashps()
 static bool GenerateBlock(ChainstateManager& chainman, CBlock& block, uint64_t& max_tries, unsigned int& extra_nonce, std::shared_ptr<const CBlock>& block_out, bool process_new_block)
 {
     block_out.reset();
-    // SYSCOIN
+    // wentuno
     {
         LOCK(cs_main);
         IncrementExtraNonce(&block, chainman.ActiveChain().Tip(), extra_nonce);
@@ -138,7 +138,7 @@ static bool GenerateBlock(ChainstateManager& chainman, CBlock& block, uint64_t& 
     if (block.nNonce == std::numeric_limits<uint32_t>::max()) {
         return true;
     }
-    // SYSCOIN
+    // wentuno
     CBlock copyBlock = block;
     block_out = std::make_shared<const CBlock>(copyBlock);
 
@@ -155,7 +155,7 @@ static UniValue generateBlocks(ChainstateManager& chainman, const CTxMemPool& me
 {
     unsigned int nExtraNonce = 0;
     UniValue blockHashes(UniValue::VARR);
-    // SYSCOIN
+    // wentuno
     while (nGenerate > 0 && !ShutdownRequested()) {
         std::unique_ptr<CBlockTemplate> pblocktemplate(BlockAssembler{chainman.ActiveChainstate(), &mempool}.CreateNewBlock(coinbase_script));
         if (!pblocktemplate.get())
@@ -215,7 +215,7 @@ static RPCHelpMan generatetodescriptor()
         "Mine to a specified descriptor and return the block hashes.",
         {
             {"num_blocks", RPCArg::Type::NUM, RPCArg::Optional::NO, "How many blocks are generated."},
-            {"descriptor", RPCArg::Type::STR, RPCArg::Optional::NO, "The descriptor to send the newly generated syscoin to."},
+            {"descriptor", RPCArg::Type::STR, RPCArg::Optional::NO, "The descriptor to send the newly generated wentuno to."},
             {"maxtries", RPCArg::Type::NUM, RPCArg::Default{DEFAULT_MAX_TRIES}, "How many iterations to try."},
         },
         RPCResult{
@@ -259,7 +259,7 @@ static RPCHelpMan generatetoaddress()
         "Mine to a specified address and return the block hashes.",
          {
              {"nblocks", RPCArg::Type::NUM, RPCArg::Optional::NO, "How many blocks are generated."},
-             {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The address to send the newly generated syscoin to."},
+             {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The address to send the newly generated wentuno to."},
              {"maxtries", RPCArg::Type::NUM, RPCArg::Default{DEFAULT_MAX_TRIES}, "How many iterations to try."},
          },
          RPCResult{
@@ -270,7 +270,7 @@ static RPCHelpMan generatetoaddress()
          RPCExamples{
             "\nGenerate 11 blocks to myaddress\n"
             + HelpExampleCli("generatetoaddress", "11 \"myaddress\"")
-            + "If you are using the " PACKAGE_NAME " wallet, you can get a new address to send the newly generated syscoin to with:\n"
+            + "If you are using the " PACKAGE_NAME " wallet, you can get a new address to send the newly generated wentuno to with:\n"
             + HelpExampleCli("getnewaddress", "")
                 },
         [&](const RPCHelpMan& self, const node::JSONRPCRequest& request) -> UniValue
@@ -299,7 +299,7 @@ static RPCHelpMan generateblock()
     return RPCHelpMan{"generateblock",
         "Mine a set of ordered transactions to a specified address or descriptor and return the block hash.",
         {
-            {"output", RPCArg::Type::STR, RPCArg::Optional::NO, "The address or descriptor to send the newly generated syscoin to."},
+            {"output", RPCArg::Type::STR, RPCArg::Optional::NO, "The address or descriptor to send the newly generated wentuno to."},
             {"transactions", RPCArg::Type::ARR, RPCArg::Optional::NO, "An array of hex strings which are either txids or raw transactions.\n"
                 "Txids must reference transactions currently in the mempool.\n"
                 "All transactions must be valid and in valid order, otherwise the block will be rejected.",
@@ -364,7 +364,7 @@ static RPCHelpMan generateblock()
 
     const bool process_new_block{request.params[2].isNull() ? true : request.params[2].get_bool()};
     CBlock block;
-    // SYSCOIN
+    // wentuno
     std::vector<unsigned char> vchCoinbaseCommitmentExtra;
     ChainstateManager& chainman = EnsureChainman(node);
     {
@@ -375,7 +375,7 @@ static RPCHelpMan generateblock()
             throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
         }
         block = blocktemplate->block;
-        // SYSCOIN
+        // wentuno
         vchCoinbaseCommitmentExtra = blocktemplate->vchCoinbaseCommitmentExtra;
     }
 
@@ -383,7 +383,7 @@ static RPCHelpMan generateblock()
 
     // Add transactions
     block.vtx.insert(block.vtx.end(), txs.begin(), txs.end());
-    // SYSCOIN
+    // wentuno
     RegenerateCommitments(block, chainman, vchCoinbaseCommitmentExtra);
 
     {
@@ -459,7 +459,7 @@ static RPCHelpMan getmininginfo()
 }
 
 
-// NOTE: Unlike wallet RPC (which use SYS values), mining RPCs follow GBT (BIP 22) in using satoshi amounts
+// NOTE: Unlike wallet RPC (which use WUNO values), mining RPCs follow GBT (BIP 22) in using satoshi amounts
 static RPCHelpMan prioritisetransaction()
 {
     return RPCHelpMan{"prioritisetransaction",
@@ -645,7 +645,7 @@ static RPCHelpMan getblocktemplate()
                 {RPCResult::Type::NUM, "height", "The height of the next block"},
                 {RPCResult::Type::STR_HEX, "signet_challenge", /*optional=*/true, "Only on signet"},
                 {RPCResult::Type::STR_HEX, "default_witness_commitment", /*optional=*/true, "a valid witness commitment for the unmodified block template"},
-                // SYSCOIN
+                // wentuno
                 {RPCResult::Type::NUM, "version_coinbase", "The coinbase tx version"},
                 {RPCResult::Type::ARR, "masternode", "",
                 {
@@ -675,7 +675,7 @@ static RPCHelpMan getblocktemplate()
                 },
         [&](const RPCHelpMan& self, const node::JSONRPCRequest& request) -> UniValue
 {
-    // SYSCOIN
+    // wentuno
     bool isSBSportActive = AreSuperblocksEnabled();
     node::NodeContext& node = EnsureAnyNodeContext(request.context);
     ChainstateManager& chainman = EnsureChainman(node);
@@ -751,7 +751,7 @@ static RPCHelpMan getblocktemplate()
         }
     }
 
-    // SYSCOIN
+    // wentuno
     // Get expected MN/superblock payees. The call to GetBlockTxOuts might fail on regtest/devnet or when
     // testnet is reset. This is fine and we ignore failure (blocks will be accepted)
     std::vector<CTxOut> voutMasternodePayments;
@@ -763,7 +763,7 @@ static RPCHelpMan getblocktemplate()
     if (!fRegTest && !fSigNet && isSBSportActive
         && !masternodeSync.IsSynced()
         && CSuperblock::IsValidBlockHeight(node.chainman->ActiveHeight() + 1))
-            throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Syscoin Core is syncing with network...");
+            throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "wentuno Core is syncing with network...");
     
 
     static unsigned int nTransactionsUpdatedLast;
@@ -978,7 +978,7 @@ static RPCHelpMan getblocktemplate()
     result.pushKV("mutable", aMutable);
     result.pushKV("noncerange", "00000000ffffffff");
     int64_t nSigOpLimit = MAX_BLOCK_SIGOPS_COST;
-    // SYSCOIN
+    // wentuno
     int64_t nSizeLimit = MAX_BLOCK_SERIALIZED_SIZE + MAX_NEVM_DATA_BLOCK;
     if (fPreSegWit) {
         CHECK_NONFATAL(nSigOpLimit % WITNESS_SCALE_FACTOR == 0);
@@ -1001,7 +1001,7 @@ static RPCHelpMan getblocktemplate()
     if (!pblocktemplate->vchCoinbaseCommitment.empty()) {
         result.pushKV("default_witness_commitment", HexStr(pblocktemplate->vchCoinbaseCommitment));
     }
-    // SYSCOIN
+    // wentuno
     result.pushKV("version_coinbase", pblock->vtx[0]->nVersion);
     UniValue masternodeObj(UniValue::VARR);
     for (const auto& txout : pblocktemplate->voutMasternodePayments) {
@@ -1181,7 +1181,7 @@ static RPCHelpMan createauxblock()
                         {RPCResult::Type::NUM, "chainid", "chain ID for this block"},
                         {RPCResult::Type::STR_HEX, "previousblockhash", "hash of the previous block"},
                         {RPCResult::Type::NUM, "coinbasevalue", "value of the block's coinbase"},
-                        {RPCResult::Type::STR_HEX, "coinbasescript", "The full scriptPubKey of the parent coinbase output for Syscoin AuxPoW tag commitment"},
+                        {RPCResult::Type::STR_HEX, "coinbasescript", "The full scriptPubKey of the parent coinbase output for wentuno AuxPoW tag commitment"},
                         {RPCResult::Type::STR, "bits", "compressed target of the block"},
                         {RPCResult::Type::NUM, "height", "height of the block"},
                         {RPCResult::Type::STR_HEX, "_target", "target in reversed byte order, deprecated"},
@@ -1239,7 +1239,7 @@ void RegisterMiningRPCCommands(CRPCTable& t)
         {"mining", &getblocktemplate},
         {"mining", &submitblock},
         {"mining", &submitheader},
-        // SYSCOIN
+        // wentuno
         {"mining", &createauxblock},
         {"mining", &submitauxblock},
 

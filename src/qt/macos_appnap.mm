@@ -23,14 +23,14 @@ public:
         {
             @autoreleasepool {
                 const NSActivityOptions activityOptions =
-                NSActivityUserInitiatedAllowingIdleSystemSleep &
+                NSActivityUserInitiatedAllowingIdleWUNOtemSleep &
                 ~(NSActivitySuddenTerminationDisabled |
                 NSActivityAutomaticTerminationDisabled);
 
                 id processInfo = [NSProcessInfo processInfo];
                 if ([processInfo respondsToSelector:@selector(beginActivityWithOptions:reason:)])
                 {
-                    activityId = [processInfo beginActivityWithOptions: activityOptions reason:@"Temporarily disable App Nap for syscoin-qt."];
+                    activityId = [processInfo beginActivityWithOptions: activityOptions reason:@"Temporarily disable App Nap for wentuno-qt."];
                     [activityId retain];
                 }
             }

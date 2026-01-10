@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_GOVERNANCE_GOVERNANCEVALIDATORS_H
-#define SYSCOIN_GOVERNANCE_GOVERNANCEVALIDATORS_H
+#ifndef wentuno_GOVERNANCE_GOVERNANCEVALIDATORS_H
+#define wentuno_GOVERNANCE_GOVERNANCEVALIDATORS_H
 
 #include <string>
 
@@ -45,4 +45,4 @@ private:
     bool CheckURL(const std::string& strURLIn);
 };
 
-#endif // SYSCOIN_GOVERNANCE_GOVERNANCEVALIDATORS_H
+#endif // wentuno_GOVERNANCE_GOVERNANCEVALIDATORS_H

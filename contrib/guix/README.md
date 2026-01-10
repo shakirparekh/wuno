@@ -1,6 +1,6 @@
-# Bootstrappable Syscoin Core Builds
+# Bootstrappable wentuno Core Builds
 
-This directory contains the files necessary to perform bootstrappable Syscoin
+This directory contains the files necessary to perform bootstrappable wentuno
 Core builds.
 
 [Bootstrappability][b17e] furthers our binary security guarantees by allowing us
@@ -57,7 +57,7 @@ and examples](#common-guix-build-invocation-patterns-and-examples) section below
 before starting a build. For a full list of customization options, see the
 [recognized environment variables][env-vars-list] section.*
 
-To build Syscoin Core reproducibly with all default options, invoke the
+To build wentuno Core reproducibly with all default options, invoke the
 following from the top of a clean repository:
 
 ```sh
@@ -80,14 +80,14 @@ crucial differences:
     * _**DETACHED_SIGS_REPO**_
 
       Set the directory where detached codesignatures can be found for the current
-      Syscoin Core version being built.
+      wentuno Core version being built.
 
       _REQUIRED environment variable_
 
 An invocation with all default options would look like:
 
 ```
-env DETACHED_SIGS_REPO=<path/to/syscoin-detached-sigs> ./contrib/guix/guix-codesign
+env DETACHED_SIGS_REPO=<path/to/wentuno-detached-sigs> ./contrib/guix/guix-codesign
 ```
 
 ## Cleaning intermediate work directories
@@ -108,7 +108,7 @@ worktree to save disk space:
 
 Much like how Gitian build outputs are attested to in a `gitian.sigs`
 repository, Guix build outputs are attested to in the [`guix.sigs`
-repository](https://github.com/syscoin-core/guix.sigs).
+repository](https://github.com/wentuno-core/guix.sigs).
 
 After you've cloned the `guix.sigs` repository, to attest to the current
 worktree's commit/tag:
@@ -167,7 +167,7 @@ details.
 
 ### Controlling the number of threads used by `guix` build commands
 
-Depending on your system's RAM capacity, you may want to decrease the number of
+Depending on your WUNOtem's RAM capacity, you may want to decrease the number of
 threads used to decrease RAM usage or vice versa.
 
 By default, the scripts under `./contrib/guix` will invoke all `guix` build

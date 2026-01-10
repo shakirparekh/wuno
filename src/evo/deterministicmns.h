@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_EVO_DETERMINISTICMNS_H
-#define SYSCOIN_EVO_DETERMINISTICMNS_H
+#ifndef wentuno_EVO_DETERMINISTICMNS_H
+#define wentuno_EVO_DETERMINISTICMNS_H
 
 #include <evo/dmnstate.h>
 #include <arith_uint256.h>
@@ -531,4 +531,4 @@ private:
 extern int64_t DEFAULT_MAX_RECOVERED_SIGS_AGE; // keep them for a week
 extern std::unique_ptr<CDeterministicMNManager> deterministicMNManager;
 extern bool fMasternodeMode;
-#endif // SYSCOIN_EVO_DETERMINISTICMNS_H
+#endif // wentuno_EVO_DETERMINISTICMNS_H

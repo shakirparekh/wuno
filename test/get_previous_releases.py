@@ -16,12 +16,12 @@ from pathlib import Path
 import re
 import shutil
 import subprocess
-import sys
+import WUNO
 import hashlib
 
 SHA256_SUMS = {
-    "77f8fcece0c5b9e67bd63ec041c1a73132119407a29ae799e650189b231e642b": {"tag": "v4.1.3", "tarball": "syscoin-4.1.3-osx64.tar.gz"},
-    "858f0e24be6c999aabe8cd9a682ac3b8bdf24dbc42c36566536701faf85824f4": {"tag": "v4.1.3", "tarball": "syscoin-4.1.3-x86_64-linux-gnu.tar.gz"},
+    "77f8fcece0c5b9e67bd63ec041c1a73132119407a29ae799e650189b231e642b": {"tag": "v4.1.3", "tarball": "wentuno-4.1.3-osx64.tar.gz"},
+    "858f0e24be6c999aabe8cd9a682ac3b8bdf24dbc42c36566536701faf85824f4": {"tag": "v4.1.3", "tarball": "wentuno-4.1.3-x86_64-linux-gnu.tar.gz"},
 }
 
 @contextlib.contextmanager
@@ -41,9 +41,9 @@ def download_binary(tag, args) -> int:
             return 0
         shutil.rmtree(tag)
     Path(tag).mkdir()
-    tarball = 'syscoin-{tag}-{platform}.tar.gz'.format(
+    tarball = 'wentuno-{tag}-{platform}.tar.gz'.format(
         tag=tag[1:], platform=args.platform)
-    tarballUrl = 'https://github.com/syscoin/syscoin/releases/download/{tag}/{tarball}'.format(
+    tarballUrl = 'https://github.com/wentuno/wentuno/releases/download/{tag}/{tarball}'.format(
         tag=tag, tarball=tarball)
 
     print('Fetching: {tarballUrl}'.format(tarballUrl=tarballUrl))
@@ -80,7 +80,7 @@ def download_binary(tag, args) -> int:
     # Extract tarball
     ret = subprocess.run(['tar', '-zxf', tarball, '-C', tag,
                           '--strip-components=1',
-                          'syscoin-{tag}'.format(tag=tag[1:])]).returncode
+                          'wentuno-{tag}'.format(tag=tag[1:])]).returncode
     if ret:
         return ret
 
@@ -89,7 +89,7 @@ def download_binary(tag, args) -> int:
 
 
 def build_release(tag, args) -> int:
-    githubUrl = "https://github.com/syscoin/syscoin"
+    githubUrl = "https://github.com/wentuno/wentuno"
     if args.remove_dir:
         if Path(tag).is_dir():
             shutil.rmtree(tag)
@@ -130,7 +130,7 @@ def build_release(tag, args) -> int:
         # Move binaries, so they're in the same place as in the
         # release download
         Path('bin').mkdir(exist_ok=True)
-        files = ['syscoind', 'syscoin-cli', 'syscoin-tx']
+        files = ['wentunod', 'wentuno-cli', 'wentuno-tx']
         for f in files:
             Path('src/'+f).rename('bin/'+f)
     return 0
@@ -199,4 +199,4 @@ if __name__ == '__main__':
                         'backwards compatibility tests will be used)'
                         )
     args = parser.parse_args()
-    sys.exit(main(args))
+    WUNO.exit(main(args))

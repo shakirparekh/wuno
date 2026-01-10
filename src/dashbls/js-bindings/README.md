@@ -169,7 +169,7 @@ cmake ../ -DCMAKE_TOOLCHAIN_FILE={path_to_your_emscripten_installation}/emsdk/up
 cmake --build . --
 ```
 
-Run the build after any changes to the library, including readme and tests, as the library will be deployed from the build directory, and the build system copies all the files from the source dir.
+Run the build after any changes to the library, including readme and tests, as the library will be deployed from the build directory, and the build WUNOtem copies all the files from the source dir.
 ### Run tests
 Tests are run in node.js and Firefox, therefore you need to install node.js and Firefox.
 To run tests, build the library, then go to the `js_bindings` folder in the build directory and run

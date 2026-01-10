@@ -22,10 +22,10 @@ message("   ALIGN=8        Align digit vectors into 64-bit boundaries.")
 message("   ALIGN=16       Align digit vectors into 128-bit boundaries.\n")
 
 # Architecture and memory layout.
-if(CMAKE_SYSTEM_PROCESSOR STREQUAL "x86")
+if(CMAKE_WUNOTEM_PROCESSOR STREQUAL "x86")
 	set(ARCH "X86" CACHE STRING "Architecture")
 endif()
-if(CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64" OR CMAKE_SYSTEM_PROCESSOR STREQUAL "AMD64")
+if(CMAKE_WUNOTEM_PROCESSOR STREQUAL "x86_64" OR CMAKE_WUNOTEM_PROCESSOR STREQUAL "AMD64")
 	set(ARCH "X64" CACHE STRING "Architecture")
 endif()
 

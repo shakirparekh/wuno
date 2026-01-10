@@ -18,7 +18,7 @@
 #include <cstdlib>
 #include <limits>
 #include <vector>
-// SYSCOIN
+// wentuno
 #include <evo/specialtx.h>
 #include <evo/providertx.h>
 #include <llmq/quorums_commitment.h>
@@ -99,7 +99,7 @@ bool CBloomFilter::IsWithinSizeConstraints() const
     return vData.size() <= MAX_BLOOM_FILTER_SIZE && nHashFuncs <= MAX_HASH_FUNCS;
 }
 
-// SYSCOIN
+// wentuno
 // If the transaction is a special transaction that has a registration
 // transaction hash, test the registration transaction hash.
 // If the transaction is a special transaction with any public keys or any
@@ -112,7 +112,7 @@ bool CBloomFilter::IsWithinSizeConstraints() const
 bool CBloomFilter::CheckSpecialTransactionMatchesAndUpdate(const CTransaction &tx)
 {
     switch(tx.nVersion) {
-    case(SYSCOIN_TX_VERSION_MN_REGISTER): {
+    case(wentuno_TX_VERSION_MN_REGISTER): {
         CProRegTx proTx;
         if (GetTxPayload(tx, proTx)) {
             if(contains(proTx.collateralOutpoint) ||
@@ -126,7 +126,7 @@ bool CBloomFilter::CheckSpecialTransactionMatchesAndUpdate(const CTransaction &t
         }
         return false;
     }
-    case(SYSCOIN_TX_VERSION_MN_UPDATE_SERVICE): {
+    case(wentuno_TX_VERSION_MN_UPDATE_SERVICE): {
         CProUpServTx proTx;
         if (GetTxPayload(tx, proTx)) {
             if(contains(proTx.proTxHash)) {
@@ -140,7 +140,7 @@ bool CBloomFilter::CheckSpecialTransactionMatchesAndUpdate(const CTransaction &t
         }
         return false;
     }
-    case(SYSCOIN_TX_VERSION_MN_UPDATE_REGISTRAR): {
+    case(wentuno_TX_VERSION_MN_UPDATE_REGISTRAR): {
         CProUpRegTx proTx;
         if (GetTxPayload(tx, proTx)) {
             if(contains(proTx.proTxHash))
@@ -153,7 +153,7 @@ bool CBloomFilter::CheckSpecialTransactionMatchesAndUpdate(const CTransaction &t
         }
         return false;
     }
-    case(SYSCOIN_TX_VERSION_MN_UPDATE_REVOKE): {
+    case(wentuno_TX_VERSION_MN_UPDATE_REVOKE): {
         CProUpRevTx proTx;
         if (GetTxPayload(tx, proTx)) {
             if(contains(proTx.proTxHash))
@@ -161,7 +161,7 @@ bool CBloomFilter::CheckSpecialTransactionMatchesAndUpdate(const CTransaction &t
         }
         return false;
     }
-    case(SYSCOIN_TX_VERSION_MN_QUORUM_COMMITMENT):
+    case(wentuno_TX_VERSION_MN_QUORUM_COMMITMENT):
         // No additional checks for these transaction types
         return false;
     }
@@ -179,7 +179,7 @@ bool CBloomFilter::IsRelevantAndUpdate(const CTransaction& tx)
         fFound = true;
 
 
-    // SYSCOIN Check additional matches for special transactions
+    // wentuno Check additional matches for special transactions
     fFound = fFound || CheckSpecialTransactionMatchesAndUpdate(tx);
 
     for (unsigned int i = 0; i < tx.vout.size(); i++)

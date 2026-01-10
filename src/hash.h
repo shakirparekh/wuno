@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_HASH_H
-#define SYSCOIN_HASH_H
+#ifndef wentuno_HASH_H
+#define wentuno_HASH_H
 
 #include <attributes.h>
 #include <crypto/common.h>
@@ -20,7 +20,7 @@
 #include <vector>
 typedef uint256 ChainCode;
 
-/** A hasher class for Syscoin's 256-bit hash (double SHA-256). */
+/** A hasher class for wentuno's 256-bit hash (double SHA-256). */
 class CHash256 {
 private:
     CSHA256 sha;
@@ -45,7 +45,7 @@ public:
     }
 };
 
-/** A hasher class for Syscoin's 160-bit hash (SHA-256 + RIPEMD-160). */
+/** A hasher class for wentuno's 160-bit hash (SHA-256 + RIPEMD-160). */
 class CHash160 {
 private:
     CSHA256 sha;
@@ -146,7 +146,7 @@ public:
         ::Serialize(*this, obj);
         return *this;
     }
-    // SYSCOIN
+    // wentuno
     int GetVersion() const { return nVersion; }
     void SetTxVersion(int nTxVersionIn) { nTxVersion = nTxVersionIn; }
     void seek(size_t _nSize) {return;}
@@ -231,7 +231,7 @@ public:
     }
 };
 
-// SYSCOIN
+// wentuno
 /** Compute the 256-bit hash of an object's serialization. */
 template<typename T>
 uint256 SerializeHash(const T& obj, int nType=SER_GETHASH, int nVersion=PROTOCOL_VERSION)
@@ -264,4 +264,4 @@ inline uint160 RIPEMD160(Span<const unsigned char> data)
     return result;
 }
 
-#endif // SYSCOIN_HASH_H
+#endif // wentuno_HASH_H

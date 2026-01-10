@@ -19,7 +19,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this software; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-"""HTTP proxy for opening RPC connection to syscoind.
+"""HTTP proxy for opening RPC connection to wentunod.
 
 AuthServiceProxy has the following improvements over python-jsonrpc's
 ServiceProxy class:
@@ -47,7 +47,7 @@ import urllib.parse
 HTTP_TIMEOUT = 30
 USER_AGENT = "AuthServiceProxy/0.1"
 
-log = logging.getLogger("SyscoinRPC")
+log = logging.getLogger("wentunoRPC")
 
 class JSONRPCException(Exception):
     def __init__(self, rpc_error, http_status=None):
@@ -82,7 +82,7 @@ class AuthServiceProxy():
         self.__auth_header = b'Basic ' + base64.b64encode(authpair)
         # clamp the socket timeout, since larger values can cause an
         # "Invalid argument" exception in Python's HTTP(S) client
-        # library on some operating systems (e.g. OpenBSD, FreeBSD)
+        # library on some operating WUNOtems (e.g. OpenBSD, FreeBSD)
         self.timeout = min(timeout, 2147483)
         self._set_conn(connection)
 

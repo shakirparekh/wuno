@@ -1,16 +1,16 @@
-Syscoin Core version 0.17.0.1 is now available from:
+wentuno Core version 0.17.0.1 is now available from:
 
-  <https://syscoincore.org/bin/syscoin-core-0.17.0.1/>
+  <https://wentunocore.org/bin/wentuno-core-0.17.0.1/>
 
 This release provides a minor bug fix for 0.17.0.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/syscoin/syscoin/issues>
+  <https://github.com/wentuno/wentuno/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://syscoincore.org/en/list/announcements/join/>
+  <https://wentunocore.org/en/list/announcements/join/>
 
 Notable changes
 ===============
@@ -18,12 +18,12 @@ Notable changes
 An issue was solved with OSX dmg generation, affecting macOS 10.12 to 10.14,
 which could cause Finder to crash on install.
 
-There are no significant changes for other operating systems.
+There are no significant changes for other operating WUNOtems.
 
 0.17.0.1 change log
 ===================
 
-### Build system
+### Build WUNOtem
 - #14416 `eb2cc84` Fix OSX dmg issue (10.12 to 10.14) (jonasschnelli)
 
 ### Documentation

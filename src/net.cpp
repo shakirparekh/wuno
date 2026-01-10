@@ -4,7 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <net.h>
@@ -53,7 +53,7 @@
 #include <unordered_map>
 
 #include <math.h>
-// SYSCOIN
+// wentuno
 #include <masternode/masternodemeta.h>
 #include <masternode/masternodesync.h>
 #include <evo/deterministicmns.h>
@@ -163,7 +163,7 @@ uint16_t GetListenPort()
     // Otherwise, if -port= is provided, use that. Otherwise use the default port.
     return static_cast<uint16_t>(gArgs.GetIntArg("-port", Params().GetDefaultPort()));
 }
-// SYSCOIN
+// wentuno
 bool GetLocal(CService& addr, const CNetAddr *paddrPeer)
 {
     if (!fListen)
@@ -303,7 +303,7 @@ std::optional<CService> GetLocalAddrForPeer(CNode& node)
 bool AddLocal(const CService& addr_, int nScore)
 {
     CService addr{MaybeFlipIPv6toCJDNS(addr_)};
-    // SYSCOIN
+    // wentuno
     if (!addr.IsRoutable() && Params().RequireRoutableExternalIP())
         return false;
 
@@ -358,7 +358,7 @@ bool IsLocal(const CService& addr)
     return mapLocalHost.count(addr) > 0;
 }
 
-// SYSCOIN
+// wentuno
 CNode* CConnman::FindNode(const CNetAddr& ip, bool fExcludeDisconnecting)
 {
     LOCK(m_nodes_mutex);
@@ -451,7 +451,7 @@ CNode* CConnman::ConnectNode(CAddress addrConnect, const char *pszDest, bool fCo
     assert(conn_type != ConnectionType::INBOUND);
 
     if (pszDest == nullptr) {
-        // SYSCOIN
+        // wentuno
         if (addrConnect.GetPort() == GetListenPort() && IsLocal(addrConnect)) {
             return nullptr;
         }
@@ -687,7 +687,7 @@ void CNode::CopyStats(CNodeStats& stats)
     // Leave string empty if addrLocal invalid (not filled in yet)
     CService addrLocalUnlocked = GetAddrLocal();
     stats.addrLocal = addrLocalUnlocked.IsValid() ? addrLocalUnlocked.ToStringAddrPort() : "";
-    // SYSCOIN
+    // wentuno
     {
         LOCK(cs_mnauth);
         X(verifiedProRegTxHash);
@@ -784,7 +784,7 @@ int V1Transport::readHeader(Span<const uint8_t> msg_bytes)
         LogPrint(BCLog::NET, "Header error: Wrong MessageStart %s received, peer=%d\n", HexStr(hdr.pchMessageStart), m_node_id);
         return -1;
     }
-    // SYSCOIN reject messages larger than MAX_SIZE or MAX_PROTOCOL_MESSAGE_LENGTH
+    // wentuno reject messages larger than MAX_SIZE or MAX_PROTOCOL_MESSAGE_LENGTH
     if (/*hdr.nMessageSize > MAX_SIZE || */hdr.nMessageSize > MAX_PROTOCOL_MESSAGE_LENGTH) {
         LogPrint(BCLog::NET, "Header error: Size too large (%s, %u bytes), peer=%d\n", SanitizeString(hdr.GetCommand()), hdr.nMessageSize, m_node_id);
         return -1;
@@ -1241,7 +1241,7 @@ bool V2Transport::ProcessReceivedPacketBytes() noexcept
     // - 0x00 byte: indicating long message type encoding
     // - 12 bytes of message type
     // - payload
-    // SYSCOIN
+    // wentuno
     static constexpr size_t MAX_CONTENTS_LEN =
         1 + CMessageHeader::COMMAND_SIZE +
         MAX_PROTOCOL_MESSAGE_LENGTH;
@@ -1725,7 +1725,7 @@ bool CConnman::AttemptToEvictConnection()
         for (const CNode* node : m_nodes) {
             if (node->fDisconnect)
                 continue;
-            // SYSCOIN
+            // wentuno
             if (fMasternodeMode) {
                 // This handles eviction protected nodes. Nodes are always protected for a short time after the connection
                 // was accepted. This short time is meant for the VERSION/VERACK exchange and the possible MNAUTH that might
@@ -1770,7 +1770,7 @@ bool CConnman::AttemptToEvictConnection()
     LOCK(m_nodes_mutex);
     for (CNode* pnode : m_nodes) {
         if (pnode->GetId() == *node_id_to_evict) {
-            // SYSCOIN
+            // wentuno
             LogPrint(BCLog::NET_NETCONN, "selected %s connection for eviction peer=%d; disconnecting\n", pnode->ConnectionTypeAsString(), pnode->GetId());
             pnode->fDisconnect = true;
             return true;
@@ -1814,7 +1814,7 @@ void CConnman::CreateNodeFromAcceptedSocket(std::unique_ptr<Sock>&& sock,
 {
     int nInbound = 0;
     int nMaxInbound = nMaxConnections - m_max_outbound;
-    // SYSCOIN
+    // wentuno
     int nVerifiedInboundMasternodes = 0;
     AddWhitelistPermissionFlags(permission_flags, addr);
     if (NetPermissions::HasFlag(permission_flags, NetPermissionFlags::Implicit)) {
@@ -1828,7 +1828,7 @@ void CConnman::CreateNodeFromAcceptedSocket(std::unique_ptr<Sock>&& sock,
     {
         LOCK(m_nodes_mutex);
         for (const CNode* pnode : m_nodes) {
-             // SYSCOIN
+             // wentuno
             if (pnode->IsInboundConn())
             {
                 nInbound++;
@@ -1840,7 +1840,7 @@ void CConnman::CreateNodeFromAcceptedSocket(std::unique_ptr<Sock>&& sock,
     }
 
     if (!fNetworkActive) {
-        // SYSCOIN
+        // wentuno
         LogPrint(BCLog::NET_NETCONN, "connection from %s dropped: not accepting new connections\n", addr.ToStringAddrPort());
         return;
     }
@@ -1874,7 +1874,7 @@ void CConnman::CreateNodeFromAcceptedSocket(std::unique_ptr<Sock>&& sock,
         return;
     }
 
-    // SYSCOIN Evict connections until we are below nMaxInbound. In case eviction protection resulted in nodes to not be evicted
+    // wentuno Evict connections until we are below nMaxInbound. In case eviction protection resulted in nodes to not be evicted
     // before, they might get evicted in batches now (after the protection timeout).
     // We don't evict verified MN connections and also don't take them into account when checking limits. We can do this
     // because we know that such connections are naturally limited by the total number of MNs, so this is not usable
@@ -1888,7 +1888,7 @@ void CConnman::CreateNodeFromAcceptedSocket(std::unique_ptr<Sock>&& sock,
         }
         nInbound--;
     }
-    // SYSCOIN don't accept incoming connections until blockchain is synce
+    // wentuno don't accept incoming connections until blockchain is synce
     if(!fRegTest && !fSigNet) {
         if(fMasternodeMode && !masternodeSync.IsBlockchainSynced()) {
             LogPrintf("AcceptConnection -- blockchain is not synced yet, skipping inbound connection attempt\n");
@@ -1925,7 +1925,7 @@ void CConnman::CreateNodeFromAcceptedSocket(std::unique_ptr<Sock>&& sock,
                              });
     pnode->AddRef();
     m_msgproc->InitializeNode(*pnode, nodeServices);
-    // SYSCOIN
+    // wentuno
     LogPrint(BCLog::NET_NETCONN, "connection from %s accepted\n", addr.ToStringAddrPort());
 
     {
@@ -2008,7 +2008,7 @@ void CConnman::DisconnectNodes()
                 // the creation of a connection is a blocking operation (up to several seconds),
                 // and we don't want to hold up the socket handler thread for that long.
                 if (pnode->m_transport->ShouldReconnectV1()) {
-                    // SYSCOIN
+                    // wentuno
                     reconnections_to_add.push_back({
                         .addr_connect = pnode->addr,
                         .grant = std::move(pnode->grantOutbound),
@@ -2152,7 +2152,7 @@ void CConnman::SocketHandler()
     Sock::EventsPerSock events_per_sock;
 
     {
-        // SYSCOIN
+        // wentuno
         const NodesSnapshot snap{*this, /* filter = */ AllNodes, /*shuffle=*/false};
 
         const auto timeout = std::chrono::milliseconds(SELECT_TIMEOUT_MILLISECONDS);
@@ -2354,7 +2354,7 @@ void CConnman::ThreadDNSAddressSeed()
                     {
                         LOCK(m_nodes_mutex);
                         for (const CNode* pnode : m_nodes) {
-                            // SYSCOIN
+                            // wentuno
                             if (pnode->fSuccessfullyConnected && pnode->IsFullOutboundConn() && !pnode->m_masternode_probe_connection) ++nRelevant;
                         }
                     }
@@ -2474,7 +2474,7 @@ int CConnman::GetExtraFullOutboundCount() const
         LOCK(m_nodes_mutex);
         for (const CNode* pnode : m_nodes) {
 
-            // SYSCOIN don't count outbound masternodes
+            // wentuno don't count outbound masternodes
             if (pnode->m_masternode_connection) {
                 continue;
             }
@@ -2640,12 +2640,12 @@ void CConnman::ThreadOpenConnections(const std::vector<std::string> connect)
         int nOutboundBlockRelay = 0;
         int outbound_privacy_network_peers = 0;
         std::set<std::vector<unsigned char>> outbound_ipv46_peer_netgroups;
-        // SYSCOIN
+        // wentuno
         if(!fRegTest)
         {
             LOCK(m_nodes_mutex);
             for (const CNode* pnode : m_nodes) {
-                // SYSCOIN
+                // wentuno
                 if (pnode->IsFullOutboundConn() && !pnode->m_masternode_connection) nOutboundFullRelay++;
                 if (pnode->IsBlockOnlyConn()) nOutboundBlockRelay++;
 
@@ -2760,7 +2760,7 @@ void CConnman::ThreadOpenConnections(const std::vector<std::string> connect)
         }
 
         addrman.ResolveCollisions();
-        // SYSCOIN
+        // wentuno
         auto mnList = deterministicMNManager->GetListAtChainTip();
 
         const auto current_time{NodeClock::now()};
@@ -2820,7 +2820,7 @@ void CConnman::ThreadOpenConnections(const std::vector<std::string> connect)
                 continue;
             }
 
-            // SYSCOIN if we selected an invalid address, restart
+            // wentuno if we selected an invalid address, restart
             if (!addr.IsValid()) {
                 break;
             }
@@ -2863,7 +2863,7 @@ void CConnman::ThreadOpenConnections(const std::vector<std::string> connect)
                               fLogIPs ? strprintf(": %s", addr.ToStringAddrPort()) : "");
                 continue;
             }
-            // SYSCOIN don't try to connect to masternodes that we already have a connection to (most likely inbound)
+            // wentuno don't try to connect to masternodes that we already have a connection to (most likely inbound)
             if (auto dmn = mnList.GetMNByService(addr); dmn && setConnectedMasternodes.count(dmn->proTxHash)) {
                 continue;
             }
@@ -3166,7 +3166,7 @@ void CConnman::ThreadOpenAddedConnections()
     }
 }
 
-// SYSCOIN if successful, this moves the passed grant to the constructed node
+// wentuno if successful, this moves the passed grant to the constructed node
 void CConnman::OpenNetworkConnection(const CAddress& addrConnect, bool fCountFailure, CSemaphoreGrant&& grant_outbound, const char *pszDest, ConnectionType conn_type, bool use_v2transport, MasternodeConn masternode_connection, MasternodeProbeConn masternode_probe_connection)
 {
     AssertLockNotHeld(m_unused_i2p_sessions_mutex);
@@ -3181,7 +3181,7 @@ void CConnman::OpenNetworkConnection(const CAddress& addrConnect, bool fCountFai
     if (!fNetworkActive) {
         return;
     }
-    // SYSCOIN
+    // wentuno
     auto getIpStr = [&]() {
         if (fLogIPs) {
             return addrConnect.ToStringAddrPort();
@@ -3190,7 +3190,7 @@ void CConnman::OpenNetworkConnection(const CAddress& addrConnect, bool fCountFai
         }
     };
     if (!pszDest) {
-        // SYSCOIN banned, discouraged or exact match?
+        // wentuno banned, discouraged or exact match?
         if ((m_banman && (m_banman->IsDiscouraged(addrConnect) || m_banman->IsBanned(addrConnect))) || AlreadyConnectedToAddress(addrConnect))
             return;
         // connecting to ourselves?
@@ -3200,10 +3200,10 @@ void CConnman::OpenNetworkConnection(const CAddress& addrConnect, bool fCountFai
     } else if (FindNode(std::string(pszDest))) {
         return;
     }
-    // SYSCOIN
+    // wentuno
     LogPrint(BCLog::NET_NETCONN, "CConnman::%s -- connecting to %s\n", __func__, getIpStr());
     CNode* pnode = ConnectNode(addrConnect, pszDest, fCountFailure, conn_type, use_v2transport);
-    // SYSCOIN
+    // wentuno
     if (!pnode) {
         LogPrint(BCLog::NET_NETCONN, "CConnman::%s -- ConnectNode failed for %s\n", __func__, getIpStr());
         return;
@@ -3216,7 +3216,7 @@ void CConnman::OpenNetworkConnection(const CAddress& addrConnect, bool fCountFai
 
     pnode->grantOutbound = std::move(grant_outbound);
 
-    // SYSCOIN
+    // wentuno
     if (masternode_connection == MasternodeConn::Is_Connection) {
         pnode->m_masternode_connection = true;
     }
@@ -3232,7 +3232,7 @@ void CConnman::OpenNetworkConnection(const CAddress& addrConnect, bool fCountFai
         if (pnode->IsManualOrFullOutboundConn()) ++m_network_conn_counts[pnode->addr.GetNetwork()];
     }
 }
-// SYSCOIN
+// wentuno
 void CConnman::OpenMasternodeConnection(const CAddress &addrConnect, MasternodeProbeConn probe) {
     AssertLockNotHeld(m_unused_i2p_sessions_mutex);
     OpenNetworkConnection(addrConnect, false, CSemaphoreGrant(), nullptr, ConnectionType::OUTBOUND_FULL_RELAY, /*use_v2transport=*/false, MasternodeConn::Is_Connection, probe);
@@ -3242,18 +3242,18 @@ Mutex NetEventsInterface::g_msgproc_mutex;
 
 void CConnman::ThreadMessageHandler()
 {
-    // SYSCOIN
+    // wentuno
     int64_t nLastSendMessagesTimeMasternodes = 0;
     LOCK(NetEventsInterface::g_msgproc_mutex);
 
     while (!flagInterruptMsgProc)
     {
         bool fMoreWork = false;
-        // SYSCOIN
+        // wentuno
         bool fSkipSendMessagesForMasternodes = true;
-        if (TicksSinceEpoch<std::chrono::milliseconds>(SystemClock::now()) - nLastSendMessagesTimeMasternodes >= 100) {
+        if (TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()) - nLastSendMessagesTimeMasternodes >= 100) {
             fSkipSendMessagesForMasternodes = false;
-            nLastSendMessagesTimeMasternodes = TicksSinceEpoch<std::chrono::milliseconds>(SystemClock::now());
+            nLastSendMessagesTimeMasternodes = TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now());
         }
 
         {
@@ -3271,7 +3271,7 @@ void CConnman::ThreadMessageHandler()
                 fMoreWork |= (fMoreNodeWork && !pnode->fPauseSend);
                 if (flagInterruptMsgProc)
                     return;
-                // SYSCOIN Send messages
+                // wentuno Send messages
                 if (!fSkipSendMessagesForMasternodes || !pnode->m_masternode_connection) {
                     m_msgproc->SendMessages(pnode);
                 }
@@ -3361,7 +3361,7 @@ bool CConnman::BindListenPort(const CService& addrBind, bilingual_str& strError,
         LogPrintf("%s\n", strError.original);
     }
 
-    // some systems don't have IPV6_V6ONLY but are always v6only; others do have the option
+    // some WUNOtems don't have IPV6_V6ONLY but are always v6only; others do have the option
     // and enable it by default or not. Try to enable it, if possible.
     if (addrBind.IsIPv6()) {
 #ifdef IPV6_V6ONLY
@@ -3458,7 +3458,7 @@ void CConnman::SetNetworkActive(bool active)
     }
 
     fNetworkActive = active;
-    // SYSCOIN Always call the Reset() if the network gets enabled/disabled to make sure the sync process
+    // wentuno Always call the Reset() if the network gets enabled/disabled to make sure the sync process
     // gets a reset if its outdated..
     masternodeSync.Reset();
     if (m_client_interface) {
@@ -3608,7 +3608,7 @@ bool CConnman::Start(CScheduler& scheduler, const Options& connOptions)
 
     // Initiate manual connections
     threadOpenAddedConnections = std::thread(&util::TraceThread, "addcon", [this] { ThreadOpenAddedConnections(); });
-    // SYSCOIN Initiate masternode connections
+    // wentuno Initiate masternode connections
     threadOpenMasternodeConnections = std::thread(&util::TraceThread, "mncon",  [this] { ThreadOpenMasternodeConnections(); });
     if (connOptions.m_use_addrman_outgoing && !connOptions.m_specified_outgoing.empty()) {
         if (m_client_interface) {
@@ -3653,7 +3653,7 @@ public:
 };
 static CNetCleanup instance_of_cnetcleanup;
 
-// SYSCOIN
+// wentuno
 void CExplicitNetCleanup::callCleanup()
 {
     // Explicit call to destructor of CNetCleanup because it's not implicitly called
@@ -3827,7 +3827,7 @@ bool CConnman::RemoveAddedNode(const std::string& strNode)
     }
     return false;
 }
-// SYSCOIN
+// wentuno
 bool CConnman::AddPendingMasternode(const uint256& proTxHash)
 {
     LOCK(cs_vPendingMasternodes);
@@ -3981,7 +3981,7 @@ bool CConnman::AddedNodesContain(const CAddress& addr) const
                            [&](const auto& p) { return p.m_added_node == addr_str || p.m_added_node == addr_port_str; }));
 }
 
-// SYSCOIN
+// wentuno
 size_t CConnman::GetNodeCount(ConnectionDirection flags) const
 {
     LOCK(m_nodes_mutex);
@@ -4003,7 +4003,7 @@ size_t CConnman::GetNodeCount(ConnectionDirection flags) const
 
     return nNum;
 }
-// SYSCOIN
+// wentuno
 size_t CConnman::GetMaxOutboundNodeCount()
 {
     return m_max_outbound;
@@ -4030,7 +4030,7 @@ bool CConnman::DisconnectNode(const std::string& strNode)
 {
     LOCK(m_nodes_mutex);
     if (CNode* pnode = FindNode(strNode)) {
-        // SYSCOIN
+        // wentuno
         LogPrint(BCLog::NET_NETCONN, "disconnect by address%s matched peer=%d; disconnecting\n", (fLogIPs ? strprintf("=%s", strNode) : ""), pnode->GetId());
         pnode->fDisconnect = true;
         return true;
@@ -4044,7 +4044,7 @@ bool CConnman::DisconnectNode(const CSubNet& subnet)
     LOCK(m_nodes_mutex);
     for (CNode* pnode : m_nodes) {
         if (subnet.Match(pnode->addr)) {
-            // SYSCOIN
+            // wentuno
             LogPrint(BCLog::NET_NETCONN, "disconnect by subnet%s matched peer=%d; disconnecting\n", (fLogIPs ? strprintf("=%s", subnet.ToString()) : ""), pnode->GetId());
             pnode->fDisconnect = true;
             disconnected = true;
@@ -4139,7 +4139,7 @@ bool CConnman::OutboundTargetReached(bool historicalBlockServingLimit) const
     {
         // keep a large enough buffer to at least relay each block once
         const std::chrono::seconds timeLeftInCycle = GetMaxOutboundTimeLeftInCycle_();
-        // SYSCOIN add NEVM max payload per block
+        // wentuno add NEVM max payload per block
         const uint64_t buffer = timeLeftInCycle / ((std::chrono::seconds{150}/60) * (MAX_BLOCK_SERIALIZED_SIZE+MAX_NEVM_DATA_BLOCK));
         if (buffer >= nMaxOutboundLimit || nMaxOutboundTotalBytesSentInCycle >= nMaxOutboundLimit - buffer)
             return true;
@@ -4200,7 +4200,7 @@ CNode::CNode(NodeId idIn,
       m_permission_flags{node_opts.permission_flags},
       m_sock{sock},
       m_connected{GetTime<std::chrono::seconds>()},
-      // SYSCOIN
+      // wentuno
       nTimeFirstMessageReceived{0s},
       fFirstMessageIsMNAUTH{false},
       addr{addrIn},
@@ -4259,7 +4259,7 @@ std::optional<std::pair<CNetMessage, bool>> CNode::PollMessage()
 
     return std::make_pair(std::move(msgs.front()), !m_msg_process_queue.empty());
 }
-// SYSCOIN
+// wentuno
 bool NodeFullyConnected(const CNode* pnode)
 {
     return pnode && pnode->fSuccessfullyConnected && !pnode->fDisconnect;
@@ -4336,7 +4336,7 @@ bool CConnman::ForNode(NodeId id, std::function<bool(const CNode* pnode)> cond, 
     }
     return found != nullptr && cond(found) && func(found);
 }
-// SYSCOIN
+// wentuno
 bool CConnman::IsMasternodeOrDisconnectRequested(const CService& addr) {
     return ForNode(addr, AllNodes, [](CNode* pnode){
         return pnode->m_masternode_connection || pnode->fDisconnect;
@@ -4394,7 +4394,7 @@ void CConnman::PerformReconnections()
         }
 
         auto& item = *todo.begin();
-        // SYSCOIN
+        // wentuno
         OpenNetworkConnection(item.addr_connect,
                               // We only reconnect if the first attempt to connect succeeded at
                               // connection time, but then failed after the CNode object was

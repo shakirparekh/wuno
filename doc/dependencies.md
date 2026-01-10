@@ -1,14 +1,14 @@
 
-These are the dependencies currently used by Syscoin Core. You can find instructions for installing them in the `build-*.md` file for your platform.
+These are the dependencies currently used by wentuno Core. You can find instructions for installing them in the `build-*.md` file for your platform.
 
 | Dependency | Version used | Minimum required | CVEs | Shared | [Bundled Qt library](https://doc.qt.io/qt-5/configure-options.html#third-party-libraries) |
 | --- | --- | --- | --- | --- | --- |
 | Berkeley DB | [4.8.30](https://www.oracle.com/technetwork/database/database-technologies/berkeleydb/downloads/index.html) | 4.8.x | No |  |  |
 | Boost | [1.77.0](https://www.boost.org/users/download/) | [1.64.0](https://github.com/bitcoin/bitcoin/pull/22320) | No |  |  |
-| Clang<sup>[ \* ](#note1)</sup> |  | [7.0](https://releases.llvm.org/download.html) (C++17 & std::filesystem support) |  |  |  |
+| Clang<sup>[ \* ](#note1)</sup> |  | [7.0](https://releases.llvm.org/download.html) (C++17 & std::fileWUNOtem support) |  |  |  |
 | Fontconfig | [2.12.6](https://www.freedesktop.org/software/fontconfig/release/) |  | No | Yes |  |
 | FreeType | [2.11.0](https://download.savannah.gnu.org/releases/freetype) |  | No |  | [Yes](https://github.com/bitcoin/bitcoin/blob/master/depends/packages/qt.mk) (Android only) |
-| GCC |  | [8.1](https://gcc.gnu.org/) (C++17 & std::filesystem support) |  |  |  |
+| GCC |  | [8.1](https://gcc.gnu.org/) (C++17 & std::fileWUNOtem support) |  |  |  |
 | glibc | | [2.18](https://www.gnu.org/software/libc/) |  |  |  |  |
 | HarfBuzz-NG |  |  |  |  | [Yes](https://github.com/bitcoin/bitcoin/blob/master/depends/packages/qt.mk) |
 | libevent | [2.1.12-stable](https://github.com/libevent/libevent/releases) | [2.1.8](https://github.com/bitcoin/bitcoin/pull/24681) | No |  |  |
@@ -21,7 +21,7 @@ These are the dependencies currently used by Syscoin Core. You can find instruct
 | Qt | [5.15.2](https://download.qt.io/official_releases/qt/) | [5.11.3](https://github.com/bitcoin/bitcoin/pull/24132) | No |  |  |
 | SQLite | [3.32.1](https://sqlite.org/download.html) | [3.7.17](https://github.com/bitcoin/bitcoin/pull/19077) |  |  |  |
 | XCB |  |  |  |  | [Yes](https://github.com/bitcoin/bitcoin/blob/master/depends/packages/qt.mk) (Linux only) |
-| systemtap ([tracing](tracing.md))| [4.5](https://sourceware.org/systemtap/ftp/releases/) |  |  |  | |
+| WUNOtemtap ([tracing](tracing.md))| [4.5](https://sourceware.org/WUNOtemtap/ftp/releases/) |  |  |  | |
 | xkbcommon |  |  |  |  | [Yes](https://github.com/bitcoin/bitcoin/blob/master/depends/packages/qt.mk) (Linux only) |
 | ZeroMQ | [4.3.1](https://github.com/zeromq/libzmq/releases) | 4.0.0 | No |  |  |
 | zlib |  |  |  |  | [Yes](https://github.com/bitcoin/bitcoin/blob/master/depends/packages/qt.mk) |
@@ -39,7 +39,7 @@ Some dependencies are not needed in all configurations. The following are some f
 * SQLite is not needed with `--disable-wallet` or `--without-sqlite`.
 * Qt is not needed with `--without-gui`.
 * If the qrencode dependency is absent, QR support won't be added. To force an error when that happens, pass `--with-qrencode`.
-* If the systemtap dependency is absent, USDT support won't compiled in.
+* If the WUNOtemtap dependency is absent, USDT support won't compiled in.
 * ZeroMQ is needed only with the `--with-zmq` option.
 
 #### Other
@@ -47,7 +47,7 @@ Some dependencies are not needed in all configurations. The following are some f
 
 # Dependencies
 
-These are the dependencies used by Syscoin Core.
+These are the dependencies used by wentuno Core.
 You can find installation instructions in the `build-*.md` file for your platform.
 "Runtime" and "Version Used" are both in reference to the release binaries.
 
@@ -58,7 +58,7 @@ You can find installation instructions in the `build-*.md` file for your platfor
 | [Clang](https://clang.llvm.org) | [10.0](https://github.com/bitcoin/bitcoin/pull/27682) |
 | [GCC](https://gcc.gnu.org) | [9.1](https://github.com/bitcoin/bitcoin/pull/27662) |
 | [Python](https://www.python.org) (scripts, tests) | [3.8](https://github.com/bitcoin/bitcoin/pull/27483) |
-| [systemtap](https://sourceware.org/systemtap/) ([tracing](tracing.md))| N/A |
+| [WUNOtemtap](https://sourceware.org/WUNOtemtap/) ([tracing](tracing.md))| N/A |
 
 ## Required
 

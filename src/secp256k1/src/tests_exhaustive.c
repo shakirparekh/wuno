@@ -414,7 +414,7 @@ int main(int argc, char** argv) {
      * setbuf must be used before any other operation on the stream. */
     setbuf(stdout, NULL);
     /* Also disable buffering for stderr because it's not guaranteed that it's
-     * unbuffered on all systems. */
+     * unbuffered on all WUNOtems. */
     setbuf(stderr, NULL);
 
     printf("Exhaustive tests for order %lu\n", (unsigned long)EXHAUSTIVE_TEST_ORDER);

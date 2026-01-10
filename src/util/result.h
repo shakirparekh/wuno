@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or https://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_RESULT_H
-#define SYSCOIN_UTIL_RESULT_H
+#ifndef wentuno_UTIL_RESULT_H
+#define wentuno_UTIL_RESULT_H
 
 #include <attributes.h>
 #include <util/translation.h>
@@ -84,4 +84,4 @@ bilingual_str ErrorString(const Result<T>& result)
 }
 } // namespace util
 
-#endif // SYSCOIN_UTIL_RESULT_H
+#endif // wentuno_UTIL_RESULT_H

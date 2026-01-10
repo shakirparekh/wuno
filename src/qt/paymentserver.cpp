@@ -3,12 +3,12 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <qt/paymentserver.h>
 
-#include <qt/syscoinunits.h>
+#include <qt/wentunounits.h>
 #include <qt/guiutil.h>
 #include <qt/optionsmodel.h>
 
@@ -36,8 +36,8 @@
 #include <QStringList>
 #include <QUrlQuery>
 
-const int SYSCOIN_IPC_CONNECT_TIMEOUT = 1000; // milliseconds
-const QString SYSCOIN_IPC_PREFIX("syscoin:");
+const int wentuno_IPC_CONNECT_TIMEOUT = 1000; // milliseconds
+const QString wentuno_IPC_PREFIX("wentuno:");
 
 //
 // Create a name that is unique for:
@@ -46,7 +46,7 @@ const QString SYSCOIN_IPC_PREFIX("syscoin:");
 //
 static QString ipcServerName()
 {
-    QString name("SyscoinQt");
+    QString name("wentunoQt");
 
     // Append a simple hash of the datadir
     // Note that gArgs.GetDataDirNet() returns a different path
@@ -80,7 +80,7 @@ void PaymentServer::ipcParseCommandLine(int argc, char* argv[])
         QString arg(argv[i]);
         if (arg.startsWith("-")) continue;
 
-        if (arg.startsWith(SYSCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // syscoin: URI
+        if (arg.startsWith(wentuno_IPC_PREFIX, Qt::CaseInsensitive)) // wentuno: URI
         {
             savedPaymentRequests.insert(arg);
         }
@@ -100,7 +100,7 @@ bool PaymentServer::ipcSendCommandLine()
     {
         QLocalSocket* socket = new QLocalSocket();
         socket->connectToServer(ipcServerName(), QIODevice::WriteOnly);
-        if (!socket->waitForConnected(SYSCOIN_IPC_CONNECT_TIMEOUT))
+        if (!socket->waitForConnected(wentuno_IPC_CONNECT_TIMEOUT))
         {
             delete socket;
             socket = nullptr;
@@ -115,7 +115,7 @@ bool PaymentServer::ipcSendCommandLine()
 
         socket->write(block);
         socket->flush();
-        socket->waitForBytesWritten(SYSCOIN_IPC_CONNECT_TIMEOUT);
+        socket->waitForBytesWritten(wentuno_IPC_CONNECT_TIMEOUT);
         socket->disconnectFromServer();
 
         delete socket;
@@ -130,7 +130,7 @@ PaymentServer::PaymentServer(QObject* parent, bool startLocalServer)
     : QObject(parent)
 {
     // Install global event filter to catch QFileOpenEvents
-    // on Mac: sent when you click syscoin: links
+    // on Mac: sent when you click wentuno: links
     // other OSes: helpful when dealing with payment request files
     if (parent)
         parent->installEventFilter(this);
@@ -147,7 +147,7 @@ PaymentServer::PaymentServer(QObject* parent, bool startLocalServer)
         if (!uriServer->listen(name)) {
             // constructor is called early in init, so don't use "Q_EMIT message()" here
             QMessageBox::critical(nullptr, tr("Payment request error"),
-                tr("Cannot start syscoin: click-to-pay handler"));
+                tr("Cannot start wentuno: click-to-pay handler"));
         }
         else {
             connect(uriServer, &QLocalServer::newConnection, this, &PaymentServer::handleURIConnection);
@@ -158,7 +158,7 @@ PaymentServer::PaymentServer(QObject* parent, bool startLocalServer)
 PaymentServer::~PaymentServer() = default;
 
 //
-// OSX-specific way of handling syscoin: URIs
+// OSX-specific way of handling wentuno: URIs
 //
 bool PaymentServer::eventFilter(QObject *object, QEvent *event)
 {
@@ -193,18 +193,18 @@ void PaymentServer::handleURIOrFile(const QString& s)
         return;
     }
 
-    if (s.startsWith("syscoin://", Qt::CaseInsensitive))
+    if (s.startsWith("wentuno://", Qt::CaseInsensitive))
     {
-        Q_EMIT message(tr("URI handling"), tr("'syscoin://' is not a valid URI. Use 'syscoin:' instead."),
+        Q_EMIT message(tr("URI handling"), tr("'wentuno://' is not a valid URI. Use 'wentuno:' instead."),
             CClientUIInterface::MSG_ERROR);
     }
-    else if (s.startsWith(SYSCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // syscoin: URI
+    else if (s.startsWith(wentuno_IPC_PREFIX, Qt::CaseInsensitive)) // wentuno: URI
     {
         QUrlQuery uri((QUrl(s)));
         // normal URI
         {
             SendCoinsRecipient recipient;
-            if (GUIUtil::parseSyscoinURI(s, &recipient))
+            if (GUIUtil::parsewentunoURI(s, &recipient))
             {
                 std::string error_msg;
                 const CTxDestination dest = DecodeDestination(recipient.address.toStdString(), error_msg);
@@ -225,7 +225,7 @@ void PaymentServer::handleURIOrFile(const QString& s)
             }
             else
                 Q_EMIT message(tr("URI handling"),
-                    tr("URI cannot be parsed! This can be caused by an invalid Syscoin address or malformed URI parameters."),
+                    tr("URI cannot be parsed! This can be caused by an invalid wentuno address or malformed URI parameters."),
                     CClientUIInterface::ICON_WARNING);
 
             return;

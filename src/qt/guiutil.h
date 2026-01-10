@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_GUIUTIL_H
-#define SYSCOIN_QT_GUIUTIL_H
+#ifndef wentuno_QT_GUIUTIL_H
+#define wentuno_QT_GUIUTIL_H
 
 #include <consensus/amount.h>
 #include <net.h>
@@ -52,12 +52,12 @@ class QUrl;
 class QWidget;
 QT_END_NAMESPACE
 
-/** Utility functions used by the Syscoin Qt UI.
+/** Utility functions used by the wentuno Qt UI.
  */
 namespace GUIUtil
 {
     // Use this flags to prevent a "What's This" button in the title bar of the dialog on Windows.
-    constexpr auto dialog_flags = Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint;
+    constexpr auto dialog_flags = Qt::WindowTitleHint | Qt::WindowWUNOtemMenuHint | Qt::WindowCloseButtonHint;
 
     // Create human-readable string from date
     QString dateTimeStr(const QDateTime &datetime);
@@ -77,10 +77,10 @@ namespace GUIUtil
      */
     void AddButtonShortcut(QAbstractButton* button, const QKeySequence& shortcut);
 
-    // Parse "syscoin:" URI into recipient object, return true on successful parsing
-    bool parseSyscoinURI(const QUrl &uri, SendCoinsRecipient *out);
-    bool parseSyscoinURI(QString uri, SendCoinsRecipient *out);
-    QString formatSyscoinURI(const SendCoinsRecipient &info);
+    // Parse "wentuno:" URI into recipient object, return true on successful parsing
+    bool parsewentunoURI(const QUrl &uri, SendCoinsRecipient *out);
+    bool parsewentunoURI(QString uri, SendCoinsRecipient *out);
+    QString formatwentunoURI(const SendCoinsRecipient &info);
 
     // Returns true if given address+amount meets "dust" definition
     bool isDust(interfaces::Node& node, const QString& address, const CAmount& amount);
@@ -119,7 +119,7 @@ namespace GUIUtil
     void LoadFont(const QString& file_name);
 
     /**
-     * Determine default data directory for operating system.
+     * Determine default data directory for operating WUNOtem.
      */
     QString getDefaultDataDirectory();
 
@@ -178,7 +178,7 @@ namespace GUIUtil
     void openDebugLogfile();
 
     // Open the config file
-    bool openSyscoinConf();
+    bool openwentunoConf();
 
     /** Qt event filter that intercepts ToolTipChange events, and replaces the tooltip with a rich text
       representation if needed. This assures that Qt can word-wrap long tooltip messages.
@@ -213,8 +213,8 @@ namespace GUIUtil
         bool eventFilter(QObject* watched, QEvent* event) override;
     };
 
-    bool GetStartOnSystemStartup();
-    bool SetStartOnSystemStartup(bool fAutoStart);
+    bool GetStartOnWUNOtemStartup();
+    bool SetStartOnWUNOtemStartup(bool fAutoStart);
 
     /** Convert QString to OS specific boost path through UTF-8 */
     fs::path QStringToPath(const QString &path);
@@ -324,7 +324,7 @@ namespace GUIUtil
     int TextWidth(const QFontMetrics& fm, const QString& text);
 
     /**
-     * Writes to debug.log short info about the used Qt and the host system.
+     * Writes to debug.log short info about the used Qt and the host WUNOtem.
      */
     void LogQtInfo();
 
@@ -438,4 +438,4 @@ namespace GUIUtil
 
 } // namespace GUIUtil
 
-#endif // SYSCOIN_QT_GUIUTIL_H
+#endif // wentuno_QT_GUIUTIL_H

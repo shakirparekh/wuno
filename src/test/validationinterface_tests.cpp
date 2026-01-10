@@ -91,7 +91,7 @@ BOOST_AUTO_TEST_CASE(unregister_all_during_call)
         },
         [&] { destroyed = true; }));
     TestInterface::Call();
-    // SYSCOIN
+    // wentuno
     SyncWithValidationInterfaceQueue();
     BOOST_CHECK(destroyed);
 }

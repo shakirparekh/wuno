@@ -1,5 +1,5 @@
-#ifndef SYSCOIN_QT_MASTERNODELIST_H
-#define SYSCOIN_QT_MASTERNODELIST_H
+#ifndef wentuno_QT_MASTERNODELIST_H
+#define wentuno_QT_MASTERNODELIST_H
 
 #include <primitives/transaction.h>
 #include <sync.h>
@@ -82,4 +82,4 @@ private Q_SLOTS:
     void handleMasternodeListChanged();
     void updateDIP3ListScheduled();
 };
-#endif // SYSCOIN_QT_MASTERNODELIST_H
+#endif // wentuno_QT_MASTERNODELIST_H

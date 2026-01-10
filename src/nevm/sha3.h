@@ -21,8 +21,8 @@
  * The FixedHash fixed-size "hash" container type.
  */
 
-#ifndef SYSCOIN_NEVM_SHA3_H
-#define SYSCOIN_NEVM_SHA3_H
+#ifndef wentuno_NEVM_SHA3_H
+#define wentuno_NEVM_SHA3_H
 
 #include <string>
 #include <nevm/fixedhash.h>
@@ -70,4 +70,4 @@ extern h256 EmptySHA3;
 extern h256 EmptyListSHA3;
 
 }
-#endif // SYSCOIN_NEVM_SHA3_H
+#endif // wentuno_NEVM_SHA3_H

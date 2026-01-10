@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_WALLET_COINCONTROL_H
-#define SYSCOIN_WALLET_COINCONTROL_H
+#ifndef wentuno_WALLET_COINCONTROL_H
+#define wentuno_WALLET_COINCONTROL_H
 
 #include <outputtype.h>
 #include <policy/feerate.h>
@@ -59,7 +59,7 @@ public:
     int m_max_depth = DEFAULT_MAX_DEPTH;
     //! SigningProvider that has pubkeys and scripts to do spend size estimation for external inputs
     FlatSigningProvider m_external_provider;
-    // SYSCOIN
+    // wentuno
     //! Custom transaction version
     int m_version = CTransaction::CURRENT_VERSION;
     //! Custom poda data
@@ -128,4 +128,4 @@ private:
 };
 } // namespace wallet
 
-#endif // SYSCOIN_WALLET_COINCONTROL_H
+#endif // wentuno_WALLET_COINCONTROL_H

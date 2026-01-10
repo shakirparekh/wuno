@@ -24,7 +24,7 @@ Context::Context()
     LogPrintf("Using the '%s' SHA256 implementation\n", sha256_algo);
     RandomInit();
     ECC_Start();
-    // SYSCOIN
+    // wentuno
     BLSInit();
 }
 

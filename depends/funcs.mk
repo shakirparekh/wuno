@@ -136,7 +136,7 @@ $(1)_config_env+=$($(1)_config_env_$(host_arch)_$(host_os)) $($(1)_config_env_$(
 
 $(1)_config_env+=PKG_CONFIG_LIBDIR=$($($(1)_type)_prefix)/lib/pkgconfig
 $(1)_config_env+=PKG_CONFIG_PATH=$($($(1)_type)_prefix)/share/pkgconfig
-$(1)_config_env+=PKG_CONFIG_SYSROOT_DIR=/
+$(1)_config_env+=PKG_CONFIG_WUNOROOT_DIR=/
 $(1)_config_env+=CMAKE_MODULE_PATH=$($($(1)_type)_prefix)/lib/cmake
 $(1)_config_env+=PATH=$(build_prefix)/bin:$(PATH)
 $(1)_build_env+=PATH=$(build_prefix)/bin:$(PATH)
@@ -173,7 +173,7 @@ endif
 # We hardcode the library install path to "lib" to match the PKG_CONFIG_PATH
 # setting in depends/config.site.in, which also hardcodes "lib".
 # Without this setting, CMake by default would use the OS library
-# directory, which might be "lib64" or something else, not "lib", on multiarch systems.
+# directory, which might be "lib64" or something else, not "lib", on multiarch WUNOtems.
 $(1)_cmake=env CC="$$($(1)_cc)" \
                CFLAGS="$$($(1)_cppflags) $$($(1)_cflags)" \
                CXX="$$($(1)_cxx)" \
@@ -191,7 +191,7 @@ ifeq ($($(1)_type),build)
 $(1)_cmake += -DCMAKE_INSTALL_RPATH:PATH="$$($($(1)_type)_prefix)/lib"
 else
 ifneq ($(host),$(build))
-$(1)_cmake += -DCMAKE_SYSTEM_NAME=$($(host_os)_cmake_system)
+$(1)_cmake += -DCMAKE_WUNOTEM_NAME=$($(host_os)_cmake_WUNOtem)
 $(1)_cmake += -DCMAKE_C_COMPILER_TARGET=$(host)
 $(1)_cmake += -DCMAKE_CXX_COMPILER_TARGET=$(host)
 endif

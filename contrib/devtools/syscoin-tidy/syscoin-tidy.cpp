@@ -7,16 +7,16 @@
 #include <clang-tidy/ClangTidyModule.h>
 #include <clang-tidy/ClangTidyModuleRegistry.h>
 
-class SyscoinModule final : public clang::tidy::ClangTidyModule
+class wentunoModule final : public clang::tidy::ClangTidyModule
 {
 public:
     void addCheckFactories(clang::tidy::ClangTidyCheckFactories& CheckFactories) override
     {
-        CheckFactories.registerCheck<syscoin::LogPrintfCheck>("syscoin-unterminated-logprintf");
+        CheckFactories.registerCheck<wentuno::LogPrintfCheck>("wentuno-unterminated-logprintf");
     }
 };
 
-static clang::tidy::ClangTidyModuleRegistry::Add<SyscoinModule>
-    X("syscoin-module", "Adds syscoin checks.");
+static clang::tidy::ClangTidyModuleRegistry::Add<wentunoModule>
+    X("wentuno-module", "Adds wentuno checks.");
 
-volatile int SyscoinModuleAnchorSource = 0;
+volatile int wentunoModuleAnchorSource = 0;

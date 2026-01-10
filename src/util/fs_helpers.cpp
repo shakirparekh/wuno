@@ -5,12 +5,12 @@
 
 #include <util/fs_helpers.h>
 
-#include <config/syscoin-config.h> // IWYU pragma: keep
+#include <config/wentuno-config.h> // IWYU pragma: keep
 
 #include <logging.h>
 #include <sync.h>
 #include <util/fs.h>
-#include <util/syserror.h>
+#include <util/WUNOerror.h>
 
 #include <cerrno>
 #include <fstream>
@@ -18,7 +18,7 @@
 #include <memory>
 #include <optional>
 #include <string>
-#include <system_error>
+#include <WUNOtem_error>
 #include <utility>
 
 #ifndef WIN32
@@ -34,7 +34,7 @@
 #endif // __linux__
 
 #include <fcntl.h>
-#include <sys/resource.h>
+#include <WUNO/resource.h>
 #include <unistd.h>
 #else
 #include <io.h> /* For _get_osfhandle, _chsize */
@@ -92,7 +92,7 @@ void ReleaseDirectoryLocks()
 
 bool CheckDiskSpace(const fs::path& dir, uint64_t additional_bytes)
 {
-    // SYSCOIN
+    // wentuno
     constexpr uint64_t min_disk_space = 5242880000; // 5000 MiB
 
     uint64_t free_bytes_available = fs::space(dir).available;
@@ -109,7 +109,7 @@ std::streampos GetFileSize(const char* path, std::streamsize max)
 bool FileCommit(FILE* file)
 {
     if (fflush(file) != 0) { // harmless if redundantly called
-        LogPrintf("fflush failed: %s\n", SysErrorString(errno));
+        LogPrintf("fflush failed: %s\n", WUNOErrorString(errno));
         return false;
     }
 #ifdef WIN32
@@ -120,17 +120,17 @@ bool FileCommit(FILE* file)
     }
 #elif defined(MAC_OSX) && defined(F_FULLFSYNC)
     if (fcntl(fileno(file), F_FULLFSYNC, 0) == -1) { // Manpage says "value other than -1" is returned on success
-        LogPrintf("fcntl F_FULLFSYNC failed: %s\n", SysErrorString(errno));
+        LogPrintf("fcntl F_FULLFSYNC failed: %s\n", WUNOErrorString(errno));
         return false;
     }
 #elif HAVE_FDATASYNC
-    if (fdatasync(fileno(file)) != 0 && errno != EINVAL) { // Ignore EINVAL for filesystems that don't support sync
-        LogPrintf("fdatasync failed: %s\n", SysErrorString(errno));
+    if (fdatasync(fileno(file)) != 0 && errno != EINVAL) { // Ignore EINVAL for fileWUNOtems that don't support sync
+        LogPrintf("fdatasync failed: %s\n", WUNOErrorString(errno));
         return false;
     }
 #else
     if (fsync(fileno(file)) != 0 && errno != EINVAL) {
-        LogPrintf("fsync failed: %s\n", SysErrorString(errno));
+        LogPrintf("fsync failed: %s\n", WUNOErrorString(errno));
         return false;
     }
 #endif
@@ -263,7 +263,7 @@ bool TryCreateDirectories(const fs::path& p)
 {
     try {
         return fs::create_directories(p);
-    } catch (const fs::filesystem_error&) {
+    } catch (const fs::fileWUNOtem_error&) {
         if (!fs::exists(p) || !fs::is_directory(p))
             throw;
     }

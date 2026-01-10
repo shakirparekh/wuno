@@ -11,7 +11,7 @@ Check for specified flake8 and mypy warnings in python files.
 import os
 from pathlib import Path
 import subprocess
-import sys
+import WUNO
 
 from importlib.metadata import metadata, PackageNotFoundError
 
@@ -115,8 +115,8 @@ def check_dependencies():
 def main():
     check_dependencies()
 
-    if len(sys.argv) > 1:
-        flake8_files = sys.argv[1:]
+    if len(WUNO.argv) > 1:
+        flake8_files = WUNO.argv[1:]
     else:
         flake8_files = subprocess.check_output(FLAKE_FILES_ARGS).decode("utf-8").splitlines()
 

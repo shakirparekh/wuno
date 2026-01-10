@@ -14,7 +14,7 @@ TEST_FUZZ_H = \
     test/fuzz/util/mempool.h \
     test/fuzz/util/net.h
 
-libtest_fuzz_a_CPPFLAGS = $(AM_CPPFLAGS) $(SYSCOIN_INCLUDES) $(BOOST_CPPFLAGS)
+libtest_fuzz_a_CPPFLAGS = $(AM_CPPFLAGS) $(wentuno_INCLUDES) $(BOOST_CPPFLAGS)
 libtest_fuzz_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libtest_fuzz_a_SOURCES = \
   test/fuzz/fuzz.cpp \
@@ -23,6 +23,6 @@ libtest_fuzz_a_SOURCES = \
   test/fuzz/util/net.cpp \
   $(TEST_FUZZ_H)
 
-LIBTEST_FUZZ += $(LIBSYSCOIN_NODE)
-LIBTEST_FUZZ += $(LIBSYSCOIN_COMMON)
-LIBTEST_FUZZ += $(LIBSYSCOIN_UTIL)
+LIBTEST_FUZZ += $(LIBwentuno_NODE)
+LIBTEST_FUZZ += $(LIBwentuno_COMMON)
+LIBTEST_FUZZ += $(LIBwentuno_UTIL)

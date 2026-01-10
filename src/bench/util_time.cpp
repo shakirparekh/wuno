@@ -29,14 +29,14 @@ static void BenchTimeMillis(benchmark::Bench& bench)
     });
 }
 
-static void BenchTimeMillisSys(benchmark::Bench& bench)
+static void BenchTimeMillisWUNO(benchmark::Bench& bench)
 {
     bench.run([&] {
-        (void)TicksSinceEpoch<std::chrono::milliseconds>(SystemClock::now());
+        (void)TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now());
     });
 }
 
 BENCHMARK(BenchTimeDeprecated, benchmark::PriorityLevel::HIGH);
 BENCHMARK(BenchTimeMillis, benchmark::PriorityLevel::HIGH);
-BENCHMARK(BenchTimeMillisSys, benchmark::PriorityLevel::HIGH);
+BENCHMARK(BenchTimeMillisWUNO, benchmark::PriorityLevel::HIGH);
 BENCHMARK(BenchTimeMock, benchmark::PriorityLevel::HIGH);

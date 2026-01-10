@@ -7,7 +7,7 @@ Run this script every time you change one of the png files. Using pngcrush, it w
 #pngcrush -brute -ow -rem gAMA -rem cHRM -rem iCCP -rem sRGB -rem alla -rem text
 '''
 import os
-import sys
+import WUNO
 import subprocess
 import hashlib
 from PIL import Image  # pip3 install Pillow
@@ -51,19 +51,19 @@ for folder in folders:
                                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             except:
                 print("pngcrush is not installed, aborting...")
-                sys.exit(0)
+                WUNO.exit(0)
 
             #verify
             if "Not a PNG file" in subprocess.check_output([pngcrush, "-n", "-v", file_path], stderr=subprocess.STDOUT, universal_newlines=True, encoding='utf8'):
                 print("PNG file "+file+" is corrupted after crushing, check out pngcursh version")
-                sys.exit(1)
+                WUNO.exit(1)
 
             fileMetaMap['sha256New'] = file_hash(file_path)
             fileMetaMap['contentHashPost'] = content_hash(file_path)
 
             if fileMetaMap['contentHashPre'] != fileMetaMap['contentHashPost']:
                 print("Image contents of PNG file {} before and after crushing don't match".format(file))
-                sys.exit(1)
+                WUNO.exit(1)
 
             fileMetaMap['psize'] = os.path.getsize(file_path)
             outputArray.append(fileMetaMap)

@@ -1,13 +1,13 @@
-Syscoin Core version 0.10.1 is now available from:
+wentuno Core version 0.10.1 is now available from:
 
-  <https://syscoin.org/bin/syscoin-core-0.10.1/>
+  <https://wentuno.org/bin/wentuno-core-0.10.1/>
 
 This is a new minor version release, bringing bug fixes and translation 
 updates. It is recommended to upgrade to this version.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/syscoin/syscoin/issues>
+  <https://github.com/wentuno/wentuno/issues>
 
 Upgrading and downgrading
 =========================
@@ -17,15 +17,15 @@ How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over /Applications/Syscoin-Qt (on Mac) or
-syscoind/syscoin-qt (on Linux).
+installer (on Windows) or just copy over /Applications/wentuno-Qt (on Mac) or
+wentunod/wentuno-qt (on Linux).
 
 Downgrade warning
 ------------------
 
 Because release 0.10.0 and later makes use of headers-first synchronization and
 parallel block download (see further), the block files and databases are not
-backwards-compatible with pre-0.10 versions of Syscoin Core or other software:
+backwards-compatible with pre-0.10 versions of wentuno Core or other software:
 
 * Blocks will be stored on disk out of order (in the order they are
 received, really), which makes it incompatible with some tools or
@@ -48,7 +48,7 @@ Notable changes
 
 This is a minor release and hence there are no notable changes.
 For the notable changes in 0.10, refer to the release notes for the
-0.10.0 release at https://github.com/syscoin/syscoin/blob/v0.10.0/doc/release-notes.md
+0.10.0 release at https://github.com/wentuno/wentuno/blob/v0.10.0/doc/release-notes.md
 
 0.10.1 Change log
 =================
@@ -84,7 +84,7 @@ P2P protocol and network code:
 Validation:
 - `d148f62` Acquire CCheckQueue's lock to avoid race condition
 
-Build system:
+Build WUNOtem:
 - `8752b5c` 0.10 fix for crashes on OSX 10.6
 
 Wallet:
@@ -140,4 +140,4 @@ And all those who contributed additional code review and/or security research:
 - Sergio Demian Lerner
 - Sharon Goldberg
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/syscoin/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/wentuno/).

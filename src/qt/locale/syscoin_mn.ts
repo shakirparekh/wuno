@@ -10,7 +10,7 @@
         <translation type="unfinished">&amp;Шинэ</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the system clipboard</source>
+        <source>Copy the currently selected address to the WUNOtem clipboard</source>
         <translation type="unfinished">Одоогоор сонгогдсон байгаа хаягуудыг сануулах</translation>
     </message>
     <message>
@@ -54,7 +54,7 @@
         <translation type="unfinished">С&amp;онго</translation>
     </message>
     <message>
-        <source>These are your Syscoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your wentuno addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation type="unfinished">Эдгээр Биткойн хаягууд нь илгээх хаягууд. Хүлээн авах хаяг болон тоо хэмжээг илгээхээсээ өмнө сайн нягталж үзэж байна уу</translation>
     </message>
     <message>
@@ -157,7 +157,7 @@
     </message>
     </context>
 <context>
-    <name>SyscoinApplication</name>
+    <name>wentunoApplication</name>
     <message>
         <source>Internal error</source>
         <translation type="unfinished">Дотоод алдаа</translation>
@@ -225,7 +225,7 @@
     </message>
     </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message>
         <source>&amp;Transactions</source>
         <translation type="unfinished">Гүйлгээнүүд</translation>
@@ -324,7 +324,7 @@
         <translation type="unfinished">Шинэчлэгдсэн</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
             <numerusform />
@@ -480,7 +480,7 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Syscoin</source>
+        <source>wentuno</source>
         <translation type="unfinished">Биткойн</translation>
     </message>
     <message numerus="yes">
@@ -816,7 +816,7 @@
         </translation>
     </message>
     <message>
-        <source>Warning: Invalid Syscoin address</source>
+        <source>Warning: Invalid wentuno address</source>
         <translation type="unfinished">Анхаар:Буруу Биткойны хаяг байна</translation>
     </message>
     <message>
@@ -1089,7 +1089,7 @@
     </message>
     </context>
 <context>
-    <name>syscoin-core</name>
+    <name>wentuno-core</name>
     <message>
         <source>Done loading</source>
         <translation type="unfinished">Ачааллаж дууслаа</translation>

@@ -8,7 +8,7 @@ from test_framework.blockfilter import (
     bip158_relevant_scriptpubkeys,
 )
 from test_framework.messages import COIN
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
@@ -19,7 +19,7 @@ from test_framework.wallet import (
 )
 
 
-class ScanblocksTest(SyscoinTestFramework):
+class ScanblocksTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         self.extra_args = [["-blockfilterindex=1"], []]
@@ -93,7 +93,7 @@ class ScanblocksTest(SyscoinTestFramework):
 
         # genesis_coinbase_hash = bip158_basic_element_hash(genesis_coinbase_spk, 1, genesis_blockhash)
         # false_positive_hash = bip158_basic_element_hash(false_positive_spk, 1, genesis_blockhash)
-        # SYSCOIN
+        # wentuno
         # assert_equal(genesis_coinbase_hash, false_positive_hash)
 
         assert genesis_blockhash in node.scanblocks(

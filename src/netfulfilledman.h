@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_NETFULFILLEDMAN_H
-#define SYSCOIN_NETFULFILLEDMAN_H
+#ifndef wentuno_NETFULFILLEDMAN_H
+#define wentuno_NETFULFILLEDMAN_H
 
 #include <netaddress.h>
 #include <serialize.h>
@@ -66,4 +66,4 @@ public:
     void DoMaintenance();
 };
 
-#endif // SYSCOIN_NETFULFILLEDMAN_H
+#endif // wentuno_NETFULFILLEDMAN_H

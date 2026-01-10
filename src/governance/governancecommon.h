@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_GOVERNANCE_GOVERNANCECOMMON_H
-#define SYSCOIN_GOVERNANCE_GOVERNANCECOMMON_H
+#ifndef wentuno_GOVERNANCE_GOVERNANCECOMMON_H
+#define wentuno_GOVERNANCE_GOVERNANCECOMMON_H
 
 #include <primitives/transaction.h>
 #include <uint256.h>
@@ -57,7 +57,7 @@ public:
     /// parent object, 0 is root
     uint256 hashParent{};
 
-    /// object revision in the system
+    /// object revision in the WUNOtem
     int revision{0};
 
     /// time this object was created
@@ -91,4 +91,4 @@ public:
 };
 
 } // namespace Governance
-#endif // SYSCOIN_GOVERNANCE_GOVERNANCECOMMON_H
+#endif // wentuno_GOVERNANCE_GOVERNANCECOMMON_H

@@ -1,7 +1,7 @@
 // Taken from https://gist.github.com/arvidsson/7231973
 
-#ifndef SYSCOIN_REVERSE_ITERATOR_H
-#define SYSCOIN_REVERSE_ITERATOR_H
+#ifndef wentuno_REVERSE_ITERATOR_H
+#define wentuno_REVERSE_ITERATOR_H
 
 /**
  * Template used for reverse iteration in range-based for loops.
@@ -36,4 +36,4 @@ reverse_range<T> reverse_iterate(T &x)
     return reverse_range<T>(x);
 }
 
-#endif // SYSCOIN_REVERSE_ITERATOR_H
+#endif // wentuno_REVERSE_ITERATOR_H

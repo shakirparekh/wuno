@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_TXMEMPOOL_H
-#define SYSCOIN_TXMEMPOOL_H
+#ifndef wentuno_TXMEMPOOL_H
+#define wentuno_TXMEMPOOL_H
 
 #include <coins.h>
 #include <consensus/amount.h>
@@ -27,11 +27,11 @@
 #include <boost/multi_index/indexed_by.hpp>
 #include <boost/multi_index/ordered_index.hpp>
 #include <boost/multi_index/sequenced_index.hpp>
-#include <netaddress.h>     // SYSCOIN
+#include <netaddress.h>     // wentuno
 #include <boost/multi_index/tag.hpp>
 #include <boost/multi_index_container.hpp>
 
-// SYSCOIN
+// wentuno
 #include <pubkey.h>
 #include <bls/bls.h>
 class CBlockIndex;
@@ -397,8 +397,8 @@ public:
      * @par Consistency bug
      *
      * The second guarantee above is not currently enforced, but
-     * https://github.com/syscoin/syscoin/pull/14193 will fix it. No known code
-     * in syscoin currently depends on second guarantee, but it is important to
+     * https://github.com/wentuno/wentuno/pull/14193 will fix it. No known code
+     * in wentuno currently depends on second guarantee, but it is important to
      * fix for third party code that needs be able to frequently poll the
      * mempool without locking `cs_main` and without encountering missing
      * transactions during reorgs.
@@ -427,7 +427,7 @@ private:
      * Track locally submitted transactions to periodically retry initial broadcast.
      */
     std::set<uint256> m_unbroadcast_txids GUARDED_BY(cs);
-    // SYSCOIN
+    // wentuno
     std::multimap<uint256, uint256> mapProTxRefs; // proTxHash -> transaction (all TXs that refer to an existing proTx)
     std::map<CService, uint256> mapProTxAddresses;
     std::map<std::vector<unsigned char>, uint256> mapProTxNEVMAddresses;
@@ -496,7 +496,7 @@ public:
     void addUnchecked(const CTxMemPoolEntry& entry, bool validFeeEstimate = true) EXCLUSIVE_LOCKS_REQUIRED(cs, cs_main);
     void addUnchecked(const CTxMemPoolEntry& entry, setEntries& setAncestors, bool validFeeEstimate = true) EXCLUSIVE_LOCKS_REQUIRED(cs, cs_main);
     void removeRecursive(const CTransaction& tx, MemPoolRemovalReason reason) EXCLUSIVE_LOCKS_REQUIRED(cs);
-    // SYSCOIN
+    // wentuno
     void removeProTxPubKeyConflicts(const CTransaction &tx, const CKeyID &keyId) EXCLUSIVE_LOCKS_REQUIRED(cs, cs_main);
     void removeProTxNEVMKeyConflicts(const CTransaction &tx, const std::vector<unsigned char> &vchNEVMAddress) EXCLUSIVE_LOCKS_REQUIRED(cs, cs_main);
     void removeProTxPubKeyConflicts(const CTransaction &tx, const CBLSLazyPublicKey &pubKey) EXCLUSIVE_LOCKS_REQUIRED(cs, cs_main);
@@ -505,7 +505,7 @@ public:
     void removeProTxKeyChangedConflicts(const CTransaction &tx, const uint256& proTxHash, const uint256& newKeyHash) EXCLUSIVE_LOCKS_REQUIRED(cs, cs_main);
     void removeProTxConflicts(const CTransaction &tx) EXCLUSIVE_LOCKS_REQUIRED(cs, cs_main);
     bool existsConflicts(const CTransaction& tx) const EXCLUSIVE_LOCKS_REQUIRED(cs, cs_main);
-    bool isSyscoinConflictIsFirstSeen(const CTransaction &tx) const EXCLUSIVE_LOCKS_REQUIRED(cs);
+    bool iswentunoConflictIsFirstSeen(const CTransaction &tx) const EXCLUSIVE_LOCKS_REQUIRED(cs);
     void removeZDAGConflicts(const CTransaction& tx) EXCLUSIVE_LOCKS_REQUIRED(cs, cs_main);
     /** After reorg, filter the entries that would no longer be valid in the next block, and update
      * the entries' cached LockPoints if needed.  The mempool does not have any knowledge of
@@ -515,7 +515,7 @@ public:
      *                                        and updates an entry's LockPoints.
      * */
     void removeForReorg(CChain& chain, std::function<bool(txiter)> filter_final_and_mature) EXCLUSIVE_LOCKS_REQUIRED(cs, cs_main);
-    // SYSCOIN
+    // wentuno
     void removeConflicts(const CTransaction& tx) EXCLUSIVE_LOCKS_REQUIRED(cs, cs_main);
     void removeForBlock(const std::vector<CTransactionRef>& vtx, unsigned int nBlockHeight) EXCLUSIVE_LOCKS_REQUIRED(cs, cs_main);
 
@@ -729,7 +729,7 @@ public:
     TxMempoolInfo info_for_relay(const GenTxid& gtxid, uint64_t last_sequence) const;
 
     std::vector<TxMempoolInfo> infoAll() const;
-    // SYSCOIN
+    // wentuno
     bool existsProviderTxConflict(const CTransaction &tx) const EXCLUSIVE_LOCKS_REQUIRED(cs, cs_main);
     size_t DynamicMemoryUsage() const;
 
@@ -882,4 +882,4 @@ public:
     /** Clear m_temp_added and m_non_base_coins. */
     void Reset();
 };
-#endif // SYSCOIN_TXMEMPOOL_H
+#endif // wentuno_TXMEMPOOL_H

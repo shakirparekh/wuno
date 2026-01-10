@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_LOGGING_H
-#define SYSCOIN_LOGGING_H
+#ifndef wentuno_LOGGING_H
+#define wentuno_LOGGING_H
 
 #include <threadsafety.h>
 #include <tinyformat.h>
@@ -59,7 +59,7 @@ namespace BCLog {
         QT          = (1 << 19),
         LEVELDB     = (1 << 20),
         VALIDATION  = (1 << 21),
-        // SYSCOIN
+        // wentuno
         GOBJECT     = (1 << 22),
         LLMQ        = (1 << 23),
         LLMQ_DKG    = (1 << 24),
@@ -67,7 +67,7 @@ namespace BCLog {
         MNPAYMENTS  = (1 << 26),
         MNSYNC      = (1 << 27),
         SPORK       = (1 << 28),
-        SYS         = (1 << 29),
+        WUNO         = (1 << 29),
         CHAINLOCKS  = (1 << 30),
         MNLIST      = (uint64_t)(1ULL << 31),
         I2P         = (uint64_t)(1ULL << 32),
@@ -186,7 +186,7 @@ namespace BCLog {
         Level LogLevel() const { return m_log_level.load(); }
         void SetLogLevel(Level level) { m_log_level = level; }
         bool SetLogLevel(const std::string& level);
-        // SYSCOIN
+        // wentuno
         uint64_t GetCategoryMask() const { return m_categories.load(); }
 
         void EnableCategory(LogFlags flag);
@@ -280,4 +280,4 @@ bool error(const char* fmt, const Args&... args)
     return false;
 }
 
-#endif // SYSCOIN_LOGGING_H
+#endif // wentuno_LOGGING_H

@@ -29,7 +29,7 @@ static void DeserializeBlockTest(benchmark::Bench& bench)
         assert(rewound);
     });
 }
-// SYSCOIN TODO block413567 for syscoin
+// wentuno TODO block413567 for wentuno
 /*static void DeserializeAndCheckBlockTest(benchmark::State& state)
 {
     CDataStream stream(benchmark::data::block413567, SER_NETWORK, PROTOCOL_VERSION);
@@ -52,5 +52,5 @@ static void DeserializeBlockTest(benchmark::Bench& bench)
 }*/
 
 BENCHMARK(DeserializeBlockTest, benchmark::PriorityLevel::HIGH);
-// SYSCOIN
+// wentuno
 //BENCHMARK(DeserializeAndCheckBlockTest, benchmark::PriorityLevel::HIGH);

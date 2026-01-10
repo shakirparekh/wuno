@@ -4,8 +4,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file license.txt or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_AUXPOW_H
-#define SYSCOIN_AUXPOW_H
+#ifndef wentuno_AUXPOW_H
+#define wentuno_AUXPOW_H
 
 #include <consensus/params.h>
 #include <primitives/pureheader.h>
@@ -29,10 +29,10 @@ class CAuxPowForTest;
 
 /** Header for merge-mining data in the coinbase.  */
 static const unsigned char pchMergedMiningHeader[] = { 0xfa, 0xbe, 'm', 'm' };
-static const unsigned char pchSyscoinHeader[] = { 's', 'y', 's' };
+static const unsigned char pchwentunoHeader[] = { 's', 'y', 's' };
 /**
  * Data for the merge-mining auxpow.  This uses a merkle tx (the parent block's
- * coinbase tx) and a second merkle branch to link the actual Syscoin block
+ * coinbase tx) and a second merkle branch to link the actual wentuno block
  * header to the parent block header, which is mined to satisfy the PoW.
  */
 class CAuxPow
@@ -155,4 +155,4 @@ public:
 
 };
 
-#endif // SYSCOIN_AUXPOW_H
+#endif // wentuno_AUXPOW_H

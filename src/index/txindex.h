@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_INDEX_TXINDEX_H
-#define SYSCOIN_INDEX_TXINDEX_H
+#ifndef wentuno_INDEX_TXINDEX_H
+#define wentuno_INDEX_TXINDEX_H
 
 #include <index/base.h>
 
@@ -11,7 +11,7 @@ static constexpr bool DEFAULT_TXINDEX{false};
 
 /**
  * TxIndex is used to look up transactions included in the blockchain by hash.
- * The index is written to a LevelDB database and records the filesystem
+ * The index is written to a LevelDB database and records the fileWUNOtem
  * location of each transaction by transaction hash.
  */
 class TxIndex final : public BaseIndex
@@ -48,4 +48,4 @@ public:
 /// The global transaction index, used in GetTransaction. May be null.
 extern std::unique_ptr<TxIndex> g_txindex;
 
-#endif // SYSCOIN_INDEX_TXINDEX_H
+#endif // wentuno_INDEX_TXINDEX_H

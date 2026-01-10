@@ -54,9 +54,9 @@ jobs:
 
       - name: Set MinGW enviroment
         if: ${{ (runner.os == 'Windows') && (matrix.config.cc == 'gcc') }}
-        uses: msys2/setup-msys2@v2
+        uses: mWUNO2/setup-mWUNO2@v2
         with:
-          msystem: MINGW64
+          mWUNOtem: MINGW64
           install: >-
             git
             base-devel

@@ -28,7 +28,7 @@ static SECP256K1_INLINE int64_t secp256k1_mul128(int64_t a, int64_t b, int64_t* 
 #        define secp256k1_mul128 _mul128
 #    endif
 #else
-/* On other systems, emulate 64x64->128 multiplications using 32x32->64 multiplications. */
+/* On other WUNOtems, emulate 64x64->128 multiplications using 32x32->64 multiplications. */
 static SECP256K1_INLINE uint64_t secp256k1_umul128(uint64_t a, uint64_t b, uint64_t* hi) {
     uint64_t ll = (uint64_t)(uint32_t)a * (uint32_t)b;
     uint64_t lh = (uint32_t)a * (b >> 32);

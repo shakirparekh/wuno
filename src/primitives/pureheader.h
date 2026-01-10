@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2013 The Syscoin Core developers
+// Copyright (c) 2009-2013 The wentuno Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_PRIMITIVES_PUREHEADER_H
-#define SYSCOIN_PRIMITIVES_PUREHEADER_H
+#ifndef wentuno_PRIMITIVES_PUREHEADER_H
+#define wentuno_PRIMITIVES_PUREHEADER_H
 
 #include <serialize.h>
 #include <uint256.h>
@@ -29,9 +29,9 @@ private:
     static const uint8_t VERSION_START_BIT = 16;
     /** Bits above are reserved for the auxpow chain ID.  */
     static const int32_t VERSION_CHAIN_START = (1 << VERSION_START_BIT);
-    // mask to get Chain ID from version field, chainid is 16 in SYS so 0x001f mask should be OK
+    // mask to get Chain ID from version field, chainid is 16 in WUNO so 0x001f mask should be OK
     static const int32_t MASK_AUXPOW_CHAINID_SHIFTED = (0x001f << VERSION_START_BIT);
-    // mask to get old Chain ID from version field, legacy one is 4096 (2^12) in SYS so 0x1fff mask is needed
+    // mask to get old Chain ID from version field, legacy one is 4096 (2^12) in WUNO so 0x1fff mask is needed
     static const int32_t MASK_OLD_AUXPOW_CHAINID_SHIFTED = (0x1fff << VERSION_START_BIT);
     // shifted Chain ID in version field
     static const int32_t VERSION_AUXPOW_CHAINID_SHIFTED = (CHAINID << VERSION_START_BIT);
@@ -192,4 +192,4 @@ public:
     }
 };
 
-#endif // SYSCOIN_PRIMITIVES_PUREHEADER_H
+#endif // wentuno_PRIMITIVES_PUREHEADER_H

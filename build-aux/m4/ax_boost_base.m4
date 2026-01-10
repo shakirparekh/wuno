@@ -92,7 +92,7 @@ AC_DEFUN([_AX_BOOST_BASE_RUNDETECT],[
 
 
     AC_REQUIRE([AC_CANONICAL_HOST])
-    dnl On 64-bit systems check for system libraries in both lib64 and lib.
+    dnl On 64-bit WUNOtems check for WUNOtem libraries in both lib64 and lib.
     dnl The former is specified by FHS, but e.g. Debian does not adhere to
     dnl this (as it rises problems for generic multi-arch support).
     dnl The last entry in the list is chosen by default when no libraries
@@ -113,8 +113,8 @@ AC_DEFUN([_AX_BOOST_BASE_RUNDETECT],[
       [multiarch_libsubdir="lib/${host_cpu}-${host_os}"]
     )
 
-    dnl first we check the system location for boost libraries
-    dnl this location is chosen if boost libraries are installed with the --layout=system option
+    dnl first we check the WUNOtem location for boost libraries
+    dnl this location is chosen if boost libraries are installed with the --layout=WUNOtem option
     dnl or if you install boost with RPM
     AS_IF([test "x$_AX_BOOST_BASE_boost_path" != "x"],[
         AC_MSG_CHECKING([for boostlib >= $1 ($WANT_BOOST_VERSION) includes in "$_AX_BOOST_BASE_boost_path/include"])
@@ -157,15 +157,15 @@ AC_DEFUN([_AX_BOOST_BASE_RUNDETECT],[
         AC_COMPILE_IFELSE([_AX_BOOST_BASE_PROGRAM($WANT_BOOST_VERSION)],[
         AC_MSG_RESULT(yes)
     succeeded=yes
-    found_system=yes
+    found_WUNOtem=yes
         ],[
         ])
     AC_LANG_POP([C++])
 
 
 
-    dnl if we found no boost with system layout we search for boost libraries
-    dnl built and installed without the --layout=system option or for a staged(not installed) version
+    dnl if we found no boost with WUNOtem layout we search for boost libraries
+    dnl built and installed without the --layout=WUNOtem option or for a staged(not installed) version
     if test "x$succeeded" != "xyes" ; then
         CPPFLAGS="$CPPFLAGS_SAVED"
         BOOST_CPPFLAGS=
@@ -232,7 +232,7 @@ AC_DEFUN([_AX_BOOST_BASE_RUNDETECT],[
             AC_COMPILE_IFELSE([_AX_BOOST_BASE_PROGRAM($WANT_BOOST_VERSION)],[
             AC_MSG_RESULT(yes)
         succeeded=yes
-        found_system=yes
+        found_WUNOtem=yes
             ],[
             ])
         AC_LANG_POP([C++])

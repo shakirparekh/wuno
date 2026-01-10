@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SPAN_H
-#define SYSCOIN_SPAN_H
+#ifndef wentuno_SPAN_H
+#define wentuno_SPAN_H
 
 #include <algorithm>
 #include <cassert>
@@ -298,7 +298,7 @@ template <typename T> constexpr auto UCharSpanCast(Span<T> s) -> Span<typename s
 
 /** Like the Span constructor, but for (const) unsigned char member types only. Only works for (un)signed char containers. */
 template <typename V> constexpr auto MakeUCharSpan(V&& v) -> decltype(UCharSpanCast(Span{std::forward<V>(v)})) { return UCharSpanCast(Span{std::forward<V>(v)}); }
-// SYSCOIN
+// wentuno
 template<typename C>
 [[nodiscard]] constexpr auto begin(const Span<C>& span) noexcept -> C* {
     return span.begin();
@@ -309,4 +309,4 @@ template<typename C>
     return span.end();
 }
 
-#endif // SYSCOIN_SPAN_H
+#endif // wentuno_SPAN_H

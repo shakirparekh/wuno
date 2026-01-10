@@ -10,7 +10,7 @@
         <translation type="unfinished">&amp;Sabonta</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the system clipboard</source>
+        <source>Copy the currently selected address to the WUNOtem clipboard</source>
         <translation type="unfinished">Kwafi adireshin da aka zaɓa a halin yanzu domin yin amfani dashi</translation>
     </message>
     <message>
@@ -54,13 +54,13 @@
         <translation type="unfinished">c&amp;zaɓi</translation>
     </message>
     <message>
-        <source>These are your Syscoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished">Waɗannan adiresoshin Syscoin ne don tura kuɗi syscoin . ka tabbatar da cewa adreshin daidai ne kamin ka tura abua a ciki</translation>
+        <source>These are your wentuno addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation type="unfinished">Waɗannan adiresoshin wentuno ne don tura kuɗi wentuno . ka tabbatar da cewa adreshin daidai ne kamin ka tura abua a ciki</translation>
     </message>
     <message>
-        <source>These are your Syscoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
+        <source>These are your wentuno addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
 Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">Waɗannan adiresoshin Syscoin ne don karɓar kuɗi. Yi amfani da maɓallin 'Ƙirƙiri sabon adireshin karɓa' a cikin shafin karɓa don ƙirƙirar sababbin adireshi.
+        <translation type="unfinished">Waɗannan adiresoshin wentuno ne don karɓar kuɗi. Yi amfani da maɓallin 'Ƙirƙiri sabon adireshin karɓa' a cikin shafin karɓa don ƙirƙirar sababbin adireshi.
 zaka iya shiga ne kawai da adiresoshin 'na musamman' kawai.</translation>
     </message>
     <message>
@@ -148,8 +148,8 @@ zaka iya shiga ne kawai da adiresoshin 'na musamman' kawai.</translation>
         <translation type="unfinished">tabbar da an sakaye walet</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR SYSCOINS&lt;/b&gt;!</source>
-        <translation type="unfinished">Jan kunne: idan aka sakaye walet kuma aka manta laƙabin sirri, za a Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt; RASA DUKKAN SYSCOINS&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR wentunoS&lt;/b&gt;!</source>
+        <translation type="unfinished">Jan kunne: idan aka sakaye walet kuma aka manta laƙabin sirri, za a Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt; RASA DUKKAN wentunoS&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -226,7 +226,7 @@ zaka iya shiga ne kawai da adiresoshin 'na musamman' kawai.</translation>
     </message>
     </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
         <translation type="unfinished">
@@ -235,7 +235,7 @@ zaka iya shiga ne kawai da adiresoshin 'na musamman' kawai.</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
             <numerusform />
@@ -253,7 +253,7 @@ zaka iya shiga ne kawai da adiresoshin 'na musamman' kawai.</translation>
 <context>
     <name>Intro</name>
     <message>
-        <source>Syscoin</source>
+        <source>wentuno</source>
         <translation type="unfinished">Bitkoin</translation>
     </message>
     <message numerus="yes">

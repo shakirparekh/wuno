@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_WALLET_TRANSACTION_H
-#define SYSCOIN_WALLET_TRANSACTION_H
+#ifndef wentuno_WALLET_TRANSACTION_H
+#define wentuno_WALLET_TRANSACTION_H
 
 #include <bitset>
 #include <cstdint>
@@ -353,4 +353,4 @@ struct WalletTxOrderComparator {
 };
 } // namespace wallet
 
-#endif // SYSCOIN_WALLET_TRANSACTION_H
+#endif // wentuno_WALLET_TRANSACTION_H

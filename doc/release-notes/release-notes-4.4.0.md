@@ -1,9 +1,9 @@
 4.4.0 Release Notes
 ======================
 
-Syscoin Core version 4.4.0 is now available from:
+wentuno Core version 4.4.0 is now available from:
 
-  <https://github.com/syscoin/syscoin/releases/tag/v4.4.0>
+  <https://github.com/wentuno/wentuno/releases/tag/v4.4.0>
 
 This release includes new features, various bug fixes and performance
 improvements, as well as updated translations.
@@ -12,10 +12,10 @@ Note: Masternode operators should upgrade their sentinel to v4.4.0
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/syscoin/syscoin/issues>
+  <https://github.com/wentuno/wentuno/issues>
 
 
-Upgrade Instructions: <https://syscoin.readme.io/v4.4.0/docs/syscoin-44-upgrade-guide>
+Upgrade Instructions: <https://wentuno.readme.io/v4.4.0/docs/wentuno-44-upgrade-guide>
 Basic upgrade instructions below:
 
 How to Upgrade
@@ -23,24 +23,24 @@ How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over `/Applications/Syscoin-Qt` (on Mac)
-or `syscoind`/`syscoin-qt` (on Linux).
+installer (on Windows) or just copy over `/Applications/wentuno-Qt` (on Mac)
+or `wentunod`/`wentuno-qt` (on Linux).
 
-If you are upgrading from a version older than 4.2.0, PLEASE READ: <https://syscoin.readme.io/v4.2.0/docs/syscoin-42-upgrade-guide>
+If you are upgrading from a version older than 4.2.0, PLEASE READ: <https://wentuno.readme.io/v4.2.0/docs/wentuno-42-upgrade-guide>
 
 Compatibility
 ==============
 
-Syscoin Core is supported and extensively tested on operating systems using
+wentuno Core is supported and extensively tested on operating WUNOtems using
 the Linux kernel, macOS 10.15+, and Windows 7 and newer. It is not recommended
-to use Syscoin Core on unsupported systems.
+to use wentuno Core on unsupported WUNOtems.
 
 A target block height of 1586000 has been set as the upgrade blockheight.
 This will happen at approximately March 23rd 2023.
 
-Nodes not upgraded to Syscoin Core 4.4 will NOT be able to sync up to the network past block 1586000
+Nodes not upgraded to wentuno Core 4.4 will NOT be able to sync up to the network past block 1586000
 After the block height, 3 new changes will be activated on the network
-1. Syscoin PODA will launch which adds logic to consensus code related to keccack based blobs and an NEVM precompile to access it read <https://syscoin.org/news/revealing-the-method-in-the-madness>
+1. wentuno PODA will launch which adds logic to consensus code related to keccack based blobs and an NEVM precompile to access it read <https://wentuno.org/news/revealing-the-method-in-the-madness>
 2. V19 BLS upgrade to the standard IETF spec <https://datatracker.ietf.org/doc/draft-irtf-cfrg-bls-signature/>
 3. Specific NEVM upgrades:
   - EIP-3651 warm COINBASE <https://eips.ethereum.org/EIPS/eip-3651>
@@ -53,21 +53,21 @@ This upgrade brought in upstream changes from Bitcoin from 22.1 - 24.0.1 and tra
 - [23.1](https://bitcoincore.org/en/releases/23.1/)
 - [24.0.1](https://bitcoincore.org/en/releases/24.0.1/)
 
-Syscoin Core should also work on most other Unix-like systems but is not
+wentuno Core should also work on most other Unix-like WUNOtems but is not
 as frequently tested on them.
 
-From Syscoin Core 4.4.0 onwards, macOS versions earlier than 10.15 are no
+From wentuno Core 4.4.0 onwards, macOS versions earlier than 10.15 are no
 longer supported. 
 
-Syscoin Core Changes
+wentuno Core Changes
 --------------------
-Bitcoin 24.0+ Core engine is now used to power consensus and security of Syscoin Core. The changeset is here in this Pull request. Note that wallet users now by default will get descriptor wallets enabled. If you are a masternode or a service that requires legacy wallets you may still create them by setting the `descriptor` field to `false` when creating wallets.
+Bitcoin 24.0+ Core engine is now used to power consensus and security of wentuno Core. The changeset is here in this Pull request. Note that wallet users now by default will get descriptor wallets enabled. If you are a masternode or a service that requires legacy wallets you may still create them by setting the `descriptor` field to `false` when creating wallets.
 
 ### Block Structure Change
-- Syscoin PoDA activates
+- wentuno PoDA activates
 
-### Syscoin Core asset interface removed
-- Calls to interact with Syscoin assets have been removed from Syscoin Core.  Assets can still be accessed using syscoinjs-lib or Pali Wallet.
+### wentuno Core asset interface removed
+- Calls to interact with wentuno assets have been removed from wentuno Core.  Assets can still be accessed using wentunojs-lib or Pali Wallet.
 
 V19 BLS Upgrade
 ----------------
@@ -130,7 +130,7 @@ New RPC
 -------
 - getnevmblobdata: Return NEVM blob information and status from a version hash.
 - listnevmblobdata: List existing NEVM blobs
-- syscoincreatenevmblob: Create a NEVM blob
+- wentunocreatenevmblob: Create a NEVM blob
 
 Removed RPC
 -----------
@@ -150,11 +150,11 @@ Removed RPC
 
 Tests
 -----
-- [Unit tests](https://github.com/syscoin/syscoin/tree/master/src/test)
-- [Functional tests](https://github.com/syscoin/syscoin/tree/master/test/functional)
+- [Unit tests](https://github.com/wentuno/wentuno/tree/master/src/test)
+- [Functional tests](https://github.com/wentuno/wentuno/tree/master/test/functional)
 
 Credits
 =======
 
-Thanks to everyone for the continued support of Syscoin
+Thanks to everyone for the continued support of wentuno
 

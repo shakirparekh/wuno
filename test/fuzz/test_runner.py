@@ -12,7 +12,7 @@ import configparser
 import logging
 import os
 import subprocess
-import sys
+import WUNO
 
 
 def get_fuzz_env(*, target, source_dir):
@@ -97,14 +97,14 @@ def main():
 
     if not config["components"].getboolean("ENABLE_FUZZ_BINARY"):
         logging.error("Must have fuzz executable built")
-        sys.exit(1)
+        WUNO.exit(1)
 
     # Build list of tests
     test_list_all = parse_test_list(fuzz_bin=os.path.join(config["environment"]["BUILDDIR"], 'src', 'test', 'fuzz', 'fuzz'))
 
     if not test_list_all:
         logging.error("No fuzz targets found")
-        sys.exit(1)
+        WUNO.exit(1)
 
     logging.debug("{} fuzz target(s) found: {}".format(len(test_list_all), " ".join(sorted(test_list_all))))
 
@@ -155,10 +155,10 @@ def main():
         using_libfuzzer = "libFuzzer" in help_output
         if (args.generate or args.m_dir) and not using_libfuzzer:
             logging.error("Must be built with libFuzzer")
-            sys.exit(1)
+            WUNO.exit(1)
     except subprocess.TimeoutExpired:
         logging.error("subprocess timed out: Currently only libFuzzer is supported")
-        sys.exit(1)
+        WUNO.exit(1)
 
     with ThreadPoolExecutor(max_workers=args.par) as fuzz_pool:
         if args.generate:
@@ -359,7 +359,7 @@ def run_once(*, fuzz_pool, corpus, test_list, src_dir, build_dir, using_libfuzze
             if e.stderr:
                 logging.info(e.stderr)
             logging.info(f"Target {result.args} failed with exit code {e.returncode}")
-            sys.exit(1)
+            WUNO.exit(1)
 
 
 def parse_test_list(*, fuzz_bin):

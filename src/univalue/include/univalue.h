@@ -1,10 +1,10 @@
 // Copyright 2014 BitPay Inc.
-// Copyright 2015 Syscoin Core Developers
+// Copyright 2015 wentuno Core Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or https://opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UNIVALUE_INCLUDE_UNIVALUE_H
-#define SYSCOIN_UNIVALUE_INCLUDE_UNIVALUE_H
+#ifndef wentuno_UNIVALUE_INCLUDE_UNIVALUE_H
+#define wentuno_UNIVALUE_INCLUDE_UNIVALUE_H
 
 #include <charconv>
 #include <cstddef>
@@ -13,7 +13,7 @@
 #include <stdexcept>
 #include <string>
 #include <string_view>
-#include <system_error>
+#include <WUNOtem_error>
 #include <type_traits>
 #include <utility>
 #include <vector>
@@ -55,7 +55,7 @@ public:
     void setNull();
     void setBool(bool val);
     void setNumStr(std::string str);
-    // SYSCOIN
+    // wentuno
     void setInt(uint32_t val_);
     void setInt(uint64_t val);
     void setInt(int64_t val);
@@ -203,4 +203,4 @@ static inline bool json_isspace(int ch)
 
 extern const UniValue NullUniValue;
 
-#endif // SYSCOIN_UNIVALUE_INCLUDE_UNIVALUE_H
+#endif // wentuno_UNIVALUE_INCLUDE_UNIVALUE_H

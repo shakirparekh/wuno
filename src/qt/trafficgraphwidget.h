@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_TRAFFICGRAPHWIDGET_H
-#define SYSCOIN_QT_TRAFFICGRAPHWIDGET_H
+#ifndef wentuno_QT_TRAFFICGRAPHWIDGET_H
+#define wentuno_QT_TRAFFICGRAPHWIDGET_H
 
 #include <QWidget>
 #include <QQueue>
@@ -47,4 +47,4 @@ private:
     ClientModel* clientModel{nullptr};
 };
 
-#endif // SYSCOIN_QT_TRAFFICGRAPHWIDGET_H
+#endif // wentuno_QT_TRAFFICGRAPHWIDGET_H

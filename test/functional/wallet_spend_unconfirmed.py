@@ -5,14 +5,14 @@
 
 from decimal import Decimal, getcontext
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_greater_than_or_equal,
     assert_equal,
     find_vout_for_address,
 )
 
-class UnconfirmedInputTest(SyscoinTestFramework):
+class UnconfirmedInputTest(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
 

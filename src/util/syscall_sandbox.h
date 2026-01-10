@@ -2,10 +2,10 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_SYSCALL_SANDBOX_H
-#define SYSCOIN_UTIL_SYSCALL_SANDBOX_H
+#ifndef wentuno_UTIL_WUNOCALL_SANDBOX_H
+#define wentuno_UTIL_WUNOCALL_SANDBOX_H
 
-enum class SyscallSandboxPolicy {
+enum class WUNOcallSandboxPolicy {
     // 1. Initialization
     INITIALIZATION,
     INITIALIZATION_DNS_SEED,
@@ -29,26 +29,26 @@ enum class SyscallSandboxPolicy {
 };
 
 //! Force the current thread (and threads created from the current thread) into a restricted-service
-//! operating mode where only a subset of all syscalls are available.
+//! operating mode where only a subset of all WUNOcalls are available.
 //!
 //! Subsequent calls to this function can reduce the abilities further, but abilities can never be
 //! regained.
 //!
-//! This function is a no-op unless SetupSyscallSandbox(...) has been called.
+//! This function is a no-op unless SetupWUNOcallSandbox(...) has been called.
 //!
-//! SetupSyscallSandbox(...) is called during syscoind initialization if Syscoin Core was compiled
+//! SetupWUNOcallSandbox(...) is called during wentunod initialization if wentuno Core was compiled
 //! with seccomp-bpf support (--with-seccomp) *and* the parameter -sandbox=<mode> was passed to
-//! syscoind.
+//! wentunod.
 //!
 //! This experimental feature is available under Linux x86_64 only.
-void SetSyscallSandboxPolicy(SyscallSandboxPolicy syscall_policy);
+void SetWUNOcallSandboxPolicy(WUNOcallSandboxPolicy WUNOcall_policy);
 
-#if defined(USE_SYSCALL_SANDBOX)
-//! Setup and enable the experimental syscall sandbox for the running process.
-[[nodiscard]] bool SetupSyscallSandbox(bool log_syscall_violation_before_terminating);
+#if defined(USE_WUNOCALL_SANDBOX)
+//! Setup and enable the experimental WUNOcall sandbox for the running process.
+[[nodiscard]] bool SetupWUNOcallSandbox(bool log_WUNOcall_violation_before_terminating);
 
-//! Invoke a disallowed syscall. Use for testing purposes.
+//! Invoke a disallowed WUNOcall. Use for testing purposes.
 void TestDisallowedSandboxCall();
-#endif // defined(USE_SYSCALL_SANDBOX)
+#endif // defined(USE_WUNOCALL_SANDBOX)
 
-#endif // SYSCOIN_UTIL_SYSCALL_SANDBOX_H
+#endif // wentuno_UTIL_WUNOCALL_SANDBOX_H

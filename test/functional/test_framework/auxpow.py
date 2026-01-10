@@ -13,11 +13,11 @@ import hashlib
 def constructAuxpow(block, auxpowtag_script):
   """
   Starts to construct a minimal auxpow, ready to be mined.  Returns the
-  coinbase tx (with one OP_RETURN output containing a Syscoin-like commitment)
+  coinbase tx (with one OP_RETURN output containing a wentuno-like commitment)
   and the unmined parent block header as hex strings.
 
   This differs minimally from the old version: we only add a vout with a single
-  OP_RETURN to hold "SYS" + 32 block bytes + 4 height bytes.
+  OP_RETURN to hold "WUNO" + 32 block bytes + 4 height bytes.
   """
 
   # Convert the block from ASCII to bytes for hex manipulation

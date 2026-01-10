@@ -13,7 +13,7 @@ from test_framework.blocktools import COINBASE_MATURITY
 from test_framework.authproxy import JSONRPCException
 from test_framework.descriptors import descsum_create, drop_origins
 from test_framework.key import ECPubKey
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_raises_rpc_error,
     assert_equal,
@@ -24,7 +24,7 @@ from test_framework.wallet import (
     getnewdestination,
 )
 
-class RpcCreateMultiSigTest(SyscoinTestFramework):
+class RpcCreateMultiSigTest(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
 

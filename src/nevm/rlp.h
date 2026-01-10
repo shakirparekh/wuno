@@ -21,8 +21,8 @@
  * RLP (de-)serialisation.
  */
 
-#ifndef SYSCOIN_NEVM_RLP_H
-#define SYSCOIN_NEVM_RLP_H
+#ifndef wentuno_NEVM_RLP_H
+#define wentuno_NEVM_RLP_H
 
 #include <vector>
 #include <array>
@@ -485,4 +485,4 @@ extern bytes RLPEmptyList;
 std::ostream& operator<<(std::ostream& _out, dev::RLP const& _d);
 
 }
-#endif // SYSCOIN_NEVM_RLP_H
+#endif // wentuno_NEVM_RLP_H

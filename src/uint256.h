@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UINT256_H
-#define SYSCOIN_UINT256_H
+#ifndef wentuno_UINT256_H
+#define wentuno_UINT256_H
 
 #include <span.h>
 
@@ -14,7 +14,7 @@
 #include <cstring>
 #include <stdint.h>
 #include <string>
-// SYSCOIN
+// wentuno
 #include <crypto/common.h>
 /** Template base class for fixed-sized opaque blobs. */
 template<unsigned int BITS>
@@ -110,7 +110,7 @@ public:
     constexpr explicit uint256(Span<const unsigned char> vch) : base_blob<256>(vch) {}
     static const uint256 ZEROV;
     static const uint256 ONEV;
-    // SYSCOIN
+    // wentuno
     static const uint256 TWOV;
 };
 
@@ -136,4 +136,4 @@ inline uint256 uint256S(const std::string& str)
 }
 
 uint256& UINT256_ONE();
-#endif // SYSCOIN_UINT256_H
+#endif // wentuno_UINT256_H

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_WALLET_CONTEXT_H
-#define SYSCOIN_WALLET_CONTEXT_H
+#ifndef wentuno_WALLET_CONTEXT_H
+#define wentuno_WALLET_CONTEXT_H
 
 #include <sync.h>
 
@@ -49,4 +49,4 @@ struct WalletContext {
 };
 } // namespace wallet
 
-#endif // SYSCOIN_WALLET_CONTEXT_H
+#endif // wentuno_WALLET_CONTEXT_H

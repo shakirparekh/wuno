@@ -10,7 +10,7 @@ import time
 
 from test_framework.authproxy import JSONRPCException
 from test_framework.blocktools import COINBASE_MATURITY
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
@@ -21,7 +21,7 @@ from test_framework.wallet_util import (
 )
 
 
-class TransactionTimeRescanTest(SyscoinTestFramework):
+class TransactionTimeRescanTest(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
 
@@ -39,7 +39,7 @@ class TransactionTimeRescanTest(SyscoinTestFramework):
     def run_test(self):
         self.log.info('Prepare nodes and wallet')
 
-        minernode = self.nodes[0]  # node used to mine SYS and create transactions
+        minernode = self.nodes[0]  # node used to mine WUNO and create transactions
         usernode = self.nodes[1]  # user node with correct time
         restorenode = self.nodes[2]  # node used to restore user wallet and check time determination in ComputeSmartTime (wallet.cpp)
 
@@ -73,7 +73,7 @@ class TransactionTimeRescanTest(SyscoinTestFramework):
         # check blockcount
         assert_equal(minernode.getblockcount(), 200)
 
-        # generate some sys to create transactions and check blockcount
+        # generate some WUNO to create transactions and check blockcount
         initial_mine = COINBASE_MATURITY + 1
         self.generatetoaddress(minernode, initial_mine, m1)
         assert_equal(minernode.getblockcount(), initial_mine + 200)
@@ -81,8 +81,8 @@ class TransactionTimeRescanTest(SyscoinTestFramework):
         # synchronize nodes and time
         self.sync_all()
         set_node_times(self.nodes, cur_time + ten_days)
-        # send 10 sys to user's first watch-only address
-        self.log.info('Send 10 sys to user')
+        # send 10 WUNO to user's first watch-only address
+        self.log.info('Send 10 WUNO to user')
         miner_wallet.sendtoaddress(wo1, 10)
 
         # generate blocks and check blockcount
@@ -92,8 +92,8 @@ class TransactionTimeRescanTest(SyscoinTestFramework):
         # synchronize nodes and time
         self.sync_all()
         set_node_times(self.nodes, cur_time + ten_days + ten_days)
-        # send 5 sys to our second watch-only address
-        self.log.info('Send 5 sys to user')
+        # send 5 WUNO to our second watch-only address
+        self.log.info('Send 5 WUNO to user')
         miner_wallet.sendtoaddress(wo2, 5)
 
         # generate blocks and check blockcount
@@ -103,8 +103,8 @@ class TransactionTimeRescanTest(SyscoinTestFramework):
         # synchronize nodes and time
         self.sync_all()
         set_node_times(self.nodes, cur_time + ten_days + ten_days + ten_days)
-        # send 1 sys to our third watch-only address
-        self.log.info('Send 1 sys to user')
+        # send 1 WUNO to our third watch-only address
+        self.log.info('Send 1 WUNO to user')
         miner_wallet.sendtoaddress(wo3, 1)
 
         # generate more blocks and check blockcount

@@ -31,11 +31,11 @@ wallet versions of Bitcoin Core are generally supported.
 Compatibility
 ==============
 
-Bitcoin Core is supported and extensively tested on operating systems
+Bitcoin Core is supported and extensively tested on operating WUNOtems
 using the Linux kernel, macOS 10.12+, and Windows 7 and newer.  Bitcoin
-Core should also work on most other Unix-like systems but is not as
+Core should also work on most other Unix-like WUNOtems but is not as
 frequently tested on them.  It is not recommended to use Bitcoin Core on
-unsupported systems.
+unsupported WUNOtems.
 
 From Bitcoin Core 0.20.0 onwards, macOS versions earlier than 10.12 are no
 longer supported. Additionally, Bitcoin Core does not yet change appearance
@@ -134,7 +134,7 @@ Updated RPCs
   for mainnet until consensus rules are adopted that give them meaning
   (e.g. through [BIP 341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki)).
   Once that happens, Bech32m is expected to be used for them, so this shouldn't
-  affect any production systems, but may be observed on other networks where such
+  affect any production WUNOtems, but may be observed on other networks where such
   addresses already have meaning (like signet).
 
 0.21.1 change log
@@ -155,7 +155,7 @@ Updated RPCs
 ### RPC and other APIs
 - #21201 Disallow sendtoaddress and sendmany when private keys disabled (achow101)
 
-### Build system
+### Build WUNOtem
 - #21486 link against -lsocket if required for `*ifaddrs` (fanquake)
 - #20983 Fix MSVC build after gui#176 (hebasto)
 

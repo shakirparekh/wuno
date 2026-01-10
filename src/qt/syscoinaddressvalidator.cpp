@@ -2,7 +2,7 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <qt/syscoinaddressvalidator.h>
+#include <qt/wentunoaddressvalidator.h>
 
 #include <key_io.h>
 
@@ -15,12 +15,12 @@
   - All lower-case letters except for 'l'
 */
 
-SyscoinAddressEntryValidator::SyscoinAddressEntryValidator(QObject *parent) :
+wentunoAddressEntryValidator::wentunoAddressEntryValidator(QObject *parent) :
     QValidator(parent)
 {
 }
 
-QValidator::State SyscoinAddressEntryValidator::validate(QString &input, int &pos) const
+QValidator::State wentunoAddressEntryValidator::validate(QString &input, int &pos) const
 {
     Q_UNUSED(pos);
 
@@ -80,15 +80,15 @@ QValidator::State SyscoinAddressEntryValidator::validate(QString &input, int &po
     return state;
 }
 
-SyscoinAddressCheckValidator::SyscoinAddressCheckValidator(QObject *parent) :
+wentunoAddressCheckValidator::wentunoAddressCheckValidator(QObject *parent) :
     QValidator(parent)
 {
 }
 
-QValidator::State SyscoinAddressCheckValidator::validate(QString &input, int &pos) const
+QValidator::State wentunoAddressCheckValidator::validate(QString &input, int &pos) const
 {
     Q_UNUSED(pos);
-    // Validate the passed Syscoin address
+    // Validate the passed wentuno address
     if (IsValidDestinationString(input.toStdString())) {
         return QValidator::Acceptable;
     }

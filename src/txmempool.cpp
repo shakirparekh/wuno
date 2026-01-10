@@ -7,7 +7,7 @@
 
 #include <chain.h>
 #include <coins.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <consensus/consensus.h>
 #include <consensus/tx_verify.h>
 #include <consensus/validation.h>
@@ -24,7 +24,7 @@
 #include <util/trace.h>
 #include <util/translation.h>
 #include <validationinterface.h>
-// SYSCOIN
+// wentuno
 #include <util/rbf.h>
 #include <evo/specialtx.h>
 #include <evo/providertx.h>
@@ -489,12 +489,12 @@ void CTxMemPool::addUnchecked(const CTxMemPoolEntry &entry, setEntries &setAnces
 
     vTxHashes.emplace_back(tx.GetWitnessHash(), newit);
     newit->vTxHashesIdx = vTxHashes.size() - 1;
-    // SYSCOIN
+    // wentuno
     // Invalid ProTxes should never get this far because transactions should be
     // fully checked by AcceptToMemoryPool() at this point, so we just assume that
     // everything is fine here.
     const uint256 tx_hash{tx.GetHash()};
-    if (tx.nVersion == SYSCOIN_TX_VERSION_MN_REGISTER) {
+    if (tx.nVersion == wentuno_TX_VERSION_MN_REGISTER) {
         CProRegTx proTx;
         if(GetTxPayload(tx, proTx)) {
             if (!proTx.collateralOutpoint.hash.IsNull()) {
@@ -509,7 +509,7 @@ void CTxMemPool::addUnchecked(const CTxMemPoolEntry &entry, setEntries &setAnces
                 mapProTxCollaterals.emplace(COutPoint(tx_hash, proTx.collateralOutpoint.n), tx_hash);
             }
         }
-    } else if (tx.nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_SERVICE) {
+    } else if (tx.nVersion == wentuno_TX_VERSION_MN_UPDATE_SERVICE) {
         CProUpServTx proTx;
         if(GetTxPayload(tx, proTx)) {
             mapProTxRefs.emplace(proTx.proTxHash, tx_hash);
@@ -518,7 +518,7 @@ void CTxMemPool::addUnchecked(const CTxMemPoolEntry &entry, setEntries &setAnces
                 mapProTxNEVMAddresses.emplace(proTx.vchNEVMAddress, tx_hash);
             }
         }
-    } else if (tx.nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_REGISTRAR) {
+    } else if (tx.nVersion == wentuno_TX_VERSION_MN_UPDATE_REGISTRAR) {
         CProUpRegTx proTx;
         if(GetTxPayload(tx, proTx)) {
             mapProTxRefs.emplace(proTx.proTxHash, tx_hash);
@@ -531,7 +531,7 @@ void CTxMemPool::addUnchecked(const CTxMemPoolEntry &entry, setEntries &setAnces
                 }
             }
         }
-    } else if (tx.nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_REVOKE) {
+    } else if (tx.nVersion == wentuno_TX_VERSION_MN_UPDATE_REVOKE) {
         CProUpRevTx proTx;
         if(GetTxPayload(tx, proTx)) {
             mapProTxRefs.emplace(proTx.proTxHash, tx_hash);
@@ -592,7 +592,7 @@ void CTxMemPool::removeUnchecked(txiter it, MemPoolRemovalReason reason)
     totalTxSize -= it->GetTxSize();
     m_total_fee -= it->GetFee();
     cachedInnerUsage -= it->DynamicMemoryUsage();
-    // SYSCOIN deal with pro tx stuff first
+    // wentuno deal with pro tx stuff first
     auto eraseProTxRef = [&](const uint256& proTxHash, const uint256& txHash) {
         LOCK2(cs_main, cs);
         auto its = mapProTxRefs.equal_range(proTxHash);
@@ -605,7 +605,7 @@ void CTxMemPool::removeUnchecked(txiter it, MemPoolRemovalReason reason)
         }
     };
     const uint256 tx_hash{it->GetTx().GetHash()};
-    if (it->GetTx().nVersion == SYSCOIN_TX_VERSION_MN_REGISTER) {
+    if (it->GetTx().nVersion == wentuno_TX_VERSION_MN_REGISTER) {
         CProRegTx proTx;
         if (GetTxPayload(it->GetTx(), proTx)) {
             if (!proTx.collateralOutpoint.IsNull()) {
@@ -617,7 +617,7 @@ void CTxMemPool::removeUnchecked(txiter it, MemPoolRemovalReason reason)
             mapProTxCollaterals.erase(proTx.collateralOutpoint);
             mapProTxCollaterals.erase(COutPoint(tx_hash, proTx.collateralOutpoint.n));
         }
-    } else if (it->GetTx().nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_SERVICE) {
+    } else if (it->GetTx().nVersion == wentuno_TX_VERSION_MN_UPDATE_SERVICE) {
         CProUpServTx proTx;
         if (GetTxPayload(it->GetTx(), proTx)) {
             eraseProTxRef(proTx.proTxHash, tx_hash);
@@ -626,23 +626,23 @@ void CTxMemPool::removeUnchecked(txiter it, MemPoolRemovalReason reason)
                 mapProTxNEVMAddresses.erase(proTx.vchNEVMAddress);
             }
         }
-    } else if (it->GetTx().nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_REGISTRAR) {
+    } else if (it->GetTx().nVersion == wentuno_TX_VERSION_MN_UPDATE_REGISTRAR) {
         CProUpRegTx proTx;
         if (GetTxPayload(it->GetTx(), proTx)) { 
             eraseProTxRef(proTx.proTxHash, tx_hash);
             mapProTxBlsPubKeyHashes.erase(proTx.pubKeyOperator.GetHash());
         }
-    } else if (it->GetTx().nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_REVOKE) {
+    } else if (it->GetTx().nVersion == wentuno_TX_VERSION_MN_UPDATE_REVOKE) {
         CProUpRevTx proTx;
         if (GetTxPayload(it->GetTx(), proTx)) {
             eraseProTxRef(proTx.proTxHash, tx_hash);
         }
     }
     // remove nevm tx from mempool structure
-    if(IsSyscoinMintTx(it->GetTx().nVersion)) {
-        CMintSyscoin mintSyscoin(it->GetTx());
-        if(!mintSyscoin.IsNull())
-            setMintTxsMempool.erase(mintSyscoin.nTxHash);
+    if(IswentunoMintTx(it->GetTx().nVersion)) {
+        CMintwentuno mintwentuno(it->GetTx());
+        if(!mintwentuno.IsNull())
+            setMintTxsMempool.erase(mintwentuno.nTxHash);
     }
     // completely remove data if we are expiring due to timeout or trimming mempool, any other and it may be block related where we keep around until chainlock eventually prune them
     else if(it->GetTx().IsNEVMData() && (reason == MemPoolRemovalReason::EXPIRY || reason == MemPoolRemovalReason::SIZELIMIT)) {
@@ -736,7 +736,7 @@ void CTxMemPool::removeForReorg(CChain& chain, std::function<bool(txiter)> check
         assert(TestLockPointValidity(chain, it->GetLockPoints()));
     }
 }
-// SYSCOIN
+// wentuno
 bool CTxMemPool::existsConflicts(const CTransaction &tx) const
 {
     AssertLockHeld(cs_main);
@@ -759,7 +759,7 @@ void CTxMemPool::removeConflicts(const CTransaction &tx)
             const CTransaction &txConflict = *it->second;
             if (txConflict != tx)
             {
-                if (txConflict.nVersion == SYSCOIN_TX_VERSION_MN_REGISTER) {
+                if (txConflict.nVersion == wentuno_TX_VERSION_MN_REGISTER) {
                     // Remove all other protxes which refer to this protx
                     // NOTE: Can't use equal_range here as every call to removeRecursive might invalidate iterators
                     while (true) {
@@ -793,7 +793,7 @@ void CTxMemPool::removeProTxNEVMKeyConflicts(const CTransaction &tx, const std::
     }
 }
 
-// SYSCOIN
+// wentuno
 void CTxMemPool::removeZDAGConflicts(const CTransaction &tx)
 {
     // Remove conflicting zdag transactions which depend on inputs of tx, recursively
@@ -816,7 +816,7 @@ void CTxMemPool::removeZDAGConflicts(const CTransaction &tx)
 }
 
 // true if other tx (conflicting) was first in mempool and it was involved in asset double spend
-bool CTxMemPool::isSyscoinConflictIsFirstSeen(const CTransaction &tx) const {
+bool CTxMemPool::iswentunoConflictIsFirstSeen(const CTransaction &tx) const {
     AssertLockHeld(cs);
     if(mapAssetAllocationConflicts.empty())
         return true;
@@ -825,7 +825,7 @@ bool CTxMemPool::isSyscoinConflictIsFirstSeen(const CTransaction &tx) const {
         // ensure that we check for mapAssetAllocationConflicts intersection of this input
         // the only time conflicts are allowed and would cause problems for zdag is when its double spent without RBF
         // we allow one double spend input to be propagated and here we ensure we are only dealing with skipping transactions based on time
-        // if it is one of those transactions that propagated double spent input related to syscoin asset tx
+        // if it is one of those transactions that propagated double spent input related to wentuno asset tx
         if (it != mapAssetAllocationConflicts.end()) {
             txiter thisit, conflictit;
             txiter firstit = mapTx.find(it->second.first->GetHash());
@@ -977,7 +977,7 @@ void CTxMemPool::removeProTxConflicts(const CTransaction &tx)
     AssertLockHeld(cs);
     removeProTxSpentCollateralConflicts(tx);
     const uint256 tx_hash{tx.GetHash()};
-    if (tx.nVersion == SYSCOIN_TX_VERSION_MN_REGISTER) {
+    if (tx.nVersion == wentuno_TX_VERSION_MN_REGISTER) {
         CProRegTx proTx;
         if (!GetTxPayload(tx, proTx)) {
             LogPrint(BCLog::MEMPOOL, "%s: ERROR: Invalid transaction payload, tx: %s\n", __func__, tx_hash.ToString());
@@ -997,7 +997,7 @@ void CTxMemPool::removeProTxConflicts(const CTransaction &tx)
         } else {
             removeProTxCollateralConflicts(tx, COutPoint(tx_hash, proTx.collateralOutpoint.n));
         }
-    } else if (tx.nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_SERVICE) {
+    } else if (tx.nVersion == wentuno_TX_VERSION_MN_UPDATE_SERVICE) {
         CProUpServTx proTx;
         if (!GetTxPayload(tx, proTx)) {
             LogPrint(BCLog::MEMPOOL, "%s: ERROR: Invalid transaction payload, tx: %s\n", __func__, tx_hash.ToString());
@@ -1011,7 +1011,7 @@ void CTxMemPool::removeProTxConflicts(const CTransaction &tx)
             }
         }
         removeProTxNEVMKeyConflicts(tx, proTx.vchNEVMAddress);
-    } else if (tx.nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_REGISTRAR) {
+    } else if (tx.nVersion == wentuno_TX_VERSION_MN_UPDATE_REGISTRAR) {
         CProUpRegTx proTx;
         if (!GetTxPayload(tx, proTx)) {
             LogPrint(BCLog::MEMPOOL, "%s: ERROR: Invalid transaction payload, tx: %s\n", __func__, tx_hash.ToString());
@@ -1020,7 +1020,7 @@ void CTxMemPool::removeProTxConflicts(const CTransaction &tx)
 
         removeProTxPubKeyConflicts(tx, proTx.pubKeyOperator);
         removeProTxKeyChangedConflicts(tx, proTx.proTxHash, ::SerializeHash(proTx.pubKeyOperator));
-    } else if (tx.nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_REVOKE) {
+    } else if (tx.nVersion == wentuno_TX_VERSION_MN_UPDATE_REVOKE) {
         CProUpRevTx proTx;
         if (!GetTxPayload(tx, proTx)) {
             LogPrint(BCLog::MEMPOOL, "%s: ERROR: Invalid transaction payload, tx: %s\n", __func__, tx_hash.ToString());
@@ -1057,7 +1057,7 @@ void CTxMemPool::removeForBlock(const std::vector<CTransactionRef>& vtx, unsigne
             RemoveStaged(stage, true, MemPoolRemovalReason::BLOCK);
         }
         removeConflicts(*tx);
-        // SYSCOIN
+        // wentuno
         removeZDAGConflicts(*tx);
         removeProTxConflicts(*tx);
         ClearPrioritisation(tx->GetHash());
@@ -1090,7 +1090,7 @@ void CTxMemPool::check(const CCoinsViewCache& active_coins_tip, int64_t spendhei
         const CTransaction& tx = it->GetTx();
         innerUsage += memusage::DynamicUsage(it->GetMemPoolParentsConst()) + memusage::DynamicUsage(it->GetMemPoolChildrenConst());
         CTxMemPoolEntry::Parents setParentCheck;
-        // SYSCOIN
+        // wentuno
         bool bFoundConflict = false;
         bool bAssetAllocationTX = IsAssetAllocationTx(tx.nVersion);
         for (const CTxIn &txin : tx.vin) {
@@ -1107,7 +1107,7 @@ void CTxMemPool::check(const CCoinsViewCache& active_coins_tip, int64_t spendhei
                 assert(tx2.vout.size() > txin.prevout.n && !tx2.vout[txin.prevout.n].IsNull());
                 setParentCheck.insert(*it2);
             }
-            // SYSCOIN We are iterating through the mempool entries sorted in order by ancestor count.
+            // wentuno We are iterating through the mempool entries sorted in order by ancestor count.
             // All parents must have been checked before their children and their coins added to
             // the mempoolDuplicate coins cache.
             if(!bFoundConflict)
@@ -1115,7 +1115,7 @@ void CTxMemPool::check(const CCoinsViewCache& active_coins_tip, int64_t spendhei
             // Check whether its inputs are marked in mapNextTx.
             auto it3 = mapNextTx.find(txin.prevout);
             assert(it3 != mapNextTx.end());
-            // SYSCOIN
+            // wentuno
             if(bFoundConflict) {
                 assert(*it3->first == txin.prevout);
                 auto itzdagconflict = mapAssetAllocationConflicts.find(txin.prevout);
@@ -1178,11 +1178,11 @@ void CTxMemPool::check(const CCoinsViewCache& active_coins_tip, int64_t spendhei
         TxValidationState dummy_state; // Not used. CheckTxInputs() should always pass
         CAmount txfee = 0;
         assert(!tx.IsCoinBase());
-        // SYSCOIN
+        // wentuno
         CAssetsMap mapAssetIn, mapAssetOut;
         if(!bFoundConflict)
             assert(Consensus::CheckTxInputs(tx, dummy_state, mempoolDuplicate, spendheight, txfee, mapAssetIn, mapAssetOut));
-        // SYSCOIN
+        // wentuno
         for (const auto& input: tx.vin) if(mempoolDuplicate.HaveCoin(input.prevout)) mempoolDuplicate.SpendCoin(input.prevout);
         AddCoins(mempoolDuplicate, tx, std::numeric_limits<int>::max());
     }
@@ -1297,7 +1297,7 @@ TxMempoolInfo CTxMemPool::info(const GenTxid& gtxid) const
         return TxMempoolInfo();
     return GetInfo(i);
 }
-// SYSCOIN
+// wentuno
 
 bool CTxMemPool::existsProviderTxConflict(const CTransaction &tx) const {
     AssertLockHeld(cs_main);
@@ -1318,7 +1318,7 @@ bool CTxMemPool::existsProviderTxConflict(const CTransaction &tx) const {
         return false;
     };
     const uint256 tx_hash{tx.GetHash()};
-    if (tx.nVersion == SYSCOIN_TX_VERSION_MN_REGISTER) {
+    if (tx.nVersion == wentuno_TX_VERSION_MN_REGISTER) {
         CProRegTx proTx;
         if (!GetTxPayload(tx, proTx)) {
             LogPrint(BCLog::MEMPOOL, "%s: ERROR: Invalid transaction payload, tx: %s\n", __func__, tx_hash.ToString());
@@ -1337,7 +1337,7 @@ bool CTxMemPool::existsProviderTxConflict(const CTransaction &tx) const {
             }
         }
         return false;
-    } else if (tx.nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_SERVICE) {
+    } else if (tx.nVersion == wentuno_TX_VERSION_MN_UPDATE_SERVICE) {
         CProUpServTx proTx;
         if (!GetTxPayload(tx, proTx)) {
             LogPrint(BCLog::MEMPOOL, "%s: ERROR: Invalid transaction payload, tx: %s\n", __func__, tx_hash.ToString());
@@ -1356,7 +1356,7 @@ bool CTxMemPool::existsProviderTxConflict(const CTransaction &tx) const {
                 return true;
             }
         }
-    } else if (tx.nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_REGISTRAR) {
+    } else if (tx.nVersion == wentuno_TX_VERSION_MN_UPDATE_REGISTRAR) {
         CProUpRegTx proTx;
         if (!GetTxPayload(tx, proTx)) {
             LogPrint(BCLog::MEMPOOL, "%s: ERROR: Invalid transaction payload, tx: %s\n", __func__, tx_hash.ToString());
@@ -1381,7 +1381,7 @@ bool CTxMemPool::existsProviderTxConflict(const CTransaction &tx) const {
                 return true;
             }
         }
-    } else if (tx.nVersion == SYSCOIN_TX_VERSION_MN_UPDATE_REVOKE) {
+    } else if (tx.nVersion == wentuno_TX_VERSION_MN_UPDATE_REVOKE) {
         CProUpRevTx proTx;
         if (!GetTxPayload(tx, proTx)) {
             LogPrint(BCLog::MEMPOOL, "%s: ERROR: Invalid transaction payload, tx: %s\n", __func__, tx_hash.ToString());

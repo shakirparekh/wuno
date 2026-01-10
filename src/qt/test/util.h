@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_TEST_UTIL_H
-#define SYSCOIN_QT_TEST_UTIL_H
+#ifndef wentuno_QT_TEST_UTIL_H
+#define wentuno_QT_TEST_UTIL_H
 
 #include <chrono>
 
@@ -21,4 +21,4 @@ QT_END_NAMESPACE
  */
 void ConfirmMessage(QString* text, std::chrono::milliseconds msec);
 
-#endif // SYSCOIN_QT_TEST_UTIL_H
+#endif // wentuno_QT_TEST_UTIL_H

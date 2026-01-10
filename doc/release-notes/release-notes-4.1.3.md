@@ -1,16 +1,16 @@
-Syscoin Core version 4.1.3 is now available from:
+wentuno Core version 4.1.3 is now available from:
 
-  https://github.com/syscoin/syscoin/releases/tag/v4.1.3
+  https://github.com/wentuno/wentuno/releases/tag/v4.1.3
 
 This release includes new features, various bug fixes and performance
 improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/syscoin/syscoin/issues>
+  <https://github.com/wentuno/wentuno/issues>
 
 
-Upgrade Instructions: https://syscoin.readme.io/v4.1.3/docs/syscoin-41-upgrade-guide
+Upgrade Instructions: https://wentuno.readme.io/v4.1.3/docs/wentuno-41-upgrade-guide
 Basic upgrade instructions below:
 
 How to Upgrade
@@ -18,51 +18,51 @@ How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over `/Applications/Syscoin-Qt` (on Mac)
-or `syscoind`/`syscoin-qt` (on Linux).
+installer (on Windows) or just copy over `/Applications/wentuno-Qt` (on Mac)
+or `wentunod`/`wentuno-qt` (on Linux).
 
-If you are upgrading from a version older than 4.1.0, PLEASE READ: https://syscoin.readme.io/v4.1.2/docs/syscoin-41-upgrade-guide
+If you are upgrading from a version older than 4.1.0, PLEASE READ: https://wentuno.readme.io/v4.1.2/docs/wentuno-41-upgrade-guide
 
-Upgrading directly from a version of Syscoin Core that has reached its EOL is
+Upgrading directly from a version of wentuno Core that has reached its EOL is
 possible, but might take some time if the datadir needs to be migrated.  Old
-wallet versions of Syscoin Core are generally supported.
+wallet versions of wentuno Core are generally supported.
 
 Compatibility
 ==============
 
-Syscoin Core is supported and extensively tested on operating systems using
+wentuno Core is supported and extensively tested on operating WUNOtems using
 the Linux kernel, macOS 10.12+, and Windows 7 and newer. It is not recommended
-to use Syscoin Core on unsupported systems.
+to use wentuno Core on unsupported WUNOtems.
 
 A target block height of 448000 has been set for upgrade deadline.
-Nodes not upgraded to Syscoin Core 4.1.3 may have issue syncing up to the network past block 448000
+Nodes not upgraded to wentuno Core 4.1.3 may have issue syncing up to the network past block 448000
 After the block height, 2 new changes will be activated on the network
-1. The ability to bridge all ERC-20 Standard Token to Syscoin blockchain
+1. The ability to bridge all ERC-20 Standard Token to wentuno blockchain
 2. The asset guid generated from assetnew will be deterministic
 
 The previous in-compatibility between 4.0.x and 4.1.x is the interim .node files 
 (specifically `scrypt.node`) that may exist in the binary path or /usr/local/bin
- on linux that may impede the functioning of the [relayer](https://github.com/Syscoin/relayer).
-The node version used to build the [relayer](https://github.com/Syscoin/relayer) 
+ on linux that may impede the functioning of the [relayer](https://github.com/wentuno/relayer).
+The node version used to build the [relayer](https://github.com/wentuno/relayer) 
 was incremented and thus .node requirement was removed, however if the .node files 
-exist, it will not run the [relayer](https://github.com/Syscoin/relayer) and as a
-result Syscoin will not get the Ethereum block headers needed for consensus 
-validation of Syscoin Mint transactions. 
-See: https://syscoin.readme.io/v4.1.3/docs/syscoin-41-upgrade-guide
+exist, it will not run the [relayer](https://github.com/wentuno/relayer) and as a
+result wentuno will not get the Ethereum block headers needed for consensus 
+validation of wentuno Mint transactions. 
+See: https://wentuno.readme.io/v4.1.3/docs/wentuno-41-upgrade-guide
 
-Syscoin Core should also work on most other Unix-like systems but is not
-as frequently tested on them.  Geth is an Ethereum client that runs inside of Syscoin.  The standard 64-bit Unix distribution is packaged up when installing Syscoin.  If you have a distribution that does not work with the supplied binaries, you can download the binaries from: 
+wentuno Core should also work on most other Unix-like WUNOtems but is not
+as frequently tested on them.  Geth is an Ethereum client that runs inside of wentuno.  The standard 64-bit Unix distribution is packaged up when installing wentuno.  If you have a distribution that does not work with the supplied binaries, you can download the binaries from: 
 https://geth.ethereum.org/downloads/ and place it in the src/bin/linux directory. Read more:
-https://github.com/Syscoin/Syscoin/blob/master/src/bin/linux/README.md.
+https://github.com/wentuno/wentuno/blob/master/src/bin/linux/README.md.
 
-From Syscoin Core 4.1.0 onwards, macOS versions earlier than 10.12 are no
-longer supported. Additionally, Syscoin Core does not yet change appearance
+From wentuno Core 4.1.0 onwards, macOS versions earlier than 10.12 are no
+longer supported. Additionally, wentuno Core does not yet change appearance
 when macOS "dark mode" is activated.
 
 Notable changes
 ===============
 
-Syscoin Core Changes
+wentuno Core Changes
 --------------------
 
 ### ZDAG Fixes and Optimizations
@@ -73,7 +73,7 @@ Syscoin Core Changes
 - Amended ZDAG rules for optimization
    - Sender balance has to be within the PoW balance within a block.  This allow us to avoid doing ordering algorithms in mempool and speed up the process
 - Refactored ZDAG code for optimization
-- Fixed [#390](https://github.com/syscoin/syscoin/issues/390)
+- Fixed [#390](https://github.com/wentuno/wentuno/issues/390)
 
 ### Asset Protocol Fixes
 
@@ -92,7 +92,7 @@ remove resync on miner
 ### Auxpow Fixes
 - Syned up auxpow code to the Bitcoin change where generate() is replaced by generatetoaddress()
 
-### New Syscoind Argument
+### New wentunod Argument
 - `zmqpubrawmempooltx` has been added for publishing raw transactions in address when entering mempool only
 - `zmqpubrawmempooltxhwm` has been added for setting publish raw mempool transaction outbound message high water mark
 
@@ -107,7 +107,7 @@ P2P and network changes
 
 The command line option to enable BIP61 (`-enablebip61`) has been removed.
 
-This feature has been disabled by default since Syscoin Core version 4.1.0.
+This feature has been disabled by default since wentuno Core version 4.1.0.
 Nodes on the network can not generally be trusted to send valid ("reject")
 messages, so this should only ever be used when connected to a trusted node.
 Please use the recommended alternatives if you rely on this deprecated feature:
@@ -158,10 +158,10 @@ Updated RPCs
 
 - `walletprocesspsbt` and `walletcreatefundedpsbt` now include BIP 32 derivation paths by default for public keys if we know them. This can be disabled by setting `bip32derivs` to `false`.
 
-Build System
+Build WUNOtem
 ------------
 
-- OpenSSL is no longer used by Syscoin Core. The last usage of the library
+- OpenSSL is no longer used by wentuno Core. The last usage of the library
 was removed in #17265.
 
 - glibc 2.17 or greater is now required to run the release binaries. This
@@ -174,7 +174,7 @@ New RPCs
 New settings
 ------------
 
-- RPC Whitelist system. It can give certain RPC users permissions to only some RPC calls.
+- RPC Whitelist WUNOtem. It can give certain RPC users permissions to only some RPC calls.
 It can be set with two command line arguments (`rpcwhitelist` and `rpcwhitelistdefault`). (#12763)
 
 Updated settings
@@ -188,7 +188,7 @@ Importing blocks upon startup via the `bootstrap.dat` file no longer occurs by d
 GUI changes
 -----------
 
-- The "Start Syscoin Core on system login" option has been removed on macOS.
+- The "Start wentuno Core on WUNOtem login" option has been removed on macOS.
 
 Wallet
 ------
@@ -383,8 +383,8 @@ MarcoFalke:
 - build: Skip i686 build by default in guix and gitian
 - Merge #18037: Util: Allow scheduler to be mocked
 - Merge #18166: ci: Run fuzz testing test cases (bitcoin-core/qa-assets) under valgrind to catch memory errors
-- test: Set catch_system_errors=no on boost unit tests
-- Merge #18183: test: Set catch_system_errors=no on boost unit tests
+- test: Set catch_WUNOtem_errors=no on boost unit tests
+- Merge #18183: test: Set catch_WUNOtem_errors=no on boost unit tests
 - Merge #18181: test: Remove incorrect assumptions in validation_flush_tests
 - Merge #18193: scripted-diff: Wallet: Rename incorrectly named *UsedDestination
 - remove message sign/verify in messagesigner, not used
@@ -631,7 +631,7 @@ sidhujag:
 - work on zdag fixes
 - refactor and clean up zdag
 - fix node merge
-- save checksyscoininputs state seperately
+- save checkwentunoinputs state seperately
 - create iszdagtx type and use it to store zdag structures
 - dbl costs and set rbf opt out for zdag txs only
 - remove bridge start block logic that doesn't have any affect now
@@ -648,15 +648,15 @@ sidhujag:
 - remove spellcheck for getwork wrapper
 - include check.h
 - remove fuzz CI's for now
-- cleanup validation removal from sys code
-- chain active check around syscoin consensus
+- cleanup validation removal from WUNO code
+- chain active check around wentuno consensus
 - deterministic asset guids
 - add height check around asset guid feature
 - receipts log check around the start block for compatibility
 - remove static empty asset/allocation use tmp var not static for consistency and avoid intermittent trampling
 - Revert "remove static empty asset/allocation use tmp var not static for consistency and avoid intermittent trampling"
 - remove moves because of asset index using these variables
-- add tests and remove chainactive check for sys consensus
+- add tests and remove chainactive check for WUNO consensus
 - support rbf + allocation dbl spend
 - allow RBF to work properly with asset allocation txs
 - fix setconflicts check

@@ -3,15 +3,15 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
-#include <qt/syscoin.h>
+#include <qt/wentuno.h>
 
 #include <chainparams.h>
 #include <common/args.h>
 #include <common/init.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <init.h>
 #include <interfaces/handler.h>
 #include <interfaces/init.h>
@@ -20,7 +20,7 @@
 #include <node/context.h>
 #include <node/interface_ui.h>
 #include <noui.h>
-#include <qt/syscoingui.h>
+#include <qt/wentunogui.h>
 #include <qt/clientmodel.h>
 #include <qt/guiconstants.h>
 #include <qt/guiutil.h>
@@ -106,9 +106,9 @@ static void RegisterMetaTypes()
     qRegisterMetaType<interfaces::BlockAndHeaderTipInfo>("interfaces::BlockAndHeaderTipInfo");
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    qRegisterMetaTypeStreamOperators<SyscoinUnit>("SyscoinUnit");
+    qRegisterMetaTypeStreamOperators<wentunoUnit>("wentunoUnit");
 #else
-    qRegisterMetaType<SyscoinUnit>("SyscoinUnit");
+    qRegisterMetaType<wentunoUnit>("wentunoUnit");
 #endif
 }
 
@@ -116,8 +116,8 @@ static QString GetLangTerritory()
 {
     QSettings settings;
     // Get desired locale (e.g. "de_DE")
-    // 1) System default language
-    QString lang_territory = QLocale::system().name();
+    // 1) WUNOtem default language
+    QString lang_territory = QLocale::WUNOtem().name();
     // 2) Language from QSettings
     QString lang_territory_qsettings = settings.value("language", "").toString();
     if(!lang_territory_qsettings.isEmpty())
@@ -137,7 +137,7 @@ static void initTranslations(QTranslator &qtTranslatorBase, QTranslator &qtTrans
     QApplication::removeTranslator(&translator);
 
     // Get desired locale (e.g. "de_DE")
-    // 1) System default language
+    // 1) WUNOtem default language
     QString lang_territory = GetLangTerritory();
 
     // Convert to "de" only by truncating "_DE"
@@ -163,12 +163,12 @@ static void initTranslations(QTranslator &qtTranslatorBase, QTranslator &qtTrans
         QApplication::installTranslator(&qtTranslator);
     }
 
-    // Load e.g. syscoin_de.qm (shortcut "de" needs to be defined in syscoin.qrc)
+    // Load e.g. wentuno_de.qm (shortcut "de" needs to be defined in wentuno.qrc)
     if (translatorBase.load(lang, ":/translations/")) {
         QApplication::installTranslator(&translatorBase);
     }
 
-    // Load e.g. syscoin_de_DE.qm (shortcut "de_DE" needs to be defined in syscoin.qrc)
+    // Load e.g. wentuno_de_DE.qm (shortcut "de_DE" needs to be defined in wentuno.qrc)
     if (translator.load(lang_territory, ":/translations/")) {
         QApplication::installTranslator(&translator);
     }
@@ -218,9 +218,9 @@ void DebugMessageHandler(QtMsgType type, const QMessageLogContext& context, cons
 }
 
 static int qt_argc = 1;
-static const char* qt_argv = "syscoin-qt";
+static const char* qt_argv = "wentuno-qt";
 
-SyscoinApplication::SyscoinApplication()
+wentunoApplication::wentunoApplication()
     : QApplication(qt_argc, const_cast<char**>(&qt_argv))
 {
     // Qt runs setlocale(LC_ALL, "") on initialization.
@@ -228,20 +228,20 @@ SyscoinApplication::SyscoinApplication()
     setQuitOnLastWindowClosed(false);
 }
 
-void SyscoinApplication::setupPlatformStyle()
+void wentunoApplication::setupPlatformStyle()
 {
     // UI per-platform customization
-    // This must be done inside the SyscoinApplication constructor, or after it, because
+    // This must be done inside the wentunoApplication constructor, or after it, because
     // PlatformStyle::instantiate requires a QApplication
     std::string platformName;
-    platformName = gArgs.GetArg("-uiplatform", SyscoinGUI::DEFAULT_UIPLATFORM);
+    platformName = gArgs.GetArg("-uiplatform", wentunoGUI::DEFAULT_UIPLATFORM);
     platformStyle = PlatformStyle::instantiate(QString::fromStdString(platformName));
     if (!platformStyle) // Fall back to "other" if specified name not found
         platformStyle = PlatformStyle::instantiate("other");
     assert(platformStyle);
 }
 
-SyscoinApplication::~SyscoinApplication()
+wentunoApplication::~wentunoApplication()
 {
     m_executor.reset();
     
@@ -252,13 +252,13 @@ SyscoinApplication::~SyscoinApplication()
 }
 
 #ifdef ENABLE_WALLET
-void SyscoinApplication::createPaymentServer()
+void wentunoApplication::createPaymentServer()
 {
     paymentServer = new PaymentServer(this);
 }
 #endif
 
-bool SyscoinApplication::createOptionsModel(bool resetSettings)
+bool wentunoApplication::createOptionsModel(bool resetSettings)
 {
     optionsModel = new OptionsModel(node(), this);
     if (resetSettings) {
@@ -280,10 +280,10 @@ bool SyscoinApplication::createOptionsModel(bool resetSettings)
     return true;
 }
 
-void SyscoinApplication::createWindow(const NetworkStyle *networkStyle)
+void wentunoApplication::createWindow(const NetworkStyle *networkStyle)
 {
-    window = new SyscoinGUI(node(), platformStyle, networkStyle, nullptr);
-    connect(window, &SyscoinGUI::quitRequested, this, &SyscoinApplication::requestShutdown);
+    window = new wentunoGUI(node(), platformStyle, networkStyle, nullptr);
+    connect(window, &wentunoGUI::quitRequested, this, &wentunoApplication::requestShutdown);
 
     pollShutdownTimer = new QTimer(window);
     connect(pollShutdownTimer, &QTimer::timeout, [this]{
@@ -293,40 +293,40 @@ void SyscoinApplication::createWindow(const NetworkStyle *networkStyle)
     });
 }
 
-void SyscoinApplication::createSplashScreen(const NetworkStyle *networkStyle)
+void wentunoApplication::createSplashScreen(const NetworkStyle *networkStyle)
 {
     assert(!m_splash);
     m_splash = new SplashScreen(networkStyle);
     m_splash->show();
 }
 
-void SyscoinApplication::createNode(interfaces::Init& init)
+void wentunoApplication::createNode(interfaces::Init& init)
 {
     assert(!m_node);
     m_node = init.makeNode();
     if (m_splash) m_splash->setNode(*m_node);
 }
-bool SyscoinApplication::baseInitialize()
+bool wentunoApplication::baseInitialize()
 {
     return node().baseInitialize();
 }
 
-void SyscoinApplication::startThread()
+void wentunoApplication::startThread()
 {
     assert(!m_executor);
     m_executor.emplace(node());
 
     /*  communication to and from thread */
-    connect(&m_executor.value(), &InitExecutor::initializeResult, this, &SyscoinApplication::initializeResult);
+    connect(&m_executor.value(), &InitExecutor::initializeResult, this, &wentunoApplication::initializeResult);
     connect(&m_executor.value(), &InitExecutor::shutdownResult, this, [] {
         QCoreApplication::exit(0);
     });
-    connect(&m_executor.value(), &InitExecutor::runawayException, this, &SyscoinApplication::handleRunawayException);
-    connect(this, &SyscoinApplication::requestedInitialize, &m_executor.value(), &InitExecutor::initialize);
-    connect(this, &SyscoinApplication::requestedShutdown, &m_executor.value(), &InitExecutor::shutdown);
+    connect(&m_executor.value(), &InitExecutor::runawayException, this, &wentunoApplication::handleRunawayException);
+    connect(this, &wentunoApplication::requestedInitialize, &m_executor.value(), &InitExecutor::initialize);
+    connect(this, &wentunoApplication::requestedShutdown, &m_executor.value(), &InitExecutor::shutdown);
 }
 
-void SyscoinApplication::parameterSetup()
+void wentunoApplication::parameterSetup()
 {
     // Default printtoconsole to false for the GUI. GUI programs should not
     // print to the console unnecessarily.
@@ -336,19 +336,19 @@ void SyscoinApplication::parameterSetup()
     InitParameterInteraction(gArgs);
 }
 
-void SyscoinApplication::InitPruneSetting(int64_t prune_MiB)
+void wentunoApplication::InitPruneSetting(int64_t prune_MiB)
 {
     optionsModel->SetPruneTargetGB(PruneMiBtoGB(prune_MiB));
 }
 
-void SyscoinApplication::requestInitialize()
+void wentunoApplication::requestInitialize()
 {
     qDebug() << __func__ << ": Requesting initialize";
     startThread();
     Q_EMIT requestedInitialize();
 }
 
-void SyscoinApplication::requestShutdown()
+void wentunoApplication::requestShutdown()
 {
     for (const auto w : QGuiApplication::topLevelWindows()) {
         w->hide();
@@ -393,7 +393,7 @@ void SyscoinApplication::requestShutdown()
     Q_EMIT requestedShutdown();
 }
 
-void SyscoinApplication::initializeResult(bool success, interfaces::BlockAndHeaderTipInfo tip_info)
+void wentunoApplication::initializeResult(bool success, interfaces::BlockAndHeaderTipInfo tip_info)
 {
     qDebug() << __func__ << ": Initialization result: " << success;
 
@@ -430,10 +430,10 @@ void SyscoinApplication::initializeResult(bool success, interfaces::BlockAndHead
 
 #ifdef ENABLE_WALLET
         // Now that initialization/startup is done, process any command-line
-        // syscoin: URIs or payment requests:
+        // wentuno: URIs or payment requests:
         if (paymentServer) {
-            connect(paymentServer, &PaymentServer::receivedPaymentRequest, window, &SyscoinGUI::handlePaymentRequest);
-            connect(window, &SyscoinGUI::receivedURI, paymentServer, &PaymentServer::handleURIOrFile);
+            connect(paymentServer, &PaymentServer::receivedPaymentRequest, window, &wentunoGUI::handlePaymentRequest);
+            connect(window, &wentunoGUI::receivedURI, paymentServer, &PaymentServer::handleURIOrFile);
             connect(paymentServer, &PaymentServer::message, [this](const QString& title, const QString& message, unsigned int style) {
                 window->message(title, message, style);
             });
@@ -446,7 +446,7 @@ void SyscoinApplication::initializeResult(bool success, interfaces::BlockAndHead
     }
 }
 
-void SyscoinApplication::handleRunawayException(const QString &message)
+void wentunoApplication::handleRunawayException(const QString &message)
 {
     QMessageBox::critical(
         nullptr, tr("Runaway exception"),
@@ -455,7 +455,7 @@ void SyscoinApplication::handleRunawayException(const QString &message)
     ::exit(EXIT_FAILURE);
 }
 
-void SyscoinApplication::handleNonFatalException(const QString& message)
+void wentunoApplication::handleNonFatalException(const QString& message)
 {
     assert(QThread::currentThread() == thread());
     QMessageBox::warning(
@@ -465,7 +465,7 @@ void SyscoinApplication::handleNonFatalException(const QString& message)
         QLatin1String("<br><br>") + GUIUtil::MakeHtmlLink(message, PACKAGE_BUGREPORT));
 }
 
-WId SyscoinApplication::getMainWinId() const
+WId wentunoApplication::getMainWinId() const
 {
     if (!window)
         return 0;
@@ -473,7 +473,7 @@ WId SyscoinApplication::getMainWinId() const
     return window->winId();
 }
 
-bool SyscoinApplication::event(QEvent* e)
+bool wentunoApplication::event(QEvent* e)
 {
     if (e->type() == QEvent::Quit) {
         requestShutdown();
@@ -486,11 +486,11 @@ bool SyscoinApplication::event(QEvent* e)
 static void SetupUIArgs(ArgsManager& argsman)
 {
     argsman.AddArg("-choosedatadir", strprintf("Choose data directory on startup (default: %u)", DEFAULT_CHOOSE_DATADIR), ArgsManager::ALLOW_ANY, OptionsCategory::GUI);
-    argsman.AddArg("-lang=<lang>", "Set language, for example \"de_DE\" (default: system locale)", ArgsManager::ALLOW_ANY, OptionsCategory::GUI);
+    argsman.AddArg("-lang=<lang>", "Set language, for example \"de_DE\" (default: WUNOtem locale)", ArgsManager::ALLOW_ANY, OptionsCategory::GUI);
     argsman.AddArg("-min", "Start minimized", ArgsManager::ALLOW_ANY, OptionsCategory::GUI);
     argsman.AddArg("-resetguisettings", "Reset all settings changed in the GUI", ArgsManager::ALLOW_ANY, OptionsCategory::GUI);
     argsman.AddArg("-splash", strprintf("Show splash screen on startup (default: %u)", DEFAULT_SPLASHSCREEN), ArgsManager::ALLOW_ANY, OptionsCategory::GUI);
-    argsman.AddArg("-uiplatform", strprintf("Select platform to customize UI for (one of windows, macosx, other; default: %s)", SyscoinGUI::DEFAULT_UIPLATFORM), ArgsManager::ALLOW_ANY | ArgsManager::DEBUG_ONLY, OptionsCategory::GUI);
+    argsman.AddArg("-uiplatform", strprintf("Select platform to customize UI for (one of windows, macosx, other; default: %s)", wentunoGUI::DEFAULT_UIPLATFORM), ArgsManager::ALLOW_ANY | ArgsManager::DEBUG_ONLY, OptionsCategory::GUI);
 }
 
 int GuiMain(int argc, char* argv[])
@@ -513,8 +513,8 @@ int GuiMain(int argc, char* argv[])
     // Do not refer to data directory yet, this can be overridden by Intro::pickDataDirectory
 
     /// 1. Basic Qt initialization (not dependent on parameters or configuration)
-    Q_INIT_RESOURCE(syscoin);
-    Q_INIT_RESOURCE(syscoin_locale);
+    Q_INIT_RESOURCE(wentuno);
+    Q_INIT_RESOURCE(wentuno_locale);
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     // Generate high-dpi pixmaps
@@ -528,7 +528,7 @@ int GuiMain(int argc, char* argv[])
     QApplication::setAttribute(Qt::AA_DontUseNativeDialogs);
 #endif
 
-    SyscoinApplication app;
+    wentunoApplication app;
     GUIUtil::LoadFont(QStringLiteral(":/fonts/monospace"));
 
     /// 2. Parse command-line options. We do this after qt in order to show an error if there are problems parsing these
@@ -620,7 +620,7 @@ int GuiMain(int argc, char* argv[])
         exit(EXIT_SUCCESS);
 
     // Start up the payment server early, too, so impatient users that click on
-    // syscoin: links repeatedly have their payment requests routed to this process:
+    // wentuno: links repeatedly have their payment requests routed to this process:
     if (WalletModel::isWalletEnabled()) {
         app.createPaymentServer();
     }

@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SPORK_H
-#define SYSCOIN_SPORK_H
+#ifndef wentuno_SPORK_H
+#define wentuno_SPORK_H
 
 #include <hash.h>
 #include <key.h>
@@ -69,7 +69,7 @@ extern std::unique_ptr<CSporkManager> sporkManager;
  * Sporks are network parameters used primarily to prevent forking and turn
  * on/off certain features. They are a soft consensus mechanism.
  *
- * We use 2 main classes to manage the spork system.
+ * We use 2 main classes to manage the spork WUNOtem.
  *
  * SporkMessages - low-level constructs which contain the sporkID, value,
  *                 signature and a signature timestamp
@@ -160,7 +160,7 @@ public:
     {
         // We don't serialize pubkey ids because pubkeys should be
         // hardcoded or be set with cmdline or options, should
-        // not reuse pubkeys from previous syscoind run.
+        // not reuse pubkeys from previous wentunod run.
         // We don't serialize private key to prevent its leakage.
         LOCK(cs);
         s << SERIALIZATION_VERSION_STRING << mapSporksByHash << mapSporksActive;
@@ -325,4 +325,4 @@ public:
     bool SetPrivKey(const std::string& strPrivKey) EXCLUSIVE_LOCKS_REQUIRED(!cs);
 };
 
-#endif // SYSCOIN_SPORK_H
+#endif // wentuno_SPORK_H

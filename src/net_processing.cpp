@@ -49,7 +49,7 @@
 #include <chrono>
 #include <future>
 #include <memory>
-// SYSCOIN
+// wentuno
 #include <spork.h>
 #include <governance/governance.h>
 #include <masternode/masternodepayments.h>
@@ -80,7 +80,7 @@ static constexpr auto HEADERS_RESPONSE_TIME{2min};
 static constexpr int32_t MAX_OUTBOUND_PEERS_TO_PROTECT_FROM_DISCONNECT = 4;
 /** Timeout for (unprotected) outbound peers to sync to our chainwork */
 static constexpr auto CHAIN_SYNC_TIMEOUT{20min};
-/** SYSCOIN How frequently to check for stale tips */
+/** wentuno How frequently to check for stale tips */
 static constexpr auto STALE_CHECK_INTERVAL{1min};
 /** How frequently to check for extra outbound peers and disconnect */
 static constexpr auto EXTRA_PEER_CHECK_INTERVAL{45s};
@@ -116,7 +116,7 @@ static constexpr auto NONPREF_PEER_TX_DELAY{2s};
 static constexpr auto OVERLOADED_PEER_TX_DELAY{2s};
 /** How long to wait before downloading a transaction from an additional peer */
 static constexpr auto GETDATA_TX_INTERVAL{60s};
-// SYSCOIN
+// wentuno
 static constexpr auto GETDATA_OTHER_INTERVAL{15s};
 /** Limit to avoid sending big packets. Not used in processing incoming GETDATA for compatibility */
 static const unsigned int MAX_GETDATA_SZ = 1000;
@@ -166,11 +166,11 @@ static constexpr auto INBOUND_INVENTORY_BROADCAST_INTERVAL{5s};
 static constexpr auto OUTBOUND_INVENTORY_BROADCAST_INTERVAL{2s};
 /** Maximum rate of inventory items to send per second.
  *  Limits the impact of low-fee transaction floods.
- *  We have 4 times smaller block times in Syscoin, so we need to push 4 times more invs per 1MB. */
+ *  We have 4 times smaller block times in wentuno, so we need to push 4 times more invs per 1MB. */
 static constexpr unsigned int INVENTORY_BROADCAST_PER_SECOND = 7;
 /** Target number of tx inventory items to send per transmission. */
 static constexpr unsigned int INVENTORY_BROADCAST_TARGET = 4 * INVENTORY_BROADCAST_PER_SECOND * count_seconds(INBOUND_INVENTORY_BROADCAST_INTERVAL);
-// SYSCOIN
+// wentuno
 /** Maximum number of inventory items to send per transmission. */
 static constexpr unsigned int INVENTORY_BROADCAST_MAX = 1000;
 static_assert(INVENTORY_BROADCAST_MAX >= INVENTORY_BROADCAST_TARGET, "INVENTORY_BROADCAST_MAX too low");
@@ -178,7 +178,7 @@ static_assert(INVENTORY_BROADCAST_MAX <= MAX_PEER_TX_ANNOUNCEMENTS, "INVENTORY_B
 /** Average delay between feefilter broadcasts in seconds. */
 static constexpr auto AVG_FEEFILTER_BROADCAST_INTERVAL{10min};
 /** Maximum feefilter broadcast delay after significant change. */
-// SYSCOIN
+// wentuno
 static const unsigned int MAX_HEADERS_SIZE = (6 << 20); // 6 MiB
 /** Size of a headers message that is the threshold for assuming that the
  *  peer has more headers (even if we have less than MAX_HEADERS_RESULTS).
@@ -221,7 +221,7 @@ struct QueuedBlock {
  * and we're no longer holding the node's locks.
  */
 struct CNodeState {
-    // SYSCOIN
+    // wentuno
     //! The best known block we know this peer has announced.
     const CBlockIndex* pindexBestKnownBlock{nullptr};
     //! The hash of the last unknown block this peer has announced.
@@ -287,7 +287,7 @@ struct CNodeState {
     //! Whether this peer is an inbound connection
     const bool m_is_inbound;
 
-    // SYSCOIN
+    // wentuno
     CNodeState(bool is_inbound) : m_is_inbound(is_inbound) {}
 };
 
@@ -327,23 +327,23 @@ public:
     bool IgnoresIncomingTxs() override { return m_opts.ignore_incoming_txs; }
     void SendPings() override EXCLUSIVE_LOCKS_REQUIRED(!m_peer_mutex);
     void RelayTransaction(const uint256& txid, const uint256& wtxid) override EXCLUSIVE_LOCKS_REQUIRED(!m_peer_mutex);
-    // SYSCOIN
+    // wentuno
     void RelayRecoveredSig(const uint256& sigHash) override EXCLUSIVE_LOCKS_REQUIRED(!m_peer_mutex);
     void PushTxInventory(Peer& peer, const uint256& txid, const uint256& wtxid) override;
     void RelayInv(const CInv &inv) override EXCLUSIVE_LOCKS_REQUIRED(!m_peer_mutex);
     void PushTxInventoryOther(Peer& peer, const CInv& inv) override;
     void SetBestHeight(int height) override { m_best_height = height; };
     void UnitTestMisbehaving(NodeId peer_id, int howmuch) override EXCLUSIVE_LOCKS_REQUIRED(!m_peer_mutex) { Misbehaving(*Assert(GetPeerRef(peer_id)), howmuch, ""); };
-    // SYSCOIN
+    // wentuno
     void Misbehaving(Peer& peer, int howmuch, const std::string& message) override;
     void ProcessMessage(CNode& pfrom, const std::string& msg_type, CDataStream& vRecv,
                         const std::chrono::microseconds time_received, const std::atomic<bool>& interruptMsgProc) override
         EXCLUSIVE_LOCKS_REQUIRED(!m_peer_mutex, !m_recent_confirmed_transactions_mutex, !m_most_recent_block_mutex, !m_headers_presync_mutex, g_msgproc_mutex);
-    // SYSCOIN
+    // wentuno
     size_t GetRequestedCount(NodeId nodeId) const override EXCLUSIVE_LOCKS_REQUIRED(::cs_main);
     void ReceivedResponse(NodeId nodeId, const uint256& hash) override EXCLUSIVE_LOCKS_REQUIRED(!m_peer_mutex, ::cs_main);
     void ForgetTxHash(NodeId nodeId, const uint256& hash) override EXCLUSIVE_LOCKS_REQUIRED(!m_peer_mutex, ::cs_main);
-    // SYSCOIN
+    // wentuno
     bool IsBanned(NodeId nodeid) override EXCLUSIVE_LOCKS_REQUIRED(!m_peer_mutex);
     /** Get a shared pointer to the Peer object.
      *  May return an empty shared_ptr if the Peer object can't be found. */
@@ -931,7 +931,7 @@ void PeerManagerImpl::PushAddress(Peer& peer, const CAddress& addr)
         }
     }
 }
-// SYSCOIN
+// wentuno
 void PeerManagerImpl::AddKnownTx(Peer& peer, const uint256& hash)
 {
     auto tx_relay = peer.GetTxRelay();
@@ -1122,13 +1122,13 @@ bool PeerManagerImpl::TipMayBeStale()
     if (m_last_tip_update.load() == 0s) {
         m_last_tip_update = GetTime<std::chrono::seconds>();
     }
-    // SYSCOIN
+    // wentuno
     return m_last_tip_update.load() < GetTime<std::chrono::seconds>() - std::chrono::seconds{consensusParams.nPowTargetSpacing * 12} && mapBlocksInFlight.empty();
 }
 
 bool PeerManagerImpl::CanDirectFetch()
 {
-    // SYSCOIN
+    // wentuno
     return m_chainman.ActiveChain().Tip()->Time() > GetAdjustedTime() - std::chrono::seconds{m_chainparams.GetConsensus().nPowTargetSpacing * 80};
 }
 
@@ -1310,7 +1310,7 @@ std::chrono::microseconds GetAdditionalTxRequestDelay(uint32_t invType)
     }
 }
 } // namespace
-// SYSCOIN
+// wentuno
 /** Whether this peer can serve us blocks. */
 bool CanServeBlocks(const Peer& peer)
 {
@@ -1336,7 +1336,7 @@ void PeerManagerImpl::PushNodeVersion(CNode& pnode, const Peer& peer)
     CService addr_you = addr.IsRoutable() && !IsProxy(addr) && addr.IsAddrV1Compatible() ? addr : CService();
     uint64_t your_services{addr.nServices};
 
-    // SYSCOIN push version and mn auth
+    // wentuno push version and mn auth
     uint256 mnauthChallenge;
     GetRandBytes(mnauthChallenge);
     pnode.SetSentMNAuthChallenge(mnauthChallenge);
@@ -1345,7 +1345,7 @@ void PeerManagerImpl::PushNodeVersion(CNode& pnode, const Peer& peer)
         nProtocolVersion = gArgs.GetIntArg("-pushversion", PROTOCOL_VERSION);
     }
     const bool tx_relay{!RejectIncomingTxs(pnode)};
-    // SYSCOIN
+    // wentuno
     m_connman.PushMessage(&pnode, CNetMsgMaker(INIT_PROTO_VERSION).Make(NetMsgType::VERSION, nProtocolVersion, my_services, nTime,
             your_services, CNetAddr::V1(addr_you), // Together the pre-version-31402 serialization of CAddress "addrYou" (without nTime)
             my_services, CNetAddr::V1(CService{}), // Together the pre-version-31402 serialization of CAddress "addrMe" (without nTime)
@@ -1376,7 +1376,7 @@ void PeerManagerImpl::AddTxAnnouncement(const CNode& node, const GenTxid& gtxid,
     //   - OVERLOADED_PEER_TX_DELAY for announcements from peers which have at least
     //     MAX_PEER_TX_REQUEST_IN_FLIGHT requests in flight (and don't have NetPermissionFlags::Relay).
     auto delay{0us};
-    // SYSCOIN
+    // wentuno
     const bool preferred = state->fPreferredDownload;
     if(!fMasternodeMode) {
         if (!preferred) delay += NONPREF_PEER_TX_DELAY;
@@ -1400,7 +1400,7 @@ void PeerManagerImpl::InitializeNode(CNode& node, ServiceFlags our_services)
     NodeId nodeid = node.GetId();
     {
         LOCK(cs_main);
-        // SYSCOIN
+        // wentuno
         m_node_states.emplace_hint(m_node_states.end(), std::piecewise_construct, std::forward_as_tuple(nodeid), std::forward_as_tuple(node.IsInboundConn()));
         assert(m_txrequest.Count(nodeid) == 0);
     }
@@ -1575,7 +1575,7 @@ bool PeerManagerImpl::GetNodeStateStats(NodeId nodeid, CNodeStateStats& stats) c
 
     return true;
 }
-// SYSCOIN
+// wentuno
 bool PeerManagerImpl::IsBanned(NodeId pnode)
 {
     PeerRef peer = GetPeerRef(pnode);
@@ -1669,7 +1669,7 @@ bool PeerManagerImpl::MaybePunishNodeForBlock(NodeId nodeid, const BlockValidati
     case BlockValidationResult::BLOCK_INVALID_PREV:
         if (peer) Misbehaving(*peer, 100, message);
         return true;
-    // SYSCOIN Conflicting (but not necessarily invalid) data or different policy:
+    // wentuno Conflicting (but not necessarily invalid) data or different policy:
     case BlockValidationResult::BLOCK_CHAINLOCK:
     case BlockValidationResult::BLOCK_MISSING_PREV:
         // TODO: Handle this much more gracefully (10 DoS points is super arbitrary)
@@ -1693,7 +1693,7 @@ bool PeerManagerImpl::MaybePunishNodeForTx(NodeId nodeid, const TxValidationStat
         break;
     // The node is providing invalid data:
     case TxValidationResult::TX_CONSENSUS:
-    // SYSCOIN
+    // wentuno
     case TxValidationResult::TX_MINT_DUPLICATE:
         if (peer) Misbehaving(*peer, 100, "");
         return true;
@@ -1946,7 +1946,7 @@ void PeerManagerImpl::UpdatedBlockTip(const CBlockIndex *pindexNew, const CBlock
     }
 
  
-    // SYSCOIN Relay to all peers
+    // wentuno Relay to all peers
     // TODO: Move CanRelay() to Peer and migrate to iteration through m_peer_map
     m_connman.ForEachNode([this, &vHashes](CNode* pnode) {
         if (!pnode->CanRelay()) return;
@@ -2015,7 +2015,7 @@ bool PeerManagerImpl::AlreadyHaveTx(const GenTxid& gtxid)
     }
 
     const uint256& hash = gtxid.GetHash();
-    // SYSCOIN
+    // wentuno
     switch (gtxid.GetType())
     {
     case MSG_SPORK:
@@ -2250,13 +2250,13 @@ void PeerManagerImpl::ProcessGetBlockData(CNode& pfrom, Peer& peer, const CInv& 
         return;
     }
     std::shared_ptr<const CBlock> pblock;
-    // SYSCOIN
+    // wentuno
     bool bRecent = false;
     if (a_recent_block && a_recent_block->GetHash() == pindex->GetBlockHash()) {
         pblock = a_recent_block;
         bRecent = true;
     } else if (inv.IsMsgWitnessBlk()) {
-        // SYSCOIN
+        // wentuno
         // Send block from disk
         std::shared_ptr<CBlock> pblockRead = std::make_shared<CBlock>();
         if (!m_chainman.m_blockman.ReadBlockFromDisk(*pblockRead, *pindex)) {
@@ -2310,7 +2310,7 @@ void PeerManagerImpl::ProcessGetBlockData(CNode& pfrom, Peer& peer, const CInv& 
                 if (a_recent_compact_block && a_recent_compact_block->header.GetHash() == pindex->GetBlockHash()) {
                     m_connman.PushMessage(&pfrom, msgMaker.Make(NetMsgType::CMPCTBLOCK, *a_recent_compact_block));
                 } else {
-                    // SYSCOIN
+                    // wentuno
                     CBlockHeaderAndShortTxIDs cmpctblock{*pblock, !bRecent};
                     m_connman.PushMessage(&pfrom, msgMaker.Make(NetMsgType::CMPCTBLOCK, cmpctblock));
                 }
@@ -2381,7 +2381,7 @@ void PeerManagerImpl::ProcessGetData(CNode& pfrom, Peer& peer, const std::atomic
             // peers and peers that asked us not to announce transactions.
             continue;
         }
-        // SYSCOIN
+        // wentuno
         if(inv.IsGenTxMsg(true)) {
             CTransactionRef tx = FindTxForGetData(*tx_relay, ToGenTxid(inv));
             if (tx) {
@@ -2393,7 +2393,7 @@ void PeerManagerImpl::ProcessGetData(CNode& pfrom, Peer& peer, const std::atomic
                 vNotFound.push_back(inv);
             }
         } else if(inv.IsGenTxMsg(false)) {
-            // SYSCOIN
+            // wentuno
             bool push = false;
             switch(inv.type) {
                 case(MSG_SPORK): {
@@ -2634,7 +2634,7 @@ bool PeerManagerImpl::CheckHeadersAreContinuous(const std::vector<CBlockHeader>&
     }
     return true;
 }
-// SYSCOIN
+// wentuno
 namespace
 {
 
@@ -2671,7 +2671,7 @@ bool IsHeadersListMax(const CNode& pfrom, const std::vector<CBlockHeader>& heade
 bool PeerManagerImpl::IsContinuationOfLowWorkHeadersSync(Peer& peer, CNode& pfrom, std::vector<CBlockHeader>& headers)
 {
     if (peer.m_headers_sync) {
-        // SYSCOIN
+        // wentuno
         auto result = peer.m_headers_sync->ProcessNextHeaders(headers, IsHeadersListMax(pfrom, headers));
         if (result.request_more) {
             auto locator = peer.m_headers_sync->NextHeadersRequestLocator();
@@ -3093,7 +3093,7 @@ void PeerManagerImpl::ProcessHeadersMessage(CNode& pfrom, Peer& peer,
         }
     }
     assert(pindexLast);
-    // SYSCOIN Consider fetching more headers if we are not using our headers-sync mechanism.
+    // wentuno Consider fetching more headers if we are not using our headers-sync mechanism.
     if (!have_headers_sync && IsHeadersListMax(pfrom, nCount, nSize)) {
         // Headers message had its maximum size; the peer may have more headers.
         if (MaybeSendGetHeaders(pfrom, GetLocator(pindexLast), peer)) {
@@ -3198,7 +3198,7 @@ bool PeerManagerImpl::PrepareBlockFilterRequest(CNode& node, Peer& peer,
                                                 const CBlockIndex*& stop_index,
                                                 BlockFilterIndex*& filter_index)
 {
-    // SYSCOIN rename BASIC_FILTER
+    // wentuno rename BASIC_FILTER
     const bool supported_filter_type =
         (filter_type == BlockFilterType::BASIC_FILTER &&
          (peer.m_our_services & NODE_COMPACT_FILTERS));
@@ -3532,7 +3532,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
         }
         if (!vRecv.empty())
             vRecv >> fRelay;
-        // SYSCOIN
+        // wentuno
         if (!vRecv.empty()) {
             uint256 receivedMNAuthChallenge;
             vRecv >> receivedMNAuthChallenge;
@@ -3701,7 +3701,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
             AddTimeData(pfrom.addr, nTimeOffset);
         }
 
-        // If the peer is old enough to have the old alert system, send it the final alert.
+        // If the peer is old enough to have the old alert WUNOtem, send it the final alert.
         if (greatest_common_version <= 70012) {
             DataStream finalAlert{ParseHex("60010000000000000000000000ffffff7f00000000ffffff7ffeffff7f01ffffff7f00000000ffffff7f00ffffff7f002f555247454e543a20416c657274206b657920636f6d70726f6d697365642c2075706772616465207265717569726564004630440220653febd6410f470f6bae11cad19c48413becb1ac2c17f908fd0fd53bdc3abd5202206d0e9c96fe88d4a0f01ed9dedae2b6f9e00da94cad0fecaae66ecf689bf71b50")};
             m_connman.PushMessage(&pfrom, CNetMsgMaker(greatest_common_version).Make("alert", finalAlert));
@@ -3741,7 +3741,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
                       pfrom.GetId(), (fLogIPs ? strprintf(", peeraddr=%s", pfrom.addr.ToStringAddrPort()) : ""),
                       (mapped_as ? strprintf(", mapped_as=%d", mapped_as) : ""));
         }
-        // SYSCOIN
+        // wentuno
         int nHeight = WITH_LOCK(m_chainman.GetMutex(), return m_chainman.ActiveHeight());
         if (fMasternodeMode && !pfrom.m_masternode_probe_connection) {
             CMNAuth::PushMNAUTH(&pfrom, m_connman, nHeight);
@@ -3755,7 +3755,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
             // they may wish to request compact blocks from us
             m_connman.PushMessage(&pfrom, msgMaker.Make(NetMsgType::SENDCMPCT, /*high_bandwidth=*/false, /*version=*/CMPCTBLOCKS_VERSION));
         }
-        // SYSCOIN
+        // wentuno
         if(!RejectIncomingTxs(pfrom)) {
             if (llmq::CLLMQUtils::IsWatchQuorumsEnabled() && m_connman.IsMasternodeQuorumNode(&pfrom)) {
                 m_connman.PushMessage(&pfrom, msgMaker.Make(NetMsgType::QWATCH));
@@ -3838,7 +3838,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
     // between VERSION and VERACK.
     if (msg_type == NetMsgType::SENDADDRV2) {
         if (pfrom.fSuccessfullyConnected) {
-            // SYSCOIN Disconnect peers that send a SENDADDRV2 message after VERACK.
+            // wentuno Disconnect peers that send a SENDADDRV2 message after VERACK.
             LogPrint(BCLog::NET_NETCONN, "sendaddrv2 received after verack from peer=%d; disconnecting\n", pfrom.GetId());
             pfrom.fDisconnect = true;
             return;
@@ -3907,7 +3907,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
         LogPrint(BCLog::NET, "Unsupported message \"%s\" prior to verack from peer=%d\n", SanitizeString(msg_type), pfrom.GetId());
         return;
     }
-    // SYSCOIN
+    // wentuno
     if (pfrom.nTimeFirstMessageReceived.load() == 0s && msg_type != NetMsgType::WTXIDRELAY && msg_type != NetMsgType::SENDADDRV2) {
         // First message after VERSION/VERACK it can be sendaddrv2 or wtxidrelay as well which happen in parallel
         pfrom.nTimeFirstMessageReceived = GetTime<std::chrono::seconds>();
@@ -4010,14 +4010,14 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
         m_addrman.Add(vAddrOk, pfrom.addr, 2h);
         if (vAddr.size() < 1000) peer->m_getaddr_sent = false;
 
-        // SYSCOIN AddrFetch: Require multiple addresses to avoid disconnecting on self-announcements
+        // wentuno AddrFetch: Require multiple addresses to avoid disconnecting on self-announcements
         if (pfrom.IsAddrFetchConn() && vAddr.size() > 1) {
             LogPrint(BCLog::NET_NETCONN, "addrfetch connection completed peer=%d; disconnecting\n", pfrom.GetId());
             pfrom.fDisconnect = true;
         }
         return;
     }
-    // SYSCOIN
+    // wentuno
     if (msg_type == NetMsgType::QSENDRECSIGS) {
         peer->m_wants_recsigs = true;
         return;
@@ -4077,7 +4077,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
                 AddKnownTx(*peer, inv.hash);
                 if (!fAlreadyHave && !m_chainman.IsInitialBlockDownload()) {
                     AddTxAnnouncement(pfrom, gtxid, current_time);
-                // SYSCOIN
+                // wentuno
                 } else if(!fAlreadyHave) {
                     static std::set<int> allowWhileInIBDObjs = {
                         MSG_SPORK
@@ -4201,7 +4201,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
                 LogPrint(BCLog::NET, " getblocks stopping, pruned or too old block at %d %s\n", pindex->nHeight, pindex->GetBlockHash().ToString());
                 break;
             }
-            // SYSCOIN
+            // wentuno
             if (pfrom.CanRelay()) {
                 WITH_LOCK(peer->m_block_inv_mutex, peer->m_blocks_for_inv_relay.push_back(pindex->GetBlockHash()));
             }
@@ -4853,7 +4853,7 @@ void PeerManagerImpl::ProcessMessage(CNode& pfrom, const std::string& msg_type, 
         headers.resize(nCount);
         for (unsigned int n = 0; n < nCount; n++) {
             vRecv >> headers[n];
-            // SYSCOIN
+            // wentuno
             if(headers[n].IsNEVM())
                 ReadCompactSize(vRecv);
             ReadCompactSize(vRecv); // ignore tx count; assume it is 0.
@@ -5455,7 +5455,7 @@ void PeerManagerImpl::EvictExtraOutboundPeers(std::chrono::seconds now)
         m_connman.ForEachNode([&](CNode* pnode) EXCLUSIVE_LOCKS_REQUIRED(::cs_main, m_connman.GetNodesMutex()) {
             AssertLockHeld(::cs_main);
 
-            // SYSCOIN Don't disconnect masternodes just because they were slow in block announcement
+            // wentuno Don't disconnect masternodes just because they were slow in block announcement
             if (pnode->m_masternode_connection) return;
             // Only consider outbound-full-relay peers that are not already
             // marked for disconnection
@@ -5775,7 +5775,7 @@ bool PeerManagerImpl::SendMessages(CNode* pto)
     const auto current_time{GetTime<std::chrono::microseconds>()};
 
     if (pto->IsAddrFetchConn() && current_time - pto->m_connected > 10 * AVG_ADDRESS_BROADCAST_INTERVAL) {
-        // SYSCOIN
+        // wentuno
         LogPrint(BCLog::NET_NETCONN, "addrfetch connection timeout; disconnecting peer=%d\n", pto->GetId());
         pto->fDisconnect = true;
         return true;
@@ -5819,7 +5819,7 @@ bool PeerManagerImpl::SendMessages(CNode* pto)
                 sync_blocks_and_headers_from_peer = true;
             }
         }
-        // SYSCOIN
+        // wentuno
         if (!state.fSyncStarted && CanServeBlocks(*peer) && !m_chainman.m_blockman.LoadingBlocks() && pto->CanRelay()) {
             // Only actively request headers from a single peer, unless we're close to today.
             if ((nSyncStarted == 0 && sync_blocks_and_headers_from_peer) || m_chainman.m_best_header->Time() > GetAdjustedTime() - 24h) {
@@ -5852,7 +5852,7 @@ bool PeerManagerImpl::SendMessages(CNode* pto)
         //
         // Try sending block announcements via headers
         //
-        // SYSCOIN
+        // wentuno
         if (pto->CanRelay()) {
             // If we have no more than MAX_BLOCKS_TO_ANNOUNCE in our
             // list of block hashes we're relaying, and our peer wants
@@ -5936,7 +5936,7 @@ bool PeerManagerImpl::SendMessages(CNode* pto)
                         CBlock block;
                         const bool ret{m_chainman.m_blockman.ReadBlockFromDisk(block, *pBestIndex)};
                         assert(ret);
-                        // SYSCOIN
+                        // wentuno
                         CBlockHeaderAndShortTxIDs cmpctblock{block, true};
                         m_connman.PushMessage(pto, msgMaker.Make(NetMsgType::CMPCTBLOCK, cmpctblock));
                     }
@@ -6006,7 +6006,7 @@ bool PeerManagerImpl::SendMessages(CNode* pto)
 
         if (auto tx_relay = peer->GetTxRelay(); tx_relay != nullptr) {
                 LOCK(tx_relay->m_tx_inventory_mutex);
-                // SYSCOIN Check whether periodic sends should happen
+                // wentuno Check whether periodic sends should happen
                 // Note: If this node is running in a Masternode mode, it makes no sense to delay outgoing txes
                 // because we never produce any txes ourselves i.e. no privacy is lost in this case.
                 bool fSendTrickle = pto->HasPermission(NetPermissionFlags::NoBan) || fMasternodeMode;
@@ -6025,7 +6025,7 @@ bool PeerManagerImpl::SendMessages(CNode* pto)
                 // Time to send but the peer has requested we not relay transactions.
                 if (fSendTrickle) {
                     LOCK(tx_relay->m_bloom_filter_mutex);
-                    // SYSCOIN
+                    // wentuno
                     if (!tx_relay->m_relay_txs) { tx_relay->m_tx_inventory_to_send.clear(); tx_relay->m_tx_inventory_to_send_other.clear();}
                 }
 
@@ -6059,7 +6059,7 @@ bool PeerManagerImpl::SendMessages(CNode* pto)
                 }
                 if (fSendTrickle && tx_relay->m_send_clsig) {
                     tx_relay->m_send_clsig = false;
-                    // SYSCOIN Send an inv for the best ChainLock we have
+                    // wentuno Send an inv for the best ChainLock we have
                     const auto& clsig = llmq::chainLocksHandler->GetBestChainLock();
                     if (!clsig.IsNull()) {
                         CInv inv(MSG_CLSIG, ::SerializeHash(clsig));
@@ -6122,7 +6122,7 @@ bool PeerManagerImpl::SendMessages(CNode* pto)
                         }
                         tx_relay->m_tx_inventory_known_filter.insert(hash);
                     }
-                    // SYSCOIN Send non-tx/non-block inventory items
+                    // wentuno Send non-tx/non-block inventory items
                     while (!tx_relay->m_tx_inventory_to_send_other.empty()) {
                         // get inv's from other set to send
                         std::set<CInv>::const_iterator it = std::next(tx_relay->m_tx_inventory_to_send_other.end(), -1);
@@ -6223,7 +6223,7 @@ bool PeerManagerImpl::SendMessages(CNode* pto)
         // Message: getdata (blocks)
         //
         std::vector<CInv> vGetData;
-        // SYSCOIN
+        // wentuno
         if (CanServeBlocks(*peer) && pto->CanRelay() && ((sync_blocks_and_headers_from_peer && !IsLimitedPeer(*peer)) || !m_chainman.IsInitialBlockDownload()) && state.vBlocksInFlight.size() < MAX_BLOCKS_IN_TRANSIT_PER_PEER) {
             std::vector<const CBlockIndex*> vToDownload;
             NodeId staller = -1;
@@ -6269,7 +6269,7 @@ bool PeerManagerImpl::SendMessages(CNode* pto)
             if (!AlreadyHaveTx(gtxid)) {
                 LogPrint(BCLog::NET, "Requesting %s %s peer=%d\n", gtxid.IsWtxid() ? "wtx" : "tx",
                     gtxid.GetHash().ToString(), pto->GetId());
-                // SYSCOIN
+                // wentuno
                 uint32_t nType = gtxid.GetType();
                 if(nType == UNDEFINED) {
                     if(gtxid.IsWtxid())
@@ -6285,7 +6285,7 @@ bool PeerManagerImpl::SendMessages(CNode* pto)
                     m_connman.PushMessage(pto, msgMaker.Make(NetMsgType::GETDATA, vGetData));
                     vGetData.clear();
                 }
-                // SYSCOIN
+                // wentuno
                 m_txrequest.RequestedTx(pto->GetId(), gtxid.GetHash(), current_time + GetAdditionalTxRequestDelay(nType));
             } else {
                 // We have already seen this transaction, no need to download. This is just a belt-and-suspenders, as

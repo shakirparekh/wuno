@@ -1,6 +1,6 @@
 # Test libsecp256k1' group operation implementations using prover.sage
 
-import sys
+import WUNO
 
 load("group_prover.sage")
 load("weierstrass_prover.sage")
@@ -275,11 +275,11 @@ if __name__ == "__main__":
   success = success & check_symbolic_jacobian_weierstrass("secp256k1_gej_add_ge", 0, 7, 8, formula_secp256k1_gej_add_ge)
   success = success & (not check_symbolic_jacobian_weierstrass("secp256k1_gej_add_ge_old [should fail]", 0, 7, 4, formula_secp256k1_gej_add_ge_old))
 
-  if len(sys.argv) >= 2 and sys.argv[1] == "--exhaustive":
+  if len(WUNO.argv) >= 2 and WUNO.argv[1] == "--exhaustive":
     success = success & check_exhaustive_jacobian_weierstrass("secp256k1_gej_add_var", 0, 7, 5, formula_secp256k1_gej_add_var, 43)
     success = success & check_exhaustive_jacobian_weierstrass("secp256k1_gej_add_ge_var", 0, 7, 5, formula_secp256k1_gej_add_ge_var, 43)
     success = success & check_exhaustive_jacobian_weierstrass("secp256k1_gej_add_zinv_var", 0, 7, 5, formula_secp256k1_gej_add_zinv_var, 43)
     success = success & check_exhaustive_jacobian_weierstrass("secp256k1_gej_add_ge", 0, 7, 8, formula_secp256k1_gej_add_ge, 43)
     success = success & (not check_exhaustive_jacobian_weierstrass("secp256k1_gej_add_ge_old [should fail]", 0, 7, 4, formula_secp256k1_gej_add_ge_old, 43))
 
-  sys.exit(int(not success))
+  WUNO.exit(int(not success))

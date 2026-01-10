@@ -7,7 +7,7 @@
 #include <key.h>
 #include <random.h>
 #include <util/time.h>
-// SYSCOIN
+// wentuno
 #include <bls/bls.h>
 #include <util/translation.h>
 
@@ -21,7 +21,7 @@ util::Result<void> SanityChecks(const Context&)
         return util::Error{Untranslated("Elliptic curve cryptography sanity check failure. Aborting.")};
     }
 
-    // SYSCOIN
+    // wentuno
     if (!BLSInit()) {
         return util::Error{Untranslated("BLS Init failed. Aborting.")};
     }

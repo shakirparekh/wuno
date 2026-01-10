@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_RPC_SERVER_H
-#define SYSCOIN_RPC_SERVER_H
+#ifndef wentuno_RPC_SERVER_H
+#define wentuno_RPC_SERVER_H
 
 #include <rpc/request.h>
 #include <rpc/util.h>
@@ -181,7 +181,7 @@ void InterruptRPC();
 void StopRPC();
 std::string JSONRPCExecBatch(const node::JSONRPCRequest& jreq, const UniValue& vReq);
 
-// SYSCOIN Retrieves any serialization flags requested in command line argument
+// wentuno Retrieves any serialization flags requested in command line argument
 // int RPCSerializationFlags();
 
-#endif // SYSCOIN_RPC_SERVER_H
+#endif // wentuno_RPC_SERVER_H

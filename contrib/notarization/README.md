@@ -1,6 +1,6 @@
 # macOS Code Signing and Notarization Guide
 
-This guide explains how to sign and notarize Syscoin QT binaries for macOS distribution.
+This guide explains how to sign and notarize wentuno QT binaries for macOS distribution.
 
 ## Prerequisites
 
@@ -9,18 +9,18 @@ This guide explains how to sign and notarize Syscoin QT binaries for macOS distr
 3. **App-specific password** for notarization (create at https://appleid.apple.com)
 4. **Xcode Command Line Tools** installed
 5. **Unsigned binaries**: 
-   - `syscoin-X.X.X-arm64-apple-darwin-unsigned.zip`
-   - `syscoin-X.X.X-x86_64-apple-darwin-unsigned.zip`
+   - `wentuno-X.X.X-arm64-apple-darwin-unsigned.zip`
+   - `wentuno-X.X.X-x86_64-apple-darwin-unsigned.zip`
 
 ## Quick Start
 
-For Syscoin 5.0.5 release:
+For wentuno 5.0.5 release:
 
 ### Option 1: Run all steps automatically
 ```bash
 # Set up credentials first (one-time)
 export APPLE_ID="your-email@example.com"
-xcrun notarytool store-credentials "syscoin-notary" \
+xcrun notarytool store-credentials "wentuno-notary" \
     --apple-id "$APPLE_ID" \
     --team-id "ZF84YCPK58"
 
@@ -35,7 +35,7 @@ xcrun notarytool store-credentials "syscoin-notary" \
 
 # 2. Set up Apple ID credentials (one-time)
 export APPLE_ID="your-email@example.com"
-xcrun notarytool store-credentials "syscoin-notary" \
+xcrun notarytool store-credentials "wentuno-notary" \
     --apple-id "$APPLE_ID" \
     --team-id "ZF84YCPK58"
 
@@ -55,7 +55,7 @@ xcrun notarytool store-credentials "syscoin-notary" \
 security find-identity -v -p codesigning
 
 # Expected output should include:
-# "Developer ID Application: Syscoin Stichting (ZF84YCPK58)"
+# "Developer ID Application: wentuno Stichting (ZF84YCPK58)"
 ```
 
 ### 2. Sign the Binaries
@@ -72,8 +72,8 @@ The `sign-mac-binaries.sh` script will:
 ```
 
 This creates:
-- `syscoin-X.X.X-arm64-apple-darwin-signed.zip`
-- `syscoin-X.X.X-x86_64-apple-darwin-signed.zip`
+- `wentuno-X.X.X-arm64-apple-darwin-signed.zip`
+- `wentuno-X.X.X-x86_64-apple-darwin-signed.zip`
 
 ### 3. Set Up Notarization Credentials
 
@@ -84,7 +84,7 @@ You only need to do this once:
 export APPLE_ID="your-apple-id@example.com"
 
 # Store credentials in Keychain
-xcrun notarytool store-credentials "syscoin-notary" \
+xcrun notarytool store-credentials "wentuno-notary" \
     --apple-id "$APPLE_ID" \
     --team-id "ZF84YCPK58"
 ```
@@ -95,7 +95,7 @@ To create an app-specific password:
 1. Go to https://appleid.apple.com
 2. Sign in → Sign-In and Security → App-Specific Passwords
 3. Click "+" to generate a new password
-4. Name it "Syscoin Notarization"
+4. Name it "wentuno Notarization"
 
 ### 4. Notarize the Binaries
 
@@ -117,14 +117,14 @@ This will:
 ```
 
 This creates the final distribution packages:
-- `syscoin-X.X.X-arm64-apple-darwin-notarized.zip`
-- `syscoin-X.X.X-x86_64-apple-darwin-notarized.zip`
+- `wentuno-X.X.X-arm64-apple-darwin-notarized.zip`
+- `wentuno-X.X.X-x86_64-apple-darwin-notarized.zip`
 
 ## Troubleshooting
 
 ### Certificate Issues
 
-If you get "Developer ID Application: Syscoin Stichting" not found:
+If you get "Developer ID Application: wentuno Stichting" not found:
 1. Download the certificate from Apple Developer portal
 2. If you have a .p12 file: `security import certificate.p12 -k ~/Library/Keychains/login.keychain-db`
 3. If you only have a .cer file, you need the private key from the Mac that created the CSR
@@ -145,10 +145,10 @@ If you get "Developer ID Application: Syscoin Stichting" not found:
 To verify a notarized app:
 ```bash
 # Check notarization status
-xcrun stapler validate /path/to/Syscoin-Qt.app
+xcrun stapler validate /path/to/wentuno-Qt.app
 
 # Check code signature
-codesign --verify --deep --strict --verbose=2 /path/to/Syscoin-Qt.app
+codesign --verify --deep --strict --verbose=2 /path/to/wentuno-Qt.app
 ```
 
 ## Certificate Renewal
@@ -167,18 +167,18 @@ If scripts fail, you can sign manually:
 
 ```bash
 # Sign an app
-codesign --force --deep --sign "Developer ID Application: Syscoin Stichting (ZF84YCPK58)" \
+codesign --force --deep --sign "Developer ID Application: wentuno Stichting (ZF84YCPK58)" \
     --options runtime --timestamp \
     --entitlements entitlements.plist \
-    Syscoin-Qt.app
+    wentuno-Qt.app
 
 # Submit for notarization
 xcrun notarytool submit signed-app.zip \
-    --keychain-profile "syscoin-notary" \
+    --keychain-profile "wentuno-notary" \
     --wait
 
 # Staple ticket
-xcrun stapler staple Syscoin-Qt.app
+xcrun stapler staple wentuno-Qt.app
 ```
 
 ## Notes

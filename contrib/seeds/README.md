@@ -6,7 +6,7 @@ Utility to generate the seeds.txt list that is compiled into the client
 The seeds compiled into the release are created from the current protx list, like this:
 
 ```bash
-syscoin-cli protx list valid 1 2018966 > protx_list.json
+wentuno-cli protx list valid 1 2018966 > protx_list.json
 
 # Make sure the onion seeds still work!
 while IFS= read -r line
@@ -30,7 +30,7 @@ Ubuntu, Debian:
 
     sudo apt-get install python3-dnspython
 
-and/or for other operating systems:
+and/or for other operating WUNOtems:
 
     pip3 install dnspython3
 

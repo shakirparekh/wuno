@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_PROTOCOL_H
-#define SYSCOIN_PROTOCOL_H
+#ifndef wentuno_PROTOCOL_H
+#define wentuno_PROTOCOL_H
 
 #include <kernel/messagestartchars.h> // IWYU pragma: export
 #include <netaddress.h>
@@ -54,7 +54,7 @@ public:
 };
 
 /**
- * Syscoin protocol message types. When adding new message types, don't forget
+ * wentuno protocol message types. When adding new message types, don't forget
  * to update allNetMessageTypes in protocol.cpp.
  */
 namespace NetMsgType {
@@ -259,7 +259,7 @@ extern const char* CFCHECKPT;
  * @since protocol version 70016 as described by BIP 339.
  */
 extern const char *WTXIDRELAY;
-// SYSCOIN message types
+// wentuno message types
 extern const char *SPORK;
 extern const char *GETSPORKS;
 extern const char *SYNCSTATUSCOUNT;
@@ -299,7 +299,7 @@ enum ServiceFlags : uint64_t {
     // Nothing
     NODE_NONE = 0,
     // NODE_NETWORK means that the node is capable of serving the complete block chain. It is currently
-    // set by all Syscoin Core non pruned nodes, and is unset by SPV clients or other light clients.
+    // set by all wentuno Core non pruned nodes, and is unset by SPV clients or other light clients.
     NODE_NETWORK = (1 << 0),
     // NODE_BLOOM means the node is capable and willing to handle bloom-filtered connections.
     NODE_BLOOM = (1 << 2),
@@ -319,7 +319,7 @@ enum ServiceFlags : uint64_t {
 
     // Bits 24-31 are reserved for temporary experiments. Just pick a bit that
     // isn't getting used, or one not being used much, and notify the
-    // syscoin-development mailing list. Remember that service bits are just
+    // wentuno-development mailing list. Remember that service bits are just
     // unauthenticated advertisements, so your code must be robust against
     // collisions and other cases where nodes may be advertising a service they
     // do not actually support. Other service bits should be allocated via the
@@ -500,7 +500,7 @@ enum GetDataMsg : uint32_t {
     // The following can only occur in getdata. Invs always use TX/WTX or BLOCK.
     MSG_FILTERED_BLOCK = 3,                           //!< Defined in BIP37
     MSG_CMPCT_BLOCK = 4,                              //!< Defined in BIP152
-    // SYSCOIN message types
+    // wentuno message types
     MSG_SPORK = 11,
     MSG_GOVERNANCE_OBJECT = 12,
     MSG_GOVERNANCE_OBJECT_VOTE = 13,
@@ -540,7 +540,7 @@ public:
     bool IsMsgWitnessBlk() const { return type == MSG_WITNESS_BLOCK; }
 
     // Combined-message helper methods
-    // SYSCOIN
+    // wentuno
     bool IsGenTxMsg(bool bJustTx = false) const
     {
         const bool bJustTxInternal = type == MSG_TX || type == MSG_WTX || type == MSG_WITNESS_TX;
@@ -561,4 +561,4 @@ public:
 /** Convert a TX/WITNESS_TX/WTX CInv to a GenTxid. */
 GenTxid ToGenTxid(const CInv& inv);
 
-#endif // SYSCOIN_PROTOCOL_H
+#endif // wentuno_PROTOCOL_H

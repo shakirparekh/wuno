@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_ADDRMAN_IMPL_H
-#define SYSCOIN_ADDRMAN_IMPL_H
+#ifndef wentuno_ADDRMAN_IMPL_H
+#define wentuno_ADDRMAN_IMPL_H
 
 #include <logging.h>
 #include <logging/timer.h>
@@ -286,4 +286,4 @@ private:
     int CheckAddrman() const EXCLUSIVE_LOCKS_REQUIRED(cs);
 };
 
-#endif // SYSCOIN_ADDRMAN_IMPL_H
+#endif // wentuno_ADDRMAN_IMPL_H

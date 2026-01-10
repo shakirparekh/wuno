@@ -104,12 +104,12 @@ FUZZ_TARGET(transaction, .init = initialize_transaction)
     if (tx.GetTotalSize() < 250'000) { // Avoid high memory usage (with msan) due to json encoding
         {
             UniValue u{UniValue::VOBJ};
-            // SYSCOIN
+            // wentuno
             TxToUniv(tx, /*block_hash=*/uint256::ZEROV, /*entry=*/u);
         }
         {
             UniValue u{UniValue::VOBJ};
-            // SYSCOIN
+            // wentuno
             TxToUniv(tx, /*block_hash=*/uint256::ONEV, /*entry=*/u);
         }
     }

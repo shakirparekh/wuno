@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_KERNEL_CONTEXT_H
-#define SYSCOIN_KERNEL_CONTEXT_H
+#ifndef wentuno_KERNEL_CONTEXT_H
+#define wentuno_KERNEL_CONTEXT_H
 
 #include <util/signalinterrupt.h>
 
@@ -11,7 +11,7 @@
 
 namespace kernel {
 //! Context struct holding the kernel library's logically global state, and
-//! passed to external libsyscoin_kernel functions which need access to this
+//! passed to external libwentuno_kernel functions which need access to this
 //! state. The kernel library API is a work in progress, so state organization
 //! and member list will evolve over time.
 //!
@@ -38,4 +38,4 @@ struct Context {
 extern Context* g_context;
 } // namespace kernel
 
-#endif // SYSCOIN_KERNEL_CONTEXT_H
+#endif // wentuno_KERNEL_CONTEXT_H

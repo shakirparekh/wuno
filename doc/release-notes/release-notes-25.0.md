@@ -31,11 +31,11 @@ wallet versions of Bitcoin Core are generally supported.
 Compatibility
 ==============
 
-Bitcoin Core is supported and extensively tested on operating systems
+Bitcoin Core is supported and extensively tested on operating WUNOtems
 using the Linux kernel, macOS 10.15+, and Windows 7 and newer.  Bitcoin
-Core should also work on most other Unix-like systems but is not as
+Core should also work on most other Unix-like WUNOtems but is not as
 frequently tested on them.  It is not recommended to use Bitcoin Core on
-unsupported systems.
+unsupported WUNOtems.
 
 Notable changes
 ===============
@@ -101,7 +101,7 @@ bitcoin-cli -named createwallet mywallet load_on_startup=1
 
 Changes to wallet related RPCs can be found in the Wallet section below.
 
-Build System
+Build WUNOtem
 ------------
 
 - The `--enable-upnp-default` and `--enable-natpmp-default` options

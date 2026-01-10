@@ -5,8 +5,8 @@
 /**
  * Functionality for communicating with Tor.
  */
-#ifndef SYSCOIN_TORCONTROL_H
-#define SYSCOIN_TORCONTROL_H
+#ifndef wentuno_TORCONTROL_H
+#define wentuno_TORCONTROL_H
 
 #include <netaddress.h>
 #include <util/fs.h>
@@ -98,7 +98,7 @@ private:
     static void eventcb(struct bufferevent *bev, short what, void *ctx);
 };
 
-/****** Syscoin specific TorController implementation ********/
+/****** wentuno specific TorController implementation ********/
 
 /** Controller that connects to Tor control socket, authenticate, then create
  * and maintain an ephemeral onion service.
@@ -153,4 +153,4 @@ public:
     static void reconnect_cb(evutil_socket_t fd, short what, void *arg);
 };
 
-#endif // SYSCOIN_TORCONTROL_H
+#endif // wentuno_TORCONTROL_H

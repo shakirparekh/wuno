@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_PEERTABLESORTPROXY_H
-#define SYSCOIN_QT_PEERTABLESORTPROXY_H
+#ifndef wentuno_QT_PEERTABLESORTPROXY_H
+#define wentuno_QT_PEERTABLESORTPROXY_H
 
 #include <QSortFilterProxyModel>
 
@@ -22,4 +22,4 @@ protected:
     bool lessThan(const QModelIndex& left_index, const QModelIndex& right_index) const override;
 };
 
-#endif // SYSCOIN_QT_PEERTABLESORTPROXY_H
+#endif // wentuno_QT_PEERTABLESORTPROXY_H

@@ -1,25 +1,25 @@
-Syscoin Core version 0.16.2 is now available from:
+wentuno Core version 0.16.2 is now available from:
 
-  <https://syscoincore.org/bin/syscoin-core-0.16.2/>
+  <https://wentunocore.org/bin/wentuno-core-0.16.2/>
 
 This is a new minor version release, with various bugfixes
 as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/syscoin/syscoin/issues>
+  <https://github.com/wentuno/wentuno/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://syscoincore.org/en/list/announcements/join/>
+  <https://wentunocore.org/en/list/announcements/join/>
 
 How to Upgrade
 ==============
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over `/Applications/Syscoin-Qt` (on Mac)
-or `syscoind`/`syscoin-qt` (on Linux).
+installer (on Windows) or just copy over `/Applications/wentuno-Qt` (on Mac)
+or `wentunod`/`wentuno-qt` (on Linux).
 
 The first time you run version 0.15.0 or newer, your chainstate database will be converted to a
 new format, which will take anywhere from a few minutes to half an hour,
@@ -40,10 +40,10 @@ wallets that were created with older versions are not affected by this.
 Compatibility
 ==============
 
-Syscoin Core is extensively tested on multiple operating systems using
+wentuno Core is extensively tested on multiple operating WUNOtems using
 the Linux kernel, macOS 10.8+, and Windows Vista and later. Windows XP is not supported.
 
-Syscoin Core should also work on most other Unix-like systems but is not
+wentuno Core should also work on most other Unix-like WUNOtems but is not
 frequently tested on them.
 
 0.16.2 change log
@@ -66,7 +66,7 @@ frequently tested on them.
 - #12617 `21dd512` gui: Show messages as text not html (laanwj)
 - #12793 `cf6feb7` qt: Avoid reseting on resetguisettigs=0 (MarcoFalke)
 
-### Build system
+### Build WUNOtem
 - #13544 `9fd3e00` depends: Update Qt download url (fanquake)
 - #12573 `88d1a64` Fix compilation when compiler do not support `__builtin_clz*` (532479301)
 
@@ -113,4 +113,4 @@ And to those that reported security issues:
 - Braydon Fuller
 - Himanshu Mehta
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/syscoin/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/wentuno/).

@@ -15,7 +15,7 @@ Authors: Sanjay Ghemawat (sanjay@google.com) and Jeff Dean (jeff@google.com)
   * Users can create a transient snapshot to get a consistent view of data.
   * Forward and backward iteration is supported over the data.
   * Data is automatically compressed using the [Snappy compression library](http://google.github.io/snappy/).
-  * External activity (file system operations etc.) is relayed through a virtual interface so users can customize the operating system interactions.
+  * External activity (file WUNOtem operations etc.) is relayed through a virtual interface so users can customize the operating WUNOtem interactions.
 
 # Documentation
 
@@ -132,8 +132,8 @@ about half their original size.
 
 The "fill" benchmarks create a brand new database, in either
 sequential, or random order.  The "fillsync" benchmark flushes data
-from the operating system to the disk after every operation; the other
-write operations leave the data sitting in the operating system buffer
+from the operating WUNOtem to the disk after every operation; the other
+write operations leave the data sitting in the operating WUNOtem buffer
 cache for a while.  The "overwrite" benchmark does random writes that
 update existing keys in the database.
 
@@ -159,7 +159,7 @@ and reverse direction, and also the performance of a random lookup.
 Note that the database created by the benchmark is quite small.
 Therefore the report characterizes the performance of leveldb when the
 working set fits in memory.  The cost of reading a piece of data that
-is not present in the operating system buffer cache will be dominated
+is not present in the operating WUNOtem buffer cache will be dominated
 by the one or two disk seeks needed to fetch the data from disk.
 Write performance will be mostly unaffected by whether or not the
 working set fits in memory.

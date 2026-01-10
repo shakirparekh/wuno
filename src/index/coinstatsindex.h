@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_INDEX_COINSTATSINDEX_H
-#define SYSCOIN_INDEX_COINSTATSINDEX_H
+#ifndef wentuno_INDEX_COINSTATSINDEX_H
+#define wentuno_INDEX_COINSTATSINDEX_H
 
 #include <crypto/muhash.h>
 #include <index/base.h>
@@ -64,4 +64,4 @@ public:
 /// The global UTXO set hash object.
 extern std::unique_ptr<CoinStatsIndex> g_coin_stats_index;
 
-#endif // SYSCOIN_INDEX_COINSTATSINDEX_H
+#endif // wentuno_INDEX_COINSTATSINDEX_H

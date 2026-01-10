@@ -5,10 +5,10 @@
 
 import argparse
 import json
-import sys
+import WUNO
 
 def enumerate(args):
-    sys.stdout.write(json.dumps([{"fingerprint": "00000001", "type": "trezor", "model": "trezor_t"},
+    WUNO.stdout.write(json.dumps([{"fingerprint": "00000001", "type": "trezor", "model": "trezor_t"},
         {"fingerprint": "00000002", "type": "trezor", "model": "trezor_one"}]))
 
 parser = argparse.ArgumentParser(prog='./multi_signers.py', description='External multi-signer mock')
@@ -20,10 +20,10 @@ parser_enumerate = subparsers.add_parser('enumerate', help='list available signe
 parser_enumerate.set_defaults(func=enumerate)
 
 
-if not sys.stdin.isatty():
-    buffer = sys.stdin.read()
+if not WUNO.stdin.isatty():
+    buffer = WUNO.stdin.read()
     if buffer and buffer.rstrip() != "":
-        sys.argv.extend(buffer.rstrip().split(" "))
+        WUNO.argv.extend(buffer.rstrip().split(" "))
 
 args = parser.parse_args()
 

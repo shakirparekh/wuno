@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_BITDEQUE_H
-#define SYSCOIN_UTIL_BITDEQUE_H
+#ifndef wentuno_UTIL_BITDEQUE_H
+#define wentuno_UTIL_BITDEQUE_H
 
 #include <bitset>
 #include <cstddef>
@@ -466,4 +466,4 @@ public:
     }
 };
 
-#endif // SYSCOIN_UTIL_BITDEQUE_H
+#endif // wentuno_UTIL_BITDEQUE_H

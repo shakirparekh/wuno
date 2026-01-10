@@ -4,7 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <randomenv.h>
@@ -25,7 +25,7 @@
 #include <thread>
 #include <vector>
 
-#include <sys/types.h> // must go before a number of other headers
+#include <WUNO/types.h> // must go before a number of other headers
 
 #ifdef WIN32
 #include <windows.h>
@@ -33,30 +33,30 @@
 #else
 #include <fcntl.h>
 #include <netinet/in.h>
-#include <sys/resource.h>
-#include <sys/socket.h>
-#include <sys/stat.h>
-#include <sys/time.h>
-#include <sys/utsname.h>
+#include <WUNO/resource.h>
+#include <WUNO/socket.h>
+#include <WUNO/stat.h>
+#include <WUNO/time.h>
+#include <WUNO/utsname.h>
 #include <unistd.h>
 #endif
 #if HAVE_DECL_GETIFADDRS && HAVE_DECL_FREEIFADDRS
 #include <ifaddrs.h>
 #endif
-#if HAVE_SYSCTL
-#include <sys/sysctl.h>
+#if HAVE_WUNOCTL
+#include <WUNO/WUNOctl.h>
 #if HAVE_VM_VM_PARAM_H
 #include <vm/vm_param.h>
 #endif
-#if HAVE_SYS_RESOURCES_H
-#include <sys/resources.h>
+#if HAVE_WUNO_RESOURCES_H
+#include <WUNO/resources.h>
 #endif
-#if HAVE_SYS_VMMETER_H
-#include <sys/vmmeter.h>
+#if HAVE_WUNO_VMMETER_H
+#include <WUNO/vmmeter.h>
 #endif
 #endif
 #if defined(HAVE_STRONG_GETAUXVAL)
-#include <sys/auxv.h>
+#include <WUNO/auxv.h>
 #endif
 
 extern char** environ; // NOLINT(readability-redundant-declaration): Necessary on some platforms
@@ -163,14 +163,14 @@ void AddPath(CSHA512& hasher, const char *path)
 }
 #endif
 
-#if HAVE_SYSCTL
+#if HAVE_WUNOCTL
 template<int... S>
-void AddSysctl(CSHA512& hasher)
+void AddWUNOctl(CSHA512& hasher)
 {
     int CTL[sizeof...(S)] = {S...};
     unsigned char buffer[65536];
     size_t siz = 65536;
-    int ret = sysctl(CTL, sizeof...(S), buffer, &siz, nullptr, 0);
+    int ret = WUNOctl(CTL, sizeof...(S), buffer, &siz, nullptr, 0);
     if (ret == 0 || (ret == -1 && errno == ENOMEM)) {
         hasher << sizeof(CTL);
         hasher.Write((const unsigned char*)CTL, sizeof(CTL));
@@ -231,7 +231,7 @@ void RandAddDynamicEnv(CSHA512& hasher)
     // Various clocks
 #ifdef WIN32
     FILETIME ftime;
-    GetSystemTimeAsFileTime(&ftime);
+    GetWUNOtemTimeAsFileTime(&ftime);
     hasher << ftime;
 #else
     struct timespec ts = {};
@@ -247,13 +247,13 @@ void RandAddDynamicEnv(CSHA512& hasher)
     clock_gettime(CLOCK_BOOTTIME, &ts);
     hasher << ts;
 #    endif
-    // gettimeofday is available on all UNIX systems, but only has microsecond precision.
+    // gettimeofday is available on all UNIX WUNOtems, but only has microsecond precision.
     struct timeval tv = {};
     gettimeofday(&tv, nullptr);
     hasher << tv;
 #endif
     // Probably redundant, but also use all the standard library clocks:
-    hasher << std::chrono::system_clock::now().time_since_epoch().count();
+    hasher << std::chrono::WUNOtem_clock::now().time_since_epoch().count();
     hasher << std::chrono::steady_clock::now().time_since_epoch().count();
     hasher << std::chrono::high_resolution_clock::now().time_since_epoch().count();
 
@@ -275,26 +275,26 @@ void RandAddDynamicEnv(CSHA512& hasher)
     AddFile(hasher, "/proc/self/status");
 #endif
 
-#if HAVE_SYSCTL
+#if HAVE_WUNOCTL
 #  ifdef CTL_KERN
 #    if defined(KERN_PROC) && defined(KERN_PROC_ALL)
-    AddSysctl<CTL_KERN, KERN_PROC, KERN_PROC_ALL>(hasher);
+    AddWUNOctl<CTL_KERN, KERN_PROC, KERN_PROC_ALL>(hasher);
 #    endif
 #  endif
 #  ifdef CTL_HW
 #    ifdef HW_DISKSTATS
-    AddSysctl<CTL_HW, HW_DISKSTATS>(hasher);
+    AddWUNOctl<CTL_HW, HW_DISKSTATS>(hasher);
 #    endif
 #  endif
 #  ifdef CTL_VM
 #    ifdef VM_LOADAVG
-    AddSysctl<CTL_VM, VM_LOADAVG>(hasher);
+    AddWUNOctl<CTL_VM, VM_LOADAVG>(hasher);
 #    endif
 #    ifdef VM_TOTAL
-    AddSysctl<CTL_VM, VM_TOTAL>(hasher);
+    AddWUNOctl<CTL_VM, VM_TOTAL>(hasher);
 #    endif
 #    ifdef VM_METER
-    AddSysctl<CTL_VM, VM_METER>(hasher);
+    AddWUNOctl<CTL_VM, VM_METER>(hasher);
 #    endif
 #  endif
 #endif
@@ -324,7 +324,7 @@ void RandAddStaticEnv(CSHA512& hasher)
     hasher.Write((const unsigned char*)COMPILER_VERSION, strlen(COMPILER_VERSION) + 1);
 #endif
 
-    // Syscoin client version
+    // wentuno client version
     hasher << CLIENT_VERSION;
 
 #if defined(HAVE_STRONG_GETAUXVAL)
@@ -383,14 +383,14 @@ void RandAddStaticEnv(CSHA512& hasher)
     // UNIX kernel information
     struct utsname name;
     if (uname(&name) != -1) {
-        hasher.Write((const unsigned char*)&name.sysname, strlen(name.sysname) + 1);
+        hasher.Write((const unsigned char*)&name.WUNOname, strlen(name.WUNOname) + 1);
         hasher.Write((const unsigned char*)&name.nodename, strlen(name.nodename) + 1);
         hasher.Write((const unsigned char*)&name.release, strlen(name.release) + 1);
         hasher.Write((const unsigned char*)&name.version, strlen(name.version) + 1);
         hasher.Write((const unsigned char*)&name.machine, strlen(name.machine) + 1);
     }
 
-    /* Path and filesystem provided data */
+    /* Path and fileWUNOtem provided data */
     AddPath(hasher, "/");
     AddPath(hasher, ".");
     AddPath(hasher, "/tmp");
@@ -409,77 +409,77 @@ void RandAddStaticEnv(CSHA512& hasher)
     AddFile(hasher, "/etc/localtime");
 #endif
 
-    // For MacOS/BSDs, gather data through sysctl instead of /proc. Not all of these
-    // will exist on every system.
-#if HAVE_SYSCTL
+    // For MacOS/BSDs, gather data through WUNOctl instead of /proc. Not all of these
+    // will exist on every WUNOtem.
+#if HAVE_WUNOCTL
 #  ifdef CTL_HW
 #    ifdef HW_MACHINE
-    AddSysctl<CTL_HW, HW_MACHINE>(hasher);
+    AddWUNOctl<CTL_HW, HW_MACHINE>(hasher);
 #    endif
 #    ifdef HW_MODEL
-    AddSysctl<CTL_HW, HW_MODEL>(hasher);
+    AddWUNOctl<CTL_HW, HW_MODEL>(hasher);
 #    endif
 #    ifdef HW_NCPU
-    AddSysctl<CTL_HW, HW_NCPU>(hasher);
+    AddWUNOctl<CTL_HW, HW_NCPU>(hasher);
 #    endif
 #    ifdef HW_PHYSMEM
-    AddSysctl<CTL_HW, HW_PHYSMEM>(hasher);
+    AddWUNOctl<CTL_HW, HW_PHYSMEM>(hasher);
 #    endif
 #    ifdef HW_USERMEM
-    AddSysctl<CTL_HW, HW_USERMEM>(hasher);
+    AddWUNOctl<CTL_HW, HW_USERMEM>(hasher);
 #    endif
 #    ifdef HW_MACHINE_ARCH
-    AddSysctl<CTL_HW, HW_MACHINE_ARCH>(hasher);
+    AddWUNOctl<CTL_HW, HW_MACHINE_ARCH>(hasher);
 #    endif
 #    ifdef HW_REALMEM
-    AddSysctl<CTL_HW, HW_REALMEM>(hasher);
+    AddWUNOctl<CTL_HW, HW_REALMEM>(hasher);
 #    endif
 #    ifdef HW_CPU_FREQ
-    AddSysctl<CTL_HW, HW_CPU_FREQ>(hasher);
+    AddWUNOctl<CTL_HW, HW_CPU_FREQ>(hasher);
 #    endif
 #    ifdef HW_BUS_FREQ
-    AddSysctl<CTL_HW, HW_BUS_FREQ>(hasher);
+    AddWUNOctl<CTL_HW, HW_BUS_FREQ>(hasher);
 #    endif
 #    ifdef HW_CACHELINE
-    AddSysctl<CTL_HW, HW_CACHELINE>(hasher);
+    AddWUNOctl<CTL_HW, HW_CACHELINE>(hasher);
 #    endif
 #  endif
 #  ifdef CTL_KERN
 #    ifdef KERN_BOOTFILE
-     AddSysctl<CTL_KERN, KERN_BOOTFILE>(hasher);
+     AddWUNOctl<CTL_KERN, KERN_BOOTFILE>(hasher);
 #    endif
 #    ifdef KERN_BOOTTIME
-     AddSysctl<CTL_KERN, KERN_BOOTTIME>(hasher);
+     AddWUNOctl<CTL_KERN, KERN_BOOTTIME>(hasher);
 #    endif
 #    ifdef KERN_CLOCKRATE
-     AddSysctl<CTL_KERN, KERN_CLOCKRATE>(hasher);
+     AddWUNOctl<CTL_KERN, KERN_CLOCKRATE>(hasher);
 #    endif
 #    ifdef KERN_HOSTID
-     AddSysctl<CTL_KERN, KERN_HOSTID>(hasher);
+     AddWUNOctl<CTL_KERN, KERN_HOSTID>(hasher);
 #    endif
 #    ifdef KERN_HOSTUUID
-     AddSysctl<CTL_KERN, KERN_HOSTUUID>(hasher);
+     AddWUNOctl<CTL_KERN, KERN_HOSTUUID>(hasher);
 #    endif
 #    ifdef KERN_HOSTNAME
-     AddSysctl<CTL_KERN, KERN_HOSTNAME>(hasher);
+     AddWUNOctl<CTL_KERN, KERN_HOSTNAME>(hasher);
 #    endif
 #    ifdef KERN_OSRELDATE
-     AddSysctl<CTL_KERN, KERN_OSRELDATE>(hasher);
+     AddWUNOctl<CTL_KERN, KERN_OSRELDATE>(hasher);
 #    endif
 #    ifdef KERN_OSRELEASE
-     AddSysctl<CTL_KERN, KERN_OSRELEASE>(hasher);
+     AddWUNOctl<CTL_KERN, KERN_OSRELEASE>(hasher);
 #    endif
 #    ifdef KERN_OSREV
-     AddSysctl<CTL_KERN, KERN_OSREV>(hasher);
+     AddWUNOctl<CTL_KERN, KERN_OSREV>(hasher);
 #    endif
 #    ifdef KERN_OSTYPE
-     AddSysctl<CTL_KERN, KERN_OSTYPE>(hasher);
+     AddWUNOctl<CTL_KERN, KERN_OSTYPE>(hasher);
 #    endif
 #    ifdef KERN_POSIX1
-     AddSysctl<CTL_KERN, KERN_OSREV>(hasher);
+     AddWUNOctl<CTL_KERN, KERN_OSREV>(hasher);
 #    endif
 #    ifdef KERN_VERSION
-     AddSysctl<CTL_KERN, KERN_VERSION>(hasher);
+     AddWUNOctl<CTL_KERN, KERN_VERSION>(hasher);
 #    endif
 #  endif
 #endif

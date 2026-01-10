@@ -469,8 +469,8 @@ index 7910aa0..15121e2 100755
  else
 -  for i in "$CC" "$CC $CFLAGS $CPPFLAGS" cc gcc c89 c99; do
 +  for i in "$CC" "$CC $CFLAGS $CPPFLAGS $LDFLAGS" cc gcc c89 c99; do
-     { $as_echo "$as_me:${as_lineno-$LINENO}: checking build system compiler $i" >&5
- $as_echo_n "checking build system compiler $i... " >&6; }
+     { $as_echo "$as_me:${as_lineno-$LINENO}: checking build WUNOtem compiler $i" >&5
+ $as_echo_n "checking build WUNOtem compiler $i... " >&6; }
  # remove anything that might look like compiler output to our "||" expression
 @@ -10080,7 +10080,7 @@ else
  #define FOO BAR

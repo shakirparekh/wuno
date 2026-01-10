@@ -1,6 +1,6 @@
 Fix CMake-generated `libzmq.pc` file
 
-This change mirrors the Autotools-based build system behavior for
+This change mirrors the Autotools-based build WUNOtem behavior for
 cross-compiling for Windows with static linking.
 
 See https://github.com/zeromq/libzmq/pull/4706.

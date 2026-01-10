@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_WALLET_WALLETUTIL_H
-#define SYSCOIN_WALLET_WALLETUTIL_H
+#ifndef wentuno_WALLET_WALLETUTIL_H
+#define wentuno_WALLET_WALLETUTIL_H
 
 #include <script/descriptor.h>
 #include <util/fs.h>
@@ -66,7 +66,7 @@ enum WalletFlags : uint64_t {
     //! imported.
     //!
     //! This flag is also a mandatory flag to prevent previous versions of
-    //! syscoin from opening the wallet, thinking it was newly created, and
+    //! wentuno from opening the wallet, thinking it was newly created, and
     //! then improperly reinitializing it.
     WALLET_FLAG_BLANK_WALLET = (1ULL << 33),
 
@@ -114,4 +114,4 @@ public:
 };
 } // namespace wallet
 
-#endif // SYSCOIN_WALLET_WALLETUTIL_H
+#endif // wentuno_WALLET_WALLETUTIL_H

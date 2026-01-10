@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_TXDB_H
-#define SYSCOIN_TXDB_H
+#ifndef wentuno_TXDB_H
+#define wentuno_TXDB_H
 
 #include <coins.h>
 #include <dbwrapper.h>
@@ -33,7 +33,7 @@ static const int64_t nMinDbCache = 4;
 static const int64_t nMaxBlockDBCache = 2;
 //! Max memory allocated to block tree DB specific cache, if -txindex (MiB)
 // Unlike for the UTXO database, for the txindex scenario the leveldb cache make
-// a meaningful difference: https://github.com/syscoin/syscoin/pull/8273#issuecomment-229601991
+// a meaningful difference: https://github.com/wentuno/wentuno/pull/8273#issuecomment-229601991
 static const int64_t nMaxTxIndexCache = 1024;
 //! Max memory allocated to all block filter index caches combined in MiB.
 static const int64_t max_filter_index_cache = 1024;
@@ -73,8 +73,8 @@ public:
     //! Dynamically alter the underlying leveldb cache size.
     void ResizeCache(size_t new_cache_size) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
 
-    //! @returns filesystem path to on-disk storage or std::nullopt if in memory.
+    //! @returns fileWUNOtem path to on-disk storage or std::nullopt if in memory.
     std::optional<fs::path> StoragePath() { return m_db->StoragePath(); }
 };
 
-#endif // SYSCOIN_TXDB_H
+#endif // wentuno_TXDB_H

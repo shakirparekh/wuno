@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_INDEX_BASE_H
-#define SYSCOIN_INDEX_BASE_H
+#ifndef wentuno_INDEX_BASE_H
+#define wentuno_INDEX_BASE_H
 
 #include <dbwrapper.h>
 #include <interfaces/chain.h>
@@ -162,4 +162,4 @@ public:
     IndexSummary GetSummary() const;
 };
 
-#endif // SYSCOIN_INDEX_BASE_H
+#endif // wentuno_INDEX_BASE_H

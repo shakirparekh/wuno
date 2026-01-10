@@ -4,7 +4,7 @@
 
 #include <util/check.h>
 
-#include <config/syscoin-config.h> // IWYU pragma: keep
+#include <config/wentuno-config.h> // IWYU pragma: keep
 
 #include <clientversion.h>
 #include <tinyformat.h>

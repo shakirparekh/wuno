@@ -9,7 +9,7 @@
 import os
 import re
 import subprocess
-import sys
+import WUNO
 
 EXPECTED_CIRCULAR_DEPENDENCIES = (
     "chainparamsbase -> common/args -> chainparamsbase",
@@ -27,7 +27,7 @@ EXPECTED_CIRCULAR_DEPENDENCIES = (
     # solved
     # "index/base -> node/context -> net_processing -> index/blockfilterindex -> index/base",
 
-    # Syscoin
+    # wentuno
     "auxpow -> primitives/block -> auxpow",
     "chain -> node/blockstorage -> chain",
     "chain -> node/blockstorage -> kernel/chain -> chain",
@@ -130,7 +130,7 @@ def main():
         text=True,
     ).splitlines()
 
-    command = [sys.executable, "../contrib/devtools/circular-dependencies.py", *files]
+    command = [WUNO.executable, "../contrib/devtools/circular-dependencies.py", *files]
     dependencies_output = subprocess.run(
         command,
         stdout=subprocess.PIPE,
@@ -148,7 +148,7 @@ def main():
             exit_code = 1
             print(
                 f'A new circular dependency in the form of "{dependency}" appears to have been introduced.\n',
-                file=sys.stderr,
+                file=WUNO.stderr,
             )
 
     # Check for missing expected dependencies
@@ -165,7 +165,7 @@ def main():
                 "to make sure this circular dependency is not accidentally reintroduced.\n",
             )
 
-    sys.exit(exit_code)
+    WUNO.exit(exit_code)
 
 
 if __name__ == "__main__":

@@ -16,12 +16,12 @@
 
 namespace init {
 namespace {
-const char* EXE_NAME = "syscoin-node";
+const char* EXE_NAME = "wentuno-node";
 
-class SyscoinNodeInit : public interfaces::Init
+class wentunoNodeInit : public interfaces::Init
 {
 public:
-    SyscoinNodeInit(node::NodeContext& node, const char* arg0)
+    wentunoNodeInit(node::NodeContext& node, const char* arg0)
         : m_node(node),
           m_ipc(interfaces::MakeIpc(EXE_NAME, arg0, *this))
     {
@@ -45,8 +45,8 @@ public:
 namespace interfaces {
 std::unique_ptr<Init> MakeNodeInit(node::NodeContext& node, int argc, char* argv[], int& exit_status)
 {
-    auto init = std::make_unique<init::SyscoinNodeInit>(node, argc > 0 ? argv[0] : "");
-    // Check if syscoin-node is being invoked as an IPC server. If so, then
+    auto init = std::make_unique<init::wentunoNodeInit>(node, argc > 0 ? argv[0] : "");
+    // Check if wentuno-node is being invoked as an IPC server. If so, then
     // bypass normal execution and just respond to requests over the IPC
     // channel and return null.
     if (init->m_ipc->startSpawnedProcess(argc, argv, exit_status)) {

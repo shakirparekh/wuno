@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_TIMEDATA_H
-#define SYSCOIN_TIMEDATA_H
+#ifndef wentuno_TIMEDATA_H
+#define wentuno_TIMEDATA_H
 
 #include <util/time.h>
 
@@ -83,4 +83,4 @@ void AddTimeData(const CNetAddr& ip, int64_t nTime);
  */
 void TestOnlyResetTimeData();
 
-#endif // SYSCOIN_TIMEDATA_H
+#endif // wentuno_TIMEDATA_H

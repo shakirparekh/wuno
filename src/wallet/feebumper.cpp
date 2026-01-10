@@ -2,7 +2,7 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <consensus/validation.h>
 #include <interfaces/chain.h>
 #include <policy/fees.h>
@@ -262,7 +262,7 @@ Result CreateRateBumpTransaction(CWallet& wallet, const uint256& txid, const CCo
         if (original_change_index.has_value() ?  original_change_index.value() == i : OutputIsChange(wallet, output)) {
             new_coin_control.destChange = dest;
         } else {
-            // SYSCOIN
+            // wentuno
             if(new_coin_control.m_nevmdata.empty() && !output.vchNEVMData.empty()) {
                 new_coin_control.m_nevmdata = output.vchNEVMData;
             }

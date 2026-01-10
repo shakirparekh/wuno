@@ -8,8 +8,8 @@
 #include <type_traits>
 #include <vector>
 
-#ifndef SYSCOIN_NET_PERMISSIONS_H
-#define SYSCOIN_NET_PERMISSIONS_H
+#ifndef wentuno_NET_PERMISSIONS_H
+#define wentuno_NET_PERMISSIONS_H
 
 struct bilingual_str;
 
@@ -87,4 +87,4 @@ public:
     CSubNet m_subnet;
 };
 
-#endif // SYSCOIN_NET_PERMISSIONS_H
+#endif // wentuno_NET_PERMISSIONS_H

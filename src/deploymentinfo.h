@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_DEPLOYMENTINFO_H
-#define SYSCOIN_DEPLOYMENTINFO_H
+#ifndef wentuno_DEPLOYMENTINFO_H
+#define wentuno_DEPLOYMENTINFO_H
 
 #include <consensus/params.h>
 
@@ -29,4 +29,4 @@ inline std::string DeploymentName(Consensus::DeploymentPos pos)
 
 std::optional<Consensus::BuriedDeployment> GetBuriedDeployment(const std::string_view deployment_name);
 
-#endif // SYSCOIN_DEPLOYMENTINFO_H
+#endif // wentuno_DEPLOYMENTINFO_H

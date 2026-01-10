@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_VALIDATIONINTERFACE_H
-#define SYSCOIN_VALIDATIONINTERFACE_H
+#ifndef wentuno_VALIDATIONINTERFACE_H
+#define wentuno_VALIDATIONINTERFACE_H
 
 #include <kernel/cs_main.h>
 #include <kernel/chain.h>
@@ -20,7 +20,7 @@ class CBlockIndex;
 struct CBlockLocator;
 class CValidationInterface;
 class CScheduler;
-// SYSCOIN
+// wentuno
 class ChainstateManager;
 class CDeterministicMNList;
 class CDeterministicMNListDiff;
@@ -183,7 +183,7 @@ protected:
     virtual void NewPoWValidBlock(const CBlockIndex *pindex, const std::shared_ptr<const CBlock>& block) {};
     friend class CMainSignals;
 
-    // SYSCOIN
+    // wentuno
     virtual void NotifyHeaderTip(const CBlockIndex *pindexNew) {}
     virtual void NotifyGovernanceVote(const uint256& vote) {}
     virtual void NotifyGovernanceObject(const uint256 &object) {}
@@ -218,7 +218,7 @@ public:
 
 
     void UpdatedBlockTip(const CBlockIndex *, const CBlockIndex *, ChainstateManager&, bool fInitialDownload);
-    // SYSCOIN
+    // wentuno
     void NotifyHeaderTip(const CBlockIndex *pindexNew);
     void TransactionAddedToMempool(const CTransactionRef&, uint64_t mempool_sequence);
     void TransactionRemovedFromMempool(const CTransactionRef&, MemPoolRemovalReason, uint64_t mempool_sequence);
@@ -239,4 +239,4 @@ public:
 
 CMainSignals& GetMainSignals();
 
-#endif // SYSCOIN_VALIDATIONINTERFACE_H
+#endif // wentuno_VALIDATIONINTERFACE_H

@@ -3,19 +3,19 @@
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 
 class TestShell:
-    """Wrapper Class for SyscoinTestFramework.
+    """Wrapper Class for wentunoTestFramework.
 
-    The TestShell class extends the SyscoinTestFramework
+    The TestShell class extends the wentunoTestFramework
     rpc & daemon process management functionality to external
     python environments.
 
     It is a singleton class, which ensures that users only
     start a single TestShell at a time."""
 
-    class __TestShell(SyscoinTestFramework):
+    class __TestShell(wentunoTestFramework):
         def add_options(self, parser):
             self.add_wallet_options(parser)
 
@@ -31,7 +31,7 @@ class TestShell:
                 return
 
             # Num_nodes parameter must be set
-            # by SyscoinTestFramework child class.
+            # by wentunoTestFramework child class.
             self.num_nodes = 1
 
             # User parameters override default values.

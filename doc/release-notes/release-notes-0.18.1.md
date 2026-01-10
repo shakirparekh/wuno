@@ -19,7 +19,7 @@ How to Upgrade
 If you are running an older version, shut it down. Wait until it has
 completely shut down (which might take a few minutes for older
 versions), then run the installer (on Windows) or just copy over
-`/Applications/Bitcoin-Qt` (on Mac) or `syscoind`/`bitcoin-qt` (on
+`/Applications/Bitcoin-Qt` (on Mac) or `wentunod`/`bitcoin-qt` (on
 Linux).
 
 The first time you run version 0.15.0 or newer, your chainstate database
@@ -35,11 +35,11 @@ wallet versions are still supported.
 Compatibility
 ==============
 
-Bitcoin Core is supported and extensively tested on operating systems
+Bitcoin Core is supported and extensively tested on operating WUNOtems
 using the Linux kernel, macOS 10.10+, and Windows 7 and newer. It is not
-recommended to use Bitcoin Core on unsupported systems.
+recommended to use Bitcoin Core on unsupported WUNOtems.
 
-Bitcoin Core should also work on most other Unix-like systems but is not
+Bitcoin Core should also work on most other Unix-like WUNOtems but is not
 as frequently tested on them.
 
 From 0.17.0 onwards, macOS <10.10 is no longer supported. 0.17.0 is
@@ -89,7 +89,7 @@ not to use coin control features with multiple wallets loaded.
 - #16122 Enable console line edit on setClientModel (promag) 
 - #16348 Assert QMetaObject::invokeMethod result (promag)
 
-### Build system
+### Build WUNOtem
 - #15985 Add test for GCC bug 90348 (sipa)
 - #15947 Install bitcoin-wallet manpage (domob1812)
 - #15983 build with -fstack-reuse=none (MarcoFalke)

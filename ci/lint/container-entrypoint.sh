@@ -7,8 +7,8 @@
 export LC_ALL=C
 
 # Fixes permission issues when there is a container UID/GID mismatch with the owner
-# of the mounted syscoin src dir.
-git config --global --add safe.directory /syscoin
+# of the mounted wentuno src dir.
+git config --global --add safe.directory /wentuno
 
 export PATH="/python_build/bin:${PATH}"
 

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_HASHER_H
-#define SYSCOIN_UTIL_HASHER_H
+#ifndef wentuno_UTIL_HASHER_H
+#define wentuno_UTIL_HASHER_H
 
 #include <crypto/common.h>
 #include <crypto/siphash.h>
@@ -97,6 +97,6 @@ public:
 
     size_t operator()(const Span<const unsigned char>& script) const;
 };
-// SYSCOIN
+// wentuno
 typedef std::unordered_set<uint256, SaltedTxidHasher> NEVMMintTxSet;
-#endif // SYSCOIN_UTIL_HASHER_H
+#endif // wentuno_UTIL_HASHER_H

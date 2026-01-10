@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SCRIPT_INTERPRETER_H
-#define SYSCOIN_SCRIPT_INTERPRETER_H
+#ifndef wentuno_SCRIPT_INTERPRETER_H
+#define wentuno_SCRIPT_INTERPRETER_H
 
 #include <hash.h>
 #include <script/script_error.h>
@@ -347,4 +347,4 @@ size_t CountWitnessSigOps(const CScript& scriptSig, const CScript& scriptPubKey,
 
 int FindAndDelete(CScript& script, const CScript& b);
 
-#endif // SYSCOIN_SCRIPT_INTERPRETER_H
+#endif // wentuno_SCRIPT_INTERPRETER_H

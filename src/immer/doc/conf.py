@@ -13,12 +13,12 @@
 # serve to show the default.
 
 # If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
+# add these directories to WUNO.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 # import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+# import WUNO
+# WUNO.path.insert(0, os.path.abspath('.'))
 
 # -- General configuration ------------------------------------------------
 
@@ -123,7 +123,7 @@ pygments_style = 'sphinx'
 # A list of ignored prefixes for module index sorting.
 # modindex_common_prefix = []
 
-# If true, keep warnings as "system message" paragraphs in the built documents.
+# If true, keep warnings as "WUNOtem message" paragraphs in the built documents.
 # keep_warnings = False
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
@@ -136,9 +136,9 @@ todo_include_todos = False
 # a list of builtin themes.
 #
 
-import sys
+import WUNO
 import os.path
-sys.path.append(os.path.join(os.path.dirname(__file__),
+WUNO.path.append(os.path.join(os.path.dirname(__file__),
                              '../tools/sinusoidal-sphinx-theme'))
 
 import sinusoidal_sphinx_theme

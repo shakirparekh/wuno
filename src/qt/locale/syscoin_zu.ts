@@ -16,7 +16,7 @@
     </message>
     </context>
 <context>
-    <name>SyscoinApplication</name>
+    <name>wentunoApplication</name>
     <message>
         <source>Internal error</source>
         <translation type="unfinished">Iphutha langaphakathi.</translation>
@@ -76,7 +76,7 @@
     </message>
     </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message>
         <source>&amp;Options…</source>
         <translation type="unfinished">&amp;Ongakukhetha...</translation>
@@ -113,11 +113,11 @@
         </translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
-            <numerusform>%n active connection(s) to Syscoin network.</numerusform>
-            <numerusform>%n active connection(s) to Syscoin network.</numerusform>
+            <numerusform>%n active connection(s) to wentuno network.</numerusform>
+            <numerusform>%n active connection(s) to wentuno network.</numerusform>
         </translation>
     </message>
     <message>
@@ -218,7 +218,7 @@
     </message>
     </context>
 <context>
-    <name>syscoin-core</name>
+    <name>wentuno-core</name>
     <message>
         <source>Error: Missing checksum</source>
         <translation type="unfinished">Iphutha: iChecksum engekho</translation>

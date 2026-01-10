@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_THREAD_H
-#define SYSCOIN_UTIL_THREAD_H
+#ifndef wentuno_UTIL_THREAD_H
+#define wentuno_UTIL_THREAD_H
 
 #include <functional>
 #include <string>
@@ -16,4 +16,4 @@ void TraceThread(std::string_view thread_name, std::function<void()> thread_func
 
 } // namespace util
 
-#endif // SYSCOIN_UTIL_THREAD_H
+#endif // wentuno_UTIL_THREAD_H

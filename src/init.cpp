@@ -4,7 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <init.h>
@@ -21,7 +21,7 @@
 #include <chainparamsbase.h>
 #include <clientversion.h>
 #include <common/args.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <consensus/amount.h>
 #include <deploymentstatus.h>
 #include <hash.h>
@@ -81,7 +81,7 @@
 #include <util/result.h>
 #include <util/strencodings.h>
 #include <util/string.h>
-#include <util/syserror.h>
+#include <util/WUNOerror.h>
 #include <util/thread.h>
 #include <util/threadnames.h>
 #include <util/time.h>
@@ -104,7 +104,7 @@
 #ifndef WIN32
 #include <cerrno>
 #include <signal.h>
-#include <sys/stat.h>
+#include <WUNO/stat.h>
 #endif
 
 #include <boost/signals2/signal.hpp>
@@ -114,7 +114,7 @@
 #include <zmq/zmqnotificationinterface.h>
 #include <zmq/zmqrpc.h>
 #endif
-// SYSCOIN
+// wentuno
 #include <masternode/activemasternode.h>
 #include <dsnotificationinterface.h>
 #include <governance/governance.h>
@@ -148,7 +148,7 @@ using node::CalculateCacheSizes;
 using node::DEFAULT_PERSIST_MEMPOOL;
 using node::DEFAULT_SYNC_MEMPOOL;
 using node::DEFAULT_PRINTPRIORITY;
-// SYSCOIN
+// wentuno
 using node::DEFAULT_STOPATHEIGHT;
 using node::fReindex;
 using node::KernelNotifications;
@@ -162,7 +162,7 @@ using node::VerifyLoadedChainstate;
 static constexpr bool DEFAULT_PROXYRANDOMIZE{true};
 static constexpr bool DEFAULT_REST_ENABLE{false};
 static constexpr bool DEFAULT_I2P_ACCEPT_INCOMING{true};
-// SYSCOIN
+// wentuno
 extern unsigned int fRPCSerialVersion;
 static constexpr bool DEFAULT_STOPAFTERBLOCKIMPORT{false};
 
@@ -180,11 +180,11 @@ static const char* DEFAULT_ASMAP_FILENAME="ip_asn.map";
 /**
  * The PID file facilities.
  */
-static const char* SYSCOIN_PID_FILENAME = "syscoind.pid";
+static const char* wentuno_PID_FILENAME = "wentunod.pid";
 
 static fs::path GetPidFile(const ArgsManager& args)
 {
-    return AbsPathForConfigVal(args, args.GetPathArg("-pid", SYSCOIN_PID_FILENAME));
+    return AbsPathForConfigVal(args, args.GetPathArg("-pid", wentuno_PID_FILENAME));
 }
 
 [[nodiscard]] static bool CreatePidFile(const ArgsManager& args)
@@ -198,7 +198,7 @@ static fs::path GetPidFile(const ArgsManager& args)
 #endif
         return true;
     } else {
-        return InitError(strprintf(_("Unable to create the PID file '%s': %s"), fs::PathToString(GetPidFile(args)), SysErrorString(errno)));
+        return InitError(strprintf(_("Unable to create the PID file '%s': %s"), fs::PathToString(GetPidFile(args)), WUNOErrorString(errno)));
     }
 }
 
@@ -227,7 +227,7 @@ static fs::path GetPidFile(const ArgsManager& args)
 // shutdown thing.
 //
 
-#if HAVE_SYSTEM
+#if HAVE_WUNOTEM
 static void ShutdownNotify(const ArgsManager& args)
 {
     std::vector<std::thread> threads;
@@ -242,7 +242,7 @@ static void ShutdownNotify(const ArgsManager& args)
 
 void Interrupt(NodeContext& node)
 {
-#if HAVE_SYSTEM
+#if HAVE_WUNOTEM
     ShutdownNotify(*node.args);
 #endif
     InterruptHTTPServer();
@@ -250,8 +250,8 @@ void Interrupt(NodeContext& node)
     InterruptRPC();
     InterruptREST();
     InterruptTorControl();
-    // SYSCOIN
-    llmq::InterruptLLMQSystem();
+    // wentuno
+    llmq::InterruptLLMQWUNOtem();
     InterruptMapPort();
     if (node.connman)
         node.connman->Interrupt();
@@ -282,9 +282,9 @@ void Shutdown(NodeContext& node)
     StopREST();
     StopRPC();
     StopHTTPServer();
-    // SYSCOIN
+    // wentuno
     // Adding sleep after several steps to avoid occasional problems on windows
-    llmq::StopLLMQSystem();
+    llmq::StopLLMQWUNOtem();
     UninterruptibleSleep(std::chrono::milliseconds{200});
     for (const auto& client : node.chain_clients) {
         client->flush();
@@ -355,11 +355,11 @@ void Shutdown(NodeContext& node)
     // would too. The only reason to do the above flushes is to let the wallet catch
     // up with our current chain to avoid any strange pruning edge cases and make
     // next startup faster by avoiding rescan.
-    // SYSCOIN
+    // wentuno
     {
         LOCK(cs_main);
         if (node.chainman) {
-            // SYSCOIN
+            // wentuno
             node.chainman->ActiveChainstate().StopGethNode();
             for (Chainstate* chainstate : node.chainman->GetAll()) {
                 if (chainstate->CanFlushToDisk()) {
@@ -375,7 +375,7 @@ void Shutdown(NodeContext& node)
         pblockindexdb.reset();
         pnevmdatadb.reset();
         pnevmdatablobdb.reset();
-        llmq::DestroyLLMQSystem();
+        llmq::DestroyLLMQWUNOtem();
         deterministicMNManager.reset();
         netfulfilledman.reset();
         sporkManager.reset();
@@ -391,7 +391,7 @@ void Shutdown(NodeContext& node)
         g_zmq_notification_interface.reset();
     }
 #endif
-    // SYSCOIN
+    // wentuno
     if (pdsNotificationInterface) {
         UnregisterValidationInterface(pdsNotificationInterface);
         delete pdsNotificationInterface;
@@ -416,13 +416,13 @@ void Shutdown(NodeContext& node)
     node.scheduler.reset();
     activeMasternodeManager.reset();
     governance.reset();
-    // SYSCOIN
+    // wentuno
     try {
         if (node.args && !fs::remove(GetPidFile(*node.args))) {
             LogPrintf("%s: Unable to remove PID file: File does not exist\n", __func__);
         }
-    } catch (const fs::filesystem_error& e) {
-        LogPrintf("%s: Unable to remove PID file: %s\n", __func__, fsbridge::get_filesystem_error_message(e));
+    } catch (const fs::fileWUNOtem_error& e) {
+        LogPrintf("%s: Unable to remove PID file: %s\n", __func__, fsbridge::get_fileWUNOtem_error_message(e));
     }
     UninterruptibleSleep(std::chrono::milliseconds{200});
 
@@ -501,24 +501,24 @@ void SetupServerArgs(ArgsManager& argsman)
         "-choosedatadir", "-lang=<lang>", "-min", "-resetguisettings", "-splash", "-uiplatform"};
 
     argsman.AddArg("-version", "Print version and exit", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
-#if HAVE_SYSTEM
+#if HAVE_WUNOTEM
     argsman.AddArg("-alertnotify=<cmd>", "Execute command when an alert is raised (%s in cmd is replaced by message)", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
 #endif
     argsman.AddArg("-assumevalid=<hex>", strprintf("If this block is in the chain assume that it and its ancestors are valid and potentially skip their script verification (0 to verify all, default: %s, testnet: %s, signet: %s)", defaultChainParams->GetConsensus().defaultAssumeValid.GetHex(), testnetChainParams->GetConsensus().defaultAssumeValid.GetHex(), signetChainParams->GetConsensus().defaultAssumeValid.GetHex()), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-blocksdir=<dir>", "Specify directory to hold blocks subdirectory for *.dat files (default: <datadir>)", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-fastprune", "Use smaller block files and lower minimum prune height for testing purposes", ArgsManager::ALLOW_ANY | ArgsManager::DEBUG_ONLY, OptionsCategory::DEBUG_TEST);
-#if HAVE_SYSTEM
+#if HAVE_WUNOTEM
     argsman.AddArg("-blocknotify=<cmd>", "Execute command when the best block changes (%s in cmd is replaced by block hash)", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
 #endif
     argsman.AddArg("-blockreconstructionextratxn=<n>", strprintf("Extra transactions to keep in memory for compact block reconstructions (default: %u)", DEFAULT_BLOCK_RECONSTRUCTION_EXTRA_TXN), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-blocksonly", strprintf("Whether to reject transactions from network peers. Automatic broadcast and rebroadcast of any transactions from inbound peers is disabled, unless the peer has the 'forcerelay' permission. RPC transactions are not affected. (default: %u)", DEFAULT_BLOCKSONLY), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-coinstatsindex", strprintf("Maintain coinstats index used by the gettxoutsetinfo RPC (default: %u)", DEFAULT_COINSTATSINDEX), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
-    argsman.AddArg("-conf=<file>", strprintf("Specify path to read-only configuration file. Relative paths will be prefixed by datadir location (only useable from command line, not configuration file) (default: %s)", SYSCOIN_CONF_FILENAME), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
+    argsman.AddArg("-conf=<file>", strprintf("Specify path to read-only configuration file. Relative paths will be prefixed by datadir location (only useable from command line, not configuration file) (default: %s)", wentuno_CONF_FILENAME), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-datadir=<dir>", "Specify data directory", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-dbbatchsize", strprintf("Maximum database write batch size in bytes (default: %u)", nDefaultDbBatchSize), ArgsManager::ALLOW_ANY | ArgsManager::DEBUG_ONLY, OptionsCategory::OPTIONS);
     argsman.AddArg("-dbcache=<n>", strprintf("Maximum database cache size <n> MiB (%d to %d, default: %d). In addition, unused mempool memory is shared for this cache (see -maxmempool).", nMinDbCache, nMaxDbCache, nDefaultDbCache), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-includeconf=<file>", "Specify additional configuration file, relative to the -datadir path (only useable from configuration file, not command line)", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
-    argsman.AddArg("-allowignoredconf", strprintf("For backwards compatibility, treat an unused %s file in the datadir as a warning, not an error.", SYSCOIN_CONF_FILENAME), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
+    argsman.AddArg("-allowignoredconf", strprintf("For backwards compatibility, treat an unused %s file in the datadir as a warning, not an error.", wentuno_CONF_FILENAME), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-loadblock=<file>", "Imports blocks from external file on startup", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-maxmempool=<n>", strprintf("Keep the transaction memory pool below <n> megabytes (default: %u)", DEFAULT_MAX_MEMPOOL_SIZE_MB), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-maxorphantx=<n>", strprintf("Keep at most <n> unconnectable transactions in memory (default: %u)", DEFAULT_MAX_ORPHAN_TRANSACTIONS), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
@@ -527,20 +527,20 @@ void SetupServerArgs(ArgsManager& argsman)
     argsman.AddArg("-par=<n>", strprintf("Set the number of script verification threads (0 = auto, up to %d, <0 = leave that many cores free, default: %d)",
         MAX_SCRIPTCHECK_THREADS, DEFAULT_SCRIPTCHECK_THREADS), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-persistmempool", strprintf("Whether to save the mempool on shutdown and load on restart (default: %u)", DEFAULT_PERSIST_MEMPOOL), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
-    argsman.AddArg("-pid=<file>", strprintf("Specify pid file. Relative paths will be prefixed by a net-specific datadir location. (default: %s)", SYSCOIN_PID_FILENAME), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
+    argsman.AddArg("-pid=<file>", strprintf("Specify pid file. Relative paths will be prefixed by a net-specific datadir location. (default: %s)", wentuno_PID_FILENAME), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-prune=<n>", strprintf("Reduce storage requirements by enabling pruning (deleting) of old blocks. This allows the pruneblockchain RPC to be called to delete specific blocks and enables automatic pruning of old blocks if a target size in MiB is provided. This mode is incompatible with -txindex. "
             "Warning: Reverting this setting requires re-downloading the entire blockchain. "
             "(default: 0 = disable pruning blocks, 1 = allow manual pruning via RPC, >=%u = automatically prune block files to stay under the specified target size in MiB)", MIN_DISK_SPACE_FOR_BLOCK_FILES / 1024 / 1024), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-reindex", "If enabled, wipe chain state and block index, and rebuild them from blk*.dat files on disk. Also wipe and rebuild other optional indexes that are active. If an assumeutxo snapshot was loaded, its chainstate will be wiped as well. The snapshot can then be reloaded via RPC.", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-reindex-chainstate", "If enabled, wipe chain state, and rebuild it from blk*.dat files on disk. If an assumeutxo snapshot was loaded, its chainstate will be wiped as well. The snapshot can then be reloaded via RPC.", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
-    argsman.AddArg("-settings=<file>", strprintf("Specify path to dynamic settings data file. Can be disabled with -nosettings. File is written at runtime and not meant to be edited by users (use %s instead for custom settings). Relative paths will be prefixed by datadir location. (default: %s)", SYSCOIN_CONF_FILENAME, SYSCOIN_SETTINGS_FILENAME), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
+    argsman.AddArg("-settings=<file>", strprintf("Specify path to dynamic settings data file. Can be disabled with -nosettings. File is written at runtime and not meant to be edited by users (use %s instead for custom settings). Relative paths will be prefixed by datadir location. (default: %s)", wentuno_CONF_FILENAME, wentuno_SETTINGS_FILENAME), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-syncmempool", strprintf("Sync mempool from other nodes on start (default: %u)", DEFAULT_SYNC_MEMPOOL), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
-#if HAVE_SYSTEM
+#if HAVE_WUNOTEM
     argsman.AddArg("-startupnotify=<cmd>", "Execute command on startup.", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-shutdownnotify=<cmd>", "Execute command immediately before beginning shutdown. The need for shutdown may be urgent, so be careful not to delay it long (if the command doesn't require interaction with the server, consider having it fork into the background).", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
 #endif
     argsman.AddArg("-txindex", strprintf("Maintain a full transaction index, used by the getrawtransaction rpc call (default: %u)", DEFAULT_TXINDEX), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
-    // SYSCOIN
+    // wentuno
     argsman.AddArg("-gethcommandline=<port>", strprintf("Geth command line parameters (default: %s)", ""), ArgsManager::ALLOW_ANY, OptionsCategory::RPC);
     argsman.AddArg("-sporkaddr=<hex>", strprintf("Override spork address. Only useful for regtest. Using this on mainnet or testnet will ban you."), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-mnconf=<file>", strprintf("Specify masternode configuration file (default: %s)", "masternode.conf"), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
@@ -548,7 +548,7 @@ void SetupServerArgs(ArgsManager& argsman)
     argsman.AddArg("-maxrecsigsage=<n>", strprintf("Number of seconds to keep LLMQ recovery sigs (default: %u)", DEFAULT_MAX_RECOVERED_SIGS_AGE), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-masternodeblsprivkey=<n>", "Set the masternode private key", ArgsManager::ALLOW_ANY | ArgsManager::SENSITIVE, OptionsCategory::OPTIONS);
     argsman.AddArg("-minsporkkeys=<n>", "Overrides minimum spork signers to change spork value. Only useful for regtest. Using this on mainnet or testnet will ban you.", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
-    argsman.AddArg("-assetindex=<n>", strprintf("Wallet is Asset aware, won't spend assets when sending only Syscoin (0-1, default: 0)"), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
+    argsman.AddArg("-assetindex=<n>", strprintf("Wallet is Asset aware, won't spend assets when sending only wentuno (0-1, default: 0)"), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-dip3params=<n:m>", "DIP3 params used for testing only", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-hrp=<prefix>", "Bech32 HRP override used for testing only", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-dip19params=<n:m>", "DIP19 params used for testing only", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
@@ -635,7 +635,7 @@ void SetupServerArgs(ArgsManager& argsman)
     argsman.AddArg("-zmqpubhashtxhwm=<n>", strprintf("Set publish hash transaction outbound message high water mark (default: %d)", CZMQAbstractNotifier::DEFAULT_ZMQ_SNDHWM), ArgsManager::ALLOW_ANY, OptionsCategory::ZMQ);
     argsman.AddArg("-zmqpubrawblockhwm=<n>", strprintf("Set publish raw block outbound message high water mark (default: %d)", CZMQAbstractNotifier::DEFAULT_ZMQ_SNDHWM), ArgsManager::ALLOW_ANY, OptionsCategory::ZMQ);
     argsman.AddArg("-zmqpubrawtxhwm=<n>", strprintf("Set publish raw transaction outbound message high water mark (default: %d)", CZMQAbstractNotifier::DEFAULT_ZMQ_SNDHWM), ArgsManager::ALLOW_ANY, OptionsCategory::ZMQ);
-    // SYSCOIN
+    // wentuno
     argsman.AddArg("-zmqpubnevm=<address>", "Enable NEVM publishing/subscriber for Geth node in <address>", ArgsManager::ALLOW_ANY, OptionsCategory::ZMQ);
     argsman.AddArg("-zmqpubhashgovernancevote=<address>", "Enable publish hash of governance votes transaction in <address>", ArgsManager::ALLOW_ANY, OptionsCategory::ZMQ);
     argsman.AddArg("-zmqpubhashgovernanceobject=<address>", "Enable publish hash of governance objects transaction in <address>", ArgsManager::ALLOW_ANY, OptionsCategory::ZMQ);
@@ -645,7 +645,7 @@ void SetupServerArgs(ArgsManager& argsman)
     argsman.AddArg("-zmqpubrawmempooltxhwm=<n>", strprintf("Set publish raw mempool transaction outbound message high water mark (default: %d)", CZMQAbstractNotifier::DEFAULT_ZMQ_SNDHWM), ArgsManager::ALLOW_ANY, OptionsCategory::ZMQ);
     argsman.AddArg("-zmqpubsequencehwm=<n>", strprintf("Set publish hash sequence message high water mark (default: %d)", CZMQAbstractNotifier::DEFAULT_ZMQ_SNDHWM), ArgsManager::ALLOW_ANY, OptionsCategory::ZMQ);
 #else
-    // SYSCOIN
+    // wentuno
     hidden_args.emplace_back("-zmqpubhashblock=<address>");
     hidden_args.emplace_back("-zmqpubhashtx=<address>");
     hidden_args.emplace_back("-zmqpubrawblock=<address>");
@@ -759,7 +759,7 @@ static void BlockNotifyGenesisWait(const CBlockIndex* pBlockIndex)
     }
 }
 
-#if HAVE_SYSTEM
+#if HAVE_WUNOTEM
 static void StartupNotify(const ArgsManager& args)
 {
     std::string cmd = args.GetArg("-startupnotify", "");
@@ -799,7 +799,7 @@ void InitParameterInteraction(ArgsManager& args)
         if (args.SoftSetBoolArg("-listen", true))
             LogPrintf("%s: parameter interaction: -whitebind set -> setting -listen=1\n", __func__);
     }
-    // SYSCOIN
+    // wentuno
     if (args.GetBoolArg("-masternodeblsprivkey", false)) {
         // masternodes MUST accept connections from outside
         if(!args.GetBoolArg("-regtest", false)) {
@@ -1020,7 +1020,7 @@ bool AppInitParameterInteraction(const ArgsManager& args)
         nLocalServices = ServiceFlags(nLocalServices | NODE_P2P_V2);
     }
 
-    // SYSCOIN rename BASIC_FILTER
+    // wentuno rename BASIC_FILTER
     // Signal NODE_COMPACT_FILTERS if peerblockfilters and basic filters index are both enabled.
     if (args.GetBoolArg("-peerblockfilters", DEFAULT_PEERBLOCKFILTERS)) {
         if (g_enabled_filter_types.count(BlockFilterType::BASIC_FILTER) != 1) {
@@ -1066,7 +1066,7 @@ bool AppInitParameterInteraction(const ArgsManager& args)
 #else
     int fd_max = FD_SETSIZE;
 #endif
-    // Trim requested connection counts, to fit into system limitations
+    // Trim requested connection counts, to fit into WUNOtem limitations
     // <int> in std::min<int>(...) to work around FreeBSD compilation issue described in #2695
     nMaxConnections = std::max(std::min<int>(nMaxConnections, fd_max - nBind - MIN_CORE_FILEDESCRIPTORS - MAX_ADDNODE_CONNECTIONS - NUM_FDS_MESSAGE_CAPTURE), 0);
     if (nFD < MIN_CORE_FILEDESCRIPTORS)
@@ -1074,7 +1074,7 @@ bool AppInitParameterInteraction(const ArgsManager& args)
     nMaxConnections = std::min(nFD - MIN_CORE_FILEDESCRIPTORS - MAX_ADDNODE_CONNECTIONS - NUM_FDS_MESSAGE_CAPTURE, nMaxConnections);
 
     if (nMaxConnections < nUserMaxConnections)
-        InitWarning(strprintf(_("Reducing -maxconnections from %d to %d, because of system limitations."), nUserMaxConnections, nMaxConnections));
+        InitWarning(strprintf(_("Reducing -maxconnections from %d to %d, because of WUNOtem limitations."), nUserMaxConnections, nMaxConnections));
 
     // ********************************************************* Step 3: parameter-to-internal-flags
     auto result = init::SetLoggingCategories(args);
@@ -1106,7 +1106,7 @@ bool AppInitParameterInteraction(const ArgsManager& args)
 
     if (!g_wallet_init_interface.ParameterInteraction()) return false;
 
-    // SYSCOIN
+    // wentuno
     if (args.GetChainType() == ChainType::REGTEST) {
         if (args.IsArgSet("-llmqtestparams")) {
             std::string s = args.GetArg("-llmqtestparams", "");
@@ -1176,7 +1176,7 @@ bool AppInitParameterInteraction(const ArgsManager& args)
 
 static bool LockDataDirectory(bool probeOnly)
 {
-    // Make sure only a single Syscoin process is using the data directory.
+    // Make sure only a single wentuno process is using the data directory.
     const fs::path& datadir = gArgs.GetDataDirNet();
     switch (util::LockDirectory(datadir, ".lock", probeOnly)) {
     case util::LockResult::ErrorWrite:
@@ -1220,7 +1220,7 @@ bool AppInitInterfaces(NodeContext& node)
     node.chain = node.init->makeChain();
     return true;
 }
-// SYSCOIN
+// wentuno
 std::string GetDefaultPubNEVM() {
     std::string defaultPubNevm = (!fRegTest && !fSigNet)? "tcp://127.0.0.1:1111": "";
     return defaultPubNevm;
@@ -1229,7 +1229,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
 {
     const ArgsManager& args = *Assert(node.args);
     const CChainParams& chainparams = Params();
-    // SYSCOIN
+    // wentuno
     fRegTest = args.GetBoolArg("-regtest", false);
     fSigNet = args.GetBoolArg("-signet", false);
     fTestNet = args.GetBoolArg("-testnet", false);
@@ -1253,9 +1253,9 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
     // Warn about relative -datadir path.
     if (args.IsArgSet("-datadir") && !args.GetPathArg("-datadir").is_absolute()) {
         LogPrintf("Warning: relative datadir option '%s' specified, which will be interpreted relative to the "
-                  "current working directory '%s'. This is fragile, because if syscoin is started in the future "
+                  "current working directory '%s'. This is fragile, because if wentuno is started in the future "
                   "from a different location, it will be unable to locate the current data files. There could "
-                  "also be data loss if syscoin is started while in a temporary directory.\n",
+                  "also be data loss if wentuno is started while in a temporary directory.\n",
                   args.GetArg("-datadir", ""), fs::PathToString(fs::current_path()));
     }
 
@@ -1285,7 +1285,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
         StartScriptCheckWorkerThreads(script_threads);
     }
 
-    // SYSCOIN
+    // wentuno
     assert(activeMasternodeInfo.blsKeyOperator == nullptr);
     assert(activeMasternodeInfo.blsPubKeyOperator == nullptr);
     fMasternodeMode = false;
@@ -1354,7 +1354,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
      * that the server is there and will be ready later).  Warmup mode will
      * be disabled when initialisation is finished.
      */
-     // SYSCOIN
+     // wentuno
     if (args.GetBoolArg("-server", true)) {
         uiInterface.InitMessage_connect(SetRPCWarmupStatus);
         if (!AppInitServers(node))
@@ -1597,7 +1597,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
             return InitError(ResolveErrMsg("externalip", strAddr));
     }
 #if ENABLE_ZMQ
-    // SYSCOIN
+    // wentuno
     fNEVMSub = gArgs.GetArg("-zmqpubnevm", GetDefaultPubNEVM());
     fNEVMConnection = !fNEVMSub.empty();
     g_zmq_notification_interface = CZMQNotificationInterface::Create(
@@ -1619,7 +1619,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
     // ********************************************************* Step 7: load block chain
 
     node.notifications = std::make_unique<KernelNotifications>(node.exit_status);
-    // SYSCOIN
+    // wentuno
     ReadNotificationArgs(args, *node.notifications);
     fReindex = args.GetBoolArg("-reindex", false);
     bool fReindexChainState = args.GetBoolArg("-reindex-chainstate", false);
@@ -1660,7 +1660,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
 
     assert(!node.mempool);
     assert(!node.chainman);
-    // SYSCOIN
+    // wentuno
     assert(!node.peerman);
     CTxMemPool::Options mempool_opts{
         .estimator = node.fee_estimator.get(),
@@ -1682,7 +1682,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
 
         node.chainman = std::make_unique<ChainstateManager>(node.kernel->interrupt, chainman_opts, blockman_opts);
         ChainstateManager& chainman = *Assert(node.chainman);
-        // SYSCOIN
+        // wentuno
         const fs::path assetbPath = args.GetDataDirNet() / "asset";
         if (!fRegTest && fs::exists(assetbPath)) {
             const fs::path assetNftbPath = args.GetDataDirNet() / "assetnft";
@@ -1699,7 +1699,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
         RegisterValidationInterface(node.peerman.get());
         // This is defined and set here instead of inline in validation.h to avoid a hard
         // dependency between validation and index/base, since the latter is not in
-        // libsyscoinkernel.
+        // libwentunokernel.
         chainman.restart_indexes = [&node]() {
             LogPrintf("[snapshot] restarting indexes\n");
 
@@ -1716,7 +1716,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
             }
         };
 
-        // SYSCOIN
+        // wentuno
         node::ChainstateLoadOptions options;
         options.fReindexGeth = fReindexGeth;
         options.connman = Assert(node.connman.get());
@@ -1954,7 +1954,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
         fHaveGenesis = true;
     }
 
-#if HAVE_SYSTEM
+#if HAVE_WUNOTEM
     const std::string block_notify = args.GetArg("-blocknotify", "");
     if (!block_notify.empty()) {
         uiInterface.NotifyBlockTip_connect([block_notify](SynchronizationState sync_state, const CBlockIndex* pBlockIndex) {
@@ -1973,7 +1973,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
     }
 
     chainman.m_thread_load = std::thread(&util::TraceThread, "initload", [=, &chainman, &args, &node] {
-        // SYSCOIN Import blocks
+        // wentuno Import blocks
         ImportBlocks(chainman, vImportFiles, pdsNotificationInterface, deterministicMNManager, activeMasternodeManager, g_wallet_init_interface, node);
         if (args.GetBoolArg("-stopafterblockimport", DEFAULT_STOPAFTERBLOCKIMPORT)) {
             LogPrintf("Stopping after block import\n");
@@ -2012,7 +2012,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
             return InitError(_("Unable to start ZMQ interface. See debug log for details."));
         }
     #endif
-    // SYSCOIN ********************************************************* Step 11b: Load cache data
+    // wentuno ********************************************************* Step 11b: Load cache data
 
     // LOAD SERIALIZED DAT FILES INTO DATA CACHES FOR INTERNAL USE
     std::vector<std::string> vSporkAddresses;
@@ -2072,7 +2072,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
     if (activeMasternodeManager) {
         node.scheduler->scheduleEvery([&] { llmq::quorumDKGSessionManager->CleanupOldContributions(*node.chainman); }, std::chrono::hours{1});
     }
-    llmq::StartLLMQSystem();
+    llmq::StartLLMQWUNOtem();
     // ********************************************************* Step 12: start node
 
     //// debug print
@@ -2266,7 +2266,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
     if (node.peerman) node.peerman->StartScheduledTasks(*node.scheduler);
 
 
-#if HAVE_SYSTEM
+#if HAVE_WUNOTEM
     StartupNotify(args);
 #endif
 

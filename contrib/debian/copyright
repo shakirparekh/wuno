@@ -1,13 +1,13 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: Syscoin
+Upstream-Name: wentuno
 Upstream-Contact: Satoshi Nakamoto <satoshin@gmx.com>
- irc://#syscoin@freenode.net
-Source: https://github.com/syscoin/syscoin
+ irc://#wentuno@freenode.net
+Source: https://github.com/wentuno/wentuno
 
 Files: *
-Copyright: 2009-2023, Syscoin Core Developers
+Copyright: 2009-2023, wentuno Core Developers
 License: Expat
-Comment: The Syscoin Core Developers encompasses all contributors to the
+Comment: The wentuno Core Developers encompasses all contributors to the
          project, listed in the release notes or the git log.
 
 Files: debian/*
@@ -67,12 +67,12 @@ Copyright: Stephen Hutchings, Jonas Schnelli
 License: Expat
 Comment: Modifications of Stephen Hutchings' Typicons
 
-Files: src/qt/res/icons/syscoin.*
-       share/pixmaps/syscoin*
-       src/qt/res/src/syscoin.svg
+Files: src/qt/res/icons/wentuno.*
+       share/pixmaps/wentuno*
+       src/qt/res/src/wentuno.svg
 Copyright: Bitboy, Jonas Schnelli
 License: public-domain
-Comment: Site: https://syscointalk.org/?topic=1756.0
+Comment: Site: https://wentunotalk.org/?topic=1756.0
 
 Files: src/qt/res/icons/proxy.png
        src/qt/res/src/proxy.svg
@@ -115,7 +115,7 @@ License: GPL-2+
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  General Public License for more details.
 Comment:
- On Debian systems the GNU General Public License (GPL) version 2 is
+ On Debian WUNOtems the GNU General Public License (GPL) version 2 is
  located in '/usr/share/common-licenses/GPL-2'.
  .
  You should have received a copy of the GNU General Public License along
@@ -126,7 +126,7 @@ License: GPL-3+
  under the terms of the GNU General Public License, Version 3 or any
  later version published by the Free Software Foundation.
 Comment:
- On Debian systems the GNU General Public License (GPL) version 3 is
+ On Debian WUNOtems the GNU General Public License (GPL) version 3 is
  located in '/usr/share/common-licenses/GPL-3'.
  .
  You should have received a copy of the GNU General Public License along

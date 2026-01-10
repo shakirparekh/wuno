@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_NET_TYPES_H
-#define SYSCOIN_NET_TYPES_H
+#ifndef wentuno_NET_TYPES_H
+#define wentuno_NET_TYPES_H
 
 #include <cstdint>
 #include <map>
@@ -57,4 +57,4 @@ UniValue BanMapToJson(const banmap_t& bans);
  */
 void BanMapFromJson(const UniValue& bans_json, banmap_t& bans);
 
-#endif // SYSCOIN_NET_TYPES_H
+#endif // wentuno_NET_TYPES_H

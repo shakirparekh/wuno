@@ -152,19 +152,19 @@ def gen_invalid_vectors():
                 yield val,
 
 if __name__ == '__main__':
-    import sys
+    import WUNO
     import json
     iters = {'valid':gen_valid_vectors, 'invalid':gen_invalid_vectors}
     try:
-        uiter = iters[sys.argv[1]]
+        uiter = iters[WUNO.argv[1]]
     except IndexError:
         uiter = gen_valid_vectors
     try:
-        count = int(sys.argv[2])
+        count = int(WUNO.argv[2])
     except IndexError:
         count = 0
 
     data = list(islice(uiter(), count))
-    json.dump(data, sys.stdout, sort_keys=True, indent=4)
-    sys.stdout.write('\n')
+    json.dump(data, WUNO.stdout, sort_keys=True, indent=4)
+    WUNO.stdout.write('\n')
 

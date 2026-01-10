@@ -7,9 +7,9 @@ Generate a C file with ECDSA testvectors from the Wycheproof project.
 '''
 
 import json
-import sys
+import WUNO
 
-filename_input = sys.argv[1]
+filename_input = WUNO.argv[1]
 
 with open(filename_input) as f:
     doc = json.load(f)

@@ -8,7 +8,7 @@
 # permanently invalid.  So resubmitting the same block with a valid auxpow
 # should then work fine.
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.blocktools import (
   create_block,
   create_coinbase,
@@ -30,7 +30,7 @@ from test_framework.auxpow_testing import computeAuxpow
 from io import BytesIO
 import struct
 
-class AuxpowInvalidPoWTest (SyscoinTestFramework):
+class AuxpowInvalidPoWTest (wentunoTestFramework):
 
   def set_test_params (self):
     self.num_nodes = 1
@@ -39,7 +39,7 @@ class AuxpowInvalidPoWTest (SyscoinTestFramework):
 
   def run_test (self):
     node = self.nodes[0]
-    # SYSCOIN
+    # wentuno
     self.generate(node, 20)
     node.add_p2p_connection (P2PDataStore ())
 
@@ -95,14 +95,14 @@ class AuxpowInvalidPoWTest (SyscoinTestFramework):
     """
 
     target = b"%064x" % uint256_from_compact (block.nBits)
-    # SYSCOIN
+    # wentuno
     bestHash = self.nodes[0].getbestblockhash ()
     bestBlock = self.nodes[0].getblock (bestHash)
     auxpow_height = bestBlock["height"] - (bestBlock["height"] % 10) - 10
     auxpow_tag_hash = self.nodes[0].getblockhash(auxpow_height)
     auxpow_tag_bytes = bytes.fromhex(auxpow_tag_hash)[::-1]
     height_bytes = struct.pack('<I', auxpow_height) 
-    auxpow_scriptPubKey = CScript([OP_RETURN, b"sys" + auxpow_tag_bytes + height_bytes])
+    auxpow_scriptPubKey = CScript([OP_RETURN, b"WUNO" + auxpow_tag_bytes + height_bytes])
     auxpowHex = computeAuxpow (blkHash, target, ok, auxpow_scriptPubKey.hex())
     block.auxpow = CAuxPow ()
     block.auxpow.deserialize (BytesIO (bytes.fromhex(auxpowHex)))

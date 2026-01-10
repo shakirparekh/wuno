@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <common/args.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <external_signer.h>
 #include <rpc/protocol.h>
 #include <rpc/server.h>
@@ -41,7 +41,7 @@ static RPCHelpMan enumeratesigners()
         [&](const RPCHelpMan& self, const node::JSONRPCRequest& request) -> UniValue
         {
             const std::string command = gArgs.GetArg("-signer", "");
-            if (command == "") throw JSONRPCError(RPC_MISC_ERROR, "Error: restart syscoind with -signer=<cmd>");
+            if (command == "") throw JSONRPCError(RPC_MISC_ERROR, "Error: restart wentunod with -signer=<cmd>");
             const std::string chain = gArgs.GetChainTypeString();
             UniValue signers_res = UniValue::VARR;
             try {

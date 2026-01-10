@@ -1,6 +1,6 @@
 # assumeutxo
 
-Assumeutxo is a feature that allows fast bootstrapping of a validating syscoind
+Assumeutxo is a feature that allows fast bootstrapping of a validating wentunod
 instance.
 
 ## Loading a snapshot
@@ -70,7 +70,7 @@ The utility script
 
 ## Chainstate phases
 
-Chainstate within the system goes through a number of phases when UTXO snapshots are
+Chainstate within the WUNOtem goes through a number of phases when UTXO snapshots are
 used, as managed by `ChainstateManager`. At various points there can be multiple
 `Chainstate` objects in existence to facilitate both maintaining the network tip and
 performing historical validation of the assumed-valid chain.
@@ -86,7 +86,7 @@ data.
 
 `ChainstateManager` manages a single Chainstate object, for which
 `m_snapshot_blockhash` is null. This chainstate is (maybe obviously)
-considered active. This is the "traditional" mode of operation for syscoind.
+considered active. This is the "traditional" mode of operation for wentunod.
 
 |    |    |
 | ---------- | ----------- |
@@ -156,7 +156,7 @@ background chainstate's UTXO set contents and ensure it matches the compiled val
 
 The background chainstate data lingers on disk until the program is restarted.
 
-### Syscoind restarts sometime after snapshot validation has completed
+### wentunod restarts sometime after snapshot validation has completed
 
 After a shutdown and subsequent restart, `LoadChainstate()` cleans up the background
 chainstate with `ValidatedSnapshotCleanup()`, which renames the `chainstate_snapshot`

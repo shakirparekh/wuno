@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_LLMQ_QUORUMS_H
-#define SYSCOIN_LLMQ_QUORUMS_H
+#ifndef wentuno_LLMQ_QUORUMS_H
+#define wentuno_LLMQ_QUORUMS_H
 
 #include <util/threadinterrupt.h>
 
@@ -166,4 +166,4 @@ extern CQuorumManager* quorumManager;
 } // namespace llmq
 
 
-#endif // SYSCOIN_LLMQ_QUORUMS_H
+#endif // wentuno_LLMQ_QUORUMS_H

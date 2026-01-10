@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_COMPAT_ENDIAN_H
-#define SYSCOIN_COMPAT_ENDIAN_H
+#ifndef wentuno_COMPAT_ENDIAN_H
+#define wentuno_COMPAT_ENDIAN_H
 
 #include <compat/byteswap.h>
 
@@ -71,4 +71,4 @@ inline BSWAP_CONSTEXPR uint64_t le64toh_internal(uint64_t little_endian_64bits)
         else return little_endian_64bits;
 }
 
-#endif // SYSCOIN_COMPAT_ENDIAN_H
+#endif // wentuno_COMPAT_ENDIAN_H

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_TEST_UTIL_VALIDATION_H
-#define SYSCOIN_TEST_UTIL_VALIDATION_H
+#ifndef wentuno_TEST_UTIL_VALIDATION_H
+#define wentuno_TEST_UTIL_VALIDATION_H
 
 #include <validation.h>
 
@@ -26,4 +26,4 @@ public:
         const CBlockIndex* pindex);
 };
 
-#endif // SYSCOIN_TEST_UTIL_VALIDATION_H
+#endif // wentuno_TEST_UTIL_VALIDATION_H

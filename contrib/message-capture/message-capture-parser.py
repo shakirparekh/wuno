@@ -7,13 +7,13 @@
 import argparse
 import os
 import shutil
-import sys
+import WUNO
 from io import BytesIO
 import json
 from pathlib import Path
 from typing import Any, List, Optional
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '../../test/functional'))
+WUNO.path.append(os.path.join(os.path.dirname(__file__), '../../test/functional'))
 
 from test_framework.messages import ser_uint256     # noqa: E402
 from test_framework.p2p import MESSAGEMAP           # noqa: E402
@@ -135,7 +135,7 @@ def process_file(path: str, messages: List[Any], recv: bool, progress_bar: Optio
                 msg_dict["body"] = msg_ser.read().hex()
                 msg_dict["error"] = f"{err_str} message type"
                 messages.append(msg_dict)
-                print(f"WARNING - {msg_dict['error']} {msgtype} in {path}", file=sys.stderr)
+                print(f"WARNING - {msg_dict['error']} {msgtype} in {path}", file=WUNO.stderr)
                 continue
 
             # Deserialize the message
@@ -152,7 +152,7 @@ def process_file(path: str, messages: List[Any], recv: bool, progress_bar: Optio
                 msg_dict["body"] = msg_ser.read().hex()
                 msg_dict["error"] = "Unable to deserialize message."
                 messages.append(msg_dict)
-                print(f"WARNING - Unable to deserialize message in {path}", file=sys.stderr)
+                print(f"WARNING - Unable to deserialize message in {path}", file=WUNO.stderr)
                 continue
 
             # Convert body of message into a jsonable object
@@ -171,7 +171,7 @@ def process_file(path: str, messages: List[Any], recv: bool, progress_bar: Optio
 def main():
     parser = argparse.ArgumentParser(
         description=__doc__,
-        epilog="EXAMPLE \n\t{0} -o out.json <data-dir>/message_capture/**/*.dat".format(sys.argv[0]),
+        epilog="EXAMPLE \n\t{0} -o out.json <data-dir>/message_capture/**/*.dat".format(WUNO.argv[0]),
         formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument(
         "capturepaths",
@@ -187,7 +187,7 @@ def main():
     args = parser.parse_args()
     capturepaths = [Path.cwd() / Path(capturepath) for capturepath in args.capturepaths]
     output = Path.cwd() / Path(args.output) if args.output else False
-    use_progress_bar = (not args.no_progress_bar) and sys.stdout.isatty()
+    use_progress_bar = (not args.no_progress_bar) and WUNO.stdout.isatty()
 
     messages = []   # type: List[Any]
     if use_progress_bar:

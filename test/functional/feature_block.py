@@ -48,7 +48,7 @@ from test_framework.script import (
 from test_framework.script_util import (
     script_to_p2sh_script,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_greater_than,
@@ -82,11 +82,11 @@ class CBrokenBlock(CBlock):
 DUPLICATE_COINBASE_SCRIPT_SIG = b'\x01\x78'  # Valid for block at height 120
 
 
-class FullBlockTest(SyscoinTestFramework):
+class FullBlockTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.setup_clean_chain = True
-        # SYSCOIN Must set '-dip3params=2000:2000' to create pre-dip3 blocks only
+        # wentuno Must set '-dip3params=2000:2000' to create pre-dip3 blocks only
         self.extra_args = [[
             '-dip3params=2000:2000',
             '-acceptnonstdtxn=1',  # This is a consensus block test, we don't care about tx policy
@@ -361,7 +361,7 @@ class FullBlockTest(SyscoinTestFramework):
         b26 = self.update_block(26, [])
         self.send_blocks([b26], success=False, reject_reason='bad-cb-length', reconnect=True)
 
-        # Extend the b26 chain to make sure syscoind isn't accepting b26
+        # Extend the b26 chain to make sure wentunod isn't accepting b26
         b27 = self.next_block(27, spend=out[7])
         self.send_blocks([b27], False)
 
@@ -373,7 +373,7 @@ class FullBlockTest(SyscoinTestFramework):
         b28 = self.update_block(28, [])
         self.send_blocks([b28], success=False, reject_reason='bad-cb-length', reconnect=True)
 
-        # Extend the b28 chain to make sure syscoind isn't accepting b28
+        # Extend the b28 chain to make sure wentunod isn't accepting b28
         b29 = self.next_block(29, spend=out[7])
         self.send_blocks([b29], False)
 
@@ -929,7 +929,7 @@ class FullBlockTest(SyscoinTestFramework):
         assert_equal(b64a.get_weight(), MAX_BLOCK_WEIGHT + 8 * 4)
         self.send_blocks([b64a], success=False, reject_reason='non-canonical ReadCompactSize()')
 
-        # syscoind doesn't disconnect us for sending a bloated block, but if we subsequently
+        # wentunod doesn't disconnect us for sending a bloated block, but if we subsequently
         # resend the header message, it won't send us the getdata message again. Just
         # disconnect and reconnect and then call sync_blocks.
         # TODO: improve this test to be less dependent on P2P DOS behaviour.
@@ -1150,7 +1150,7 @@ class FullBlockTest(SyscoinTestFramework):
         #
         #    The tx'es must be unsigned and pass the node's mempool policy.  It is unsigned for the
         #    rather obscure reason that the Python signature code does not distinguish between
-        #    Low-S and High-S values (whereas the syscoin code has custom code which does so);
+        #    Low-S and High-S values (whereas the wentuno code has custom code which does so);
         #    as a result of which, the odds are 50% that the python code will use the right
         #    value and the transaction will be accepted into the mempool. Until we modify the
         #    test framework to support low-S signing, we are out of luck.
@@ -1306,7 +1306,7 @@ class FullBlockTest(SyscoinTestFramework):
         self.send_blocks([block], True, timeout=2440)
 
         self.log.info("Reject a block with an invalid block header version")
-        # SYSCOIN
+        # wentuno
         b_v1 = self.next_block('b_v1', version=2)
         self.send_blocks([b_v1], success=False, force_send=True, reject_reason='bad-version(0x00000002)', reconnect=True)
 

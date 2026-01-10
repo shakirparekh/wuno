@@ -4,7 +4,7 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test RPC help output."""
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import assert_equal, assert_raises_rpc_error
 
 from collections import defaultdict
@@ -42,7 +42,7 @@ def process_mapping(fname):
     return cmds
 
 
-class HelpRpcTest(SyscoinTestFramework):
+class HelpRpcTest(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
 
@@ -103,7 +103,7 @@ class HelpRpcTest(SyscoinTestFramework):
         # command titles
         titles = [line[3:-3] for line in node.help().splitlines() if line.startswith('==')]
 
-        # SYSCOIN
+        # wentuno
 
         components = [ 'Blockchain', 'Control', 'Evo' ]
         if self.is_wallet_compiled():
@@ -113,10 +113,10 @@ class HelpRpcTest(SyscoinTestFramework):
         if self.is_wallet_compiled():
              components.append('Governancewallet')
 
-        components.extend(['Masternode', 'Mining', 'Network', 'Rawtransactions', 'Syscoin'])
+        components.extend(['Masternode', 'Mining', 'Network', 'Rawtransactions', 'wentuno'])
 
         if self.is_wallet_compiled():
-            components.append('Syscoinwallet')
+            components.append('wentunowallet')
             components.append('Util')
             components.append('Wallet')
         else:

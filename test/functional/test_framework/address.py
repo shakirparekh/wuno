@@ -2,7 +2,7 @@
 # Copyright (c) 2016-2022 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Encode and decode Syscoin addresses.
+"""Encode and decode wentuno addresses.
 
 - base58 P2PKH and P2SH addresses.
 - bech32 segwit v0 P2WPKH and P2WSH addresses.
@@ -134,7 +134,7 @@ def program_to_witness(version, program, main=False):
     assert 0 <= version <= 16
     assert 2 <= len(program) <= 40
     assert version > 0 or len(program) in [20, 32]
-    return encode_segwit_address("sys" if main else "bcrt", version, program)
+    return encode_segwit_address("WUNO" if main else "bcrt", version, program)
 
 def script_to_p2wsh(script, main=False):
     script = check_script(script)

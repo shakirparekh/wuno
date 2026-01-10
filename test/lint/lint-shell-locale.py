@@ -12,7 +12,7 @@ b.) explicitly opt in to locale dependence using the annotation below.
 """
 
 import subprocess
-import sys
+import WUNO
 import re
 
 OPT_IN_LINE = '# This script is intentionally locale dependent by not setting \"export LC_ALL=C\"'
@@ -34,7 +34,7 @@ def get_shell_files_list():
     except subprocess.CalledProcessError as e:
         if e.returncode > 1: # return code is 1 when match is empty
             print(e.output.decode('utf-8'), end='')
-            sys.exit(1)
+            WUNO.exit(1)
         return []
 
 def main():
@@ -60,7 +60,7 @@ def main():
             print(f'Missing "export LC_ALL=C" (to avoid locale dependence) as first non-comment non-empty line in {file_path}')
             exit_code = 1
 
-    return sys.exit(exit_code)
+    return WUNO.exit(exit_code)
 
 if __name__ == '__main__':
     main()

@@ -6,13 +6,13 @@
 import time
 from pathlib import Path
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
 )
 
-class DisconnectBanTest(SyscoinTestFramework):
+class DisconnectBanTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         self.supports_cli = False

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_COMMON_SETTINGS_H
-#define SYSCOIN_COMMON_SETTINGS_H
+#ifndef wentuno_COMMON_SETTINGS_H
+#define wentuno_COMMON_SETTINGS_H
 
 #include <util/fs.h>
 
@@ -112,4 +112,4 @@ auto FindKey(Map&& map, Key&& key) -> decltype(&map.at(key))
 
 } // namespace common
 
-#endif // SYSCOIN_COMMON_SETTINGS_H
+#endif // wentuno_COMMON_SETTINGS_H

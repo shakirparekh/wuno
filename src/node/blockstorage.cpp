@@ -26,7 +26,7 @@
 #include <util/strencodings.h>
 #include <util/translation.h>
 #include <validation.h>
-// SYSCOIN
+// wentuno
 #include <evo/deterministicmns.h>
 #include <dsnotificationinterface.h>
 #include <walletinitinterface.h>
@@ -127,7 +127,7 @@ bool BlockTreeDB::LoadBlockIndexGuts(const Consensus::Params& consensusParams, s
                 pindexNew->nStatus        = diskindex.nStatus;
                 pindexNew->nTx            = diskindex.nTx;
 
-               /* Syscoin checks the PoW here.  We don't do this because
+               /* wentuno checks the PoW here.  We don't do this because
                    the CDiskBlockIndex does not contain the auxpow.
                    This check isn't important, since the data on disk should
                    already be valid and can be trusted.  */
@@ -201,7 +201,7 @@ const CBlockIndex* BlockManager::LookupBlockIndex(const uint256& hash) const
     BlockMap::const_iterator it = m_block_index.find(hash);
     return it == m_block_index.end() ? nullptr : &it->second;
 }
-// SYSCOIN
+// wentuno
 std::pair<PrevBlockMap::iterator,PrevBlockMap::iterator> BlockManager::LookupBlockIndexPrev(const uint256& hash)
 {
     AssertLockHeld(cs_main);
@@ -209,7 +209,7 @@ std::pair<PrevBlockMap::iterator,PrevBlockMap::iterator> BlockManager::LookupBlo
 }
 CBlockIndex* BlockManager::AddToBlockIndex(const CBlockHeader& block, CBlockIndex*& best_header, enum BlockStatus nStatus)
 {
-    // SYSCOIN
+    // wentuno
     assert(!(nStatus & BLOCK_FAILED_MASK)); // no failed blocks allowed
     AssertLockHeld(cs_main);
 
@@ -233,7 +233,7 @@ CBlockIndex* BlockManager::AddToBlockIndex(const CBlockHeader& block, CBlockInde
     }
     pindexNew->nTimeMax = (pindexNew->pprev ? std::max(pindexNew->pprev->nTimeMax, pindexNew->nTime) : pindexNew->nTime);
     pindexNew->nChainWork = (pindexNew->pprev ? pindexNew->pprev->nChainWork : 0) + GetBlockProof(*pindexNew);
-    // SYSCOIN
+    // wentuno
     if (nStatus & BLOCK_VALID_MASK) {
         pindexNew->RaiseValidity(BLOCK_VALID_TREE);
         if (best_header == nullptr || best_header->nChainWork < pindexNew->nChainWork) {
@@ -245,7 +245,7 @@ CBlockIndex* BlockManager::AddToBlockIndex(const CBlockHeader& block, CBlockInde
     }
 
     m_dirty_blockindex.insert(pindexNew);
-    // SYSCOIN track prevBlockHash -> pindex (multimap)
+    // wentuno track prevBlockHash -> pindex (multimap)
     if (pindexNew->pprev) {
         m_prev_block_index.emplace(pindexNew->pprev->GetBlockHash(), pindexNew);
     }
@@ -482,7 +482,7 @@ bool BlockManager::LoadBlockIndex(const std::optional<uint256>& snapshot_blockha
             m_dirty_blockindex.insert(pindex);
         }
         if (pindex->pprev) {
-            // SYSCOIN build mapPrevBlockIndex
+            // wentuno build mapPrevBlockIndex
             m_prev_block_index.emplace(pindex->pprev->GetBlockHash(), pindex);
             pindex->BuildSkip();
         }
@@ -989,7 +989,7 @@ bool BlockManager::WriteBlockToDisk(const CBlock& block, FlatFilePos& pos) const
         return error("WriteBlockToDisk: OpenBlockFile failed");
     }
 
-    // SYSCOIN Write index header
+    // wentuno Write index header
     unsigned int nSize = GetSerializeSize(block, fileout.GetVersion(), SER_DISK);
     fileout << GetParams().MessageStart() << nSize;
 
@@ -1094,7 +1094,7 @@ bool BlockManager::ReadBlockOrHeader(T& block, const CBlockIndex& pindex) const
 bool BlockManager::ReadBlockFromDisk(CBlock& block, const FlatFilePos& pos) const
 {
     auto res = ReadBlockOrHeader(block, pos);
-    // SYSCOIN
+    // wentuno
     if(!FillNEVMData(block)) {
         return error("ReadBlockFromDisk(): FillNEVMData() failed for %s",
         block.GetHash().GetHex());
@@ -1105,7 +1105,7 @@ bool BlockManager::ReadBlockFromDisk(CBlock& block, const FlatFilePos& pos) cons
 bool BlockManager::ReadBlockFromDisk(CBlock& block, const CBlockIndex& index) const
 {
     auto res = ReadBlockOrHeader(block, index);
-    // SYSCOIN
+    // wentuno
     if(!FillNEVMData(block)) {
         return error("ReadBlockFromDisk(): FillNEVMData() failed for %s",
         index.GetBlockHash().GetHex());
@@ -1195,7 +1195,7 @@ public:
         m_importing = false;
     }
 };
-// SYSCOIN
+// wentuno
 void ImportBlocks(ChainstateManager& chainman, std::vector<fs::path> vImportFiles, CDSNotificationInterface* pdsNotificationInterface, std::unique_ptr<CDeterministicMNManager> &deterministicMNManager, std::unique_ptr<CActiveMasternodeManager> &activeMasternodeManager, const WalletInitInterface &g_wallet_init_interface, node::NodeContext& node)
 {
     ScheduleBatchPriority();
@@ -1260,20 +1260,20 @@ void ImportBlocks(ChainstateManager& chainman, std::vector<fs::path> vImportFile
                 return;
             }
         }
-        // SYSCOIN
+        // wentuno
         if(pdsNotificationInterface)
             pdsNotificationInterface->InitializeCurrentBlockTip(chainman);
         // Get all UTXOs for each MN collateral in one go so that we can fill coin cache early
         // and reduce further locking overhead for cs_main in other parts of code including GUI
         LogPrintf("Filling coin cache with masternode UTXOs...\n");
-        int64_t nStart = TicksSinceEpoch<std::chrono::milliseconds>(SystemClock::now());
+        int64_t nStart = TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now());
         auto mnList = deterministicMNManager->GetListAtChainTip();
         mnList.ForEachMN(false, [&](const auto& dmn) {
             std::map<COutPoint, Coin> coins;
             coins[dmn.collateralOutpoint];
             node.chain->findCoins(coins);
         });
-        LogPrintf("Filling coin cache with masternode UTXOs: done in %dms\n", TicksSinceEpoch<std::chrono::milliseconds>(SystemClock::now()) - nStart);
+        LogPrintf("Filling coin cache with masternode UTXOs: done in %dms\n", TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()) - nStart);
 
         if (fMasternodeMode) {
             assert(activeMasternodeManager);

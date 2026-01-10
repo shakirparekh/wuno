@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_ASMAP_H
-#define SYSCOIN_UTIL_ASMAP_H
+#ifndef wentuno_UTIL_ASMAP_H
+#define wentuno_UTIL_ASMAP_H
 
 #include <util/fs.h>
 
@@ -17,4 +17,4 @@ bool SanityCheckASMap(const std::vector<bool>& asmap, int bits);
 /** Read asmap from provided binary file */
 std::vector<bool> DecodeAsmap(fs::path path);
 
-#endif // SYSCOIN_UTIL_ASMAP_H
+#endif // wentuno_UTIL_ASMAP_H

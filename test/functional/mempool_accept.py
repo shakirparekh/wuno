@@ -8,7 +8,7 @@ from copy import deepcopy
 from decimal import Decimal
 import math
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.messages import (
     MAX_BIP125_RBF_SEQUENCE,
     COIN,
@@ -46,14 +46,14 @@ from test_framework.wallet import MiniWallet
 from test_framework.wallet_util import generate_keypair
 
 
-class MempoolAcceptanceTest(SyscoinTestFramework):
+class MempoolAcceptanceTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.extra_args = [[
             '-txindex','-permitbaremultisig=0',
         ]] * self.num_nodes
         self.supports_cli = False
-        # SYSCOIN
+        # wentuno
         self.rpc_timeout = 480
 
     def check_mempool_result(self, result_expected, *args, **kwargs):
@@ -99,7 +99,7 @@ class MempoolAcceptanceTest(SyscoinTestFramework):
 
         self.log.info('A transaction not in the mempool')
         fee = Decimal('0.000007')
-        utxo_to_spend = self.wallet.get_utxo(txid=txid_in_block)  # use 0.3 SYS UTXO
+        utxo_to_spend = self.wallet.get_utxo(txid=txid_in_block)  # use 0.3 WUNO UTXO
         tx = self.wallet.create_self_transfer(utxo_to_spend=utxo_to_spend, sequence=MAX_BIP125_RBF_SEQUENCE)['tx']
         tx.vout[0].nValue = int((Decimal('0.3') - fee) * COIN)
         raw_tx_0 = tx.serialize().hex()

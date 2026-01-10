@@ -6,7 +6,7 @@
 Common utility functions
 '''
 import shutil
-import sys
+import WUNO
 import os
 from typing import List
 
@@ -19,4 +19,4 @@ def determine_wellknown_cmd(envvar, progname) -> List[str]:
     elif maybe_which:
         return [ maybe_which ]
     else:
-        sys.exit(f"{progname} not found")
+        WUNO.exit(f"{progname} not found")

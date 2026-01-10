@@ -7,14 +7,14 @@
 from test_framework.descriptors import (
     descsum_create,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
 )
 
 
-class SignMessagesWithPrivTest(SyscoinTestFramework):
+class SignMessagesWithPrivTest(wentunoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
@@ -30,7 +30,7 @@ class SignMessagesWithPrivTest(SyscoinTestFramework):
 
         self.log.info('test signing with priv_key')
         priv_key = 'cUeKHd5orzT3mz8P9pxyREHfsWtVfgsfDjiZZBcjUBAaGk1BTj7N'
-        # SYSCOIN
+        # wentuno
         expected_signature = 'IMdQnoUdbE3aKKqTj1EJFz70H/XTYPPW6+4kihiviZ5YBTx88ZXGKwHWFfq+pXtOL99W5VQXWsAmmIuy23wzIj4='
         signature = self.nodes[0].signmessagewithprivkey(priv_key, message)
         assert_equal(expected_signature, signature)
@@ -41,7 +41,7 @@ class SignMessagesWithPrivTest(SyscoinTestFramework):
         assert self.nodes[0].verifymessage(addresses[0], signature, message)
 
         self.log.info('test that verifying with non-P2PKH addresses succeeds')
-        # SYSCOIN Legacy address test (should succeed)
+        # wentuno Legacy address test (should succeed)
         legacy_address = addresses[0]
         assert self.nodes[0].verifymessage(legacy_address, signature, message)
 

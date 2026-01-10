@@ -47,7 +47,7 @@ static RPCHelpMan getzmqnotifications()
             UniValue obj(UniValue::VOBJ);
             obj.pushKV("type", n->GetType());
             obj.pushKV("address", n->GetAddress());
-            // SYSCOIN
+            // wentuno
             const std::string addresssub = n->GetAddressSub();
             if(!addresssub.empty())
                 obj.pushKV("addresssub", addresssub);

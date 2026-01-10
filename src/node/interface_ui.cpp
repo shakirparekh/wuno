@@ -9,7 +9,7 @@
 
 #include <boost/signals2/optional_last_value.hpp>
 #include <boost/signals2/signal.hpp>
-// SYSCOIN
+// wentuno
 #include <evo/deterministicmns.h>
 CClientUIInterface uiInterface;
 
@@ -47,7 +47,7 @@ ADD_SIGNALS_IMPL_WRAPPER(ShowProgress);
 ADD_SIGNALS_IMPL_WRAPPER(NotifyBlockTip);
 ADD_SIGNALS_IMPL_WRAPPER(NotifyHeaderTip);
 ADD_SIGNALS_IMPL_WRAPPER(BannedListChanged);
-// SYSCOIN
+// wentuno
 ADD_SIGNALS_IMPL_WRAPPER(NotifyAdditionalDataSyncProgressChanged);
 ADD_SIGNALS_IMPL_WRAPPER(NotifyMasternodeListChanged);
 

@@ -11,8 +11,8 @@
 //
 // For more information, see BIP 173 and BIP 350.
 
-#ifndef SYSCOIN_BECH32_H
-#define SYSCOIN_BECH32_H
+#ifndef wentuno_BECH32_H
+#define wentuno_BECH32_H
 
 #include <stdint.h>
 #include <string>
@@ -50,4 +50,4 @@ std::pair<std::string, std::vector<int>> LocateErrors(const std::string& str);
 
 } // namespace bech32
 
-#endif // SYSCOIN_BECH32_H
+#endif // wentuno_BECH32_H

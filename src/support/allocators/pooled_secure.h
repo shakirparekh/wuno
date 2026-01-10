@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SUPPORT_ALLOCATORS_POOLED_SECURE_H
-#define SYSCOIN_SUPPORT_ALLOCATORS_POOLED_SECURE_H
+#ifndef wentuno_SUPPORT_ALLOCATORS_POOLED_SECURE_H
+#define wentuno_SUPPORT_ALLOCATORS_POOLED_SECURE_H
 
 #include <support/lockedpool.h>
 #include <support/cleanse.h>
@@ -72,4 +72,4 @@ private:
     boost::pool<internal_secure_allocator> pool;
 };
 
-#endif // SYSCOIN_SUPPORT_ALLOCATORS_POOLED_SECURE_H
+#endif // wentuno_SUPPORT_ALLOCATORS_POOLED_SECURE_H

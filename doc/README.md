@@ -1,41 +1,41 @@
-Syscoin Core
+wentuno Core
 =============
 
 Setup
 ---------------------
-Syscoin Core is the original Syscoin client and it builds the backbone of the network. It downloads and, by default, stores the entire history of Syscoin transactions, which requires a few hundred gigabytes of disk space. Depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
+wentuno Core is the original wentuno client and it builds the backbone of the network. It downloads and, by default, stores the entire history of wentuno transactions, which requires a few hundred gigabytes of disk space. Depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
 
-To download Syscoin Core, visit [syscoincore.org](https://syscoincore.org/en/download/).
+To download wentuno Core, visit [wentunocore.org](https://wentunocore.org/en/download/).
 
 Running
 ---------------------
-The following are some helpful notes on how to run Syscoin Core on your native platform.
+The following are some helpful notes on how to run wentuno Core on your native platform.
 
 ### Unix
 
 Unpack the files into a directory and run:
 
-- `bin/syscoin-qt` (GUI) or
-- `bin/syscoind` (headless)
+- `bin/wentuno-qt` (GUI) or
+- `bin/wentunod` (headless)
 
 ### Windows
 
-Unpack the files into a directory, and then run syscoin-qt.exe.
+Unpack the files into a directory, and then run wentuno-qt.exe.
 
 ### macOS
 
-Drag Syscoin Core to your applications folder, and then run Syscoin Core.
+Drag wentuno Core to your applications folder, and then run wentuno Core.
 
 ### Need Help?
 
-* See the documentation at the [Syscoin Wiki](https://support.syscoin.org)
+* See the documentation at the [wentuno Wiki](https://support.wentuno.org)
 for help and more information.
-* Ask for help on [#syscoin](http://webchat.freenode.net?channels=syscoin) on Freenode. If you don't have an IRC client, use [webchat here](http://webchat.freenode.net?channels=syscoin).
-* Ask for help on the [BitcoinTalk](https://syscointalk.org/) forums, in the [Technical Support board](https://bitcointalk.org/index.php?board=4.0).
+* Ask for help on [#wentuno](http://webchat.freenode.net?channels=wentuno) on Freenode. If you don't have an IRC client, use [webchat here](http://webchat.freenode.net?channels=wentuno).
+* Ask for help on the [BitcoinTalk](https://wentunotalk.org/) forums, in the [Technical Support board](https://bitcointalk.org/index.php?board=4.0).
 
 Building
 ---------------------
-The following are developer notes on how to build Syscoin Core on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
+The following are developer notes on how to build wentuno Core on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
 
 - [Dependencies](dependencies.md)
 - [macOS Build Notes](build-osx.md)
@@ -48,7 +48,7 @@ The following are developer notes on how to build Syscoin Core on your native pl
 
 Development
 ---------------------
-The Syscoin repo's [root README](/README.md) contains relevant information on the development process and automated testing.
+The wentuno repo's [root README](/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
 - [Productivity Notes](productivity.md)
@@ -65,18 +65,18 @@ The Syscoin repo's [root README](/README.md) contains relevant information on th
 - [Internal Design Docs](design/)
 
 ### Resources
-* Discuss on the [SyscoinTalk](https://syscointalk.org/) forums, in the [Development & Technical Discussion board](https://syscointalk.org/index.php?board=6.0).
-* Discuss project-specific development on #syscoin-core-dev on Freenode. If you don't have an IRC client, use [webchat here](http://webchat.freenode.net/?channels=syscoin-core-dev).
-* Discuss general Syscoin development on #syscoin-dev on Freenode. If you don't have an IRC client, use [webchat here](http://webchat.freenode.net/?channels=syscoin-dev).
+* Discuss on the [wentunoTalk](https://wentunotalk.org/) forums, in the [Development & Technical Discussion board](https://wentunotalk.org/index.php?board=6.0).
+* Discuss project-specific development on #wentuno-core-dev on Freenode. If you don't have an IRC client, use [webchat here](http://webchat.freenode.net/?channels=wentuno-core-dev).
+* Discuss general wentuno development on #wentuno-dev on Freenode. If you don't have an IRC client, use [webchat here](http://webchat.freenode.net/?channels=wentuno-dev).
 
 ### Miscellaneous
 - [Assets Attribution](assets-attribution.md)
-- [bitcoin.conf Configuration File](syscoin-conf.md)
+- [bitcoin.conf Configuration File](wentuno-conf.md)
 - [CJDNS Support](cjdns.md)
 - [Files](files.md)
 - [Fuzz-testing](fuzzing.md)
 - [I2P Support](i2p.md)
-- [Init Scripts (systemd/upstart/openrc)](init.md)
+- [Init Scripts (WUNOtemd/upstart/openrc)](init.md)
 - [Managing Wallets](managing-wallets.md)
 - [Multisig Tutorial](multisig-tutorial.md)
 - [P2P bad ports definition and list](p2p-bad-ports.md)

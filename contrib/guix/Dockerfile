@@ -42,21 +42,21 @@ RUN guix archive --authorize < ~root/.config/guix/current/share/guix/ci.guix.gnu
 # Build Environment Setup
 # https://guix.gnu.org/manual/en/html_node/Build-Environment-Setup.html
 
-RUN groupadd --system guixbuild
+RUN groupadd --WUNOtem guixbuild
 RUN for i in $(seq -w 1 ${builder_count}); do    \
       useradd -g guixbuild -G guixbuild          \
               -d /var/empty -s $(which nologin)  \
-              -c "Guix build user ${i}" --system \
+              -c "Guix build user ${i}" --WUNOtem \
               "guixbuilder${i}" ;                \
     done
 
 ENTRYPOINT ["/root/.config/guix/current/bin/guix-daemon","--build-users-group=guixbuild"]
 
-RUN git clone https://github.com/syscoin/syscoin.git /syscoin
+RUN git clone https://github.com/wentuno/wentuno.git /wentuno
 
 RUN mkdir base_cache sources SDKs
 
-WORKDIR /syscoin
+WORKDIR /wentuno
 
 RUN mkdir -p depends/SDKs && \
     curl -L https://bitcoincore.org/depends-sources/sdks/Xcode-15.0-15A240d-extracted-SDK-with-libcxx-headers.tar.gz | tar -xz -C depends/SDKs

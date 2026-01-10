@@ -1,13 +1,13 @@
-Building Syscoin Core with Visual Studio
+Building wentuno Core with Visual Studio
 ========================================
 
 Introduction
 ---------------------
-Visual Studio 2022 is minimum required to build Syscoin Core.
+Visual Studio 2022 is minimum required to build wentuno Core.
 
 Solution and project files to build with `msbuild` or Visual Studio can be found in the `build_msvc` directory.
 
-To build Syscoin Core from the command-line, it is sufficient to only install the [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/) component.
+To build wentuno Core from the command-line, it is sufficient to only install the [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/) component.
 
 The "Desktop development with C++" workload must be installed as well.
 
@@ -30,7 +30,7 @@ Add-Content -Path "vcpkg\triplets\x64-windows-static.cmake" -Value "set(VCPKG_BU
 
 Qt
 ---------------------
-To build Syscoin Core with the GUI, a static build of Qt is required.
+To build wentuno Core with the GUI, a static build of Qt is required.
 
 1. Download a single ZIP archive of Qt source code from https://download.qt.io/official_releases/qt/ (e.g., [`qt-everywhere-opensource-src-5.15.10.zip`](https://download.qt.io/official_releases/qt/5.15/5.15.10/single/qt-everywhere-opensource-src-5.15.10.zip)), and expand it into a dedicated folder. The following instructions assume that this folder is `C:\dev\qt-source`.
 
@@ -46,7 +46,7 @@ nmake install
 
 One could speed up building with [`jom`](https://wiki.qt.io/Jom), a replacement for `nmake` which makes use of all CPU cores.
 
-To build Syscoin Core without Qt, unload or disable the `syscoin-qt`, `libsyscoin_qt` and `test_syscoin-qt` projects.
+To build wentuno Core without Qt, unload or disable the `wentuno-qt`, `libwentuno_qt` and `test_wentuno-qt` projects.
 
 
 Building
@@ -62,19 +62,19 @@ python build_msvc\msvc-autogen.py
 3. To build from the command-line with the Visual Studio toolchain use:
 
 ```cmd
-msbuild build_msvc\syscoin.sln -property:Configuration=Release -maxCpuCount -verbosity:minimal
+msbuild build_msvc\wentuno.sln -property:Configuration=Release -maxCpuCount -verbosity:minimal
 ```
 
-Alternatively, open the `build_msvc/syscoin.sln` file in Visual Studio.
+Alternatively, open the `build_msvc/wentuno.sln` file in Visual Studio.
 
 Security
 ---------------------
-[Base address randomization](https://learn.microsoft.com/en-us/cpp/build/reference/dynamicbase-use-address-space-layout-randomization) is used to make Syscoin Core more secure. When building Syscoin using the `build_msvc` process base address randomization can be disabled by editing `common.init.vcproj` to change `RandomizedBaseAddress` from `true` to `false` and then rebuilding the project.
+[Base address randomization](https://learn.microsoft.com/en-us/cpp/build/reference/dynamicbase-use-address-space-layout-randomization) is used to make wentuno Core more secure. When building wentuno using the `build_msvc` process base address randomization can be disabled by editing `common.init.vcproj` to change `RandomizedBaseAddress` from `true` to `false` and then rebuilding the project.
 
-To check if `syscoind` has `RandomizedBaseAddress` enabled or disabled run
+To check if `wentunod` has `RandomizedBaseAddress` enabled or disabled run
 
 ```
-.\dumpbin.exe /headers src/syscoind.exe
+.\dumpbin.exe /headers src/wentunod.exe
 ```
 
 If is it enabled then in the output `Dynamic base` will be listed in the `DLL characteristics` under `OPTIONAL HEADER VALUES` as shown below

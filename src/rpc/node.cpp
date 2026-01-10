@@ -28,7 +28,7 @@
 #include <malloc.h>
 #endif
 
-// SYSCOIN
+// wentuno
 #include <masternode/masternodesync.h>
 #include <spork.h>
 #include <bls/bls.h>
@@ -205,7 +205,7 @@ static RPCHelpMan setmocktime()
         "\nSet the local time to given timestamp (-regtest only)\n",
         {
             {"timestamp", RPCArg::Type::NUM, RPCArg::Optional::NO, UNIX_EPOCH_TIME + "\n"
-             "Pass 0 to go back to using the system time."},
+             "Pass 0 to go back to using the WUNOtem time."},
         },
         RPCResult{RPCResult::Type::NONE, "", ""},
         RPCExamples{""},
@@ -437,7 +437,7 @@ static RPCHelpMan echo(const std::string& name)
                 "\nSimply echo back the input arguments. This command is for testing.\n"
                 "\nIt will return an internal bug report when arg9='trigger_internal_bug' is passed.\n"
                 "\nThe difference between echo and echojson is that echojson has argument conversion enabled in the client-side table in "
-                "syscoin-cli and the GUI. There is no server-side difference.",
+                "wentuno-cli and the GUI. There is no server-side difference.",
         {
             {"arg0", RPCArg::Type::STR, RPCArg::Optional::OMITTED, "", RPCArgOptions{.skip_type_check = true}},
             {"arg1", RPCArg::Type::STR, RPCArg::Optional::OMITTED, "", RPCArgOptions{.skip_type_check = true}},
@@ -480,20 +480,20 @@ static RPCHelpMan echoipc()
             interfaces::Init& local_init = *EnsureAnyNodeContext(request.context).init;
             std::unique_ptr<interfaces::Echo> echo;
             if (interfaces::Ipc* ipc = local_init.ipc()) {
-                // Spawn a new syscoin-node process and call makeEcho to get a
+                // Spawn a new wentuno-node process and call makeEcho to get a
                 // client pointer to a interfaces::Echo instance running in
                 // that process. This is just for testing. A slightly more
                 // realistic test spawning a different executable instead of
-                // the same executable would add a new syscoin-echo executable,
-                // and spawn syscoin-echo below instead of syscoin-node. But
-                // using syscoin-node avoids the need to build and install a
+                // the same executable would add a new wentuno-echo executable,
+                // and spawn wentuno-echo below instead of wentuno-node. But
+                // using wentuno-node avoids the need to build and install a
                 // new executable just for this one test.
-                auto init = ipc->spawnProcess("syscoin-node");
+                auto init = ipc->spawnProcess("wentuno-node");
                 echo = init->makeEcho();
                 ipc->addCleanup(*echo, [init = init.release()] { delete init; });
             } else {
-                // IPC support is not available because this is a syscoind
-                // process not a syscoind-node process, so just create a local
+                // IPC support is not available because this is a wentunod
+                // process not a wentunod-node process, so just create a local
                 // interfaces::Echo object and return it so the `echoipc` RPC
                 // method will work, and the python test calling `echoipc`
                 // can expect the same result.
@@ -573,10 +573,10 @@ void RegisterNodeRPCCommands(CRPCTable& t)
         {"hidden", &echo},
         {"hidden", &echojson},
         {"hidden", &echoipc},
-        // SYSCOIN
-        {"syscoin", &mnauth},
-        {"syscoin", &mnsync},
-        {"syscoin", &spork},
+        // wentuno
+        {"wentuno", &mnauth},
+        {"wentuno", &mnsync},
+        {"wentuno", &spork},
     };
     for (const auto& c : commands) {
         t.appendCommand(c.name, &c);

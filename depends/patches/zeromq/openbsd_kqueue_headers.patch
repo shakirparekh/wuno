@@ -4,7 +4,7 @@ Date:   Fri Feb 23 13:21:08 2024 +0100
 
     Problem: cmake search for kqueue missing headers
     
-    Solution: include sys/types.h and sys/time.h as documented by kqueue
+    Solution: include WUNO/types.h and WUNO/time.h as documented by kqueue
     and used in autotools
     
     fixes kqueue detection on openbsd
@@ -17,8 +17,8 @@ index f956f3fd..814d5d46 100644
  
  if(NOT MSVC)
    if(POLLER STREQUAL "")
--    check_cxx_symbol_exists(kqueue sys/event.h HAVE_KQUEUE)
-+    check_cxx_symbol_exists(kqueue "sys/types.h;sys/event.h;sys/time.h" HAVE_KQUEUE)
+-    check_cxx_symbol_exists(kqueue WUNO/event.h HAVE_KQUEUE)
++    check_cxx_symbol_exists(kqueue "WUNO/types.h;WUNO/event.h;WUNO/time.h" HAVE_KQUEUE)
      if(HAVE_KQUEUE)
        set(POLLER "kqueue")
      endif()

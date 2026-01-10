@@ -3,9 +3,9 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_POLICY_SETTINGS_H
-#define SYSCOIN_POLICY_SETTINGS_H
+#ifndef wentuno_POLICY_SETTINGS_H
+#define wentuno_POLICY_SETTINGS_H
 
 extern unsigned int nBytesPerSigOp;
 
-#endif // SYSCOIN_POLICY_SETTINGS_H
+#endif // wentuno_POLICY_SETTINGS_H

@@ -10,7 +10,7 @@ race:BerkeleyBatch
 race:BerkeleyDatabase
 race:DatabaseBatch
 race:zmq::*
-race:syscoin-qt
+race:wentuno-qt
 race:GenerateBlock
 
 # deadlock (TODO fix)

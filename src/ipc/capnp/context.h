@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_IPC_CAPNP_CONTEXT_H
-#define SYSCOIN_IPC_CAPNP_CONTEXT_H
+#ifndef wentuno_IPC_CAPNP_CONTEXT_H
+#define wentuno_IPC_CAPNP_CONTEXT_H
 
 #include <ipc/context.h>
 
@@ -20,4 +20,4 @@ struct Context : ipc::Context
 } // namespace capnp
 } // namespace ipc
 
-#endif // SYSCOIN_IPC_CAPNP_CONTEXT_H
+#endif // wentuno_IPC_CAPNP_CONTEXT_H

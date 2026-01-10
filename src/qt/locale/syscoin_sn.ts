@@ -59,8 +59,8 @@
         <translation type="unfinished">Marii</translation>
     </message>
     <message>
-        <source>Enter a Syscoin address (e.g. %1)</source>
-        <translation type="unfinished">Nyora kero ye Syscoin (sekuti %1)</translation>
+        <source>Enter a wentuno address (e.g. %1)</source>
+        <translation type="unfinished">Nyora kero ye wentuno (sekuti %1)</translation>
     </message>
     <message>
         <source>None</source>
@@ -114,7 +114,7 @@
     </message>
     </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message>
         <source>E&amp;xit</source>
         <translation type="unfinished">Buda</translation>
@@ -171,7 +171,7 @@
         <translation type="unfinished">Ruzivo</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
             <numerusform />

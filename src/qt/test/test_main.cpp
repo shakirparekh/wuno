@@ -3,12 +3,12 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <interfaces/init.h>
 #include <interfaces/node.h>
-#include <qt/syscoin.h>
+#include <qt/wentuno.h>
 #include <qt/test/apptests.h>
 #include <qt/test/optiontests.h>
 #include <qt/test/rpcnestedtests.h>
@@ -83,8 +83,8 @@ int main(int argc, char* argv[])
         setenv("QT_QPA_PLATFORM", "minimal", 0 /* overwrite */);
     #endif
 
-    SyscoinApplication app;
-    app.setApplicationName("Syscoin-Qt-test");
+    wentunoApplication app;
+    app.setApplicationName("wentuno-Qt-test");
     app.createNode(*init);
 
     int num_test_failures{0};

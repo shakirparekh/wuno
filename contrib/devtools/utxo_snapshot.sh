@@ -11,25 +11,25 @@ set -ueo pipefail
 NETWORK_DISABLED=false
 
 if (( $# < 3 )); then
-  echo 'Usage: utxo_snapshot.sh <generate-at-height> <snapshot-out-path> <syscoin-cli-call ...>'
+  echo 'Usage: utxo_snapshot.sh <generate-at-height> <snapshot-out-path> <wentuno-cli-call ...>'
   echo
   echo "  if <snapshot-out-path> is '-', don't produce a snapshot file but instead print the "
   echo "  expected assumeutxo hash"
   echo
   echo 'Examples:'
   echo
-  echo "  ./contrib/devtools/utxo_snapshot.sh 570000 utxo.dat ./src/syscoin-cli -datadir=\$(pwd)/testdata"
-  echo '  ./contrib/devtools/utxo_snapshot.sh 570000 - ./src/syscoin-cli'
+  echo "  ./contrib/devtools/utxo_snapshot.sh 570000 utxo.dat ./src/wentuno-cli -datadir=\$(pwd)/testdata"
+  echo '  ./contrib/devtools/utxo_snapshot.sh 570000 - ./src/wentuno-cli'
   exit 1
 fi
 
 GENERATE_AT_HEIGHT="${1}"; shift;
 OUTPUT_PATH="${1}"; shift;
 # Most of the calls we make take a while to run, so pad with a lengthy timeout.
-SYSCOIN_CLI_CALL="${*} -rpcclienttimeout=9999999"
+wentuno_CLI_CALL="${*} -rpcclienttimeout=9999999"
 
 # Check if the node is pruned and get the pruned block height
-PRUNED=$( ${SYSCOIN_CLI_CALL} getblockchaininfo | awk '/pruneheight/ {print $2}' | tr -d ',' )
+PRUNED=$( ${wentuno_CLI_CALL} getblockchaininfo | awk '/pruneheight/ {print $2}' | tr -d ',' )
 
 if (( GENERATE_AT_HEIGHT < PRUNED )); then
   echo "Error: The requested snapshot height (${GENERATE_AT_HEIGHT}) should be greater than the pruned block height (${PRUNED})."
@@ -37,7 +37,7 @@ if (( GENERATE_AT_HEIGHT < PRUNED )); then
 fi
 
 # Check current block height to ensure the node has synchronized past the required block
-CURRENT_BLOCK_HEIGHT=$(${SYSCOIN_CLI_CALL} getblockcount)
+CURRENT_BLOCK_HEIGHT=$(${wentuno_CLI_CALL} getblockcount)
 PIVOT_BLOCK_HEIGHT=$(( GENERATE_AT_HEIGHT + 1 ))
 
 if (( PIVOT_BLOCK_HEIGHT > CURRENT_BLOCK_HEIGHT )); then
@@ -60,11 +60,11 @@ fi
 
 function cleanup {
   (>&2 echo "Restoring chain to original height; this may take a while")
-  ${SYSCOIN_CLI_CALL} reconsiderblock "${PIVOT_BLOCKHASH}"
+  ${wentuno_CLI_CALL} reconsiderblock "${PIVOT_BLOCKHASH}"
 
   if $NETWORK_DISABLED; then
     (>&2 echo "Restoring network activity")
-    ${SYSCOIN_CLI_CALL} setnetworkactive true
+    ${wentuno_CLI_CALL} setnetworkactive true
   fi
 }
 
@@ -80,25 +80,25 @@ if [[ "$REPLY" =~ ^[Yy]*$ || -z "$REPLY" ]]; then
   # User input is "Y", "y", or Enter key, proceed with the action
   NETWORK_DISABLED=true
   (>&2 echo "Disabling network activity")
-  ${SYSCOIN_CLI_CALL} setnetworkactive false
+  ${wentuno_CLI_CALL} setnetworkactive false
 else
   (>&2 echo "Network activity remains enabled")
 fi
 
 # Block we'll invalidate/reconsider to rewind/fast-forward the chain.
-PIVOT_BLOCKHASH=$($SYSCOIN_CLI_CALL getblockhash $(( GENERATE_AT_HEIGHT + 1 )) )
+PIVOT_BLOCKHASH=$($wentuno_CLI_CALL getblockhash $(( GENERATE_AT_HEIGHT + 1 )) )
 
 # Trap for normal exit and Ctrl-C
 trap cleanup EXIT
 trap early_exit INT
 
 (>&2 echo "Rewinding chain back to height ${GENERATE_AT_HEIGHT} (by invalidating ${PIVOT_BLOCKHASH}); this may take a while")
-${SYSCOIN_CLI_CALL} invalidateblock "${PIVOT_BLOCKHASH}"
+${wentuno_CLI_CALL} invalidateblock "${PIVOT_BLOCKHASH}"
 
 if [[ "${OUTPUT_PATH}" = "-" ]]; then
   (>&2 echo "Generating txoutset info...")
-  ${SYSCOIN_CLI_CALL} gettxoutsetinfo | grep hash_serialized_2 | sed 's/^.*: "\(.\+\)\+",/\1/g'
+  ${wentuno_CLI_CALL} gettxoutsetinfo | grep hash_serialized_2 | sed 's/^.*: "\(.\+\)\+",/\1/g'
 else
   (>&2 echo "Generating UTXO snapshot...")
-  ${SYSCOIN_CLI_CALL} dumptxoutset "${OUTPUT_PATH}"
+  ${wentuno_CLI_CALL} dumptxoutset "${OUTPUT_PATH}"
 fi

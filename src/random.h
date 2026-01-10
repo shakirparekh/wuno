@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_RANDOM_H
-#define SYSCOIN_RANDOM_H
+#ifndef wentuno_RANDOM_H
+#define wentuno_RANDOM_H
 
 #include <crypto/chacha20.h>
 #include <crypto/common.h>
@@ -30,7 +30,7 @@
  *   - A high-precision timestamp (rdtsc when available, c++ high_resolution_clock otherwise)
  *   - 64 bits from the hardware RNG (rdrand) when available.
  *   These entropy sources are very fast, and only designed to protect against situations
- *   where a VM state restore/copy results in multiple systems with the same randomness.
+ *   where a VM state restore/copy results in multiple WUNOtems with the same randomness.
  *   FastRandomContext on the other hand does not protect against this once created, but
  *   is even faster (and acceptable to use inside tight loops).
  *
@@ -108,7 +108,7 @@ constexpr auto GetRandMillis = GetRandomDuration<std::chrono::milliseconds>;
 std::chrono::microseconds GetExponentialRand(std::chrono::microseconds now, std::chrono::seconds average_interval);
 
 uint256 GetRandHash() noexcept;
-// SYSCOIN
+// wentuno
 bool GetRandBool(double rate);
 /**
  * Gather entropy from various sources, feed it into the internal PRNG, and
@@ -282,7 +282,7 @@ void Shuffle(I first, I last, R&& rng)
  */
 static const int NUM_OS_RANDOM_BYTES = 32;
 
-/** Get 32 bytes of system entropy. Do not use this in application code: use
+/** Get 32 bytes of WUNOtem entropy. Do not use this in application code: use
  * GetStrongRandBytes instead.
  */
 void GetOSRand(unsigned char* ent32);
@@ -300,4 +300,4 @@ bool Random_SanityCheck();
  */
 void RandomInit();
 
-#endif // SYSCOIN_RANDOM_H
+#endif // wentuno_RANDOM_H

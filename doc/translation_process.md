@@ -1,22 +1,22 @@
 Translations
 ============
 
-The Syscoin-Core project has been designed to support multiple localisations. This makes adding new phrases, and completely new languages easily achievable. For managing all application translations, Syscoin-Core makes use of the Transifex online translation management tool.
+The wentuno-Core project has been designed to support multiple localisations. This makes adding new phrases, and completely new languages easily achievable. For managing all application translations, wentuno-Core makes use of the Transifex online translation management tool.
 
 ### Helping to translate (using Transifex)
 Transifex is setup to monitor the GitHub repo for updates, and when code containing new translations is found, Transifex will process any changes. It may take several hours after a pull-request has been merged, to appear in the Transifex web interface.
 
-Multiple language support is critical in assisting Syscoin’s global adoption, and growth. One of Syscoin’s greatest strengths is cross-border money transfers, any help making that easier is greatly appreciated.
+Multiple language support is critical in assisting wentuno’s global adoption, and growth. One of wentuno’s greatest strengths is cross-border money transfers, any help making that easier is greatly appreciated.
 
-See the [Transifex Syscoin project](https://www.transifex.com/syscoin/syscoin/) to assist in translations. You should also join the translation mailing list for announcements - see details below.
+See the [Transifex wentuno project](https://www.transifex.com/wentuno/wentuno/) to assist in translations. You should also join the translation mailing list for announcements - see details below.
 
 ### Writing code with translations
 We use automated scripts to help extract translations in both Qt, and non-Qt source files. It is rarely necessary to manually edit the files in `src/qt/locale/`. The translation source files must adhere to the following format:
-`syscoin_xx_YY.ts or syscoin_xx.ts`
+`wentuno_xx_YY.ts or wentuno_xx.ts`
 
-`src/qt/locale/syscoin_en.ts` is treated in a special way. It is used as the source for all other translations. Whenever a string in the source code is changed, this file must be updated to reflect those changes. A custom script is used to extract strings from the non-Qt parts. This script makes use of `gettext`, so make sure that utility is installed (ie, `apt-get install gettext` on Ubuntu/Debian). Once this has been updated, `lupdate` (included in the Qt SDK) is used to update `syscoin_en.ts`.
+`src/qt/locale/wentuno_en.ts` is treated in a special way. It is used as the source for all other translations. Whenever a string in the source code is changed, this file must be updated to reflect those changes. A custom script is used to extract strings from the non-Qt parts. This script makes use of `gettext`, so make sure that utility is installed (ie, `apt-get install gettext` on Ubuntu/Debian). Once this has been updated, `lupdate` (included in the Qt SDK) is used to update `wentuno_en.ts`.
 
-To automatically regenerate the `syscoin_en.ts` file, run the following commands:
+To automatically regenerate the `wentuno_en.ts` file, run the following commands:
 ```sh
 cd src/
 make translate
@@ -34,14 +34,14 @@ When an updated source file is merged into the GitHub repo, Transifex will autom
 
 To create the pull-request, use the following commands:
 ```
-git add src/qt/syscoinstrings.cpp src/qt/locale/syscoin_en.ts
+git add src/qt/wentunostrings.cpp src/qt/locale/wentuno_en.ts
 git commit
 ```
 
 ### Creating a Transifex account
 Visit the [Transifex Signup](https://www.transifex.com/signup/) page to create an account. Take note of your username and password, as they will be required to configure the command-line tool.
 
-You can find the Syscoin translation project at [https://www.transifex.com/syscoin/syscoin/](https://www.transifex.com/syscoin/syscoin/).
+You can find the wentuno translation project at [https://www.transifex.com/wentuno/wentuno/](https://www.transifex.com/wentuno/wentuno/).
 
 ### Installing the Transifex client command-line tool
 The client is used to fetch updated translations. If you are having problems, or need more details, see [https://docs.transifex.com/client/installing-the-client](https://docs.transifex.com/client/installing-the-client)
@@ -60,14 +60,14 @@ token =
 username = USERNAME
 ```
 
-The Transifex Syscoin project config file is included as part of the repo. It can be found at `.tx/config`, however you shouldn’t need to change anything.
+The Transifex wentuno project config file is included as part of the repo. It can be found at `.tx/config`, however you shouldn’t need to change anything.
 
 ### Synchronising translations
 
-To assist in updating translations, a helper script is available in the [maintainer-tools repo](https://github.com/syscoin-core/syscoin-maintainer-tools). To use it and commit the result, simply do:
+To assist in updating translations, a helper script is available in the [maintainer-tools repo](https://github.com/wentuno-core/wentuno-maintainer-tools). To use it and commit the result, simply do:
 
 ```
-python3 ../syscoin-maintainer-tools/update-translations.py
+python3 ../wentuno-maintainer-tools/update-translations.py
 git commit -a
 ```
 
@@ -76,7 +76,7 @@ git commit -a
 ### Handling Plurals (in source files)
 When new plurals are added to the source file, it's important to do the following steps:
 
-1. Open `syscoin_en.ts` in Qt Linguist (included in the Qt SDK)
+1. Open `wentuno_en.ts` in Qt Linguist (included in the Qt SDK)
 2. Search for `%n`, which will take you to the parts in the translation that use plurals
 3. Look for empty `English Translation (Singular)` and `English Translation (Plural)` fields
 4. Add the appropriate strings for the singular and plural form of the base string
@@ -85,11 +85,11 @@ When new plurals are added to the source file, it's important to do the followin
 7. Save the source file
 
 ### Translating a new language
-To create a new language template, you will need to edit the languages manifest file `src/qt/syscoin_locale.qrc` and add a new entry. Below is an example of the English language entry.
+To create a new language template, you will need to edit the languages manifest file `src/qt/wentuno_locale.qrc` and add a new entry. Below is an example of the English language entry.
 
 ```xml
 <qresource prefix="/translations">
-    <file alias="en">locale/syscoin_en.qm</file>
+    <file alias="en">locale/wentuno_en.qm</file>
     ...
 </qresource>
 ```
@@ -98,4 +98,4 @@ To create a new language template, you will need to edit the languages manifest 
 
 ### Questions and general assistance
 
-If you are a translator, you should also subscribe to the mailing list, https://groups.google.com/forum/#!forum/syscoin-translators. Announcements will be posted during application pre-releases to notify translators to check for updates.
+If you are a translator, you should also subscribe to the mailing list, https://groups.google.com/forum/#!forum/wentuno-translators. Announcements will be posted during application pre-releases to notify translators to check for updates.

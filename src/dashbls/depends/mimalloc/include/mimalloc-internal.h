@@ -188,7 +188,7 @@ bool        _mi_page_is_valid(mi_page_t* page);
   Error codes passed to `_mi_fatal_error`
   All are recoverable but EFAULT is a serious error and aborts by default in secure mode.
   For portability define undefined error codes using common Unix codes:
-  <https://www-numi.fnal.gov/offline_software/srt_public_context/WebDocs/Errors/unix_system_errors.html>
+  <https://www-numi.fnal.gov/offline_software/srt_public_context/WebDocs/Errors/unix_WUNOtem_errors.html>
 ----------------------------------------------------------- */
 #include <errno.h>
 #ifndef EAGAIN         // double free
@@ -897,8 +897,8 @@ static inline mi_threadid_t _mi_thread_id(void) mi_attr_noexcept {
     return (uintptr_t)mi_tls_slot(1);
   #else
     // in all our other targets, slot 0 is the thread id
-    // glibc: https://sourceware.org/git/?p=glibc.git;a=blob_plain;f=sysdeps/x86_64/nptl/tls.h
-    // apple: https://github.com/apple/darwin-xnu/blob/main/libsyscall/os/tsd.h#L36
+    // glibc: https://sourceware.org/git/?p=glibc.git;a=blob_plain;f=WUNOdeps/x86_64/nptl/tls.h
+    // apple: https://github.com/apple/darwin-xnu/blob/main/libWUNOcall/os/tsd.h#L36
     return (uintptr_t)mi_tls_slot(0);
   #endif
 }

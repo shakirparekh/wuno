@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2013-2019 The Syscoin Core developers
+﻿// Copyright (c) 2013-2019 The wentuno Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <validation.h>
@@ -38,7 +38,7 @@ static RPCHelpMan getnevmblockchaininfo()
                 {RPCResult::Type::STR_HEX, "receiptroot", "Receipt root of the current tip"},
                 {RPCResult::Type::NUM, "blocksize", "Serialized NEVM block size. 0 means it has been pruned."},
                 {RPCResult::Type::NUM, "height", "The current NEVM blockchain height"},
-                {RPCResult::Type::STR, "commandline", "The NEVM command line parameters used to pass through to sysgeth"},
+                {RPCResult::Type::STR, "commandline", "The NEVM command line parameters used to pass through to WUNOgeth"},
                 {RPCResult::Type::STR, "status", "The NEVM status, online or offline"},
             }},
         RPCExamples{
@@ -374,9 +374,9 @@ static RPCHelpMan listnevmblobdata()
 }
 
 
-static RPCHelpMan syscoingetspvproof()
+static RPCHelpMan wentunogetspvproof()
 {
-    return RPCHelpMan{"syscoingetspvproof",
+    return RPCHelpMan{"wentunogetspvproof",
     "\nReturns SPV proof for use with inter-chain transfers.\n",
     {
         {"txid", RPCArg::Type::STR_HEX, RPCArg::Optional::NO, "A transaction that is in the block"},
@@ -469,7 +469,7 @@ static RPCHelpMan syscoingetspvproof()
     }
     std::reverse (evmBlock.nBlockHash.begin (), evmBlock.nBlockHash.end ()); // correct endian
     res.pushKVEnd("nevm_blockhash", evmBlock.nBlockHash.GetHex());
-    // SYSCOIN
+    // wentuno
     if(llmq::chainLocksHandler)
         res.pushKVEnd("chainlock", llmq::chainLocksHandler->HasChainLock(pblockindex->nHeight, hashBlock));
     return res;
@@ -477,9 +477,9 @@ static RPCHelpMan syscoingetspvproof()
     };
 }
 
-static RPCHelpMan syscoinstopgeth()
+static RPCHelpMan wentunostopgeth()
 {
-    return RPCHelpMan{"syscoinstopgeth",
+    return RPCHelpMan{"wentunostopgeth",
     "\nStops Geth from running.\n",
     {},
     RPCResult{
@@ -488,8 +488,8 @@ static RPCHelpMan syscoinstopgeth()
             {RPCResult::Type::STR, "status", "Result"},
         }},
     RPCExamples{
-        HelpExampleCli("syscoinstopgeth", "")
-        + HelpExampleRpc("syscoinstopgeth", "")
+        HelpExampleCli("wentunostopgeth", "")
+        + HelpExampleRpc("wentunostopgeth", "")
     },
     [&](const RPCHelpMan& self, const node::JSONRPCRequest& request) -> UniValue
 {
@@ -504,9 +504,9 @@ static RPCHelpMan syscoinstopgeth()
     };
 }
 
-static RPCHelpMan syscoinstartgeth()
+static RPCHelpMan wentunostartgeth()
 {
-    return RPCHelpMan{"syscoinstartgeth",
+    return RPCHelpMan{"wentunostartgeth",
     "\nStarts Geth.\n",
     {},
     RPCResult{
@@ -515,8 +515,8 @@ static RPCHelpMan syscoinstartgeth()
             {RPCResult::Type::STR, "status", "Result"},
         }},
     RPCExamples{
-        HelpExampleCli("syscoinstartgeth", "")
-        + HelpExampleRpc("syscoinstartgeth", "")
+        HelpExampleCli("wentunostartgeth", "")
+        + HelpExampleRpc("wentunostartgeth", "")
     },
     [&](const RPCHelpMan& self, const node::JSONRPCRequest& request) -> UniValue
 {
@@ -541,12 +541,12 @@ static RPCHelpMan syscoinstartgeth()
 void RegisterNEVMRPCCommands(CRPCTable &t)
 {
     static const CRPCCommand commands[]{
-        {"syscoin", &syscoingetspvproof},
-        {"syscoin", &listnevmblobdata},
-        {"syscoin", &syscoinstopgeth},
-        {"syscoin", &syscoinstartgeth},
-        {"syscoin", &getnevmblockchaininfo},
-        {"syscoin", &getnevmblobdata},
+        {"wentuno", &wentunogetspvproof},
+        {"wentuno", &listnevmblobdata},
+        {"wentuno", &wentunostopgeth},
+        {"wentuno", &wentunostartgeth},
+        {"wentuno", &getnevmblockchaininfo},
+        {"wentuno", &getnevmblobdata},
     };
     for (const auto& c : commands) {
         t.appendCommand(c.name, &c);

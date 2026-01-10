@@ -2,11 +2,11 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_NETADDRESS_H
-#define SYSCOIN_NETADDRESS_H
+#ifndef wentuno_NETADDRESS_H
+#define wentuno_NETADDRESS_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <compat/compat.h>
@@ -590,4 +590,4 @@ private:
     const uint64_t m_salt_k1;
 };
 
-#endif // SYSCOIN_NETADDRESS_H
+#endif // wentuno_NETADDRESS_H

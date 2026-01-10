@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_VERSIONBITS_H
-#define SYSCOIN_VERSIONBITS_H
+#ifndef wentuno_VERSIONBITS_H
+#define wentuno_VERSIONBITS_H
 
 #include <chain.h>
 #include <sync.h>
@@ -104,4 +104,4 @@ public:
     void Clear() EXCLUSIVE_LOCKS_REQUIRED(!m_mutex);
 };
 
-#endif // SYSCOIN_VERSIONBITS_H
+#endif // wentuno_VERSIONBITS_H

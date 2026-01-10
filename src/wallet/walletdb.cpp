@@ -5,7 +5,7 @@
 
 #include <wallet/walletdb.h>
 
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <key_io.h>
 #include <protocol.h>
 #include <script/script.h>
@@ -27,7 +27,7 @@
 #include <atomic>
 #include <optional>
 #include <string>
-// SYSCOIN
+// wentuno
 #include <governance/governancecommon.h>
 
 namespace wallet {
@@ -63,7 +63,7 @@ const std::string WALLETDESCRIPTORCKEY{"walletdescriptorckey"};
 const std::string WALLETDESCRIPTORKEY{"walletdescriptorkey"};
 const std::string WATCHMETA{"watchmeta"};
 const std::string WATCHS{"watchs"};
-// SYSCOIN
+// wentuno
 const std::string GOBJECT{"gobject"};
 const std::unordered_set<std::string> LEGACY_TYPES{CRYPTED_KEY, CSCRIPT, DEFAULTKEY, HDCHAIN, KEYMETA, KEY, OLD_KEY, POOL, WATCHMETA, WATCHS};
 } // namespace DBKeys
@@ -256,7 +256,7 @@ bool WalletBatch::WriteDescriptorDerivedCache(const CExtPubKey& xpub, const uint
     xpub.Encode(ser_xpub.data());
     return WriteIC(std::make_pair(std::make_pair(DBKeys::WALLETDESCRIPTORCACHE, desc_id), std::make_pair(key_exp_index, der_index)), ser_xpub);
 }
-// SYSCOIN
+// wentuno
 bool WalletBatch::WriteGovernanceObject(const Governance::Object& obj)
 {
     return WriteIC(std::make_pair(DBKeys::GOBJECT, obj.GetHash()), obj, false);
@@ -601,7 +601,7 @@ static DBErrors LoadLegacyWalletRecords(CWallet* pwallet, DatabaseBatch& batch, 
 
     // Check whether rewrite is needed
     if (ckey_res.m_records > 0) {
-        // SYSCOIN Rewrite encrypted wallets of versions 0.4.0 and 0.5.0rc:
+        // wentuno Rewrite encrypted wallets of versions 0.4.0 and 0.5.0rc:
         // if (last_client == 40000 || last_client == 50000) result = std::max(result, DBErrors::NEED_REWRITE);
     }
 
@@ -1078,7 +1078,7 @@ static DBErrors LoadTxRecords(CWallet* pwallet, DatabaseBatch& batch, std::vecto
         return result;
     });
     result = std::max(result, tx_res.m_result);
-    // SYSCOIN Load gobject
+    // wentuno Load gobject
     LoadResult gobject_res = LoadRecords(pwallet, batch, DBKeys::GOBJECT,
         [] (CWallet* pwallet, DataStream& key, CDataStream& value, std::string& err) EXCLUSIVE_LOCKS_REQUIRED(pwallet->cs_wallet) {
         uint256 nObjectHash;
@@ -1463,8 +1463,8 @@ std::unique_ptr<WalletDatabase> MakeDatabase(const fs::path& path, const Databas
     bool exists;
     try {
         exists = fs::symlink_status(path).type() != fs::file_type::not_found;
-    } catch (const fs::filesystem_error& e) {
-        error = Untranslated(strprintf("Failed to access database path '%s': %s", fs::PathToString(path), fsbridge::get_filesystem_error_message(e)));
+    } catch (const fs::fileWUNOtem_error& e) {
+        error = Untranslated(strprintf("Failed to access database path '%s': %s", fs::PathToString(path), fsbridge::get_fileWUNOtem_error_message(e)));
         status = DatabaseStatus::FAILED_BAD_PATH;
         return nullptr;
     }

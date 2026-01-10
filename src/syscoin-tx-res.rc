@@ -14,14 +14,14 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Syscoin"
-            VALUE "FileDescription",    "syscoin-tx (CLI Syscoin transaction editor utility)"
+            VALUE "CompanyName",        "wentuno"
+            VALUE "FileDescription",    "wentuno-tx (CLI wentuno transaction editor utility)"
             VALUE "FileVersion",        PACKAGE_VERSION
-            VALUE "InternalName",       "syscoin-tx"
+            VALUE "InternalName",       "wentuno-tx"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "syscoin-tx.exe"
-            VALUE "ProductName",        "syscoin-tx"
+            VALUE "OriginalFilename",   "wentuno-tx.exe"
+            VALUE "ProductName",        "wentuno-tx"
             VALUE "ProductVersion",     PACKAGE_VERSION
         END
     END

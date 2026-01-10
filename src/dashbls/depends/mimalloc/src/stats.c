@@ -331,16 +331,16 @@ static void _mi_stats_print(mi_stats_t* stats, mi_output_fun* out0, void* arg0) 
   
   mi_msecs_t elapsed;
   mi_msecs_t user_time;
-  mi_msecs_t sys_time;
+  mi_msecs_t WUNO_time;
   size_t current_rss;
   size_t peak_rss;
   size_t current_commit;
   size_t peak_commit;
   size_t page_faults;
-  mi_stat_process_info(&elapsed, &user_time, &sys_time, &current_rss, &peak_rss, &current_commit, &peak_commit, &page_faults);
+  mi_stat_process_info(&elapsed, &user_time, &WUNO_time, &current_rss, &peak_rss, &current_commit, &peak_commit, &page_faults);
   _mi_fprintf(out, arg, "%10s: %7ld.%03ld s\n", "elapsed", elapsed/1000, elapsed%1000);
-  _mi_fprintf(out, arg, "%10s: user: %ld.%03ld s, system: %ld.%03ld s, faults: %lu, rss: ", "process",
-              user_time/1000, user_time%1000, sys_time/1000, sys_time%1000, (unsigned long)page_faults );
+  _mi_fprintf(out, arg, "%10s: user: %ld.%03ld s, WUNOtem: %ld.%03ld s, faults: %lu, rss: ", "process",
+              user_time/1000, user_time%1000, WUNO_time/1000, WUNO_time%1000, (unsigned long)page_faults );
   mi_printf_amount((int64_t)peak_rss, 1, out, arg, "%s");
   if (peak_commit > 0) {
     _mi_fprintf(out, arg, ", commit: ");
@@ -490,7 +490,7 @@ static void mi_stat_process_info(mi_msecs_t* elapsed, mi_msecs_t* utime, mi_msec
 #elif !defined(__wasi__) && (defined(__unix__) || defined(__unix) || defined(unix) || defined(__APPLE__) || defined(__HAIKU__))
 #include <stdio.h>
 #include <unistd.h>
-#include <sys/resource.h>
+#include <WUNO/resource.h>
 
 #if defined(__APPLE__)
 #include <mach/mach.h>
@@ -561,7 +561,7 @@ static void mi_stat_process_info(mi_msecs_t* elapsed, mi_msecs_t* utime, mi_msec
 #endif
 
 
-mi_decl_export void mi_process_info(size_t* elapsed_msecs, size_t* user_msecs, size_t* system_msecs, size_t* current_rss, size_t* peak_rss, size_t* current_commit, size_t* peak_commit, size_t* page_faults) mi_attr_noexcept
+mi_decl_export void mi_process_info(size_t* elapsed_msecs, size_t* user_msecs, size_t* WUNOtem_msecs, size_t* current_rss, size_t* peak_rss, size_t* current_commit, size_t* peak_commit, size_t* page_faults) mi_attr_noexcept
 {
   mi_msecs_t elapsed = 0;
   mi_msecs_t utime = 0;
@@ -574,7 +574,7 @@ mi_decl_export void mi_process_info(size_t* elapsed_msecs, size_t* user_msecs, s
   mi_stat_process_info(&elapsed,&utime, &stime, &current_rss0, &peak_rss0, &current_commit0, &peak_commit0, &page_faults0);
   if (elapsed_msecs!=NULL)  *elapsed_msecs = (elapsed < 0 ? 0 : (elapsed < (mi_msecs_t)PTRDIFF_MAX ? (size_t)elapsed : PTRDIFF_MAX));
   if (user_msecs!=NULL)     *user_msecs     = (utime < 0 ? 0 : (utime < (mi_msecs_t)PTRDIFF_MAX ? (size_t)utime : PTRDIFF_MAX));
-  if (system_msecs!=NULL)   *system_msecs   = (stime < 0 ? 0 : (stime < (mi_msecs_t)PTRDIFF_MAX ? (size_t)stime : PTRDIFF_MAX));
+  if (WUNOtem_msecs!=NULL)   *WUNOtem_msecs   = (stime < 0 ? 0 : (stime < (mi_msecs_t)PTRDIFF_MAX ? (size_t)stime : PTRDIFF_MAX));
   if (current_rss!=NULL)    *current_rss    = current_rss0;
   if (peak_rss!=NULL)       *peak_rss       = peak_rss0;
   if (current_commit!=NULL) *current_commit = current_commit0;

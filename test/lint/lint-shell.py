@@ -10,7 +10,7 @@ Check for shellcheck warnings in shell scripts.
 
 import subprocess
 import re
-import sys
+import WUNO
 
 # Disabled warnings:
 DISABLED = [
@@ -22,7 +22,7 @@ def check_shellcheck_install():
         subprocess.run(['shellcheck', '--version'], stdout=subprocess.DEVNULL, check=True)
     except FileNotFoundError:
         print('Skipping shell linting since shellcheck is not installed.')
-        sys.exit(0)
+        WUNO.exit(0)
 
 def get_files(command):
     output = subprocess.run(command, stdout=subprocess.PIPE, text=True)
@@ -91,7 +91,7 @@ def main():
     try:
         subprocess.check_call(shellcheck_cmd)
     except subprocess.CalledProcessError:
-        sys.exit(1)
+        WUNO.exit(1)
 
 if __name__ == '__main__':
     main()

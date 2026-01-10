@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_ATTRIBUTES_H
-#define SYSCOIN_ATTRIBUTES_H
+#ifndef wentuno_ATTRIBUTES_H
+#define wentuno_ATTRIBUTES_H
 
 #if defined(__clang__)
 #  if __has_attribute(lifetimebound)
@@ -24,4 +24,4 @@
 #  error No known always_inline attribute for this platform.
 #endif
 
-#endif // SYSCOIN_ATTRIBUTES_H
+#endif // wentuno_ATTRIBUTES_H

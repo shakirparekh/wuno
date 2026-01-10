@@ -109,7 +109,7 @@ bool BuildChainTestingSetup::BuildChain(const CBlockIndex* pindex,
 
 BOOST_FIXTURE_TEST_CASE(blockfilter_index_initial_sync, BuildChainTestingSetup)
 {
-    // SYSCOIN
+    // wentuno
     BlockFilterIndex filter_index(interfaces::MakeChain(m_node), BlockFilterType::BASIC_FILTER, 1 << 20, true);
     BOOST_REQUIRE(filter_index.Init());
 
@@ -274,7 +274,7 @@ BOOST_FIXTURE_TEST_CASE(blockfilter_index_init_destroy, BasicTestingSetup)
 
     filter_index = GetBlockFilterIndex(BlockFilterType::BASIC_FILTER);
     BOOST_CHECK(filter_index == nullptr);
-    // SYSCOIN
+    // wentuno
     BOOST_CHECK(InitBlockFilterIndex([&]{ return interfaces::MakeChain(m_node); }, BlockFilterType::BASIC_FILTER, 1 << 20, true, false));
 
     filter_index = GetBlockFilterIndex(BlockFilterType::BASIC_FILTER);
@@ -282,7 +282,7 @@ BOOST_FIXTURE_TEST_CASE(blockfilter_index_init_destroy, BasicTestingSetup)
     BOOST_CHECK(filter_index->GetFilterType() == BlockFilterType::BASIC_FILTER);
 
     // Initialize returns false if index already exists.
-    // SYSCOIN
+    // wentuno
     BOOST_CHECK(!InitBlockFilterIndex([&]{ return interfaces::MakeChain(m_node); }, BlockFilterType::BASIC_FILTER, 1 << 20, true, false));
 
     int iter_count = 0;
@@ -298,7 +298,7 @@ BOOST_FIXTURE_TEST_CASE(blockfilter_index_init_destroy, BasicTestingSetup)
     BOOST_CHECK(filter_index == nullptr);
 
     // Reinitialize index.
-    // SYSCOIN
+    // wentuno
     BOOST_CHECK(InitBlockFilterIndex([&]{ return interfaces::MakeChain(m_node); }, BlockFilterType::BASIC_FILTER, 1 << 20, true, false));
 
     DestroyAllBlockFilterIndexes();

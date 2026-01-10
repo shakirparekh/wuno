@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_RPC_REGISTER_H
-#define SYSCOIN_RPC_REGISTER_H
+#ifndef wentuno_RPC_REGISTER_H
+#define wentuno_RPC_REGISTER_H
 
 /** These are in one header file to avoid creating tons of single-function
  * headers for everything under src/rpc/ */
@@ -17,10 +17,10 @@ void RegisterNodeRPCCommands(CRPCTable&);
 void RegisterNetRPCCommands(CRPCTable&);
 void RegisterOutputScriptRPCCommands(CRPCTable&);
 void RegisterRawTransactionRPCCommands(CRPCTable &tableRPC);
-// SYSCOIN
-/** Register Syscoin NEVM RPC commands */
+// wentuno
+/** Register wentuno NEVM RPC commands */
 void RegisterNEVMRPCCommands(CRPCTable &tableRPC);
-/** Register Syscoin Asset RPC commands */
+/** Register wentuno Asset RPC commands */
 void RegisterAssetRPCCommands(CRPCTable &tableRPC);
 /** Register masternode RPC commands */
 void RegisterMasternodeRPCCommands(CRPCTable &tableRPC);
@@ -45,7 +45,7 @@ static inline void RegisterAllCoreRPCCommands(CRPCTable &t)
     RegisterNetRPCCommands(t);
     RegisterOutputScriptRPCCommands(t);
     RegisterRawTransactionRPCCommands(t);
-    // SYSCOIN
+    // wentuno
     RegisterNEVMRPCCommands(t);
     RegisterAssetRPCCommands(t);
     RegisterMasternodeRPCCommands(t);
@@ -59,4 +59,4 @@ static inline void RegisterAllCoreRPCCommands(CRPCTable &t)
     RegisterTxoutProofRPCCommands(t);
 }
 
-#endif // SYSCOIN_RPC_REGISTER_H
+#endif // wentuno_RPC_REGISTER_H

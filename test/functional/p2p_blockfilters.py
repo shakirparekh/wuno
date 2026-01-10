@@ -19,7 +19,7 @@ from test_framework.messages import (
     uint256_from_str,
 )
 from test_framework.p2p import P2PInterface
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
 )
@@ -40,12 +40,12 @@ class FiltersClient(P2PInterface):
         self.cfilters.append(message)
 
 
-class CompactFiltersTest(SyscoinTestFramework):
+class CompactFiltersTest(wentunoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.rpc_timeout = 480
         self.num_nodes = 2
-        # SYSCOIN
+        # wentuno
         self.extra_args = [
             ["-blockfilterindex", "-peerblockfilters", "-dip3params=9000:9000"],
             ["-blockfilterindex", "-dip3params=9000:9000"],

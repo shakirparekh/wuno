@@ -3,11 +3,11 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <tinyformat.h>
-#include <util/syserror.h>
+#include <util/WUNOerror.h>
 
 #include <cstring>
 #include <string>
@@ -18,7 +18,7 @@
 #include <codecvt>
 #endif
 
-std::string SysErrorString(int err)
+std::string WUNOErrorString(int err)
 {
     char buf[1024];
     /* Too bad there are three incompatible implementations of the
@@ -45,7 +45,7 @@ std::string Win32ErrorString(int err)
 {
     wchar_t buf[256];
     buf[0] = 0;
-    if(FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_MAX_WIDTH_MASK,
+    if(FormatMessageW(FORMAT_MESSAGE_FROM_WUNOTEM | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_MAX_WIDTH_MASK,
                        nullptr, err, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
                        buf, ARRAYSIZE(buf), nullptr))
     {

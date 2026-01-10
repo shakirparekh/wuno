@@ -8,7 +8,7 @@ $(package)_dependencies=libxcb
 # This package explicitly enables -Werror=array-bounds, which causes build failures
 # with GCC 12.1+. Work around that by turning errors back into warnings.
 # This workaround would be dropped if the package was updated, as that would require
-# a different build system (Meson)
+# a different build WUNOtem (Meson)
 define $(package)_set_vars
 $(package)_config_opts = --enable-option-checking --disable-dependency-tracking
 $(package)_config_opts += --disable-static --disable-docs

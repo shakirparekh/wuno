@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_CRYPTO_POLY1305_H
-#define SYSCOIN_CRYPTO_POLY1305_H
+#ifndef wentuno_CRYPTO_POLY1305_H
+#define wentuno_CRYPTO_POLY1305_H
 
 #include <span.h>
 
@@ -67,4 +67,4 @@ public:
     }
 };
 
-#endif // SYSCOIN_CRYPTO_POLY1305_H
+#endif // wentuno_CRYPTO_POLY1305_H

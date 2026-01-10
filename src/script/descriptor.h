@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SCRIPT_DESCRIPTOR_H
-#define SYSCOIN_SCRIPT_DESCRIPTOR_H
+#ifndef wentuno_SCRIPT_DESCRIPTOR_H
+#define wentuno_SCRIPT_DESCRIPTOR_H
 
 #include <outputtype.h>
 #include <script/script.h>
@@ -199,4 +199,4 @@ std::unique_ptr<Descriptor> InferDescriptor(const CScript& script, const Signing
 */
 uint256 DescriptorID(const Descriptor& desc);
 
-#endif // SYSCOIN_SCRIPT_DESCRIPTOR_H
+#endif // wentuno_SCRIPT_DESCRIPTOR_H

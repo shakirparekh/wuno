@@ -17,10 +17,10 @@ using node::NodeContext;
 
 namespace init {
 namespace {
-class SyscoindInit : public interfaces::Init
+class wentunodInit : public interfaces::Init
 {
 public:
-    SyscoindInit(NodeContext& node) : m_node(node)
+    wentunodInit(NodeContext& node) : m_node(node)
     {
         m_node.args = &gArgs;
         m_node.init = this;
@@ -40,6 +40,6 @@ public:
 namespace interfaces {
 std::unique_ptr<Init> MakeNodeInit(NodeContext& node, int argc, char* argv[], int& exit_status)
 {
-    return std::make_unique<init::SyscoindInit>(node);
+    return std::make_unique<init::wentunodInit>(node);
 }
 } // namespace interfaces

@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_MASTERNODE_MASTERNODEMETA_H
-#define SYSCOIN_MASTERNODE_MASTERNODEMETA_H
+#ifndef wentuno_MASTERNODE_MASTERNODEMETA_H
+#define wentuno_MASTERNODE_MASTERNODEMETA_H
 
 #include <serialize.h>
 #include <sync.h>
@@ -156,4 +156,4 @@ public:
 };
 
 extern std::unique_ptr<CMasternodeMetaMan> mmetaman;
-#endif // SYSCOIN_MASTERNODE_MASTERNODEMETA_H
+#endif // wentuno_MASTERNODE_MASTERNODEMETA_H

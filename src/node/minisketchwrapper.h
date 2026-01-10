@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_NODE_MINISKETCHWRAPPER_H
-#define SYSCOIN_NODE_MINISKETCHWRAPPER_H
+#ifndef wentuno_NODE_MINISKETCHWRAPPER_H
+#define wentuno_NODE_MINISKETCHWRAPPER_H
 
 #include <minisketch.h>
 
@@ -17,4 +17,4 @@ Minisketch MakeMinisketch32(size_t capacity);
 Minisketch MakeMinisketch32FP(size_t max_elements, uint32_t fpbits);
 } // namespace node
 
-#endif // SYSCOIN_NODE_MINISKETCHWRAPPER_H
+#endif // wentuno_NODE_MINISKETCHWRAPPER_H

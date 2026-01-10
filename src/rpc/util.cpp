@@ -22,11 +22,11 @@
 
 #include <tuple>
 
-// SYSCOIN
+// wentuno
 #include <math.h>
 const std::string UNIX_EPOCH_TIME = "UNIX epoch time";
-// SYSCOIN
-const std::string EXAMPLE_ADDRESS[2] = {"sys1q09vm5lfy0j5reeulh4x5752q25uqqvz34hufdl", "sys1qtyf33aa2tl62xhrzhralpytka0krxvt0a4e8ee"};
+// wentuno
+const std::string EXAMPLE_ADDRESS[2] = {"WUNO1q09vm5lfy0j5reeulh4x5752q25uqqvz34hufdl", "WUNO1qtyf33aa2tl62xhrzhralpytka0krxvt0a4e8ee"};
 
 std::string GetAllOutputTypes()
 {
@@ -145,12 +145,12 @@ std::string ShellQuoteIfNeeded(const std::string& s)
 
 std::string HelpExampleCli(const std::string& methodname, const std::string& args)
 {
-    return "> syscoin-cli " + methodname + " " + args + "\n";
+    return "> wentuno-cli " + methodname + " " + args + "\n";
 }
 
 std::string HelpExampleCliNamed(const std::string& methodname, const RPCArgList& args)
 {
-    std::string result = "> syscoin-cli -named " + methodname;
+    std::string result = "> wentuno-cli -named " + methodname;
     for (const auto& argpair: args) {
         const auto& value = argpair.second.isStr()
                 ? argpair.second.get_str()

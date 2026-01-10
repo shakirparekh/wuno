@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_INDEX_BLOCKFILTERINDEX_H
-#define SYSCOIN_INDEX_BLOCKFILTERINDEX_H
+#ifndef wentuno_INDEX_BLOCKFILTERINDEX_H
+#define wentuno_INDEX_BLOCKFILTERINDEX_H
 
 #include <attributes.h>
 #include <blockfilter.h>
@@ -103,4 +103,4 @@ bool DestroyBlockFilterIndex(BlockFilterType filter_type);
 /** Destroy all open block filter indexes. */
 void DestroyAllBlockFilterIndexes();
 
-#endif // SYSCOIN_INDEX_BLOCKFILTERINDEX_H
+#endif // wentuno_INDEX_BLOCKFILTERINDEX_H

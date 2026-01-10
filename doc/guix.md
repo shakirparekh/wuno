@@ -1,3 +1,3 @@
-# Bootstrappable Syscoin Core Builds
+# Bootstrappable wentuno Core Builds
 
 See [contrib/guix/README.md](../contrib/guix/README.md)

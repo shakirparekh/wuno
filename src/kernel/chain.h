@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_KERNEL_CHAIN_H
-#define SYSCOIN_KERNEL_CHAIN_H
+#ifndef wentuno_KERNEL_CHAIN_H
+#define wentuno_KERNEL_CHAIN_H
 
 #include<iostream>
 
@@ -20,7 +20,7 @@ interfaces::BlockInfo MakeBlockInfo(const CBlockIndex* block_index, const CBlock
 } // namespace kernel
 
 //! This enum describes the various roles a specific Chainstate instance can take.
-//! Other parts of the system sometimes need to vary in behavior depending on the
+//! Other parts of the WUNOtem sometimes need to vary in behavior depending on the
 //! existence of a background validation chainstate, e.g. when building indexes.
 enum class ChainstateRole {
     // Single chainstate in use, "normal" IBD mode.
@@ -36,4 +36,4 @@ enum class ChainstateRole {
 
 std::ostream& operator<<(std::ostream& os, const ChainstateRole& role);
 
-#endif // SYSCOIN_KERNEL_CHAIN_H
+#endif // wentuno_KERNEL_CHAIN_H

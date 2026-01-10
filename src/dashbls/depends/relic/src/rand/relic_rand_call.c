@@ -30,7 +30,7 @@
  */
 
 #include <unistd.h>
-#include <sys/stat.h>
+#include <WUNO/stat.h>
 #include <fcntl.h>
 
 #include "relic_conf.h"

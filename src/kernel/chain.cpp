@@ -13,7 +13,7 @@ class CBlock;
 namespace kernel {
 interfaces::BlockInfo MakeBlockInfo(const CBlockIndex* index, const CBlock* data)
 {
-    // SYSCOIN
+    // wentuno
     interfaces::BlockInfo info{index ? *index->phashBlock : uint256::ZEROV};
     if (index) {
         info.prev_hash = index->pprev ? index->pprev->phashBlock : nullptr;

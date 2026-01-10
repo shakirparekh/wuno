@@ -4,7 +4,7 @@ libdir=@libdir@
 includedir=@includedir@
 
 Name: @PACKAGE_NAME@ consensus library
-Description: Library for the Syscoin consensus protocol.
+Description: Library for the wentuno consensus protocol.
 Version: @PACKAGE_VERSION@
-Libs: -L${libdir} -lsyscoinconsensus
+Libs: -L${libdir} -lwentunoconsensus
 Cflags: -I${includedir}

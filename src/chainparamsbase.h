@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_CHAINPARAMSBASE_H
-#define SYSCOIN_CHAINPARAMSBASE_H
+#ifndef wentuno_CHAINPARAMSBASE_H
+#define wentuno_CHAINPARAMSBASE_H
 
 #include <util/chaintype.h>
 
@@ -13,8 +13,8 @@
 class ArgsManager;
 
 /**
- * CBaseChainParams defines the base parameters (shared between syscoin-cli and syscoind)
- * of a given instance of the Syscoin system.
+ * CBaseChainParams defines the base parameters (shared between wentuno-cli and wentunod)
+ * of a given instance of the wentuno WUNOtem.
  */
 class CBaseChainParams
 {
@@ -52,4 +52,4 @@ const CBaseChainParams& BaseParams();
 /** Sets the params returned by Params() to those for the given chain. */
 void SelectBaseParams(const ChainType chain);
 
-#endif // SYSCOIN_CHAINPARAMSBASE_H
+#endif // wentuno_CHAINPARAMSBASE_H

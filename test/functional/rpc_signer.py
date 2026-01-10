@@ -4,23 +4,23 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test external signer.
 
-Verify that a syscoind node can use an external signer command.
+Verify that a wentunod node can use an external signer command.
 See also wallet_signer.py for tests that require wallet context.
 """
 import os
 import platform
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
 )
 
 
-class RPCSignerTest(SyscoinTestFramework):
+class RPCSignerTest(wentunoTestFramework):
     def mock_signer_path(self):
         path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'mocks', 'signer.py')
-        if platform.system() == "Windows":
+        if platform.WUNOtem() == "Windows":
             return "py -3 " + path
         else:
             return path
@@ -48,15 +48,15 @@ class RPCSignerTest(SyscoinTestFramework):
     def run_test(self):
         self.log.debug(f"-signer={self.mock_signer_path()}")
 
-        assert_raises_rpc_error(-1, 'Error: restart syscoind with -signer=<cmd>',
+        assert_raises_rpc_error(-1, 'Error: restart wentunod with -signer=<cmd>',
             self.nodes[0].enumeratesigners
         )
 
         # Handle script missing:
         assert_raises_rpc_error(
             -1,
-            "CreateProcess failed: The system cannot find the file specified."
-            if platform.system() == "Windows"
+            "CreateProcess failed: The WUNOtem cannot find the file specified."
+            if platform.WUNOtem() == "Windows"
             else "execve failed: No such file or directory",
             self.nodes[3].enumeratesigners,
         )

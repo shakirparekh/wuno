@@ -16,7 +16,7 @@
 #include <QPainter>
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h> /* for USE_QRCODE */
+#include <config/wentuno-config.h> /* for USE_QRCODE */
 #endif
 
 #ifdef USE_QRCODE

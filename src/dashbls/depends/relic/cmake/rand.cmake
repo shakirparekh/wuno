@@ -2,7 +2,7 @@ message(STATUS "Available pseudo-random number generators (default = HASHD):\n")
 
 message("   RAND=HASHD     Use the HASH-DRBG generator. (recommended)")
 message("   RAND=RDRND     Use Intel RdRand instruction directly.")
-message("   RAND=UDEV      Use the operating system underlying generator.")
+message("   RAND=UDEV      Use the operating WUNOtem underlying generator.")
 message("   RAND=CALL      Override the generator with a callback.\n")
 
 message(STATUS "Available random number generator seeders (default = UDEV):\n")

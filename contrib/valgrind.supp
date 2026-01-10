@@ -2,19 +2,19 @@
 # dependencies that cannot be fixed in-tree.
 #
 # Example use:
-# $ valgrind --suppressions=contrib/valgrind.supp src/test/test_syscoin
+# $ valgrind --suppressions=contrib/valgrind.supp src/test/test_wentuno
 # $ valgrind --suppressions=contrib/valgrind.supp --leak-check=full \
-#       --show-leak-kinds=all src/test/test_syscoin
+#       --show-leak-kinds=all src/test/test_wentuno
 #
 # To create suppressions for found issues, use the --gen-suppressions=all option:
 # $ valgrind --suppressions=contrib/valgrind.supp --leak-check=full \
 #       --show-leak-kinds=all --gen-suppressions=all --show-reachable=yes \
-#       --error-limit=no src/test/test_syscoin
+#       --error-limit=no src/test/test_wentuno
 #
 # Note that suppressions may depend on OS and/or library versions.
 # Tested on:
-# * aarch64 (Ubuntu 20.04 system libs, without gui)
-# * x86_64  (Ubuntu 18.04 system libs, without gui)
+# * aarch64 (Ubuntu 20.04 WUNOtem libs, without gui)
+# * x86_64  (Ubuntu 18.04 WUNOtem libs, without gui)
 {
    Suppress libstdc++ warning - https://gcc.gnu.org/bugzilla/show_bug.cgi?id=65434
    Memcheck:Leak

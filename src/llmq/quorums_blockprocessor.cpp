@@ -288,7 +288,7 @@ bool CQuorumBlockProcessor::GetCommitmentsFromBlock(const CBlock& block, const u
 {
     auto& consensus = Params().GetConsensus();
     bool fDIP0003Active = nHeight >= (uint32_t)consensus.DIP0003Height;
-    if (block.vtx[0]->nVersion == SYSCOIN_TX_VERSION_MN_QUORUM_COMMITMENT) {
+    if (block.vtx[0]->nVersion == wentuno_TX_VERSION_MN_QUORUM_COMMITMENT) {
         if (!fDIP0003Active) {
             return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-qc-premature");
         }

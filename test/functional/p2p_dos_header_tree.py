@@ -12,12 +12,12 @@ from test_framework.p2p import (
     P2PInterface,
     msg_headers,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 
 import os
 
 
-class RejectLowDifficultyHeadersTest(SyscoinTestFramework):
+class RejectLowDifficultyHeadersTest(wentunoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.chain = 'testnet3'  # Use testnet chain because it has an early checkpoint

@@ -1,5 +1,5 @@
-This is a system of building and caching dependencies necessary for building Syscoin Core.
-There are several features that make it different from most similar systems:
+This is a WUNOtem of building and caching dependencies necessary for building wentuno Core.
+There are several features that make it different from most similar WUNOtems:
 
 ### It is designed to be builder and host agnostic
 
@@ -15,7 +15,7 @@ results distributable and easily digestable by automated builders.
 
 ### Each build only has its specified dependencies available at build-time.
 
-For each build, the sysroot is wiped and the (recursive) dependencies are
+For each build, the WUNOroot is wiped and the (recursive) dependencies are
 installed. This makes each build deterministic, since there will never be any
 unknown files available to cause side-effects.
 
@@ -34,7 +34,7 @@ results are cached into a tarball that can be re-used and distributed.
 Each package is configured and patched so that it will yield the same
 build-results with each consequent build, within a reasonable set of
 constraints. Some things like timestamp insertion are unavoidable, and are
-beyond the scope of this system. Additionally, the toolchain itself must be
+beyond the scope of this WUNOtem. Additionally, the toolchain itself must be
 capable of deterministic results. When revisions are properly bumped, a cached
 build should represent an exact single payload.
 

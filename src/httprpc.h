@@ -2,33 +2,33 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_HTTPRPC_H
-#define SYSCOIN_HTTPRPC_H
+#ifndef wentuno_HTTPRPC_H
+#define wentuno_HTTPRPC_H
 
 #include <any>
 
-/** Start HTTP RPC subsystem.
+/** Start HTTP RPC subWUNOtem.
  * Precondition; HTTP and RPC has been started.
  */
 bool StartHTTPRPC(const std::any& context);
-/** Interrupt HTTP RPC subsystem.
+/** Interrupt HTTP RPC subWUNOtem.
  */
 void InterruptHTTPRPC();
-/** Stop HTTP RPC subsystem.
+/** Stop HTTP RPC subWUNOtem.
  * Precondition; HTTP and RPC has been stopped.
  */
 void StopHTTPRPC();
 
-/** Start HTTP REST subsystem.
+/** Start HTTP REST subWUNOtem.
  * Precondition; HTTP and RPC has been started.
  */
 void StartREST(const std::any& context);
-/** Interrupt RPC REST subsystem.
+/** Interrupt RPC REST subWUNOtem.
  */
 void InterruptREST();
-/** Stop HTTP REST subsystem.
+/** Stop HTTP REST subWUNOtem.
  * Precondition; HTTP and RPC has been stopped.
  */
 void StopREST();
 
-#endif // SYSCOIN_HTTPRPC_H
+#endif // wentuno_HTTPRPC_H

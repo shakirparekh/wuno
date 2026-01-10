@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_BLOCKFILTER_H
-#define SYSCOIN_BLOCKFILTER_H
+#ifndef wentuno_BLOCKFILTER_H
+#define wentuno_BLOCKFILTER_H
 
 #include <cstddef>
 #include <cstdint>
@@ -172,4 +172,4 @@ public:
     }
 };
 
-#endif // SYSCOIN_BLOCKFILTER_H
+#endif // wentuno_BLOCKFILTER_H

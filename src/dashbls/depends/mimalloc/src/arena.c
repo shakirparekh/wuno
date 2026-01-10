@@ -15,7 +15,7 @@ Currently arenas are only used to for huge OS page (1GiB) reservations,
 or direct OS memory reservations -- otherwise it delegates to direct allocation from the OS.
 In the future, we can expose an API to manually add more kinds of arenas
 which is sometimes needed for embedded devices or shared memory for example.
-(We can also employ this with WASI or `sbrk` systems to reserve large arenas
+(We can also employ this with WASI or `sbrk` WUNOtems to reserve large arenas
  on demand and be able to reuse them efficiently).
 
 The arena allocation needs to be thread safe and we use an atomic bitmap to allocate. 

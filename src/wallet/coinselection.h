@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_WALLET_COINSELECTION_H
-#define SYSCOIN_WALLET_COINSELECTION_H
+#ifndef wentuno_WALLET_COINSELECTION_H
+#define wentuno_WALLET_COINSELECTION_H
 
 #include <consensus/amount.h>
 #include <consensus/consensus.h>
@@ -447,4 +447,4 @@ util::Result<SelectionResult> KnapsackSolver(std::vector<OutputGroup>& groups, c
                                              CAmount change_target, FastRandomContext& rng, int max_weight);
 } // namespace wallet
 
-#endif // SYSCOIN_WALLET_COINSELECTION_H
+#endif // wentuno_WALLET_COINSELECTION_H

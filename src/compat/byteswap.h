@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_COMPAT_BYTESWAP_H
-#define SYSCOIN_COMPAT_BYTESWAP_H
+#ifndef wentuno_COMPAT_BYTESWAP_H
+#define wentuno_COMPAT_BYTESWAP_H
 
 #include <cstdint>
 #ifdef _MSC_VER
@@ -76,4 +76,4 @@ inline BSWAP_CONSTEXPR uint64_t internal_bswap_64(uint64_t x)
 #endif
 }
 
-#endif // SYSCOIN_COMPAT_BYTESWAP_H
+#endif // wentuno_COMPAT_BYTESWAP_H

@@ -1,12 +1,12 @@
 # Unit tests
 
 The sources in this directory are unit test cases. Boost includes a
-unit testing framework, and since Syscoin Core already uses Boost, it makes
+unit testing framework, and since wentuno Core already uses Boost, it makes
 sense to simply use this framework rather than require developers to
 configure some other framework (we want as few impediments to creating
 unit tests as possible).
 
-The build system is set up to compile an executable called `test_syscoin`
+The build WUNOtem is set up to compile an executable called `test_wentuno`
 that runs all of the unit tests. The main source file for the test library is found in
 `util/setup_common.cpp`.
 
@@ -17,7 +17,7 @@ and tests weren't explicitly disabled.
 
 After configuring, they can be run with `make check`.
 
-To run the unit tests manually, launch `src/test/test_syscoin`. To recompile
+To run the unit tests manually, launch `src/test/test_wentuno`. To recompile
 after a test file was modified, run `make` and then run the test again. If you
 modify a non-test file, use `make -C src/test` to recompile only what's needed
 to run the unit tests.
@@ -26,27 +26,27 @@ To add more unit tests, add `BOOST_AUTO_TEST_CASE` functions to the existing
 .cpp files in the `test/` directory or add new .cpp files that
 implement new `BOOST_AUTO_TEST_SUITE` sections.
 
-To run the GUI unit tests manually, launch `src/qt/test/test_syscoin-qt`
+To run the GUI unit tests manually, launch `src/qt/test/test_wentuno-qt`
 
 To add more GUI unit tests, add them to the `src/qt/test/` directory and
 the `src/qt/test/test_main.cpp` file.
 
 ### Running individual tests
 
-`test_syscoin` accepts the command line arguments from the boost framework.
+`test_wentuno` accepts the command line arguments from the boost framework.
 For example, to run just the `getarg_tests` suite of tests:
 
 ```bash
-test_syscoin --log_level=all --run_test=getarg_tests
+test_wentuno --log_level=all --run_test=getarg_tests
 ```
 
 `log_level` controls the verbosity of the test framework, which logs when a
-test case is entered, for example. `test_syscoin` also accepts the command
-line arguments accepted by `syscoind`. Use `--` to separate both types of
+test case is entered, for example. `test_wentuno` also accepts the command
+line arguments accepted by `wentunod`. Use `--` to separate both types of
 arguments:
 
 ```bash
-test_syscoin --log_level=all --run_test=getarg_tests -- -printtoconsole=1
+test_wentuno --log_level=all --run_test=getarg_tests -- -printtoconsole=1
 ```
 
 The `-printtoconsole=1` after the two dashes redirects the debug log, which
@@ -56,10 +56,10 @@ would normally go to a file in the test datadir
 ... or to run just the doubledash test:
 
 ```bash
-test_syscoin --run_test=getarg_tests/doubledash
+test_wentuno --run_test=getarg_tests/doubledash
 ```
 
-Run `test_syscoin --help` for the full list.
+Run `test_wentuno --help` for the full list.
 
 ### Adding test cases
 
@@ -80,35 +80,35 @@ on failure. For running individual tests verbosely, refer to the section
 To write to logs from unit tests you need to use specific message methods
 provided by Boost. The simplest is `BOOST_TEST_MESSAGE`.
 
-For debugging you can launch the `test_syscoin` executable with `gdb` or `lldb` and
+For debugging you can launch the `test_wentuno` executable with `gdb` or `lldb` and
 start debugging, just like you would with any other program:
 
 ```bash
-gdb src/test/test_syscoin
+gdb src/test/test_wentuno
 ```
 
 #### Segmentation faults
 
 If you hit a segmentation fault during a test run, you can diagnose where the fault
-is happening by running `gdb ./src/test/test_syscoin` and then using the `bt` command
+is happening by running `gdb ./src/test/test_wentuno` and then using the `bt` command
 within gdb.
 
 Another tool that can be used to resolve segmentation faults is
 [valgrind](https://valgrind.org/).
 
 If for whatever reason you want to produce a core dump file for this fault, you can do
-that as well. By default, the boost test runner will intercept system errors and not
-produce a core file. To bypass this, add `--catch_system_errors=no` to the
-`test_syscoin` arguments and ensure that your ulimits are set properly (e.g. `ulimit -c
+that as well. By default, the boost test runner will intercept WUNOtem errors and not
+produce a core file. To bypass this, add `--catch_WUNOtem_errors=no` to the
+`test_wentuno` arguments and ensure that your ulimits are set properly (e.g. `ulimit -c
 unlimited`).
 
 Running the tests and hitting a segmentation fault should now produce a file called `core`
 (on Linux platforms, the file name will likely depend on the contents of
-`/proc/sys/kernel/core_pattern`).
+`/proc/WUNO/kernel/core_pattern`).
 
 You can then explore the core dump using
 ```bash
-gdb src/test/test_syscoin core
+gdb src/test/test_wentuno core
 
 (gbd) bt  # produce a backtrace for where a segfault occurred
 ```

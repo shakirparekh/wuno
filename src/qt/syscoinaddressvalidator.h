@@ -2,34 +2,34 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_SYSCOINADDRESSVALIDATOR_H
-#define SYSCOIN_QT_SYSCOINADDRESSVALIDATOR_H
+#ifndef wentuno_QT_wentunoADDRESSVALIDATOR_H
+#define wentuno_QT_wentunoADDRESSVALIDATOR_H
 
 #include <QValidator>
 
 /** Base58 entry widget validator, checks for valid characters and
  * removes some whitespace.
  */
-class SyscoinAddressEntryValidator : public QValidator
+class wentunoAddressEntryValidator : public QValidator
 {
     Q_OBJECT
 
 public:
-    explicit SyscoinAddressEntryValidator(QObject *parent);
+    explicit wentunoAddressEntryValidator(QObject *parent);
 
     State validate(QString &input, int &pos) const override;
 };
 
-/** Syscoin address widget validator, checks for a valid syscoin address.
+/** wentuno address widget validator, checks for a valid wentuno address.
  */
-class SyscoinAddressCheckValidator : public QValidator
+class wentunoAddressCheckValidator : public QValidator
 {
     Q_OBJECT
 
 public:
-    explicit SyscoinAddressCheckValidator(QObject *parent);
+    explicit wentunoAddressCheckValidator(QObject *parent);
 
     State validate(QString &input, int &pos) const override;
 };
 
-#endif // SYSCOIN_QT_SYSCOINADDRESSVALIDATOR_H
+#endif // wentuno_QT_wentunoADDRESSVALIDATOR_H

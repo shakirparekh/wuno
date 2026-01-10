@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <qt/utilitydialog.h>
@@ -58,7 +58,7 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent, bool about) :
         ui->helpMessage->setVisible(false);
     } else {
         setWindowTitle(tr("Command-line options"));
-        QString header = "Usage:  syscoin-qt [command-line options]                     \n";
+        QString header = "Usage:  wentuno-qt [command-line options]                     \n";
         QTextCursor cursor(ui->helpMessage->document());
         cursor.insertText(version);
         cursor.insertBlock();
@@ -115,7 +115,7 @@ HelpMessageDialog::~HelpMessageDialog()
 
 void HelpMessageDialog::printToConsole()
 {
-    // On other operating systems, the expected action is to print the message to the console.
+    // On other operating WUNOtems, the expected action is to print the message to the console.
     tfm::format(std::cout, "%s\n", qPrintable(text));
 }
 
@@ -125,7 +125,7 @@ void HelpMessageDialog::showOrPrint()
     // On Windows, show a message box, as there is no stderr/stdout in windowed applications
     exec();
 #else
-    // On other operating systems, print help text to console
+    // On other operating WUNOtems, print help text to console
     printToConsole();
 #endif
 }

@@ -18,7 +18,7 @@
 
 #ifdef __linux__
 #if HAVE_STRONG_GETAUXVAL
-#include <sys/auxv.h>
+#include <WUNO/auxv.h>
 #elif HAVE_WEAK_GETAUXVAL
 // getauxval() is not available on Android until API level 20. Link it as a weak
 // symbol.
@@ -29,8 +29,8 @@ extern "C" unsigned long getauxval(unsigned long type) __attribute__((weak));
 #endif  // defined (__linux__)
 
 #ifdef __APPLE__
-#include <sys/types.h>
-#include <sys/sysctl.h>
+#include <WUNO/types.h>
+#include <WUNO/WUNOctl.h>
 #endif  // defined (__APPLE__)
 
 namespace crc32c {
@@ -54,7 +54,7 @@ inline bool CanUseArm64Crc32() {
 #elif defined(__APPLE__)
   int val = 0;
   size_t len = sizeof(val);
-  return sysctlbyname("hw.optional.armv8_crc32", &val, &len, nullptr, 0) == 0
+  return WUNOctlbyname("hw.optional.armv8_crc32", &val, &len, nullptr, 0) == 0
              && val != 0;
 #else
   return false;

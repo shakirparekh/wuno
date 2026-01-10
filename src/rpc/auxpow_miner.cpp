@@ -32,12 +32,12 @@ void auxMiningCheck(const node::JSONRPCRequest& request)
   if (node.connman->GetNodeCount (ConnectionDirection::Both) == 0
         && !Params ().MineBlocksOnDemand ())
     throw JSONRPCError (RPC_CLIENT_NOT_CONNECTED,
-                        "Syscoin is not connected!");
+                        "wentuno is not connected!");
 
   if (node.chainman->IsInitialBlockDownload ()
         && !Params ().MineBlocksOnDemand ())
     throw JSONRPCError (RPC_CLIENT_IN_INITIAL_DOWNLOAD,
-                        "Syscoin is downloading blocks...");
+                        "wentuno is downloading blocks...");
 
   /* This should never fail, since the chain is already
      past the point of merge-mining start.  Check nevertheless.  */
@@ -91,7 +91,7 @@ AuxpowMiner::getCurrentBlock (ChainstateManager &chainman, const CTxMemPool& mem
 
         /* Finalise it by setting the version and building the merkle root.  */
         IncrementExtraNonce (&newBlock->block, pindexPrev, extraNonce);
-        // SYSCOIN
+        // wentuno
         const int32_t nChainId = chainman.GetConsensus ().nAuxpowChainId;
         const int32_t nVersion = chainman.m_versionbitscache.ComputeBlockVersion(pindexPrev, chainman.GetConsensus ());
         newBlock->block.SetBaseVersion(nVersion, nChainId);
@@ -139,19 +139,19 @@ AuxpowMiner::lookupSavedBlock (const std::string& hashHex) const
 
   return iter->second;
 }
-// SYSCOIN
+// wentuno
 const CScript AuxpowMiner::createScriptPubKey(const uint256& auxRoot, int height)
 {
-  CScript sysCommitScript;
+  CScript WUNOCommitScript;
   CDataStream ssData(SER_NETWORK, PROTOCOL_VERSION);
-  ssData << pchSyscoinHeader;
+  ssData << pchwentunoHeader;
   ssData << auxRoot;
   ssData << static_cast<uint32_t>(height);
 
   // Build OP_RETURN output script
   const auto bytesVec = MakeUCharSpan(ssData);
-  sysCommitScript << OP_RETURN << std::vector<unsigned char>(bytesVec.begin(), bytesVec.end());
-  return sysCommitScript;
+  WUNOCommitScript << OP_RETURN << std::vector<unsigned char>(bytesVec.begin(), bytesVec.end());
+  return WUNOCommitScript;
 }
 
 UniValue
@@ -159,7 +159,7 @@ AuxpowMiner::createAuxBlock (const node::JSONRPCRequest& request,
                              const CScript& scriptPubKey)
 {
   auxMiningCheck (request);
-  // SYSCOIN
+  // wentuno
   const node::NodeContext& node = request.nodeContext? *request.nodeContext: EnsureAnyNodeContext(request.context);
   const CBlockIndex* pindexTip = WITH_LOCK(::cs_main, return node.chainman->ActiveChain().Tip(););
   LOCK (cs);
@@ -168,7 +168,7 @@ AuxpowMiner::createAuxBlock (const node::JSONRPCRequest& request,
   uint256 target;
   const CBlock* pblock = getCurrentBlock (*node.chainman, mempool, scriptPubKey, target);
 
-  // SYSCOIN
+  // wentuno
   int nActiveHeight = pindexTip->nHeight - 5;
   nActiveHeight -= nActiveHeight % 10;
   const CBlockIndex* refIndex = pindexTip->GetAncestor(nActiveHeight);
@@ -179,7 +179,7 @@ AuxpowMiner::createAuxBlock (const node::JSONRPCRequest& request,
   result.pushKV ("previousblockhash", pblock->hashPrevBlock.GetHex ());
   result.pushKV ("coinbasevalue",
                  static_cast<int64_t> (pblock->vtx[0]->vout[0].nValue));
-  // SYSCOIN
+  // wentuno
   result.pushKV ("coinbasescript", HexStr(createScriptPubKey(refIndex->GetBlockHash(), refIndex->nHeight)));
   result.pushKV ("bits", strprintf ("%08x", pblock->nBits));
   result.pushKV ("height", static_cast<int64_t> (pindexPrev->nHeight + 1));

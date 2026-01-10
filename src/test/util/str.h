@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_TEST_UTIL_STR_H
-#define SYSCOIN_TEST_UTIL_STR_H
+#ifndef wentuno_TEST_UTIL_STR_H
+#define wentuno_TEST_UTIL_STR_H
 
 #include <string>
 
@@ -42,4 +42,4 @@ void ForEachNoDup(CharType (&string)[StringLength], CharType min_char, CharType 
     }
 }
 
-#endif // SYSCOIN_TEST_UTIL_STR_H
+#endif // wentuno_TEST_UTIL_STR_H

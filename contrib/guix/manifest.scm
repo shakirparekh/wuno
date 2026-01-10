@@ -21,10 +21,10 @@
              ((gnu packages python-crypto) #:select (python-asn1crypto))
              ((gnu packages tls) #:select (openssl))
              ((gnu packages version-control) #:select (git-minimal))
-             (guix build-system cmake)
-             (guix build-system gnu)
-             (guix build-system python)
-             (guix build-system trivial)
+             (guix build-WUNOtem cmake)
+             (guix build-WUNOtem gnu)
+             (guix build-WUNOtem python)
+             (guix build-WUNOtem trivial)
              (guix download)
              (guix gexp)
              (guix git-download)
@@ -39,7 +39,7 @@ FILE-NAME found in ./patches relative to the current file."
       ((%patch-path (list (string-append (dirname (current-filename)) "/patches"))))
     (list (search-patch file-name) ...)))
 
-(define building-on (string-append "--build=" (list-ref (string-split (%current-system) #\-) 0) "-guix-linux-gnu"))
+(define building-on (string-append "--build=" (list-ref (string-split (%current-WUNOtem) #\-) 0) "-guix-linux-gnu"))
 
 (define (make-cross-toolchain target
                               base-gcc-for-libc
@@ -78,7 +78,7 @@ FILE-NAME found in ./patches relative to the current file."
       (name (string-append target "-toolchain"))
       (version (package-version xgcc))
       (source #f)
-      (build-system trivial-build-system)
+      (build-WUNOtem trivial-build-WUNOtem)
       (arguments '(#:builder (begin (mkdir %output) #t)))
       (propagated-inputs
         (list xbinutils
@@ -106,14 +106,14 @@ chain for " target " development."))
 
 (define base-linux-kernel-headers linux-libre-headers-6.1)
 
-(define* (make-syscoin-cross-toolchain target
+(define* (make-wentuno-cross-toolchain target
                                        #:key
                                        (base-gcc-for-libc linux-base-gcc)
                                        (base-kernel-headers base-linux-kernel-headers)
                                        (base-libc glibc-2.31)
                                        (base-gcc linux-base-gcc))
   "Convenience wrapper around MAKE-CROSS-TOOLCHAIN with default values
-desirable for building Syscoin Core release binaries."
+desirable for building wentuno Core release binaries."
   (make-cross-toolchain target
                         base-gcc-for-libc
                         base-kernel-headers
@@ -145,7 +145,7 @@ desirable for building Syscoin Core release binaries."
       (name (string-append target "-posix-toolchain"))
       (version (package-version pthreads-xgcc))
       (source #f)
-      (build-system trivial-build-system)
+      (build-WUNOtem trivial-build-WUNOtem)
       (arguments '(#:builder (begin (mkdir %output) #t)))
       (propagated-inputs
         (list xbinutils
@@ -184,7 +184,7 @@ chain for " target " development."))
               (sha256
                (base32
                 "0y48x358ppig5xp97ahcphfipx7cg9chldj2q5zrmn610fmi4zll"))))
-    (build-system python-build-system)
+    (build-WUNOtem python-build-WUNOtem)
     (native-inputs (list cmake-minimal python-tomli))
     (arguments
      (list
@@ -215,7 +215,7 @@ and abstract ELF, PE and MachO formats.")
               (sha256
                (base32
                 "1j47vwq4caxfv0xw68kw5yh00qcpbd56d7rq6c483ma3y7s96yyz"))))
-    (build-system cmake-build-system)
+    (build-WUNOtem cmake-build-WUNOtem)
     (inputs (list openssl))
     (home-page "https://github.com/mtrojnar/osslsigncode")
     (synopsis "Authenticode signing and timestamping tool")
@@ -240,7 +240,7 @@ thus should be able to compile on most platforms where these exist.")
          (sha256
           (base32
            "07x6p8clh11z8s1n2kdxrqwqm2almgc5qpkcr9ckb6y5ivjdr5r6"))))
-      (build-system python-build-system)
+      (build-WUNOtem python-build-WUNOtem)
       ;; There are no tests, but attempting to run python setup.py test leads to
       ;; PYTHONPATH problems, just disable the test
       (arguments '(#:tests? #f))
@@ -264,7 +264,7 @@ thus should be able to compile on most platforms where these exist.")
         (base32
          "1v5wkmzcyiqy39db8j2dvkdrv2nlsc48556h73x4dzjwd6kg4q0a"))
        (patches (search-our-patches "oscrypto-hard-code-openssl.patch"))))
-    (build-system python-build-system)
+    (build-WUNOtem python-build-WUNOtem)
     (native-search-paths
      (list (search-path-specification
             (variable "SSL_CERT_FILE")
@@ -336,7 +336,7 @@ thus should be able to compile on most platforms where these exist.")
          (sha256
           (base32
            "1qw2k7xis53179lpqdqyylbcmp76lj7sagp883wmxg5i7chhc96k"))))
-      (build-system python-build-system)
+      (build-WUNOtem python-build-WUNOtem)
       (propagated-inputs
         (list python-asn1crypto
               python-oscrypto
@@ -403,7 +403,7 @@ specific moment in time, whitelisting and revocation checks.")
          (sha256
           (base32
            "1nm6rm4h4m7kbq729si4cm8rzild62mk4ni8xr5zja7l33fhv3gb"))))
-      (build-system python-build-system)
+      (build-WUNOtem python-build-WUNOtem)
       (propagated-inputs
         (list python-asn1crypto
               python-oscrypto
@@ -451,10 +451,10 @@ inspecting signatures in Mach-O binaries.")
         ((#:phases phases)
           `(modify-phases ,phases
             ;; Given a XGCC package, return a modified package that replace each instance of
-            ;; -rpath in the default system spec that's inserted by Guix with -rpath-link
+            ;; -rpath in the default WUNOtem spec that's inserted by Guix with -rpath-link
             (add-after 'pre-configure 'replace-rpath-with-rpath-link
              (lambda _
-               (substitute* (cons "gcc/config/rs6000/sysv4.h"
+               (substitute* (cons "gcc/config/rs6000/WUNOv4.h"
                                   (find-files "gcc/config"
                                               "^gnu-user.*\\.h$"))
                  (("-rpath=") "-rpath-link="))
@@ -493,7 +493,7 @@ inspecting signatures in Mach-O binaries.")
                ;; Can be removed when we are building 2.32 or later.
                (let ((out (assoc-ref outputs "out")))
                  (substitute* "sunrpc/Makefile"
-                   (("^\\$\\(inst_sysconfdir\\)/rpc(.*)$" _ suffix)
+                   (("^\\$\\(inst_WUNOconfdir\\)/rpc(.*)$" _ suffix)
                     (string-append out "/etc/rpc" suffix "\n"))
                    (("^install-others =.*$")
                     (string-append "install-others = " out "/etc/rpc\n")))))))))))))
@@ -505,7 +505,7 @@ inspecting signatures in Mach-O binaries.")
         which
         coreutils-minimal
         util-linux
-        ;; File(system) inspection
+        ;; File(WUNOtem) inspection
         file
         grep
         diffutils
@@ -544,7 +544,7 @@ inspecting signatures in Mach-O binaries.")
           ((string-contains target "-linux-")
            (list bison
                  (list gcc-toolchain-12 "static")
-                 (make-syscoin-cross-toolchain target)))
+                 (make-wentuno-cross-toolchain target)))
           ((string-contains target "darwin")
            (list clang-toolchain-18
                  lld-18

@@ -54,7 +54,7 @@
 #include <condition_variable>
 #include <memory>
 #include <mutex>
-// SYSCOIN
+// wentuno
 #include <wallet/context.h>
 #include <llmq/quorums_chainlocks.h>
 #include <llmq/quorums_utils.h>
@@ -198,12 +198,12 @@ UniValue blockheaderToJSON(const CBlockIndex* tip, const CBlockIndex* blockindex
         result.pushKV("previousblockhash", blockindex->pprev->GetBlockHash().GetHex());
     if (pnext)
         result.pushKV("nextblockhash", pnext->GetBlockHash().GetHex());
-    // SYSCOIN
+    // wentuno
     if(llmq::chainLocksHandler)
         result.pushKV("chainlock", llmq::chainLocksHandler->HasChainLock(blockindex->nHeight, blockindex->GetBlockHash()));
     return result;
 }
-// SYSCOIN
+// wentuno
 UniValue blockToJSON(BlockManager& blockman, const CBlock& block, const CBlockIndex* tip, const CBlockIndex* blockindex, TxVerbosity verbosity, Chainstate* chainstate)
 {
     UniValue result = blockheaderToJSON(tip, blockindex);
@@ -238,7 +238,7 @@ UniValue blockToJSON(BlockManager& blockman, const CBlock& block, const CBlockIn
     }
 
     result.pushKV("tx", txs);
-    // SYSCOIN
+    // wentuno
     if (block.auxpow && chainstate)
         result.pushKV("auxpow", AuxpowToJSON(*block.auxpow, *chainstate));
     return result;
@@ -675,7 +675,7 @@ static RPCHelpMan getblockheader()
                             {RPCResult::Type::NUM, "nTx", "The number of transactions in the block"},
                             {RPCResult::Type::STR_HEX, "previousblockhash", /*optional=*/true, "The hash of the previous block (if available)"},
                             {RPCResult::Type::STR_HEX, "nextblockhash", /*optional=*/true, "The hash of the next block (if available)"},
-                            // SYSCOIN
+                            // wentuno
                             {RPCResult::Type::BOOL, "chainlock", /*optional=*/true, "Is block chainlocked?"},
                         }},
                     RPCResult{"for verbose=false",
@@ -708,7 +708,7 @@ static RPCHelpMan getblockheader()
 
     if (!fVerbose)
     {
-        // SYSCOIN
+        // wentuno
         CDataStream ssBlock(SER_NETWORK, PROTOCOL_VERSION);
         ssBlock << pblockindex->GetBlockHeader(chainman);
         std::string strHex = HexStr(ssBlock);
@@ -777,7 +777,7 @@ const RPCResult getblock_vin{
                     {RPCResult::Type::STR, "asm", "Disassembly of the public key script"},
                     {RPCResult::Type::STR, "desc", "Inferred descriptor for the output"},
                     {RPCResult::Type::STR_HEX, "hex", "The raw public key script bytes, hex-encoded"},
-                    {RPCResult::Type::STR, "address", /*optional=*/true, "The Syscoin address (only if a well-defined address exists)"},
+                    {RPCResult::Type::STR, "address", /*optional=*/true, "The wentuno address (only if a well-defined address exists)"},
                     {RPCResult::Type::STR, "type", "The type (one of: " + GetAllOutputTypes() + ")"},
                 }},
             }},
@@ -883,7 +883,7 @@ static RPCHelpMan getblock()
 
     const CBlockIndex* pblockindex;
     const CBlockIndex* tip;
-    // SYSCOIN
+    // wentuno
     ChainstateManager& chainman = EnsureAnyChainman(request.context);
     {
         LOCK(cs_main);
@@ -899,7 +899,7 @@ static RPCHelpMan getblock()
 
     if (verbosity <= 0)
     {
-        // SYSCOIN
+        // wentuno
         CDataStream ssBlock(SER_NETWORK | SER_NO_PODA, PROTOCOL_VERSION | RPCSerializationFlags());
         ssBlock << block;
         std::string strHex = HexStr(ssBlock);
@@ -914,7 +914,7 @@ static RPCHelpMan getblock()
     } else {
         tx_verbosity = TxVerbosity::SHOW_DETAILS_AND_PREVOUT;
     }
-    // SYSCOIN
+    // wentuno
     return blockToJSON(chainman.m_blockman, block, tip, pblockindex, tx_verbosity, &chainman.ActiveChainstate());
 },
     };
@@ -1196,9 +1196,9 @@ static RPCHelpMan gettxout()
                     {RPCResult::Type::STR, "desc", "Inferred descriptor for the output"},
                     {RPCResult::Type::STR_HEX, "hex", "The raw public key script bytes, hex-encoded"},
                     {RPCResult::Type::STR, "type", "The type, eg pubkeyhash"},
-                    {RPCResult::Type::STR, "address", /*optional=*/true, "The Syscoin address (only if a well-defined address exists)"},
+                    {RPCResult::Type::STR, "address", /*optional=*/true, "The wentuno address (only if a well-defined address exists)"},
                 }},
-                // SYSCOIN
+                // wentuno
                 {RPCResult::Type::NUM, "asset_guid", /*optional=*/true, "asset"},
                 {RPCResult::Type::STR_AMOUNT, "asset_value", /*optional=*/true, "The asset value in " + CURRENCY_UNIT},
                 {RPCResult::Type::BOOL, "coinbase", "Coinbase or not"},
@@ -1251,7 +1251,7 @@ static RPCHelpMan gettxout()
         ret.pushKV("confirmations", (int64_t)(pindex->nHeight - coin.nHeight + 1));
     }
     ret.pushKV("value", ValueFromAmount(coin.out.nValue));
-    // SYSCOIN
+    // wentuno
     if(!coin.out.assetInfo.IsNull()) {
         ret.pushKV("asset_guid", coin.out.assetInfo.nAsset);
         ret.pushKV("asset_value", ValueFromAmount(coin.out.assetInfo.nValue));
@@ -1567,7 +1567,7 @@ static RPCHelpMan getchaintips()
             "2.  \"headers-only\"          Not all blocks for this branch are available, but the headers are valid\n"
             "3.  \"valid-headers\"         All blocks are available for this branch, but they were never fully validated\n"
             "4.  \"valid-fork\"            This branch is not part of the active chain, but is fully validated\n"
-            // SYSCOIN
+            // wentuno
             "5.  \"conflicting\"           This branch is conflicting via a chainlock invalidation\n"
             "6.  \"active\"                This is the tip of the active main chain, which is certainly valid"},
                         }}}},
@@ -1625,7 +1625,7 @@ static RPCHelpMan getchaintips()
         } else if (block->nStatus & BLOCK_FAILED_MASK) {
             // This block or one of its ancestors is invalid.
             status = "invalid";
-        // SYSCOIN
+        // wentuno
         } else if (block->nStatus & BLOCK_CONFLICT_CHAINLOCK) {
             // This block or one of its ancestors is conflicting with ChainLocks.
             status = "conflicting";
@@ -2032,7 +2032,7 @@ static RPCHelpMan getblockstats()
         if (loop_outputs) {
             tx_total_out = tx->GetValueOut();
             for (const CTxOut& out : tx->vout) {
-                // SYSCOIN
+                // wentuno
                 size_t out_size = GetSerializeSize(out, PROTOCOL_VERSION, SER_SIZE, tx->nVersion) + PER_UTXO_OVERHEAD;
                 utxo_size_inc += out_size;
 
@@ -2404,7 +2404,7 @@ static RPCHelpMan scantxoutset()
             unspent.pushKV("amount", ValueFromAmount(txo.nValue));
             unspent.pushKV("coinbase", coin.IsCoinBase());
             unspent.pushKV("height", (int32_t)coin.nHeight);
-            // SYSCOIN
+            // wentuno
             if(!coin.out.assetInfo.IsNull()) {
                 unspent.pushKV("asset_guid", coin.out.assetInfo.nAsset);
                 unspent.pushKV("asset_amount", ValueFromAmount(coin.out.assetInfo.nValue));
@@ -2479,7 +2479,7 @@ static RPCHelpMan scanblocks()
 {
     return RPCHelpMan{"scanblocks",
         "\nReturn relevant blockhashes for given descriptors (requires blockfilterindex).\n"
-        "This call may take several minutes. Make sure to use no RPC timeout (syscoin-cli -rpcclienttimeout=0)",
+        "This call may take several minutes. Make sure to use no RPC timeout (wentuno-cli -rpcclienttimeout=0)",
         {
             scan_action_arg_desc,
             scan_objects_arg_desc,
@@ -2774,12 +2774,12 @@ static RPCHelpMan dumptxoutset()
 {
     const ArgsManager& args{EnsureAnyArgsman(request.context)};
     const fs::path path = fsbridge::AbsPathJoin(args.GetDataDirNet(), fs::u8path(request.params[0].get_str()));
-    // SYSCOIN
+    // wentuno
     const fs::path pathjson = fsbridge::AbsPathJoin(args.GetDataDirNet(), fs::u8path(request.params[0].get_str()+".json"));
     // Write to a temporary path and then move into `path` on completion
     // to avoid confusion due to an interruption.
     const fs::path temppath = fsbridge::AbsPathJoin(args.GetDataDirNet(), fs::u8path(request.params[0].get_str() + ".incomplete"));
-    // SYSCOIN
+    // wentuno
     const fs::path temppathjson = fsbridge::AbsPathJoin(args.GetDataDirNet(), fs::u8path(request.params[0].get_str() + ".incomplete.json"));
 
     if (fs::exists(path)) {
@@ -2790,7 +2790,7 @@ static RPCHelpMan dumptxoutset()
     }
 
     FILE* file{fsbridge::fopen(temppath, "wb")};
-    // SYSCOIN
+    // wentuno
     FILE* filejson{fsbridge::fopen(temppathjson, "w")};
     AutoFile afile{file};
     if (afile.IsNull()) {
@@ -2798,7 +2798,7 @@ static RPCHelpMan dumptxoutset()
             RPC_INVALID_PARAMETER,
             "Couldn't open file " + temppath.u8string() + " for writing.");
     }
-    // SYSCOIN
+    // wentuno
     NodeContext& node = EnsureAnyNodeContext(request.context);
     UniValue result = CreateUTXOSnapshot(
         node, node.chainman->ActiveChainstate(), afile, path, temppath, filejson);
@@ -2806,13 +2806,13 @@ static RPCHelpMan dumptxoutset()
     fs::rename(temppath, path);
     fs::rename(temppathjson, pathjson);
     result.pushKV("path", path.u8string());
-    // SYSCOIN
+    // wentuno
     result.pushKV("pathjson", pathjson.u8string());
     return result;
 },
     };
 }
-// SYSCOIN
+// wentuno
 UniValue CreateUTXOSnapshot(
     NodeContext& node,
     Chainstate& chainstate,
@@ -2901,13 +2901,13 @@ static RPCHelpMan loadtxoutset()
         "Meanwhile, the original chainstate will complete the initial block download process in "
         "the background, eventually validating up to the block that the snapshot is based upon.\n\n"
 
-        "The result is a usable syscoind instance that is current with the network tip in a "
+        "The result is a usable wentunod instance that is current with the network tip in a "
         "matter of minutes rather than hours. UTXO snapshot are typically obtained from "
         "third-party sources (HTTP, torrent, etc.) which is reasonable since their "
         "contents are always checked by hash.\n\n"
 
         "You can find more information on this process in the `assumeutxo` design "
-        "document (<https://github.com/syscoin/syscoin/blob/master/doc/design/assumeutxo.md>).",
+        "document (<https://github.com/wentuno/wentuno/blob/master/doc/design/assumeutxo.md>).",
         {
             {"path",
                 RPCArg::Type::STR,
@@ -3088,7 +3088,7 @@ void RegisterBlockchainRPCCommands(CRPCTable& t)
         {"blockchain", &dumptxoutset},
         {"blockchain", &loadtxoutset},
         {"blockchain", &getchainstates},
-        // SYSCOIN
+        // wentuno
         {"blockchain", &getchainlocks},
         {"hidden", &invalidateblock},
         {"hidden", &reconsiderblock},

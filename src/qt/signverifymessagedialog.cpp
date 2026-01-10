@@ -119,7 +119,7 @@ void SignVerifyMessageDialog::on_signMessageButton_SM_clicked()
         ui->statusLabel_SM->setText(tr("The entered address is invalid.") + QString(" ") + tr("Please check the address and try again."));
         return;
     }
-    // SYSCOIN
+    // wentuno
     /*
     const PKHash* pkhash = std::get_if<PKHash>(&destination);
     if (!pkhash) {
@@ -139,7 +139,7 @@ void SignVerifyMessageDialog::on_signMessageButton_SM_clicked()
 
     const std::string& message = ui->messageIn_SM->document()->toPlainText().toStdString();
     std::string signature;
-    // SYSCOIN
+    // wentuno
     SigningResult res = model->wallet().signMessage(message, destination, signature);
 
     QString error;

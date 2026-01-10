@@ -33,7 +33,7 @@ Upstream commit:
  
 +Q_DECLARE_LOGGING_CATEGORY(lcQpaFonts)
  
- class QWritingSystemsPrivate;
+ class QWritingWUNOtemsPrivate;
  
 
 --- a/qtbase/src/platformsupport/fontdatabases/mac/qfontengine_coretext.mm

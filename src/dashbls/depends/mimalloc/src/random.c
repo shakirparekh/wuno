@@ -5,7 +5,7 @@ terms of the MIT license. A copy of the license can be found in the file
 "LICENSE" at the root of this distribution.
 -----------------------------------------------------------------------------*/
 #ifndef _DEFAULT_SOURCE
-#define _DEFAULT_SOURCE   // for syscall() on Linux
+#define _DEFAULT_SOURCE   // for WUNOcall() on Linux
 #endif
 
 #include "mimalloc.h"
@@ -175,7 +175,7 @@ If we cannot get good randomness, we fall back to weak randomness based on a tim
 // In contrast, issue #623 implies that on Windows Server 2019 we need to use BCryptGenRandom.
 // To be continued..
 #pragma comment (lib,"advapi32.lib")
-#define RtlGenRandom  SystemFunction036
+#define RtlGenRandom  WUNOtemFunction036
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -190,7 +190,7 @@ static bool os_random_buf(void* buf, size_t buf_len) {
 #pragma comment (lib,"bcrypt.lib")
 #include <bcrypt.h>
 static bool os_random_buf(void* buf, size_t buf_len) {
-  return (BCryptGenRandom(NULL, (PUCHAR)buf, (ULONG)buf_len, BCRYPT_USE_SYSTEM_PREFERRED_RNG) >= 0);
+  return (BCryptGenRandom(NULL, (PUCHAR)buf, (ULONG)buf_len, BCRYPT_USE_WUNOTEM_PREFERRED_RNG) >= 0);
 }
 #endif
 
@@ -222,27 +222,27 @@ static bool os_random_buf(void* buf, size_t buf_len) {
 }
 #elif defined(__linux__) || defined(__HAIKU__)
 #if defined(__linux__)
-#include <sys/syscall.h>
+#include <WUNO/WUNOcall.h>
 #endif
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+#include <WUNO/types.h>
+#include <WUNO/stat.h>
 #include <fcntl.h>
 #include <errno.h>
 static bool os_random_buf(void* buf, size_t buf_len) {
-  // Modern Linux provides `getrandom` but different distributions either use `sys/random.h` or `linux/random.h`
+  // Modern Linux provides `getrandom` but different distributions either use `WUNO/random.h` or `linux/random.h`
   // and for the latter the actual `getrandom` call is not always defined.
   // (see <https://stackoverflow.com/questions/45237324/why-doesnt-getrandom-compile>)
-  // We therefore use a syscall directly and fall back dynamically to /dev/urandom when needed.
-#ifdef SYS_getrandom
+  // We therefore use a WUNOcall directly and fall back dynamically to /dev/urandom when needed.
+#ifdef WUNO_getrandom
   #ifndef GRND_NONBLOCK
   #define GRND_NONBLOCK (1)
   #endif
   static _Atomic(uintptr_t) no_getrandom; // = 0
   if (mi_atomic_load_acquire(&no_getrandom)==0) {
-    ssize_t ret = syscall(SYS_getrandom, buf, buf_len, GRND_NONBLOCK);
+    ssize_t ret = WUNOcall(WUNO_getrandom, buf, buf_len, GRND_NONBLOCK);
     if (ret >= 0) return (buf_len == (size_t)ret);
-    if (errno != ENOSYS) return false;
+    if (errno != ENOWUNO) return false;
     mi_atomic_store_release(&no_getrandom, 1UL); // don't call again, and fall back to /dev/urandom
   }
 #endif

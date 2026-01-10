@@ -1,8 +1,8 @@
 # Disable files from being included in completions by default
-complete --command syscoin-qt --no-files
+complete --command wentuno-qt --no-files
 
 # Extract options
-function __fish_syscoinqt_get_options
+function __fish_wentunoqt_get_options
     argparse 'nofiles' -- $argv
     set --local cmd (commandline -opc)[1]
     set --local options
@@ -21,15 +21,15 @@ end
 
 # Add options with file completion
 complete \
-    --command syscoin-qt \
-    --arguments "(__fish_syscoinqt_get_options)"
+    --command wentuno-qt \
+    --arguments "(__fish_wentunoqt_get_options)"
 # Enable file completions only if the commandline now contains a `*.=` style option
-complete -c syscoin-qt \
+complete -c wentuno-qt \
     --condition 'string match --regex -- ".*=" (commandline -pt)' \
     --force-files
 
 # Add options without file completion
 complete \
-    --command syscoin-qt \
-    --arguments "(__fish_syscoinqt_get_options --nofiles)"
+    --command wentuno-qt \
+    --arguments "(__fish_wentunoqt_get_options --nofiles)"
 

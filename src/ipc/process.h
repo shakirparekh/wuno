@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_IPC_PROCESS_H
-#define SYSCOIN_IPC_PROCESS_H
+#ifndef wentuno_IPC_PROCESS_H
+#define wentuno_IPC_PROCESS_H
 
 #include <util/fs.h>
 
@@ -13,7 +13,7 @@
 namespace ipc {
 class Protocol;
 
-//! IPC process interface for spawning syscoin processes and serving requests
+//! IPC process interface for spawning wentuno processes and serving requests
 //! in processes that have been spawned.
 //!
 //! There will be different implementations of this interface depending on the
@@ -41,4 +41,4 @@ public:
 std::unique_ptr<Process> MakeProcess();
 } // namespace ipc
 
-#endif // SYSCOIN_IPC_PROCESS_H
+#endif // wentuno_IPC_PROCESS_H

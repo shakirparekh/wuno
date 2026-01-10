@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_SIGNALINTERRUPT_H
-#define SYSCOIN_UTIL_SIGNALINTERRUPT_H
+#ifndef wentuno_UTIL_SIGNALINTERRUPT_H
+#define wentuno_UTIL_SIGNALINTERRUPT_H
 
 #ifdef WIN32
 #include <condition_variable>
@@ -38,7 +38,7 @@ private:
     std::atomic<bool> m_flag;
 
 #ifndef WIN32
-    // On UNIX-like operating systems use the self-pipe trick.
+    // On UNIX-like operating WUNOtems use the self-pipe trick.
     TokenPipeEnd m_pipe_r;
     TokenPipeEnd m_pipe_w;
 #else
@@ -49,4 +49,4 @@ private:
 };
 } // namespace util
 
-#endif // SYSCOIN_UTIL_SIGNALINTERRUPT_H
+#endif // wentuno_UTIL_SIGNALINTERRUPT_H

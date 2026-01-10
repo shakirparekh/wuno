@@ -3,12 +3,12 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_EXCEPTION_H
-#define SYSCOIN_UTIL_EXCEPTION_H
+#ifndef wentuno_UTIL_EXCEPTION_H
+#define wentuno_UTIL_EXCEPTION_H
 
 #include <exception>
 #include <string_view>
 
 void PrintExceptionContinue(const std::exception* pex, std::string_view thread_name);
 
-#endif // SYSCOIN_UTIL_EXCEPTION_H
+#endif // wentuno_UTIL_EXCEPTION_H

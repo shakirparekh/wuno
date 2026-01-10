@@ -6,10 +6,10 @@
 
 export LC_ALL=C.UTF-8
 
-export CONTAINER_NAME=ci_native_nowallet_libsyscoinkernel
+export CONTAINER_NAME=ci_native_nowallet_libwentunokernel
 export CI_IMAGE_NAME_TAG="docker.io/ubuntu:20.04"
 # Use minimum supported python3.8 and clang-10, see doc/dependencies.md
 export PACKAGES="python3-zmq clang-10 llvm-10 libc++abi-10-dev libc++-10-dev"
 export DEP_OPTS="NO_WALLET=1 CC=clang-10 CXX='clang++-10 -stdlib=libc++'"
 export GOAL="install"
-export SYSCOIN_CONFIG="--enable-reduce-exports --enable-experimental-util-chainstate --with-experimental-kernel-lib --enable-shared"
+export wentuno_CONFIG="--enable-reduce-exports --enable-experimental-util-chainstate --with-experimental-kernel-lib --enable-shared"

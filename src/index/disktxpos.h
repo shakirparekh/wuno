@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_INDEX_DISKTXPOS_H
-#define SYSCOIN_INDEX_DISKTXPOS_H
+#ifndef wentuno_INDEX_DISKTXPOS_H
+#define wentuno_INDEX_DISKTXPOS_H
 
 #include <flatfile.h>
 #include <serialize.h>
@@ -23,4 +23,4 @@ struct CDiskTxPos : public FlatFilePos
     CDiskTxPos() {}
 };
 
-#endif // SYSCOIN_INDEX_DISKTXPOS_H
+#endif // wentuno_INDEX_DISKTXPOS_H

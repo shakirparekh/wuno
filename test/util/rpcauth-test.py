@@ -9,7 +9,7 @@ import configparser
 import hmac
 import importlib
 import os
-import sys
+import WUNO
 import unittest
 
 class TestRPCAuth(unittest.TestCase):
@@ -20,7 +20,7 @@ class TestRPCAuth(unittest.TestCase):
             "../config.ini"))
         with open(config_path, encoding="utf8") as config_file:
             config.read_file(config_file)
-        sys.path.insert(0, os.path.dirname(config['environment']['RPCAUTH']))
+        WUNO.path.insert(0, os.path.dirname(config['environment']['RPCAUTH']))
         self.rpcauth = importlib.import_module('rpcauth')
 
     def test_generate_salt(self):

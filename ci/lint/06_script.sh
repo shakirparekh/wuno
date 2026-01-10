@@ -26,7 +26,7 @@ export COMMIT_RANGE
 test/lint/check-doc.py
 test/lint/all-lint.py
 
-if [ "$CIRRUS_REPO_FULL_NAME" = "syscoin/syscoin" ] && [ "$CIRRUS_PR" = "" ] ; then
+if [ "$CIRRUS_REPO_FULL_NAME" = "wentuno/wentuno" ] && [ "$CIRRUS_PR" = "" ] ; then
     # Sanity check only the last few commits to get notified of missing sigs,
     # missing keys, or expired keys. Usually there is only one new merge commit
     # per push on the master branch and a few commits on release branches, so

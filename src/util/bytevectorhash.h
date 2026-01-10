@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_UTIL_BYTEVECTORHASH_H
-#define SYSCOIN_UTIL_BYTEVECTORHASH_H
+#ifndef wentuno_UTIL_BYTEVECTORHASH_H
+#define wentuno_UTIL_BYTEVECTORHASH_H
 
 #include <cstdint>
 #include <cstddef>
@@ -24,4 +24,4 @@ public:
     size_t operator()(const std::vector<unsigned char>& input) const;
 };
 
-#endif // SYSCOIN_UTIL_BYTEVECTORHASH_H
+#endif // wentuno_UTIL_BYTEVECTORHASH_H

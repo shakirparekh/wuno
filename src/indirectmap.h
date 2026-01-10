@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_INDIRECTMAP_H
-#define SYSCOIN_INDIRECTMAP_H
+#ifndef wentuno_INDIRECTMAP_H
+#define wentuno_INDIRECTMAP_H
 
 #include <map>
 
@@ -55,4 +55,4 @@ public:
     const_iterator cend() const     { return m.cend(); }
 };
 
-#endif // SYSCOIN_INDIRECTMAP_H
+#endif // wentuno_INDIRECTMAP_H

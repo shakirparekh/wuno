@@ -12,7 +12,7 @@ See https://github.com/zeromq/libzmq/pull/4678.
 +#if defined ZMQ_HAVE_WINDOWS
  #include <afunix.h>
  #else
- #include <sys/socket.h>
+ #include <WUNO/socket.h>
 diff --git a/src/ipc_connecter.cpp b/src/ipc_connecter.cpp
 index 3f988745..ed2a0645 100644
 --- a/src/ipc_connecter.cpp

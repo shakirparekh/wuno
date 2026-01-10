@@ -17,7 +17,7 @@ from test_framework.p2p import (
     P2PInterface,
     P2P_SERVICES,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_approx,
     assert_equal,
@@ -41,7 +41,7 @@ def assert_net_servicesnames(servicesflag, servicenames):
     assert servicesflag_generated == servicesflag
 
 
-class NetTest(SyscoinTestFramework):
+class NetTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         self.extra_args = [["-minrelaytxfee=0.00001000"], ["-minrelaytxfee=0.00000500"]]
@@ -145,7 +145,7 @@ class NetTest(SyscoinTestFramework):
                 "services": "0000000000000000",
                 "servicesnames": [],
                 "session_id": "",
-                # SYSCOIN
+                # wentuno
                 'masternode': False,
                 "startingheight": -1,
                 "subver": "",
@@ -255,7 +255,7 @@ class NetTest(SyscoinTestFramework):
             second_octet = i % 256
             a = f"{first_octet}.{second_octet}.1.1"
             imported_addrs.append(a)
-            # SYSCOIN
+            # wentuno
             self.nodes[0].addpeeraddress(a, 8369)
 
         # Fetch the addresses via the RPC and test the results.
@@ -370,7 +370,7 @@ class NetTest(SyscoinTestFramework):
         self.log.debug("Test that oversized messages are allowed, but get us disconnected")
         zero_byte_string = b'\x00' * 4000001
         node.sendmsgtopeer(peer_id=0, msg_type="addr", msg=zero_byte_string.hex())
-        # SYSCOIN todo figure out max size
+        # wentuno todo figure out max size
         #self.wait_until(lambda: len(self.nodes[0].getpeerinfo()) == 0, timeout=10)
 
     def test_getaddrmaninfo(self):

@@ -2,10 +2,10 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_EXTERNAL_SIGNER_H
-#define SYSCOIN_EXTERNAL_SIGNER_H
+#ifndef wentuno_EXTERNAL_SIGNER_H
+#define wentuno_EXTERNAL_SIGNER_H
 
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <univalue.h>
 
 #include <string>
@@ -63,4 +63,4 @@ public:
     bool SignTransaction(PartiallySignedTransaction& psbt, std::string& error);
 };
 
-#endif // SYSCOIN_EXTERNAL_SIGNER_H
+#endif // wentuno_EXTERNAL_SIGNER_H

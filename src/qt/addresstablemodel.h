@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_ADDRESSTABLEMODEL_H
-#define SYSCOIN_QT_ADDRESSTABLEMODEL_H
+#ifndef wentuno_QT_ADDRESSTABLEMODEL_H
+#define wentuno_QT_ADDRESSTABLEMODEL_H
 
 #include <optional>
 
@@ -35,7 +35,7 @@ public:
 
     enum ColumnIndex {
         Label = 0,   /**< User specified label */
-        Address = 1  /**< Syscoin address */
+        Address = 1  /**< wentuno address */
     };
 
     enum RoleIndex {
@@ -109,4 +109,4 @@ public Q_SLOTS:
     friend class AddressTablePriv;
 };
 
-#endif // SYSCOIN_QT_ADDRESSTABLEMODEL_H
+#endif // wentuno_QT_ADDRESSTABLEMODEL_H

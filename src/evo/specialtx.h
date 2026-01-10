@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_EVO_SPECIALTX_H
-#define SYSCOIN_EVO_SPECIALTX_H
+#ifndef wentuno_EVO_SPECIALTX_H
+#define wentuno_EVO_SPECIALTX_H
 
 #include <primitives/transaction.h>
 #include <streams.h>
@@ -44,7 +44,7 @@ inline bool GetTxPayload(const CTransaction& tx, T& obj)
 {
     std::vector<unsigned char> vchData;
 	int nOut;
-	if (!GetSyscoinData(tx, vchData, nOut))
+	if (!GetwentunoData(tx, vchData, nOut))
 		return false;
     return GetTxPayload(vchData, obj);
 }
@@ -59,11 +59,11 @@ void SetTxPayload(CMutableTransaction& tx, const T& payload)
     const auto bytesVec = MakeUCharSpan(ds);
     scriptData << OP_RETURN << std::vector<unsigned char>(bytesVec.begin(), bytesVec.end());
     // if opreturn exists update payload
-	if (GetSyscoinData(CTransaction(tx), vchData, nOut))
+	if (GetwentunoData(CTransaction(tx), vchData, nOut))
         tx.vout[nOut].scriptPubKey = scriptData;
     // otherwise add a new output with opreturn
     else
         tx.vout.push_back(CTxOut(0, scriptData));
 }
 uint256 CalcTxInputsHash(const CTransaction& tx);
-#endif // SYSCOIN_EVO_SPECIALTX_H
+#endif // wentuno_EVO_SPECIALTX_H

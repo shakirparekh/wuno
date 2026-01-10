@@ -6,14 +6,14 @@ from test_framework.messages import (
     ser_string,
 )
 from test_framework.blocktools import (
-    SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN,
-    SYSCOIN_TX_VERSION_SYSCOIN_BURN_TO_ALLOCATION,
-    SYSCOIN_TX_VERSION_ALLOCATION_MINT,
-    SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_NEVM,
-    SYSCOIN_TX_VERSION_ALLOCATION_SEND,
+    wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno,
+    wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION,
+    wentuno_TX_VERSION_ALLOCATION_MINT,
+    wentuno_TX_VERSION_ALLOCATION_BURN_TO_NEVM,
+    wentuno_TX_VERSION_ALLOCATION_SEND,
 )
 ################################################################################
-# Minimal stubs mirroring Syscoin classes:
+# Minimal stubs mirroring wentuno classes:
 ################################################################################
 
 DUST_THRESHOLD = Decimal('0.00000546')
@@ -83,7 +83,7 @@ class CAssetAllocation:
             out += ao.serialize()
         return out
 
-class CMintSyscoin(CAssetAllocation):
+class CMintwentuno(CAssetAllocation):
     def __init__(self, voutAssets=None, spv_proof=None):
         super().__init__(voutAssets=voutAssets)
         spv_proof = spv_proof or {}
@@ -119,7 +119,7 @@ class CMintSyscoin(CAssetAllocation):
 
 
 
-class CBurnSyscoin(CAssetAllocation):
+class CBurnwentuno(CAssetAllocation):
     def __init__(self, voutAssets=None, nevm_address=b''):
         super().__init__(voutAssets=voutAssets)
         self.vchNEVMAddress = nevm_address
@@ -134,12 +134,12 @@ class CBurnSyscoin(CAssetAllocation):
 
 def create_allocation_data(tx_type,
                          vout_assets=None,
-                         # For CMintSyscoin:
+                         # For CMintwentuno:
                          spv_proof=None,  # Pass the entire SPV proof as one object
-                         # For CBurnSyscoin:
+                         # For CBurnwentuno:
                          vchNEVMAddress=None
                          ) -> str:
-    """Create serialized allocation data for a Syscoin transaction.
+    """Create serialized allocation data for a wentuno transaction.
     
     Args:
         allocation_type: Type of allocation ("allocation", "mint", or "burn")
@@ -152,12 +152,12 @@ def create_allocation_data(tx_type,
     """
     if vout_assets is None:
         vout_assets = []
-    if tx_type == SYSCOIN_TX_VERSION_ALLOCATION_SEND or tx_type == SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN or tx_type == SYSCOIN_TX_VERSION_SYSCOIN_BURN_TO_ALLOCATION:
+    if tx_type == wentuno_TX_VERSION_ALLOCATION_SEND or tx_type == wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno or tx_type == wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION:
         obj = CAssetAllocation(voutAssets=vout_assets)
-    elif tx_type == SYSCOIN_TX_VERSION_ALLOCATION_MINT:
-        obj = CMintSyscoin(voutAssets=vout_assets, spv_proof=spv_proof)
-    elif tx_type == SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_NEVM:
-        obj = CBurnSyscoin(voutAssets=vout_assets, nevm_address=vchNEVMAddress)
+    elif tx_type == wentuno_TX_VERSION_ALLOCATION_MINT:
+        obj = CMintwentuno(voutAssets=vout_assets, spv_proof=spv_proof)
+    elif tx_type == wentuno_TX_VERSION_ALLOCATION_BURN_TO_NEVM:
+        obj = CBurnwentuno(voutAssets=vout_assets, nevm_address=vchNEVMAddress)
     else:
         raise ValueError(f"Unknown allocation type: {tx_type}")
     
@@ -167,7 +167,7 @@ def create_allocation_data(tx_type,
 
 def attach_allocation_data_to_tx(node, inputs, outputs):
     """
-    Create raw tx with allocation data, then modify it with Syscoin RPC if needed
+    Create raw tx with allocation data, then modify it with wentuno RPC if needed
     """
     # Clean up inputs to only include required fields
     cleaned_inputs = []
@@ -191,37 +191,37 @@ class CoinSelector:
         self.node = node
         self.max_inputs = max_inputs
         self.selected_utxos = []
-        self.total_sys = Decimal('0')
+        self.total_WUNO = Decimal('0')
         self.total_assets = {}
 
     def analyze_utxo(self, utxo):
-        sys_value = Decimal(str(utxo['amount']))
+        WUNO_value = Decimal(str(utxo['amount']))
         asset = None
         if 'asset_guid' in utxo:
             asset = {'asset_guid': utxo['asset_guid'], 'asset_amount': utxo['asset_amount']}
-        return sys_value, asset
+        return WUNO_value, asset
 
-    def select_optimal_inputs(self, sys_target, asset_targets=None):
+    def select_optimal_inputs(self, WUNO_target, asset_targets=None):
         asset_targets = asset_targets or {}
         asset_targets = {int(k): v for k, v in asset_targets.items()}
         self.selected_utxos = []
-        self.total_sys = Decimal('0')
+        self.total_WUNO = Decimal('0')
         self.total_assets = {}
 
         all_utxos = sorted(self.node.listunspent(), key=lambda x: -x['amount'])
 
         asset_utxos = []
-        sys_only_utxos = []
+        WUNO_only_utxos = []
 
         for utxo in all_utxos:
-            sys_value, asset = self.analyze_utxo(utxo)
+            WUNO_value, asset = self.analyze_utxo(utxo)
             if asset:
-                asset_utxos.append((utxo, sys_value, asset))
+                asset_utxos.append((utxo, WUNO_value, asset))
             else:
-                sys_only_utxos.append((utxo, sys_value))
+                WUNO_only_utxos.append((utxo, WUNO_value))
 
         # First select asset utxos required explicitly for asset targets
-        for utxo, sys_value, asset in asset_utxos:
+        for utxo, WUNO_value, asset in asset_utxos:
             if len(self.selected_utxos) >= self.max_inputs:
                 break
 
@@ -233,50 +233,50 @@ class CoinSelector:
                 continue  # already fulfilled
 
             self.selected_utxos.append({"txid": utxo["txid"], "vout": utxo["vout"]})
-            self.total_sys += sys_value
+            self.total_WUNO += WUNO_value
             self.total_assets[guid] = self.total_assets.get(guid, Decimal('0')) + asset['asset_amount']
 
             if all(self.total_assets.get(g, 0) >= amt for g, amt in asset_targets.items()):
                 break  # All explicit asset targets met
 
-        # SYS-only UTXOs next
-        if self.total_sys < sys_target:
-            for utxo, sys_value in sys_only_utxos:
+        # WUNO-only UTXOs next
+        if self.total_WUNO < WUNO_target:
+            for utxo, WUNO_value in WUNO_only_utxos:
                 if len(self.selected_utxos) >= self.max_inputs:
                     break
                 self.selected_utxos.append({"txid": utxo["txid"], "vout": utxo["vout"]})
-                self.total_sys += sys_value
+                self.total_WUNO += WUNO_value
 
-                if self.total_sys >= sys_target:
+                if self.total_WUNO >= WUNO_target:
                     break
 
-        # Still need more SYS? Then use asset UTXOs again (but track unintended assets)
-        if self.total_sys < sys_target:
-            for utxo, sys_value, asset in asset_utxos:
+        # Still need more WUNO? Then use asset UTXOs again (but track unintended assets)
+        if self.total_WUNO < WUNO_target:
+            for utxo, WUNO_value, asset in asset_utxos:
                 if len(self.selected_utxos) >= self.max_inputs:
                     break
                 if {"txid": utxo["txid"], "vout": utxo["vout"]} in self.selected_utxos:
                     continue  # already added above
 
                 self.selected_utxos.append({"txid": utxo["txid"], "vout": utxo["vout"]})
-                self.total_sys += sys_value
+                self.total_WUNO += WUNO_value
 
                 # Track unintended assets here
                 guid = asset['asset_guid']
                 self.total_assets[guid] = self.total_assets.get(guid, Decimal('0')) + asset['asset_amount']
 
-                if self.total_sys >= sys_target:
+                if self.total_WUNO >= WUNO_target:
                     break
 
         # Final validations
-        if self.total_sys < sys_target:
-            raise ValueError(f"Not enough SYS: need {sys_target}, have {self.total_sys}")
+        if self.total_WUNO < WUNO_target:
+            raise ValueError(f"Not enough WUNO: need {WUNO_target}, have {self.total_WUNO}")
 
         for guid, amount in asset_targets.items():
             if self.total_assets.get(guid, Decimal('0')) < amount:
                 raise ValueError(f"Not enough asset {guid}: need {amount}, have {self.total_assets.get(guid, Decimal('0'))}")
 
-    def select_coins_for_transaction(self, sys_amount, asset_amounts=None, fees=None):
+    def select_coins_for_transaction(self, WUNO_amount, asset_amounts=None, fees=None):
         asset_amounts = asset_amounts or []
         accumulated_assets = defaultdict(Decimal)
         for guid, amount, _ in asset_amounts:
@@ -285,25 +285,25 @@ class CoinSelector:
         asset_amounts = dict(accumulated_assets)
         initial_fee = fees if fees else Decimal('0.0001')
         num_asset_change_outputs = len([guid for guid in asset_amounts if asset_amounts[guid] > 0])
-        total_sys_needed = Decimal(sys_amount) + initial_fee + (DUST_THRESHOLD * num_asset_change_outputs)
-        self.select_optimal_inputs(total_sys_needed, asset_amounts)
-        if self.total_sys < total_sys_needed:
-            raise ValueError(f"Not enough SYS: need {total_sys_needed}, have {self.total_sys}")
-        sys_change = self.total_sys - total_sys_needed
-        sys_change = sys_change if sys_change >= DUST_THRESHOLD else Decimal('0')
+        total_WUNO_needed = Decimal(WUNO_amount) + initial_fee + (DUST_THRESHOLD * num_asset_change_outputs)
+        self.select_optimal_inputs(total_WUNO_needed, asset_amounts)
+        if self.total_WUNO < total_WUNO_needed:
+            raise ValueError(f"Not enough WUNO: need {total_WUNO_needed}, have {self.total_WUNO}")
+        WUNO_change = self.total_WUNO - total_WUNO_needed
+        WUNO_change = WUNO_change if WUNO_change >= DUST_THRESHOLD else Decimal('0')
         asset_changes = {
             guid: (self.total_assets[guid] - asset_amounts.get(guid, Decimal('0')))
             for guid in self.total_assets
             if (self.total_assets[guid] - asset_amounts.get(guid, Decimal('0'))) > 0
         }
         print(f"Selected UTXOs: {self.selected_utxos}")
-        print(f"Total SYS: {self.total_sys}")
+        print(f"Total WUNO: {self.total_WUNO}")
         print(f"Total assets collected: {self.total_assets}")
         print(f"Asset changes calculated: {asset_changes}")
 
-        return True, self.selected_utxos, sys_change, asset_changes
+        return True, self.selected_utxos, WUNO_change, asset_changes
 
-def create_transaction_with_selector(node, tx_type, sys_amount=Decimal('0'), sys_destination=None,
+def create_transaction_with_selector(node, tx_type, WUNO_amount=Decimal('0'), WUNO_destination=None,
                               asset_amounts=None, fees=None, nevm_address=None,
                               spv_proof=None):
     """
@@ -311,9 +311,9 @@ def create_transaction_with_selector(node, tx_type, sys_amount=Decimal('0'), sys
     
     Args:
         node: The node to use for coin selection and transaction creation
-        tx_type: One of the SYSCOIN_TX_VERSION_* constants
-        sys_amount: Amount of SYS to send/burn (for SYS->SYSX conversion)
-        sys_destination: Destination for SYS to send/burn  (for SYSX->SYS conversion)
+        tx_type: One of the wentuno_TX_VERSION_* constants
+        WUNO_amount: Amount of WUNO to send/burn (for WUNO->WUNOX conversion)
+        WUNO_destination: Destination for WUNO to send/burn  (for WUNOX->WUNO conversion)
         asset_amounts: Triple of {guid, amount, destination} for asset operations
         fees: Optional override for fee calculation
         destinations: Dict of {guid: address} for asset send operations
@@ -328,23 +328,23 @@ def create_transaction_with_selector(node, tx_type, sys_amount=Decimal('0'), sys
     nevm_address_bin = None
     # Create coin selector and select inputs
     selector = CoinSelector(node)
-    if tx_type == SYSCOIN_TX_VERSION_SYSCOIN_BURN_TO_ALLOCATION or tx_type == SYSCOIN_TX_VERSION_ALLOCATION_MINT:
+    if tx_type == wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION or tx_type == wentuno_TX_VERSION_ALLOCATION_MINT:
         success, inputs, change, asset_changes = selector.select_coins_for_transaction(
-            sys_amount, fees=fees
+            WUNO_amount, fees=fees
         )
     else:
         success, inputs, change, asset_changes = selector.select_coins_for_transaction(
-            sys_amount, asset_amounts, fees
+            WUNO_amount, asset_amounts, fees
         )
 
     if not success:
         raise ValueError(f"Failed to select coins for transaction type {tx_type}")
     
     outputs = []
-    if sys_destination and sys_amount > 0:
-        outputs.append({sys_destination: float(sys_amount)})
+    if WUNO_destination and WUNO_amount > 0:
+        outputs.append({WUNO_destination: float(WUNO_amount)})
 
-    # Handle SYS change if any (always comes next)
+    # Handle WUNO change if any (always comes next)
     if change > 0:
         change_address = node.getnewaddress()
         outputs.append({change_address: float(change)})
@@ -361,34 +361,34 @@ def create_transaction_with_selector(node, tx_type, sys_amount=Decimal('0'), sys
 
     # Now add all other outputs and track their indices
     # Handle each transaction type
-    if tx_type == SYSCOIN_TX_VERSION_SYSCOIN_BURN_TO_ALLOCATION:
+    if tx_type == wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION:
         guid, amount, destination = next(iter(asset_amounts))
         outputs.append({destination: float(DUST_THRESHOLD)})
-        sysx_out = AssetOut(
+        WUNOx_out = AssetOut(
             key=guid,
             values=[AssetOutValue(n=len(outputs)-1, nValue=amount)]
         )
-        asset_outputs.append(sysx_out)
+        asset_outputs.append(WUNOx_out)
         data_hex = create_allocation_data(tx_type, vout_assets=asset_outputs)
         outputs.append({"data_amount": float(amount)})
     
-    elif tx_type == SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN:
+    elif tx_type == wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno:
         guid, amount, destination = next(iter(asset_amounts))
-        # Replace normal SYS output with burn SYS output
-        if sys_destination and sys_amount > 0:
+        # Replace normal WUNO output with burn WUNO output
+        if WUNO_destination and WUNO_amount > 0:
             outputs.pop(0)
-        # SYS has to exist at vout[0]
+        # WUNO has to exist at vout[0]
         outputs.insert(0, {destination: float(amount)})
-        # if regular SYS spend add it to the end
-        if sys_destination and sys_amount > 0:
-            outputs.append({sys_destination: float(sys_amount)})
-        sysx_out = AssetOut(
+        # if regular WUNO spend add it to the end
+        if WUNO_destination and WUNO_amount > 0:
+            outputs.append({WUNO_destination: float(WUNO_amount)})
+        WUNOx_out = AssetOut(
             key=guid,
             values=[AssetOutValue(n=len(outputs), nValue=amount)]
         )
-        asset_outputs.append(sysx_out)
+        asset_outputs.append(WUNOx_out)
     
-    elif tx_type == SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_NEVM:
+    elif tx_type == wentuno_TX_VERSION_ALLOCATION_BURN_TO_NEVM:
         # For NEVM burn, we don't create regular outputs for the assets
         guid, amount, destination = next(iter(asset_amounts))
         # Validate and format NEVM address
@@ -407,7 +407,7 @@ def create_transaction_with_selector(node, tx_type, sys_amount=Decimal('0'), sys
         asset_outputs.append(burn_out)
         
     
-    elif tx_type == SYSCOIN_TX_VERSION_ALLOCATION_SEND:
+    elif tx_type == wentuno_TX_VERSION_ALLOCATION_SEND:
         # Add all destination outputs first
         for guid, amount, destination in asset_amounts:
             if not destination:
@@ -423,7 +423,7 @@ def create_transaction_with_selector(node, tx_type, sys_amount=Decimal('0'), sys
             )
             asset_outputs.append(send_out)
     
-    elif tx_type == SYSCOIN_TX_VERSION_ALLOCATION_MINT:
+    elif tx_type == wentuno_TX_VERSION_ALLOCATION_MINT:
         # Add destination output for minted assets
         guid, amount, destination = next(iter(asset_amounts))
         outputs.append({destination: float(DUST_THRESHOLD)})
@@ -446,14 +446,14 @@ def create_transaction_with_selector(node, tx_type, sys_amount=Decimal('0'), sys
     return tx_hex
 
 def verify_tx_outputs(node, txid, tx_type, asset_details=None):
-    """Efficiently verify transaction outputs based on Syscoin transaction type."""
+    """Efficiently verify transaction outputs based on wentuno transaction type."""
     asset_details = asset_details or {}
     utxos = node.listunspent()
-    def utxo_exists(asset_guid=None, asset_amount=None, sys_amt=None, destination=None):
+    def utxo_exists(asset_guid=None, asset_amount=None, WUNO_amt=None, destination=None):
         for utxo in utxos:
             if utxo['txid'] != txid:
                 continue
-            if sys_amt and Decimal(str(utxo['amount'])) != Decimal(str(sys_amt)):
+            if WUNO_amt and Decimal(str(utxo['amount'])) != Decimal(str(WUNO_amt)):
                 continue
             if destination and utxo['address'] != destination:
                 continue
@@ -466,30 +466,30 @@ def verify_tx_outputs(node, txid, tx_type, asset_details=None):
                 return True
         return False
 
-    if tx_type == SYSCOIN_TX_VERSION_ALLOCATION_SEND:
+    if tx_type == wentuno_TX_VERSION_ALLOCATION_SEND:
         for guid, amount, destination in asset_details:
-            if not utxo_exists(asset_guid=guid, asset_amount=amount, sys_amt=DUST_THRESHOLD, destination=destination):
+            if not utxo_exists(asset_guid=guid, asset_amount=amount, WUNO_amt=DUST_THRESHOLD, destination=destination):
                 raise AssertionError(f"Asset output not found: txid={txid}, guid={guid}, amount={amount}")
 
-    elif tx_type == SYSCOIN_TX_VERSION_ALLOCATION_MINT:
+    elif tx_type == wentuno_TX_VERSION_ALLOCATION_MINT:
         for guid, amount, destination  in asset_details:
-            if not utxo_exists(asset_guid=guid, asset_amount=amount, sys_amt=DUST_THRESHOLD, destination=destination):
+            if not utxo_exists(asset_guid=guid, asset_amount=amount, WUNO_amt=DUST_THRESHOLD, destination=destination):
                 raise AssertionError(f"Minted asset not found: txid={txid}, guid={guid}, amount={amount}")
 
-    elif tx_type == SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_NEVM:
+    elif tx_type == wentuno_TX_VERSION_ALLOCATION_BURN_TO_NEVM:
         for guid, amount, destination  in asset_details:
             if utxo_exists(asset_guid=guid, asset_amount=amount, destination=destination):
                 raise AssertionError(f"Burned asset still found in UTXO: txid={txid}, guid={guid}, amount={amount}")
 
-    elif tx_type == SYSCOIN_TX_VERSION_SYSCOIN_BURN_TO_ALLOCATION:
+    elif tx_type == wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION:
         for guid, amount, destination  in asset_details:
             if not utxo_exists(asset_guid=guid, asset_amount=amount, destination=destination):
-                raise AssertionError(f"SYSX output not found in UTXO: txid={txid}, guid={guid}, amount={amount}")
+                raise AssertionError(f"WUNOX output not found in UTXO: txid={txid}, guid={guid}, amount={amount}")
 
-    elif tx_type == SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN:
+    elif tx_type == wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno:
         for guid, amount, destination  in asset_details:
             if utxo_exists(asset_guid=guid, asset_amount=amount, destination=destination):
-                raise AssertionError(f"SYS output still found in UTXO: txid={txid}, guid={guid}, amount={amount}")
+                raise AssertionError(f"WUNO output still found in UTXO: txid={txid}, guid={guid}, amount={amount}")
 
     else:
         raise ValueError("Unknown transaction type")

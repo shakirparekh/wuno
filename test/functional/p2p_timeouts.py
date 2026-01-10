@@ -22,7 +22,7 @@
 
 from test_framework.messages import msg_ping
 from test_framework.p2p import P2PInterface
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 
 import time
 
@@ -33,7 +33,7 @@ class TestP2PConn(P2PInterface):
         pass
 
 
-class TimeoutsTest(SyscoinTestFramework):
+class TimeoutsTest(wentunoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1

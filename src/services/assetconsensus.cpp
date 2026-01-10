@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2013-2019 The Syscoin Core developers
+﻿// Copyright (c) 2013-2019 The wentuno Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <services/assetconsensus.h>
@@ -19,8 +19,8 @@
 std::unique_ptr<CNEVMTxRootsDB> pnevmtxrootsdb;
 std::unique_ptr<CNEVMMintedTxDB> pnevmtxmintdb;
 const arith_uint256 nMax = arith_uint256(MAX_MONEY);
-bool CheckSyscoinMintInternal(
-    const CMintSyscoin &mintSyscoin,
+bool CheckwentunoMintInternal(
+    const CMintwentuno &mintwentuno,
     TxValidationState &state,
     const bool &fJustCheck,
     NEVMMintTxSet &setMintTxs,
@@ -28,31 +28,31 @@ bool CheckSyscoinMintInternal(
     CAmount &outputAmount,
     std::string &witnessAddress) {
     NEVMTxRoot txRootDB;
-    if (!pnevmtxrootsdb || !pnevmtxrootsdb->ReadTxRoots(mintSyscoin.nBlockHash, txRootDB)) {
-        return FormatSyscoinErrorMessage(state, "mint-txroot-missing", fJustCheck);
+    if (!pnevmtxrootsdb || !pnevmtxrootsdb->ReadTxRoots(mintwentuno.nBlockHash, txRootDB)) {
+        return FormatwentunoErrorMessage(state, "mint-txroot-missing", fJustCheck);
     }
-    const dev::RLP rlpReceiptParentNodes(&mintSyscoin.vchReceiptParentNodes);
+    const dev::RLP rlpReceiptParentNodes(&mintwentuno.vchReceiptParentNodes);
     const dev::RLP rlpReceiptValue(
         dev::bytesConstRef(
-            mintSyscoin.vchReceiptParentNodes.data() + mintSyscoin.posReceipt,
-            mintSyscoin.vchReceiptParentNodes.size() - mintSyscoin.posReceipt
+            mintwentuno.vchReceiptParentNodes.data() + mintwentuno.posReceipt,
+            mintwentuno.vchReceiptParentNodes.size() - mintwentuno.posReceipt
         )
     );
     
     if (!rlpReceiptValue.isList() || rlpReceiptValue.itemCount() != 4) {
-        return FormatSyscoinErrorMessage(state, "mint-invalid-receipt-structure", fJustCheck);
+        return FormatwentunoErrorMessage(state, "mint-invalid-receipt-structure", fJustCheck);
     }
 
     const uint64_t nStatus = rlpReceiptValue[0].toInt<uint64_t>(dev::RLP::VeryStrict);
     if (nStatus != 1) {
-        return FormatSyscoinErrorMessage(state, "mint-receipt-status-failed", fJustCheck);
+        return FormatwentunoErrorMessage(state, "mint-receipt-status-failed", fJustCheck);
     }
     const dev::RLP rlpLogs(rlpReceiptValue[3]);
     const size_t itemCount = rlpLogs.itemCount();
     if (!rlpLogs.isList() || itemCount < 1 || itemCount > 10) {
-        return FormatSyscoinErrorMessage(state, "mint-invalid-receipt-logs-count", fJustCheck);
+        return FormatwentunoErrorMessage(state, "mint-invalid-receipt-logs-count", fJustCheck);
     }
-    const std::vector<unsigned char>& vchManagerAddress = Params().GetConsensus().vchSyscoinVaultManager;
+    const std::vector<unsigned char>& vchManagerAddress = Params().GetConsensus().vchwentunoVaultManager;
     const std::vector<unsigned char>& vchFreezeTopic = Params().GetConsensus().vchTokenFreezeMethod;
 
     for (size_t i = 0; i < itemCount; ++i) {
@@ -75,7 +75,7 @@ bool CheckSyscoinMintInternal(
         }
         // Verify topics count
         if (rlpLogTopics.itemCount() < 3) {
-            return FormatSyscoinErrorMessage(state, "mint-log-invalid-topics-count", fJustCheck);
+            return FormatwentunoErrorMessage(state, "mint-log-invalid-topics-count", fJustCheck);
         }
 
         // Parse indexed asset guid from topics:
@@ -86,7 +86,7 @@ bool CheckSyscoinMintInternal(
         // Now parse non-indexed parameters from data:
         dev::bytes dataValue = rlpLog[2].toBytes(dev::RLP::VeryStrict);
         if (dataValue.size() < 96) {
-            return FormatSyscoinErrorMessage(state, "mint-log-data-too-small", fJustCheck);
+            return FormatwentunoErrorMessage(state, "mint-log-data-too-small", fJustCheck);
         }
 
         // satoshiValue (big-endian)
@@ -94,11 +94,11 @@ bool CheckSyscoinMintInternal(
         std::reverse(vchValue.begin(), vchValue.end());
         const arith_uint256 valueArith = UintToArith256(uint256(vchValue));
         if (valueArith > nMax) {
-            return FormatSyscoinErrorMessage(state, "mint-value-overflow", fJustCheck);
+            return FormatwentunoErrorMessage(state, "mint-value-overflow", fJustCheck);
         }
         outputAmount = static_cast<CAmount>(valueArith.GetLow64());
         if (!MoneyRange(outputAmount)) {
-            return FormatSyscoinErrorMessage(state, "mint-value-out-of-range", fJustCheck);
+            return FormatwentunoErrorMessage(state, "mint-value-out-of-range", fJustCheck);
         }
 
         // offset to string (big-endian)
@@ -108,7 +108,7 @@ bool CheckSyscoinMintInternal(
 
         // string length (big-endian)
         if (offsetToString + 32 > dataValue.size()) {
-            return FormatSyscoinErrorMessage(state, "mint-log-invalid-string-offset", fJustCheck);
+            return FormatwentunoErrorMessage(state, "mint-log-invalid-string-offset", fJustCheck);
         }
         std::vector<unsigned char> vchLenString(
             dataValue.data() + offsetToString,
@@ -119,13 +119,13 @@ bool CheckSyscoinMintInternal(
 
         // Parse the string
         if (offsetToString + 32 + lenString > dataValue.size()) {
-            return FormatSyscoinErrorMessage(state, "mint-log-invalid-string-length", fJustCheck);
+            return FormatwentunoErrorMessage(state, "mint-log-invalid-string-length", fJustCheck);
         }
 
         // Add maximum length check to prevent excessive memory allocation
         const uint64_t MAX_WITNESS_ADDRESS_LENGTH = 1024; // Reasonable maximum
         if (lenString > MAX_WITNESS_ADDRESS_LENGTH) {
-            return FormatSyscoinErrorMessage(state, "mint-witness-address-too-long", fJustCheck);
+            return FormatwentunoErrorMessage(state, "mint-witness-address-too-long", fJustCheck);
         }
 
         witnessAddress = std::string(
@@ -136,55 +136,55 @@ bool CheckSyscoinMintInternal(
     }
 
     if (nAssetFromLog == 0 || outputAmount == 0 || witnessAddress.empty()) {
-        return FormatSyscoinErrorMessage(state, "mint-missing-freeze-log", fJustCheck);
+        return FormatwentunoErrorMessage(state, "mint-missing-freeze-log", fJustCheck);
     }
     // check transaction spv proofs
     dev::RLPStream sTxRoot, sReceiptRoot;
-    sTxRoot.append(dev::bytesConstRef(mintSyscoin.nTxRoot.data(), mintSyscoin.nTxRoot.size()));
-    sReceiptRoot.append(dev::bytesConstRef(mintSyscoin.nReceiptRoot.data(), mintSyscoin.nReceiptRoot.size()));
+    sTxRoot.append(dev::bytesConstRef(mintwentuno.nTxRoot.data(), mintwentuno.nTxRoot.size()));
+    sReceiptRoot.append(dev::bytesConstRef(mintwentuno.nReceiptRoot.data(), mintwentuno.nReceiptRoot.size()));
     const dev::RLP rlpTxRoot(sTxRoot.out());
     const dev::RLP rlpReceiptRoot(sReceiptRoot.out());
-    if(mintSyscoin.nTxRoot != txRootDB.nTxRoot){
-        return FormatSyscoinErrorMessage(state, "mint-mismatching-txroot", fJustCheck);
+    if(mintwentuno.nTxRoot != txRootDB.nTxRoot){
+        return FormatwentunoErrorMessage(state, "mint-mismatching-txroot", fJustCheck);
     }
-    if(mintSyscoin.nReceiptRoot != txRootDB.nReceiptRoot){
-        return FormatSyscoinErrorMessage(state, "mint-mismatching-receiptroot", fJustCheck);
+    if(mintwentuno.nReceiptRoot != txRootDB.nReceiptRoot){
+        return FormatwentunoErrorMessage(state, "mint-mismatching-receiptroot", fJustCheck);
     }
     
     
-    const dev::RLP rlpTxParentNodes(&mintSyscoin.vchTxParentNodes);
+    const dev::RLP rlpTxParentNodes(&mintwentuno.vchTxParentNodes);
     const dev::bytesConstRef vchTxValueRef(
-        mintSyscoin.vchTxParentNodes.data() + mintSyscoin.posTx,
-        mintSyscoin.vchTxParentNodes.size() - mintSyscoin.posTx
+        mintwentuno.vchTxParentNodes.data() + mintwentuno.posTx,
+        mintwentuno.vchTxParentNodes.size() - mintwentuno.posTx
     );
     const dev::h256 txHash = dev::sha3(vchTxValueRef);
     std::vector<unsigned char> vchTxHash(txHash.asBytes());
     // we must reverse the endian-ness because we store uint256 in BE but Eth uses LE.
     std::reverse(vchTxHash.begin(), vchTxHash.end());
-    // validate mintSyscoin.nTxHash is the hash of vchTxValue, this is not the TXID which would require deserializataion of the transaction object, for our purpose we only need
+    // validate mintwentuno.nTxHash is the hash of vchTxValue, this is not the TXID which would require deserializataion of the transaction object, for our purpose we only need
     // uniqueness per transaction that is immutable and we do not care specifically for the txid but only that the hash cannot be reproduced for double-spend
-    if(uint256S(HexStr(vchTxHash)) != mintSyscoin.nTxHash) {
-        return FormatSyscoinErrorMessage(state, "mint-verify-tx-hash", fJustCheck);
+    if(uint256S(HexStr(vchTxHash)) != mintwentuno.nTxHash) {
+        return FormatwentunoErrorMessage(state, "mint-verify-tx-hash", fJustCheck);
     }
     dev::RLP rlpTxValue(vchTxValueRef);
     
     // Create a bytesConstRef for the path to avoid passing a pointer
-    dev::bytesConstRef vchTxPathRef(mintSyscoin.vchTxPath.data(), mintSyscoin.vchTxPath.size());
+    dev::bytesConstRef vchTxPathRef(mintwentuno.vchTxPath.data(), mintwentuno.vchTxPath.size());
     
     // ensure eth tx not already spent in a previous block
-    if(pnevmtxmintdb->ExistsTx(mintSyscoin.nTxHash)) {
-        return FormatSyscoinErrorMessage(state, "mint-exists", fJustCheck);
+    if(pnevmtxmintdb->ExistsTx(mintwentuno.nTxHash)) {
+        return FormatwentunoErrorMessage(state, "mint-exists", fJustCheck);
     } 
     // sanity check is set in mempool during m_test_accept and when miner validates block
     // we care to ensure unique bridge id's in the mempool, not to emplace on test_accept
     if(fJustCheck) {
-        if(setMintTxs.find(mintSyscoin.nTxHash) != setMintTxs.end()) {
+        if(setMintTxs.find(mintwentuno.nTxHash) != setMintTxs.end()) {
             return state.Invalid(TxValidationResult::TX_MINT_DUPLICATE, "mint-duplicate-transfer");
         }
     }
     else {
         // ensure eth tx not already spent in current processing block or mempool(mapMintKeysMempool passed in)
-        auto itMap = setMintTxs.insert(mintSyscoin.nTxHash);
+        auto itMap = setMintTxs.insert(mintwentuno.nTxHash);
         if(!itMap.second) {
             return state.Invalid(TxValidationResult::TX_MINT_DUPLICATE, "mint-duplicate-transfer");
         }
@@ -192,18 +192,18 @@ bool CheckSyscoinMintInternal(
     
     // verify receipt proof
     if(!VerifyProof(vchTxPathRef, rlpReceiptValue, rlpReceiptParentNodes, rlpReceiptRoot)) {
-        return FormatSyscoinErrorMessage(state, "mint-verify-receipt-proof", fJustCheck);
+        return FormatwentunoErrorMessage(state, "mint-verify-receipt-proof", fJustCheck);
     }
     // verify transaction proof
     if(!VerifyProof(vchTxPathRef, rlpTxValue, rlpTxParentNodes, rlpTxRoot)) {
-        return FormatSyscoinErrorMessage(state, "mint-verify-tx-proof", fJustCheck);
+        return FormatwentunoErrorMessage(state, "mint-verify-tx-proof", fJustCheck);
     }
     if (!rlpTxValue.isList()) {
-        return FormatSyscoinErrorMessage(state, "mint-tx-rlp-list", fJustCheck);
+        return FormatwentunoErrorMessage(state, "mint-tx-rlp-list", fJustCheck);
     }
     const size_t txItemCount = rlpTxValue.itemCount();
     if (txItemCount < 8) {
-        return FormatSyscoinErrorMessage(state, "mint-tx-itemcount", fJustCheck);
+        return FormatwentunoErrorMessage(state, "mint-tx-itemcount", fJustCheck);
     }
 
     dev::u256 nChainID = 0;
@@ -216,27 +216,27 @@ bool CheckSyscoinMintInternal(
     } else if (txItemCount >= 12) {
         nChainID = rlpTxValue[0].toInt<dev::u256>(dev::RLP::VeryStrict);
     } else {
-        return FormatSyscoinErrorMessage(state, "mint-unsupported-tx-format", fJustCheck);
+        return FormatwentunoErrorMessage(state, "mint-unsupported-tx-format", fJustCheck);
     }
     
-    // Compare extracted chain ID with Syscoin's expected Chain ID
+    // Compare extracted chain ID with wentuno's expected Chain ID
     if(nChainID != (dev::u256(Params().GetConsensus().nNEVMChainID))) {
-        return FormatSyscoinErrorMessage(state, "mint-invalid-chainid", fJustCheck);
+        return FormatwentunoErrorMessage(state, "mint-invalid-chainid", fJustCheck);
     }
     const size_t toFieldIndex = (txItemCount == 9) ? 3 : 5;
     dev::bytes vchAddress = rlpTxValue[toFieldIndex].toBytes(dev::RLP::VeryStrict);
     if (vchAddress.size() != 20) {
-        return FormatSyscoinErrorMessage(state, "mint-invalid-address-length", fJustCheck);
+        return FormatwentunoErrorMessage(state, "mint-invalid-address-length", fJustCheck);
     }
     const dev::Address address160(vchAddress);
     // Verify "to" address is vault
-    if (Params().GetConsensus().vchSyscoinVaultManager != address160.asBytes()) {
-        return FormatSyscoinErrorMessage(state, "mint-invalid-contract-manager", fJustCheck);
+    if (Params().GetConsensus().vchwentunoVaultManager != address160.asBytes()) {
+        return FormatwentunoErrorMessage(state, "mint-invalid-contract-manager", fJustCheck);
     }
     
     return true;
 }
-bool CheckSyscoinMint(
+bool CheckwentunoMint(
     const CTransaction &tx,
     const uint256 &txHash,
     TxValidationState &state,
@@ -246,17 +246,17 @@ bool CheckSyscoinMint(
     CAssetsMap &mapAssetIn,
     CAssetsMap &mapAssetOut
 ) {
-    LogPrint(BCLog::SYS,"*** ASSET MINT blockHeight=%d tx=%s %s\n",
+    LogPrint(BCLog::WUNO,"*** ASSET MINT blockHeight=%d tx=%s %s\n",
             nHeight, txHash.ToString(), fJustCheck ? "JUSTCHECK" : "BLOCK");
-    const CMintSyscoin mintSyscoin(tx);
-    if (mintSyscoin.IsNull()) {
-        return FormatSyscoinErrorMessage(state, "mint-unserialize-failed", fJustCheck);
+    const CMintwentuno mintwentuno(tx);
+    if (mintwentuno.IsNull()) {
+        return FormatwentunoErrorMessage(state, "mint-unserialize-failed", fJustCheck);
     }
     std::string witnessAddress;
     uint64_t nAssetFromLog;
     CAmount outputAmount;
-    if(!CheckSyscoinMintInternal(mintSyscoin, state, fJustCheck, setMintTxs, nAssetFromLog, outputAmount, witnessAddress)) {
-        return false; // state filled in by CheckSyscoinMintInternal
+    if(!CheckwentunoMintInternal(mintwentuno, state, fJustCheck, setMintTxs, nAssetFromLog, outputAmount, witnessAddress)) {
+        return false; // state filled in by CheckwentunoMintInternal
     }
     bool bFoundDest = false;
     for (const auto &vout : tx.vout) {
@@ -265,7 +265,7 @@ bool CheckSyscoinMint(
         }
         CTxDestination dest;
         if (!ExtractDestination(vout.scriptPubKey, dest)) {
-            return FormatSyscoinErrorMessage(state, "mint-extract-destination", fJustCheck);  
+            return FormatwentunoErrorMessage(state, "mint-extract-destination", fJustCheck);  
         }
         if (EncodeDestination(dest) == witnessAddress && vout.assetInfo.nAsset == nAssetFromLog && vout.assetInfo.nValue == outputAmount) {
             bFoundDest = true;
@@ -273,12 +273,12 @@ bool CheckSyscoinMint(
         }
     }
     if (!bFoundDest) {
-        return FormatSyscoinErrorMessage(state, "mint-mismatch-destination", fJustCheck);
+        return FormatwentunoErrorMessage(state, "mint-mismatch-destination", fJustCheck);
     }
     // check that there is an output from the asset in the log
     auto itOut = mapAssetOut.find(nAssetFromLog);
     if (itOut == mapAssetOut.end()) {
-        return FormatSyscoinErrorMessage(state, "mint-asset-output-notfound", fJustCheck);
+        return FormatwentunoErrorMessage(state, "mint-asset-output-notfound", fJustCheck);
     }
 
     // If there's also an input for this asset, remove it and see how much was net minted
@@ -297,16 +297,16 @@ bool CheckSyscoinMint(
     // This is important because we now will have assets in and out (minus this asset). 
     // Since we may create a new asset output without an input via this function, 
     // we cannot gaurantee in==out unless we remove the asset from in and out. 
-    // The same pattern is used with SYSCOIN_TX_VERSION_SYSCOIN_BURN_TO_ALLOCATION where sysx(asset) is minted by burning sys (non-asset).
+    // The same pattern is used with wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION where WUNOx(asset) is minted by burning WUNO (non-asset).
     mapAssetOut.erase(itOut);
 
     // Must match the bridging "outputAmount"
     if (outputAmount != nTotalMinted) {
-        return FormatSyscoinErrorMessage(state, "mint-output-mismatch", fJustCheck);
+        return FormatwentunoErrorMessage(state, "mint-output-mismatch", fJustCheck);
     }
     if (!fJustCheck) {
         if (nHeight > 0) {
-            LogPrint(BCLog::SYS,"CONNECTED ASSET MINT: asset=%llu tx=%s height=%d fJustCheck=%s\n",
+            LogPrint(BCLog::WUNO,"CONNECTED ASSET MINT: asset=%llu tx=%s height=%d fJustCheck=%s\n",
                 nAssetFromLog,
                 txHash.ToString(),
                 nHeight,
@@ -319,24 +319,24 @@ bool CheckSyscoinMint(
 }
 
 bool DisconnectMintAsset(const CTransaction &tx, NEVMMintTxSet &setMintTxs){
-    CMintSyscoin mintSyscoin(tx);
-    if(mintSyscoin.IsNull()) {
-        LogPrint(BCLog::SYS,"DisconnectMintAsset: Cannot unserialize data inside of this transaction relating to an assetallocationmint\n");
+    CMintwentuno mintwentuno(tx);
+    if(mintwentuno.IsNull()) {
+        LogPrint(BCLog::WUNO,"DisconnectMintAsset: Cannot unserialize data inside of this transaction relating to an assetallocationmint\n");
         return false;
     }
-    setMintTxs.insert(mintSyscoin.nTxHash);
+    setMintTxs.insert(mintwentuno.nTxHash);
     return true;
 }
 
-bool CheckSyscoinInputs(const Consensus::Params& params, const CTransaction& tx, const uint256& txHash, TxValidationState& state, const uint32_t &nHeight, const bool &fJustCheck, NEVMMintTxSet &setMintTxs, CAssetsMap& mapAssetIn, CAssetsMap& mapAssetOut) {
+bool CheckwentunoInputs(const Consensus::Params& params, const CTransaction& tx, const uint256& txHash, TxValidationState& state, const uint32_t &nHeight, const bool &fJustCheck, NEVMMintTxSet &setMintTxs, CAssetsMap& mapAssetIn, CAssetsMap& mapAssetOut) {
     bool good = true;
     if(nHeight < (uint32_t)params.nNexusStartBlock)
         return !tx.HasAssets();
-    if(tx.nVersion == SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN_LEGACY || tx.nVersion == SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN_LEGACY1)
+    if(tx.nVersion == wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno_LEGACY || tx.nVersion == wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno_LEGACY1)
         return false;
     try{
-        if(IsSyscoinMintTx(tx.nVersion)) {
-            good = CheckSyscoinMint(tx, txHash, state, nHeight, fJustCheck, setMintTxs, mapAssetIn, mapAssetOut);
+        if(IswentunoMintTx(tx.nVersion)) {
+            good = CheckwentunoMint(tx, txHash, state, nHeight, fJustCheck, setMintTxs, mapAssetIn, mapAssetOut);
         }
         else if (IsAssetAllocationTx(tx.nVersion)) {
             good = CheckAssetAllocationInputs(tx, txHash, state, nHeight, fJustCheck, mapAssetIn, mapAssetOut);
@@ -345,36 +345,36 @@ bool CheckSyscoinInputs(const Consensus::Params& params, const CTransaction& tx,
             return state.Invalid(TxValidationResult::TX_CONSENSUS, "bad-txns-asset-io-mismatch");
         }
     } catch (const std::exception& e) {
-        return FormatSyscoinErrorMessage(state, e.what(), fJustCheck);
+        return FormatwentunoErrorMessage(state, e.what(), fJustCheck);
     } catch (...) {
-        return FormatSyscoinErrorMessage(state, "checksyscoininputs-exception", fJustCheck);
+        return FormatwentunoErrorMessage(state, "checkwentunoinputs-exception", fJustCheck);
     }
     return good;
 }
 
 bool CheckAssetAllocationInputs(const CTransaction &tx, const uint256& txHash, TxValidationState &state,
     const uint32_t &nHeight, const bool &fJustCheck, CAssetsMap &mapAssetIn, CAssetsMap &mapAssetOut) {
-    LogPrint(BCLog::SYS,"*** ASSET ALLOCATION %d %s %s\n", nHeight,
+    LogPrint(BCLog::WUNO,"*** ASSET ALLOCATION %d %s %s\n", nHeight,
             txHash.ToString().c_str(),
             fJustCheck ? "JUSTCHECK" : "BLOCK");
         
-    const int nOut = GetSyscoinDataOutput(tx);
+    const int nOut = GetwentunoDataOutput(tx);
     if(nOut < 0) {
-        return FormatSyscoinErrorMessage(state, "assetallocation-missing-burn-output", fJustCheck);
+        return FormatwentunoErrorMessage(state, "assetallocation-missing-burn-output", fJustCheck);
     }
     switch (tx.nVersion) {
-        case SYSCOIN_TX_VERSION_ALLOCATION_SEND:
+        case wentuno_TX_VERSION_ALLOCATION_SEND:
         break;
-        case SYSCOIN_TX_VERSION_SYSCOIN_BURN_TO_ALLOCATION:
+        case wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION:
         {   
-            const uint64_t &nAsset = Params().GetConsensus().nSYSXAsset;
+            const uint64_t &nAsset = Params().GetConsensus().nWUNOXAsset;
             const CAmount &nBurnAmount = tx.vout[nOut].nValue;
             if(nBurnAmount <= 0) {
-                return FormatSyscoinErrorMessage(state, "syscoin-burn-invalid-amount", fJustCheck);
+                return FormatwentunoErrorMessage(state, "wentuno-burn-invalid-amount", fJustCheck);
             }
             auto itOut = mapAssetOut.find(nAsset);
             if(itOut == mapAssetOut.end()) {
-                return FormatSyscoinErrorMessage(state, "syscoin-burn-asset-output-notfound", fJustCheck);             
+                return FormatwentunoErrorMessage(state, "wentuno-burn-asset-output-notfound", fJustCheck);             
             }
             // if input for this asset exists, must also include it as change in output, so output-input should be the new amount created
             auto itIn = mapAssetIn.find(nAsset);
@@ -386,42 +386,42 @@ bool CheckAssetAllocationInputs(const CTransaction &tx, const uint256& txHash, T
                 nTotal = itOut->second;
             }
             mapAssetOut.erase(itOut);
-            // erase in / out of this asset as equality is checked for the rest after CheckSyscoinInputs()
-            // the burn amount in opreturn (SYS) should match total output for SYSX
+            // erase in / out of this asset as equality is checked for the rest after CheckwentunoInputs()
+            // the burn amount in opreturn (WUNO) should match total output for WUNOX
             if(nTotal != nBurnAmount) {
-                return FormatSyscoinErrorMessage(state, "syscoin-burn-mismatch-amount", fJustCheck);
+                return FormatwentunoErrorMessage(state, "wentuno-burn-mismatch-amount", fJustCheck);
             }
         }
         break;
-        case SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_NEVM:
-        case SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN:
+        case wentuno_TX_VERSION_ALLOCATION_BURN_TO_NEVM:
+        case wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno:
         {
             const CAmount &nBurnAmount = tx.vout[nOut].assetInfo.nValue;
             if (nBurnAmount <= 0) {
-                return FormatSyscoinErrorMessage(state, "assetallocation-invalid-burn-amount", fJustCheck);
+                return FormatwentunoErrorMessage(state, "assetallocation-invalid-burn-amount", fJustCheck);
             }
-            if(tx.nVersion == SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN) {
+            if(tx.nVersion == wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno) {
                 if(nOut == 0) {
-                    return FormatSyscoinErrorMessage(state, "assetallocation-invalid-burn-index", fJustCheck);
+                    return FormatwentunoErrorMessage(state, "assetallocation-invalid-burn-index", fJustCheck);
                 }
-                // the burn of asset in opreturn should match the output value of index 0 (sys)
+                // the burn of asset in opreturn should match the output value of index 0 (WUNO)
                 if(nBurnAmount != tx.vout[0].nValue) {
-                    return FormatSyscoinErrorMessage(state, "assetallocation-mismatch-burn-amount", fJustCheck);
+                    return FormatwentunoErrorMessage(state, "assetallocation-mismatch-burn-amount", fJustCheck);
                 }  
-                if(tx.vout[nOut].assetInfo.nAsset != Params().GetConsensus().nSYSXAsset) {
-                    return FormatSyscoinErrorMessage(state, "assetallocation-invalid-sysx-asset", fJustCheck);
+                if(tx.vout[nOut].assetInfo.nAsset != Params().GetConsensus().nWUNOXAsset) {
+                    return FormatwentunoErrorMessage(state, "assetallocation-invalid-WUNOx-asset", fJustCheck);
                 }  
             }
         } 
         break;
         default:
-            return FormatSyscoinErrorMessage(state, "assetallocation-invalid-op", fJustCheck);
+            return FormatwentunoErrorMessage(state, "assetallocation-invalid-op", fJustCheck);
     }
 
     if(!fJustCheck){
         if(nHeight > 0) {  
-            LogPrint(BCLog::SYS,"CONNECTED ASSET ALLOCATION: op=%s hash=%s height=%d fJustCheck=%s\n",
-                stringFromSyscoinTx(tx.nVersion).c_str(),
+            LogPrint(BCLog::WUNO,"CONNECTED ASSET ALLOCATION: op=%s hash=%s height=%d fJustCheck=%s\n",
+                stringFromwentunoTx(tx.nVersion).c_str(),
                 txHash.ToString().c_str(),
                 nHeight,
                 "BLOCK");      
@@ -467,7 +467,7 @@ bool CNEVMTxRootsDB::FlushCacheToDisk(std::size_t CHUNK_ITEMS)
     }
     if (!flush()) return false;       // last partial chunk
 
-    LogPrint(BCLog::SYS,
+    LogPrint(BCLog::WUNO,
              "Flushed NEVM-tx-roots cache, %zu items written in %zu-entry chunks\n",
              count, CHUNK_ITEMS);
     return true;
@@ -495,7 +495,7 @@ bool CNEVMTxRootsDB::FlushErase(const std::vector<uint256> &vecBlockHashes) {
         }
     }
     if(vecBlockHashes.size() > 0)
-        LogPrint(BCLog::SYS, "Flushing, erasing %d nevm tx roots\n", vecBlockHashes.size());
+        LogPrint(BCLog::WUNO, "Flushing, erasing %d nevm tx roots\n", vecBlockHashes.size());
     return WriteBatch(batch, true);
 }
 void CNEVMMintedTxDB::FlushDataToCache(const NEVMMintTxSet &mapNEVMTxRoots) {
@@ -531,7 +531,7 @@ bool CNEVMMintedTxDB::FlushCacheToDisk(std::size_t CHUNK_ITEMS)
     }
     if (!flush()) return false;
 
-    LogPrint(BCLog::SYS,
+    LogPrint(BCLog::WUNO,
              "Flushed NEVM-minted-tx cache, %zu items written in %zu-entry chunks\n",
              count, CHUNK_ITEMS);
     return true;
@@ -550,24 +550,24 @@ bool CNEVMMintedTxDB::FlushErase(const NEVMMintTxSet &mapNEVMTxRoots) {
         }
     }
     if(mapNEVMTxRoots.size() > 0)
-        LogPrint(BCLog::SYS, "Flushing, erasing %d nevm tx mints\n", mapNEVMTxRoots.size());
+        LogPrint(BCLog::WUNO, "Flushing, erasing %d nevm tx mints\n", mapNEVMTxRoots.size());
     return WriteBatch(batch, true);
 }
 bool CNEVMMintedTxDB::ExistsTx(const uint256& nTxHash) {
     LOCK(cs_cache);
     return (mapCache.find(nTxHash) != mapCache.end()) || Exists(nTxHash);
 }
-std::string stringFromSyscoinTx(const int &nVersion) {
+std::string stringFromwentunoTx(const int &nVersion) {
     switch (nVersion) {
-	case SYSCOIN_TX_VERSION_ALLOCATION_SEND:
+	case wentuno_TX_VERSION_ALLOCATION_SEND:
 		return "assetallocationsend";
-	case SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_NEVM:
+	case wentuno_TX_VERSION_ALLOCATION_BURN_TO_NEVM:
 		return "assetallocationburntonevm"; 
-	case SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN:
-		return "assetallocationburntosyscoin";
-	case SYSCOIN_TX_VERSION_SYSCOIN_BURN_TO_ALLOCATION:
-		return "syscoinburntoassetallocation";            
-    case SYSCOIN_TX_VERSION_ALLOCATION_MINT:
+	case wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno:
+		return "assetallocationburntowentuno";
+	case wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION:
+		return "wentunoburntoassetallocation";            
+    case wentuno_TX_VERSION_ALLOCATION_MINT:
         return "assetallocationmint";   
     default:
         return "<unknown assetallocation op>";

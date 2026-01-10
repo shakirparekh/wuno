@@ -1,25 +1,25 @@
-Syscoin version 0.6.0 is now available for download at:
-http://sourceforge.net/projects/syscoin/files/Syscoin/syscoin-0.6.0/test/
+wentuno version 0.6.0 is now available for download at:
+http://sourceforge.net/projects/wentuno/files/wentuno/wentuno-0.6.0/test/
 
 This release includes more than 20 language localizations.
 More translations are welcome; join the
 project at Transifex to help:
-https://www.transifex.net/projects/p/syscoin/
+https://www.transifex.net/projects/p/wentuno/
 
 Please report bugs using the issue tracker at github:
-https://github.com/syscoin/syscoin/issues
+https://github.com/wentuno/wentuno/issues
 
 Project source code is hosted at github; we are no longer
 distributing .tar.gz files here, you can get them
 directly from github:
-https://github.com/syscoin/syscoin/tarball/v0.6.0  # .tar.gz
-https://github.com/syscoin/syscoin/zipball/v0.6.0  # .zip
+https://github.com/wentuno/wentuno/tarball/v0.6.0  # .tar.gz
+https://github.com/wentuno/wentuno/zipball/v0.6.0  # .zip
 
 For Ubuntu users, there is a ppa maintained by Matt Corallo which
-you can add to your system so that it will automatically keep
-syscoin up-to-date.  Just type
-sudo apt-add-repository ppa:syscoin/syscoin
-in your terminal, then install the syscoin-qt package.
+you can add to your WUNOtem so that it will automatically keep
+wentuno up-to-date.  Just type
+sudo apt-add-repository ppa:wentuno/wentuno
+in your terminal, then install the wentuno-qt package.
 
 
 KNOWN ISSUES
@@ -30,7 +30,7 @@ because database writes are queued to speed up download
 time.
 
 
-NEW FEATURES SINCE SYSCOIN VERSION 0.5
+NEW FEATURES SINCE wentuno VERSION 0.5
 
 Initial network synchronization should be much faster
 (one or two hours on a typical machine instead of ten or more
@@ -38,30 +38,30 @@ hours).
 
 Backup Wallet menu option.
 
-Syscoin-Qt can display and save QR codes for sending
+wentuno-Qt can display and save QR codes for sending
 and receiving addresses.
 
 New context menu on addresses to copy/edit/delete them.
 
 New Sign Message dialog that allows you to prove that you
-own a syscoin address by creating a digital
+own a wentuno address by creating a digital
 signature.
 
 New wallets created with this version will
 use 33-byte 'compressed' public keys instead of
 65-byte public keys, resulting in smaller
-transactions and less traffic on the syscoin
+transactions and less traffic on the wentuno
 network. The shorter keys are already supported
 by the network but wallet.dat files containing
 short keys are not compatible with earlier
-versions of Syscoin-Qt/syscoind.
+versions of wentuno-Qt/wentunod.
 
 New command-line argument -blocknotify=<command>
 that will spawn a shell process to run <command> 
 when a new block is accepted.
 
 New command-line argument -splash=0 to disable
-Syscoin-Qt's initial splash screen
+wentuno-Qt's initial splash screen
 
 validateaddress JSON-RPC api command output includes
 two new fields for addresses in the wallet:
@@ -104,11 +104,11 @@ attacks were fixed.
 
 NOT YET IMPLEMENTED FEATURES
 
-Support for clicking on syscoin: URIs and
-opening/launching Syscoin-Qt is available only on Linux,
+Support for clicking on wentuno: URIs and
+opening/launching wentuno-Qt is available only on Linux,
 and only if you configure your desktop to launch
-Syscoin-Qt. All platforms support dragging and dropping
-syscoin: URIs onto the Syscoin-Qt window to start
+wentuno-Qt. All platforms support dragging and dropping
+wentuno: URIs onto the wentuno-Qt window to start
 payment.
 
 
@@ -117,7 +117,7 @@ PRELIMINARY SUPPORT FOR MULTISIGNATURE TRANSACTIONS
 This release has preliminary support for multisignature
 transactions-- transactions that require authorization
 from more than one person or device before they
-will be accepted by the syscoin network.
+will be accepted by the wentuno network.
 
 Prior to this release, multisignature transactions
 were considered 'non-standard' and were ignored;
@@ -125,13 +125,13 @@ with this release multisignature transactions are
 considered standard and will start to be relayed
 and accepted into blocks.
 
-It is expected that future releases of Syscoin-Qt
+It is expected that future releases of wentuno-Qt
 will support the creation of multisignature transactions,
 once enough of the network has upgraded so relaying
 and validating them is robust.
 
 For this release, creation and testing of multisignature
-transactions is limited to the syscoin test network using
+transactions is limited to the wentuno test network using
 the "addmultisigaddress" JSON-RPC api call.
 
 Short multisignature address support is included in this

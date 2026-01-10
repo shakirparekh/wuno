@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_TEST_UTIL_SETUP_COMMON_H
-#define SYSCOIN_TEST_UTIL_SETUP_COMMON_H
+#ifndef wentuno_TEST_UTIL_SETUP_COMMON_H
+#define wentuno_TEST_UTIL_SETUP_COMMON_H
 
 #include <common/args.h>
 #include <key.h>
@@ -21,7 +21,7 @@
 #include <functional>
 #include <type_traits>
 #include <vector>
-// SYSCOIN
+// wentuno
 #include <consensus/consensus.h>
 
 class CFeeRate;
@@ -102,7 +102,7 @@ struct TestChain100Setup : public TestingSetup {
     TestChain100Setup(
         const ChainType chain_type = ChainType::REGTEST,
         const std::vector<const char*>& extra_args = {},
-        // SYSCOIN
+        // wentuno
         int count = COINBASE_MATURITY,
         const bool coins_db_in_memory = true,
         const bool block_tree_db_in_memory = true);
@@ -176,7 +176,7 @@ struct TestChain100Setup : public TestingSetup {
 };
 
 //
-// SYSCOIN Testing fixture that pre-creates a
+// wentuno Testing fixture that pre-creates a
 // N-block REGTEST-mode block chain
 //
 struct TestChainDIP3Setup : public TestChain100Setup
@@ -238,4 +238,4 @@ private:
     const std::string m_reason;
 };
 
-#endif // SYSCOIN_TEST_UTIL_SETUP_COMMON_H
+#endif // wentuno_TEST_UTIL_SETUP_COMMON_H

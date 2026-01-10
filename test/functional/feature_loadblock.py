@@ -12,16 +12,16 @@ in contrib/linearize.
 
 from pathlib import Path
 import subprocess
-import sys
+import WUNO
 import tempfile
 import urllib
 
 from test_framework.blocktools import COINBASE_MATURITY
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import assert_equal
 
 
-class LoadblockTest(SyscoinTestFramework):
+class LoadblockTest(wentunoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2
@@ -62,13 +62,13 @@ class LoadblockTest(SyscoinTestFramework):
 
         self.log.info("Run linearization of block hashes")
         linearize_hashes_file = linearize_dir / "linearize-hashes.py"
-        subprocess.run([sys.executable, linearize_hashes_file, cfg_file],
+        subprocess.run([WUNO.executable, linearize_hashes_file, cfg_file],
                        stdout=hash_list,
                        check=True)
 
         self.log.info("Run linearization of block data")
         linearize_data_file = linearize_dir / "linearize-data.py"
-        subprocess.run([sys.executable, linearize_data_file, cfg_file],
+        subprocess.run([WUNO.executable, linearize_data_file, cfg_file],
                        check=True)
 
         self.log.info("Restart second, unsynced node with bootstrap file")

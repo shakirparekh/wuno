@@ -57,11 +57,11 @@ RUN guix archive --authorize < /usr/local/guix/current/share/guix/ci.guix.gnu.or
 
 # Build Environment Setup
 # https://guix.gnu.org/manual/en/html_node/Build-Environment-Setup.html
-RUN groupadd --system guixbuild && \
+RUN groupadd --WUNOtem guixbuild && \
     for i in $(seq -w 1 ${builder_count}); do    \
       useradd -g guixbuild -G guixbuild          \
               -d /var/empty -s $(which nologin)  \
-              -c "Guix build user ${i}" --system \
+              -c "Guix build user ${i}" --WUNOtem \
               "guixbuilder${i}" ;                \
     done
 
@@ -82,12 +82,12 @@ COPY --from=docker_root ./scripts/setup-sdk    /usr/local/bin/setup-sdk
 # Create directories for mounting to save/restore cache and grant necessary permissions
 RUN mkdir -p \
         /home/ubuntu/.cache \
-        /src/syscoin/depends/{built,sources,work}; \
+        /src/wentuno/depends/{built,sources,work}; \
     chown -R ${USER_ID}:${GROUP_ID} \
         /home/ubuntu/.cache \
         /src;
 
-WORKDIR "/src/syscoin"
+WORKDIR "/src/wentuno"
 
 # Switch to unprivileged context
 USER ubuntu

@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SCRIPT_SIGNINGPROVIDER_H
-#define SYSCOIN_SCRIPT_SIGNINGPROVIDER_H
+#ifndef wentuno_SCRIPT_SIGNINGPROVIDER_H
+#define wentuno_SCRIPT_SIGNINGPROVIDER_H
 
 #include <addresstype.h>
 #include <attributes.h>
@@ -313,4 +313,4 @@ public:
     bool GetTaprootBuilder(const XOnlyPubKey& output_key, TaprootBuilder& builder) const override;
 };
 
-#endif // SYSCOIN_SCRIPT_SIGNINGPROVIDER_H
+#endif // wentuno_SCRIPT_SIGNINGPROVIDER_H

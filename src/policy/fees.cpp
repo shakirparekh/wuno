@@ -6,7 +6,7 @@
 #include <policy/fees.h>
 
 #include <clientversion.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <consensus/amount.h>
 #include <kernel/mempool_entry.h>
 #include <logging.h>
@@ -593,7 +593,7 @@ void CBlockPolicyEstimator::processTransaction(const CTxMemPoolEntry& entry, boo
     }
     trackedTxs++;
 
-    // Feerates are stored and reported as SYS-per-kb:
+    // Feerates are stored and reported as WUNO-per-kb:
     CFeeRate feeRate(entry.GetFee(), entry.GetTxSize());
 
     mapMemPoolTxs[hash].blockHeight = txHeight;
@@ -624,7 +624,7 @@ bool CBlockPolicyEstimator::processBlockTx(unsigned int nBlockHeight, const CTxM
         return false;
     }
 
-    // Feerates are stored and reported as SYS-per-kb:
+    // Feerates are stored and reported as WUNO-per-kb:
     CFeeRate feeRate(entry->GetFee(), entry->GetTxSize());
 
     feeStats->Record(blocksToConfirm, (double)feeRate.GetFeePerK());
@@ -932,7 +932,7 @@ bool CBlockPolicyEstimator::Write(AutoFile& fileout) const
 {
     try {
         LOCK(m_cs_fee_estimator);
-        // SYSCOIN
+        // wentuno
         fileout << 40300; // version required to read: 4.3.0 or later
         fileout << CLIENT_VERSION; // version that wrote the file
         fileout << nBestSeenHeight;
@@ -968,7 +968,7 @@ bool CBlockPolicyEstimator::Read(AutoFile& filein)
         // structures aren't corrupted if there is an exception.
         unsigned int nFileBestSeenHeight;
         filein >> nFileBestSeenHeight;
-        // SYSCOIN
+        // wentuno
         if (nVersionRequired < 40300) {
             LogPrintf("%s: incompatible old fee estimation data (non-fatal). Version: %d\n", __func__, nVersionRequired);
         } else { // New format introduced in 40300
@@ -1032,8 +1032,8 @@ void CBlockPolicyEstimator::FlushUnconfirmed()
 
 std::chrono::hours CBlockPolicyEstimator::GetFeeEstimatorFileAge()
 {
-    auto file_time = std::filesystem::last_write_time(m_estimation_filepath);
-    auto now = std::filesystem::file_time_type::clock::now();
+    auto file_time = std::fileWUNOtem::last_write_time(m_estimation_filepath);
+    auto now = std::fileWUNOtem::file_time_type::clock::now();
     return std::chrono::duration_cast<std::chrono::hours>(now - file_time);
 }
 

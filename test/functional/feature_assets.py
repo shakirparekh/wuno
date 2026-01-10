@@ -2,21 +2,21 @@
 # Copyright (c) 2017-2022 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Syscoin Asset Transaction Types Test
+"""wentuno Asset Transaction Types Test
 
-This test covers the five main Syscoin transaction types:
-1. SYSCOIN_TX_VERSION_ALLOCATION_SEND - For sending assets
-2. SYSCOIN_TX_VERSION_ALLOCATION_MINT - For minting new assets
-3. SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_NEVM - For burning assets to NEVM
-4. SYSCOIN_TX_VERSION_SYSCOIN_BURN_TO_ALLOCATION - For converting SYS to SYSX
-5. SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN - For converting SYSX back to SYS
+This test covers the five main wentuno transaction types:
+1. wentuno_TX_VERSION_ALLOCATION_SEND - For sending assets
+2. wentuno_TX_VERSION_ALLOCATION_MINT - For minting new assets
+3. wentuno_TX_VERSION_ALLOCATION_BURN_TO_NEVM - For burning assets to NEVM
+4. wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION - For converting WUNO to WUNOX
+5. wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno - For converting WUNOX back to WUNO
 
 The test also verifies various edge cases and coin selection nuances.
 """
 
 from decimal import Decimal
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_greater_than,
@@ -25,18 +25,18 @@ from test_framework.asset_helpers import (
     create_transaction_with_selector,
     verify_tx_outputs,
     CoinSelector,
-    SYSCOIN_TX_VERSION_ALLOCATION_SEND,
-    SYSCOIN_TX_VERSION_ALLOCATION_MINT,
-    SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_NEVM,
-    SYSCOIN_TX_VERSION_SYSCOIN_BURN_TO_ALLOCATION,
-    SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN,
+    wentuno_TX_VERSION_ALLOCATION_SEND,
+    wentuno_TX_VERSION_ALLOCATION_MINT,
+    wentuno_TX_VERSION_ALLOCATION_BURN_TO_NEVM,
+    wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION,
+    wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno,
 )
 
 # Constants for testing
-SYSX_GUID = 123456
+WUNOX_GUID = 123456
 DUST_THRESHOLD = Decimal('0.00000546')
 BLOCK_REWARD = Decimal('50')
-class AssetTransactionTest(SyscoinTestFramework):
+class AssetTransactionTest(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
 
@@ -49,12 +49,12 @@ class AssetTransactionTest(SyscoinTestFramework):
         self.num_nodes = 1
         self.extra_args = [['-dip3params=0:0']]
 
-    def syscoin_tx(self, tx_type, asset_amounts, sys_amount=Decimal('0'), sys_destination=None, nevm_address=None, spv_proof=None):
+    def wentuno_tx(self, tx_type, asset_amounts, WUNO_amount=Decimal('0'), WUNO_destination=None, nevm_address=None, spv_proof=None):
         tx_hex = create_transaction_with_selector(
             node=self.nodes[0],
             tx_type=tx_type,
-            sys_amount=sys_amount,
-            sys_destination=sys_destination,
+            WUNO_amount=WUNO_amount,
+            WUNO_destination=WUNO_destination,
             asset_amounts=asset_amounts,
             nevm_address=nevm_address,
             spv_proof=spv_proof
@@ -69,53 +69,53 @@ class AssetTransactionTest(SyscoinTestFramework):
             asset_details=asset_amounts
         )
 
-    def syscoin_burn_to_allocation(self, asset_amounts, sys_amount=Decimal('0')):
-        sys_balance_before = self.nodes[0].getbalance()
-        self.syscoin_tx(SYSCOIN_TX_VERSION_SYSCOIN_BURN_TO_ALLOCATION, asset_amounts, sys_amount)
-        sys_balance_after = self.nodes[0].getbalance()
-        expected_balance = sys_balance_before - sys_amount - Decimal('0.0001') + BLOCK_REWARD + DUST_THRESHOLD
-        assert_equal(expected_balance, sys_balance_after)
+    def wentuno_burn_to_allocation(self, asset_amounts, WUNO_amount=Decimal('0')):
+        WUNO_balance_before = self.nodes[0].getbalance()
+        self.wentuno_tx(wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION, asset_amounts, WUNO_amount)
+        WUNO_balance_after = self.nodes[0].getbalance()
+        expected_balance = WUNO_balance_before - WUNO_amount - Decimal('0.0001') + BLOCK_REWARD + DUST_THRESHOLD
+        assert_equal(expected_balance, WUNO_balance_after)
 
-    def asset_allocation_send(self, asset_amounts, sys_amount=Decimal('0'), sys_destination=None):
-        self.syscoin_tx(SYSCOIN_TX_VERSION_ALLOCATION_SEND, asset_amounts, sys_amount, sys_destination)
+    def asset_allocation_send(self, asset_amounts, WUNO_amount=Decimal('0'), WUNO_destination=None):
+        self.wentuno_tx(wentuno_TX_VERSION_ALLOCATION_SEND, asset_amounts, WUNO_amount, WUNO_destination)
 
-    def allocation_burn_to_nevm(self, asset_amounts, sys_amount=Decimal('0'), nevm_address=''):
-        sys_balance_before = self.nodes[0].getbalance()
-        self.syscoin_tx(SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_NEVM, asset_amounts, sys_amount, nevm_address=nevm_address)
-        sys_balance_after = self.nodes[0].getbalance()
-        expected_balance = sys_balance_before - Decimal('0.0001') + BLOCK_REWARD - DUST_THRESHOLD
-        assert_equal(expected_balance, sys_balance_after)
+    def allocation_burn_to_nevm(self, asset_amounts, WUNO_amount=Decimal('0'), nevm_address=''):
+        WUNO_balance_before = self.nodes[0].getbalance()
+        self.wentuno_tx(wentuno_TX_VERSION_ALLOCATION_BURN_TO_NEVM, asset_amounts, WUNO_amount, nevm_address=nevm_address)
+        WUNO_balance_after = self.nodes[0].getbalance()
+        expected_balance = WUNO_balance_before - Decimal('0.0001') + BLOCK_REWARD - DUST_THRESHOLD
+        assert_equal(expected_balance, WUNO_balance_after)
         
-    def allocation_burn_to_syscoin(self, asset_amounts, sys_amount=Decimal('0'), sys_destination=None):
-        sys_balance_before = self.nodes[0].getbalance()
-        self.syscoin_tx(SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN, asset_amounts, sys_amount, sys_destination)
-        sys_balance_after = self.nodes[0].getbalance()
-        # You get back SYS equal to the asset amount burned
+    def allocation_burn_to_wentuno(self, asset_amounts, WUNO_amount=Decimal('0'), WUNO_destination=None):
+        WUNO_balance_before = self.nodes[0].getbalance()
+        self.wentuno_tx(wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno, asset_amounts, WUNO_amount, WUNO_destination)
+        WUNO_balance_after = self.nodes[0].getbalance()
+        # You get back WUNO equal to the asset amount burned
         total_asset_amount = sum(amount for _, amount, _ in asset_amounts)
-        expected_balance = sys_balance_before + total_asset_amount + BLOCK_REWARD - Decimal('0.0001')
-        assert_equal(expected_balance, sys_balance_after)
+        expected_balance = WUNO_balance_before + total_asset_amount + BLOCK_REWARD - Decimal('0.0001')
+        assert_equal(expected_balance, WUNO_balance_after)
 
-    def allocation_mint(self, asset_amounts, spv_proof, sys_amount=Decimal('0'), sys_destination=None):
-        sys_balance_before = self.nodes[0].getbalance()
-        self.syscoin_tx(SYSCOIN_TX_VERSION_ALLOCATION_MINT, asset_amounts, sys_amount, sys_destination, spv_proof=spv_proof)
-        sys_balance_after = self.nodes[0].getbalance()
-        # You get back SYS equal to the asset amount burned
+    def allocation_mint(self, asset_amounts, spv_proof, WUNO_amount=Decimal('0'), WUNO_destination=None):
+        WUNO_balance_before = self.nodes[0].getbalance()
+        self.wentuno_tx(wentuno_TX_VERSION_ALLOCATION_MINT, asset_amounts, WUNO_amount, WUNO_destination, spv_proof=spv_proof)
+        WUNO_balance_after = self.nodes[0].getbalance()
+        # You get back WUNO equal to the asset amount burned
         total_asset_amount = sum(amount for _, amount, _ in asset_amounts)
-        expected_balance = sys_balance_before + total_asset_amount + BLOCK_REWARD - Decimal('0.0001') # minus fees
-        assert_equal(expected_balance, sys_balance_after)
+        expected_balance = WUNO_balance_before + total_asset_amount + BLOCK_REWARD - Decimal('0.0001') # minus fees
+        assert_equal(expected_balance, WUNO_balance_after)
 
 
     def setup_test_assets(self):
         """Create test assets for transactions"""
         print("Setting up test assets...")
         self.generate(self.nodes[0],110)
-        self.sysx_addr = self.nodes[0].getnewaddress()
-        self.nodes[0].sendtoaddress(self.sysx_addr, 50)
+        self.WUNOx_addr = self.nodes[0].getnewaddress()
+        self.nodes[0].sendtoaddress(self.WUNOx_addr, 50)
         self.generate(self.nodes[0],1)
         asset_amounts = [
-            (SYSX_GUID, Decimal('20'), self.sysx_addr)
+            (WUNOX_GUID, Decimal('20'), self.WUNOx_addr)
         ]
-        self.syscoin_burn_to_allocation(asset_amounts, sys_amount=Decimal('20'))
+        self.wentuno_burn_to_allocation(asset_amounts, WUNO_amount=Decimal('20'))
 
         print("Test assets created successfully")
 
@@ -125,8 +125,8 @@ class AssetTransactionTest(SyscoinTestFramework):
         self.setup_test_assets()
         self.test_allocation_send()
         self.test_allocation_burn_to_nevm()
-        self.test_sys_burn_to_allocation()
-        self.test_allocation_burn_to_sys()
+        self.test_WUNO_burn_to_allocation()
+        self.test_allocation_burn_to_WUNO()
         return
         # Run tests for each transaction type
         self.test_allocation_mint()
@@ -140,31 +140,31 @@ class AssetTransactionTest(SyscoinTestFramework):
         self.test_error_cases()
 
     def test_allocation_send(self):
-        """Test SYSCOIN_TX_VERSION_ALLOCATION_SEND transactions"""
+        """Test wentuno_TX_VERSION_ALLOCATION_SEND transactions"""
         print("\nTesting ALLOCATION_SEND transactions...")
         asset_amounts = [
-            (SYSX_GUID, Decimal('5'), self.sysx_addr)
+            (WUNOX_GUID, Decimal('5'), self.WUNOx_addr)
         ]
-        self.sysx_addr = self.nodes[0].getnewaddress()
-        self.sysx_addr1 = self.nodes[0].getnewaddress()
-        self.sysx_addr2 = self.nodes[0].getnewaddress()
+        self.WUNOx_addr = self.nodes[0].getnewaddress()
+        self.WUNOx_addr1 = self.nodes[0].getnewaddress()
+        self.WUNOx_addr2 = self.nodes[0].getnewaddress()
         self.asset_allocation_send(asset_amounts)
         asset_amounts = [
-            (SYSX_GUID, Decimal('5'), self.sysx_addr),
-            (SYSX_GUID, Decimal('15'), self.sysx_addr1)
+            (WUNOX_GUID, Decimal('5'), self.WUNOx_addr),
+            (WUNOX_GUID, Decimal('15'), self.WUNOx_addr1)
         ]
         self.asset_allocation_send(asset_amounts)
         asset_amounts = [
-            (SYSX_GUID, Decimal('3'), self.sysx_addr1),
-            (SYSX_GUID, Decimal('1'), self.sysx_addr2),
-            (SYSX_GUID, Decimal('15'), self.sysx_addr)
+            (WUNOX_GUID, Decimal('3'), self.WUNOx_addr1),
+            (WUNOX_GUID, Decimal('1'), self.WUNOx_addr2),
+            (WUNOX_GUID, Decimal('15'), self.WUNOx_addr)
         ]
-        self.asset_allocation_send(asset_amounts, sys_amount=Decimal('25'), sys_destination=self.nodes[0].getnewaddress())
+        self.asset_allocation_send(asset_amounts, WUNO_amount=Decimal('25'), WUNO_destination=self.nodes[0].getnewaddress())
                 
         print("ALLOCATION_SEND tests passed")
 
     def test_allocation_mint(self):
-        """Test SYSCOIN_TX_VERSION_ALLOCATION_MINT transactions"""
+        """Test wentuno_TX_VERSION_ALLOCATION_MINT transactions"""
         print("\nTesting ALLOCATION_MINT transactions...")
         
         # Get current block info for SPV proof
@@ -188,14 +188,14 @@ class AssetTransactionTest(SyscoinTestFramework):
         dest_addr = self.nodes[0].getnewaddress()
         
         # Use a fresh GUID for this test
-        new_asset_guid = SYSX_GUID
+        new_asset_guid = WUNOX_GUID
         
         asset_amounts = [
             (new_asset_guid, Decimal('500'), dest_addr)
         ]
         tx_hex = create_transaction_with_selector(
             node=self.nodes[0],
-            tx_type=SYSCOIN_TX_VERSION_ALLOCATION_MINT,
+            tx_type=wentuno_TX_VERSION_ALLOCATION_MINT,
             asset_amounts=asset_amounts,
             spv_proof=spv_proof,
         )
@@ -211,57 +211,57 @@ class AssetTransactionTest(SyscoinTestFramework):
         print("ALLOCATION_MINT tests passed")
 
     def test_allocation_burn_to_nevm(self):
-        """Test SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_NEVM transactions"""
+        """Test wentuno_TX_VERSION_ALLOCATION_BURN_TO_NEVM transactions"""
         print("\nTesting ALLOCATION_BURN_TO_NEVM transactions...")
         
         # Test case: Burn asset to NEVM
         nevm_address = "0x" + "1" * 40  # Dummy NEVM address
         asset_amounts = [
-            (SYSX_GUID, Decimal('20'), '')
+            (WUNOX_GUID, Decimal('20'), '')
         ]
         self.allocation_burn_to_nevm(asset_amounts, Decimal('0'), nevm_address)
         
         print("ALLOCATION_BURN_TO_NEVM tests passed")
 
-    def test_sys_burn_to_allocation(self):
-        """Test SYSCOIN_TX_VERSION_SYSCOIN_BURN_TO_ALLOCATION transactions"""
-        print("\nTesting SYSCOIN_BURN_TO_ALLOCATION transactions...")
+    def test_WUNO_burn_to_allocation(self):
+        """Test wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION transactions"""
+        print("\nTesting wentuno_BURN_TO_ALLOCATION transactions...")
         
-        # Test case: Convert SYS to SYSX
+        # Test case: Convert WUNO to WUNOX
         dest_addr = self.nodes[0].getnewaddress()
-        sys_amount = Decimal('5.0')
+        WUNO_amount = Decimal('5.0')
         asset_amounts = [
-            (SYSX_GUID, sys_amount, dest_addr)
+            (WUNOX_GUID, WUNO_amount, dest_addr)
         ]
-        self.syscoin_burn_to_allocation(asset_amounts, sys_amount)
+        self.wentuno_burn_to_allocation(asset_amounts, WUNO_amount)
         
-        # Test edge case: SYS amount near dust threshold
+        # Test edge case: WUNO amount near dust threshold
         dest_addr = self.nodes[0].getnewaddress()
-        sys_amount = Decimal('0.0001')  # Very small amount
+        WUNO_amount = Decimal('0.0001')  # Very small amount
         asset_amounts = [
-            (SYSX_GUID, sys_amount, dest_addr)
+            (WUNOX_GUID, WUNO_amount, dest_addr)
         ]
-        self.syscoin_burn_to_allocation(asset_amounts, sys_amount)
+        self.wentuno_burn_to_allocation(asset_amounts, WUNO_amount)
         
-        print("SYSCOIN_BURN_TO_ALLOCATION tests passed")
+        print("wentuno_BURN_TO_ALLOCATION tests passed")
 
-    def test_allocation_burn_to_sys(self):
-        """Test SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN transactions"""
-        print("\nTesting ALLOCATION_BURN_TO_SYSCOIN transactions...")
+    def test_allocation_burn_to_WUNO(self):
+        """Test wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno transactions"""
+        print("\nTesting ALLOCATION_BURN_TO_wentuno transactions...")
         dest_addr = self.nodes[0].getnewaddress()
         dest_addr1 = self.nodes[0].getnewaddress()
         asset_amounts = [
-            (SYSX_GUID, Decimal('3'), dest_addr)
+            (WUNOX_GUID, Decimal('3'), dest_addr)
         ]
-        self.allocation_burn_to_syscoin(asset_amounts)
+        self.allocation_burn_to_wentuno(asset_amounts)
    
         small_amount = Decimal('0.0001')
         asset_amounts = [
-            (SYSX_GUID, small_amount, dest_addr)
+            (WUNOX_GUID, small_amount, dest_addr)
         ]
-        self.allocation_burn_to_syscoin(asset_amounts, Decimal('300'), dest_addr1)
+        self.allocation_burn_to_wentuno(asset_amounts, Decimal('300'), dest_addr1)
        
-        print("ALLOCATION_BURN_TO_SYSCOIN tests passed")
+        print("ALLOCATION_BURN_TO_wentuno tests passed")
 
     def test_coin_selection_priority(self):
         """Test UTXO prioritization in coin selection"""
@@ -278,7 +278,7 @@ class AssetTransactionTest(SyscoinTestFramework):
         self.nodes[0].sendtoaddress(addresses[3], 0.05)  # Smaller UTXO
         self.nodes[0].sendtoaddress(addresses[4], 0.01)  # Smallest UTXO
         
-        # Create mixed UTXOs with both SYS and assets
+        # Create mixed UTXOs with both WUNO and assets
         mixed_addr1 = self.nodes[0].getnewaddress()
         mixed_addr2 = self.nodes[0].getnewaddress()
         self.nodes[0].sendtoaddress(mixed_addr1, 0.2)
@@ -289,30 +289,30 @@ class AssetTransactionTest(SyscoinTestFramework):
         
         self.generate(self.nodes[0],1)
         
-        # Test case 1: Small SYS target should use smaller UTXOs first
+        # Test case 1: Small WUNO target should use smaller UTXOs first
         selector = CoinSelector(self.nodes[0])
         success, inputs, change, asset_changes = selector.select_coins_for_transaction(
-            SYSCOIN_TX_VERSION_ALLOCATION_SEND,
+            wentuno_TX_VERSION_ALLOCATION_SEND,
             Decimal('0.03'),  # Small amount
             {}
         )
         
-        assert success, "Coin selection should succeed for small SYS amount"
+        assert success, "Coin selection should succeed for small WUNO amount"
         
-        # Test case 2: Large SYS target should use larger UTXOs
+        # Test case 2: Large WUNO target should use larger UTXOs
         selector = CoinSelector(self.nodes[0])
         success, inputs, change, asset_changes = selector.select_coins_for_transaction(
-            SYSCOIN_TX_VERSION_ALLOCATION_SEND,
+            wentuno_TX_VERSION_ALLOCATION_SEND,
             Decimal('1.2'),  # Large amount
             {}
         )
         
-        assert success, "Coin selection should succeed for large SYS amount"
+        assert success, "Coin selection should succeed for large WUNO amount"
         
         # Test case 3: Asset transactions should prioritize UTXOs with the needed assets
         selector = CoinSelector(self.nodes[0])
         success, inputs, change, asset_changes = selector.select_coins_for_transaction(
-            SYSCOIN_TX_VERSION_ALLOCATION_SEND,
+            wentuno_TX_VERSION_ALLOCATION_SEND,
             Decimal('0.01'),
             {str(self.asset1_guid): Decimal('50')}
         )
@@ -335,12 +335,12 @@ class AssetTransactionTest(SyscoinTestFramework):
         # Test consolidation through a transaction that requires multiple inputs
         dest_addr = self.nodes[1].getnewaddress()
         asset_amounts = [
-            (SYSX_GUID, Decimal('0.05'), dest_addr)
+            (WUNOX_GUID, Decimal('0.05'), dest_addr)
         ]
         tx_hex = create_transaction_with_selector(
             node=self.nodes[0],
-            tx_type=SYSCOIN_TX_VERSION_SYSCOIN_BURN_TO_ALLOCATION,
-            sys_amount=Decimal('0.05'),  # Should require multiple small UTXOs
+            tx_type=wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION,
+            WUNO_amount=Decimal('0.05'),  # Should require multiple small UTXOs
             asset_amounts=asset_amounts
         )
         
@@ -377,8 +377,8 @@ class AssetTransactionTest(SyscoinTestFramework):
         # This should send most of the 0.001 UTXO but leave change below dust
         tx_hex = create_transaction_with_selector(
             node=self.nodes[0],
-            tx_type=SYSCOIN_TX_VERSION_ALLOCATION_SEND,
-            sys_amount=Decimal('0.0001'),  # Small fee
+            tx_type=wentuno_TX_VERSION_ALLOCATION_SEND,
+            WUNO_amount=Decimal('0.0001'),  # Small fee
             asset_amounts=asset_amounts,
         )
         
@@ -409,7 +409,7 @@ class AssetTransactionTest(SyscoinTestFramework):
         # Get current block info for SPV proof structure
         burn_block = self.nodes[0].getblock(self.nodes[0].getbestblockhash())
         
-        # Test case 1: ALLOCATION_BURN_TO_SYSCOIN with non-SYSX asset
+        # Test case 1: ALLOCATION_BURN_TO_wentuno with non-WUNOX asset
         dest_addr = self.nodes[0].getnewaddress()
         
         try:
@@ -418,11 +418,11 @@ class AssetTransactionTest(SyscoinTestFramework):
             ]
             tx_hex = create_transaction_with_selector(
                 node=self.nodes[0],
-                tx_type=SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_SYSCOIN,
+                tx_type=wentuno_TX_VERSION_ALLOCATION_BURN_TO_wentuno,
                 asset_amounts=asset_amounts
             )
             self.nodes[0].sendrawtransaction(tx_hex)
-            assert False, "Should have raised an error for non-SYSX burn"
+            assert False, "Should have raised an error for non-WUNOX burn"
         except Exception:
             pass  # Expected exception
         
@@ -435,7 +435,7 @@ class AssetTransactionTest(SyscoinTestFramework):
         try:
             tx_hex = create_transaction_with_selector(
                 node=self.nodes[0],
-                tx_type=SYSCOIN_TX_VERSION_ALLOCATION_MINT,
+                tx_type=wentuno_TX_VERSION_ALLOCATION_MINT,
                 asset_amounts=asset_amounts,
                 # Omitting spv_proof
             )
@@ -459,7 +459,7 @@ class AssetTransactionTest(SyscoinTestFramework):
         try:
             tx_hex = create_transaction_with_selector(
                 node=self.nodes[0],
-                tx_type=SYSCOIN_TX_VERSION_ALLOCATION_MINT,
+                tx_type=wentuno_TX_VERSION_ALLOCATION_MINT,
                 asset_amounts=asset_amounts,
                 spv_proof=bad_spv_proof,
             )
@@ -475,7 +475,7 @@ class AssetTransactionTest(SyscoinTestFramework):
         try:
             tx_hex = create_transaction_with_selector(
                 node=self.nodes[0],
-                tx_type=SYSCOIN_TX_VERSION_ALLOCATION_BURN_TO_NEVM,
+                tx_type=wentuno_TX_VERSION_ALLOCATION_BURN_TO_NEVM,
                 asset_amounts=asset_amounts
                 # Omitting nevm_address
             )
@@ -491,7 +491,7 @@ class AssetTransactionTest(SyscoinTestFramework):
         try:
             tx_hex = create_transaction_with_selector(
                 node=self.nodes[0],
-                tx_type=SYSCOIN_TX_VERSION_ALLOCATION_SEND,
+                tx_type=wentuno_TX_VERSION_ALLOCATION_SEND,
                 asset_amounts=asset_amounts
             )
             self.nodes[0].sendrawtransaction(tx_hex)

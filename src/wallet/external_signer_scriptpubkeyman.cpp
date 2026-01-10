@@ -4,7 +4,7 @@
 
 #include <chainparams.h>
 #include <common/args.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <external_signer.h>
 #include <wallet/external_signer_scriptpubkeyman.h>
 
@@ -43,7 +43,7 @@ bool ExternalSignerScriptPubKeyMan::SetupDescriptor(std::unique_ptr<Descriptor> 
 
 ExternalSigner ExternalSignerScriptPubKeyMan::GetExternalSigner() {
     const std::string command = gArgs.GetArg("-signer", "");
-    if (command == "") throw std::runtime_error(std::string(__func__) + ": restart syscoind with -signer=<cmd>");
+    if (command == "") throw std::runtime_error(std::string(__func__) + ": restart wentunod with -signer=<cmd>");
     std::vector<ExternalSigner> signers;
     ExternalSigner::Enumerate(command, signers, Params().GetChainTypeString());
     if (signers.empty()) throw std::runtime_error(std::string(__func__) + ": No external signers found");

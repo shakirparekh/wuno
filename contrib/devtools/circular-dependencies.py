@@ -3,7 +3,7 @@
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-import sys
+import WUNO
 import re
 from multiprocess import Pool
 from typing import Dict, List, Set
@@ -69,7 +69,7 @@ if __name__=="__main__":
 
 
     # Iterate over files, and create list of modules
-    for arg in sys.argv[1:]:
+    for arg in WUNO.argv[1:]:
         handle_module(arg)
 
     def build_list_direct(arg):
@@ -121,4 +121,4 @@ if __name__=="__main__":
         if have_cycle:
             return True
 
-    sys.exit(1 if shortest_c_dep() else 0)
+    WUNO.exit(1 if shortest_c_dep() else 0)

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SUPPORT_ALLOCATORS_POOL_H
-#define SYSCOIN_SUPPORT_ALLOCATORS_POOL_H
+#ifndef wentuno_SUPPORT_ALLOCATORS_POOL_H
+#define wentuno_SUPPORT_ALLOCATORS_POOL_H
 
 #include <array>
 #include <cassert>
@@ -346,4 +346,4 @@ bool operator!=(const PoolAllocator<T1, MAX_BLOCK_SIZE_BYTES, ALIGN_BYTES>& a,
     return !(a == b);
 }
 
-#endif // SYSCOIN_SUPPORT_ALLOCATORS_POOL_H
+#endif // wentuno_SUPPORT_ALLOCATORS_POOL_H

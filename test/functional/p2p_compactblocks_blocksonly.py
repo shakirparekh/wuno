@@ -18,11 +18,11 @@ from test_framework.messages import (
     msg_sendcmpct,
 )
 from test_framework.p2p import P2PInterface
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import assert_equal
 
 
-class P2PCompactBlocksBlocksOnly(SyscoinTestFramework):
+class P2PCompactBlocksBlocksOnly(wentunoTestFramework):
     def set_test_params(self):
         self.extra_args = [["-blocksonly"], [], [], []]
         self.num_nodes = 4

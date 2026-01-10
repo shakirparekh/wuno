@@ -21,7 +21,7 @@ def validate_object(prepared, rpc_prepared):
     assert_equal(prepared["data"], rpc_prepared["data"])
 
 
-class SyscoinGovernanceTest (DashTestFramework):
+class wentunoGovernanceTest (DashTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
 
@@ -42,7 +42,7 @@ class SyscoinGovernanceTest (DashTestFramework):
             "end_epoch": proposal_time + 24 * 60 * 60,
             "payment_amount": amount,
             "payment_address": self.nodes[0].getnewaddress(),
-            "url": "https://syscoin.org"
+            "url": "https://wentuno.org"
         }
         proposal_hex = ''.join(format(x, '02x') for x in json.dumps(proposal_template).encode())
         collateral_hash = self.nodes[0].gobject_prepare(parent_hash, proposal_rev, proposal_time, proposal_hex)
@@ -106,4 +106,4 @@ class SyscoinGovernanceTest (DashTestFramework):
 
 
 if __name__ == '__main__':
-    SyscoinGovernanceTest().main()
+    wentunoGovernanceTest().main()

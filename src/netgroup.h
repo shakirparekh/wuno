@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_NETGROUP_H
-#define SYSCOIN_NETGROUP_H
+#ifndef wentuno_NETGROUP_H
+#define wentuno_NETGROUP_H
 
 #include <netaddress.h>
 #include <uint256.h>
@@ -35,7 +35,7 @@ public:
     std::vector<unsigned char> GetGroup(const CNetAddr& address) const;
 
     /**
-     *  Get the autonomous system on the BGP path to address.
+     *  Get the autonomous WUNOtem on the BGP path to address.
      *
      *  The ip->AS mapping depends on how asmap is constructed.
      */
@@ -63,4 +63,4 @@ private:
     const std::vector<bool> m_asmap;
 };
 
-#endif // SYSCOIN_NETGROUP_H
+#endif // wentuno_NETGROUP_H

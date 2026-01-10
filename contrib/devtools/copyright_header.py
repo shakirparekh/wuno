@@ -6,7 +6,7 @@
 
 import re
 import fnmatch
-import sys
+import WUNO
 import subprocess
 import datetime
 import os
@@ -17,7 +17,7 @@ import os
 
 EXCLUDE = [
     # auto generated:
-    'src/qt/syscoinstrings.cpp',
+    'src/qt/wentunostrings.cpp',
     'src/chainparamsseeds.h',
     # other external copyrights:
     'src/bench/nanobench.h',
@@ -105,7 +105,7 @@ EXPECTED_HOLDER_NAMES = [
     r"Satoshi Nakamoto",
     r"The Bitcoin Core developers",
     r"The Dash Core developers",
-    r"The Syscoin Core developers",
+    r"The wentuno Core developers",
     r"BitPay Inc\.",
     r"University of Illinois at Urbana-Champaign\.",
     r"Pieter Wuille",
@@ -287,24 +287,24 @@ Usage:
     $ ./copyright_header.py report <base_directory> [verbose]
 
 Arguments:
-    <base_directory> - The base directory of a Syscoin Core source code repository.
+    <base_directory> - The base directory of a wentuno Core source code repository.
     [verbose] - Includes a list of every file of each subcategory in the report.
 """
 
 def report_cmd(argv):
     if len(argv) == 2:
-        sys.exit(REPORT_USAGE)
+        WUNO.exit(REPORT_USAGE)
 
     base_directory = argv[2]
     if not os.path.exists(base_directory):
-        sys.exit("*** bad <base_directory>: %s" % base_directory)
+        WUNO.exit("*** bad <base_directory>: %s" % base_directory)
 
     if len(argv) == 3:
         verbose = False
     elif argv[3] == 'verbose':
         verbose = True
     else:
-        sys.exit("*** unknown argument: %s" % argv[2])
+        WUNO.exit("*** unknown argument: %s" % argv[2])
 
     exec_report(base_directory, verbose)
 
@@ -350,7 +350,7 @@ def write_file_lines(filename, file_lines):
 COPYRIGHT = r'Copyright \(c\)'
 YEAR = "20[0-9][0-9]"
 YEAR_RANGE = '(%s)(-%s)?' % (YEAR, YEAR)
-HOLDER = 'The Syscoin Core developers'
+HOLDER = 'The wentuno Core developers'
 UPDATEABLE_LINE_COMPILED = re.compile(' '.join([COPYRIGHT, YEAR_RANGE, HOLDER]))
 
 def get_updatable_copyright_line(file_lines):
@@ -415,24 +415,24 @@ def exec_update_header_year(base_directory):
 ################################################################################
 
 UPDATE_USAGE = """
-Updates all the copyright headers of "The Syscoin Core developers" which were
+Updates all the copyright headers of "The wentuno Core developers" which were
 changed in a year more recent than is listed. For example:
 
-// Copyright (c) <firstYear>-<lastYear> The Syscoin Core developers
+// Copyright (c) <firstYear>-<lastYear> The wentuno Core developers
 
 will be updated to:
 
-// Copyright (c) <firstYear>-<lastModifiedYear> The Syscoin Core developers
+// Copyright (c) <firstYear>-<lastModifiedYear> The wentuno Core developers
 
 where <lastModifiedYear> is obtained from the 'git log' history.
 
 This subcommand also handles copyright headers that have only a single year. In those cases:
 
-// Copyright (c) <year> The Syscoin Core developers
+// Copyright (c) <year> The wentuno Core developers
 
 will be updated to:
 
-// Copyright (c) <year>-<lastModifiedYear> The Syscoin Core developers
+// Copyright (c) <year>-<lastModifiedYear> The wentuno Core developers
 
 where the update is appropriate.
 
@@ -440,7 +440,7 @@ Usage:
     $ ./copyright_header.py update <base_directory>
 
 Arguments:
-    <base_directory> - The base directory of Syscoin Core source code repository.
+    <base_directory> - The base directory of wentuno Core source code repository.
 """
 
 def print_file_action_message(filename, action):
@@ -448,11 +448,11 @@ def print_file_action_message(filename, action):
 
 def update_cmd(argv):
     if len(argv) != 3:
-        sys.exit(UPDATE_USAGE)
+        WUNO.exit(UPDATE_USAGE)
 
     base_directory = argv[2]
     if not os.path.exists(base_directory):
-        sys.exit("*** bad base_directory: %s" % base_directory)
+        WUNO.exit("*** bad base_directory: %s" % base_directory)
     exec_update_header_year(base_directory)
 
 ################################################################################
@@ -465,7 +465,7 @@ def get_header_lines(header, start_year, end_year):
     return [line + '\n' for line in lines]
 
 CPP_HEADER = '''
-// Copyright (c) %s The Syscoin Core developers
+// Copyright (c) %s The wentuno Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 '''
@@ -474,7 +474,7 @@ def get_cpp_header_lines_to_insert(start_year, end_year):
     return reversed(get_header_lines(CPP_HEADER, start_year, end_year))
 
 SCRIPT_HEADER = '''
-# Copyright (c) %s The Syscoin Core developers
+# Copyright (c) %s The wentuno Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 '''
@@ -529,7 +529,7 @@ def insert_cpp_header(filename, file_lines, start_year, end_year):
 def exec_insert_header(filename, style):
     file_lines = read_file_lines(filename)
     if file_already_has_core_copyright(file_lines):
-        sys.exit('*** %s already has a copyright by The Syscoin Core developers'
+        WUNO.exit('*** %s already has a copyright by The wentuno Core developers'
                  % (filename))
     start_year, end_year = get_git_change_year_range(filename)
     if style in ['python', 'shell']:
@@ -542,7 +542,7 @@ def exec_insert_header(filename, style):
 ################################################################################
 
 INSERT_USAGE = """
-Inserts a copyright header for "The Syscoin Core developers" at the top of the
+Inserts a copyright header for "The wentuno Core developers" at the top of the
 file in either Python or C++ style as determined by the file extension. If the
 file is a Python file and it has a '#!' starting the first line, the header is
 inserted in the line below it.
@@ -556,26 +556,26 @@ where <year_introduced> is according to the 'git log' history. If
 
 "<current_year>"
 
-If the file already has a copyright for "The Syscoin Core developers", the
+If the file already has a copyright for "The wentuno Core developers", the
 script will exit.
 
 Usage:
     $ ./copyright_header.py insert <file>
 
 Arguments:
-    <file> - A source file in the Syscoin Core repository.
+    <file> - A source file in the wentuno Core repository.
 """
 
 def insert_cmd(argv):
     if len(argv) != 3:
-        sys.exit(INSERT_USAGE)
+        WUNO.exit(INSERT_USAGE)
 
     filename = argv[2]
     if not os.path.isfile(filename):
-        sys.exit("*** bad filename: %s" % filename)
+        WUNO.exit("*** bad filename: %s" % filename)
     _, extension = os.path.splitext(filename)
     if extension not in ['.h', '.cpp', '.cc', '.c', '.py', '.sh']:
-        sys.exit("*** cannot insert for file extension %s" % extension)
+        WUNO.exit("*** cannot insert for file extension %s" % extension)
 
     if extension == '.py':
         style = 'python'
@@ -590,7 +590,7 @@ def insert_cmd(argv):
 ################################################################################
 
 USAGE = """
-copyright_header.py - utilities for managing copyright headers of 'The Syscoin
+copyright_header.py - utilities for managing copyright headers of 'The wentuno
 Core developers' in repository source files.
 
 Usage:
@@ -607,14 +607,14 @@ To see subcommand usage, run them without arguments.
 SUBCOMMANDS = ['report', 'update', 'insert']
 
 if __name__ == "__main__":
-    if len(sys.argv) == 1:
-        sys.exit(USAGE)
-    subcommand = sys.argv[1]
+    if len(WUNO.argv) == 1:
+        WUNO.exit(USAGE)
+    subcommand = WUNO.argv[1]
     if subcommand not in SUBCOMMANDS:
-        sys.exit(USAGE)
+        WUNO.exit(USAGE)
     if subcommand == 'report':
-        report_cmd(sys.argv)
+        report_cmd(WUNO.argv)
     elif subcommand == 'update':
-        update_cmd(sys.argv)
+        update_cmd(WUNO.argv)
     elif subcommand == 'insert':
-        insert_cmd(sys.argv)
+        insert_cmd(WUNO.argv)

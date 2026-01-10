@@ -38,7 +38,7 @@
 namespace Consensus {
 struct Params;
 }
-// SYSCOIN
+// wentuno
 extern int RPCSerializationFlags();
 static std::multimap<std::string, CZMQAbstractPublishNotifier*> mapPublishNotifiers;
 static bool bFirstTime = true;
@@ -46,7 +46,7 @@ static const char *MSG_HASHBLOCK = "hashblock";
 static const char *MSG_HASHTX    = "hashtx";
 static const char *MSG_RAWBLOCK  = "rawblock";
 static const char *MSG_RAWTX     = "rawtx";
-// SYSCOIN
+// wentuno
 static const char *MSG_NEVMBLOCKCONNECT  = "nevmconnect";
 static const char *MSG_NEVMCOMMS  = "nevmcomms";
 static const char *MSG_NEVMBLOCKDISCONNECT  = "nevmdisconnect";
@@ -193,7 +193,7 @@ bool CZMQAbstractPublishNotifier::Initialize(void *pcontext, void *pcontextsub)
                 zmq_close(psocket);
                 return false;
             }
-            // On some systems (e.g. OpenBSD) the ZMQ_IPV6 must not be enabled, if the address to bind isn't IPv6
+            // On some WUNOtems (e.g. OpenBSD) the ZMQ_IPV6 must not be enabled, if the address to bind isn't IPv6
             const int enable_ipv6 { IsZMQAddressIPV6(address) ? 1 : 0};
             rc = zmq_setsockopt(psocket, ZMQ_IPV6, &enable_ipv6, sizeof(enable_ipv6));
             if (rc != 0) {
@@ -255,14 +255,14 @@ void CZMQAbstractPublishNotifier::Shutdown()
             zmq_close(psocket);
         }
     }
-    // SYSCOIN
+    // wentuno
     if(psocketsub) {
         int linger = 0;
         zmq_setsockopt(psocketsub, ZMQ_LINGER, &linger, sizeof(linger));
         zmq_close(psocketsub);
     }
     psocket = nullptr;
-    // SYSCOIN
+    // wentuno
     psocketsub = nullptr;
 }
 
@@ -293,7 +293,7 @@ bool CZMQAbstractPublishNotifier::SendZmqMessageNEVM(const char *command, const 
     return true;
 }
 
-// SYSCOIN
+// wentuno
 bool CZMQAbstractPublishNotifier::ReceiveZmqMessage(std::vector<std::string>& parts)
 {
     if(!psocketsub) {
@@ -326,26 +326,26 @@ bool CZMQAbstractPublishNotifier::NotifyNEVMCommsCommon(const std::string &commM
     CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
     ss << commMessage;
     if(!SendZmqMessageNEVM(MSG_NEVMCOMMS, &(*ss.begin()), ss.size())) {
-        LogPrint(BCLog::SYS, "NotifyNEVMComms: nevm-connect-not-sent: %s\n", commMessage);
+        LogPrint(BCLog::WUNO, "NotifyNEVMComms: nevm-connect-not-sent: %s\n", commMessage);
         return false;
     }
     if(commMessage != "disconnect") {
         if(ReceiveZmqMessage(parts)) {
             if(parts.size() != 2) {
-                LogPrint(BCLog::SYS, "NotifyNEVMComms: nevm-response-invalid-parts\n");
+                LogPrint(BCLog::WUNO, "NotifyNEVMComms: nevm-response-invalid-parts\n");
                 return false;  
             }
             if(parts[0] != MSG_NEVMCOMMS) {
-                LogPrint(BCLog::SYS, "NotifyNEVMComms: nevm-response-wrong-command\n");
+                LogPrint(BCLog::WUNO, "NotifyNEVMComms: nevm-response-wrong-command\n");
                 return false;
             }
             if(parts[1] != "ack") {
-                LogPrint(BCLog::SYS, "NotifyNEVMComms: nevm-comms-response-invalid-data\n");
+                LogPrint(BCLog::WUNO, "NotifyNEVMComms: nevm-comms-response-invalid-data\n");
                 return false;
             }
             bResponse = true;
         } else {
-            LogPrint(BCLog::SYS, "NotifyNEVMComms: nevm-response-not-found: %s\n", commMessage);
+            LogPrint(BCLog::WUNO, "NotifyNEVMComms: nevm-response-not-found: %s\n", commMessage);
             return false;
         }
     } else {
@@ -353,7 +353,7 @@ bool CZMQAbstractPublishNotifier::NotifyNEVMCommsCommon(const std::string &commM
     }
     return true;
 }
-bool CZMQPublishNEVMBlockConnectNotifier::NotifyNEVMBlockConnect(const CNEVMHeader &evmBlock, const CBlock& block, std::string &state, const uint256& nSYSBlockHash, NEVMDataVec &NEVMDataVecOut, const uint32_t& nHeight, bool bSkipValidation, const CDeterministicMNListNEVMAddressDiff &diff)
+bool CZMQPublishNEVMBlockConnectNotifier::NotifyNEVMBlockConnect(const CNEVMHeader &evmBlock, const CBlock& block, std::string &state, const uint256& nWUNOBlockHash, NEVMDataVec &NEVMDataVecOut, const uint32_t& nHeight, bool bSkipValidation, const CDeterministicMNListNEVMAddressDiff &diff)
 {
     LOCK(cs_nevm);
     state = "";
@@ -380,7 +380,7 @@ bool CZMQPublishNEVMBlockConnectNotifier::NotifyNEVMBlockConnect(const CNEVMHead
     uint256 hash = evmBlock.nBlockHash;
     LogPrint(BCLog::ZMQ, "zmq: Publish nevm block connect %s to %s, subscriber %s\n", hash.GetHex(), this->address, this->addresssub);
     CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
-    ss << evmBlock << block.vchNEVMBlockData << nSYSBlockHash << NEVMDataVecOut << diff;
+    ss << evmBlock << block.vchNEVMBlockData << nWUNOBlockHash << NEVMDataVecOut << diff;
     if(!SendZmqMessageNEVM(MSG_NEVMBLOCKCONNECT, &(*ss.begin()), ss.size())) {
         state = "nevm-connect-not-sent";
         return false;
@@ -395,7 +395,7 @@ bool CZMQPublishNEVMBlockConnectNotifier::NotifyNEVMBlockConnect(const CNEVMHead
             return false;
         }
         if(!bSkipValidation && parts[1] != "connected") {
-            LogPrint(BCLog::SYS, "NotifyNEVMBlockConnect: %s\n", parts[1]);
+            LogPrint(BCLog::WUNO, "NotifyNEVMBlockConnect: %s\n", parts[1]);
             state = "nevm-connect-response-invalid-data";
             return false;
         }
@@ -406,7 +406,7 @@ bool CZMQPublishNEVMBlockConnectNotifier::NotifyNEVMBlockConnect(const CNEVMHead
 
     return true;
 }
-bool CZMQPublishNEVMBlockDisconnectNotifier::NotifyNEVMBlockDisconnect(std::string &state, const uint256& nSYSBlockHash, const CDeterministicMNListNEVMAddressDiff &diff)
+bool CZMQPublishNEVMBlockDisconnectNotifier::NotifyNEVMBlockDisconnect(std::string &state, const uint256& nWUNOBlockHash, const CDeterministicMNListNEVMAddressDiff &diff)
 {
     LOCK(cs_nevm);
     if(bFirstTime) {
@@ -429,9 +429,9 @@ bool CZMQPublishNEVMBlockDisconnectNotifier::NotifyNEVMBlockDisconnect(std::stri
         }
     }
     std::vector<std::string> parts;
-    LogPrint(BCLog::ZMQ, "zmq: Publish nevm block disconnect %s to %s, subscriber %s\n", nSYSBlockHash.GetHex(), this->address, this->addresssub);
+    LogPrint(BCLog::ZMQ, "zmq: Publish nevm block disconnect %s to %s, subscriber %s\n", nWUNOBlockHash.GetHex(), this->address, this->addresssub);
     CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
-    ss << nSYSBlockHash << diff;
+    ss << nWUNOBlockHash << diff;
     if(!SendZmqMessageNEVM(MSG_NEVMBLOCKDISCONNECT, &(*ss.begin()), ss.size())) {
         state = "nevm-disconnect-not-sent";
         return false;
@@ -523,7 +523,7 @@ bool CZMQPublishNEVMBlockNotifier::NotifyGetNEVMBlock(CNEVMBlock &evmBlock, std:
             return false;
         }
         const std::vector<unsigned char> evmData{parts[1].begin(), parts[1].end()};
-        // SYSCOIN
+        // wentuno
         CDataStream ss(evmData, SER_NETWORK, PROTOCOL_VERSION);
         try {
             ss >> evmBlock;
@@ -578,7 +578,7 @@ bool CZMQPublishHashTransactionNotifier::NotifyTransaction(const CTransaction &t
 bool CZMQPublishRawBlockNotifier::NotifyBlock(const CBlockIndex *pindex)
 {
     LogPrint(BCLog::ZMQ, "Publish rawblock %s to %s\n", pindex->GetBlockHash().GetHex(), this->address);
-    // SYSCOIN
+    // wentuno
     CDataStream ss(SER_NETWORK | SER_NO_PODA, PROTOCOL_VERSION | RPCSerializationFlags());
     CBlock block;
     if (!m_get_block_by_index(block, *pindex)) {
@@ -594,12 +594,12 @@ bool CZMQPublishRawTransactionNotifier::NotifyTransaction(const CTransaction &tr
 {
     uint256 hash = transaction.GetHash();
     LogPrint(BCLog::ZMQ, "Publish rawtx %s to %s\n", hash.GetHex(), this->address);
-    // SYSCOIN
+    // wentuno
     CDataStream ss(SER_NETWORK | SER_NO_PODA, PROTOCOL_VERSION | RPCSerializationFlags());
     ss << transaction;
     return SendZmqMessage(MSG_RAWTX, &(*ss.begin()), ss.size());
 }
-// SYSCOIN
+// wentuno
 bool CZMQPublishHashGovernanceVoteNotifier::NotifyGovernanceVote(const uint256& hash)
 {
     LogPrint(BCLog::ZMQ, "zmq: Publish hashgovernancevote %s\n", hash.GetHex());
@@ -622,7 +622,7 @@ bool CZMQPublishRawMempoolTransactionNotifier::NotifyTransactionMempool(const CT
 {
     uint256 hash = transaction.GetHash();
     LogPrint(BCLog::ZMQ, "zmq: Publish rawmempooltx %s\n", hash.GetHex());
-    // SYSCOIN
+    // wentuno
     CDataStream ss(SER_NETWORK | SER_NO_PODA, PROTOCOL_VERSION | RPCSerializationFlags());
     ss << transaction;
     return SendZmqMessage(MSG_RAWMEMPOOLTX, &(*ss.begin()), ss.size());

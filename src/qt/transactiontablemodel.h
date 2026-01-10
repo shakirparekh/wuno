@@ -2,10 +2,10 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_TRANSACTIONTABLEMODEL_H
-#define SYSCOIN_QT_TRANSACTIONTABLEMODEL_H
+#ifndef wentuno_QT_TRANSACTIONTABLEMODEL_H
+#define wentuno_QT_TRANSACTIONTABLEMODEL_H
 
-#include <qt/syscoinunits.h>
+#include <qt/wentunounits.h>
 
 #include <QAbstractTableModel>
 #include <QStringList>
@@ -101,7 +101,7 @@ private:
     QString formatTxDate(const TransactionRecord *wtx) const;
     QString formatTxType(const TransactionRecord *wtx) const;
     QString formatTxToAddress(const TransactionRecord *wtx, bool tooltip) const;
-    QString formatTxAmount(const TransactionRecord *wtx, bool showUnconfirmed=true, SyscoinUnits::SeparatorStyle separators=SyscoinUnits::SeparatorStyle::STANDARD) const;
+    QString formatTxAmount(const TransactionRecord *wtx, bool showUnconfirmed=true, wentunoUnits::SeparatorStyle separators=wentunoUnits::SeparatorStyle::STANDARD) const;
     QString formatTooltip(const TransactionRecord *rec) const;
     QVariant txStatusDecoration(const TransactionRecord *wtx) const;
     QVariant txWatchonlyDecoration(const TransactionRecord *wtx) const;
@@ -120,4 +120,4 @@ public Q_SLOTS:
     friend class TransactionTablePriv;
 };
 
-#endif // SYSCOIN_QT_TRANSACTIONTABLEMODEL_H
+#endif // wentuno_QT_TRANSACTIONTABLEMODEL_H

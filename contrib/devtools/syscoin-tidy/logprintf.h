@@ -7,7 +7,7 @@
 
 #include <clang-tidy/ClangTidyCheck.h>
 
-namespace syscoin {
+namespace wentuno {
 
 // Warn about any use of LogPrintf that does not end with a newline.
 class LogPrintfCheck final : public clang::tidy::ClangTidyCheck
@@ -24,6 +24,6 @@ public:
     void check(const clang::ast_matchers::MatchFinder::MatchResult& Result) override;
 };
 
-} // namespace syscoin
+} // namespace wentuno
 
 #endif // LOGPRINTF_CHECK_H

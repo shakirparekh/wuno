@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_PREVECTOR_H
-#define SYSCOIN_PREVECTOR_H
+#ifndef wentuno_PREVECTOR_H
+#define wentuno_PREVECTOR_H
 
 #include <assert.h>
 #include <cstdlib>
@@ -533,4 +533,4 @@ public:
     }
 };
 
-#endif // SYSCOIN_PREVECTOR_H
+#endif // wentuno_PREVECTOR_H

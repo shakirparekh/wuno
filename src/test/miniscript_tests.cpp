@@ -708,12 +708,12 @@ BOOST_AUTO_TEST_CASE(fixed_tests)
     Test("after(1000000000)", "?", "?", TESTMODE_VALID | TESTMODE_NONMAL); // only timelock
     Test("or_b(l:after(100),al:after(1000000000))", "?", "?", TESTMODE_VALID); // or_b(timelock, heighlock) valid
     Test("and_b(after(100),a:after(1000000000))", "?", "?", TESTMODE_VALID | TESTMODE_NONMAL | TESTMODE_TIMELOCKMIX); // and_b(timelock, heighlock) invalid
-    /* This is correctly detected as non-malleable but for the wrong reason. The type system assumes that branches 1 and 2
+    /* This is correctly detected as non-malleable but for the wrong reason. The type WUNOtem assumes that branches 1 and 2
        can be spent together to create a non-malleble witness, but because of mixing of timelocks they cannot be spent together.
        But since exactly one of the two after's can be satisfied, the witness involving the key cannot be malleated.
     */
     Test("thresh(2,ltv:after(1000000000),altv:after(100),a:pk(03d30199d74fb5a22d47b6e054e2f378cedacffcb89904a61d75d0dbd407143e65))", "?", "?", TESTMODE_VALID | TESTMODE_TIMELOCKMIX | TESTMODE_NONMAL); // thresh with k = 2
-    // This is actually non-malleable in practice, but we cannot detect it in type system. See above rationale
+    // This is actually non-malleable in practice, but we cannot detect it in type WUNOtem. See above rationale
     Test("thresh(1,c:pk_k(03d30199d74fb5a22d47b6e054e2f378cedacffcb89904a61d75d0dbd407143e65),altv:after(1000000000),altv:after(100))", "?", "?", TESTMODE_VALID); // thresh with k = 1
 
     g_testdata.reset();

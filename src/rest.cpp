@@ -316,7 +316,7 @@ static bool rest_block(const std::any& context,
 
     switch (rf) {
     case RESTResponseFormat::BINARY: {
-        // SYSCOIN
+        // wentuno
         CDataStream ssBlock(SER_NETWORK | SER_NO_PODA, PROTOCOL_VERSION | RPCSerializationFlags());
         ssBlock << block;
         std::string binaryBlock = ssBlock.str();
@@ -326,7 +326,7 @@ static bool rest_block(const std::any& context,
     }
 
     case RESTResponseFormat::HEX: {
-        // SYSCOIN
+        // wentuno
         CDataStream ssBlock(SER_NETWORK | SER_NO_PODA, PROTOCOL_VERSION | RPCSerializationFlags());
         ssBlock << block;
         std::string strHex = HexStr(ssBlock) + "\n";
@@ -714,7 +714,7 @@ static bool rest_tx(const std::any& context, HTTPRequest* req, const std::string
     if (g_txindex) {
         g_txindex->BlockUntilSyncedToCurrentChain();
     }
-    // SYSCOIN
+    // wentuno
     else{
         uint32_t nBlockHeight;
         if(pblockindexdb->ReadBlockHeight(hash, nBlockHeight)) {
@@ -725,7 +725,7 @@ static bool rest_tx(const std::any& context, HTTPRequest* req, const std::string
 
     if (!node) return false;
     uint256 hashBlock = uint256();
-    // SYSCOIN
+    // wentuno
     const CTransactionRef tx = GetTransaction(blockindex, node->mempool.get(), hash, hashBlock, node->chainman->m_blockman);
     if (!tx) {
         return RESTERR(req, HTTP_NOT_FOUND, hashStr + " not found");
@@ -733,7 +733,7 @@ static bool rest_tx(const std::any& context, HTTPRequest* req, const std::string
 
     switch (rf) {
     case RESTResponseFormat::BINARY: {
-        // SYSCOIN
+        // wentuno
         CDataStream ssTx(SER_NETWORK | SER_NO_PODA, PROTOCOL_VERSION | RPCSerializationFlags());
         ssTx << tx;
 
@@ -744,7 +744,7 @@ static bool rest_tx(const std::any& context, HTTPRequest* req, const std::string
     }
 
     case RESTResponseFormat::HEX: {
-        // SYSCOIN
+        // wentuno
         CDataStream ssTx(SER_NETWORK | SER_NO_PODA, PROTOCOL_VERSION | RPCSerializationFlags());
         ssTx << tx;
 
@@ -947,7 +947,7 @@ static bool rest_getutxos(const std::any& context, HTTPRequest* req, const std::
             UniValue o(UniValue::VOBJ);
             ScriptToUniv(coin.out.scriptPubKey, /*out=*/o, /*include_hex=*/true, /*include_address=*/true);
             utxo.pushKV("scriptPubKey", o);
-            // SYSCOIN
+            // wentuno
             if(!coin.out.assetInfo.IsNull()) {
                 utxo.pushKV("asset_guid", coin.out.assetInfo.nAsset);
                 utxo.pushKV("asset_value", ValueFromAmount(coin.out.assetInfo.nValue));
@@ -975,7 +975,7 @@ static bool rest_blockhash_by_height(const std::any& context, HTTPRequest* req,
     std::string height_str;
     const RESTResponseFormat rf = ParseDataFormat(height_str, str_uri_part);
 
-    int32_t blockheight = -1; // Initialization done only to prevent valgrind false positive, see https://github.com/syscoin/syscoin/pull/18785
+    int32_t blockheight = -1; // Initialization done only to prevent valgrind false positive, see https://github.com/wentuno/wentuno/pull/18785
     if (!ParseInt32(height_str, &blockheight) || blockheight < 0) {
         return RESTERR(req, HTTP_BAD_REQUEST, "Invalid height: " + SanitizeString(height_str));
     }

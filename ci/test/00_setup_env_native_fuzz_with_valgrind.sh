@@ -15,4 +15,4 @@ export RUN_FUNCTIONAL_TESTS=false
 export RUN_FUZZ_TESTS=true
 export FUZZ_TESTS_CONFIG="--valgrind"
 export GOAL="install"
-export SYSCOIN_CONFIG="--enable-fuzz --with-sanitizers=fuzzer CC=clang-18 CXX=clang++-18"
+export wentuno_CONFIG="--enable-fuzz --with-sanitizers=fuzzer CC=clang-18 CXX=clang++-18"

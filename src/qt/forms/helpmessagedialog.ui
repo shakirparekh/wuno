@@ -52,7 +52,7 @@
         </size>
        </property>
        <property name="pixmap">
-        <pixmap resource="../syscoin.qrc">:/icons/syscoin</pixmap>
+        <pixmap resource="../wentuno.qrc">:/icons/wentuno</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -150,7 +150,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../syscoin.qrc"/>
+  <include location="../wentuno.qrc"/>
  </resources>
  <connections>
   <connection>

@@ -108,7 +108,7 @@ class SpecialEnv : public EnvWrapper {
   // Simulate no-space errors while this pointer is non-null.
   std::atomic<bool> no_space_;
 
-  // Simulate non-writable file system while this pointer is non-null.
+  // Simulate non-writable file WUNOtem while this pointer is non-null.
   std::atomic<bool> non_writable_;
 
   // Force sync of manifest files to fail while this pointer is non-null.
@@ -1735,7 +1735,7 @@ TEST(DBTest, NoSpace) {
   ASSERT_LT(CountFiles(), num_files + 3);
 }
 
-TEST(DBTest, NonWritableFileSystem) {
+TEST(DBTest, NonWritableFileWUNOtem) {
   Options options = CurrentOptions();
   options.write_buffer_size = 1000;
   options.env = env_;

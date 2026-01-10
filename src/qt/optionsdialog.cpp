@@ -3,19 +3,19 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <qt/optionsdialog.h>
 #include <qt/forms/ui_optionsdialog.h>
 
-#include <qt/syscoinunits.h>
+#include <qt/wentunounits.h>
 #include <qt/clientmodel.h>
 #include <qt/guiconstants.h>
 #include <qt/guiutil.h>
 #include <qt/optionsmodel.h>
 
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <interfaces/node.h>
 #include <netbase.h>
 #include <txdb.h>
@@ -28,7 +28,7 @@
 #include <QIntValidator>
 #include <QLocale>
 #include <QMessageBox>
-#include <QSystemTrayIcon>
+#include <QWUNOtemTrayIcon>
 #include <QTimer>
 
 OptionsDialog::OptionsDialog(QWidget* parent, bool enableWallet)
@@ -77,8 +77,8 @@ OptionsDialog::OptionsDialog(QWidget* parent, bool enableWallet)
     /* remove Window tab on Mac */
     ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabWindow));
     /* hide launch at startup option on macOS */
-    ui->syscoinAtStartup->setVisible(false);
-    ui->verticalLayout_Main->removeWidget(ui->syscoinAtStartup);
+    ui->wentunoAtStartup->setVisible(false);
+    ui->verticalLayout_Main->removeWidget(ui->wentunoAtStartup);
     ui->verticalLayout_Main->removeItem(ui->horizontalSpacer_0_Main);
 #endif
 
@@ -99,10 +99,10 @@ OptionsDialog::OptionsDialog(QWidget* parent, bool enableWallet)
     /* Display elements init */
     QDir translations(":translations");
 
-    ui->syscoinAtStartup->setToolTip(ui->syscoinAtStartup->toolTip().arg(PACKAGE_NAME));
-    ui->syscoinAtStartup->setText(ui->syscoinAtStartup->text().arg(PACKAGE_NAME));
+    ui->wentunoAtStartup->setToolTip(ui->wentunoAtStartup->toolTip().arg(PACKAGE_NAME));
+    ui->wentunoAtStartup->setText(ui->wentunoAtStartup->text().arg(PACKAGE_NAME));
 
-    ui->openSyscoinConfButton->setToolTip(ui->openSyscoinConfButton->toolTip().arg(PACKAGE_NAME));
+    ui->openwentunoConfButton->setToolTip(ui->openwentunoConfButton->toolTip().arg(PACKAGE_NAME));
 
     ui->lang->setToolTip(ui->lang->toolTip().arg(PACKAGE_NAME));
     ui->lang->addItem(QString("(") + tr("default") + QString(")"), QVariant(""));
@@ -122,7 +122,7 @@ OptionsDialog::OptionsDialog(QWidget* parent, bool enableWallet)
             ui->lang->addItem(locale.nativeLanguageName() + QString(" (") + langStr + QString(")"), QVariant(langStr));
         }
     }
-    ui->unit->setModel(new SyscoinUnits(this));
+    ui->unit->setModel(new wentunoUnits(this));
 
     /* Widget-to-option mapper */
     mapper = new QDataWidgetMapper(this);
@@ -141,7 +141,7 @@ OptionsDialog::OptionsDialog(QWidget* parent, bool enableWallet)
     connect(ui->proxyPort, &QLineEdit::textChanged, this, &OptionsDialog::updateProxyValidationState);
     connect(ui->proxyPortTor, &QLineEdit::textChanged, this, &OptionsDialog::updateProxyValidationState);
 
-    if (!QSystemTrayIcon::isSystemTrayAvailable()) {
+    if (!QWUNOtemTrayIcon::isWUNOtemTrayAvailable()) {
         ui->showTrayIcon->setChecked(false);
         ui->showTrayIcon->setEnabled(false);
         ui->minimizeToTray->setChecked(false);
@@ -154,13 +154,13 @@ OptionsDialog::OptionsDialog(QWidget* parent, bool enableWallet)
     ui->embeddedFont_label_1->setFont(embedded_font);
     ui->embeddedFont_label_9->setFont(embedded_font);
 
-    QFont system_font{GUIUtil::fixedPitchFont(false)};
-    ui->systemFont_radioButton->setText(ui->systemFont_radioButton->text().arg(QFontInfo(system_font).family()));
-    system_font.setWeight(QFont::Bold);
-    ui->systemFont_label_1->setFont(system_font);
-    ui->systemFont_label_9->setFont(system_font);
-    // Checking the embeddedFont_radioButton automatically unchecks the systemFont_radioButton.
-    ui->systemFont_radioButton->setChecked(true);
+    QFont WUNOtem_font{GUIUtil::fixedPitchFont(false)};
+    ui->WUNOtemFont_radioButton->setText(ui->WUNOtemFont_radioButton->text().arg(QFontInfo(WUNOtem_font).family()));
+    WUNOtem_font.setWeight(QFont::Bold);
+    ui->WUNOtemFont_label_1->setFont(WUNOtem_font);
+    ui->WUNOtemFont_label_9->setFont(WUNOtem_font);
+    // Checking the embeddedFont_radioButton automatically unchecks the WUNOtemFont_radioButton.
+    ui->WUNOtemFont_radioButton->setChecked(true);
 
     GUIUtil::handleCloseWindowShortcut(this);
 }
@@ -236,14 +236,14 @@ void OptionsDialog::setCurrentTab(OptionsDialog::Tab tab)
 void OptionsDialog::setMapper()
 {
     /* Main */
-    mapper->addMapping(ui->syscoinAtStartup, OptionsModel::StartAtStartup);
+    mapper->addMapping(ui->wentunoAtStartup, OptionsModel::StartAtStartup);
     mapper->addMapping(ui->threadsScriptVerif, OptionsModel::ThreadsScriptVerif);
     mapper->addMapping(ui->databaseCache, OptionsModel::DatabaseCache);
     mapper->addMapping(ui->prune, OptionsModel::Prune);
     mapper->addMapping(ui->pruneSize, OptionsModel::PruneSize);
 
     /* Wallet */
-    // SYSCOIN
+    // wentuno
     mapper->addMapping(ui->showMasternodesTab, OptionsModel::ShowMasternodesTab);
     mapper->addMapping(ui->spendZeroConfChange, OptionsModel::SpendZeroConfChange);
     mapper->addMapping(ui->coinControlFeatures, OptionsModel::CoinControlFeatures);
@@ -267,7 +267,7 @@ void OptionsDialog::setMapper()
 
     /* Window */
 #ifndef Q_OS_MACOS
-    if (QSystemTrayIcon::isSystemTrayAvailable()) {
+    if (QWUNOtemTrayIcon::isWUNOtemTrayAvailable()) {
         mapper->addMapping(ui->showTrayIcon, OptionsModel::ShowTrayIcon);
         mapper->addMapping(ui->minimizeToTray, OptionsModel::MinimizeToTray);
     }
@@ -314,7 +314,7 @@ void OptionsDialog::on_resetButton_clicked()
     }
 }
 
-void OptionsDialog::on_openSyscoinConfButton_clicked()
+void OptionsDialog::on_openwentunoConfButton_clicked()
 {
     QMessageBox config_msgbox(this);
     config_msgbox.setIcon(QMessageBox::Information);
@@ -334,7 +334,7 @@ void OptionsDialog::on_openSyscoinConfButton_clicked()
     if (config_msgbox.clickedButton() != open_button) return;
 
     /* show an error if there was some problem opening the file */
-    if (!GUIUtil::openSyscoinConf())
+    if (!GUIUtil::openwentunoConf())
         QMessageBox::critical(this, tr("Error"), tr("The configuration file could not be opened."));
 }
 

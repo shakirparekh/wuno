@@ -32,7 +32,7 @@
 #include <string>
 #include <utility>
 #include <vector>
-// SYSCOIN
+// wentuno
 #include <node/context.h>
 #include <util/any.h>
 using interfaces::Chain;
@@ -169,12 +169,12 @@ public:
     {
         return m_wallet->SignMessage(message, pkhash, str_sig);
     }
-    // SYSCOIN
+    // wentuno
     SigningResult signMessage(const std::string& message, const CTxDestination& dest, std::string& str_sig) override
     {
         return m_wallet->SignMessage(message, dest, str_sig);
     }
-    // SYSCOIN
+    // wentuno
     bool isSpendable(const CScript& script) override
     {
         LOCK(m_wallet->cs_wallet);
@@ -286,7 +286,7 @@ public:
         LOCK(m_wallet->cs_wallet);
         return m_wallet->ListLockedCoins(outputs);
     }
-    // SYSCOIN
+    // wentuno
     void listProTxCoins(std::vector<COutPoint>& outputs) override
     {
         LOCK(m_wallet->cs_wallet);
@@ -301,7 +301,7 @@ public:
         LOCK(m_wallet->cs_wallet);
         auto res = CreateTransaction(*m_wallet, recipients, change_pos,
                                      coin_control, sign);
-        // SYSCOIN
+        // wentuno
         if (!res) return util::Error{_("Failed to create transaction: ") + util::ErrorString(res)};
         const auto& txr = *res;
         fee = txr.fee;
@@ -602,7 +602,7 @@ public:
             }, command.argNames, command.unique_id);
             m_rpc_handlers.emplace_back(m_context.chain->handleRpc(m_rpc_commands.back()));
         }
-        // SYSCOIN
+        // wentuno
         for (const CRPCCommand& command : GetNEVMWalletRPCCommands()) {
             m_rpc_commands.emplace_back(command.category, command.name, [this, &command](const node::JSONRPCRequest& request, UniValue& result, bool last_handler) {
                 node::JSONRPCRequest wallet_request = request;

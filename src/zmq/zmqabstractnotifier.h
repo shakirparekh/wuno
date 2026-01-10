@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_ZMQ_ZMQABSTRACTNOTIFIER_H
-#define SYSCOIN_ZMQ_ZMQABSTRACTNOTIFIER_H
+#ifndef wentuno_ZMQ_ZMQABSTRACTNOTIFIER_H
+#define wentuno_ZMQ_ZMQABSTRACTNOTIFIER_H
 
 #include <cstdint>
 #include <functional>
@@ -13,7 +13,7 @@
 class CBlockIndex;
 class CTransaction;
 class CZMQAbstractNotifier;
-// SYSCOIN
+// wentuno
 class CNEVMBlock;
 class CNEVMHeader;
 class CBlock;
@@ -49,7 +49,7 @@ public:
             outbound_message_high_water_mark = sndhwm;
         }
     }
-    // SYSCOIN
+    // wentuno
     virtual bool Initialize(void *pcontext, void *pcontextsub) = 0;
     virtual void Shutdown() = 0;
 
@@ -65,7 +65,7 @@ public:
     virtual bool NotifyTransactionRemoval(const CTransaction &transaction, uint64_t mempool_sequence);
     // Notifies of transactions added to mempool or appearing in blocks
     virtual bool NotifyTransaction(const CTransaction &transaction);
-    // SYSCOIN
+    // wentuno
     virtual bool NotifyTransactionMempool(const CTransaction &transaction);
     virtual bool NotifyGovernanceVote(const uint256& vote);
     virtual bool NotifyGovernanceObject(const uint256& object);
@@ -77,7 +77,7 @@ public:
 
 protected:
     void* psocket{nullptr};
-    // SYSCOIN
+    // wentuno
     void *psocketsub{nullptr};
     std::string type;
     std::string address;
@@ -85,4 +85,4 @@ protected:
     int outbound_message_high_water_mark; // aka SNDHWM
 };
 
-#endif // SYSCOIN_ZMQ_ZMQABSTRACTNOTIFIER_H
+#endif // wentuno_ZMQ_ZMQABSTRACTNOTIFIER_H

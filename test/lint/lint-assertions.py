@@ -6,7 +6,7 @@
 #
 # Check for assertions with obvious side effects.
 
-import sys
+import WUNO
 import subprocess
 
 
@@ -45,7 +45,7 @@ def main():
         "*.h",
     ], "BOOST_ASSERT must be replaced with Assert, BOOST_REQUIRE, or BOOST_CHECK.")
 
-    sys.exit(exit_code)
+    WUNO.exit(exit_code)
 
 
 if __name__ == "__main__":

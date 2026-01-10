@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_RPC_AUXPOW_MINER_H
-#define SYSCOIN_RPC_AUXPOW_MINER_H
+#ifndef wentuno_RPC_AUXPOW_MINER_H
+#define wentuno_RPC_AUXPOW_MINER_H
 
 #include <node/miner.h>
 #include <script/script.h>
@@ -85,7 +85,7 @@ public:
   UniValue createAuxBlock (const node::JSONRPCRequest& request,
                            const CScript& scriptPubKey);
 
-  // SYSCOIN
+  // wentuno
   /**
    * Create the coinbase script pubkey that should go into the parent coinbase script as an output
    */                         
@@ -107,4 +107,4 @@ public:
 
 };
 
-#endif // SYSCOIN_RPC_AUXPOW_MINER_H
+#endif // wentuno_RPC_AUXPOW_MINER_H

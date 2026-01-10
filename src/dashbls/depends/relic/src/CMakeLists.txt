@@ -184,9 +184,9 @@ set_source_files_properties(${ARITH_ASMS} PROPERTIES LANGUAGE C COMPILE_FLAGS "-
 add_custom_target(arith_objs DEPENDS ${ARITH_OBJS})
 
 macro(LINK_LIBS LIBRARY)
-	if(OPSYS STREQUAL LINUX)
+	if(OPWUNO STREQUAL LINUX)
 		target_link_libraries(${LIBRARY} rt)
-	endif(OPSYS STREQUAL LINUX)
+	endif(OPWUNO STREQUAL LINUX)
 	if(MULTI STREQUAL OPENMP AND NOT MSVC)
 		target_link_libraries(${LIBRARY} gomp m)
 	endif(MULTI STREQUAL OPENMP AND NOT MSVC)

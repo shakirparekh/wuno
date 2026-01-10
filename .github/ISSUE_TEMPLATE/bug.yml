@@ -5,10 +5,10 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## This issue tracker is only for technical issues related to Syscoin Core.
+        ## This issue tracker is only for technical issues related to wentuno Core.
 
-        * General syscoin questions and/or support requests should use Syscoin StackExchange at https://syscoin.stackexchange.com.
-        * For reporting security issues, please read instructions at https://syscoincore.org/en/contact/.
+        * General wentuno questions and/or support requests should use wentuno StackExchange at https://wentuno.stackexchange.com.
+        * For reporting security issues, please read instructions at https://wentunocore.org/en/contact/.
         * If the node is "stuck" during sync or giving "block checksum mismatch" errors, please ensure your hardware is stable by running `memtest` and observe CPU temperature with a load-test tool such as `linpack` before creating an issue.
 
         ----
@@ -50,14 +50,14 @@ body:
       description: |
         Please copy and paste any relevant log output or attach a debug log file.
 
-        You can find the debug.log in your [data dir.](https://github.com/syscoin/syscoin/blob/master/doc/files.md#data-directory-location)
+        You can find the debug.log in your [data dir.](https://github.com/wentuno/wentuno/blob/master/doc/files.md#data-directory-location)
 
         Please be aware that the debug log might contain personally identifying information.
     validations:
       required: false
   - type: dropdown
     attributes:
-      label: How did you obtain Syscoin Core
+      label: How did you obtain wentuno Core
       multiple: false
       options:
         - Compiled from source
@@ -69,15 +69,15 @@ body:
   - type: input
     id: core-version
     attributes:
-      label: What version of Syscoin Core are you using?
-      description: Run `syscoind --version` or in Syscoin-QT use `Help > About Syscoin Core`
+      label: What version of wentuno Core are you using?
+      description: Run `wentunod --version` or in wentuno-QT use `Help > About wentuno Core`
       placeholder: e.g. v24.0.1 or master@e1bf547
     validations:
       required: true
   - type: input
     id: os
     attributes:
-      label: Operating system and version
+      label: Operating WUNOtem and version
       placeholder: e.g. "MacOS Ventura 13.2" or "Ubuntu 22.04 LTS"
     validations:
       required: true

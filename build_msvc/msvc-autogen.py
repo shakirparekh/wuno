@@ -12,15 +12,15 @@ SOURCE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src'
 DEFAULT_PLATFORM_TOOLSET = R'v143'
 
 libs = [
-    'libsyscoin_cli',
-    'libsyscoin_common',
-    'libsyscoin_crypto',
-    'libsyscoin_node',
-    'libsyscoin_util',
-    'libsyscoin_wallet_tool',
-    'libsyscoin_wallet',
-    'libsyscoin_zmq',
-    'bench_syscoin',
+    'libwentuno_cli',
+    'libwentuno_common',
+    'libwentuno_crypto',
+    'libwentuno_node',
+    'libwentuno_util',
+    'libwentuno_wallet_tool',
+    'libwentuno_wallet',
+    'libwentuno_zmq',
+    'bench_wentuno',
     'libtest_util',
 ]
 
@@ -70,9 +70,9 @@ def parse_config_into_btc_config():
     config_dict = dict(item.split(", ") for item in config_info)
     config_dict["PACKAGE_VERSION"] = f"\"{config_dict['CLIENT_VERSION_MAJOR']}.{config_dict['CLIENT_VERSION_MINOR']}.{config_dict['CLIENT_VERSION_BUILD']}\""
     version = config_dict["PACKAGE_VERSION"].strip('"')
-    config_dict["PACKAGE_STRING"] = f"\"Syscoin Core {version}\""
+    config_dict["PACKAGE_STRING"] = f"\"wentuno Core {version}\""
 
-    with open(os.path.join(SOURCE_DIR,'../build_msvc/syscoin_config.h.in'), "r", encoding="utf8") as template_file:
+    with open(os.path.join(SOURCE_DIR,'../build_msvc/wentuno_config.h.in'), "r", encoding="utf8") as template_file:
         template = template_file.readlines()
 
     for index, line in enumerate(template):
@@ -82,7 +82,7 @@ def parse_config_into_btc_config():
         if header in config_dict:
             template[index] = line.replace("$", f"{config_dict[header]}")
 
-    with open(os.path.join(SOURCE_DIR,'../build_msvc/syscoin_config.h'), "w", encoding="utf8") as btc_config:
+    with open(os.path.join(SOURCE_DIR,'../build_msvc/wentuno_config.h'), "w", encoding="utf8") as btc_config:
         btc_config.writelines(template)
 
 def set_properties(vcxproj_filename, placeholder, content):
@@ -91,7 +91,7 @@ def set_properties(vcxproj_filename, placeholder, content):
             vcxproj_file.write(vcxproj_in_file.read().replace(placeholder, content))
 
 def main():
-    parser = argparse.ArgumentParser(description='Syscoin-core msbuild configuration initialiser.')
+    parser = argparse.ArgumentParser(description='wentuno-core msbuild configuration initialiser.')
     parser.add_argument('-toolset', nargs='?', default=DEFAULT_PLATFORM_TOOLSET,
         help='Optionally sets the msbuild platform toolset, e.g. v143 for Visual Studio 2022.'
          ' default is %s.'%DEFAULT_PLATFORM_TOOLSET)
@@ -110,7 +110,7 @@ def main():
             content += '    </ClCompile>\n'
         set_properties(vcxproj_filename, '@SOURCE_FILES@\n', content)
     parse_config_into_btc_config()
-    copyfile(os.path.join(SOURCE_DIR,'../build_msvc/syscoin_config.h'), os.path.join(SOURCE_DIR, 'config/syscoin-config.h'))
+    copyfile(os.path.join(SOURCE_DIR,'../build_msvc/wentuno_config.h'), os.path.join(SOURCE_DIR, 'config/wentuno-config.h'))
 
 if __name__ == '__main__':
     main()

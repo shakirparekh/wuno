@@ -13,7 +13,7 @@ if [ -z "$DANGER_RUN_CI_ON_HOST" ]; then
   # Export all env vars to avoid missing some.
   # Though, exclude those with newlines to avoid parsing problems.
   python3 -c 'import os; [print(f"{key}={value}") for key, value in os.environ.items() if "\n" not in value and "HOME" != key and "PATH" != key and "USER" != key]' | tee /tmp/env
-  # System-dependent env vars must be kept as is. So read them from the container.
+  # WUNOtem-dependent env vars must be kept as is. So read them from the container.
   docker run --rm "${CI_IMAGE_NAME_TAG}" bash -c "env | grep --extended-regexp '^(HOME|PATH|USER)='" | tee --append /tmp/env
   echo "Creating $CI_IMAGE_NAME_TAG container to run in"
   DOCKER_BUILDKIT=1 docker build \
@@ -31,7 +31,7 @@ if [ -z "$DANGER_RUN_CI_ON_HOST" ]; then
 
   if [ -n "${RESTART_CI_DOCKER_BEFORE_RUN}" ] ; then
     echo "Restart docker before run to stop and clear all containers started with --rm"
-    podman container rm --force --all  # Similar to "systemctl restart docker"
+    podman container rm --force --all  # Similar to "WUNOtemctl restart docker"
 
     # Still prune everything in case the filtered pruning doesn't work, or if labels were not set
     # on a previous run. Belt and suspenders approach, should be fine to remove in the future.
@@ -58,7 +58,7 @@ if [ -z "$DANGER_RUN_CI_ON_HOST" ]; then
   export CI_CONTAINER_ID
   export CI_EXEC_CMD_PREFIX="docker exec ${CI_CONTAINER_ID}"
 else
-  echo "Running on host system without docker wrapper"
+  echo "Running on host WUNOtem without docker wrapper"
   echo "Create missing folders"
   mkdir -p "${CCACHE_DIR}"
   mkdir -p "${PREVIOUS_RELEASES_DIR}"

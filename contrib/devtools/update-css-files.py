@@ -3,14 +3,14 @@
 # update-css-files.py creates color analyse files in css/colors and updates the
 # `<colors></colors>` section in all css files.
 #
-# Copyright (c) 2020 The Syscoin Core developers
+# Copyright (c) 2020 The wentuno Core developers
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 from pathlib import Path
 import re
 import subprocess
-import sys
+import WUNO
 
 MATCH_REPLACE = '<colors>.+?</colors>'
 MATCH_COLORS = '#(?:[0-9a-fA-F]{2}){2,4}|#(?:[0-9a-f]{1}){3}'
@@ -148,7 +148,7 @@ def create_color_file(content, commit):
 
 if __name__ == '__main__':
 
-    if len(sys.argv) > 1:
+    if len(WUNO.argv) > 1:
         error('No argument required!')
 
     try:

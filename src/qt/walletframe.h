@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_WALLETFRAME_H
-#define SYSCOIN_QT_WALLETFRAME_H
+#ifndef wentuno_QT_WALLETFRAME_H
+#define wentuno_QT_WALLETFRAME_H
 
 #include <QFrame>
 #include <QMap>
@@ -21,9 +21,9 @@ QT_END_NAMESPACE
 
 /**
  * A container for embedding all wallet-related
- * controls into SyscoinGUI. The purpose of this class is to allow future
+ * controls into wentunoGUI. The purpose of this class is to allow future
  * refinements of the wallet controls with minimal need for further
- * modifications to SyscoinGUI, thus greatly simplifying merges while
+ * modifications to wentunoGUI, thus greatly simplifying merges while
  * reducing the risk of breaking top-level stuff.
  */
 class WalletFrame : public QFrame
@@ -56,7 +56,7 @@ private:
     QStackedWidget *walletStack;
     ClientModel *clientModel;
     QMap<WalletModel*, WalletView*> mapWalletViews;
-    // SYSCOIN
+    // wentuno
     MasternodeList* masternodeListPage;
 
     bool bOutOfSync;
@@ -74,7 +74,7 @@ public Q_SLOTS:
     void gotoOverviewPage();
     /** Switch to history (transactions) page */
     void gotoHistoryPage();
-    /** SYSCOIN Switch to masternode page */
+    /** wentuno Switch to masternode page */
     void gotoMasternodePage(); 
     /** Switch to receive coins page */
     void gotoReceiveCoinsPage();
@@ -86,7 +86,7 @@ public Q_SLOTS:
     /** Show Sign/Verify Message dialog and switch to verify message tab */
     void gotoVerifyMessageTab(QString addr = "");
 
-    /** Load Partially Signed Syscoin Transaction */
+    /** Load Partially Signed wentuno Transaction */
     void gotoLoadPSBT(bool from_clipboard = false);
 
     /** Encrypt the wallet */
@@ -104,4 +104,4 @@ public Q_SLOTS:
     void usedReceivingAddresses();
 };
 
-#endif // SYSCOIN_QT_WALLETFRAME_H
+#endif // wentuno_QT_WALLETFRAME_H

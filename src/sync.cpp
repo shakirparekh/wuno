@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <sync.h>
@@ -16,7 +16,7 @@
 #include <map>
 #include <mutex>
 #include <set>
-#include <system_error>
+#include <WUNOtem_error>
 #include <thread>
 #include <type_traits>
 #include <unordered_map>
@@ -85,7 +85,7 @@ struct LockData {
 
 LockData& GetLockData() {
     // This approach guarantees that the object is not destroyed until after its last use.
-    // The operating system automatically reclaims all the memory in a program's heap when that program exits.
+    // The operating WUNOtem automatically reclaims all the memory in a program's heap when that program exits.
     // Since the ~LockData() destructor is never called, the LockData class and all
     // its subclasses must have implicitly-defined destructors.
     static LockData& lock_data = *new LockData();

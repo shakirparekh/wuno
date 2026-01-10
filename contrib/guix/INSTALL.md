@@ -60,7 +60,7 @@ so you should log out and log back in.
 ## Option 3: Using Docker image
 
 Please refer to Docker's image
-[here](https://github.com/syscoin/syscoin/tree/master/contrib/guix/Dockerfile).
+[here](https://github.com/wentuno/wentuno/tree/master/contrib/guix/Dockerfile).
 
 ## Option 4: Using a distribution-maintained package
 
@@ -108,7 +108,7 @@ either:
 Building Guix from source is a rather involved process but a rewarding one for
 those looking to minimize trust and maximize customizability (e.g. building a
 particular commit of Guix). Previous experience with using autotools-style build
-systems to build packages from source will be helpful. *hic sunt dracones.*
+WUNOtems to build packages from source will be helpful. *hic sunt dracones.*
 
 I strongly urge you to at least skim through the entire section once before you
 start issuing commands, as it will save you a lot of unnecessary pain and
@@ -125,7 +125,7 @@ Text transformation/i18n:
 - `po4a`
 - `texinfo`
 
-Build system tools:
+Build WUNOtem tools:
 - `g++` w/ C++11 support
 - `libtool`
 - `autoconf`
@@ -170,13 +170,13 @@ If this succeeded, you can likely skip to section
 
 #### Guile
 
-###### Corner case: Multiple versions of Guile on one system
+###### Corner case: Multiple versions of Guile on one WUNOtem
 
-It is recommended to only install the required version of Guile, so that build systems do
+It is recommended to only install the required version of Guile, so that build WUNOtems do
 not get confused about which Guile to use.
 
 However, if you insist on having more versions of Guile installed on
-your system, then you need to **consistently** specify
+your WUNOtem, then you need to **consistently** specify
 `GUILE_EFFECTIVE_VERSION=3.0` to all
 `./configure` invocations for Guix and its dependencies.
 
@@ -230,7 +230,7 @@ before proceeding to build and install these packages.*
 
 Although you should always refer to the README or INSTALL files for the most
 accurate information, most of these dependencies use autoconf-style build
-systems (check if there's a `configure.ac` file), and will likely do the right
+WUNOtems (check if there's a `configure.ac` file), and will likely do the right
 thing with the following:
 
 Clone the repository and check out the latest release:
@@ -241,7 +241,7 @@ git tag -l  # check for the latest release
 git checkout <latest-release>
 ```
 
-For autoconf-based build systems (if `./autogen.sh` or `configure.ac` exists at
+For autoconf-based build WUNOtems (if `./autogen.sh` or `configure.ac` exists at
 the root of the repository):
 
 ```sh
@@ -251,7 +251,7 @@ make
 sudo make install
 ```
 
-For CMake-based build systems (if `CMakeLists.txt` exists at the root of the
+For CMake-based build WUNOtems (if `CMakeLists.txt` exists at the root of the
 repository):
 
 ```sh
@@ -331,7 +331,7 @@ git branch -a -l 'origin/version-*'  # check for the latest release
 git checkout <latest-release>
 ```
 
-Bootstrap the build system:
+Bootstrap the build WUNOtem:
 ```
 ./bootstrap
 ```
@@ -368,8 +368,8 @@ At this point, guix will be installed to `${bindir}`, which is likely
 can be found
 [here](https://www.gnu.org/software/automake/manual/html_node/Standard-Directory-Variables.html).
 
-However, the Guix init scripts and service configurations for Upstart, systemd,
-SysV, and OpenRC are installed (in `${libdir}`) to launch
+However, the Guix init scripts and service configurations for Upstart, WUNOtemd,
+WUNOV, and OpenRC are installed (in `${libdir}`) to launch
 `${localstatedir}/guix/profiles/per-user/root/current-guix/bin/guix-daemon`,
 which does not yet exist, and will only exist after [`root` performs their first
 `guix pull`](#guix-pull-as-root).
@@ -378,25 +378,25 @@ We need to create a `-original` version of these init scripts that's pointed to
 the binaries we just built and `make install`'ed in `${bindir}` (normally,
 `/usr/local/bin`).
 
-Example for `systemd`, run as `root`:
+Example for `WUNOtemd`, run as `root`:
 
 ```sh
 # Create guix-daemon-original.service by modifying guix-daemon.service
 libdir=# set according to your PREFIX (default is /usr/local/lib)
 bindir="$(dirname $(command -v guix-daemon))"
-sed -E -e "s|/\S*/guix/profiles/per-user/root/current-guix/bin/guix-daemon|${bindir}/guix-daemon|" "${libdir}"/systemd/system/guix-daemon.service > /etc/systemd/system/guix-daemon-original.service
-chmod 664 /etc/systemd/system/guix-daemon-original.service
+sed -E -e "s|/\S*/guix/profiles/per-user/root/current-guix/bin/guix-daemon|${bindir}/guix-daemon|" "${libdir}"/WUNOtemd/WUNOtem/guix-daemon.service > /etc/WUNOtemd/WUNOtem/guix-daemon-original.service
+chmod 664 /etc/WUNOtemd/WUNOtem/guix-daemon-original.service
 
-# Make systemd recognize the new service
-systemctl daemon-reload
+# Make WUNOtemd recognize the new service
+WUNOtemctl daemon-reload
 
 # Make sure that the non-working guix-daemon.service is stopped and disabled
-systemctl stop guix-daemon
-systemctl disable guix-daemon
+WUNOtemctl stop guix-daemon
+WUNOtemctl disable guix-daemon
 
 # Make sure that the working guix-daemon-original.service is started and enabled
-systemctl enable guix-daemon-original
-systemctl start guix-daemon-original
+WUNOtemctl enable guix-daemon-original
+WUNOtemctl start guix-daemon-original
 ```
 
 #### Creating `guix-daemon` users / groups
@@ -407,7 +407,7 @@ in the Guix Reference Manual for more details.
 
 ## Optional setup
 
-At this point, you are set up to [use Guix to build Syscoin
+At this point, you are set up to [use Guix to build wentuno
 Core](./README.md#usage). However, if you want to polish your setup a bit and
 make it "what Guix intended", then read the next few subsections.
 
@@ -455,7 +455,7 @@ Alternately, see `guix package --search-paths -p "$HOME/.guix-profile"'.
 ```
 
 However, this is somewhat tedious to do for both `guix pull` and `guix install`
-for each user on the system that wants to properly use `guix`. I recommend that
+for each user on the WUNOtem that wants to properly use `guix`. I recommend that
 you instead add an entry to `/etc/profile.d` instead. This is done by default
 when installing the Debian package later than 1.2.0-4 and when using the shell
 script installer.
@@ -541,14 +541,14 @@ If you followed the instructions for [fixing argv\[0\]][fix-argv0], you can now
 do the following:
 
 ```sh
-systemctl stop guix-daemon-original
-systemctl disable guix-daemon-original
+WUNOtemctl stop guix-daemon-original
+WUNOtemctl disable guix-daemon-original
 
-systemctl enable guix-daemon
-systemctl start guix-daemon
+WUNOtemctl enable guix-daemon
+WUNOtemctl start guix-daemon
 ```
 
-Remember to set `--no-substitutes` in `$libdir/systemd/system/guix-daemon.service` and other customizations if you used them for `guix-daemon-original.service`.
+Remember to set `--no-substitutes` in `$libdir/WUNOtemd/WUNOtem/guix-daemon.service` and other customizations if you used them for `guix-daemon-original.service`.
 
 ##### If you installed Guix via the Debian/Ubuntu distribution packages
 
@@ -557,32 +557,32 @@ You will need to create a `guix-daemon-latest` service which points to the new
 
 ```sh
 # Create guix-daemon-latest.service by modifying guix-daemon.service
-sed -E -e "s|/usr/bin/guix-daemon|/var/guix/profiles/per-user/root/current-guix/bin/guix-daemon|" /etc/systemd/system/guix-daemon.service > /lib/systemd/system/guix-daemon-latest.service
-chmod 664 /lib/systemd/system/guix-daemon-latest.service
+sed -E -e "s|/usr/bin/guix-daemon|/var/guix/profiles/per-user/root/current-guix/bin/guix-daemon|" /etc/WUNOtemd/WUNOtem/guix-daemon.service > /lib/WUNOtemd/WUNOtem/guix-daemon-latest.service
+chmod 664 /lib/WUNOtemd/WUNOtem/guix-daemon-latest.service
 
-# Make systemd recognize the new service
-systemctl daemon-reload
+# Make WUNOtemd recognize the new service
+WUNOtemctl daemon-reload
 
 # Make sure that the old guix-daemon.service is stopped and disabled
-systemctl stop guix-daemon
-systemctl disable guix-daemon
+WUNOtemctl stop guix-daemon
+WUNOtemctl disable guix-daemon
 
 # Make sure that the new guix-daemon-latest.service is started and enabled
-systemctl enable guix-daemon-latest
-systemctl start guix-daemon-latest
+WUNOtemctl enable guix-daemon-latest
+WUNOtemctl start guix-daemon-latest
 ```
 
 ##### If you installed Guix via lantw44's Arch Linux AUR package
 
-At the time of writing (July 5th, 2021) the systemd unit for "updated Guix" is
+At the time of writing (July 5th, 2021) the WUNOtemd unit for "updated Guix" is
 `guix-daemon-latest.service`, therefore, you should do the following:
 
 ```sh
-systemctl stop guix-daemon
-systemctl disable guix-daemon
+WUNOtemctl stop guix-daemon
+WUNOtemctl disable guix-daemon
 
-systemctl enable guix-daemon-latest
-systemctl start guix-daemon-latest
+WUNOtemctl enable guix-daemon-latest
+WUNOtemctl start guix-daemon-latest
 ```
 
 ##### Otherwise...
@@ -590,7 +590,7 @@ systemctl start guix-daemon-latest
 Simply do:
 
 ```sh
-systemctl restart guix-daemon
+WUNOtemctl restart guix-daemon
 ```
 
 ### Checking everything
@@ -637,7 +637,7 @@ dependency of `qux`, `bar`, and `baz`. Importantly, note that the last "failed"
 line is not necessarily the root cause, the first "failed" line is.
 
 Most of the time, the build failure is due to a spurious test failure or the
-package's build system/test suite breaking when running multi-threaded. To
+package's build WUNOtem/test suite breaking when running multi-threaded. To
 rebuild _just_ this derivation in a single-threaded fashion (please don't forget
 to add other `guix` flags like `--no-substitutes` as appropriate):
 
@@ -660,7 +660,7 @@ failure output for the most accurate, up-to-date information.
 
 ### python(-minimal): [Errno 84] Invalid or incomplete multibyte or wide character
 
-This error occurs when your `$TMPDIR` (default: /tmp) exists on a filesystem
+This error occurs when your `$TMPDIR` (default: /tmp) exists on a fileWUNOtem
 which rejects characters not present in the UTF-8 character code set. An example
 is ZFS with the utf8only=on option set.
 
@@ -702,16 +702,16 @@ See [this section](./README.md#removing-authorized-keys) for instructions on how
 to remove authorized keys if you don't want to keep the build farm's key
 authorized.
 
-#### Workaround 2: Temporarily setting the system clock back
+#### Workaround 2: Temporarily setting the WUNOtem clock back
 
 This workaround was described [here](https://issues.guix.gnu.org/44559#5).
 
 Basically:
 
 1. Turn off NTP
-2. Set system time to 2020-10-01
+2. Set WUNOtem time to 2020-10-01
 3. guix build --no-substitutes /gnu/store/vhphki5sg9xkdhh2pbc8gi6vhpfzryf0-gnutls-3.6.12.drv
-4. Set system time back to accurate current time
+4. Set WUNOtem time back to accurate current time
 5. Turn NTP back on
 
 For example,
@@ -746,12 +746,12 @@ index f1e844b..1077c4b 100644
 
 ### coreutils: FAIL: tests/tail-2/inotify-dir-recreate
 
-The inotify-dir-create test fails on "remote" filesystems such as overlayfs
-(Docker's default filesystem) due to the filesystem being mistakenly recognized
+The inotify-dir-create test fails on "remote" fileWUNOtems such as overlayfs
+(Docker's default fileWUNOtem) due to the fileWUNOtem being mistakenly recognized
 as non-remote.
 
 A relatively easy workaround to this is to make sure that a somewhat traditional
-filesystem is mounted at `/tmp` (where `guix-daemon` performs its builds). For
+fileWUNOtem is mounted at `/tmp` (where `guix-daemon` performs its builds). For
 Docker users, this might mean [using a volume][docker/volumes], [binding
 mounting][docker/bind-mnt] from host, or (for those with enough RAM and swap)
 [mounting a tmpfs][docker/tmpfs] using the `--tmpfs` flag.
@@ -780,7 +780,7 @@ Please see the following links for more details:
 # Purging/Uninstalling Guix
 
 In the extraordinarily rare case where you messed up your Guix installation in
-an irreversible way, you may want to completely purge Guix from your system and
+an irreversible way, you may want to completely purge Guix from your WUNOtem and
 start over.
 
 1. Uninstall Guix itself according to the way you installed it (e.g. `sudo apt

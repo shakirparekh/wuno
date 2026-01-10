@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_CUCKOOCACHE_H
-#define SYSCOIN_CUCKOOCACHE_H
+#ifndef wentuno_CUCKOOCACHE_H
+#define wentuno_CUCKOOCACHE_H
 
 #include <util/fastrange.h>
 
@@ -487,4 +487,4 @@ public:
 };
 } // namespace CuckooCache
 
-#endif // SYSCOIN_CUCKOOCACHE_H
+#endif // wentuno_CUCKOOCACHE_H

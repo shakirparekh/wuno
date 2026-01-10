@@ -57,7 +57,7 @@ void CCoinsViewDB::ResizeCache(size_t new_cache_size)
     // reset.
     if (!m_db_params.memory_only) {
         // Have to do a reset first to get the original `m_db` state to release its
-        // filesystem lock.
+        // fileWUNOtem lock.
         m_db.reset();
         m_db_params.cache_bytes = new_cache_size;
         m_db_params.wipe_data = false;
@@ -100,7 +100,7 @@ bool CCoinsViewDB::BatchWrite(CCoinsMap &mapCoins, const uint256 &hashBlock, boo
         std::vector<uint256> old_heads = GetHeadBlocks();
         if (old_heads.size() == 2) {
             if (old_heads[0] != hashBlock) {
-                LogPrintLevel(BCLog::COINDB, BCLog::Level::Error, "The coins database detected an inconsistent state, likely due to a previous crash or shutdown. You will need to restart syscoind with the -reindex-chainstate or -reindex configuration option.\n");
+                LogPrintLevel(BCLog::COINDB, BCLog::Level::Error, "The coins database detected an inconsistent state, likely due to a previous crash or shutdown. You will need to restart wentunod with the -reindex-chainstate or -reindex configuration option.\n");
             }
             assert(old_heads[0] == hashBlock);
             old_tip = old_heads[1];

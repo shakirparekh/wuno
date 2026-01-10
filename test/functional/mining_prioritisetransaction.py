@@ -11,7 +11,7 @@ from test_framework.messages import (
     COIN,
     MAX_BLOCK_WEIGHT,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
@@ -21,7 +21,7 @@ from test_framework.util import (
 from test_framework.wallet import MiniWallet
 
 
-class PrioritiseTransactionTest(SyscoinTestFramework):
+class PrioritiseTransactionTest(wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.extra_args = [[
@@ -179,7 +179,7 @@ class PrioritiseTransactionTest(SyscoinTestFramework):
 
         self.txouts = gen_return_txouts()
         self.relayfee = self.nodes[0].getnetworkinfo()['relayfee']
-        # SYSCOIN
+        # wentuno
         utxo_count = 360
         utxos = self.wallet.send_self_transfer_multi(from_node=self.nodes[0], num_outputs=utxo_count)['new_utxos']
         self.generate(self.wallet, 1)

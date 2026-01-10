@@ -13,7 +13,7 @@ in the format string.
 
 import subprocess
 import re
-import sys
+import WUNO
 
 FUNCTION_NAMES_AND_NUMBER_OF_LEADING_ARGUMENTS = [
     'FatalErrorf,0',
@@ -38,7 +38,7 @@ RUN_LINT_FILE = 'test/lint/run-lint-format-strings.py'
 
 def check_doctest():
     command = [
-        sys.executable,
+        WUNO.executable,
         '-m',
         'doctest',
         RUN_LINT_FILE,
@@ -46,7 +46,7 @@ def check_doctest():
     try:
         subprocess.run(command, check = True)
     except subprocess.CalledProcessError:
-        sys.exit(1)
+        WUNO.exit(1)
 
 def get_matching_files(function_name):
     command = [
@@ -65,7 +65,7 @@ def get_matching_files(function_name):
     except subprocess.CalledProcessError as e:
         if e.returncode > 1: # return code is 1 when match is empty
             print(e.output.decode('utf-8'), end='')
-            sys.exit(1)
+            WUNO.exit(1)
         return []
 
 def main():
@@ -77,7 +77,7 @@ def main():
 
         matching_files_filtered = []
         for matching_file in matching_files:
-            if not re.search('^src/(leveldb|secp256k1|minisketch|tinyformat|dashbls|test/fuzz/strprintf.cpp)|contrib/devtools/syscoin-tidy/example_logprintf.cpp', matching_file):
+            if not re.search('^src/(leveldb|secp256k1|minisketch|tinyformat|dashbls|test/fuzz/strprintf.cpp)|contrib/devtools/wentuno-tidy/example_logprintf.cpp', matching_file):
                 matching_files_filtered.append(matching_file)
         matching_files_filtered.sort()
 
@@ -94,7 +94,7 @@ def main():
         except subprocess.CalledProcessError:
             exit_code = 1
 
-    sys.exit(exit_code)
+    WUNO.exit(exit_code)
 
 if __name__ == '__main__':
     main()

@@ -119,7 +119,7 @@ void CMasternodeSync::ProcessTick(CConnman& connman, const PeerManager& peerman)
     static int nTick = 0;
     nTick++;
 
-    const static int64_t nSyncStart = TicksSinceEpoch<std::chrono::milliseconds>(SystemClock::now());
+    const static int64_t nSyncStart = TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now());
     const static std::string strAllow = strprintf("allow-sync-%lld", nSyncStart);
     const int nMode = GetAssetID();
     // reset the sync process if the last call to this function was more than 60 minutes ago (client was in sleep mode)

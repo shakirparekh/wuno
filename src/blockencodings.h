@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_BLOCKENCODINGS_H
-#define SYSCOIN_BLOCKENCODINGS_H
+#ifndef wentuno_BLOCKENCODINGS_H
+#define wentuno_BLOCKENCODINGS_H
 
 #include <primitives/block.h>
 namespace node {
@@ -60,7 +60,7 @@ public:
     // A BlockTransactions message
     uint256 blockhash;
     std::vector<CTransactionRef> txn;
-    // SYSCOIN TODO: remove this field it shouldn't be required
+    // wentuno TODO: remove this field it shouldn't be required
     std::vector<unsigned char> vchNEVMBlockData{};
     BlockTransactions() {}
     explicit BlockTransactions(const BlockTransactionsRequest& req) :
@@ -106,13 +106,13 @@ protected:
 
 public:
     static constexpr int SHORTTXIDS_LENGTH = 6;
-    // SYSCOIN
+    // wentuno
     std::vector<unsigned char> vchNEVMBlockData{};
     CBlockHeader header;
 
     // Dummy for deserialization
     CBlockHeaderAndShortTxIDs() {}
-    // SYSCOIN
+    // wentuno
     CBlockHeaderAndShortTxIDs(const CBlock& block, bool fMoveNEVMData = false);
 
     uint64_t GetShortID(const uint256& txhash) const;
@@ -137,7 +137,7 @@ protected:
     const CTxMemPool* pool;
 public:
     CBlockHeader header;
-    // SYSCOIN
+    // wentuno
     std::vector<unsigned char> vchNEVMBlockData{};
 
     // Can be overridden for testing
@@ -152,4 +152,4 @@ public:
     ReadStatus FillBlock(CBlock& block, const std::vector<CTransactionRef>& vtx_missing);
 };
 
-#endif // SYSCOIN_BLOCKENCODINGS_H
+#endif // wentuno_BLOCKENCODINGS_H

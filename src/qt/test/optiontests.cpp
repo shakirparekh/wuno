@@ -4,7 +4,7 @@
 
 #include <common/args.h>
 #include <init.h>
-#include <qt/syscoin.h>
+#include <qt/wentuno.h>
 #include <qt/guiutil.h>
 #include <qt/test/optiontests.h>
 #include <test/util/setup_common.h>

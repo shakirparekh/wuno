@@ -21,8 +21,8 @@
  * Very common stuff (i.e. that every other header needs except vector_ref.h).
  */
 
-#ifndef SYSCOIN_NEVM_COMMON_H
-#define SYSCOIN_NEVM_COMMON_H
+#ifndef wentuno_NEVM_COMMON_H
+#define wentuno_NEVM_COMMON_H
 
 // way too many unsigned to size_t warnings in 32 bit build
 #ifdef _M_IX86
@@ -301,4 +301,4 @@ enum class WithExisting: int
 uint64_t utcTime();
 
 }
-#endif // SYSCOIN_NEVM_COMMON_H
+#endif // wentuno_NEVM_COMMON_H

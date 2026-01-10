@@ -4,9 +4,9 @@ stapled_tmp/
 temp_verify/
 
 # Signed/notarized binaries (should be in releases, not repo)
-syscoin-*-signed.zip
-syscoin-*-notarized.zip
-syscoin-*-unsigned.zip
+wentuno-*-signed.zip
+wentuno-*-notarized.zip
+wentuno-*-unsigned.zip
 
 # Certificate files (sensitive)
 *.p12

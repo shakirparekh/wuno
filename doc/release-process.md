@@ -5,10 +5,10 @@ Release Process
 
 ### Before every release candidate
 
-* Update translations see [translation_process.md](https://github.com/syscoin/syscoin/blob/master/doc/translation_process.md#synchronising-translations).
+* Update translations see [translation_process.md](https://github.com/wentuno/wentuno/blob/master/doc/translation_process.md#synchronising-translations).
 * Update release candidate version in `configure.ac` (`CLIENT_VERSION_RC`).
-* Update manpages (after rebuilding the binaries), see [gen-manpages.py](https://github.com/syscoin/syscoin/blob/master/contrib/devtools/README.md#gen-manpagespy).
-* Update syscoin.conf and commit, see [gen-syscoin-conf.sh](https://github.com/syscoin/syscoin/blob/master/contrib/devtools/README.md#gen-syscoin-confsh).
+* Update manpages (after rebuilding the binaries), see [gen-manpages.py](https://github.com/wentuno/wentuno/blob/master/contrib/devtools/README.md#gen-manpagespy).
+* Update wentuno.conf and commit, see [gen-wentuno-conf.sh](https://github.com/wentuno/wentuno/blob/master/contrib/devtools/README.md#gen-wentuno-confsh).
 
 ### Before every major and minor release
 
@@ -53,35 +53,35 @@ Release Process
 - Clear the release notes and move them to the wiki (see "Write the release notes" below).
 - Translations on Transifex:
     - Pull translations from Transifex into the master branch.
-    - Create [a new resource](https://www.transifex.com/syscoin/syscoin/content/) named after the major version with the slug `qt-translation-<RRR>x`, where `RRR` is the major branch number padded with zeros. Use `src/qt/locale/syscoin_en.xlf` to create it.
+    - Create [a new resource](https://www.transifex.com/wentuno/wentuno/content/) named after the major version with the slug `qt-translation-<RRR>x`, where `RRR` is the major branch number padded with zeros. Use `src/qt/locale/wentuno_en.xlf` to create it.
     - In the project workflow settings, ensure that [Translation Memory Fill-up](https://help.transifex.com/en/articles/6224817-setting-up-translation-memory-fill-up) is enabled and that [Translation Memory Context Matching](https://help.transifex.com/en/articles/6224753-translation-memory-with-context) is disabled.
     - Update the Transifex slug in [`.tx/config`](/.tx/config) to the slug of the resource created in the first step. This identifies which resource the translations will be synchronized from.
-    - Make an announcement that translators can start translating for the new version. You can use one of the [previous announcements](https://www.transifex.com/syscoin/communication/) as a template.
-    - Change the auto-update URL for the resource to `master`, e.g. `https://raw.githubusercontent.com/syscoin/syscoin/master/src/qt/locale/syscoin_en.xlf`. (Do this only after the previous steps, to prevent an auto-update from interfering.)
+    - Make an announcement that translators can start translating for the new version. You can use one of the [previous announcements](https://www.transifex.com/wentuno/communication/) as a template.
+    - Change the auto-update URL for the resource to `master`, e.g. `https://raw.githubusercontent.com/wentuno/wentuno/master/src/qt/locale/wentuno_en.xlf`. (Do this only after the previous steps, to prevent an auto-update from interfering.)
 
 #### After branch-off (on the major release branch)
 
 - Update the versions.
-- Create the draft, named "*version* Release Notes Draft", as a [collaborative wiki](https://github.com/syscoin-core/syscoin-devwiki/wiki/_new).
+- Create the draft, named "*version* Release Notes Draft", as a [collaborative wiki](https://github.com/wentuno-core/wentuno-devwiki/wiki/_new).
 - Clear the release notes: `cp doc/release-notes-empty-template.md doc/release-notes.md`
 - Create a pinned meta-issue for testing the release candidate (see [this issue](https://github.com/bitcoin/bitcoin/issues/27621) for an example) and provide a link to it in the release announcements where useful.
 - Translations on Transifex
-    - Change the auto-update URL for the new major version's resource away from `master` and to the branch, e.g. `https://raw.githubusercontent.com/syscoin/syscoin/<branch>/src/qt/locale/syscoin_en.xlf`. Do not forget this or it will keep tracking the translations on master instead, drifting away from the specific major release.
+    - Change the auto-update URL for the new major version's resource away from `master` and to the branch, e.g. `https://raw.githubusercontent.com/wentuno/wentuno/<branch>/src/qt/locale/wentuno_en.xlf`. Do not forget this or it will keep tracking the translations on master instead, drifting away from the specific major release.
 - Prune inputs from the qa-assets repo (See [pruning
-  inputs](https://github.com/syscoin-core/qa-assets#pruning-inputs)).
+  inputs](https://github.com/wentuno-core/qa-assets#pruning-inputs)).
 
 #### Before final release
 
-- Merge the release notes from [the wiki](https://github.com/syscoin-core/syscoin-devwiki/wiki/) into the branch.
+- Merge the release notes from [the wiki](https://github.com/wentuno-core/wentuno-devwiki/wiki/) into the branch.
 - Ensure the "Needs release note" label is removed from all relevant pull requests and issues.
 
 #### Tagging a release (candidate)
 
-To tag the version (or release candidate) in git, use the `make-tag.py` script from [syscoin-maintainer-tools](https://github.com/syscoin-core/syscoin-maintainer-tools). From the root of the repository run:
+To tag the version (or release candidate) in git, use the `make-tag.py` script from [wentuno-maintainer-tools](https://github.com/wentuno-core/wentuno-maintainer-tools). From the root of the repository run:
 
-    ../syscoin-maintainer-tools/make-tag.py v(new version, e.g. 4.4.0)
+    ../wentuno-maintainer-tools/make-tag.py v(new version, e.g. 4.4.0)
 
-This will perform a few last-minute consistency checks in the build system files, and if they pass, create a signed tag.
+This will perform a few last-minute consistency checks in the build WUNOtem files, and if they pass, create a signed tag.
 
 ## Building
 
@@ -93,13 +93,13 @@ Install Guix using one of the installation methods detailed in
 Check out the source code in the following directory hierarchy.
 
     cd /path/to/your/toplevel/build
-    git clone https://github.com/syscoin-core/guix.sigs.git
-    git clone https://github.com/syscoin-core/syscoin-detached-sigs.git
-    git clone https://github.com/syscoin/syscoin.git
+    git clone https://github.com/wentuno-core/guix.sigs.git
+    git clone https://github.com/wentuno-core/wentuno-detached-sigs.git
+    git clone https://github.com/wentuno/wentuno.git
 
 ### Write the release notes
 
-Open a draft of the release notes for collaborative editing at https://github.com/syscoin-core/syscoin-devwiki/wiki.
+Open a draft of the release notes for collaborative editing at https://github.com/wentuno-core/wentuno-devwiki/wiki.
 
 For the period during which the notes are being edited on the wiki, the version on the branch should be wiped and replaced with a link to the wiki which should be used for all announcements until `-final`.
 
@@ -109,10 +109,10 @@ Generate list of authors:
 
 ### Setup and perform Guix builds
 
-Checkout the Syscoin Core version you'd like to build:
+Checkout the wentuno Core version you'd like to build:
 
 ```sh
-pushd ./syscoin
+pushd ./wentuno
 SIGNER='(your builder key, ie sidhujag, willyk, etc)'
 VERSION='(new version without v-prefix, e.g. 4.4.2)'
 git fetch origin "v${VERSION}"
@@ -152,32 +152,32 @@ git commit -m "Add attestations by ${SIGNER} for ${VERSION} non-codesigned"
 popd
 ```
 
-Then open a Pull Request to the [guix.sigs repository](https://github.com/syscoin-core/guix.sigs).
+Then open a Pull Request to the [guix.sigs repository](https://github.com/wentuno-core/guix.sigs).
 
 ## Codesigning
 
 ### macOS codesigner only: Create detached macOS signatures (assuming [signapple](https://github.com/achow101/signapple/) is installed and up to date with master branch)
 
-    tar xf syscoin-osx-unsigned.tar.gz
+    tar xf wentuno-osx-unsigned.tar.gz
     ./detached-sig-create.sh /path/to/codesign.p12
     Enter the keychain password and authorize the signature
     signature-osx.tar.gz will be created
 
 ### Windows codesigner only: Create detached Windows signatures
 
-    tar xf syscoin-win-unsigned.tar.gz
+    tar xf wentuno-win-unsigned.tar.gz
     ./detached-sig-create.sh -key /path/to/codesign.key
     Enter the passphrase for the key when prompted
     signature-win.tar.gz will be created
 
 ### Windows and macOS codesigners only: test code signatures
 It is advised to test that the code signature attaches properly prior to tagging by performing the `guix-codesign` step.
-However if this is done, once the release has been tagged in the syscoin-detached-sigs repo, the `guix-codesign` step must be performed again in order for the guix attestation to be valid when compared against the attestations of non-codesigner builds.
+However if this is done, once the release has been tagged in the wentuno-detached-sigs repo, the `guix-codesign` step must be performed again in order for the guix attestation to be valid when compared against the attestations of non-codesigner builds.
 
 ### Windows and macOS codesigners only: Commit the detached codesign payloads
 
 ```sh
-pushd ./syscoin-detached-sigs
+pushd ./wentuno-detached-sigs
 # checkout the appropriate branch for this release series
 rm -rf ./*
 tar xf signature-osx.tar.gz
@@ -192,7 +192,7 @@ popd
 ### Non-codesigners: wait for Windows and macOS detached signatures
 
 - Once the Windows and macOS builds each have 3 matching signatures, they will be signed with their respective release keys.
-- Detached signatures will then be committed to the [syscoin-detached-sigs](https://github.com/syscoin-core/syscoin-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
+- Detached signatures will then be committed to the [wentuno-detached-sigs](https://github.com/wentuno-core/wentuno-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
 
 ### Create the codesigned build outputs
 
@@ -211,7 +211,7 @@ git commit -m "Add attestations by ${SIGNER} for ${VERSION} codesigned"
 popd
 ```
 
-Then open a Pull Request to the [guix.sigs repository](https://github.com/syscoin-core/guix.sigs).
+Then open a Pull Request to the [guix.sigs repository](https://github.com/wentuno-core/guix.sigs).
 
 ## After 3 or more people have guix-built and their results match
 
@@ -222,8 +222,8 @@ cat "$VERSION"/*/all.SHA256SUMS.asc > SHA256SUMS.asc
 ```
 
 
-- Upload to the syscoincore.org server (`/var/www/bin/syscoin-core-${VERSION}/`):
-    1. The contents of each `./syscoin/guix-build-${VERSION}/output/${HOST}/` directory, except for
+- Upload to the wentunocore.org server (`/var/www/bin/wentuno-core-${VERSION}/`):
+    1. The contents of each `./wentuno/guix-build-${VERSION}/output/${HOST}/` directory, except for
        `*-debug*` files.
 
        Guix will output all of the results into host subdirectories, but the SHA256SUMS
@@ -235,21 +235,21 @@ cat "$VERSION"/*/all.SHA256SUMS.asc > SHA256SUMS.asc
        for troubleshooting by developers. It is assumed that anyone that is
        interested in debugging can run guix to generate the files for
        themselves. To avoid end-user confusion about which file to pick, as well
-       as save storage space *do not upload these to the syscoincore.org server,
+       as save storage space *do not upload these to the wentunocore.org server,
        nor put them in the torrent*.
 
        ```sh
-       find guix-build-${VERSION}/output/ -maxdepth 2 -type f -not -name "SHA256SUMS.part" -and -not -name "*debug*" -exec scp {} user@syscoincore.org:/var/www/bin/syscoin-core-${VERSION} \;
+       find guix-build-${VERSION}/output/ -maxdepth 2 -type f -not -name "SHA256SUMS.part" -and -not -name "*debug*" -exec scp {} user@wentunocore.org:/var/www/bin/wentuno-core-${VERSION} \;
        ```
 
     2. The `SHA256SUMS` file
 
     3. The `SHA256SUMS.asc` combined signature file you just created
 
-- Create a torrent of the `/var/www/bin/syscoin-core-${VERSION}` directory such
-  that at the top level there is only one file: the `syscoin-core-${VERSION}`
+- Create a torrent of the `/var/www/bin/wentuno-core-${VERSION}` directory such
+  that at the top level there is only one file: the `wentuno-core-${VERSION}`
   directory containing everything else. Name the torrent
-  `syscoin-${VERSION}.torrent` (note that there is no `-core-` in this name).
+  `wentuno-${VERSION}.torrent` (note that there is no `-core-` in this name).
 
   Optionally help seed this torrent. To get the `magnet:` URI use:
 
@@ -258,46 +258,46 @@ cat "$VERSION"/*/all.SHA256SUMS.asc > SHA256SUMS.asc
   ```
 
   Insert the magnet URI into the announcement sent to mailing lists. This permits
-  people without access to `syscoincore.org` to download the binary distribution.
+  people without access to `wentunocore.org` to download the binary distribution.
   Also put it into the `optional_magnetlink:` slot in the YAML file for
-  syscoincore.org.
+  wentunocore.org.
 
 - Update other repositories and websites for new version
 
-  - syscoincore.org blog post
+  - wentunocore.org blog post
 
-  - syscoincore.org maintained versions update:
-    [table](https://github.com/syscoin-core/syscoincore.org/commits/master/_includes/posts/maintenance-table.md)
+  - wentunocore.org maintained versions update:
+    [table](https://github.com/wentuno-core/wentunocore.org/commits/master/_includes/posts/maintenance-table.md)
 
-  - Delete post-EOL [release branches](https://github.com/syscoin/syscoin/branches/all) and create a tag `v${branch_name}-final`.
+  - Delete post-EOL [release branches](https://github.com/wentuno/wentuno/branches/all) and create a tag `v${branch_name}-final`.
 
-  - Delete ["Needs backport" labels](https://github.com/syscoin/syscoin/labels?q=backport) for non-existing branches.
+  - Delete ["Needs backport" labels](https://github.com/wentuno/wentuno/labels?q=backport) for non-existing branches.
 
-  - syscoincore.org RPC documentation update
+  - wentunocore.org RPC documentation update
 
-      - See https://github.com/syscoin-core/syscoincore.org/blob/master/contrib/doc-gen/
+      - See https://github.com/wentuno-core/wentunocore.org/blob/master/contrib/doc-gen/
 
   - Update packaging repo
 
-      - Push the flatpak to flathub, e.g. https://github.com/flathub/org.syscoincore.syscoin-qt/pull/2
+      - Push the flatpak to flathub, e.g. https://github.com/flathub/org.wentunocore.wentuno-qt/pull/2
 
-      - Push the snap, see https://github.com/syscoin-core/packaging/blob/main/snap/local/build.md
+      - Push the snap, see https://github.com/wentuno-core/packaging/blob/main/snap/local/build.md
 
   - This repo
 
       - Archive the release notes for the new version to `doc/release-notes/` (branch `master` and branch of the release)
 
-      - Create a [new GitHub release](https://github.com/syscoin/syscoin/releases/new) with a link to the archived release notes
+      - Create a [new GitHub release](https://github.com/wentuno/wentuno/releases/new) with a link to the archived release notes
 
 - Announce the release:
 
-  - syscoin-dev and syscoin-core-dev mailing list
+  - wentuno-dev and wentuno-core-dev mailing list
 
-  - Syscoin Core announcements list https://syscoincore.org/en/list/announcements/join/
+  - wentuno Core announcements list https://wentunocore.org/en/list/announcements/join/
 
-  - Update title of #syscoin on Freenode IRC
+  - Update title of #wentuno on Freenode IRC
 
-  - Optionally twitter, reddit /r/Syscoin, ... but this will usually sort out itself
+  - Optionally twitter, reddit /r/wentuno, ... but this will usually sort out itself
 
   - Celebrate
 

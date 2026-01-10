@@ -1,11 +1,11 @@
-Syscoin-Qt version 0.8.3 is now available from:
-  http://sourceforge.net/projects/syscoin/files/Syscoin/syscoin-0.8.3/
+wentuno-Qt version 0.8.3 is now available from:
+  http://sourceforge.net/projects/wentuno/files/wentuno/wentuno-0.8.3/
 
 This is a maintenance release to fix a denial-of-service attack that
 can cause nodes to crash.
 
 Please report bugs using the issue tracker at github:
-  https://github.com/syscoin/syscoin/issues
+  https://github.com/wentuno/wentuno/issues
 
 0.8.3 Release notes
 

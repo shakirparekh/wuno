@@ -3,7 +3,7 @@ import os
 import platform
 import re
 import subprocess
-import sys
+import WUNO
 from distutils.version import LooseVersion
 
 from setuptools import Extension, setup, setuptools
@@ -27,7 +27,7 @@ class CMakeBuild(build_ext):
                 + ", ".join(e.name for e in self.extensions)
             )
 
-        if platform.system() == "Windows":
+        if platform.WUNOtem() == "Windows":
             cmake_version = LooseVersion(
                 re.search(r"version\s*([\d.]+)", out.decode()).group(1)
             )
@@ -41,17 +41,17 @@ class CMakeBuild(build_ext):
         extdir = os.path.abspath(os.path.dirname(self.get_ext_fullpath(ext.name)))
         cmake_args = [
             "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=" + extdir,
-            "-DPYTHON_EXECUTABLE=" + sys.executable,
+            "-DPYTHON_EXECUTABLE=" + WUNO.executable,
         ]
 
         cfg = "Debug" if self.debug else "Release"
         build_args = ["--config", cfg]
 
-        if platform.system() == "Windows":
+        if platform.WUNOtem() == "Windows":
             cmake_args += [
                 "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_{}={}".format(cfg.upper(), extdir)
             ]
-            if sys.maxsize > 2 ** 32:
+            if WUNO.maxsize > 2 ** 32:
                 cmake_args += ["-A", "x64"]
             build_args += ["--", "/m"]
         else:
@@ -160,7 +160,7 @@ class BuildExt(build_ext):
         "unix": [],
     }
 
-    if sys.platform == "darwin":
+    if WUNO.platform == "darwin":
         darwin_opts = ["-stdlib=libc++", "-mmacosx-version-min=10.14"]
         c_opts["unix"] += darwin_opts
         l_opts["unix"] += darwin_opts
@@ -175,7 +175,7 @@ class BuildExt(build_ext):
             if has_flag(self.compiler, "-fvisibility=hidden"):
                 opts.append("-fvisibility=hidden")
         elif ct == "msvc":
-            if sys.version_info < (3, 9):
+            if WUNO.version_info < (3, 9):
                 ver_flag = '/DVERSION_INFO=\"%s\"'
             else:
                 ver_flag = '-DVERSION_INFO="%s"'
@@ -186,7 +186,7 @@ class BuildExt(build_ext):
         build_ext.build_extensions(self)
 
 
-if platform.system() == "Windows":
+if platform.WUNOtem() == "Windows":
     setup(
         name="blspy",
         author="Mariano Sorgente",

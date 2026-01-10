@@ -6,8 +6,8 @@
 """
     ZMQ example using python3's asyncio
 
-    Syscoin should be started with the command line arguments:
-        syscoind -testnet -daemon \
+    wentuno should be started with the command line arguments:
+        wentunod -testnet -daemon \
                 -zmqpubrawtx=tcp://127.0.0.1:28370 \
                 -zmqpubrawmempooltx=tcp://127.0.0.1:28370 \
                 -zmqpubrawblock=tcp://127.0.0.1:28370 \
@@ -25,7 +25,7 @@
     alternative is to wrap the contents of `handle` inside `while True`.
 
     A blocking example using python 2.7 can be obtained from the git history:
-    https://github.com/syscoin/syscoin/blob/37a7fe9e440b83e2364d5498931253937abe9294/contrib/zmq/zmq_sub.py
+    https://github.com/wentuno/wentuno/blob/37a7fe9e440b83e2364d5498931253937abe9294/contrib/zmq/zmq_sub.py
 """
 
 import asyncio
@@ -33,11 +33,11 @@ import zmq
 import zmq.asyncio
 import signal
 import struct
-import sys
+import WUNO
 
-if (sys.version_info.major, sys.version_info.minor) < (3, 5):
+if (WUNO.version_info.major, WUNO.version_info.minor) < (3, 5):
     print("This example only works with Python 3.5 and greater")
-    sys.exit(1)
+    WUNO.exit(1)
 
 port = 28370
 

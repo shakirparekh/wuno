@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Mới</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the system clipboard</source>
+        <source>Copy the currently selected address to the WUNOtem clipboard</source>
         <translation type="unfinished">Sao chép địa chỉ được chọn vào bộ nhớ tạm</translation>
     </message>
     <message>
@@ -50,8 +50,8 @@
         <translation type="unfinished">Chọn địa chỉ để gửi coin đến</translation>
     </message>
     <message>
-        <source>These are your Syscoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished">Các địa chỉ này là các địa chỉ Syscoin dùng để thanh toán.Luôn luôn kiểm tra số dư và địa chỉ nhận trước khi gởi chuyển tiền ảo. </translation>
+        <source>These are your wentuno addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation type="unfinished">Các địa chỉ này là các địa chỉ wentuno dùng để thanh toán.Luôn luôn kiểm tra số dư và địa chỉ nhận trước khi gởi chuyển tiền ảo. </translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -128,8 +128,8 @@
         <translation type="unfinished">Xác nhận mã hóa ví</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR SYSCOINS&lt;/b&gt;!</source>
-        <translation type="unfinished">Cảnh báo: Nếu bạn mã hóa ví và mất cụm mật khẩu, bạn sẽ &lt;b&gt;MẤT TẤT CẢ CÁC SYSCOIN&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR wentunoS&lt;/b&gt;!</source>
+        <translation type="unfinished">Cảnh báo: Nếu bạn mã hóa ví và mất cụm mật khẩu, bạn sẽ &lt;b&gt;MẤT TẤT CẢ CÁC wentuno&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -148,8 +148,8 @@
         <translation type="unfinished">Nhập mật khẩu cũ và mật khẩu mới cho ví.</translation>
     </message>
     <message>
-        <source>Remember that encrypting your wallet cannot fully protect your syscoins from being stolen by malware infecting your computer.</source>
-        <translation type="unfinished">Xin lưu ý rằng mã hoá ví của bạn không thể bảo về hoàn toàn Syscoin của bạn khỏi việc bị đánh cắp mới các phần mềm gián điệp nhiễm vào máy tính của bạn.</translation>
+        <source>Remember that encrypting your wallet cannot fully protect your wentunos from being stolen by malware infecting your computer.</source>
+        <translation type="unfinished">Xin lưu ý rằng mã hoá ví của bạn không thể bảo về hoàn toàn wentuno của bạn khỏi việc bị đánh cắp mới các phần mềm gián điệp nhiễm vào máy tính của bạn.</translation>
     </message>
     <message>
         <source>Wallet to be encrypted</source>
@@ -212,7 +212,7 @@
     </message>
 </context>
 <context>
-    <name>SyscoinApplication</name>
+    <name>wentunoApplication</name>
     <message>
         <source>Settings file %1 might be corrupt or invalid.</source>
         <translation type="unfinished">Tệp cài đặt %1 có thể bị hư hại hoặc không hợp lệ.</translation>
@@ -284,7 +284,7 @@
     </message>
     </context>
 <context>
-    <name>SyscoinGUI</name>
+    <name>wentunoGUI</name>
     <message>
         <source>&amp;Overview</source>
         <translation type="unfinished">&amp;Tổng quan</translation>
@@ -351,8 +351,8 @@
         <translation type="unfinished">Proxy là &lt;b&gt; cho phép &lt;/b&gt;: %1</translation>
     </message>
     <message>
-        <source>Send coins to a Syscoin address</source>
-        <translation type="unfinished">Gửi coin đến một địa chỉ Syscoin</translation>
+        <source>Send coins to a wentuno address</source>
+        <translation type="unfinished">Gửi coin đến một địa chỉ wentuno</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -383,16 +383,16 @@
         <translation type="unfinished">&amp;Thay dổi Passphrase…</translation>
     </message>
     <message>
-        <source>Sign messages with your Syscoin addresses to prove you own them</source>
-        <translation type="unfinished">Đăng ký lời nhắn với địa chỉ Syscoin của bạn để chứng minh quyền sở hữu chúng</translation>
+        <source>Sign messages with your wentuno addresses to prove you own them</source>
+        <translation type="unfinished">Đăng ký lời nhắn với địa chỉ wentuno của bạn để chứng minh quyền sở hữu chúng</translation>
     </message>
     <message>
         <source>&amp;Verify message…</source>
         <translation type="unfinished">&amp;Xác minh tin nhắn…</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Syscoin addresses</source>
-        <translation type="unfinished">Xác minh lời nhắn để chắc chắn đã được đăng ký với địa chỉ Syscoin xác định</translation>
+        <source>Verify messages to ensure they were signed with specified wentuno addresses</source>
+        <translation type="unfinished">Xác minh lời nhắn để chắc chắn đã được đăng ký với địa chỉ wentuno xác định</translation>
     </message>
     <message>
         <source>Close Wallet…</source>
@@ -445,16 +445,16 @@
         </translation>
     </message>
     <message>
-        <source>Load Partially Signed Syscoin Transaction</source>
-        <translation type="unfinished">Tải một phần giao dịch Syscoin đã ký</translation>
+        <source>Load Partially Signed wentuno Transaction</source>
+        <translation type="unfinished">Tải một phần giao dịch wentuno đã ký</translation>
     </message>
     <message>
         <source>Load PSBT from &amp;clipboard…</source>
         <translation type="unfinished">Tải PSBT từ &amp;khay nhớ tạm…</translation>
     </message>
     <message>
-        <source>Load Partially Signed Syscoin Transaction from clipboard</source>
-        <translation type="unfinished">Tải một phần giao dịch Syscoin đã ký từ khay nhớ tạm</translation>
+        <source>Load Partially Signed wentuno Transaction from clipboard</source>
+        <translation type="unfinished">Tải một phần giao dịch wentuno đã ký từ khay nhớ tạm</translation>
     </message>
     <message>
         <source>Node window</source>
@@ -473,8 +473,8 @@
         <translation type="unfinished">Các địa chỉ đang &amp;nhận</translation>
     </message>
     <message>
-        <source>Open a syscoin: URI</source>
-        <translation type="unfinished">Mở một syscoin: URI</translation>
+        <source>Open a wentuno: URI</source>
+        <translation type="unfinished">Mở một wentuno: URI</translation>
     </message>
     <message>
         <source>Open Wallet</source>
@@ -503,8 +503,8 @@
         <translation type="unfinished">Đóng tất cả ví</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Syscoin command-line options</source>
-        <translation type="unfinished">Hiển thị %1 tin nhắn hỗ trợ để nhận được danh sách Syscoin command-line khả dụng</translation>
+        <source>Show the %1 help message to get a list with possible wentuno command-line options</source>
+        <translation type="unfinished">Hiển thị %1 tin nhắn hỗ trợ để nhận được danh sách wentuno command-line khả dụng</translation>
     </message>
     <message>
         <source>&amp;Mask values</source>
@@ -545,10 +545,10 @@
         <translation type="unfinished">Trìn&amp;h diễn</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Syscoin network.</source>
+        <source>%n active connection(s) to wentuno network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
-            <numerusform>%nkết nối đang hoạt động với mạng lưới Syscoin</numerusform>
+            <numerusform>%nkết nối đang hoạt động với mạng lưới wentuno</numerusform>
         </translation>
     </message>
     <message>
@@ -832,11 +832,11 @@
 <context>
     <name>OptionsDialog</name>
     <message>
-        <source>Automatically start %1 after logging in to the system.</source>
+        <source>Automatically start %1 after logging in to the WUNOtem.</source>
         <translation type="unfinished">Tự động bắt đầu %1 sau khi đăng nhập vào hệ thống.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on system login</source>
+        <source>&amp;Start %1 on WUNOtem login</source>
         <translation type="unfinished">&amp;Bắt đầu %1 trên đăng nhập hệ thống</translation>
     </message>
     <message>
@@ -877,8 +877,8 @@
         <translation type="unfinished">Kích thước bộ đệm cơ sở dữ liệu tối đa. Bộ nhớ đệm lớn hơn có thể góp phần đồng bộ hóa nhanh hơn, sau đó lợi ích ít rõ rệt hơn đối với hầu hết các trường hợp sử dụng. Giảm kích thước bộ nhớ cache sẽ làm giảm mức sử dụng bộ nhớ. Bộ nhớ mempool không sử dụng được chia sẻ cho bộ nhớ cache này.</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
         <translation type="unfinished">Đặt số lượng chuỗi xác minh tập lệnh. Giá trị âm tương ứng với số lõi bạn muốn để lại miễn phí cho hệ thống.</translation>
     </message>
     <message>
@@ -1100,9 +1100,9 @@
         <translation type="unfinished">Bạn có muốn tạo giao dịch này không?</translation>
     </message>
     <message>
-        <source>Please, review your transaction. You can create and send this transaction or create a Partially Signed Syscoin Transaction (PSBT), which you can save or copy and then sign with, e.g., an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
+        <source>Please, review your transaction. You can create and send this transaction or create a Partially Signed wentuno Transaction (PSBT), which you can save or copy and then sign with, e.g., an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
         <extracomment>Text to inform a user attempting to create a transaction of their current options. At this stage, a user can send their transaction or create a PSBT. This string is displayed when both private keys and PSBT controls are enabled.</extracomment>
-        <translation type="unfinished">Vui lòng xem lại giao dịch của bạn. Bạn có thể tạo và gửi giao dịch này hoặc tạo Giao dịch Syscoin được ký một phần (PSBT), bạn có thể lưu hoặc sao chép và sau đó ký bằng, ví dụ: ví %1 ngoại tuyến hoặc ví phần cứng tương thích với PSBT.</translation>
+        <translation type="unfinished">Vui lòng xem lại giao dịch của bạn. Bạn có thể tạo và gửi giao dịch này hoặc tạo Giao dịch wentuno được ký một phần (PSBT), bạn có thể lưu hoặc sao chép và sau đó ký bằng, ví dụ: ví %1 ngoại tuyến hoặc ví phần cứng tương thích với PSBT.</translation>
     </message>
     <message>
         <source>Unsigned Transaction</source>
@@ -1238,7 +1238,7 @@
     </message>
     </context>
 <context>
-    <name>syscoin-core</name>
+    <name>wentuno-core</name>
     <message>
         <source>Error reading %s! Transaction data may be missing or incorrect. Rescanning wallet.</source>
         <translation type="unfinished">Lỗi khi đọc%s! Dữ liệu giao dịch có thể bị thiếu hoặc không chính xác. Đang quét lại ví.</translation>

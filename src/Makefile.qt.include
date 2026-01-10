@@ -2,15 +2,15 @@
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-bin_PROGRAMS += qt/syscoin-qt
+bin_PROGRAMS += qt/wentuno-qt
 
-if BUILD_SYSCOIN_GUI
-  bin_PROGRAMS += syscoin-gui
+if BUILD_wentuno_GUI
+  bin_PROGRAMS += wentuno-gui
 endif
 
-EXTRA_LIBRARIES += qt/libsyscoinqt.a
+EXTRA_LIBRARIES += qt/libwentunoqt.a
 
-# syscoin qt core #
+# wentuno qt core #
 include Makefile.qt_locale.include
 
 QT_FORMS_UI = \
@@ -41,11 +41,11 @@ QT_MOC_CPP = \
   qt/moc_askpassphrasedialog.cpp \
   qt/moc_createwalletdialog.cpp \
   qt/moc_bantablemodel.cpp \
-  qt/moc_syscoin.cpp \
-  qt/moc_syscoinaddressvalidator.cpp \
-  qt/moc_syscoinamountfield.cpp \
-  qt/moc_syscoingui.cpp \
-  qt/moc_syscoinunits.cpp \
+  qt/moc_wentuno.cpp \
+  qt/moc_wentunoaddressvalidator.cpp \
+  qt/moc_wentunoamountfield.cpp \
+  qt/moc_wentunogui.cpp \
+  qt/moc_wentunounits.cpp \
   qt/moc_clientmodel.cpp \
   qt/moc_coincontroldialog.cpp \
   qt/moc_coincontroltreewidget.cpp \
@@ -91,32 +91,32 @@ QT_MOC_CPP = \
   qt/moc_walletmodel.cpp \
   qt/moc_walletview.cpp
 
-SYSCOIN_MM = \
+wentuno_MM = \
   qt/macdockiconhandler.mm \
   qt/macnotificationhandler.mm \
   qt/macos_appnap.mm
 
 QT_MOC = \
-  qt/syscoinamountfield.moc \
+  qt/wentunoamountfield.moc \
   qt/intro.moc \
   qt/overviewpage.moc \
   qt/rpcconsole.moc
 
-QT_QRC_CPP = qt/qrc_syscoin.cpp
-QT_QRC = qt/syscoin.qrc
-QT_QRC_LOCALE_CPP = qt/qrc_syscoin_locale.cpp
-QT_QRC_LOCALE = qt/syscoin_locale.qrc
+QT_QRC_CPP = qt/qrc_wentuno.cpp
+QT_QRC = qt/wentuno.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_wentuno_locale.cpp
+QT_QRC_LOCALE = qt/wentuno_locale.qrc
 
-SYSCOIN_QT_H = \
+wentuno_QT_H = \
   qt/addressbookpage.h \
   qt/addresstablemodel.h \
   qt/askpassphrasedialog.h \
   qt/bantablemodel.h \
-  qt/syscoin.h \
-  qt/syscoinaddressvalidator.h \
-  qt/syscoinamountfield.h \
-  qt/syscoingui.h \
-  qt/syscoinunits.h \
+  qt/wentuno.h \
+  qt/wentunoaddressvalidator.h \
+  qt/wentunoamountfield.h \
+  qt/wentunogui.h \
+  qt/wentunounits.h \
   qt/clientmodel.h \
   qt/coincontroldialog.h \
   qt/coincontroltreewidget.h \
@@ -177,9 +177,9 @@ QT_RES_FONTS = \
 QT_RES_ICONS = \
   qt/res/icons/add.png \
   qt/res/icons/address-book.png \
-  qt/res/icons/syscoin.ico \
-  qt/res/icons/syscoin_testnet.ico \
-  qt/res/icons/syscoin.png \
+  qt/res/icons/wentuno.ico \
+  qt/res/icons/wentuno_testnet.ico \
+  qt/res/icons/wentuno.png \
   qt/res/icons/chevron.png \
   qt/res/icons/clock1.png \
   qt/res/icons/clock2.png \
@@ -223,13 +223,13 @@ QT_RES_ICONS = \
   qt/res/icons/tx_mined.png \
   qt/res/icons/warning.png
 
-SYSCOIN_QT_BASE_CPP = \
+wentuno_QT_BASE_CPP = \
   qt/bantablemodel.cpp \
-  qt/syscoin.cpp \
-  qt/syscoinaddressvalidator.cpp \
-  qt/syscoinamountfield.cpp \
-  qt/syscoingui.cpp \
-  qt/syscoinunits.cpp \
+  qt/wentuno.cpp \
+  qt/wentunoaddressvalidator.cpp \
+  qt/wentunoamountfield.cpp \
+  qt/wentunogui.cpp \
+  qt/wentunounits.cpp \
   qt/clientmodel.cpp \
   qt/csvmodelwriter.cpp \
   qt/guiutil.cpp \
@@ -250,9 +250,9 @@ SYSCOIN_QT_BASE_CPP = \
   qt/trafficgraphwidget.cpp \
   qt/utilitydialog.cpp
 
-SYSCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+wentuno_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
 
-SYSCOIN_QT_WALLET_CPP = \
+wentuno_QT_WALLET_CPP = \
   qt/addressbookpage.cpp \
   qt/addresstablemodel.cpp \
   qt/askpassphrasedialog.cpp \
@@ -285,32 +285,32 @@ SYSCOIN_QT_WALLET_CPP = \
   qt/walletmodeltransaction.cpp \
   qt/walletview.cpp
 
-SYSCOIN_QT_CPP = $(SYSCOIN_QT_BASE_CPP)
+wentuno_QT_CPP = $(wentuno_QT_BASE_CPP)
 if TARGET_WINDOWS
-SYSCOIN_QT_CPP += $(SYSCOIN_QT_WINDOWS_CPP)
+wentuno_QT_CPP += $(wentuno_QT_WINDOWS_CPP)
 endif
 if ENABLE_WALLET
-SYSCOIN_QT_CPP += $(SYSCOIN_QT_WALLET_CPP)
+wentuno_QT_CPP += $(wentuno_QT_WALLET_CPP)
 endif # ENABLE_WALLET
 
 QT_RES_ANIMATION = $(wildcard $(srcdir)/qt/res/animation/spinner-*.png)
 
-SYSCOIN_QT_RC = qt/res/syscoin-qt-res.rc
+wentuno_QT_RC = qt/res/wentuno-qt-res.rc
 
-SYSCOIN_QT_INCLUDES = -DQT_NO_KEYWORDS -DQT_USE_QSTRINGBUILDER
+wentuno_QT_INCLUDES = -DQT_NO_KEYWORDS -DQT_USE_QSTRINGBUILDER
 
-qt_libsyscoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(SYSCOIN_INCLUDES) $(SYSCOIN_QT_INCLUDES) \
+qt_libwentunoqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(wentuno_INCLUDES) $(wentuno_QT_INCLUDES) \
   $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(QR_CFLAGS) $(BOOST_CPPFLAGS)
-qt_libsyscoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
-qt_libsyscoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
+qt_libwentunoqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libwentunoqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
 
-qt_libsyscoinqt_a_SOURCES = $(SYSCOIN_QT_CPP) $(SYSCOIN_QT_H) $(QT_FORMS_UI) \
+qt_libwentunoqt_a_SOURCES = $(wentuno_QT_CPP) $(wentuno_QT_H) $(QT_FORMS_UI) \
   $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(QT_RES_FONTS) $(QT_RES_ICONS) $(QT_RES_ANIMATION)
 if TARGET_DARWIN
-  qt_libsyscoinqt_a_SOURCES += $(SYSCOIN_MM)
+  qt_libwentunoqt_a_SOURCES += $(wentuno_MM)
 endif
 
-nodist_qt_libsyscoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
+nodist_qt_libwentunoqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
 
 # forms/foo.h -> forms/ui_foo.h
 QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
@@ -318,96 +318,96 @@ QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:
 # Most files will depend on the forms and moc files as includes. Generate them
 # before anything else.
 $(QT_MOC): $(QT_FORMS_H)
-$(qt_libsyscoinqt_a_OBJECTS) $(qt_syscoin_qt_OBJECTS) $(syscoin_gui_OBJECTS) : | $(QT_MOC)
+$(qt_libwentunoqt_a_OBJECTS) $(qt_wentuno_qt_OBJECTS) $(wentuno_gui_OBJECTS) : | $(QT_MOC)
 
-# syscoin-qt and syscoin-gui binaries #
-syscoin_qt_cppflags = $(AM_CPPFLAGS) $(SYSCOIN_INCLUDES) $(SYSCOIN_QT_INCLUDES) \
+# wentuno-qt and wentuno-gui binaries #
+wentuno_qt_cppflags = $(AM_CPPFLAGS) $(wentuno_INCLUDES) $(wentuno_QT_INCLUDES) \
   $(QT_INCLUDES) $(QR_CFLAGS)
-syscoin_qt_cxxflags = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+wentuno_qt_cxxflags = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
 
-syscoin_qt_sources = qt/main.cpp
+wentuno_qt_sources = qt/main.cpp
 if TARGET_WINDOWS
-  syscoin_qt_sources += $(SYSCOIN_QT_RC)
+  wentuno_qt_sources += $(wentuno_QT_RC)
 endif
-syscoin_qt_ldadd = qt/libsyscoinqt.a $(LIBSYSCOIN_NODE)
+wentuno_qt_ldadd = qt/libwentunoqt.a $(LIBwentuno_NODE)
 if ENABLE_WALLET
-syscoin_qt_ldadd += $(LIBSYSCOIN_UTIL) $(LIBSYSCOIN_WALLET)
+wentuno_qt_ldadd += $(LIBwentuno_UTIL) $(LIBwentuno_WALLET)
 endif
 if ENABLE_ZMQ
-syscoin_qt_ldadd += $(LIBSYSCOIN_ZMQ) $(ZMQ_LIBS)
+wentuno_qt_ldadd += $(LIBwentuno_ZMQ) $(ZMQ_LIBS)
 endif
-syscoin_qt_ldadd += $(LIBSYSCOIN_CLI) $(LIBSYSCOIN_COMMON) $(LIBSYSCOIN_UTIL) $(LIBSYSCOIN_CONSENSUS) $(LIBSYSCOIN_CRYPTO) $(LIBDASHBLS) $(LIBUNIVALUE) $(LIBLEVELDB) $(LIBMEMENV) \
+wentuno_qt_ldadd += $(LIBwentuno_CLI) $(LIBwentuno_COMMON) $(LIBwentuno_UTIL) $(LIBwentuno_CONSENSUS) $(LIBwentuno_CRYPTO) $(LIBDASHBLS) $(LIBUNIVALUE) $(LIBLEVELDB) $(LIBMEMENV) \
   $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(BDB_LIBS) $(MINIUPNPC_LIBS) $(NATPMP_LIBS) $(LIBSECP256K1) \
   $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(SQLITE_LIBS) $(LIBNEVM) $(GMP_LIBS)
-syscoin_qt_ldflags = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
-syscoin_qt_libtoolflags = $(AM_LIBTOOLFLAGS) --tag CXX
+wentuno_qt_ldflags = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
+wentuno_qt_libtoolflags = $(AM_LIBTOOLFLAGS) --tag CXX
 
-qt_syscoin_qt_CPPFLAGS = $(syscoin_qt_cppflags)
-qt_syscoin_qt_CXXFLAGS = $(syscoin_qt_cxxflags)
-qt_syscoin_qt_SOURCES = $(syscoin_qt_sources) init/syscoin-qt.cpp
-qt_syscoin_qt_LDADD = $(syscoin_qt_ldadd)
-qt_syscoin_qt_LDFLAGS = $(syscoin_qt_ldflags)
-qt_syscoin_qt_LIBTOOLFLAGS = $(syscoin_qt_libtoolflags)
+qt_wentuno_qt_CPPFLAGS = $(wentuno_qt_cppflags)
+qt_wentuno_qt_CXXFLAGS = $(wentuno_qt_cxxflags)
+qt_wentuno_qt_SOURCES = $(wentuno_qt_sources) init/wentuno-qt.cpp
+qt_wentuno_qt_LDADD = $(wentuno_qt_ldadd)
+qt_wentuno_qt_LDFLAGS = $(wentuno_qt_ldflags)
+qt_wentuno_qt_LIBTOOLFLAGS = $(wentuno_qt_libtoolflags)
 
-syscoin_gui_CPPFLAGS = $(syscoin_qt_cppflags)
-syscoin_gui_CXXFLAGS = $(syscoin_qt_cxxflags)
-syscoin_gui_SOURCES = $(syscoin_qt_sources) init/syscoin-gui.cpp
-syscoin_gui_LDADD = $(syscoin_qt_ldadd) $(LIBSYSCOIN_IPC) $(LIBSYSCOIN_UTIL) $(LIBMULTIPROCESS_LIBS)
-syscoin_gui_LDFLAGS = $(syscoin_qt_ldflags)
-syscoin_gui_LIBTOOLFLAGS = $(syscoin_qt_libtoolflags)
+wentuno_gui_CPPFLAGS = $(wentuno_qt_cppflags)
+wentuno_gui_CXXFLAGS = $(wentuno_qt_cxxflags)
+wentuno_gui_SOURCES = $(wentuno_qt_sources) init/wentuno-gui.cpp
+wentuno_gui_LDADD = $(wentuno_qt_ldadd) $(LIBwentuno_IPC) $(LIBwentuno_UTIL) $(LIBMULTIPROCESS_LIBS)
+wentuno_gui_LDFLAGS = $(wentuno_qt_ldflags)
+wentuno_gui_LIBTOOLFLAGS = $(wentuno_qt_libtoolflags)
 
 #locale/foo.ts -> locale/foo.qm
 QT_QM=$(QT_TS:.ts=.qm)
 
 SECONDARY: $(QT_QM)
 
-$(srcdir)/qt/syscoinstrings.cpp: FORCE
+$(srcdir)/qt/wentunostrings.cpp: FORCE
 	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
 	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) COPYRIGHT_HOLDERS="$(COPYRIGHT_HOLDERS)" $(PYTHON) ../share/qt/extract_strings_qt.py \
-            $(libsyscoin_node_a_SOURCES) $(libsyscoin_wallet_a_SOURCES) $(libsyscoin_common_a_SOURCES) \
-            $(libsyscoin_zmq_a_SOURCES) $(libsyscoin_consensus_a_SOURCES) $(libsyscoin_util_a_SOURCES) \
-            $(SYSCOIN_QT_BASE_CPP) $(SYSCOIN_QT_WINDOWS_CPP) $(SYSCOIN_QT_WALLET_CPP) $(SYSCOIN_QT_H) $(SYSCOIN_MM)
+            $(libwentuno_node_a_SOURCES) $(libwentuno_wallet_a_SOURCES) $(libwentuno_common_a_SOURCES) \
+            $(libwentuno_zmq_a_SOURCES) $(libwentuno_consensus_a_SOURCES) $(libwentuno_util_a_SOURCES) \
+            $(wentuno_QT_BASE_CPP) $(wentuno_QT_WINDOWS_CPP) $(wentuno_QT_WALLET_CPP) $(wentuno_QT_H) $(wentuno_MM)
 
-# The resulted syscoin_en.xlf source file should follow Transifex requirements.
+# The resulted wentuno_en.xlf source file should follow Transifex requirements.
 # See: https://docs.transifex.com/formats/xliff#how-to-distinguish-between-a-source-file-and-a-translation-file
-translate: $(srcdir)/qt/syscoinstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(SYSCOIN_QT_BASE_CPP) $(SYSCOIN_QT_WINDOWS_CPP) $(SYSCOIN_QT_WALLET_CPP) $(SYSCOIN_QT_H) $(SYSCOIN_MM)
+translate: $(srcdir)/qt/wentunostrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(wentuno_QT_BASE_CPP) $(wentuno_QT_WINDOWS_CPP) $(wentuno_QT_WALLET_CPP) $(wentuno_QT_H) $(wentuno_MM)
 	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) -no-obsolete -I $(srcdir) -locations relative $^ -ts $(srcdir)/qt/locale/syscoin_en.ts
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) -no-obsolete -I $(srcdir) -locations relative $^ -ts $(srcdir)/qt/locale/wentuno_en.ts
 	@test -n $(LCONVERT) || echo "lconvert is required for updating translations"
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LCONVERT) -drop-translations -o $(srcdir)/qt/locale/syscoin_en.xlf -i $(srcdir)/qt/locale/syscoin_en.ts
-	@$(SED) -i.old -e 's|source-language="en" target-language="en"|source-language="en"|' -e '/<target xml:space="preserve"><\/target>/d' $(srcdir)/qt/locale/syscoin_en.xlf
-	@rm -f $(srcdir)/qt/locale/syscoin_en.xlf.old
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LCONVERT) -drop-translations -o $(srcdir)/qt/locale/wentuno_en.xlf -i $(srcdir)/qt/locale/wentuno_en.ts
+	@$(SED) -i.old -e 's|source-language="en" target-language="en"|source-language="en"|' -e '/<target xml:space="preserve"><\/target>/d' $(srcdir)/qt/locale/wentuno_en.xlf
+	@rm -f $(srcdir)/qt/locale/wentuno_en.xlf.old
 
 $(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
 	@test -f $(RCC) || (echo "rcc $(RCC) not found, but is required for generating qrc cpp files"; exit 1)
 	@cp -f $< $(@D)/temp_$(<F)
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name syscoin_locale --format-version 1 $(@D)/temp_$(<F) > $@
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name wentuno_locale --format-version 1 $(@D)/temp_$(<F) > $@
 	@rm $(@D)/temp_$(<F)
 
 $(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(QT_RES_FONTS) $(QT_RES_ICONS) $(QT_RES_ANIMATION)
 	@test -f $(RCC) || (echo "rcc $(RCC) not found, but is required for generating qrc cpp files"; exit 1)
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name syscoin --format-version 1 $< > $@
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name wentuno --format-version 1 $< > $@
 
-CLEAN_QT = $(nodist_qt_libsyscoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/temp_syscoin_locale.qrc
+CLEAN_QT = $(nodist_qt_libwentunoqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/temp_wentuno_locale.qrc
 
 CLEANFILES += $(CLEAN_QT)
 
-syscoin_qt_clean: FORCE
-	rm -f $(CLEAN_QT) $(qt_libsyscoinqt_a_OBJECTS) $(qt_syscoin_qt_OBJECTS) qt/syscoin-qt$(EXEEXT) $(LIBSYSCOINQT)
+wentuno_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libwentunoqt_a_OBJECTS) $(qt_wentuno_qt_OBJECTS) qt/wentuno-qt$(EXEEXT) $(LIBwentunoQT)
 
-syscoin_qt : qt/syscoin-qt$(EXEEXT)
+wentuno_qt : qt/wentuno-qt$(EXEEXT)
 
 APK_LIB_DIR = qt/android/libs/$(ANDROID_ARCH)
 QT_BASE_VERSION = $(lastword $(shell $(MOC) --version))
 QT_BASE_PATH = $(shell find ../depends/sources/ -maxdepth 1 -type f -regex ".*qtbase.*$(QT_BASE_VERSION)\.tar.xz")
 QT_BASE_TLD = $(shell tar tf $(QT_BASE_PATH) --exclude='*/*')
 
-syscoin_qt_apk: FORCE
+wentuno_qt_apk: FORCE
 	mkdir -p $(APK_LIB_DIR)
-	cp $(dir $(lastword $(CC)))../sysroot/usr/lib/$(host_alias)/libc++_shared.so $(APK_LIB_DIR)
+	cp $(dir $(lastword $(CC)))../WUNOroot/usr/lib/$(host_alias)/libc++_shared.so $(APK_LIB_DIR)
 	tar xf $(QT_BASE_PATH) -C qt/android/src/ $(QT_BASE_TLD)src/android/jar/src --strip-components=5
 	tar xf $(QT_BASE_PATH) -C qt/android/src/ $(QT_BASE_TLD)src/android/java/src --strip-components=5
-	cp qt/syscoin-qt $(APK_LIB_DIR)/libsyscoin-qt_$(ANDROID_ARCH).so
+	cp qt/wentuno-qt $(APK_LIB_DIR)/libwentuno-qt_$(ANDROID_ARCH).so
 	cd qt/android && gradle wrapper --gradle-version=6.6.1
 	cd qt/android && ./gradlew build
 

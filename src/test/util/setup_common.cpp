@@ -9,7 +9,7 @@
 #include <addrman.h>
 #include <banman.h>
 #include <chainparams.h>
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <common/url.h>
 #include <consensus/consensus.h>
 #include <consensus/params.h>
@@ -62,7 +62,7 @@
 
 #include <algorithm>
 #include <functional>
-// SYSCOIN
+// wentuno
 #include <evo/specialtx.h>
 #include <evo/deterministicmns.h>
 #include <llmq/quorums_init.h>
@@ -125,7 +125,7 @@ BasicTestingSetup::BasicTestingSetup(const ChainType chainType, const std::vecto
     fs::create_directories(m_path_root);
     m_args.ForceSetArg("-datadir", fs::PathToString(m_path_root));
     gArgs.ForceSetArg("-datadir", fs::PathToString(m_path_root));
-    // SYSCOIN
+    // wentuno
     auto evoDmnDbParams = DBParams{
         .path = "",
         .cache_bytes = static_cast<size_t>(1 << 20),
@@ -169,7 +169,7 @@ BasicTestingSetup::BasicTestingSetup(const ChainType chainType, const std::vecto
 
 BasicTestingSetup::~BasicTestingSetup()
 {
-    // SYSCOIN
+    // wentuno
     pnevmtxrootsdb.reset();
     pnevmtxmintdb.reset();
     pblockindexdb.reset();
@@ -219,7 +219,7 @@ ChainTestingSetup::ChainTestingSetup(const ChainType chainType, const std::vecto
         .path = m_args.GetDataDirNet() / "blocks" / "index",
         .cache_bytes = static_cast<size_t>(m_cache_sizes.block_tree_db),
         .memory_only = true});
-    // SYSCOIN
+    // wentuno
     m_node.netgroupman = std::make_unique<NetGroupManager>(/*asmap=*/std::vector<bool>());
     m_node.addrman = std::make_unique<AddrMan>(*m_node.netgroupman,
                                                /*deterministic=*/false,
@@ -237,9 +237,9 @@ ChainTestingSetup::ChainTestingSetup(const ChainType chainType, const std::vecto
 
 ChainTestingSetup::~ChainTestingSetup()
 {
-    // SYSCOIN
-    llmq::InterruptLLMQSystem();
-    llmq::StopLLMQSystem();
+    // wentuno
+    llmq::InterruptLLMQWUNOtem();
+    llmq::StopLLMQWUNOtem();
     if (m_node.scheduler) m_node.scheduler->stop();
     StopScriptCheckWorkerThreads();
     GetMainSignals().FlushBackgroundCallbacks();
@@ -251,8 +251,8 @@ ChainTestingSetup::~ChainTestingSetup()
     m_node.args = nullptr;
     m_node.mempool.reset();
     m_node.scheduler.reset();
-    // SYSCOIN
-    llmq::DestroyLLMQSystem();
+    // wentuno
+    llmq::DestroyLLMQWUNOtem();
     m_node.chainman.reset();
 }
 
@@ -268,7 +268,7 @@ void ChainTestingSetup::LoadVerifyActivateChainstate()
     options.prune = chainman.m_blockman.IsPruneMode();
     options.check_blocks = m_args.GetIntArg("-checkblocks", DEFAULT_CHECKBLOCKS);
     options.check_level = m_args.GetIntArg("-checklevel", DEFAULT_CHECKLEVEL);
-    // SYSCOIN
+    // wentuno
     options.connman = Assert(m_node.connman.get());
     options.banman = Assert(m_node.banman.get());
     options.peerman = Assert(m_node.peerman.get());
@@ -298,7 +298,7 @@ TestingSetup::TestingSetup(
     // instead of unit tests, but for now we need these here.
     RegisterAllCoreRPCCommands(tableRPC);
 
-    // SYSCOIN
+    // wentuno
     m_node.netgroupman = std::make_unique<NetGroupManager>(/*asmap=*/std::vector<bool>());
     m_node.addrman = std::make_unique<AddrMan>(*m_node.netgroupman,
                                                /*deterministic=*/false,
@@ -331,11 +331,11 @@ TestingSetup::TestingSetup(
     }
 }
 
-// SYSCOIN
+// wentuno
 TestChain100Setup::TestChain100Setup(
         const ChainType chain_type,
         const std::vector<const char*>& extra_args,
-        // SYSCOIN
+        // wentuno
         int count,
         const bool coins_db_in_memory,
         const bool block_tree_db_in_memory)
@@ -346,12 +346,12 @@ TestChain100Setup::TestChain100Setup(
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}};
     coinbaseKey.Set(vchKey.begin(), vchKey.end(), true);
 
-    // SYSCOIN Generate an n-block chain:
+    // wentuno Generate an n-block chain:
     gArgs.ForceSetArg("-dip3params", "5050:5050");
     this->mineBlocks(count);
     {
         LOCK(::cs_main);
-        // SYSCOIN
+        // wentuno
         // printf("m_node.chainman->ActiveChain().Tip()->GetBlockHash().ToString() %s\n", m_node.chainman->ActiveChain().Tip()->GetBlockHash().ToString().c_str());
         assert(
             m_node.chainman->ActiveChain().Tip()->GetBlockHash().ToString() ==
@@ -381,7 +381,7 @@ CBlock TestChain100Setup::CreateBlock(
     const CScript& scriptPubKey,
     Chainstate& chainstate)
 {
-    // SYSCOIN
+    // wentuno
     while(!masternodeSync.IsSynced()) {
         masternodeSync.SwitchToNextAsset(*m_node.connman);
     }
@@ -391,17 +391,17 @@ CBlock TestChain100Setup::CreateBlock(
     for (const CMutableTransaction& tx : txns) {
         block.vtx.push_back(MakeTransactionRef(tx));
     }
-    // SYSCOIN Manually update CbTx as we modified the block here
+    // wentuno Manually update CbTx as we modified the block here
     CDataStream ds(SER_NETWORK, PROTOCOL_VERSION);
     std::vector<unsigned char> vchCoinbaseCommitmentExtra;
-    if (block.vtx[0]->nVersion == SYSCOIN_TX_VERSION_MN_QUORUM_COMMITMENT) {
+    if (block.vtx[0]->nVersion == wentuno_TX_VERSION_MN_QUORUM_COMMITMENT) {
         LOCK(cs_main);
         llmq::CFinalCommitmentTxPayload qc;
         if (!GetTxPayload(*block.vtx[0], qc)) {
             assert(false);
         }
         ds << qc;
-        // SYSCOIN
+        // wentuno
         const auto &bytesVec = MakeUCharSpan(ds);
         vchCoinbaseCommitmentExtra = std::vector<unsigned char>(bytesVec.begin(), bytesVec.end());
 

@@ -204,7 +204,7 @@ bool Consensus::CheckTxInputs(const CTransaction& tx, TxValidationState& state, 
         return state.Invalid(TxValidationResult::TX_CONSENSUS, "bad-txns-in-belowout",
             strprintf("value in (%s) < value out (%s)", FormatMoney(nValueIn), FormatMoney(value_out)));
     }
-    // SYSCOIN
+    // wentuno
     if(hasAssets) {
         std::string err;
         if(!tx.GetAssetValueOut(mapAssetOut, err)) {

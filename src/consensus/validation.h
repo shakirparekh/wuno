@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_CONSENSUS_VALIDATION_H
-#define SYSCOIN_CONSENSUS_VALIDATION_H
+#ifndef wentuno_CONSENSUS_VALIDATION_H
+#define wentuno_CONSENSUS_VALIDATION_H
 
 #include <string>
 #include <version.h>
@@ -53,7 +53,7 @@ enum class TxValidationResult {
      */
     TX_CONFLICT,
     TX_MEMPOOL_POLICY,        //!< violated mempool's fee/size/descendant/RBF/etc limits
-    // SYSCOIN
+    // wentuno
     TX_MINT_DUPLICATE, //!< mempool's nevm mint tx hashexisting in mempool
     TX_NO_MEMPOOL,            //!< this node does not have a mempool so can't validate the transaction
 };
@@ -82,7 +82,7 @@ enum class BlockValidationResult {
     BLOCK_TIME_FUTURE,       //!< block timestamp was > 2 hours in the future (or our clock is bad)
     BLOCK_CHECKPOINT,        //!< the block failed to meet one of our checkpoints
     BLOCK_HEADER_LOW_WORK,    //!< the block header may be on a too-little-work chain
-    // SYSCOIN
+    // wentuno
     BLOCK_CHAINLOCK,         //!< the block conflicts with the ChainLock
 };
 
@@ -183,8 +183,8 @@ inline int GetWitnessCommitmentIndex(const CBlock& block)
     }
     return commitpos;
 }
-// SYSCOIN
-static inline bool FormatSyscoinErrorMessage(TxValidationState& state, const std::string &errorMessage, bool bConsensus) {
+// wentuno
+static inline bool FormatwentunoErrorMessage(TxValidationState& state, const std::string &errorMessage, bool bConsensus) {
     return state.Invalid(bConsensus? TxValidationResult::TX_CONSENSUS: TxValidationResult::TX_CONFLICT, errorMessage);
 }
-#endif // SYSCOIN_CONSENSUS_VALIDATION_H
+#endif // wentuno_CONSENSUS_VALIDATION_H

@@ -25,7 +25,7 @@
 #include <cstdint>
 #include <cstring>
 #include <type_traits>
-// SYSCOIN includes for gen block
+// wentuno includes for gen block
 #include <chainparams.h>
 /*#include <uint256.h>
 #include <arith_uint256.h>
@@ -138,7 +138,7 @@ static Consensus::LLMQParams llmq400_60 = {
  */
 class CMainParams : public CChainParams {
 public:
-    // SYSCOIN
+    // wentuno
     CMainParams(const MainNetOptions& opts) {
         m_chain_type = ChainType::MAIN;
         consensus.signet_blocks = false;
@@ -168,7 +168,7 @@ public:
         consensus.SegwitHeight = 0;
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~uint256(0) >> 20
         consensus.nPowTargetTimespan = 6 * 60 * 60;
-        consensus.nPowTargetSpacing = 2.5 * 60; // Syscoin: 2.5 minute
+        consensus.nPowTargetSpacing = 2.5 * 60; // wentuno: 2.5 minute
         consensus.nAuxpowChainId = 16;
         consensus.nAuxpowOldChainId = 4096;
         consensus.nAuxpowStartHeight = 1;
@@ -195,9 +195,9 @@ public:
         consensus.defaultAssumeValid = uint256S("0xfebaa7252e6d98be97f246e4a2447c11ed4665e80418c5b3b7602d12b62d1c72"); // 2022819
         consensus.fStrictChainId = true;
         consensus.nLegacyBlocksBefore = 1;
-        consensus.nSYSXAsset = 123456;
+        consensus.nWUNOXAsset = 123456;
         consensus.nNEVMChainID = 57;
-        consensus.vchSyscoinVaultManager = ParseHex("7904299b3D3dC1b03d1DdEb45E9fDF3576aCBd5f");
+        consensus.vchwentunoVaultManager = ParseHex("7904299b3D3dC1b03d1DdEb45E9fDF3576aCBd5f");
         consensus.vchTokenFreezeMethod = ParseHex("0b8914e27c9a6c88836bc5547f82ccf331142c761f84e9f1d36934a6a31eefad");
         consensus.nBridgeStartBlock = 348000;
         consensus.nNEVMStartBlock = 1317500;
@@ -230,24 +230,24 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x0000022642db0346b6e01c2a397471f4f12e65d4f4251ec96c1f85367a61a7ab"));
         assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
 
-        vSeeds.emplace_back("seed1.syscoin.org");
-        vSeeds.emplace_back("seed2.syscoin.org");
-        vSeeds.emplace_back("seed3.syscoin.org");
-        vSeeds.emplace_back("seed4.syscoin.org");
+        vSeeds.emplace_back("seed1.wentuno.org");
+        vSeeds.emplace_back("seed2.wentuno.org");
+        vSeeds.emplace_back("seed3.wentuno.org");
+        vSeeds.emplace_back("seed4.wentuno.org");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,63);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,128);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xB2, 0x1E};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xAD, 0xE4};
-        // SYSCOIN
+        // wentuno
         bech32_hrp = opts.bech32_hrp;
 
         vFixedSeeds = std::vector<uint8_t>(std::begin(chainparams_seed_main), std::end(chainparams_seed_main));
 
         fDefaultConsistencyChecks = false;
         fRequireRoutableExternalIP = true;
-        vSporkAddresses = {"sys1qx0zzzjag402apkw4kn8unr0qa0k3pv3258v4sr", "sys1qk2kq7hhp58ycaevzzu5hugh7flxs7qcg8rjjlh", "sys1qm4ka204x3mn46sk6ussrex8um87qkj0r5xakyg"};
+        vSporkAddresses = {"WUNO1qx0zzzjag402apkw4kn8unr0qa0k3pv3258v4sr", "WUNO1qk2kq7hhp58ycaevzzu5hugh7flxs7qcg8rjjlh", "WUNO1qm4ka204x3mn46sk6ussrex8um87qkj0r5xakyg"};
         nMinSporkKeys = 2;
         // long living quorum params
         consensus.llmqTypeChainLocks = llmq400_60;
@@ -329,7 +329,7 @@ public:
         consensus.CSVHeight = 1;
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~uint256(0) >> 20
         consensus.nPowTargetTimespan = 6 * 60 * 60;
-        consensus.nPowTargetSpacing = 2.5 * 60; // Syscoin: 2.5 minute
+        consensus.nPowTargetSpacing = 2.5 * 60; // wentuno: 2.5 minute
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 1512; // 75% for testchains
@@ -358,9 +358,9 @@ public:
         consensus.nAuxpowOldChainId = 4096;
         consensus.fStrictChainId = false;
         consensus.nLegacyBlocksBefore = 1;
-        consensus.nSYSXAsset = 123456;
+        consensus.nWUNOXAsset = 123456;
         consensus.nNEVMChainID = 5700;
-        consensus.vchSyscoinVaultManager = ParseHex("7904299b3D3dC1b03d1DdEb45E9fDF3576aCBd5f");
+        consensus.vchwentunoVaultManager = ParseHex("7904299b3D3dC1b03d1DdEb45E9fDF3576aCBd5f");
         consensus.vchTokenFreezeMethod = ParseHex("0b8914e27c9a6c88836bc5547f82ccf331142c761f84e9f1d36934a6a31eefad");
         consensus.nBridgeStartBlock = 1000;
         consensus.nNEVMStartBlock = 840000;
@@ -389,15 +389,15 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("testseed1.syscoin.org");
-        vSeeds.emplace_back("testseed2.syscoin.org");
+        vSeeds.emplace_back("testseed1.wentuno.org");
+        vSeeds.emplace_back("testseed2.wentuno.org");
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,65);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
 
-        bech32_hrp = "tsys";
+        bech32_hrp = "tWUNO";
 
         // vFixedSeeds = std::vector<uint8_t>(std::begin(chainparams_seed_test), std::end(chainparams_seed_test));
 
@@ -405,7 +405,7 @@ public:
         fRequireRoutableExternalIP = true;
 
         // privKey: cU52TqHDWJg6HoL3keZHBvrJgsCLsduRvDFkPyZ5EmeMwoEHshiT
-        vSporkAddresses = {"TCGpumHyMXC5BmfkaAQXwB7Bf4kbkhM9BX", "tsys1qgmafz3mqa7glqy92r549w8qmq5535uc2e8ahjm", "tsys1q68gu0fhcchr27w08sjdxwt3rtgwef0nyh9zwk0"};
+        vSporkAddresses = {"TCGpumHyMXC5BmfkaAQXwB7Bf4kbkhM9BX", "tWUNO1qgmafz3mqa7glqy92r549w8qmq5535uc2e8ahjm", "tWUNO1q68gu0fhcchr27w08sjdxwt3rtgwef0nyh9zwk0"};
         nMinSporkKeys = 2;
         // long living quorum params
         consensus.llmqTypeChainLocks = llmq400_60;
@@ -574,7 +574,7 @@ public:
         consensus.nMinMNSubsidySats = 527500000;
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 6 * 60 * 60;
-        consensus.nPowTargetSpacing = 2.5 * 60; // Syscoin: 2.5 minute
+        consensus.nPowTargetSpacing = 2.5 * 60; // wentuno: 2.5 minute
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = true;
         consensus.nRuleChangeActivationThreshold = 108; // 75% for testchains
@@ -597,9 +597,9 @@ public:
         consensus.nAuxpowOldChainId = 4096;
         consensus.fStrictChainId = true;
         consensus.nLegacyBlocksBefore = 0;
-        consensus.nSYSXAsset = 123456;
+        consensus.nWUNOXAsset = 123456;
         consensus.nNEVMChainID = 5700;
-        consensus.vchSyscoinVaultManager = ParseHex("7904299b3D3dC1b03d1DdEb45E9fDF3576aCBd5f");
+        consensus.vchwentunoVaultManager = ParseHex("7904299b3D3dC1b03d1DdEb45E9fDF3576aCBd5f");
         consensus.vchTokenFreezeMethod = ParseHex("0b8914e27c9a6c88836bc5547f82ccf331142c761f84e9f1d36934a6a31eefad");
         consensus.nBridgeStartBlock = 0;
         consensus.nNEVMStartBlock = opts.nevmstartblock;
@@ -720,7 +720,7 @@ std::unique_ptr<const CChainParams> CChainParams::RegTest(const RegTestOptions& 
 {
     return std::make_unique<const CRegTestParams>(options);
 }
-// SYSCOIN
+// wentuno
 std::unique_ptr<const CChainParams> CChainParams::Main(const MainNetOptions& options)
 {
     return std::make_unique<const CMainParams>(options);

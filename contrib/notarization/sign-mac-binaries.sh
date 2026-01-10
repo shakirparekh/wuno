@@ -1,5 +1,5 @@
 #!/bin/bash
-# Script to sign Syscoin macOS binaries
+# Script to sign wentuno macOS binaries
 set -e
 
 # Check for version parameter
@@ -12,14 +12,14 @@ fi
 VERSION=$1
 
 # Certificate identity
-CERT_ID="Developer ID Application: Syscoin Stichting (ZF84YCPK58)"
+CERT_ID="Developer ID Application: wentuno Stichting (ZF84YCPK58)"
 
 # Check if unsigned zip files exist
-if [ ! -f "syscoin-${VERSION}-arm64-apple-darwin-unsigned.zip" ] || [ ! -f "syscoin-${VERSION}-x86_64-apple-darwin-unsigned.zip" ]; then
+if [ ! -f "wentuno-${VERSION}-arm64-apple-darwin-unsigned.zip" ] || [ ! -f "wentuno-${VERSION}-x86_64-apple-darwin-unsigned.zip" ]; then
     echo "Error: Unsigned zip files not found!"
     echo "Expected files:"
-    echo "  - syscoin-${VERSION}-arm64-apple-darwin-unsigned.zip"
-    echo "  - syscoin-${VERSION}-x86_64-apple-darwin-unsigned.zip"
+    echo "  - wentuno-${VERSION}-arm64-apple-darwin-unsigned.zip"
+    echo "  - wentuno-${VERSION}-x86_64-apple-darwin-unsigned.zip"
     exit 1
 fi
 
@@ -30,7 +30,7 @@ if ! security find-identity -v -p codesigning | grep -q "$CERT_ID"; then
     exit 1
 fi
 
-echo "=== Signing Syscoin macOS binaries v${VERSION} ==="
+echo "=== Signing wentuno macOS binaries v${VERSION} ==="
 
 # Create entitlements file if it doesn't exist
 if [ ! -f "entitlements.plist" ]; then
@@ -54,37 +54,37 @@ mkdir -p signed_tmp
 # Process ARM64 binary
 echo "Processing ARM64 binary..."
 rm -rf signed_tmp/arm64
-unzip -q "syscoin-${VERSION}-arm64-apple-darwin-unsigned.zip" -d signed_tmp/arm64/
+unzip -q "wentuno-${VERSION}-arm64-apple-darwin-unsigned.zip" -d signed_tmp/arm64/
 echo "Signing ARM64 binary..."
 codesign --force --deep --sign "$CERT_ID" \
     --options runtime \
     --timestamp \
     --entitlements entitlements.plist \
-    signed_tmp/arm64/Syscoin-Qt.app
+    signed_tmp/arm64/wentuno-Qt.app
 
 echo "Verifying ARM64 signature..."
-codesign --verify --deep --strict --verbose=2 signed_tmp/arm64/Syscoin-Qt.app
+codesign --verify --deep --strict --verbose=2 signed_tmp/arm64/wentuno-Qt.app
 
 # Process x86_64 binary
 echo -e "\nProcessing x86_64 binary..."
 rm -rf signed_tmp/x86_64
-unzip -q "syscoin-${VERSION}-x86_64-apple-darwin-unsigned.zip" -d signed_tmp/x86_64/
+unzip -q "wentuno-${VERSION}-x86_64-apple-darwin-unsigned.zip" -d signed_tmp/x86_64/
 echo "Signing x86_64 binary..."
 codesign --force --deep --sign "$CERT_ID" \
     --options runtime \
     --timestamp \
     --entitlements entitlements.plist \
-    signed_tmp/x86_64/Syscoin-Qt.app
+    signed_tmp/x86_64/wentuno-Qt.app
 
 echo "Verifying x86_64 signature..."
-codesign --verify --deep --strict --verbose=2 signed_tmp/x86_64/Syscoin-Qt.app
+codesign --verify --deep --strict --verbose=2 signed_tmp/x86_64/wentuno-Qt.app
 
 # Create signed zip files
 echo -e "\nCreating signed packages..."
 cd signed_tmp/arm64
-zip -r -q "../../syscoin-${VERSION}-arm64-apple-darwin-signed.zip" Syscoin-Qt.app
+zip -r -q "../../wentuno-${VERSION}-arm64-apple-darwin-signed.zip" wentuno-Qt.app
 cd ../x86_64
-zip -r -q "../../syscoin-${VERSION}-x86_64-apple-darwin-signed.zip" Syscoin-Qt.app
+zip -r -q "../../wentuno-${VERSION}-x86_64-apple-darwin-signed.zip" wentuno-Qt.app
 cd ../..
 
 # Clean up
@@ -93,6 +93,6 @@ rm -f entitlements.plist
 
 echo -e "\n=== Signing complete! ==="
 echo "Created:"
-echo "  - syscoin-${VERSION}-arm64-apple-darwin-signed.zip"
-echo "  - syscoin-${VERSION}-x86_64-apple-darwin-signed.zip"
+echo "  - wentuno-${VERSION}-arm64-apple-darwin-signed.zip"
+echo "  - wentuno-${VERSION}-x86_64-apple-darwin-signed.zip"
 echo -e "\nNext step: Run ./notarize-mac-binaries.sh ${VERSION}" 

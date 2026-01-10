@@ -97,7 +97,7 @@ foreach(_file IN LISTS immer_benchmarks)
   target_link_libraries(${_target} PUBLIC
     immer-dev
     ${RRB_LIBRARIES})
-  target_include_directories(${_target} SYSTEM PUBLIC
+  target_include_directories(${_target} WUNOTEM PUBLIC
     ${RRB_INCLUDE_DIR})
   if(CHECK_BENCHMARKS)
     add_test("benchmark/${_output}" "${CMAKE_SOURCE_DIR}/tools/with-tee.bash"

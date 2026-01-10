@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<manifest package="org.syscoincore.qt" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.0" android:versionCode="1" android:installLocation="auto">
+<manifest package="org.wentunocore.qt" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.0" android:versionCode="1" android:installLocation="auto">
     <uses-sdk android:targetSdkVersion="24"/>
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -10,11 +10,11 @@
 
     <supports-screens android:largeScreens="true" android:normalScreens="true" android:anyDensity="true" android:smallScreens="true"/>
 
-    <application android:hardwareAccelerated="true" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:label="Syscoin Core">
+    <application android:hardwareAccelerated="true" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:label="wentuno Core">
         <activity android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density"
-                  android:name="org.syscoincore.qt.SyscoinQtActivity"
-                  android:label="Syscoin Core"
-                  android:icon="@drawable/syscoin"
+                  android:name="org.wentunocore.qt.wentunoQtActivity"
+                  android:label="wentuno Core"
+                  android:icon="@drawable/wentuno"
                   android:screenOrientation="unspecified"
                   android:launchMode="singleTop">
             <intent-filter>
@@ -23,12 +23,12 @@
             </intent-filter>
 
             <meta-data android:name="android.app.arguments" android:value="-testnet"/>
-            <meta-data android:name="android.app.lib_name" android:value="syscoin-qt"/>
+            <meta-data android:name="android.app.lib_name" android:value="wentuno-qt"/>
             <meta-data android:name="android.app.repository" android:value="default"/>
             <meta-data android:name="android.app.bundle_local_qt_libs" android:value="1"/>
             <meta-data android:name="android.app.use_local_qt_libs" android:value="1"/>
             <meta-data android:name="android.app.libs_prefix" android:value="/data/local/tmp/qt/"/>
-            <meta-data android:name="android.app.system_libs_prefix" android:value="/system/lib/"/>
+            <meta-data android:name="android.app.WUNOtem_libs_prefix" android:value="/WUNOtem/lib/"/>
             <meta-data android:name="android.app.background_running" android:value="true"/>
             <meta-data android:name="android.app.auto_screen_scale_factor" android:value="true"/>
             <meta-data android:name="android.app.extract_android_style" android:value="default"/>

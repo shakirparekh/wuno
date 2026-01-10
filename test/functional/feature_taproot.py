@@ -91,7 +91,7 @@ from test_framework.script_util import (
     script_to_p2sh_script,
     script_to_p2wsh_script,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_raises_rpc_error,
     assert_equal,
@@ -1274,7 +1274,7 @@ def dump_json_test(tx, input_utxos, idx, success, failure):
 # Data type to keep track of UTXOs, where they were created, and how to spend them.
 UTXOData = namedtuple('UTXOData', 'outpoint,output,spender')
 
-class TaprootTest(SyscoinTestFramework):
+class TaprootTest(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
         parser.add_argument("--dumptests", dest="dump_tests", default=False, action="store_true",
@@ -1286,7 +1286,7 @@ class TaprootTest(SyscoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.setup_clean_chain = True
-        # SYSCOIN
+        # wentuno
         self.extra_args = [["-dip3params=2000:2000","-par=1"]]
 
     def block_submit(self, node, txs, msg, err_msg, cb_pubkey=None, fees=0, sigops_weight=0, witness=False, accept=False):
@@ -1756,7 +1756,7 @@ class TaprootTest(SyscoinTestFramework):
             print(json.dumps(tests, indent=4, sort_keys=False))
 
     def run_test(self):
-        # SYSCOIN
+        # wentuno
         for i in range(len(self.nodes)):
             force_finish_mnsync(self.nodes[i])
         self.gen_test_vectors()

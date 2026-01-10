@@ -10,10 +10,10 @@
 - verify that getchaintips now returns two chain tips.
 """
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import assert_equal
 
-class GetChainTipsTest (SyscoinTestFramework):
+class GetChainTipsTest (wentunoTestFramework):
     def set_test_params(self):
         self.num_nodes = 4
 

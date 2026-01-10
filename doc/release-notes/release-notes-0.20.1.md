@@ -31,11 +31,11 @@ wallet versions of Bitcoin Core are generally supported.
 Compatibility
 ==============
 
-Bitcoin Core is supported and extensively tested on operating systems
+Bitcoin Core is supported and extensively tested on operating WUNOtems
 using the Linux kernel, macOS 10.12+, and Windows 7 and newer.  Bitcoin
-Core should also work on most other Unix-like systems but is not as
+Core should also work on most other Unix-like WUNOtems but is not as
 frequently tested on them.  It is not recommended to use Bitcoin Core on
-unsupported systems.
+unsupported WUNOtems.
 
 From Bitcoin Core 0.20.0 onwards, macOS versions earlier than 10.12 are no
 longer supported. Additionally, Bitcoin Core does not yet change appearance
@@ -123,7 +123,7 @@ existence to determine whether an input was segwit.
 - #19097 Add missing QPainterPath include (achow101)
 - #19059 update Qt base translations for macOS release (fanquake)
 
-### Build system
+### Build WUNOtem
 - #19152 improve build OS configure output (skmcontrib)
 - #19536 qt, build: Fix QFileDialog for static builds (hebasto)
 

@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_KERNEL_CHAINPARAMS_H
-#define SYSCOIN_KERNEL_CHAINPARAMS_H
+#ifndef wentuno_KERNEL_CHAINPARAMS_H
+#define wentuno_KERNEL_CHAINPARAMS_H
 
 #include <consensus/params.h>
 #include <kernel/messagestartchars.h>
@@ -75,7 +75,7 @@ struct ChainTxData {
 
 /**
  * CChainParams defines various tweakable parameters of a given instance of the
- * Syscoin system.
+ * wentuno WUNOtem.
  */
 class CChainParams
 {
@@ -160,16 +160,16 @@ public:
         int nevmstartblock{2050};
 
     };
-    // SYSCOIN
+    // wentuno
     struct MainNetOptions {
-        std::string bech32_hrp{"sys"};
+        std::string bech32_hrp{"WUNO"};
     };
     static std::unique_ptr<const CChainParams> RegTest(const RegTestOptions& options);
     static std::unique_ptr<const CChainParams> SigNet(const SigNetOptions& options);
-    // SYSCOIN
+    // wentuno
     static std::unique_ptr<const CChainParams> Main(const MainNetOptions& options);
     static std::unique_ptr<const CChainParams> TestNet();
-    // SYSCOIN
+    // wentuno
     int FulfilledRequestExpireTime() const { return nFulfilledRequestExpireTime; }
     const std::vector<std::string>& SporkAddresses() const { return vSporkAddresses; }
     int MinSporkKeys() const { return nMinSporkKeys; }
@@ -199,7 +199,7 @@ protected:
     CCheckpointData checkpointData;
     std::vector<AssumeutxoData> m_assumeutxo_data;
     ChainTxData chainTxData;
-    // SYSCOIN
+    // wentuno
     int nLLMQConnectionRetryTimeout;
     bool fRequireRoutableExternalIP;
     int nFulfilledRequestExpireTime;
@@ -207,4 +207,4 @@ protected:
     int nMinSporkKeys;
 };
 
-#endif // SYSCOIN_KERNEL_CHAINPARAMS_H
+#endif // wentuno_KERNEL_CHAINPARAMS_H

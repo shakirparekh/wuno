@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_INITEXECUTOR_H
-#define SYSCOIN_QT_INITEXECUTOR_H
+#ifndef wentuno_QT_INITEXECUTOR_H
+#define wentuno_QT_INITEXECUTOR_H
 
 #include <interfaces/node.h>
 
@@ -44,4 +44,4 @@ private:
     QThread m_thread;
 };
 
-#endif // SYSCOIN_QT_INITEXECUTOR_H
+#endif // wentuno_QT_INITEXECUTOR_H

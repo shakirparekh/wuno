@@ -3,12 +3,12 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_NET_PROCESSING_H
-#define SYSCOIN_NET_PROCESSING_H
+#ifndef wentuno_NET_PROCESSING_H
+#define wentuno_NET_PROCESSING_H
 
 #include <net.h>
 #include <validationinterface.h>
-// SYSCOIN
+// wentuno
 #include <headerssync.h>
 class AddrMan;
 class CChainParams;
@@ -26,7 +26,7 @@ static const bool DEFAULT_PEERBLOOMFILTERS = false;
 static const bool DEFAULT_PEERBLOCKFILTERS = false;
 /** Threshold for marking a node to be discouraged, e.g. disconnected and added to the discouragement filter. */
 static const int DISCOURAGEMENT_THRESHOLD{100};
-// SYSCOIN
+// wentuno
 /** The number of most recently announced transactions a peer can request. */
 static const unsigned int INVENTORY_MAX_RECENT_RELAY = 35000;
 /** Maximum number of outstanding CMPCTBLOCK requests for the same block. */
@@ -46,7 +46,7 @@ struct CNodeStateStats {
     ServiceFlags their_services;
     int64_t presync_height{-1};
 };
-// SYSCOIN
+// wentuno
 extern RecursiveMutex g_cs_orphans;
 /** Data structure for an individual peer. This struct is not protected by
  * cs_main since it does not contain validation-critical data.
@@ -145,7 +145,7 @@ struct Peer {
          *  permitted if the peer has NetPermissionFlags::Mempool or we advertise
          *  NODE_BLOOM. See BIP35. */
         bool m_send_mempool GUARDED_BY(m_tx_inventory_mutex){false};
-        // SYSCOIN
+        // wentuno
         bool m_send_clsig GUARDED_BY(m_tx_inventory_mutex){false};
          /** The mempool sequence num at which we sent the last `inv` message to this peer.
          *  Can relay txs with lower sequence numbers than this (see CTxMempool::info_for_relay). */
@@ -156,7 +156,7 @@ struct Peer {
 
         /** Minimum fee rate with which to filter transaction announcements to this node. See BIP133. */
         std::atomic<CAmount> m_fee_filter_received{0};
-        // SYSCOIN
+        // wentuno
         std::set<CInv> m_tx_inventory_to_send_other;
     };
 
@@ -250,7 +250,7 @@ struct Peer {
 
     /** Whether this peer wants invs or headers (when possible) for block announcements */
     bool m_prefers_headers GUARDED_BY(NetEventsInterface::g_msgproc_mutex){false};
-    // SYSCOIN
+    // wentuno
     /** This peer's a masternode connection */
     std::atomic<bool> m_masternode_connection{false};
     explicit Peer(NodeId id, ServiceFlags our_services)
@@ -313,7 +313,7 @@ public:
     /** Relay transaction to all peers. */
     virtual void RelayTransaction(const uint256& txid, const uint256& wtxid) = 0;
 
-    /** SYSCOIN Relay recovered sigs to all interested peers */
+    /** wentuno Relay recovered sigs to all interested peers */
     virtual void RelayRecoveredSig(const uint256& sigHash) = 0;
 
     /** Send ping message to all peers */
@@ -322,7 +322,7 @@ public:
     /** Set the best height */
     virtual void SetBestHeight(int height) = 0;
 
-    // SYSCOIN
+    // wentuno
     virtual size_t GetRequestedCount(NodeId nodeId) const = 0;
     virtual void ReceivedResponse(NodeId nodeId, const uint256& hash) = 0;
     virtual void ForgetTxHash(NodeId nodeId, const uint256& hash) = 0;
@@ -334,7 +334,7 @@ public:
     virtual bool IsBanned(NodeId nodeid) = 0;
     /* Public for unit testing. */
     virtual void UnitTestMisbehaving(NodeId peer_id, int howmuch) = 0;
-    // SYSCOIN
+    // wentuno
     virtual void Misbehaving(Peer& peer, int howmuch, const std::string& message) = 0;
 
     /**
@@ -351,11 +351,11 @@ public:
     virtual void UpdateLastBlockAnnounceTime(NodeId node, int64_t time_in_seconds) = 0;
 };
 
-// SYSCOIN
-// Upstream moved this into net_processing.cpp (13417), however since we use Misbehaving in a number of syscoin specific
+// wentuno
+// Upstream moved this into net_processing.cpp (13417), however since we use Misbehaving in a number of wentuno specific
 // files such as mnauth.cpp and governance.cpp it makes sense to keep it in the header
 /** Increase a node's misbehavior score. */
 bool IsBanned(NodeId nodeid, BanMan& banman);
 unsigned int GetMaxInv();
 bool CanServeBlocks(const Peer& peer);
-#endif // SYSCOIN_NET_PROCESSING_H
+#endif // wentuno_NET_PROCESSING_H

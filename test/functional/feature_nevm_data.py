@@ -22,7 +22,7 @@ class NEVMDataTest(DashTestFramework):
         print('Testing for max size of a blob (2MB)')
         blobDataMax = secrets.token_hex(MAX_NEVM_DATA_BLOB)
         print('Creating large blob (2MB)...')
-        vh = self.nodes[0].syscoincreatenevmblob(blobDataMax)['versionhash']
+        vh = self.nodes[0].wentunocreatenevmblob(blobDataMax)['versionhash']
         self.wait_until(lambda: self.sync_mempools_helper(self.nodes))
         print('Generating block...')
         cl = self.nodes[0].getbestblockhash()
@@ -37,13 +37,13 @@ class NEVMDataTest(DashTestFramework):
         vh = secrets.token_hex(32)
         print('Trying 2MB + 1 to ensure it cannot create blob...')
         blobDataMaxPlus = secrets.token_hex(MAX_NEVM_DATA_BLOB + 1)
-        txBad = self.nodes[0].syscoincreatenevmblob(blobDataMaxPlus)['txid']
+        txBad = self.nodes[0].wentunocreatenevmblob(blobDataMaxPlus)['txid']
         assert_raises_rpc_error(-5, "No such mempool transaction", self.nodes[1].getrawtransaction, txid=txBad)
         print('Making 2MB * MAX_DATA_BLOBS+1...')
         self.blobVHs = []
         for i in range(0, 33):
             blobDataMax = secrets.token_hex(MAX_NEVM_DATA_BLOB)
-            vh = self.nodes[0].syscoincreatenevmblob(blobDataMax)['versionhash']
+            vh = self.nodes[0].wentunocreatenevmblob(blobDataMax)['versionhash']
             self.blobVHs.append(vh)
         self.wait_until(lambda: self.sync_mempools_helper(self.nodes))
         print('Generating block...')
@@ -89,7 +89,7 @@ class NEVMDataTest(DashTestFramework):
         self.blobVHs = []
         print('Populate 2 * MAX_DATA_BLOBS blobs in mempool (64)')
         for i in range(0, MAX_DATA_BLOBS*2):
-            vh = self.nodes[0].syscoincreatenevmblob(secrets.token_hex(55))['versionhash']
+            vh = self.nodes[0].wentunocreatenevmblob(secrets.token_hex(55))['versionhash']
             self.blobVHs.append(vh)
         self.wait_until(lambda: self.sync_mempools_helper(self.nodes))
         print('Generating block...')
@@ -156,48 +156,48 @@ class NEVMDataTest(DashTestFramework):
         self.stop_node(4)
         print('Creating a few blobs across nodes...')
         startblockhash = self.nodes[0].getbestblockhash()
-        self.nodes[0].syscoincreatenevmblob(secrets.token_hex(55))
+        self.nodes[0].wentunocreatenevmblob(secrets.token_hex(55))
         txidData = secrets.token_hex(55)
-        txid = self.nodes[1].syscoincreatenevmblob(txidData)['txid']
+        txid = self.nodes[1].wentunocreatenevmblob(txidData)['txid']
         txid1Data = secrets.token_hex(55)
-        txid1 = self.nodes[0].syscoincreatenevmblob(txid1Data)['txid']
+        txid1 = self.nodes[0].wentunocreatenevmblob(txid1Data)['txid']
         vhData = secrets.token_hex(55)
-        res = self.nodes[3].syscoincreatenevmblob(vhData)
+        res = self.nodes[3].wentunocreatenevmblob(vhData)
         vh = res['versionhash']
         vhTxid = res['txid']
-        self.nodes[3].syscoincreatenevmblob(secrets.token_hex(55))
+        self.nodes[3].wentunocreatenevmblob(secrets.token_hex(55))
         print('Checking for duplicate versionhash...')
-        assert vhTxid != self.nodes[3].syscoincreaterawnevmblob(vh, vhData)['txid']
+        assert vhTxid != self.nodes[3].wentunocreaterawnevmblob(vh, vhData)['txid']
         self.wait_until(lambda: self.sync_mempools_helper(self.nodes[0:4]))
-        self.nodes[3].syscoincreatenevmblob(secrets.token_hex(55))['txid']
+        self.nodes[3].wentunocreatenevmblob(secrets.token_hex(55))['txid']
         print('Generating blocks without waiting for mempools to sync...')
         self.generate_helper(self.nodes[2], 5, sync_fun=self.no_op, nodes=self.nodes[0:4])
         self.wait_until(lambda: self.sync_blocks_helper(self.nodes[0:4]))
         self.generate_helper(self.nodes[2], 5, sync_fun=self.no_op, nodes=self.nodes[0:4])
         print('Check for consistency...')
-        self.nodes[3].syscoincreatenevmblob(secrets.token_hex(55))
+        self.nodes[3].wentunocreatenevmblob(secrets.token_hex(55))
         self.wait_until(lambda: self.sync_mempools_helper(self.nodes[0:4]))
-        self.nodes[3].syscoincreatenevmblob(secrets.token_hex(55))
+        self.nodes[3].wentunocreatenevmblob(secrets.token_hex(55))
         self.wait_until(lambda: self.sync_mempools_helper(self.nodes[0:4]))
         assert_equal(self.nodes[0].getnevmblobdata(txid, True)['data'], txidData)
         assert_equal(self.nodes[1].getnevmblobdata(vh, True)['data'], vhData)
         assert_equal(self.nodes[1].getnevmblobdata(txid, True)['data'], txidData)
         # test relay before block creation
         print('Create more blobs...')
-        self.nodes[0].syscoincreatenevmblob(secrets.token_hex(55))
-        self.nodes[0].syscoincreatenevmblob(secrets.token_hex(55))
-        self.nodes[0].syscoincreatenevmblob(secrets.token_hex(55))
-        self.nodes[0].syscoincreatenevmblob(secrets.token_hex(55))
-        self.nodes[0].syscoincreatenevmblob(secrets.token_hex(55))
+        self.nodes[0].wentunocreatenevmblob(secrets.token_hex(55))
+        self.nodes[0].wentunocreatenevmblob(secrets.token_hex(55))
+        self.nodes[0].wentunocreatenevmblob(secrets.token_hex(55))
+        self.nodes[0].wentunocreatenevmblob(secrets.token_hex(55))
+        self.nodes[0].wentunocreatenevmblob(secrets.token_hex(55))
         data = secrets.token_hex(55)
-        self.nodes[0].syscoincreatenevmblob(data)
-        self.nodes[0].syscoincreatenevmblob(vhData, True)
-        self.nodes[0].syscoincreatenevmblob(data, True)
-        self.nodes[0].syscoincreatenevmblob(data, True)
-        self.nodes[0].syscoincreatenevmblob(data, True)
+        self.nodes[0].wentunocreatenevmblob(data)
+        self.nodes[0].wentunocreatenevmblob(vhData, True)
+        self.nodes[0].wentunocreatenevmblob(data, True)
+        self.nodes[0].wentunocreatenevmblob(data, True)
+        self.nodes[0].wentunocreatenevmblob(data, True)
         for i in range(0, 33):
             blobDataMax = secrets.token_hex(MAX_NEVM_DATA_BLOB)
-            self.nodes[0].syscoincreatenevmblob(blobDataMax)
+            self.nodes[0].wentunocreatenevmblob(blobDataMax)
         print('Generating blocks after waiting for mempools to sync...')
         self.wait_until(lambda: self.sync_mempools_helper(self.nodes[0:4]))
         self.generate_helper(self.nodes[2], 5, sync_fun=self.no_op, nodes=self.nodes[0:4])
@@ -277,7 +277,7 @@ class NEVMDataTest(DashTestFramework):
         assert_equal(self.nodes[0].getnevmblobdata(vh, True)['data'], vhData)
         assert_raises_rpc_error(-32602, 'Could not find blob information for versionhash', self.nodes[0].getnevmblobdata, txid1)
         print('Checking for invalid versionhash...')
-        txidBad = self.nodes[3].syscoincreaterawnevmblob(secrets.token_hex(55), secrets.token_hex(55))['txid']
+        txidBad = self.nodes[3].wentunocreaterawnevmblob(secrets.token_hex(55), secrets.token_hex(55))['txid']
         # should fail and not propagate due to 'bad-txns-poda-invalid'
         assert_raises_rpc_error(-5, "No such mempool transaction", self.nodes[0].getrawtransaction, txid=txidBad)
         print('Expire updated blob...')

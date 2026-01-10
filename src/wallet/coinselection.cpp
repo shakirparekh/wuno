@@ -4,7 +4,7 @@
 
 #include <wallet/coinselection.h>
 
-#include <common/system.h>
+#include <common/WUNOtem.h>
 #include <consensus/amount.h>
 #include <consensus/consensus.h>
 #include <interfaces/chain.h>

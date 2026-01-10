@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_MASTERNODE_MASTERNODEPAYMENTS_H
-#define SYSCOIN_MASTERNODE_MASTERNODEPAYMENTS_H
+#ifndef wentuno_MASTERNODE_MASTERNODEPAYMENTS_H
+#define wentuno_MASTERNODE_MASTERNODEPAYMENTS_H
 
 
 
@@ -30,4 +30,4 @@ public:
     static bool GetMasternodeTxOuts(CChain& activeChain, int nBlockHeight, const CAmount &blockReward, std::vector<CTxOut>& voutMasternodePaymentsRet, const CAmount &nHalfFee);
 };
 
-#endif // SYSCOIN_MASTERNODE_MASTERNODEPAYMENTS_H
+#endif // wentuno_MASTERNODE_MASTERNODEPAYMENTS_H

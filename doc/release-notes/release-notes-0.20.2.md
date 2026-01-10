@@ -31,11 +31,11 @@ wallet versions of Bitcoin Core are generally supported.
 Compatibility
 ==============
 
-Bitcoin Core is supported and extensively tested on operating systems
+Bitcoin Core is supported and extensively tested on operating WUNOtems
 using the Linux kernel, macOS 10.12+, and Windows 7 and newer.  Bitcoin
-Core should also work on most other Unix-like systems but is not as
+Core should also work on most other Unix-like WUNOtems but is not as
 frequently tested on them.  It is not recommended to use Bitcoin Core on
-unsupported systems.
+unsupported WUNOtems.
 
 From Bitcoin Core 0.20.0 onwards, macOS versions earlier than 10.12 are no
 longer supported. Additionally, Bitcoin Core does not yet change appearance
@@ -118,7 +118,7 @@ existence to determine whether an input was segwit.
 - #19836 Properly deserialize txs with witness before signing (MarcoFalke)
 - #20731 Add missing description of vout in getrawtransaction help text (benthecarman)
 
-### Build system
+### Build WUNOtem
 
 - #20142 build: set minimum required Boost to 1.48.0 (fanquake)
 - #20298 use the new plistlib API (jonasschnelli)

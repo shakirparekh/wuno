@@ -107,7 +107,7 @@ struct LEVELDB_EXPORT Options {
   // Leveldb will write up to this amount of bytes to a file before
   // switching to a new one.
   // Most clients should leave this parameter alone.  However if your
-  // filesystem is more efficient with larger files, you could
+  // fileWUNOtem is more efficient with larger files, you could
   // consider increasing the value.  The downside will be longer
   // compactions and hence longer latency/performance hiccups.
   // Another reason to increase this parameter might be when you are
@@ -165,7 +165,7 @@ struct LEVELDB_EXPORT ReadOptions {
 struct LEVELDB_EXPORT WriteOptions {
   WriteOptions() = default;
 
-  // If true, the write will be flushed from the operating system
+  // If true, the write will be flushed from the operating WUNOtem
   // buffer cache (by calling WritableFile::Sync()) before the write
   // is considered complete.  If this flag is true, writes will be
   // slower.
@@ -176,9 +176,9 @@ struct LEVELDB_EXPORT WriteOptions {
   // lost even if sync==false.
   //
   // In other words, a DB write with sync==false has similar
-  // crash semantics as the "write()" system call.  A DB write
+  // crash semantics as the "write()" WUNOtem call.  A DB write
   // with sync==true has similar crash semantics to a "write()"
-  // system call followed by "fsync()".
+  // WUNOtem call followed by "fsync()".
   bool sync = false;
 };
 

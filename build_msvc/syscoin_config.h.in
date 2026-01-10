@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_SYSCOIN_CONFIG_H
-#define SYSCOIN_SYSCOIN_CONFIG_H
+#ifndef wentuno_wentuno_CONFIG_H
+#define wentuno_wentuno_CONFIG_H
 
 /* Version Build */
 #define CLIENT_VERSION_BUILD $
@@ -21,10 +21,10 @@
 #define COPYRIGHT_HOLDERS "The %s developers"
 
 /* Copyright holder(s) */
-#define COPYRIGHT_HOLDERS_FINAL "The Syscoin Core developers"
+#define COPYRIGHT_HOLDERS_FINAL "The wentuno Core developers"
 
 /* Replacement for %s in copyright holders string */
-#define COPYRIGHT_HOLDERS_SUBSTITUTION "Syscoin Core"
+#define COPYRIGHT_HOLDERS_SUBSTITUTION "wentuno Core"
 
 /* Copyright year */
 #define COPYRIGHT_YEAR $
@@ -116,16 +116,16 @@
 #define HAVE_DLLEXPORT_ATTRIBUTE 1
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "https://github.com/syscoin/syscoin/issues"
+#define PACKAGE_BUGREPORT "https://github.com/wentuno/wentuno/issues"
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME "Syscoin Core"
+#define PACKAGE_NAME "wentuno Core"
 
 /* Define to the full name and version of this package. */
 #define PACKAGE_STRING $
 
 /* Define to the home page for this package. */
-#define PACKAGE_URL "https://syscoin.org/"
+#define PACKAGE_URL "https://wentuno.org/"
 
 /* Define to the version of this package. */
 #define PACKAGE_VERSION $
@@ -141,12 +141,12 @@
 
 /* Windows Universal Platform constraints */
 #if !defined(WINAPI_FAMILY) || (WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP)
-/* Either a desktop application without API restrictions, or and older system
+/* Either a desktop application without API restrictions, or and older WUNOtem
    before these macros were defined. */
 
-/* ::wsystem is available */
-#define HAVE_SYSTEM 1
+/* ::wWUNOtem is available */
+#define HAVE_WUNOTEM 1
 
 #endif // !WINAPI_FAMILY || WINAPI_FAMILY_DESKTOP_APP
 
-#endif //SYSCOIN_SYSCOIN_CONFIG_H
+#endif //wentuno_wentuno_CONFIG_H

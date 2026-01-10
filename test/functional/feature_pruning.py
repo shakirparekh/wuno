@@ -20,7 +20,7 @@ from test_framework.script import (
     OP_NOP,
     OP_RETURN,
 )
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import (
     assert_equal,
     assert_greater_than,
@@ -64,7 +64,7 @@ def mine_large_blocks(node, n):
 def calc_usage(blockdir):
     return sum(os.path.getsize(blockdir + f) for f in os.listdir(blockdir) if os.path.isfile(os.path.join(blockdir, f))) / (1024. * 1024.)
 
-class PruneTest(SyscoinTestFramework):
+class PruneTest(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
 
@@ -75,11 +75,11 @@ class PruneTest(SyscoinTestFramework):
 
         # Create nodes 0 and 1 to mine.
         # Create node 2 to test pruning.
-        # SYSCOIN
+        # wentuno
         self.full_node_default_args = ["-dip3params=2000:2000","-maxreceivebuffer=20000", "-checkblocks=5"]
         # Create nodes 3 and 4 to test manual pruning (they will be re-started with manual pruning later)
         # Create nodes 5 to test wallet in prune mode, but do not connect
-        # SYSCOIN
+        # wentuno
         self.extra_args = [
             self.full_node_default_args,
             self.full_node_default_args,
@@ -480,7 +480,7 @@ class PruneTest(SyscoinTestFramework):
 
         self.log.info("Test invalid pruning command line options")
         self.test_invalid_command_line_options()
-        # SYSCOIN
+        # wentuno
         # self.test_scanblocks_pruned()
 
         self.log.info("Done")

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_CLIENTMODEL_H
-#define SYSCOIN_QT_CLIENTMODEL_H
+#ifndef wentuno_QT_CLIENTMODEL_H
+#define wentuno_QT_CLIENTMODEL_H
 
 #include <sync.h>
 
@@ -24,7 +24,7 @@ enum class SynchronizationState;
 namespace interfaces {
 class Handler;
 class Node;
-// SYSCOIN
+// wentuno
 namespace Masternode {
     class Sync;
 }
@@ -56,7 +56,7 @@ enum NumConnections {
 
 class CDeterministicMNList;
 typedef std::shared_ptr<CDeterministicMNList> CDeterministicMNListPtr;
-/** Model for Syscoin network client. */
+/** Model for wentuno network client. */
 class ClientModel : public QObject
 {
     Q_OBJECT
@@ -66,7 +66,7 @@ public:
     ~ClientModel();
 
     interfaces::Node& node() const { return m_node; }
-    // SYSCOIN
+    // wentuno
     interfaces::Masternode::Sync& masternodeSync() const;
     OptionsModel *getOptionsModel();
     PeerTableModel *getPeerTableModel();
@@ -80,7 +80,7 @@ public:
     int getHeaderTipHeight() const;
     int64_t getHeaderTipTime() const;
 
-    // SYSCOIN
+    // wentuno
     void setMasternodeList(const CDeterministicMNList& mnList);
     CDeterministicMNList getMasternodeList() const;
     void refreshMasternodeList();
@@ -116,7 +116,7 @@ private:
     std::unique_ptr<interfaces::Handler> m_handler_banned_list_changed;
     std::unique_ptr<interfaces::Handler> m_handler_notify_block_tip;
     std::unique_ptr<interfaces::Handler> m_handler_notify_header_tip;
-    // SYSCOIN
+    // wentuno
     std::unique_ptr<interfaces::Handler>  m_handler_additional_data_sync_progress_changed;
     std::unique_ptr<interfaces::Handler>  m_handler_masternodelist_changed;
     OptionsModel *optionsModel;
@@ -127,7 +127,7 @@ private:
     //! A thread to interact with m_node asynchronously
     QThread* const m_thread;
 
-    // SYSCOIN The cache for mn list is not technically needed because CDeterministicMNManager
+    // wentuno The cache for mn list is not technically needed because CDeterministicMNManager
     // caches it internally for recent blocks but it's not enough to get consistent
     // representation of the list in UI during initial sync/reindex, so we cache it here too.
     mutable RecursiveMutex cs_mnlinst; // protects mnListCached
@@ -150,9 +150,9 @@ Q_SIGNALS:
 
     // Show progress dialog e.g. for verifychain
     void showProgress(const QString &title, int nProgress);
-    // SYSCOIN
+    // wentuno
     void masternodeListChanged() const;
     void additionalDataSyncProgressChanged(double nSyncProgress);
 };
 
-#endif // SYSCOIN_QT_CLIENTMODEL_H
+#endif // wentuno_QT_CLIENTMODEL_H

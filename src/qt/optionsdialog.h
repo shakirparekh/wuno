@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_OPTIONSDIALOG_H
-#define SYSCOIN_QT_OPTIONSDIALOG_H
+#ifndef wentuno_QT_OPTIONSDIALOG_H
+#define wentuno_QT_OPTIONSDIALOG_H
 
 #include <QDialog>
 #include <QValidator>
@@ -55,7 +55,7 @@ private Q_SLOTS:
     /* set OK button state (enabled / disabled) */
     void setOkButtonState(bool fState);
     void on_resetButton_clicked();
-    void on_openSyscoinConfButton_clicked();
+    void on_openwentunoConfButton_clicked();
     void on_okButton_clicked();
     void on_cancelButton_clicked();
 
@@ -79,4 +79,4 @@ private:
     QDataWidgetMapper* mapper{nullptr};
 };
 
-#endif // SYSCOIN_QT_OPTIONSDIALOG_H
+#endif // wentuno_QT_OPTIONSDIALOG_H

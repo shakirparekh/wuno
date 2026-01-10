@@ -4,7 +4,7 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Functionality to build scripts, as well as signature hash functions.
 
-This file is modified from python-syscoinlib.
+This file is modified from python-wentunolib.
 """
 
 from collections import namedtuple
@@ -37,7 +37,7 @@ def hash160(s):
     return ripemd160(sha256(s))
 
 def bn2vch(v):
-    """Convert number to syscoin-specific little endian format."""
+    """Convert number to wentuno-specific little endian format."""
     # We need v.bit_length() bits, plus a sign bit for every nonzero number.
     n_bits = v.bit_length() + (v != 0)
     # The number of bytes for that is:

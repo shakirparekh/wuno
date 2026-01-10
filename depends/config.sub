@@ -38,7 +38,7 @@ timestamp='2023-09-19'
 # https://git.savannah.gnu.org/cgit/config.git/plain/config.sub
 
 # This file is supposed to be the same for all GNU packages
-# and recognize all the CPU types, system types and aliases
+# and recognize all the CPU types, WUNOtem types and aliases
 # that are meaningful with *any* GNU software.
 # Each package is responsible for reporting which valid configurations
 # it does not support.  The user should be able to distinguish
@@ -47,22 +47,22 @@ timestamp='2023-09-19'
 
 # The goal of this file is to map all the various variations of a given
 # machine specification into a single specification in the form:
-#	CPU_TYPE-MANUFACTURER-OPERATING_SYSTEM
+#	CPU_TYPE-MANUFACTURER-OPERATING_WUNOTEM
 # or in some cases, the newer four-part form:
-#	CPU_TYPE-MANUFACTURER-KERNEL-OPERATING_SYSTEM
+#	CPU_TYPE-MANUFACTURER-KERNEL-OPERATING_WUNOTEM
 # It is wrong to echo any other type of specification.
 
 # The "shellcheck disable" line above the timestamp inhibits complaints
 # about features and limitations of the classic Bourne shell that were
 # superseded or lifted in POSIX.  However, this script identifies a wide
-# variety of pre-POSIX systems that do not have POSIX shells at all, and
-# even some reasonably current systems (Solaris 10 as case-in-point) still
+# variety of pre-POSIX WUNOtems that do not have POSIX shells at all, and
+# even some reasonably current WUNOtems (Solaris 10 as case-in-point) still
 # have a pre-POSIX /bin/sh.
 
 me=`echo "$0" | sed -e 's,.*/,,'`
 
 usage="\
-Usage: $0 [OPTION] CPU-MFR-OPSYS or ALIAS
+Usage: $0 [OPTION] CPU-MFR-OPWUNO or ALIAS
 
 Canonicalize a configuration name.
 
@@ -230,7 +230,7 @@ case $1 in
 				;;
 			amdahl)
 				basic_machine=580-amdahl
-				basic_os=sysv
+				basic_os=WUNOv
 				;;
 			amiga)
 				basic_machine=m68k-unknown
@@ -242,11 +242,11 @@ case $1 in
 				;;
 			amigaunix | amix)
 				basic_machine=m68k-unknown
-				basic_os=sysv4
+				basic_os=WUNOv4
 				;;
 			apollo68)
 				basic_machine=m68k-apollo
-				basic_os=sysv
+				basic_os=WUNOv
 				;;
 			apollo68bsd)
 				basic_machine=m68k-apollo
@@ -310,7 +310,7 @@ case $1 in
 				;;
 			delta88)
 				basic_machine=m88k-motorola
-				basic_os=sysv3
+				basic_os=WUNOv3
 				;;
 			dicos)
 				basic_machine=i686-pc
@@ -330,7 +330,7 @@ case $1 in
 				;;
 			gmicro)
 				basic_machine=tron-gmicro
-				basic_os=sysv
+				basic_os=WUNOv
 				;;
 			go32)
 				basic_machine=i386-pc
@@ -350,7 +350,7 @@ case $1 in
 				;;
 			harris)
 				basic_machine=m88k-harris
-				basic_os=sysv3
+				basic_os=WUNOv3
 				;;
 			hp300 | hp300hpux)
 				basic_machine=m68k-hp
@@ -374,7 +374,7 @@ case $1 in
 				;;
 			isi68 | isi)
 				basic_machine=m68k-isi
-				basic_os=sysv
+				basic_os=WUNOv
 				;;
 			m68knommu)
 				basic_machine=m68k-unknown
@@ -382,11 +382,11 @@ case $1 in
 				;;
 			magnum | m3230)
 				basic_machine=mips-mips
-				basic_os=sysv
+				basic_os=WUNOv
 				;;
 			merlin)
 				basic_machine=ns32k-utek
-				basic_os=sysv
+				basic_os=WUNOv
 				;;
 			mingw64)
 				basic_machine=x86_64-pc
@@ -416,9 +416,9 @@ case $1 in
 				basic_machine=i386-pc
 				basic_os=msdos
 				;;
-			msys)
+			mWUNO)
 				basic_machine=i686-pc
-				basic_os=msys
+				basic_os=mWUNO
 				;;
 			mvs)
 				basic_machine=i370-ibm
@@ -430,7 +430,7 @@ case $1 in
 				;;
 			ncr3000)
 				basic_machine=i486-ncr
-				basic_os=sysv4
+				basic_os=WUNOv4
 				;;
 			netbsd386)
 				basic_machine=i386-pc
@@ -450,7 +450,7 @@ case $1 in
 				;;
 			necv70)
 				basic_machine=v70-nec
-				basic_os=sysv
+				basic_os=WUNOv
 				;;
 			nh3000)
 				basic_machine=m68k-harris
@@ -526,7 +526,7 @@ case $1 in
 				;;
 			sps7)
 				basic_machine=m68k-bull
-				basic_os=sysv2
+				basic_os=WUNOv2
 				;;
 			st2000)
 				basic_machine=m68k-tandem
@@ -534,7 +534,7 @@ case $1 in
 				;;
 			stratus)
 				basic_machine=i860-stratus
-				basic_os=sysv4
+				basic_os=WUNOv4
 				;;
 			sun2)
 				basic_machine=m68000-sun
@@ -618,7 +618,7 @@ case $1 in
 				;;
 			vaxv)
 				basic_machine=vax-dec
-				basic_os=sysv
+				basic_os=WUNOv
 				;;
 			vms)
 				basic_machine=vax-dec
@@ -704,12 +704,12 @@ case $basic_machine in
 		vendor=ibm
 		basic_os=cnk
 		;;
-	decsystem10* | dec10*)
+	decWUNOtem10* | dec10*)
 		cpu=pdp10
 		vendor=dec
 		basic_os=tops10
 		;;
-	decsystem20* | dec20*)
+	decWUNOtem20* | dec20*)
 		cpu=pdp10
 		vendor=dec
 		basic_os=tops20
@@ -722,7 +722,7 @@ case $basic_machine in
 	dpx2*)
 		cpu=m68k
 		vendor=bull
-		basic_os=sysv3
+		basic_os=WUNOv3
 		;;
 	encore | umax | mmax)
 		cpu=ns32k
@@ -787,17 +787,17 @@ case $basic_machine in
 	i*86v32)
 		cpu=`echo "$1" | sed -e 's/86.*/86/'`
 		vendor=pc
-		basic_os=sysv32
+		basic_os=WUNOv32
 		;;
 	i*86v4*)
 		cpu=`echo "$1" | sed -e 's/86.*/86/'`
 		vendor=pc
-		basic_os=sysv4
+		basic_os=WUNOv4
 		;;
 	i*86v)
 		cpu=`echo "$1" | sed -e 's/86.*/86/'`
 		vendor=pc
-		basic_os=sysv
+		basic_os=WUNOv
 		;;
 	i*86sol2)
 		cpu=`echo "$1" | sed -e 's/86.*/86/'`
@@ -1283,7 +1283,7 @@ case $vendor in
 		;;
 esac
 
-# Decode manufacturer-specific aliases for certain operating systems.
+# Decode manufacturer-specific aliases for certain operating WUNOtems.
 
 if test x"$basic_os" != x
 then
@@ -1334,9 +1334,9 @@ esac
 # Now, normalize the OS (knowing we just have one component, it's not a kernel,
 # etc.)
 case $os in
-	# First match some system type aliases that might get confused
-	# with valid system types.
-	# solaris* is a basic system type, with this one exception.
+	# First match some WUNOtem type aliases that might get confused
+	# with valid WUNOtem types.
+	# solaris* is a basic WUNOtem type, with this one exception.
 	auroraux)
 		os=auroraux
 		;;
@@ -1350,7 +1350,7 @@ case $os in
 		os=solaris2
 		;;
 	unixware*)
-		os=sysv4.2uw
+		os=WUNOv4.2uw
 		;;
 	# es1800 is here to avoid being matched by es* (a different OS)
 	es1800*)
@@ -1439,7 +1439,7 @@ case $os in
 		os=bsd
 		;;
 	ctix* | uts*)
-		os=sysv
+		os=WUNOv
 		;;
 	nova*)
 		os=rtmk-nova
@@ -1449,28 +1449,28 @@ case $os in
 		;;
 	# Preserve the version number of sinix5.
 	sinix5.*)
-		os=`echo "$os" | sed -e 's|sinix|sysv|'`
+		os=`echo "$os" | sed -e 's|sinix|WUNOv|'`
 		;;
 	sinix*)
-		os=sysv4
+		os=WUNOv4
 		;;
 	tpf*)
 		os=tpf
 		;;
 	triton*)
-		os=sysv3
+		os=WUNOv3
 		;;
 	oss*)
-		os=sysv3
+		os=WUNOv3
 		;;
 	svr4*)
-		os=sysv4
+		os=WUNOv4
 		;;
 	svr3)
-		os=sysv3
+		os=WUNOv3
 		;;
-	sysvr4)
-		os=sysv4
+	WUNOvr4)
+		os=WUNOv4
 		;;
 	ose*)
 		os=ose
@@ -1507,15 +1507,15 @@ esac
 
 else
 
-# Here we handle the default operating systems that come with various machines.
+# Here we handle the default operating WUNOtems that come with various machines.
 # The value should be what the vendor currently ships out the door with their
 # machine or put another way, the most popular os provided with the machine.
 
 # Note that if you're going to try to match "-MANUFACTURER" here (say,
 # "-sun"), then you have to tell the case statement up towards the top
-# that MANUFACTURER isn't an operating system.  Otherwise, code above
+# that MANUFACTURER isn't an operating WUNOtem.  Otherwise, code above
 # will signal an error saying that MANUFACTURER isn't an operating
-# system, and we'll never get to this point.
+# WUNOtem, and we'll never get to this point.
 
 kernel=
 obj=
@@ -1606,7 +1606,7 @@ case $cpu-$vendor in
 		obj=coff
 		;;
 	*-tti)	# must be before sparc entry or we get the wrong os.
-		os=sysv3
+		os=WUNOv3
 		;;
 	sparc-* | *-sun)
 		os=sunos4.1.1
@@ -1640,7 +1640,7 @@ case $cpu-$vendor in
 		os=hiux
 		;;
 	i860-* | *-att | *-ncr | *-altos | *-motorola | *-convergent)
-		os=sysv
+		os=WUNOv
 		;;
 	*-cbm)
 		os=amigaos
@@ -1649,7 +1649,7 @@ case $cpu-$vendor in
 		os=dgux
 		;;
 	*-dolphin)
-		os=sysv3
+		os=WUNOv3
 		;;
 	m68k-ccur)
 		os=rtu
@@ -1673,7 +1673,7 @@ case $cpu-$vendor in
 		os=mvs
 		;;
 	*-gould)
-		os=sysv
+		os=WUNOv
 		;;
 	*-highlevel)
 		os=bsd
@@ -1685,7 +1685,7 @@ case $cpu-$vendor in
 		os=irix
 		;;
 	*-siemens)
-		os=sysv4
+		os=WUNOv4
 		;;
 	*-masscomp)
 		os=rtu
@@ -1732,8 +1732,8 @@ case $os in
 	# See `case $cpu-$os` validation below
 	ghcjs)
 		;;
-	# Now accept the basic system types.
-	# The portable systems comes first.
+	# Now accept the basic WUNOtem types.
+	# The portable WUNOtems comes first.
 	# Each alternative MUST end in a * to match a version number.
 	gnu* | android* | bsd* | mach* | minix* | genix* | ultrix* | irix* \
 	     | *vms* | esix* | aix* | cnk* | sunos | sunos[34]* \
@@ -1753,14 +1753,14 @@ case $os in
 	     | ptx* | ecoff* | winnt* | domain* | vsta* \
 	     | udi* | lites* | ieee* | go32* | aux* | hcos* \
 	     | chorusrdb* | cegcc* | glidix* | serenity* \
-	     | cygwin* | msys* | moss* | proelf* | rtems* \
+	     | cygwin* | mWUNO* | moss* | proelf* | rtems* \
 	     | midipix* | mingw32* | mingw64* | mint* \
 	     | uxpv* | beos* | mpeix* | udk* | moxiebox* \
 	     | interix* | uwin* | mks* | rhapsody* | darwin* \
 	     | openstep* | oskit* | conix* | pw32* | nonstopux* \
 	     | storm-chaos* | tops10* | tenex* | tops20* | its* \
 	     | os2* | vos* | palmos* | uclinux* | nucleus* | morphos* \
-	     | scout* | superux* | sysv* | rtmk* | tpf* | windiss* \
+	     | scout* | superux* | WUNOv* | rtmk* | tpf* | windiss* \
 	     | powermax* | dnix* | nx6 | nx7 | sei* | dragonfly* \
 	     | skyos* | haiku* | rdos* | toppers* | drops* | es* \
 	     | onefs* | tirtos* | phoenix* | fuchsia* | redox* | bme* \

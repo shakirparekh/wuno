@@ -3,11 +3,11 @@
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.util import assert_equal
 
 
-class WalletLocktimeTest(SyscoinTestFramework):
+class WalletLocktimeTest(wentunoTestFramework):
     def add_options(self, parser):
         self.add_wallet_options(parser)
 

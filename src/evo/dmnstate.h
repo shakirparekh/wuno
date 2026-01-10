@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_EVO_DMNSTATE_H
-#define SYSCOIN_EVO_DMNSTATE_H
+#ifndef wentuno_EVO_DMNSTATE_H
+#define wentuno_EVO_DMNSTATE_H
 
 #include <crypto/common.h>
 #include <bls/bls.h>
@@ -226,4 +226,4 @@ public:
 };
 
 
-#endif // SYSCOIN_EVO_DMNSTATE_H
+#endif // wentuno_EVO_DMNSTATE_H

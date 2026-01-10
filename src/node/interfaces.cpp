@@ -52,7 +52,7 @@
 #include <warnings.h>
 
 #if defined(HAVE_CONFIG_H)
-#include <config/syscoin-config.h>
+#include <config/wentuno-config.h>
 #endif
 
 #include <any>
@@ -60,7 +60,7 @@
 #include <optional>
 #include <utility>
 
-// SYSCOIN
+// wentuno
 #include <evo/deterministicmns.h>
 #include <masternode/masternodesync.h>
 
@@ -73,7 +73,7 @@ using interfaces::Handler;
 using interfaces::MakeSignalHandler;
 using interfaces::Node;
 using interfaces::WalletLoader;
-// SYSCOIN
+// wentuno
 using interfaces::EVO;
 namespace Masternode {
 using interfaces::Masternode::Sync;
@@ -82,7 +82,7 @@ namespace node {
 // All members of the classes in this namespace are intentionally public, as the
 // classes themselves are private.
 namespace {
-// SYSCOIN
+// wentuno
 class EVOImpl : public EVO
 {
 public:
@@ -122,11 +122,11 @@ public:
 
 class NodeImpl : public Node
 {
-    // SYSCOIN
+    // wentuno
     EVOImpl m_evo;
     MasternodeSyncImpl m_masternodeSync;
 public:
-    // SYSCOIN
+    // wentuno
     EVO& evo() override { return m_evo; }
     Masternode::Sync& masternodeSync() override { return m_masternodeSync; }
     std::unique_ptr<Handler> handleNotifyAdditionalDataSyncProgressChanged(NotifyAdditionalDataSyncProgressChangedFn fn) override
@@ -599,7 +599,7 @@ public:
         }
         return std::nullopt;
     }
-    // SYSCOIN
+    // wentuno
     CDeterministicMNList getMNList(int height) override {
         return deterministicMNManager->GetListForBlock(WITH_LOCK(chainman().GetMutex(), return chainman().ActiveChain()[height]));
     }

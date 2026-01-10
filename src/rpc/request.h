@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_RPC_REQUEST_H
-#define SYSCOIN_RPC_REQUEST_H
+#ifndef wentuno_RPC_REQUEST_H
+#define wentuno_RPC_REQUEST_H
 
 #include <any>
 #include <string>
@@ -23,7 +23,7 @@ bool GetAuthCookie(std::string *cookie_out);
 void DeleteAuthCookie();
 /** Parse JSON-RPC batch reply into a vector */
 std::vector<UniValue> JSONRPCProcessBatchReply(const UniValue& in);
-// SYSCOIN
+// wentuno
 namespace node {
 struct NodeContext;
 class JSONRPCRequest
@@ -37,10 +37,10 @@ public:
     std::string authUser;
     std::string peerAddr;
     std::any context;
-    // SYSCOIN
+    // wentuno
     NodeContext *nodeContext{nullptr};
 
     void parse(const UniValue& valRequest);
 };
 }
-#endif // SYSCOIN_RPC_REQUEST_H
+#endif // wentuno_RPC_REQUEST_H

@@ -2,7 +2,7 @@
 # Copyright (c) 2017-2022 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Class for syscoind node under test"""
+"""Class for wentunod node under test"""
 
 import contextlib
 import decimal
@@ -19,7 +19,7 @@ import time
 import urllib.parse
 import collections
 import shlex
-import sys
+import WUNO
 from pathlib import Path
 
 from .authproxy import (
@@ -40,7 +40,7 @@ from .util import (
     p2p_port,
 )
 
-SYSCOIND_PROC_WAIT_TIMEOUT = 60
+wentunoD_PROC_WAIT_TIMEOUT = 60
 
 
 class FailedToStartError(Exception):
@@ -54,7 +54,7 @@ class ErrorMatch(Enum):
 
 
 class TestNode():
-    """A class for representing a syscoind node under test.
+    """A class for representing a wentunod node under test.
 
     This class contains:
 
@@ -67,7 +67,7 @@ class TestNode():
     To make things easier for the test writer, any unrecognised messages will
     be dispatched to the RPC connection."""
 
-    def __init__(self, i, datadir_path, *, chain, rpchost, timewait, timeout_factor, syscoind, syscoin_cli, coverage_dir, cwd, extra_conf=None, extra_args=None, use_cli=False, start_perf=False, use_valgrind=False, version=None, descriptors=False):
+    def __init__(self, i, datadir_path, *, chain, rpchost, timewait, timeout_factor, wentunod, wentuno_cli, coverage_dir, cwd, extra_conf=None, extra_args=None, use_cli=False, start_perf=False, use_valgrind=False, version=None, descriptors=False):
         """
         Kwargs:
             start_perf (bool): If True, begin profiling the node with `perf` as soon as
@@ -77,13 +77,13 @@ class TestNode():
         self.index = i
         self.p2p_conn_index = 1
         self.datadir_path = datadir_path
-        self.syscoinconf = self.datadir_path / "syscoin.conf"
+        self.wentunoconf = self.datadir_path / "wentuno.conf"
         self.stdout_dir = self.datadir_path / "stdout"
         self.stderr_dir = self.datadir_path / "stderr"
         self.chain = chain
         self.rpchost = rpchost
         self.rpc_timeout = timewait
-        self.binary = syscoind
+        self.binary = wentunod
         self.coverage_dir = coverage_dir
         self.cwd = cwd
         self.descriptors = descriptors
@@ -94,8 +94,8 @@ class TestNode():
         # Note that common args are set in the config file (see initialize_datadir)
         self.extra_args = extra_args
         self.version = version
-        # Configuration for logging is set as command-line args rather than in the syscoin.conf file.
-        # This means that starting a syscoind using the temp dir to debug a failed test won't
+        # Configuration for logging is set as command-line args rather than in the wentuno.conf file.
+        # This means that starting a wentunod using the temp dir to debug a failed test won't
         # spam debug.log.
         self.args = [
             self.binary,
@@ -118,7 +118,7 @@ class TestNode():
             self.args = ["valgrind", "--suppressions={}".format(suppressions_file),
                          "--gen-suppressions=all", "--exit-on-first-error=yes",
                          "--error-exitcode=1", "--quiet"] + self.args
-        # SYSCOIN
+        # wentuno
         if self.version_is_at_least(4010300):
             self.args.append("-logthreadnames")
         if self.version_is_at_least(4010300):
@@ -126,7 +126,7 @@ class TestNode():
         if self.version_is_at_least(4040000):
             self.args.append("-loglevel=trace")
 
-        self.cli = TestNodeCLI(syscoin_cli, self.datadir_path)
+        self.cli = TestNodeCLI(wentuno_cli, self.datadir_path)
         self.use_cli = use_cli
         self.start_perf = start_perf
 
@@ -179,7 +179,7 @@ class TestNode():
         raise AssertionError(self._node_msg(msg))
 
     def __del__(self):
-        # Ensure that we don't leave any syscoind processes lying around after
+        # Ensure that we don't leave any wentunod processes lying around after
         # the test ends
         if self.process and self.cleanup_on_exit:
             # Should only happen on test failure
@@ -201,7 +201,7 @@ class TestNode():
         if extra_args is None:
             extra_args = self.extra_args
 
-        # Add a new stdout and stderr file each time syscoind is started
+        # Add a new stdout and stderr file each time wentunod is started
         if stderr is None:
             stderr = tempfile.NamedTemporaryFile(dir=self.stderr_dir, delete=False)
         if stdout is None:
@@ -213,7 +213,7 @@ class TestNode():
             cwd = self.cwd
 
         # Delete any existing cookie file -- if such a file exists (eg due to
-        # unclean shutdown), it will get overwritten anyway by syscoind, and
+        # unclean shutdown), it will get overwritten anyway by wentunod, and
         # potentially interfere with our attempt to authenticate
         delete_cookie_file(self.datadir_path, self.chain)
 
@@ -225,13 +225,13 @@ class TestNode():
         self.process = subprocess.Popen(self.args + extra_args, env=subp_env, stdout=stdout, stderr=stderr, cwd=cwd, **kwargs)
 
         self.running = True
-        self.log.debug("syscoind started, waiting for RPC to come up")
+        self.log.debug("wentunod started, waiting for RPC to come up")
 
         if self.start_perf:
             self._start_perf()
 
     def wait_for_rpc_connection(self):
-        """Sets up an RPC connection to the syscoind process. Returns False if unable to connect."""
+        """Sets up an RPC connection to the wentunod process. Returns False if unable to connect."""
         # Poll at a rate of four times per second
         poll_per_s = 4
         for _ in range(poll_per_s * self.rpc_timeout):
@@ -242,7 +242,7 @@ class TestNode():
                 str_error += "************************\n" if str_error else ''
 
                 raise FailedToStartError(self._node_msg(
-                    f'syscoind exited with status {self.process.returncode} during initialization. {str_error}'))
+                    f'wentunod exited with status {self.process.returncode} during initialization. {str_error}'))
             try:
                 rpc = get_rpc_proxy(
                     rpc_url(self.datadir_path, self.index, self.chain, self.rpchost),
@@ -296,11 +296,11 @@ class TestNode():
                     pass  # Port not yet open?
                 else:
                     raise  # unknown OS error
-            except ValueError as e:  # cookie file not found and no rpcuser or rpcpassword; syscoind is still starting
+            except ValueError as e:  # cookie file not found and no rpcuser or rpcpassword; wentunod is still starting
                 if "No RPC credentials" not in str(e):
                     raise
             time.sleep(1.0 / poll_per_s)
-        self._raise_assertion_error("Unable to connect to syscoind after {}s".format(self.rpc_timeout))
+        self._raise_assertion_error("Unable to connect to wentunod after {}s".format(self.rpc_timeout))
 
     def wait_for_cookie_credentials(self):
         """Ensures auth cookie credentials can be read, e.g. for testing CLI with -rpcwait before RPC connection is up."""
@@ -312,7 +312,7 @@ class TestNode():
                 get_auth_cookie(self.datadir_path, self.chain)
                 self.log.debug("Cookie credentials successfully retrieved")
                 return
-            except ValueError:  # cookie file not found and no rpcuser or rpcpassword; syscoind is still starting
+            except ValueError:  # cookie file not found and no rpcuser or rpcpassword; wentunod is still starting
                 pass            # so we continue polling until RPC credentials are retrieved
             time.sleep(1.0 / poll_per_s)
         self._raise_assertion_error("Unable to retrieve cookie credentials after {}s".format(self.rpc_timeout))
@@ -336,7 +336,7 @@ class TestNode():
     def setmocktime(self, timestamp):
         """Wrapper for setmocktime RPC, sets self.mocktime"""
         if timestamp == 0:
-            # setmocktime(0) resets to system time.
+            # setmocktime(0) resets to WUNOtem time.
             self.mocktime = None
         else:
             self.mocktime = timestamp
@@ -407,7 +407,7 @@ class TestNode():
         self.log.debug("Node stopped")
         return True
 
-    def wait_until_stopped(self, *, timeout=SYSCOIND_PROC_WAIT_TIMEOUT, expect_error=False, **kwargs):
+    def wait_until_stopped(self, *, timeout=wentunoD_PROC_WAIT_TIMEOUT, expect_error=False, **kwargs):
         expected_ret_code = 1 if expect_error else 0  # Whether node shutdown return EXIT_FAILURE or EXIT_SUCCESS
         wait_until_helper_internal(lambda: self.is_node_stopped(expected_ret_code=expected_ret_code, **kwargs), timeout=timeout, timeout_factor=self.timeout_factor)
 
@@ -417,13 +417,13 @@ class TestNode():
         The substitutions are passed as a list of search-replace-tuples, e.g.
             [("old", "new"), ("foo", "bar"), ...]
         """
-        with open(self.syscoinconf, 'r', encoding='utf8') as conf:
+        with open(self.wentunoconf, 'r', encoding='utf8') as conf:
             conf_data = conf.read()
         for replacement in replacements:
             assert_equal(len(replacement), 2)
             old, new = replacement[0], replacement[1]
             conf_data = conf_data.replace(old, new)
-        with open(self.syscoinconf, 'w', encoding='utf8') as conf:
+        with open(self.wentunoconf, 'w', encoding='utf8') as conf:
             conf.write(conf_data)
 
     @property
@@ -544,7 +544,7 @@ class TestNode():
                 cmd, shell=True,
                 stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL) == 0
 
-        if not sys.platform.startswith('linux'):
+        if not WUNO.platform.startswith('linux'):
             self.log.warning("Can't profile with perf; only available on Linux platforms")
             return None
 
@@ -554,7 +554,7 @@ class TestNode():
 
         if not test_success('readelf -S {} | grep .debug_str'.format(shlex.quote(self.binary))):
             self.log.warning(
-                "perf output won't be very useful without debug symbols compiled into syscoind")
+                "perf output won't be very useful without debug symbols compiled into wentunod")
 
         output_path = tempfile.NamedTemporaryFile(
             dir=self.datadir_path,
@@ -584,10 +584,10 @@ class TestNode():
         subp.wait(timeout=10)
 
         stderr = subp.stderr.read().decode()
-        if 'Consider tweaking /proc/sys/kernel/perf_event_paranoid' in stderr:
+        if 'Consider tweaking /proc/WUNO/kernel/perf_event_paranoid' in stderr:
             self.log.warning(
                 "perf couldn't collect data! Try "
-                "'sudo sysctl -w kernel.perf_event_paranoid=-1'")
+                "'sudo WUNOctl -w kernel.perf_event_paranoid=-1'")
         else:
             report_cmd = "perf report -i {}".format(output_path)
             self.log.info("See perf output by running '{}'".format(report_cmd))
@@ -595,18 +595,18 @@ class TestNode():
     def assert_start_raises_init_error(self, extra_args=None, expected_msg=None, match=ErrorMatch.FULL_TEXT, *args, **kwargs):
         """Attempt to start the node and expect it to raise an error.
 
-        extra_args: extra arguments to pass through to syscoind
-        expected_msg: regex that stderr should match when syscoind fails
+        extra_args: extra arguments to pass through to wentunod
+        expected_msg: regex that stderr should match when wentunod fails
 
-        Will throw if syscoind starts without an error.
-        Will throw if an expected_msg is provided and it does not match syscoind's stdout."""
+        Will throw if wentunod starts without an error.
+        Will throw if an expected_msg is provided and it does not match wentunod's stdout."""
         assert not self.running
         with tempfile.NamedTemporaryFile(dir=self.stderr_dir, delete=False) as log_stderr, \
              tempfile.NamedTemporaryFile(dir=self.stdout_dir, delete=False) as log_stdout:
             try:
                 self.start(extra_args, stdout=log_stdout, stderr=log_stderr, *args, **kwargs)
                 ret = self.process.wait(timeout=self.rpc_timeout)
-                self.log.debug(self._node_msg(f'syscoind exited with status {ret} during initialization'))
+                self.log.debug(self._node_msg(f'wentunod exited with status {ret} during initialization'))
                 assert ret != 0  # Exit code must indicate failure
                 self.running = False
                 self.process = None
@@ -630,7 +630,7 @@ class TestNode():
                 self.process.kill()
                 self.running = False
                 self.process = None
-                assert_msg = f'syscoind should have exited within {self.rpc_timeout}s '
+                assert_msg = f'wentunod should have exited within {self.rpc_timeout}s '
                 if expected_msg is None:
                     assert_msg += "with an error"
                 else:
@@ -672,7 +672,7 @@ class TestNode():
             dst_addr_and_port = f"{p2p_conn.dstaddr}:{p2p_conn.dstport}"
             info = [peer for peer in self.getpeerinfo() if peer["addr"] == our_addr_and_port and peer["addrbind"] == dst_addr_and_port]
             assert_equal(len(info), 1)
-            # SYSCOIN
+            # wentuno
             assert_equal(info[0]["subver"], p2p_conn.strSubVer)
 
         return p2p_conn
@@ -754,16 +754,16 @@ def arg_to_cli(arg):
 
 
 class TestNodeCLI():
-    """Interface to syscoin-cli for an individual node"""
+    """Interface to wentuno-cli for an individual node"""
     def __init__(self, binary, datadir):
         self.options = []
         self.binary = binary
         self.datadir = datadir
         self.input = None
-        self.log = logging.getLogger('TestFramework.syscoincli')
+        self.log = logging.getLogger('TestFramework.wentunocli')
 
     def __call__(self, *options, input=None):
-        # TestNodeCLI is callable with syscoin-cli command-line options
+        # TestNodeCLI is callable with wentuno-cli command-line options
         cli = TestNodeCLI(self.binary, self.datadir)
         cli.options = [str(o) for o in options]
         cli.input = input
@@ -782,7 +782,7 @@ class TestNodeCLI():
         return results
 
     def send_cli(self, command=None, *args, **kwargs):
-        """Run syscoin-cli command. Deserializes returned string as python object."""
+        """Run wentuno-cli command. Deserializes returned string as python object."""
         pos_args = [arg_to_cli(arg) for arg in args]
         named_args = [str(key) + "=" + arg_to_cli(value) for (key, value) in kwargs.items()]
         p_args = [self.binary, f"-datadir={self.datadir}"] + self.options
@@ -791,7 +791,7 @@ class TestNodeCLI():
         if command is not None:
             p_args += [command]
         p_args += pos_args + named_args
-        self.log.debug("Running syscoin-cli {}".format(p_args[2:]))
+        self.log.debug("Running wentuno-cli {}".format(p_args[2:]))
         process = subprocess.Popen(p_args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         cli_stdout, cli_stderr = process.communicate(input=self.input)
         returncode = process.poll()

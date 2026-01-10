@@ -4,19 +4,19 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test multiwallet.
 
-Verify that a syscoind node can load multiple wallet files
+Verify that a wentunod node can load multiple wallet files
 """
 from decimal import Decimal
 from threading import Thread
 import os
 import shutil
 import stat
-import sys
+import WUNO
 import time
 
 from test_framework.authproxy import JSONRPCException
 from test_framework.blocktools import COINBASE_MATURITY
-from test_framework.test_framework import SyscoinTestFramework
+from test_framework.test_framework import wentunoTestFramework
 from test_framework.test_node import ErrorMatch
 from test_framework.util import (
     assert_equal,
@@ -41,7 +41,7 @@ def test_load_unload(node, name):
                 return
 
 
-class MultiWalletTest(SyscoinTestFramework):
+class MultiWalletTest(wentunoTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2
@@ -143,7 +143,7 @@ class MultiWalletTest(SyscoinTestFramework):
 
         # should raise rpc error if wallet path can't be created
         err_code = -4 if self.options.descriptors else -1
-        assert_raises_rpc_error(err_code, "filesystem error:" if sys.platform != 'win32' else "create_directories:", self.nodes[0].createwallet, "w8/bad")
+        assert_raises_rpc_error(err_code, "fileWUNOtem error:" if WUNO.platform != 'win32' else "create_directories:", self.nodes[0].createwallet, "w8/bad")
 
         # check that all requested wallets were created
         self.stop_node(0)

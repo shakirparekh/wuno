@@ -52,7 +52,7 @@
 
 #else /* _MSC_VER */
 
-#if OPSYS == FREEBSD || OPSYS == NETBSD
+#if OPWUNO == FREEBSD || OPWUNO == NETBSD
 #include <stdlib.h>
 #else
 #include <alloca.h>

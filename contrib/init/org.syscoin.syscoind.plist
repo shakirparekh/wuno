@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>Label</key>
-	<string>org.syscoin.syscoind</string>
+	<string>org.wentuno.wentunod</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/usr/local/bin/syscoind</string>
+		<string>/usr/local/bin/wentunod</string>
 	</array>
 	<key>RunAtLoad</key>
 	<true/>

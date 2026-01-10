@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_POLICY_POLICY_H
-#define SYSCOIN_POLICY_POLICY_H
+#ifndef wentuno_POLICY_POLICY_H
+#define wentuno_POLICY_POLICY_H
 
 #include <consensus/amount.h>
 #include <consensus/consensus.h>
@@ -45,7 +45,7 @@ static constexpr unsigned int MAX_STANDARD_P2WSH_STACK_ITEM_SIZE{80};
 static constexpr unsigned int MAX_STANDARD_TAPSCRIPT_STACK_ITEM_SIZE{80};
 /** The maximum size in bytes of a standard witnessScript */
 static constexpr unsigned int MAX_STANDARD_P2WSH_SCRIPT_SIZE{3600};
-// SYSCOIN
+// wentuno
 /** The maximum size of a standard ZDAG transaction. Dessimation has to happen in timely manner and it is an
  * interactive protocol so we ensure a transaction or its ancestors abide by the size restriction */
 static constexpr unsigned int MAX_STANDARD_ZDAG_TX_SIZE{1100};
@@ -129,15 +129,15 @@ CAmount GetDustThreshold(const CTxOut& txout, const CFeeRate& dustRelayFee);
 
 bool IsDust(const CTxOut& txout, const CFeeRate& dustRelayFee);
 
-bool IsStandard(const CScript& scriptPubKey, const std::optional<unsigned>& max_datacarrier_bytes, TxoutType& whichType, bool isSysTx = false);
+bool IsStandard(const CScript& scriptPubKey, const std::optional<unsigned>& max_datacarrier_bytes, TxoutType& whichType, bool isWUNOTx = false);
 
 
 // Changing the default transaction version requires a two step process: first
 // adapting relay policy by bumping TX_MAX_STANDARD_VERSION, and then later
 // allowing the new transaction version in the wallet/RPC.
 static constexpr decltype(CTransaction::nVersion) TX_MAX_STANDARD_VERSION{2};
-// SYSCOIN consensus is driven by version, the highest version is SYSCOIN_TX_VERSION_ALLOCATION_SEND(142)
-static constexpr decltype(CTransaction::nVersion) TX_MAX_SYSCOIN_STANDARD_VERSION{SYSCOIN_TX_VERSION_ALLOCATION_SEND};
+// wentuno consensus is driven by version, the highest version is wentuno_TX_VERSION_ALLOCATION_SEND(142)
+static constexpr decltype(CTransaction::nVersion) TX_MAX_wentuno_STANDARD_VERSION{wentuno_TX_VERSION_ALLOCATION_SEND};
 
 
 /**
@@ -175,4 +175,4 @@ static inline int64_t GetVirtualTransactionInputSize(const CTxIn& tx)
     return GetVirtualTransactionInputSize(tx, 0, 0);
 }
 
-#endif // SYSCOIN_POLICY_POLICY_H
+#endif // wentuno_POLICY_POLICY_H

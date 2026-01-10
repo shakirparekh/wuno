@@ -2,27 +2,27 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_QT_TEST_APPTESTS_H
-#define SYSCOIN_QT_TEST_APPTESTS_H
+#ifndef wentuno_QT_TEST_APPTESTS_H
+#define wentuno_QT_TEST_APPTESTS_H
 
 #include <QObject>
 #include <set>
 #include <string>
 #include <utility>
 
-class SyscoinApplication;
-class SyscoinGUI;
+class wentunoApplication;
+class wentunoGUI;
 class RPCConsole;
 
 class AppTests : public QObject
 {
     Q_OBJECT
 public:
-    explicit AppTests(SyscoinApplication& app) : m_app(app) {}
+    explicit AppTests(wentunoApplication& app) : m_app(app) {}
 
 private Q_SLOTS:
     void appTests();
-    void guiTests(SyscoinGUI* window);
+    void guiTests(wentunoGUI* window);
     void consoleTests(RPCConsole* console);
 
 private:
@@ -37,8 +37,8 @@ private:
         ~HandleCallback();
     };
 
-    //! Syscoin application.
-    SyscoinApplication& m_app;
+    //! wentuno application.
+    wentunoApplication& m_app;
 
     //! Set of pending callback names. Used to track expected callbacks and shut
     //! down the app after the last callback has been handled and all tests have
@@ -47,4 +47,4 @@ private:
     std::multiset<std::string> m_callbacks;
 };
 
-#endif // SYSCOIN_QT_TEST_APPTESTS_H
+#endif // wentuno_QT_TEST_APPTESTS_H

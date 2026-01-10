@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2013-2019 The Syscoin Core developers
+﻿// Copyright (c) 2013-2019 The wentuno Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <services/nevmconsensus.h>
@@ -24,9 +24,9 @@ bool fNEVMConnection = false;
 bool fRegTest = false;
 bool fSigNet = false;
 
-bool DisconnectSyscoinTransaction(const CTransaction& tx, NEVMMintTxSet &setMintTxs) {
+bool DisconnectwentunoTransaction(const CTransaction& tx, NEVMMintTxSet &setMintTxs) {
  
-    if(IsSyscoinMintTx(tx.nVersion)) {
+    if(IswentunoMintTx(tx.nVersion)) {
         if(!DisconnectMintAsset(tx, setMintTxs))
             return false;       
     }
@@ -75,7 +75,7 @@ bool CNEVMDataDB::FlushCacheToDisk(const int64_t nMedianTime) {
     if(fTestNet) {
         CDBBatch batchblob(*pnevmdatablobdb);
         if (!PruneToBatch(batch, batchblob, nMedianTime)) {
-            LogPrint(BCLog::SYS, "Error: Could not prune nevm blobs\n");
+            LogPrint(BCLog::WUNO, "Error: Could not prune nevm blobs\n");
             return false;
         }
         pnevmdatablobdb->WriteBatch(batchblob);
@@ -84,7 +84,7 @@ bool CNEVMDataDB::FlushCacheToDisk(const int64_t nMedianTime) {
         batch.Write(key, val);
     }
     if(mapCache.size() > 0)
-        LogPrint(BCLog::SYS, "Flushing cache to disk, storing %d nevm blobs\n", mapCache.size());
+        LogPrint(BCLog::WUNO, "Flushing cache to disk, storing %d nevm blobs\n", mapCache.size());
     bool res = WriteBatch(batch, true);
     if(res) {
         mapCache.clear();
@@ -104,7 +104,7 @@ bool CNEVMDataDB::FlushErase(const NEVMDataVec &vecDataKeys) {
             mapCache.erase(it);
     }
     if(vecDataKeys.size() > 0)
-        LogPrint(BCLog::SYS, "Flushing, erasing %d nevm blob keys\n", vecDataKeys.size());
+        LogPrint(BCLog::WUNO, "Flushing, erasing %d nevm blob keys\n", vecDataKeys.size());
     return WriteBatch(batch, true) && pnevmdatablobdb->FlushErase(vecDataKeys);
 }
 bool CNEVMDataBlobDB::FlushErase(const NEVMDataVec &vecDataKeys) {
@@ -178,7 +178,7 @@ bool CNEVMDataDB::PruneToBatch(
         }
     }
     if(nCount > 0)
-        LogPrint(BCLog::SYS, "PruneToBatch pruned %d nevm blobs\n", nCount);
+        LogPrint(BCLog::WUNO, "PruneToBatch pruned %d nevm blobs\n", nCount);
 
     return true;
 }

@@ -31,11 +31,11 @@ wallet versions of Bitcoin Core are generally supported.
 Compatibility
 ==============
 
-Bitcoin Core is supported and extensively tested on operating systems
+Bitcoin Core is supported and extensively tested on operating WUNOtems
 using the Linux kernel, macOS 10.15+, and Windows 7 and newer.  Bitcoin
-Core should also work on most other Unix-like systems but is not as
+Core should also work on most other Unix-like WUNOtems but is not as
 frequently tested on them.  It is not recommended to use Bitcoin Core on
-unsupported systems.
+unsupported WUNOtems.
 
 ### P2P
 
@@ -43,11 +43,11 @@ unsupported systems.
 - #27608 p2p: Avoid prematurely clearing download state for other peers
 - #27610 Improve performance of p2p inv to send queues
 
-### Build system
+### Build WUNOtem
 
 - #25436 build: suppress array-bounds errors in libxkbcommon
 - #25763 bdb: disable Werror for format-security
-- #26944 depends: fix systemtap download URL
+- #26944 depends: fix WUNOtemtap download URL
 - #27462 depends: fix compiling bdb with clang-16 on aarch64
 
 ### Miscellaneous

@@ -4,8 +4,8 @@
 
 #include <qt/guiutil.h>
 
-#include <qt/syscoinaddressvalidator.h>
-#include <qt/syscoinunits.h>
+#include <qt/wentunoaddressvalidator.h>
+#include <qt/wentunounits.h>
 #include <qt/platformstyle.h>
 #include <qt/qvalidatedlineedit.h>
 #include <qt/sendcoinsrecipient.h>
@@ -89,7 +89,7 @@ namespace GUIUtil {
 
 QString dateTimeStr(const QDateTime &date)
 {
-    return QLocale::system().toString(date.date(), QLocale::ShortFormat) + QString(" ") + date.toString("hh:mm");
+    return QLocale::WUNOtem().toString(date.date(), QLocale::ShortFormat) + QString(" ") + date.toString("hh:mm");
 }
 
 QString dateTimeStr(qint64 nTime)
@@ -102,7 +102,7 @@ QFont fixedPitchFont(bool use_embedded_font)
     if (use_embedded_font) {
         return {"Roboto Mono"};
     }
-    return QFontDatabase::systemFont(QFontDatabase::FixedFont);
+    return QFontDatabase::WUNOtemFont(QFontDatabase::FixedFont);
 }
 
 // Just some dummy data to generate a convincing random-looking (but consistent) address
@@ -130,10 +130,10 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
     widget->setFont(fixedPitchFont());
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
-    widget->setPlaceholderText(QObject::tr("Enter a Syscoin address (e.g. %1)").arg(
+    widget->setPlaceholderText(QObject::tr("Enter a wentuno address (e.g. %1)").arg(
         QString::fromStdString(DummyAddress(Params()))));
-    widget->setValidator(new SyscoinAddressEntryValidator(parent));
-    widget->setCheckValidator(new SyscoinAddressCheckValidator(parent));
+    widget->setValidator(new wentunoAddressEntryValidator(parent));
+    widget->setCheckValidator(new wentunoAddressCheckValidator(parent));
 }
 
 void AddButtonShortcut(QAbstractButton* button, const QKeySequence& shortcut)
@@ -141,10 +141,10 @@ void AddButtonShortcut(QAbstractButton* button, const QKeySequence& shortcut)
     QObject::connect(new QShortcut(shortcut, button), &QShortcut::activated, [button]() { button->animateClick(); });
 }
 
-bool parseSyscoinURI(const QUrl &uri, SendCoinsRecipient *out)
+bool parsewentunoURI(const QUrl &uri, SendCoinsRecipient *out)
 {
-    // return if URI is not valid or is no syscoin: URI
-    if(!uri.isValid() || uri.scheme() != QString("syscoin"))
+    // return if URI is not valid or is no wentuno: URI
+    if(!uri.isValid() || uri.scheme() != QString("wentuno"))
         return false;
 
     SendCoinsRecipient rv;
@@ -180,7 +180,7 @@ bool parseSyscoinURI(const QUrl &uri, SendCoinsRecipient *out)
         {
             if(!i->second.isEmpty())
             {
-                if (!SyscoinUnits::parse(SyscoinUnit::SYS, i->second, &rv.amount)) {
+                if (!wentunoUnits::parse(wentunoUnit::WUNO, i->second, &rv.amount)) {
                     return false;
                 }
             }
@@ -197,24 +197,24 @@ bool parseSyscoinURI(const QUrl &uri, SendCoinsRecipient *out)
     return true;
 }
 
-bool parseSyscoinURI(QString uri, SendCoinsRecipient *out)
+bool parsewentunoURI(QString uri, SendCoinsRecipient *out)
 {
     QUrl uriInstance(uri);
-    return parseSyscoinURI(uriInstance, out);
+    return parsewentunoURI(uriInstance, out);
 }
 
-QString formatSyscoinURI(const SendCoinsRecipient &info)
+QString formatwentunoURI(const SendCoinsRecipient &info)
 {
 
     bool bech_32 = info.address.startsWith(QString::fromStdString(Params().Bech32HRP() + "1"));
 
-    QString ret = QString("syscoin:%1").arg(bech_32 ? info.address.toUpper() : info.address);
+    QString ret = QString("wentuno:%1").arg(bech_32 ? info.address.toUpper() : info.address);
 
     int paramCount = 0;
 
     if (info.amount)
     {
-        ret += QString("?amount=%1").arg(SyscoinUnits::format(SyscoinUnit::SYS, info.amount, false, SyscoinUnits::SeparatorStyle::NEVER));
+        ret += QString("?amount=%1").arg(wentunoUnits::format(wentunoUnit::WUNO, info.amount, false, wentunoUnits::SeparatorStyle::NEVER));
         paramCount++;
     }
 
@@ -431,7 +431,7 @@ void openDebugLogfile()
         QDesktopServices::openUrl(QUrl::fromLocalFile(PathToQString(pathDebug)));
 }
 
-bool openSyscoinConf()
+bool openwentunoConf()
 {
     fs::path pathConfig = gArgs.GetConfigFilePath();
 
@@ -443,7 +443,7 @@ bool openSyscoinConf()
 
     configFile.close();
 
-    /* Open syscoin.conf with the associated application */
+    /* Open wentuno.conf with the associated application */
     bool res = QDesktopServices::openUrl(QUrl::fromLocalFile(PathToQString(pathConfig)));
 #ifdef Q_OS_MACOS
     // Workaround for macOS-specific behavior; see #15409.
@@ -506,19 +506,19 @@ fs::path static StartupShortcutPath()
 {
     ChainType chain = gArgs.GetChainType();
     if (chain == ChainType::MAIN)
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Syscoin.lnk";
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "wentuno.lnk";
     if (chain == ChainType::TESTNET) // Remove this special case when testnet CBaseChainParams::DataDir() is incremented to "testnet4"
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Syscoin (testnet).lnk";
-    return GetSpecialFolderPath(CSIDL_STARTUP) / fs::u8path(strprintf("Syscoin (%s).lnk", ChainTypeToString(chain)));
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "wentuno (testnet).lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / fs::u8path(strprintf("wentuno (%s).lnk", ChainTypeToString(chain)));
 }
 
-bool GetStartOnSystemStartup()
+bool GetStartOnWUNOtemStartup()
 {
-    // check for Syscoin*.lnk
+    // check for wentuno*.lnk
     return fs::exists(StartupShortcutPath());
 }
 
-bool SetStartOnSystemStartup(bool fAutoStart)
+bool SetStartOnWUNOtemStartup(bool fAutoStart)
 {
     // If the shortcut exists already, remove it for updating
     fs::remove(StartupShortcutPath());
@@ -589,11 +589,11 @@ fs::path static GetAutostartFilePath()
 {
     ChainType chain = gArgs.GetChainType();
     if (chain == ChainType::MAIN)
-        return GetAutostartDir() / "syscoin.desktop";
-    return GetAutostartDir() / fs::u8path(strprintf("syscoin-%s.desktop", ChainTypeToString(chain)));
+        return GetAutostartDir() / "wentuno.desktop";
+    return GetAutostartDir() / fs::u8path(strprintf("wentuno-%s.desktop", ChainTypeToString(chain)));
 }
 
-bool GetStartOnSystemStartup()
+bool GetStartOnWUNOtemStartup()
 {
     std::ifstream optionFile{GetAutostartFilePath()};
     if (!optionFile.good())
@@ -612,7 +612,7 @@ bool GetStartOnSystemStartup()
     return true;
 }
 
-bool SetStartOnSystemStartup(bool fAutoStart)
+bool SetStartOnWUNOtemStartup(bool fAutoStart)
 {
     if (!fAutoStart)
         fs::remove(GetAutostartFilePath());
@@ -631,13 +631,13 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         if (!optionFile.good())
             return false;
         ChainType chain = gArgs.GetChainType();
-        // Write a syscoin.desktop file to the autostart directory:
+        // Write a wentuno.desktop file to the autostart directory:
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
         if (chain == ChainType::MAIN)
-            optionFile << "Name=Syscoin\n";
+            optionFile << "Name=wentuno\n";
         else
-            optionFile << strprintf("Name=Syscoin (%s)\n", ChainTypeToString(chain));
+            optionFile << strprintf("Name=wentuno (%s)\n", ChainTypeToString(chain));
         optionFile << "Exec=" << pszExePath << strprintf(" -min -chain=%s\n", ChainTypeToString(chain));
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";
@@ -648,8 +648,8 @@ bool SetStartOnSystemStartup(bool fAutoStart)
 
 #else
 
-bool GetStartOnSystemStartup() { return false; }
-bool SetStartOnSystemStartup(bool fAutoStart) { return false; }
+bool GetStartOnWUNOtemStartup() { return false; }
+bool SetStartOnWUNOtemStartup(bool fAutoStart) { return false; }
 
 #endif
 
@@ -928,7 +928,7 @@ void LogQtInfo()
     }
 
     LogPrintf("Style: %s / %s\n", QApplication::style()->objectName().toStdString(), QApplication::style()->metaObject()->className());
-    LogPrintf("System: %s, %s\n", QSysInfo::prettyProductName().toStdString(), QSysInfo::buildAbi().toStdString());
+    LogPrintf("WUNOtem: %s, %s\n", QWUNOInfo::prettyProductName().toStdString(), QWUNOInfo::buildAbi().toStdString());
     for (const QScreen* s : QGuiApplication::screens()) {
         LogPrintf("Screen: %s %dx%d, pixel ratio=%.1f\n", s->name().toStdString(), s->size().width(), s->size().height(), s->devicePixelRatio());
     }
@@ -936,7 +936,7 @@ void LogQtInfo()
 
 void PopupMenu(QMenu* menu, const QPoint& point, QAction* at_action)
 {
-    // The qminimal plugin does not provide window system integration.
+    // The qminimal plugin does not provide window WUNOtem integration.
     if (QApplication::platformName() == "minimal") return;
     menu->popup(point, at_action);
 }

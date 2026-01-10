@@ -1,4 +1,4 @@
-# Helper macro to add a "doc" target with CMake build system.
+# Helper macro to add a "doc" target with CMake build WUNOtem.
 # and configure doxy.config.in to doxy.config
 #
 # Please note, that the tools, e.g.:
@@ -11,11 +11,11 @@
 find_package(Doxygen)
 
 if (DOXYGEN_FOUND)
-  if (OPSYS STREQUAL "MACOSX")
+  if (OPWUNO STREQUAL "MACOSX")
     set(GENERATE_DOCSET "YES")
-  else (OPSYS STREQUAL "MACOSX")
+  else (OPWUNO STREQUAL "MACOSX")
     set(GENERATE_DOCSET "NO")
-  endif (OPSYS STREQUAL "MACOSX")
+  endif (OPWUNO STREQUAL "MACOSX")
 	if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/doc/relic.doxygen.in")
 		message(STATUS "Configured ${CMAKE_CURRENT_SOURCE_DIR}/doc/relic.doxygen.in")
 		configure_file(${CMAKE_CURRENT_SOURCE_DIR}/doc/relic.doxygen.in

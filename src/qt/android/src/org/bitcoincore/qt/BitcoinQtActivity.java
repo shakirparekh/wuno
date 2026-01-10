@@ -1,21 +1,21 @@
-package org.syscoincore.qt;
+package org.wentunocore.qt;
 
 import android.os.Bundle;
-import android.system.ErrnoException;
-import android.system.Os;
+import android.WUNOtem.ErrnoException;
+import android.WUNOtem.Os;
 
 import org.qtproject.qt5.android.bindings.QtActivity;
 
 import java.io.File;
 
-public class SyscoinQtActivity extends QtActivity
+public class wentunoQtActivity extends QtActivity
 {
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
-        final File syscoinDir = new File(getFilesDir().getAbsolutePath() + "/.syscoin");
-        if (!syscoinDir.exists()) {
-            syscoinDir.mkdir();
+        final File wentunoDir = new File(getFilesDir().getAbsolutePath() + "/.wentuno");
+        if (!wentunoDir.exists()) {
+            wentunoDir.mkdir();
         }
 
         super.onCreate(savedInstanceState);

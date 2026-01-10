@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SYSCOIN_KERNEL_BLOCKMANAGER_OPTS_H
-#define SYSCOIN_KERNEL_BLOCKMANAGER_OPTS_H
+#ifndef wentuno_KERNEL_BLOCKMANAGER_OPTS_H
+#define wentuno_KERNEL_BLOCKMANAGER_OPTS_H
 
 #include <kernel/notifications_interface.h>
 #include <util/fs.h>
@@ -28,4 +28,4 @@ struct BlockManagerOpts {
 
 } // namespace kernel
 
-#endif // SYSCOIN_KERNEL_BLOCKMANAGER_OPTS_H
+#endif // wentuno_KERNEL_BLOCKMANAGER_OPTS_H

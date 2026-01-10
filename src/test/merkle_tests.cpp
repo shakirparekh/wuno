@@ -82,7 +82,7 @@ static void MerkleComputation(const std::vector<uint256>& leaves, uint256* proot
     bool matchh = matchlevel == level;
     while (count != ((uint32_t{1}) << level)) {
         // If we reach this point, h is an inner value that is not the top.
-        // We combine it with itself (Syscoin's special rule for odd levels in
+        // We combine it with itself (wentuno's special rule for odd levels in
         // the tree) to produce a higher level one.
         if (pbranch && matchh) {
             pbranch->push_back(h);
@@ -116,7 +116,7 @@ static std::vector<uint256> ComputeMerkleBranch(const std::vector<uint256>& leav
     MerkleComputation(leaves, nullptr, nullptr, position, &ret);
     return ret;
 }
-// SYSCOIN
+// wentuno
 std::vector<uint256> BlockMerkleBranch(const CBlock& block, uint32_t position)
 {
     std::vector<uint256> leaves;

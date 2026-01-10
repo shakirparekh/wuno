@@ -13,7 +13,7 @@
 
 /**
  * Name of client reported in the 'version' message. Report the same name
- * for both syscoind and syscoin-qt, to make it harder for attackers to
+ * for both wentunod and wentuno-qt, to make it harder for attackers to
  * target servers or GUI users specifically.
  */
 const std::string CLIENT_NAME("Satoshi");
@@ -58,7 +58,7 @@ std::string FormatFullVersion()
 }
 
 /**
- * Format the subversion field according to BIP 14 spec (https://github.com/syscoin/bips/blob/master/bip-0014.mediawiki)
+ * Format the subversion field according to BIP 14 spec (https://github.com/wentuno/bips/blob/master/bip-0014.mediawiki)
  */
 std::string FormatSubVersion(const std::string& name, int nClientVersion, const std::vector<std::string>& comments)
 {
@@ -83,15 +83,15 @@ std::string CopyrightHolders(const std::string& strPrefix)
     std::string strCopyrightHolders = strPrefix + copyright_devs;
 
     // Make sure Bitcoin Core copyright is not removed by accident
-    if (copyright_devs.find("Syscoin Core") == std::string::npos) {
-        strCopyrightHolders += "\n" + strPrefix + "The Syscoin Core developers";
+    if (copyright_devs.find("wentuno Core") == std::string::npos) {
+        strCopyrightHolders += "\n" + strPrefix + "The wentuno Core developers";
     }
     return strCopyrightHolders;
 }
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/syscoin/syscoin>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/wentuno/wentuno>";
 
     return CopyrightHolders(strprintf(_("Copyright (C) %i-%i").translated, 2009, COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +
