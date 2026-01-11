@@ -1,10 +1,10 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2022 The Bitcoin Core developers
+// Copyright (c) 2014-2025 The Syscoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <chainparams.h>
-
 #include <chainparamsbase.h>
 #include <common/args.h>
 #include <consensus/params.h>
@@ -14,161 +14,110 @@
 #include <util/chaintype.h>
 #include <util/strencodings.h>
 #include <util/string.h>
-
 #include <assert.h>
 #include <cstdint>
 #include <limits>
 #include <stdexcept>
 #include <vector>
 
-void ReadSigNetArgs(const ArgsManager& args, CChainParams::SigNetOptions& options)
+#include <chainparamsseeds.h>
+
+// Wentuno modifications
+static CBlock CreateGenesisBlock(const std::string& pszTimestamp, const CScript& genesisOutputScript, uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    if (args.IsArgSet("-signetseednode")) {
-        options.seeds.emplace(args.GetArgs("-signetseednode"));
-    }
-    if (args.IsArgSet("-signetchallenge")) {
-        const auto signet_challenge = args.GetArgs("-signetchallenge");
-        if (signet_challenge.size() != 1) {
-            throw std::runtime_error("-signetchallenge cannot be multiple values.");
-        }
-        const auto val{TryParseHex<uint8_t>(signet_challenge[0])};
-        if (!val) {
-            throw std::runtime_error(strprintf("-signetchallenge must be hex, not '%s'.", signet_challenge[0]));
-        }
-        options.challenge.emplace(*val);
-    }
+    CMutableTransaction txNew;
+    txNew.nVersion = 1;
+    txNew.vin.resize(1);
+    txNew.vout.resize(1);
+    txNew.vin[0].scriptSig = CScript() << 486604799 << CScriptNum(4) << std::vector<unsigned char>(pszTimestamp.begin(), pszTimestamp.end());
+    txNew.vout[0].nValue = genesisReward;
+    txNew.vout[0].scriptPubKey = genesisOutputScript;
+
+    CBlock genesis;
+    genesis.nTime    = nTime;
+    genesis.nBits    = nBits;
+    genesis.nNonce   = nNonce;
+    genesis.nVersion = nVersion;
+    genesis.vtx.push_back(MakeTransactionRef(std::move(txNew)));
+    genesis.hashPrevBlock.SetNull();
+    genesis.hashMerkleRoot = BlockMerkleRoot(genesis);
+    return genesis;
 }
-void ReadRegTestArgs(const ArgsManager& args, CChainParams::RegTestOptions& options)
+
+static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    if (auto value = args.GetBoolArg("-fastprune")) options.fastprune = *value;
-
-    for (const std::string& arg : args.GetArgs("-testactivationheight")) {
-        const auto found{arg.find('@')};
-        if (found == std::string::npos) {
-            throw std::runtime_error(strprintf("Invalid format (%s) for -testactivationheight=name@height.", arg));
-        }
-
-        const auto value{arg.substr(found + 1)};
-        int32_t height;
-        if (!ParseInt32(value, &height) || height < 0 || height >= std::numeric_limits<int>::max()) {
-            throw std::runtime_error(strprintf("Invalid height value (%s) for -testactivationheight=name@height.", arg));
-        }
-
-        const auto deployment_name{arg.substr(0, found)};
-        if (const auto buried_deployment = GetBuriedDeployment(deployment_name)) {
-            options.activation_heights[*buried_deployment] = height;
-        } else {
-            throw std::runtime_error(strprintf("Invalid name (%s) for -testactivationheight=name@height.", arg));
-        }
-    }
-    // wentuno
-    if (args.IsArgSet("-mncollateral")) {
-        uint32_t collateral = args.GetIntArg("-mncollateral", DEFAULT_MN_COLLATERAL_REQUIRED);
-        nMNCollateralRequired = collateral*COIN;
-    }
-    if (args.IsArgSet("-dip3params")) {
-        std::string strDIP3Params = args.GetArg("-dip3params", "");
-        std::vector<std::string> vDIP3Params = SplitString(strDIP3Params, ':');
-        if (vDIP3Params.size() != 2) {
-            throw std::runtime_error("DIP3 parameters malformed, expecting DIP3ActivationHeight:DIP3EnforcementHeight");
-        }
-        if (!ParseInt32(vDIP3Params[0], &options.dip3startblock)) {
-            throw std::runtime_error(strprintf("Invalid nDIP3ActivationHeight (%s)", vDIP3Params[0]));
-        }
-        if (!ParseInt32(vDIP3Params[1], &options.dip3enforcement)) {
-            throw std::runtime_error(strprintf("Invalid nDIP3EnforcementHeight (%s)", vDIP3Params[1]));
-        }
-    }
-    if (args.IsArgSet("-dip19params")) {
-        std::string strDIP19Params = args.GetArg("-dip19params", "");
-        if (!ParseInt32(strDIP19Params, &options.v19startblock)) {
-            throw std::runtime_error(strprintf("Invalid nDIP19ActivationHeight (%s)", strDIP19Params));
-        }
-    }
-    if (args.IsArgSet("-nevmstartheight")) {
-        options.nevmstartblock = args.GetIntArg("-nevmstartheight", 2050);
-    }
-    if (!args.IsArgSet("-vbparams")) return;
-
-    for (const std::string& strDeployment : args.GetArgs("-vbparams")) {
-        std::vector<std::string> vDeploymentParams = SplitString(strDeployment, ':');
-        if (vDeploymentParams.size() < 3 || 4 < vDeploymentParams.size()) {
-            throw std::runtime_error("Version bits parameters malformed, expecting deployment:start:end[:min_activation_height]");
-        }
-        CChainParams::VersionBitsParameters vbparams{};
-        if (!ParseInt64(vDeploymentParams[1], &vbparams.start_time)) {
-            throw std::runtime_error(strprintf("Invalid nStartTime (%s)", vDeploymentParams[1]));
-        }
-        if (!ParseInt64(vDeploymentParams[2], &vbparams.timeout)) {
-            throw std::runtime_error(strprintf("Invalid nTimeout (%s)", vDeploymentParams[2]));
-        }
-        if (vDeploymentParams.size() >= 4) {
-            if (!ParseInt32(vDeploymentParams[3], &vbparams.min_activation_height)) {
-                throw std::runtime_error(strprintf("Invalid min_activation_height (%s)", vDeploymentParams[3]));
-            }
-        } else {
-            vbparams.min_activation_height = 0;
-        }
-        bool found = false;
-        for (int j=0; j < (int)Consensus::MAX_VERSION_BITS_DEPLOYMENTS; ++j) {
-            if (vDeploymentParams[0] == VersionBitsDeploymentInfo[j].name) {
-                options.version_bits_parameters[Consensus::DeploymentPos(j)] = vbparams;
-                found = true;
-                LogPrintf("Setting version bits activation parameters for %s to start=%ld, timeout=%ld, min_activation_height=%d\n", vDeploymentParams[0], vbparams.start_time, vbparams.timeout, vbparams.min_activation_height);
-                break;
-            }
-        }
-        if (!found) {
-            throw std::runtime_error(strprintf("Invalid deployment (%s)", vDeploymentParams[0]));
-        }
-    }
+    const char* pszTimestamp = "20/Jan/2026 Seventeen years and seventeen days late to the beginning. Nine years until the absolute end. Then nothing. Ever.";
+    const CScript genesisOutputScript = CScript() << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f") << OP_CHECKSIG;
+    return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
-// wentuno
-void ReadMainNetArgs(const ArgsManager& args, CChainParams::MainNetOptions& options)
-{
-    if (args.IsArgSet("-hrp")) {
-        options.bech32_hrp = args.GetArg("-hrp", "");
+
+class CMainParams : public CChainParams {
+public:
+    CMainParams() {
+        strNetworkID = CBaseChainParams::MAIN;
+        consensus.signet_blocks = false;
+        consensus.signet_challenge.clear();
+        consensus.nSubsidyHalvingInterval = 210000; // placeholder - we will override with linear
+        consensus.BIP16Exception = uint256S("0x00000000000002dc756eebf4f49723ed8d30cc28a5f108eb94b6d5b2d9b2c2e9"); // example
+        consensus.BIP34Height = 0;
+        consensus.BIP34Hash = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000");
+        consensus.BIP65Height = 0;
+        consensus.BIP66Height = 0;
+        consensus.CSVHeight = 0;
+        consensus.SegwitHeight = 0;
+        consensus.MinBIP9WarningHeight = 0;
+        consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // low difficulty for genesis
+        consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // 2 weeks
+        consensus.nPowTargetSpacing = 10 * 60;  // 10 MINUTES - WENTUNO CHANGE
+        consensus.fPowAllowMinDifficultyBlocks = false;
+        consensus.fPowNoRetargeting = false;
+        consensus.nRuleChangeActivationThreshold = 1916; // 95% for mainnet
+        consensus.nMinerConfirmationWindow = 2016;
+
+        // The best chain should have at least this much work.
+        consensus.nMinimumChainWork = uint256S("0x00");
+
+        // By default assume that the signatures in ancestors of this block are valid.
+        consensus.defaultAssumeValid = uint256S("0x00");
+
+        /**
+         * The message bytes to be included in the alert messages.
+         */
+        pchMessageStart[0] = 0xf1;   // Unique for Wentuno - random bytes
+        pchMessageStart[1] = 0xc2;
+        pchMessageStart[2] = 0xb3;
+        pchMessageStart[3] = 0xa4;
+
+        nDefaultPort = 22556;  // Change from Syscoin's port to avoid conflict
+
+        genesis = CreateGenesisBlock(1768867200, 2083236893, 0x1e0ffff0, 1, 50 * COIN);  // Jan 20 2026 00:00 UTC, low nonce/bits for easy mining
+
+        consensus.hashGenesisBlock = genesis.GetHash();
+        assert(consensus.hashGenesisBlock == uint256S("0x0000000000000000000000000000000000000000000000000000000000000000")); // placeholder - will update after first run
+
+        // TODO: Add DNS seeds, checkpoints, etc. later
+
+        // AuxPoW / merge-mining params (Syscoin compatible)
+        consensus.nAuxpowChainId = 0x0001; // adjust if needed
+        consensus.nAuxpowStartHeight = 0;  // from genesis
+        consensus.fStrictChainId = true;
+        consensus.nLegacyBlocksBefore = -1; // always allow AuxPoW
+
+        // Wentuno specific - will expand later for linear emission, quantum etc.
     }
-}
-static std::unique_ptr<const CChainParams> globalChainParams;
+};
 
 const CChainParams &Params() {
-    assert(globalChainParams);
-    return *globalChainParams;
+    static std::unique_ptr<CChainParams> globalParams = std::make_unique<CMainParams>();
+    return *globalParams;
 }
 
-std::unique_ptr<const CChainParams> CreateChainParams(const ArgsManager& args, const ChainType chain)
-{
-    switch (chain) {
-    // wentuno
-    case ChainType::MAIN: {
-        auto opts = CChainParams::MainNetOptions{};
-        ReadMainNetArgs(args, opts);
-        return CChainParams::Main(opts);
+// Add TestNet/RegTest stubs if needed later
+std::unique_ptr<const CChainParams> CreateChainParams(const ArgsManager& args, const ChainType chainType) {
+    switch (chainType) {
+    case ChainType::MAIN:
+        return std::make_unique<CMainParams>();
+    default:
+        throw std::runtime_error(strprintf("%s: Unknown chain type %d", __func__, int(chainType)));
     }
-    case ChainType::TESTNET:
-        return CChainParams::TestNet();
-    case ChainType::SIGNET: {
-        auto opts = CChainParams::SigNetOptions{};
-        ReadSigNetArgs(args, opts);
-        return CChainParams::SigNet(opts);
-    }
-    case ChainType::REGTEST: {
-        auto opts = CChainParams::RegTestOptions{};
-        ReadRegTestArgs(args, opts);
-        return CChainParams::RegTest(opts);
-    }
-    }
-    assert(false);
-}
-
-void SelectParams(const ChainType chain)
-{
-    SelectBaseParams(chain);
-    globalChainParams = CreateChainParams(gArgs, chain);
-}
-void UpdateLLMQTestParams(int size, int threshold)
-{
-    auto* params = const_cast<CChainParams*> (globalChainParams.get ());
-    params->UpdateLLMQTestParams(size, threshold);
 }
