@@ -188,7 +188,7 @@ bool        _mi_page_is_valid(mi_page_t* page);
   Error codes passed to `_mi_fatal_error`
   All are recoverable but EFAULT is a serious error and aborts by default in secure mode.
   For portability define undefined error codes using common Unix codes:
-  <https://www-numi.fnal.gov/offline_software/srt_public_context/WebDocs/Errors/unix_WUNOtem_errors.html>
+  <https://www-numi.fnal.gov/offline_software/srt_public_context/WebDocs/Errors/unix_system_errors.html>
 ----------------------------------------------------------- */
 #include <errno.h>
 #ifndef EAGAIN         // double free

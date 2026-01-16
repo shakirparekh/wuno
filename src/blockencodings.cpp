@@ -4,7 +4,7 @@
 
 #include <blockencodings.h>
 #include <chainparams.h>
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <consensus/consensus.h>
 #include <consensus/validation.h>
 #include <crypto/sha256.h>

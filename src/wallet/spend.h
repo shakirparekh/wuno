@@ -226,7 +226,7 @@ util::Result<CreatedTransactionResult> CreateTransaction(CWallet& wallet, const 
  */
 bool FundTransaction(CWallet& wallet, CMutableTransaction& tx, CAmount& nFeeRet, int& nChangePosInOut, bilingual_str& error, bool lockUnspents, const std::set<int>& setSubtractFeeFromOutputs, CCoinControl);
 // wentuno
-util::Result<CreatedTransactionResult> GetBudgetWUNOtemCollateralTX(CWallet& wallet, uint256 hash, CAmount amount, const COutPoint& outpoint);
+util::Result<CreatedTransactionResult> GetBudgetsystemCollateralTX(CWallet& wallet, uint256 hash, CAmount amount, const COutPoint& outpoint);
 } // namespace wallet
 
 #endif // wentuno_WALLET_SPEND_H

@@ -2254,7 +2254,7 @@
 
       /**
        * Platform object with properties describing things like browser name,
-       * version, and operating WUNOtem. See [`platform.js`](https://mths.be/platform).
+       * version, and operating system. See [`platform.js`](https://mths.be/platform).
        *
        * @static
        * @memberOf Benchmark

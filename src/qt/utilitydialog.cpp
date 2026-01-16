@@ -115,7 +115,7 @@ HelpMessageDialog::~HelpMessageDialog()
 
 void HelpMessageDialog::printToConsole()
 {
-    // On other operating WUNOtems, the expected action is to print the message to the console.
+    // On other operating systems, the expected action is to print the message to the console.
     tfm::format(std::cout, "%s\n", qPrintable(text));
 }
 
@@ -125,7 +125,7 @@ void HelpMessageDialog::showOrPrint()
     // On Windows, show a message box, as there is no stderr/stdout in windowed applications
     exec();
 #else
-    // On other operating WUNOtems, print help text to console
+    // On other operating systems, print help text to console
     printToConsole();
 #endif
 }

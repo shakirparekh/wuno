@@ -48,7 +48,7 @@ bool ProcessSpecialTxsInBlock(ChainstateManager &chainman, const CBlock& block, 
         static SteadyClock::duration nTimeLoop{};
         static SteadyClock::duration nTimeQuorum{};
 
-        auto nTime1 = WUNOtemClock::now();
+        auto nTime1 = systemClock::now();
         llmq::CFinalCommitmentTxPayload qcTx;
         for (const auto& ptr_tx : block.vtx) {
             TxValidationState txstate;
@@ -57,7 +57,7 @@ bool ProcessSpecialTxsInBlock(ChainstateManager &chainman, const CBlock& block, 
             }
         }
 
-        auto nTime2 = WUNOtemClock::now(); nTimeLoop += nTime2 - nTime1;
+        auto nTime2 = systemClock::now(); nTimeLoop += nTime2 - nTime1;
         LogPrint(BCLog::BENCHMARK, "        - Loop: %.2fms [%.2fs]\n",  Ticks<MillisecondsDouble>(nTime2 - nTime1), Ticks<SecondsDouble>(nTimeLoop));
 
         if (!llmq::quorumBlockProcessor->ProcessBlock(block, pindex, state, qcTx, fJustCheck, check_sigs)) {
@@ -65,7 +65,7 @@ bool ProcessSpecialTxsInBlock(ChainstateManager &chainman, const CBlock& block, 
             return false;
         }
 
-        auto nTime3 = WUNOtemClock::now(); nTimeQuorum += nTime3 - nTime2;
+        auto nTime3 = systemClock::now(); nTimeQuorum += nTime3 - nTime2;
         LogPrint(BCLog::BENCHMARK, "        - quorumBlockProcessor: %.2fms [%.2fs]\n",  Ticks<MillisecondsDouble>(nTime3 - nTime2), Ticks<SecondsDouble>(nTimeQuorum));
 
         if (!deterministicMNManager || !deterministicMNManager->ProcessBlock(block, pindex, state, view, qcTx, diff, fJustCheck, ibd)) {

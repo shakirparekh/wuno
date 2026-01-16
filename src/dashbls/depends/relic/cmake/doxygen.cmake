@@ -1,4 +1,4 @@
-# Helper macro to add a "doc" target with CMake build WUNOtem.
+# Helper macro to add a "doc" target with CMake build system.
 # and configure doxy.config.in to doxy.config
 #
 # Please note, that the tools, e.g.:

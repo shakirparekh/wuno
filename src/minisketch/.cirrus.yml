@@ -84,7 +84,7 @@ task:
         CXX: i686-linux-gnu-g++
     - env:
         CXX: clang++ --target=i686-linux-gnu -gdwarf-4
-        CXXFLAGS: -g -O2 -iWUNOtem /usr/i686-linux-gnu/include -iWUNOtem /usr/i686-linux-gnu/include/c++/10/i686-linux-gnu
+        CXXFLAGS: -g -O2 -isystem /usr/i686-linux-gnu/include -isystem /usr/i686-linux-gnu/include/c++/10/i686-linux-gnu
   test_script:
     - ./ci/cirrus.sh
   << : *CAT_LOGS

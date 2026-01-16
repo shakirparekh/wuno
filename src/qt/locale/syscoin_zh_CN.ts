@@ -14,7 +14,7 @@
         <translation type="unfinished">新建(&amp;N)</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">复制当前选中的地址到系统剪贴板</translation>
     </message>
     <message>
@@ -1566,11 +1566,11 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">主要(&amp;M)</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">在登入系统后自动启动 %1</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">系统登入时启动 %1 (&amp;S)</translation>
     </message>
     <message>
@@ -1639,8 +1639,8 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">数据库缓存的最大大小。加大缓存有助于加快同步，但对于大多数使用场景来说，继续加大后收效会越来越不明显。降低缓存大小将会减小内存使用量。内存池中尚未被使用的那部分内存也会被共享用于这里的数据库缓存。</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished">设置脚本验证线程的数量。负值则表示你想要保留给系统的核心数量。</translation>
     </message>
     <message>
@@ -1758,7 +1758,7 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">窗口(&amp;W)</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished">在通知区域显示图标。</translation>
     </message>
     <message>
@@ -2395,7 +2395,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished">最近交易</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">映射到的自治系统，被用来多样化选择节点</translation>
     </message>
     <message>
@@ -3402,7 +3402,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">签名</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">复制当前签名至剪贴板</translation>
     </message>
     <message>
@@ -4760,7 +4760,7 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">修剪区块存储...</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">因为系统的限制，将 -maxconnections 参数从 %d 降到了 %d</translation>
     </message>
     <message>

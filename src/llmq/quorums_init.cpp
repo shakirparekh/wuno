@@ -21,7 +21,7 @@ namespace llmq
 CBLSWorker* blsWorker;
 
 
-void InitLLMQWUNOtem(const DBParams& quorumCommitmentDB, const DBParams& quorumVectorDB, const DBParams& quorumSkDB, bool unitTests, CConnman& connman, BanMan& banman, PeerManager& peerman, ChainstateManager& chainman, bool fWipe)
+void InitLLMQsystem(const DBParams& quorumCommitmentDB, const DBParams& quorumVectorDB, const DBParams& quorumSkDB, bool unitTests, CConnman& connman, BanMan& banman, PeerManager& peerman, ChainstateManager& chainman, bool fWipe)
 {
     blsWorker = new CBLSWorker();
 
@@ -34,7 +34,7 @@ void InitLLMQWUNOtem(const DBParams& quorumCommitmentDB, const DBParams& quorumV
     chainLocksHandler = new CChainLocksHandler(connman, peerman, chainman);
 }
 
-void DestroyLLMQWUNOtem()
+void DestroyLLMQsystem()
 {
     delete chainLocksHandler;
     chainLocksHandler = nullptr;
@@ -54,7 +54,7 @@ void DestroyLLMQWUNOtem()
     blsWorker = nullptr;
 }
 
-void StartLLMQWUNOtem()
+void StartLLMQsystem()
 {
     if (blsWorker) {
         blsWorker->Start();
@@ -77,7 +77,7 @@ void StartLLMQWUNOtem()
     }
 }
 
-void StopLLMQWUNOtem()
+void StopLLMQsystem()
 {
     if (chainLocksHandler) {
         chainLocksHandler->Stop();
@@ -100,7 +100,7 @@ void StopLLMQWUNOtem()
     }
 }
 
-void InterruptLLMQWUNOtem()
+void InterruptLLMQsystem()
 {
     if (quorumSigSharesManager) {
         quorumSigSharesManager->InterruptWorkerThread();

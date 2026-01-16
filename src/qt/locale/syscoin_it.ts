@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Nuovo</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Copia l'indirizzo attualmente selezionato negli appunti di sistema</translation>
     </message>
     <message>
@@ -1489,11 +1489,11 @@ E' possibile firmare solo con indirizzi di tipo "legacy".</translation>
         <translation type="unfinished">&amp;Principale</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Avvia automaticamente %1 una volta effettuato l'accesso al sistema.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">&amp;Start %1 all'accesso al sistema</translation>
     </message>
     <message>
@@ -1562,8 +1562,8 @@ E' possibile firmare solo con indirizzi di tipo "legacy".</translation>
         <translation type="unfinished">Dimensione massima della cache del database. Una cache più grande può contribuire a una sincronizzazione più veloce, dopo di che il vantaggio è meno pronunciato per la maggior parte dei casi d'uso. Abbassando la dimensione della cache si riduce l'uso della memoria. La memoria inutilizzata della mempool viene sfruttata per questa cache.</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished">Imposta il numero di thread di verifica degli script. I valori negativi corrispondono al numero di core che preferisci lasciare liberi per il sistema.</translation>
     </message>
     <message>
@@ -1681,7 +1681,7 @@ E' possibile firmare solo con indirizzi di tipo "legacy".</translation>
         <translation type="unfinished">&amp;Finestra</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished">Mostra l'icona nella barra delle applicazioni di sistema</translation>
     </message>
     <message>
@@ -2277,7 +2277,7 @@ Se ricevi questo errore, dovresti richiedere al commerciante di fornire un URI c
         <translation type="unfinished">Ultima Transazione</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">Il Sistema Autonomo mappato utilizzato per diversificare la selezione dei peer.</translation>
     </message>
     <message>
@@ -3238,7 +3238,7 @@ Nota: poiché la commissione è calcolata su base per byte, una commissione di "
         <translation type="unfinished">Firma</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Copia la firma corrente nella clipboard</translation>
     </message>
     <message>
@@ -4565,7 +4565,7 @@ Non in grado di ripristinare il backup del portafoglio.</translation>
         <translation type="unfinished">Pruning del blockstore...</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">Riduzione -maxconnections da %d a %d a causa di limitazioni di sistema.</translation>
     </message>
     <message>

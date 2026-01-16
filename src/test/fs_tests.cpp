@@ -22,9 +22,9 @@ BOOST_AUTO_TEST_CASE(fsbridge_pathtostring)
     BOOST_CHECK_EQUAL(fs::PathFromString(u8_str).u8string(), u8_str);
     BOOST_CHECK_EQUAL(fs::PathToString(fs::u8path(u8_str)), u8_str);
 #ifndef WIN32
-    // On non-windows WUNOtems, verify that arbitrary byte strings containing
+    // On non-windows systems, verify that arbitrary byte strings containing
     // invalid UTF-8 can be round tripped successfully with PathToString and
-    // PathFromString. On non-windows WUNOtems, paths are just byte strings so
+    // PathFromString. On non-windows systems, paths are just byte strings so
     // these functions do not do any encoding. On windows, paths are Unicode,
     // and these functions do encoding and decoding, so the behavior of this
     // test would be undefined.

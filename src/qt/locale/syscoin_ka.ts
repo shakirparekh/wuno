@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;ახალი</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">მონიშნული მისამართის კოპირება სისტემის მეხსიერების ბუფერში</translation>
     </message>
     <message>
@@ -1212,7 +1212,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;მთავარი</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">ავტომატურად დაიწყება %1 სისტემაში შესვლის შემდეგ.</translation>
     </message>
     <message>
@@ -2285,7 +2285,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">ხელმოწერა</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">მიმდინარე ხელმოწერის კოპირება კლიპბორდში</translation>
     </message>
     <message>

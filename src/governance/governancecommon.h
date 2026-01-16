@@ -57,7 +57,7 @@ public:
     /// parent object, 0 is root
     uint256 hashParent{};
 
-    /// object revision in the WUNOtem
+    /// object revision in the system
     int revision{0};
 
     /// time this object was created

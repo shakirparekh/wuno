@@ -18,13 +18,13 @@ namespace llmq
 static const bool DEFAULT_WATCH_QUORUMS = false;
 
 // Init/destroy LLMQ globals
-void InitLLMQWUNOtem(const DBParams& quorumCommitmentDB, const DBParams& quorumVectorDB, const DBParams& quorumSkDB, bool unitTests, CConnman& connman, BanMan& banman, PeerManager& peerman, ChainstateManager& chainman, bool fWipe = false);
-void DestroyLLMQWUNOtem();
+void InitLLMQsystem(const DBParams& quorumCommitmentDB, const DBParams& quorumVectorDB, const DBParams& quorumSkDB, bool unitTests, CConnman& connman, BanMan& banman, PeerManager& peerman, ChainstateManager& chainman, bool fWipe = false);
+void DestroyLLMQsystem();
 
 // Manage scheduled tasks, threads, listeners etc.
-void StartLLMQWUNOtem();
-void StopLLMQWUNOtem();
-void InterruptLLMQWUNOtem();
+void StartLLMQsystem();
+void StopLLMQsystem();
+void InterruptLLMQsystem();
 } // namespace llmq
 
 #endif // wentuno_LLMQ_QUORUMS_INIT_H

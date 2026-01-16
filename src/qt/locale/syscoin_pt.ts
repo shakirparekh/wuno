@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Novo</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Copiar o endereço selecionado para a área de transferência do sistema</translation>
     </message>
     <message>
@@ -1462,11 +1462,11 @@ Assinar só é possível com endereços do tipo "legado".</translation>
         <translation type="unfinished">&amp;Principal</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Iniciar automaticamente o %1 depois de iniciar a sessão no sistema.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">&amp;Iniciar o %1 no início de sessão do sistema</translation>
     </message>
     <message>
@@ -1535,8 +1535,8 @@ Assinar só é possível com endereços do tipo "legado".</translation>
         <translation type="unfinished">Tamanho máximo da cache da base de dados. Uma cache maior pode contribuir para uma sincronização mais rápida, a partir do qual os benefícios são menos visíveis. Ao baixar o tamanho da cache irá diminuir a utilização de memória. Memória da mempool não usada será partilhada com esta cache.</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished">Define o número de threads do script de verificação. Valores negativos correspondem ao número de núcleos que deseja deixar livres para o sistema.</translation>
     </message>
     <message>
@@ -1654,7 +1654,7 @@ Assinar só é possível com endereços do tipo "legado".</translation>
         <translation type="unfinished">&amp;Janela</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished">Mostrar o ícone na barra de ferramentas.</translation>
     </message>
     <message>
@@ -2260,7 +2260,7 @@ Se está a receber este erro, deverá pedir ao comerciante para fornecer um URI 
         <translation type="unfinished">Última Transação</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">O sistema autónomo mapeado usado para diversificar a seleção de pares.</translation>
     </message>
     <message>
@@ -3208,7 +3208,7 @@ Nota: Como a taxa é calculada por byte, uma taxa de "100 satoshis por kvB" para
         <translation type="unfinished">Assinatura</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Copiar a assinatura atual para a área de transferência</translation>
     </message>
     <message>
@@ -4406,7 +4406,7 @@ Impossível restaurar backup da carteira.</translation>
         <translation type="unfinished">Prunando os blocos existentes...</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">Reduzindo -maxconnections de %d para %d, devido a limitações no sistema.</translation>
     </message>
     <message>

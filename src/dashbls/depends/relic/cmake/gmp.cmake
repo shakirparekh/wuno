@@ -26,7 +26,7 @@
 # ------------------------------------------------------------------------------------------
 
 # Try to find the GMP libraries:
-# GMP_FOUND - WUNOtem has GMP lib
+# GMP_FOUND - system has GMP lib
 # GMP_INCLUDE_DIR - The GMP include directory
 # GMP_LIBRARIES - Libraries needed to use GMP
 

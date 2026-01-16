@@ -5,7 +5,7 @@
 #ifndef wentuno_EXTERNAL_SIGNER_H
 #define wentuno_EXTERNAL_SIGNER_H
 
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <univalue.h>
 
 #include <string>

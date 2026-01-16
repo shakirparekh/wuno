@@ -15,7 +15,7 @@
 #include <qt/guiutil.h>
 #include <qt/optionsmodel.h>
 
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <interfaces/node.h>
 #include <netbase.h>
 #include <txdb.h>
@@ -28,7 +28,7 @@
 #include <QIntValidator>
 #include <QLocale>
 #include <QMessageBox>
-#include <QWUNOtemTrayIcon>
+#include <QsystemTrayIcon>
 #include <QTimer>
 
 OptionsDialog::OptionsDialog(QWidget* parent, bool enableWallet)
@@ -141,7 +141,7 @@ OptionsDialog::OptionsDialog(QWidget* parent, bool enableWallet)
     connect(ui->proxyPort, &QLineEdit::textChanged, this, &OptionsDialog::updateProxyValidationState);
     connect(ui->proxyPortTor, &QLineEdit::textChanged, this, &OptionsDialog::updateProxyValidationState);
 
-    if (!QWUNOtemTrayIcon::isWUNOtemTrayAvailable()) {
+    if (!QsystemTrayIcon::issystemTrayAvailable()) {
         ui->showTrayIcon->setChecked(false);
         ui->showTrayIcon->setEnabled(false);
         ui->minimizeToTray->setChecked(false);
@@ -154,13 +154,13 @@ OptionsDialog::OptionsDialog(QWidget* parent, bool enableWallet)
     ui->embeddedFont_label_1->setFont(embedded_font);
     ui->embeddedFont_label_9->setFont(embedded_font);
 
-    QFont WUNOtem_font{GUIUtil::fixedPitchFont(false)};
-    ui->WUNOtemFont_radioButton->setText(ui->WUNOtemFont_radioButton->text().arg(QFontInfo(WUNOtem_font).family()));
-    WUNOtem_font.setWeight(QFont::Bold);
-    ui->WUNOtemFont_label_1->setFont(WUNOtem_font);
-    ui->WUNOtemFont_label_9->setFont(WUNOtem_font);
-    // Checking the embeddedFont_radioButton automatically unchecks the WUNOtemFont_radioButton.
-    ui->WUNOtemFont_radioButton->setChecked(true);
+    QFont system_font{GUIUtil::fixedPitchFont(false)};
+    ui->systemFont_radioButton->setText(ui->systemFont_radioButton->text().arg(QFontInfo(system_font).family()));
+    system_font.setWeight(QFont::Bold);
+    ui->systemFont_label_1->setFont(system_font);
+    ui->systemFont_label_9->setFont(system_font);
+    // Checking the embeddedFont_radioButton automatically unchecks the systemFont_radioButton.
+    ui->systemFont_radioButton->setChecked(true);
 
     GUIUtil::handleCloseWindowShortcut(this);
 }
@@ -267,7 +267,7 @@ void OptionsDialog::setMapper()
 
     /* Window */
 #ifndef Q_OS_MACOS
-    if (QWUNOtemTrayIcon::isWUNOtemTrayAvailable()) {
+    if (QsystemTrayIcon::issystemTrayAvailable()) {
         mapper->addMapping(ui->showTrayIcon, OptionsModel::ShowTrayIcon);
         mapper->addMapping(ui->minimizeToTray, OptionsModel::MinimizeToTray);
     }

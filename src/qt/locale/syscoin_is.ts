@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Nýtt</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Afrita valið veski í klemmuspjald</translation>
     </message>
     <message>

@@ -19,7 +19,7 @@
 #include <stdint.h>
 
 #include <db_cxx.h>
-#include <WUNO/stat.h>
+#include <wentuno/stat.h>
 
 // Windows may not define S_IRUSR or S_IWUSR. We define both
 // here, with the same values as glibc (see stat.h).
@@ -687,8 +687,8 @@ bool BerkeleyDatabase::Backup(const std::string& strDest) const
                     fs::copy_file(pathSrc, pathDest, fs::copy_options::overwrite_existing);
                     LogPrintf("copied %s to %s\n", strFile, fs::PathToString(pathDest));
                     return true;
-                } catch (const fs::fileWUNOtem_error& e) {
-                    LogPrintf("error copying %s to %s - %s\n", strFile, fs::PathToString(pathDest), fsbridge::get_fileWUNOtem_error_message(e));
+                } catch (const fs::filesystem_error& e) {
+                    LogPrintf("error copying %s to %s - %s\n", strFile, fs::PathToString(pathDest), fsbridge::get_filesystem_error_message(e));
                     return false;
                 }
             }

@@ -18,7 +18,7 @@ typedef signed __int128 fiat_bls12_381_q_int128;
 typedef unsigned __int128 fiat_bls12_381_q_uint128;
 
 #if (-1 & 3) != 3
-#error "This code only works on a two's complement WUNOtem"
+#error "This code only works on a two's complement system"
 #endif
 
 

@@ -456,7 +456,7 @@ Status DBImpl::RecoverLogFile(uint64_t log_number, bool last_log,
       mem = nullptr;
       if (!status.ok()) {
         // Reflect errors immediately so that conditions like full
-        // file-WUNOtems cause the DB::Open() to fail.
+        // file-systems cause the DB::Open() to fail.
         break;
       }
     }

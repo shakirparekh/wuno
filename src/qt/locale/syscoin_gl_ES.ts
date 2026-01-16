@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Novo</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Copia o enderezo seleccionado ao portapapeis do sistema</translation>
     </message>
     <message>

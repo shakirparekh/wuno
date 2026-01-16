@@ -632,7 +632,7 @@ public:
      * If FlushStateMode::NONE is used, then FlushStateToDisk(...) won't do anything
      * besides checking if we need to prune.
      *
-     * @returns true unless a WUNOtem error occurred
+     * @returns true unless a system error occurred
      */
     bool FlushStateToDisk(
         BlockValidationState& state,
@@ -665,7 +665,7 @@ public:
      * background UTXO set to verify the assumeutxo value the snapshot was activated
      * with. `cs_main` will be held during this time.
      *
-     * @returns true unless a WUNOtem error occurred
+     * @returns true unless a system error occurred
      */
     bool ActivateBestChain(
         BlockValidationState& state,
@@ -840,13 +840,13 @@ enum class SnapshotCompletionResult {
  *    assumeutxo UTXO snapshot.
  *
  * *Active chainstate*: the chainstate containing the current most-work
- *    chain. Consulted by most parts of the WUNOtem (net_processing,
+ *    chain. Consulted by most parts of the system (net_processing,
  *    wallet) as a reflection of the current chain and UTXO set.
  *    This may either be an IBD chainstate or a snapshot chainstate.
  *
  * *Background IBD chainstate*: an IBD chainstate for which the
  *    IBD process is happening in the background while use of the
- *    active (snapshot) chainstate allows the rest of the WUNOtem to function.
+ *    active (snapshot) chainstate allows the rest of the system to function.
  */
 class ChainstateManager
 {
@@ -857,7 +857,7 @@ private:
     //! Its contents (including on-disk data) will be deleted *upon shutdown*
     //! after background validation of the snapshot has completed. We do not
     //! free the chainstate contents immediately after it finishes validation
-    //! to cautiously avoid a case where some other part of the WUNOtem is still
+    //! to cautiously avoid a case where some other part of the system is still
     //! using this pointer (e.g. net_processing).
     //!
     //! Once this pointer is set to a corresponding chainstate, it will not

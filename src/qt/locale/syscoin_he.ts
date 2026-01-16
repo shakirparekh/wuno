@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;חדש</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">העתק את הכתובת המסומנת ללוח</translation>
     </message>
     <message>
@@ -1376,11 +1376,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;ראשי</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">להפעיל את %1 אוטומטית לאחר הכניסה למערכת.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">ה&amp;פעלת %1 עם הכניסה למערכת</translation>
     </message>
     <message>
@@ -2017,7 +2017,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">בלוקים מסונכרנים</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">המערכת האוטונומית הממופה משמשת לגיוון בחירת עמיתים.</translation>
     </message>
     <message>
@@ -2745,7 +2745,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">חתימה</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">העתקת החתימה הנוכחית ללוח הגזירים</translation>
     </message>
     <message>
@@ -3619,7 +3619,7 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished">שיטת הגיזום אינה תואמת את  -txindex.</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">הורדת -maxconnections מ %d ל %d, עקב מגבלות מערכת.</translation>
     </message>
     <message>

@@ -1,6 +1,7 @@
-﻿// Copyright (c) 2013-2019 The wentuno Core developers
+// Copyright (c) 2013-2019 The wentuno Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <services/nevmconsensus.h>
 #include <services/assetconsensus.h>
 #include <validation.h>
@@ -16,7 +17,7 @@
 #include <validationinterface.h>
 #include <timedata.h>
 #include <key_io.h>
-#include <logging.h>
+
 std::unique_ptr<CBlockIndexDB> pblockindexdb;
 std::unique_ptr<CNEVMDataDB> pnevmdatadb;
 std::unique_ptr<CNEVMDataBlobDB> pnevmdatablobdb;
@@ -25,115 +26,135 @@ bool fRegTest = false;
 bool fSigNet = false;
 
 bool DisconnectwentunoTransaction(const CTransaction& tx, NEVMMintTxSet &setMintTxs) {
- 
-    if(IswentunoMintTx(tx.nVersion)) {
-        if(!DisconnectMintAsset(tx, setMintTxs))
-            return false;       
+    if (IswentunoMintTx(tx.nVersion)) {
+        if (!DisconnectMintAsset(tx, setMintTxs))
+            return false;
     }
-    return true;       
+    return true;
 }
 
 void CNEVMDataDB::FlushDataToCache(const PoDAMAPMemory &mapPoDA) {
     LOCK(cs_cache);
-    if(mapPoDA.empty()) {
+    if (mapPoDA.empty()) {
         return;
     }
-    CDBBatch batchblob(*pnevmdatablobdb);  
+    CDBBatch batchblob(*pnevmdatablobdb);
     for (auto const& [key, val] : mapPoDA) {
-        if(!val.vchNEVMData) {
+        if (!val.vchNEVMData) {
             continue;
         }
         auto inserted = mapCache.try_emplace(key, val.txid, val.nSize, val.nMedianTime);
         // for duplicate blobs, allow to update txid/mediantime
-        if(!inserted.second) {
+        if (!inserted.second) {
             inserted.first->second.nMedianTime = val.nMedianTime;
             inserted.first->second.txid = val.txid;
         }
-        if(!pnevmdatablobdb->Exists(key)) {
+        if (!pnevmdatablobdb->Exists(key)) {
             batchblob.Write(key, val.vchNEVMData);
         }
     }
-    if(batchblob.SizeEstimate() > 0) {
+    if (batchblob.SizeEstimate() > 0) {
         pnevmdatablobdb->WriteBatch(batchblob);
     }
 }
+
 bool CNEVMDataDB::FlushCacheToDisk(const int64_t nMedianTime) {
     bool cacheEmpty = false;
     {
         LOCK(cs_cache);
         cacheEmpty = mapCache.empty();
     }
-    if(cacheEmpty) {
-        if(fTestNet) {
+    if (cacheEmpty) {
+        if (fTestNet) {
             return PruneStandalone(nMedianTime);
         }
         return true;
     }
+
     LOCK(cs_cache);
+    bool res = true;
     CDBBatch batch(*this);
+
     // only prune on testnet flush, mainnet relies only on CL
-    if(fTestNet) {
+    if (fTestNet) {
         CDBBatch batchblob(*pnevmdatablobdb);
         if (!PruneToBatch(batch, batchblob, nMedianTime)) {
-            LogPrint(BCLog::WUNO, "Error: Could not prune nevm blobs\n");
-            return false;
+            LogPrint(BCLog::VALIDATION, "Error: Could not prune nevm blobs\n");
+            res = false;
+        } else {
+            pnevmdatablobdb->WriteBatch(batchblob);
         }
-        pnevmdatablobdb->WriteBatch(batchblob);
     }
+
     for (auto const& [key, val] : mapCache) {
         batch.Write(key, val);
     }
-    if(mapCache.size() > 0)
-        LogPrint(BCLog::WUNO, "Flushing cache to disk, storing %d nevm blobs\n", mapCache.size());
-    bool res = WriteBatch(batch, true);
-    if(res) {
-        mapCache.clear();
+
+    LogPrint(BCLog::VALIDATION, "Flushing cache to disk, storing %d nevm blobs\n", mapCache.size());
+
+    if (res) {
+        res = WriteBatch(batch, true);
+        if (res) {
+            mapCache.clear();
+        }
     }
+
     return res;
 }
+
 bool CNEVMDataDB::FlushErase(const NEVMDataVec &vecDataKeys) {
     LOCK(cs_cache);
-    if(vecDataKeys.empty())
+    if (vecDataKeys.empty())
         return true;
-    CDBBatch batch(*this);    
+
+    bool res = true;
+    CDBBatch batch(*this);
     for (const auto &key : vecDataKeys) {
         batch.Erase(key);
         // remove from cache as well
         auto it = mapCache.find(key);
-        if(it != mapCache.end())
+        if (it != mapCache.end())
             mapCache.erase(it);
     }
-    if(vecDataKeys.size() > 0)
-        LogPrint(BCLog::WUNO, "Flushing, erasing %d nevm blob keys\n", vecDataKeys.size());
-    return WriteBatch(batch, true) && pnevmdatablobdb->FlushErase(vecDataKeys);
+
+    if (vecDataKeys.size() > 0)
+        LogPrint(BCLog::VALIDATION, "Flushing, erasing %d nevm blob keys\n", vecDataKeys.size());
+
+    res = WriteBatch(batch, true);
+    return res && pnevmdatablobdb->FlushErase(vecDataKeys);
 }
+
 bool CNEVMDataBlobDB::FlushErase(const NEVMDataVec &vecDataKeys) {
-    CDBBatch batch(*this);    
+    CDBBatch batch(*this);
     for (const auto &key : vecDataKeys) {
         batch.Erase(key);
     }
     return WriteBatch(batch, true);
 }
+
 bool CNEVMDataDB::BlobExists(const std::vector<uint8_t>& vchVersionHash) {
     LOCK(cs_cache);
     return (mapCache.find(vchVersionHash) != mapCache.end()) || Exists(vchVersionHash);
 }
+
 bool CNEVMDataDB::GetBlobMetaData(const std::vector<uint8_t>& vchVersionHash, MapPoDAPayloadMeta& meta) {
     LOCK(cs_cache);
     auto it = mapCache.find(vchVersionHash);
     if (it != mapCache.end()) {
         meta = it->second;
         return true;
-    } 
-    if(Exists(vchVersionHash)) {
+    }
+    if (Exists(vchVersionHash)) {
         return Read(vchVersionHash, meta);
     }
     return false;
 }
+
 const PoDAMAPMemory& CNEVMDataDB::GetCache() const {
     AssertLockHeld(cs_cache);
     return mapCache;
 }
+
 bool CNEVMDataDB::PruneToBatch(
     CDBBatch& batch,
     CDBBatch& batchblob,
@@ -153,7 +174,7 @@ bool CNEVMDataDB::PruneToBatch(
             ++it;
         }
     }
-    
+
     std::unique_ptr<CDBIterator> pcursor(NewIterator());
     pcursor->SeekToFirst();
     std::vector<uint8_t> vchVersionHash;
@@ -177,14 +198,14 @@ bool CNEVMDataDB::PruneToBatch(
             return error("%s() : deserialize error: %s", __func__, e.what());
         }
     }
-    if(nCount > 0)
-        LogPrint(BCLog::WUNO, "PruneToBatch pruned %d nevm blobs\n", nCount);
+
+    if (nCount > 0)
+        LogPrint(BCLog::VALIDATION, "PruneToBatch pruned %d nevm blobs\n", nCount);
 
     return true;
 }
 
-bool CNEVMDataDB::PruneStandalone(const int64_t nMedianTime)
-{
+bool CNEVMDataDB::PruneStandalone(const int64_t nMedianTime) {
     LOCK(cs_cache);
     CDBBatch batch(*this);
     CDBBatch batchblob(*pnevmdatablobdb);

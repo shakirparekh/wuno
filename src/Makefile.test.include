@@ -160,7 +160,7 @@ wentuno_TESTS =\
   test/sock_tests.cpp \
   test/streams_tests.cpp \
   test/sync_tests.cpp \
-  test/WUNOtem_tests.cpp \
+  test/system_tests.cpp \
   test/timedata_tests.cpp \
   test/torcontrol_tests.cpp \
   test/transaction_tests.cpp \
@@ -355,7 +355,7 @@ test_fuzz_fuzz_SOURCES = \
  test/fuzz/spanparsing.cpp \
  test/fuzz/string.cpp \
  test/fuzz/strprintf.cpp \
- test/fuzz/WUNOtem.cpp \
+ test/fuzz/system.cpp \
  test/fuzz/timedata.cpp \
  test/fuzz/torcontrol.cpp \
  test/fuzz/transaction.cpp \
@@ -434,7 +434,7 @@ endif
 	$(AM_V_at)export TEST_LOGFILE=$(abs_builddir)/$$(\
 	  echo $< | grep -E -o "(wallet/test/.*\.cpp|test/.*\.cpp)" | $(SED) -e s/\.cpp/.log/ \
 	) && \
-	$(TEST_BINARY) --catch_WUNOtem_errors=no -l test_suite -t "$$(\
+	$(TEST_BINARY) --catch_system_errors=no -l test_suite -t "$$(\
 	  cat $< | \
 	  grep -E "(BOOST_FIXTURE_TEST_SUITE\\(|BOOST_AUTO_TEST_SUITE\\()" | \
 	  cut -d '(' -f 2 | cut -d ',' -f 1 | cut -d ')' -f 1\

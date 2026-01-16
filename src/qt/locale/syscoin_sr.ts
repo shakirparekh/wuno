@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Ново</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Копирај тренутно одабрану адресу</translation>
     </message>
     <message>
@@ -1385,11 +1385,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Главни</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Аутоматски почети %1 након пријање на систем.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">&amp;Покрени %1 приликом пријаве на систем</translation>
     </message>
     <message>
@@ -1534,7 +1534,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Тор</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished">Прикажите икону у системској палети.</translation>
     </message>
     <message>
@@ -2103,7 +2103,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished">Синхронизовани блокови</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">Мапирани аутономни систем који се користи за диверсификацију селекције колега чворова.</translation>
     </message>
     <message>
@@ -3023,7 +3023,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">Потпис</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Копирајте тренутни потпис у системску базу за копирање</translation>
     </message>
     <message>
@@ -3886,7 +3886,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">Мод скраћивања није компатибилан са -txindex.</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">Смањивање -maxconnections са %d на %d, због ограничења система.</translation>
     </message>
     <message>

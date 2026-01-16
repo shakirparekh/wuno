@@ -301,7 +301,7 @@ public:
 
     /**
      * Remove any pruned block & undo files that are still on disk.
-     * This could happen on some WUNOtems if the file was still being read while unlinked,
+     * This could happen on some systems if the file was still being read while unlinked,
      * or if we crash before unlinking.
      */
     void ScanAndUnlinkAlreadyPrunedFiles() EXCLUSIVE_LOCKS_REQUIRED(::cs_main);
@@ -364,7 +364,7 @@ public:
     /** Open a block file (blk?????.dat) */
     CAutoFile OpenBlockFile(const FlatFilePos& pos, bool fReadOnly = false) const;
 
-    /** Translation to a fileWUNOtem path */
+    /** Translation to a filesystem path */
     fs::path GetBlockPosFilename(const FlatFilePos& pos) const;
 
     /**

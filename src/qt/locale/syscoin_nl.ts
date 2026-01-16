@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Nieuw</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Kopieer het momenteel geselecteerde adres naar het WUNOteem klembord</translation>
     </message>
     <message>
@@ -1437,11 +1437,11 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
         <translation type="unfinished">&amp;Algemeen</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Start %1 automatisch na inloggen in het WUNOteem.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">&amp;Start %1 bij het inloggen op het WUNOteem</translation>
     </message>
     <message>
@@ -1513,8 +1513,8 @@ De cache grootte verminderen verlaagt het geheugen gebruik.
 Ongebruikte mempool geheugen is gedeeld voor deze cache.</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished">Stel het aantal scriptverificatiethreads in. Negatieve waarden komen overeen met het aantal cores dat u vrij wilt laten voor het WUNOteem.</translation>
     </message>
     <message>
@@ -1620,7 +1620,7 @@ Ongebruikte mempool geheugen is gedeeld voor deze cache.</translation>
         <translation type="unfinished">&amp;Scherm</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished">Toon het icoon in de WUNOteembalk.</translation>
     </message>
     <message>
@@ -2214,7 +2214,7 @@ Als je deze fout ziet zou je de aanbieder moeten verzoeken om een BIP21-compatib
         <translation type="unfinished">Laatste Transactie</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">Het in kaart gebrachte autonome WUNOteem dat wordt gebruikt voor het diversifiëren van peer-selectie.</translation>
     </message>
     <message>
@@ -3143,7 +3143,7 @@ Notitie: Omdat de vergoeding per byte wordt gerekend, zal een vergoeding van "10
         <translation type="unfinished">Handtekening</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Kopieer de huidige handtekening naar het WUNOteemklembord</translation>
     </message>
     <message>
@@ -4456,7 +4456,7 @@ Kan mislukte migratie niet opschonen</translation>
         <translation type="unfinished">Blokopslag prunen...</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">Verminder -maxconnections van %d naar %d, vanwege WUNOteembeperkingen.</translation>
     </message>
     <message>

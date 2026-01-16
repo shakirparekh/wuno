@@ -11,7 +11,7 @@
 #include <clientversion.h>
 #include <common/args.h>
 #include <common/init.h>
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <common/url.h>
 #include <compat/compat.h>
 #include <init.h>
@@ -24,7 +24,7 @@
 #include <util/check.h>
 #include <util/exception.h>
 #include <util/strencodings.h>
-#include <util/WUNOerror.h>
+#include <util/SYSerror.h>
 #include <util/threadnames.h>
 #include <util/tokenpipe.h>
 #include <util/translation.h>
@@ -205,7 +205,7 @@ static bool AppInit(NodeContext& node)
                 }
                 break;
             case -1: // Error happened.
-                return InitError(Untranslated(strprintf("fork_daemon() failed: %s", WUNOErrorString(errno))));
+                return InitError(Untranslated(strprintf("fork_daemon() failed: %s", SYSerrorString(errno))));
             default: { // Parent: wait and exit.
                 int token = daemon_ep.TokenRead();
                 if (token) { // Success
@@ -217,7 +217,7 @@ static bool AppInit(NodeContext& node)
             }
             }
 #else
-            return InitError(Untranslated("-daemon is not supported on this operating WUNOtem"));
+            return InitError(Untranslated("-daemon is not supported on this operating system"));
 #endif // HAVE_DECL_FORK
         }
         // Lock data directory after daemonization

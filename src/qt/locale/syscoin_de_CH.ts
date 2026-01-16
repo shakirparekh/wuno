@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Neu</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Ausgewählte Adresse in die Zwischenablage kopieren</translation>
     </message>
     <message>
@@ -1358,12 +1358,12 @@ Während des Migrationsprozesses wird vor der Migration ein Backup der Wallet er
         <translation type="unfinished">&amp;Allgemein</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
-        <translation type="unfinished">%1 nach der Anmeldung im WUNOtem automatisch ausführen.</translation>
+        <source>Automatically start %1 after logging in to the system.</source>
+        <translation type="unfinished">%1 nach der Anmeldung im system automatisch ausführen.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
-        <translation type="unfinished">&amp;Starte %1 nach WUNOtemanmeldung</translation>
+        <source>&amp;Start %1 on system login</source>
+        <translation type="unfinished">&amp;Starte %1 nach systemanmeldung</translation>
     </message>
     <message>
         <source>Enabling pruning significantly reduces the disk space required to store transactions. All blocks are still fully validated. Reverting this setting requires re-downloading the entire blockchain.</source>
@@ -1431,9 +1431,9 @@ Während des Migrationsprozesses wird vor der Migration ein Backup der Wallet er
         <translation type="unfinished">Maximale Größe des Datenbank-Caches. Ein größerer Cache kann zu einer schnelleren Synchronisierung beitragen, danach ist der Vorteil für die meisten Anwendungsfälle weniger ausgeprägt. Eine Verringerung der Cache-Größe reduziert den Speicherverbrauch. Ungenutzter Mempool-Speicher wird für diesen Cache gemeinsam genutzt.</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
-        <translation type="unfinished">Legen Sie die Anzahl der Skriptüberprüfungs-Threads fest. Negative Werte entsprechen der Anzahl der Kerne, die Sie für das WUNOtem frei lassen möchten.</translation>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
+        <translation type="unfinished">Legen Sie die Anzahl der Skriptüberprüfungs-Threads fest. Negative Werte entsprechen der Anzahl der Kerne, die Sie für das system frei lassen möchten.</translation>
     </message>
     <message>
         <source>(0 = auto, &lt;0 = leave that many cores free)</source>
@@ -1546,7 +1546,7 @@ Während des Migrationsprozesses wird vor der Migration ein Backup der Wallet er
         <translation type="unfinished">&amp;Programmfenster</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished">Zeigt das Symbol in der Leiste an.</translation>
     </message>
     <message>
@@ -2159,8 +2159,8 @@ Wenn Sie diese Fehlermeldung erhalten, sollten Sie den Händler bitten, einen BI
         <translation type="unfinished">Letzte Transaktion</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
-        <translation type="unfinished">Das zugeordnete autonome WUNOtem zur Diversifizierung der Gegenstellen-Auswahl.</translation>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
+        <translation type="unfinished">Das zugeordnete autonome system zur Diversifizierung der Gegenstellen-Auswahl.</translation>
     </message>
     <message>
         <source>Mapped AS</source>
@@ -3187,7 +3187,7 @@ Hinweis: Da die Gebühr auf Basis der Bytes berechnet wird, führt eine Gebühre
         <translation type="unfinished">Signatur</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Aktuelle Signatur in die Zwischenablage kopieren</translation>
     </message>
     <message>
@@ -4001,7 +4001,7 @@ Gehen Sie zu Datei &gt; Wallet Öffnen, um eine Wallet zu laden.
     </message>
     <message>
         <source>The block database contains a block which appears to be from the future. This may be due to your computer's date and time being set incorrectly. Only rebuild the block database if you are sure that your computer's date and time are correct</source>
-        <translation type="unfinished">Die Block-Datenbank enthält einen Block, der scheinbar aus der Zukunft kommt. Dies kann daran liegen, dass die WUNOtemzeit Ihres Computers falsch eingestellt ist. Stellen Sie die Block-Datenbank erst dann wieder her, wenn Sie sich sicher sind, dass Ihre WUNOtemzeit korrekt eingestellt ist.</translation>
+        <translation type="unfinished">Die Block-Datenbank enthält einen Block, der scheinbar aus der Zukunft kommt. Dies kann daran liegen, dass die systemzeit Ihres Computers falsch eingestellt ist. Stellen Sie die Block-Datenbank erst dann wieder her, wenn Sie sich sicher sind, dass Ihre systemzeit korrekt eingestellt ist.</translation>
     </message>
     <message>
         <source>The transaction amount is too small to send after the fee has been deducted</source>
@@ -4539,8 +4539,8 @@ Berechnet: %s, erwartet: %s</translation>
         <translation type="unfinished">Kürze den Blockspeicher…</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
-        <translation type="unfinished">Reduziere -maxconnections von %d zu %d, aufgrund von WUNOtemlimitierungen.</translation>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
+        <translation type="unfinished">Reduziere -maxconnections von %d zu %d, aufgrund von systemlimitierungen.</translation>
     </message>
     <message>
         <source>Replaying blocks…</source>

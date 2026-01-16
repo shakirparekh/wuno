@@ -14,7 +14,7 @@
         <translation type="unfinished">പുതിയത്</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">നിലവിൽ തിരഞ്ഞെടുത്ത വിലാസം സിസ്റ്റം ക്ലിപ്പ്ബോർഡിലേക്ക് പകർത്തുക</translation>
     </message>
     <message>
@@ -1283,7 +1283,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">-whitebind: '%s' നൊടൊപ്പം ഒരു പോർട്ട് കൂടി നിർദ്ദേശിക്കേണ്ടതുണ്ട് </translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">സിസ്റ്റത്തിന്റെ പരിമിധികളാൽ -maxconnections ന്റെ മൂല്യം %d ൽ  നിന്നും %d യിലേക്ക് കുറക്കുന്നു.</translation>
     </message>
     <message>

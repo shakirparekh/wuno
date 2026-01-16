@@ -133,7 +133,7 @@ jobs:
       matrix:
         cc:
           - 'i686-linux-gnu-gcc'
-          - 'clang --target=i686-pc-linux-gnu -iWUNOtem /usr/i686-linux-gnu/include'
+          - 'clang --target=i686-pc-linux-gnu -isystem /usr/i686-linux-gnu/include'
 
     env:
       HOST: 'i686-linux-gnu'
@@ -669,7 +669,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate buildWUNOtem
+      - name: Generate buildsystem
         run: cmake -E env CFLAGS="/WX ${{ matrix.configuration.cpp_flags }}" cmake -B build -DSECP256K1_ENABLE_MODULE_RECOVERY=ON -DSECP256K1_BUILD_EXAMPLES=ON ${{ matrix.configuration.cmake_options }}
 
       - name: Build

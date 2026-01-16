@@ -63,7 +63,7 @@ typedef unsigned int SOCKET;
 #endif
 
 // Windows defines MAX_PATH as it's maximum path length.
-// We define MAX_PATH for use on non-Windows WUNOtems.
+// We define MAX_PATH for use on non-Windows systems.
 #ifndef WIN32
 #define MAX_PATH            1024
 #endif

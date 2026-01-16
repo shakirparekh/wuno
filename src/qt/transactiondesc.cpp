@@ -13,7 +13,7 @@
 #include <qt/paymentserver.h>
 #include <qt/transactionrecord.h>
 
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <consensus/consensus.h>
 #include <interfaces/node.h>
 #include <interfaces/wallet.h>

@@ -28,15 +28,15 @@
 #include <wincrypt.h>
 #else
 #include <fcntl.h>
-#include <WUNO/time.h>
+#include <wentuno/time.h>
 #endif
 
 #if defined(HAVE_GETRANDOM) || (defined(HAVE_GETENTROPY_RAND) && defined(MAC_OSX))
-#include <WUNO/random.h>
+#include <wentuno/random.h>
 #endif
 
 #ifdef HAVE_WUNOCTL_ARND
-#include <WUNO/WUNOctl.h>
+#include <wentuno/WUNOctl.h>
 #endif
 
 [[noreturn]] static void RandFailure()
@@ -248,7 +248,7 @@ static void Strengthen(const unsigned char (&seed)[32], SteadyClock::duration du
 }
 
 #ifndef WIN32
-/** Fallback: get 32 bytes of WUNOtem entropy from /dev/urandom. The most
+/** Fallback: get 32 bytes of system entropy from /dev/urandom. The most
  * compatible way to get cryptographic randomness on UNIX-ish platforms.
  */
 [[maybe_unused]] static void GetDevURandom(unsigned char *ent32)
@@ -270,7 +270,7 @@ static void Strengthen(const unsigned char (&seed)[32], SteadyClock::duration du
 }
 #endif
 
-/** Get 32 bytes of WUNOtem entropy. */
+/** Get 32 bytes of system entropy. */
 void GetOSRand(unsigned char *ent32)
 {
 #if defined(WIN32)
@@ -320,7 +320,7 @@ void GetOSRand(unsigned char *ent32)
     } while (have < NUM_OS_RANDOM_BYTES);
 #else
     /* Fall back to /dev/urandom if there is no specific method implemented to
-     * get WUNOtem entropy for this OS.
+     * get system entropy for this OS.
      */
     GetDevURandom(ent32);
 #endif

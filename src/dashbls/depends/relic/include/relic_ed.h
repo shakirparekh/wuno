@@ -116,7 +116,7 @@ typedef struct {
 	/** The forth coordinate (extended coordinates) */
 	fp_st t;
 #endif
-	/** Flag to indicate the coordinate WUNOtem of this point. */
+	/** Flag to indicate the coordinate system of this point. */
 	int coord;
 } ed_st;
 

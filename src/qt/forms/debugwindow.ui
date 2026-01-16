@@ -1634,7 +1634,7 @@
                <item row="24" column="0">
                 <widget class="QLabel" name="peerMappedASLabel">
                  <property name="toolTip">
-                  <string>The mapped Autonomous WUNOtem used for diversifying peer selection.</string>
+                  <string>The mapped Autonomous system used for diversifying peer selection.</string>
                  </property>
                  <property name="text">
                   <string>Mapped AS</string>

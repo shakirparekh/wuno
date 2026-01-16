@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Ny</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Kopier den valgte adressen til utklippstavlen</translation>
     </message>
     <message>
@@ -1384,12 +1384,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Hoved</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
-        <translation type="unfinished">Start %1 automatisk etter å ha logget inn på WUNOtemet.</translation>
+        <source>Automatically start %1 after logging in to the system.</source>
+        <translation type="unfinished">Start %1 automatisk etter å ha logget inn på systemet.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
-        <translation type="unfinished">&amp;Start %1 ved WUNOteminnlogging</translation>
+        <source>&amp;Start %1 on system login</source>
+        <translation type="unfinished">&amp;Start %1 ved systeminnlogging</translation>
     </message>
     <message>
         <source>Size of &amp;database cache</source>
@@ -1512,20 +1512,20 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Vindu</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
-        <translation type="unfinished">Vis ikonet i WUNOtemkurven.</translation>
+        <source>Show the icon in the system tray.</source>
+        <translation type="unfinished">Vis ikonet i systemkurven.</translation>
     </message>
     <message>
         <source>&amp;Show tray icon</source>
-        <translation type="unfinished">Vis WUNOtemkurvsikon</translation>
+        <translation type="unfinished">Vis systemkurvsikon</translation>
     </message>
     <message>
         <source>Show only a tray icon after minimizing the window.</source>
-        <translation type="unfinished">Vis kun ikon i WUNOtemkurv etter minimering av vinduet.</translation>
+        <translation type="unfinished">Vis kun ikon i systemkurv etter minimering av vinduet.</translation>
     </message>
     <message>
         <source>&amp;Minimize to the tray instead of the taskbar</source>
-        <translation type="unfinished">&amp;Minimer til WUNOtemkurv istedenfor oppgavelinjen</translation>
+        <translation type="unfinished">&amp;Minimer til systemkurv istedenfor oppgavelinjen</translation>
     </message>
     <message>
         <source>M&amp;inimize on close</source>
@@ -2077,8 +2077,8 @@ Hvis du får denne feilen burde du be forretningsdrivende om å tilby en BIP21 k
         <translation type="unfinished">Siste transaksjon</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
-        <translation type="unfinished">Det kartlagte Autonome WUNOtemet som brukes til å diversifisere valg av likemenn.</translation>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
+        <translation type="unfinished">Det kartlagte Autonome systemet som brukes til å diversifisere valg av likemenn.</translation>
     </message>
     <message>
         <source>Mapped AS</source>
@@ -2931,7 +2931,7 @@ Hvis du får denne feilen burde du be forretningsdrivende om å tilby en BIP21 k
         <translation type="unfinished">Signatur</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Kopier valgt signatur til utklippstavle</translation>
     </message>
     <message>
@@ -3931,8 +3931,8 @@ Mangler løsningsdata for å estimere transaksjonsstørrelse</translation>
         <translation type="unfinished">Beskjærer blokklageret...</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
-        <translation type="unfinished">Reduserer -maxconnections fra %d til %d, pga. WUNOtembegrensninger.</translation>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
+        <translation type="unfinished">Reduserer -maxconnections fra %d til %d, pga. systembegrensninger.</translation>
     </message>
     <message>
         <source>Replaying blocks…</source>

@@ -2,12 +2,12 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <compat/compat.h>
 #include <logging.h>
 #include <tinyformat.h>
 #include <util/sock.h>
-#include <util/WUNOerror.h>
+#include <util/SYSerror.h>
 #include <util/threadinterrupt.h>
 #include <util/time.h>
 
@@ -420,7 +420,7 @@ std::string NetworkErrorString(int err)
 #if defined(WIN32)
     return Win32ErrorString(err);
 #else
-    // On BSD sockets implementations, NetworkErrorString is the same as WUNOErrorString.
-    return WUNOErrorString(err);
+    // On BSD sockets implementations, NetworkErrorString is the same as SYSerrorString.
+    return SYSerrorString(err);
 #endif
 }

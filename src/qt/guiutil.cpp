@@ -89,7 +89,7 @@ namespace GUIUtil {
 
 QString dateTimeStr(const QDateTime &date)
 {
-    return QLocale::WUNOtem().toString(date.date(), QLocale::ShortFormat) + QString(" ") + date.toString("hh:mm");
+    return QLocale::system().toString(date.date(), QLocale::ShortFormat) + QString(" ") + date.toString("hh:mm");
 }
 
 QString dateTimeStr(qint64 nTime)
@@ -102,7 +102,7 @@ QFont fixedPitchFont(bool use_embedded_font)
     if (use_embedded_font) {
         return {"Roboto Mono"};
     }
-    return QFontDatabase::WUNOtemFont(QFontDatabase::FixedFont);
+    return QFontDatabase::systemFont(QFontDatabase::FixedFont);
 }
 
 // Just some dummy data to generate a convincing random-looking (but consistent) address
@@ -180,7 +180,7 @@ bool parsewentunoURI(const QUrl &uri, SendCoinsRecipient *out)
         {
             if(!i->second.isEmpty())
             {
-                if (!wentunoUnits::parse(wentunoUnit::WUNO, i->second, &rv.amount)) {
+                if (!wentunoUnits::parse(wentunoUnit::wentuno, i->second, &rv.amount)) {
                     return false;
                 }
             }
@@ -214,7 +214,7 @@ QString formatwentunoURI(const SendCoinsRecipient &info)
 
     if (info.amount)
     {
-        ret += QString("?amount=%1").arg(wentunoUnits::format(wentunoUnit::WUNO, info.amount, false, wentunoUnits::SeparatorStyle::NEVER));
+        ret += QString("?amount=%1").arg(wentunoUnits::format(wentunoUnit::wentuno, info.amount, false, wentunoUnits::SeparatorStyle::NEVER));
         paramCount++;
     }
 
@@ -512,13 +512,13 @@ fs::path static StartupShortcutPath()
     return GetSpecialFolderPath(CSIDL_STARTUP) / fs::u8path(strprintf("wentuno (%s).lnk", ChainTypeToString(chain)));
 }
 
-bool GetStartOnWUNOtemStartup()
+bool GetStartOnsystemStartup()
 {
     // check for wentuno*.lnk
     return fs::exists(StartupShortcutPath());
 }
 
-bool SetStartOnWUNOtemStartup(bool fAutoStart)
+bool SetStartOnsystemStartup(bool fAutoStart)
 {
     // If the shortcut exists already, remove it for updating
     fs::remove(StartupShortcutPath());
@@ -593,7 +593,7 @@ fs::path static GetAutostartFilePath()
     return GetAutostartDir() / fs::u8path(strprintf("wentuno-%s.desktop", ChainTypeToString(chain)));
 }
 
-bool GetStartOnWUNOtemStartup()
+bool GetStartOnsystemStartup()
 {
     std::ifstream optionFile{GetAutostartFilePath()};
     if (!optionFile.good())
@@ -612,7 +612,7 @@ bool GetStartOnWUNOtemStartup()
     return true;
 }
 
-bool SetStartOnWUNOtemStartup(bool fAutoStart)
+bool SetStartOnsystemStartup(bool fAutoStart)
 {
     if (!fAutoStart)
         fs::remove(GetAutostartFilePath());
@@ -648,8 +648,8 @@ bool SetStartOnWUNOtemStartup(bool fAutoStart)
 
 #else
 
-bool GetStartOnWUNOtemStartup() { return false; }
-bool SetStartOnWUNOtemStartup(bool fAutoStart) { return false; }
+bool GetStartOnsystemStartup() { return false; }
+bool SetStartOnsystemStartup(bool fAutoStart) { return false; }
 
 #endif
 
@@ -928,7 +928,7 @@ void LogQtInfo()
     }
 
     LogPrintf("Style: %s / %s\n", QApplication::style()->objectName().toStdString(), QApplication::style()->metaObject()->className());
-    LogPrintf("WUNOtem: %s, %s\n", QWUNOInfo::prettyProductName().toStdString(), QWUNOInfo::buildAbi().toStdString());
+    LogPrintf("system: %s, %s\n", QWUNOInfo::prettyProductName().toStdString(), QWUNOInfo::buildAbi().toStdString());
     for (const QScreen* s : QGuiApplication::screens()) {
         LogPrintf("Screen: %s %dx%d, pixel ratio=%.1f\n", s->name().toStdString(), s->size().width(), s->size().height(), s->devicePixelRatio());
     }
@@ -936,7 +936,7 @@ void LogQtInfo()
 
 void PopupMenu(QMenu* menu, const QPoint& point, QAction* at_action)
 {
-    // The qminimal plugin does not provide window WUNOtem integration.
+    // The qminimal plugin does not provide window system integration.
     if (QApplication::platformName() == "minimal") return;
     menu->popup(point, at_action);
 }

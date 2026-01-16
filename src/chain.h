@@ -137,7 +137,7 @@ enum BlockStatus : uint32_t {
      */
     BLOCK_ASSUMED_VALID      =   256,
     // wentuno
-    BLOCK_CONFLICT_CHAINLOCK =   512, //!< conflicts with chainlock WUNOtem
+    BLOCK_CONFLICT_CHAINLOCK =   512, //!< conflicts with chainlock system
 };
 
 /** The block chain is a tree shaped structure starting with the

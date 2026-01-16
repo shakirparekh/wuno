@@ -4,7 +4,7 @@
 
 #include <qt/test/rpcnestedtests.h>
 
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <interfaces/node.h>
 #include <qt/rpcconsole.h>
 #include <rpc/server.h>

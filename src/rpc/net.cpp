@@ -546,14 +546,14 @@ static RPCHelpMan getnettotals()
 {
     return RPCHelpMan{"getnettotals",
         "Returns information about network traffic, including bytes in, bytes out,\n"
-        "and current WUNOtem time.",
+        "and current system time.",
         {},
                 RPCResult{
                    RPCResult::Type::OBJ, "", "",
                    {
                        {RPCResult::Type::NUM, "totalbytesrecv", "Total bytes received"},
                        {RPCResult::Type::NUM, "totalbytessent", "Total bytes sent"},
-                       {RPCResult::Type::NUM_TIME, "timemillis", "Current WUNOtem " + UNIX_EPOCH_TIME + " in milliseconds"},
+                       {RPCResult::Type::NUM_TIME, "timemillis", "Current system " + UNIX_EPOCH_TIME + " in milliseconds"},
                        {RPCResult::Type::OBJ, "uploadtarget", "",
                        {
                            {RPCResult::Type::NUM, "timeframe", "Length of the measuring timeframe in seconds"},
@@ -577,7 +577,7 @@ static RPCHelpMan getnettotals()
     UniValue obj(UniValue::VOBJ);
     obj.pushKV("totalbytesrecv", connman.GetTotalBytesRecv());
     obj.pushKV("totalbytessent", connman.GetTotalBytesSent());
-    obj.pushKV("timemillis", TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()));
+    obj.pushKV("timemillis", TicksSinceEpoch<std::chrono::milliseconds>(systemClock::now()));
 
     UniValue outboundLimit(UniValue::VOBJ);
     outboundLimit.pushKV("timeframe", count_seconds(connman.GetMaxOutboundTimeframe()));

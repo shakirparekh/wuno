@@ -14,8 +14,8 @@
         <translation type="unfinished">&amp;Ny</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
-        <translation type="unfinished">Kopiér den valgte adresse til WUNOtemets udklipsholder</translation>
+        <source>Copy the currently selected address to the system clipboard</source>
+        <translation type="unfinished">Kopiér den valgte adresse til systemets udklipsholder</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -1378,12 +1378,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Generelt</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
-        <translation type="unfinished">Start %1 automatisk, når der logges ind på WUNOtemet.</translation>
+        <source>Automatically start %1 after logging in to the system.</source>
+        <translation type="unfinished">Start %1 automatisk, når der logges ind på systemet.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
-        <translation type="unfinished">&amp;Start %1 ved WUNOtemlogin</translation>
+        <source>&amp;Start %1 on system login</source>
+        <translation type="unfinished">&amp;Start %1 ved systemlogin</translation>
     </message>
     <message>
         <source>Enabling pruning significantly reduces the disk space required to store transactions. All blocks are still fully validated. Reverting this setting requires re-downloading the entire blockchain.</source>
@@ -1443,9 +1443,9 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Maksimal størrelse på databasecache. En større cache kan bidrage til hurtigere synkronisering, hvorefter fordelen er mindre synlig i de fleste tilfælde. Sænkning af cachestørrelsen vil reducere hukommelsesforbruget. Ubrugt mempool-hukommelse deles for denne cache.</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
-        <translation type="unfinished">Indstil antallet af scriptbekræftelsestråde. Negative værdier svarer til antallet af kerner, du ønsker at lade være frie til WUNOtemet.</translation>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
+        <translation type="unfinished">Indstil antallet af scriptbekræftelsestråde. Negative værdier svarer til antallet af kerner, du ønsker at lade være frie til systemet.</translation>
     </message>
     <message>
         <source>(0 = auto, &lt;0 = leave that many cores free)</source>
@@ -1558,7 +1558,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Vindue</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished">Vis ikonet i proceslinjen.</translation>
     </message>
     <message>
@@ -2129,12 +2129,12 @@ Hvis du modtager denne fejl, skal du anmode forhandleren om en BIP21-kompatibel 
         <translation type="unfinished">Sidste transaktion</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
-        <translation type="unfinished">Afbildning fra Autonome WUNOtemer (et Internet-Protocol-rutefindingsprefiks) til IP-adresser som bruges til at diversificere knudeforbindelser. Den engelske betegnelse er "asmap".</translation>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
+        <translation type="unfinished">Afbildning fra Autonome systemer (et Internet-Protocol-rutefindingsprefiks) til IP-adresser som bruges til at diversificere knudeforbindelser. Den engelske betegnelse er "asmap".</translation>
     </message>
     <message>
         <source>Mapped AS</source>
-        <translation type="unfinished">Autonomt-WUNOtem-afbildning</translation>
+        <translation type="unfinished">Autonomt-system-afbildning</translation>
     </message>
     <message>
         <source>Whether we relay addresses to this peer.</source>
@@ -3066,8 +3066,8 @@ Bemærk: Da gebyret beregnes på per-byte-basis, ville en gebyrsats på "100 sat
         <translation type="unfinished">Signatur</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
-        <translation type="unfinished">Kopiér den nuværende signatur til WUNOtemets udklipsholder</translation>
+        <source>Copy the current signature to the system clipboard</source>
+        <translation type="unfinished">Kopiér den nuværende signatur til systemets udklipsholder</translation>
     </message>
     <message>
         <source>Sign the message to prove you own this wentuno address</source>
@@ -4156,8 +4156,8 @@ Gå til Fil &gt; Åbn Pung for, at indlæse en pung.
         <translation type="unfinished">Beskærer bloklager…</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
-        <translation type="unfinished">Reducerer -maxconnections fra %d til %d på grund af WUNOtembegrænsninger.</translation>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
+        <translation type="unfinished">Reducerer -maxconnections fra %d til %d på grund af systembegrænsninger.</translation>
     </message>
     <message>
         <source>Replaying blocks…</source>

@@ -260,7 +260,7 @@ class InMemoryEnv : public EnvWrapper {
   Status NewWritableFile(const std::string& fname,
                          WritableFile** result) override {
     MutexLock lock(&mutex_);
-    FileWUNOtem::iterator it = file_map_.find(fname);
+    Filesystem::iterator it = file_map_.find(fname);
 
     FileState* file;
     if (it == file_map_.end()) {
@@ -380,11 +380,11 @@ class InMemoryEnv : public EnvWrapper {
   }
 
  private:
-  // Map from filenames to FileState objects, representing a simple file WUNOtem.
-  typedef std::map<std::string, FileState*> FileWUNOtem;
+  // Map from filenames to FileState objects, representing a simple file system.
+  typedef std::map<std::string, FileState*> Filesystem;
 
   port::Mutex mutex_;
-  FileWUNOtem file_map_ GUARDED_BY(mutex_);
+  Filesystem file_map_ GUARDED_BY(mutex_);
 };
 
 }  // namespace

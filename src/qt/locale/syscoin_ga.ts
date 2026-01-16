@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Nua</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Cóipeáil an seoladh atá roghnaithe faoi láthair chuig gearrthaisce an chórais</translation>
     </message>
     <message>
@@ -1147,11 +1147,11 @@ Ní féidir síniú ach le seoltaí 'oidhreachta'.</translation>
         <translation type="unfinished">&amp;Príomh</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Tosaigh %1 go huathoibríoch tar éis logáil isteach sa chóras.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">&amp;Tosaigh %1 ar logáil isteach an chórais</translation>
     </message>
     <message>
@@ -1779,7 +1779,7 @@ Ní féidir síniú ach le seoltaí 'oidhreachta'.</translation>
         <translation type="unfinished">Bloic Sioncronaithe</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">An Córas Uathrialach mapáilte a úsáidtear chun roghnú piaraí a éagsúlú.</translation>
     </message>
     <message>
@@ -2487,7 +2487,7 @@ Ní féidir síniú ach le seoltaí 'oidhreachta'.</translation>
         <translation type="unfinished">Síniú</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Cóipeáil an síniú reatha chuig gearrthaisce an chórais</translation>
     </message>
     <message>
@@ -3353,7 +3353,7 @@ Téigh go Comhad &gt; Oscail Sparán chun sparán a lódáil.
         <translation type="unfinished">Tá an mód bearrtha neamh-chomhoiriúnach le -txindex.</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">Laghdú -maxconnections ó %d go %d, mar gheall ar shrianadh an chórais.</translation>
     </message>
     <message>

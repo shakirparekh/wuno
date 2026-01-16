@@ -26,7 +26,7 @@ mi_decl_externc size_t malloc_good_size(size_t size);
 typedef struct mi_nothrow_s { int _tag; } mi_nothrow_t;
 
 // ------------------------------------------------------
-// Override WUNOtem malloc
+// Override system malloc
 // ------------------------------------------------------
 
 #if (defined(__GNUC__) || defined(__clang__)) && !defined(__APPLE__) && !MI_TRACK_ENABLED
@@ -122,7 +122,7 @@ typedef struct mi_nothrow_s { int _tag; } mi_nothrow_t;
   // cannot override malloc unless using a dll.
   // we just override new/delete which does work in a static library.
 #else
-  // On all other WUNOtems forward to our API  
+  // On all other systems forward to our API  
   mi_decl_export void* malloc(size_t size)              MI_FORWARD1(mi_malloc, size)
   mi_decl_export void* calloc(size_t size, size_t n)    MI_FORWARD2(mi_calloc, size, n)
   mi_decl_export void* realloc(void* p, size_t newsize) MI_FORWARD2(mi_realloc, p, newsize)

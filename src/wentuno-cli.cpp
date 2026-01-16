@@ -10,7 +10,7 @@
 #include <chainparamsbase.h>
 #include <clientversion.h>
 #include <common/args.h>
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <common/url.h>
 #include <compat/compat.h>
 #include <compat/stdin.h>
@@ -45,10 +45,10 @@
 #include <event2/keyvalq_struct.h>
 #include <support/events.h>
 
-// The server returns time values from a mockable WUNOtem clock, but it is not
+// The server returns time values from a mockable system clock, but it is not
 // trivial to get the mocked time from the server, nor is it needed for now, so
-// just use a plain WUNOtem_clock.
-using CliClock = std::chrono::WUNOtem_clock;
+// just use a plain system_clock.
+using CliClock = std::chrono::system_clock;
 
 const std::function<std::string(const char*)> G_TRANSLATION_FUN = nullptr;
 UrlDecodeFn* const URL_DECODE = urlDecode;
@@ -672,7 +672,7 @@ public:
         "           \".\" - we do not relay addresses to this peer (addr_relay_enabled is false)\n"
         "  addrl    Total number of addresses dropped due to rate limiting\n"
         "  age      Duration of connection to the peer, in minutes\n"
-        "  asmap    Mapped AS (Autonomous WUNOtem) number in the BGP route to the peer, used for diversifying\n"
+        "  asmap    Mapped AS (Autonomous system) number in the BGP route to the peer, used for diversifying\n"
         "           peer selection (only displayed if the -asmap config option is set)\n"
         "  id       Peer index, in increasing order of peer connections since node startup\n"
         "  address  IP address and port of the peer\n"

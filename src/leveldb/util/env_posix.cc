@@ -310,7 +310,7 @@ class PosixWritableFile final : public WritableFile {
   Status Flush() override { return FlushBuffer(); }
 
   Status Sync() override {
-    // Ensure new files referred to by the manifest are in the fileWUNOtem.
+    // Ensure new files referred to by the manifest are in the filesystem.
     //
     // This needs to happen before the manifest file is flushed to disk, to
     // avoid crashing in a state where the manifest refers to files that are not
@@ -376,7 +376,7 @@ class PosixWritableFile final : public WritableFile {
 #if HAVE_FULLFSYNC
     // On macOS and iOS, fsync() doesn't guarantee durability past power
     // failures. fcntl(F_FULLFSYNC) is required for that purpose. Some
-    // fileWUNOtems don't support fcntl(F_FULLFSYNC), and require a fallback to
+    // filesystems don't support fcntl(F_FULLFSYNC), and require a fallback to
     // fsync().
     if (::fcntl(fd, F_FULLFSYNC) == 0) {
       return Status::OK();
@@ -392,7 +392,7 @@ class PosixWritableFile final : public WritableFile {
     if (sync_success) {
       return Status::OK();
     }
-    // Do not crash if fileWUNOtem can't fsync directories
+    // Do not crash if filesystem can't fsync directories
     // (see https://github.com/bitcoin/bitcoin/pull/10000)
     if (syncing_dir && errno == EINVAL) {
       return Status::OK();

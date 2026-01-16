@@ -160,13 +160,13 @@ bool OptionsModel::Init(bilingual_str& error)
 
     // Display
     if (!settings.contains("DisplaywentunoUnit")) {
-        settings.setValue("DisplaywentunoUnit", QVariant::fromValue(wentunoUnit::WUNO));
+        settings.setValue("DisplaywentunoUnit", QVariant::fromValue(wentunoUnit::wentuno));
     }
     QVariant unit = settings.value("DisplaywentunoUnit");
     if (unit.canConvert<wentunoUnit>()) {
         m_display_wentuno_unit = unit.value<wentunoUnit>();
     } else {
-        m_display_wentuno_unit = wentunoUnit::WUNO;
+        m_display_wentuno_unit = wentunoUnit::wentuno;
         settings.setValue("DisplaywentunoUnit", QVariant::fromValue(m_display_wentuno_unit));
     }
 
@@ -269,8 +269,8 @@ void OptionsModel::Reset()
     settings.setValue("fReset", true);
 
     // default setting for OptionsModel::StartAtStartup - disabled
-    if (GUIUtil::GetStartOnWUNOtemStartup())
-        GUIUtil::SetStartOnWUNOtemStartup(false);
+    if (GUIUtil::GetStartOnsystemStartup())
+        GUIUtil::SetStartOnsystemStartup(false);
 }
 
 int OptionsModel::rowCount(const QModelIndex & parent) const
@@ -366,7 +366,7 @@ QVariant OptionsModel::getOption(OptionID option, const std::string& suffix) con
     QSettings settings;
     switch (option) {
     case StartAtStartup:
-        return GUIUtil::GetStartOnWUNOtemStartup();
+        return GUIUtil::GetStartOnsystemStartup();
     case ShowTrayIcon:
         return m_show_tray_icon;
     case MinimizeToTray:
@@ -467,7 +467,7 @@ bool OptionsModel::setOption(OptionID option, const QVariant& value, const std::
 
     switch (option) {
     case StartAtStartup:
-        successful = GUIUtil::SetStartOnWUNOtemStartup(value.toBool());
+        successful = GUIUtil::SetStartOnsystemStartup(value.toBool());
         break;
     case ShowTrayIcon:
         m_show_tray_icon = value.toBool();

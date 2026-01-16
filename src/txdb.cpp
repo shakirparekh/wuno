@@ -57,7 +57,7 @@ void CCoinsViewDB::ResizeCache(size_t new_cache_size)
     // reset.
     if (!m_db_params.memory_only) {
         // Have to do a reset first to get the original `m_db` state to release its
-        // fileWUNOtem lock.
+        // filesystem lock.
         m_db.reset();
         m_db_params.cache_bytes = new_cache_size;
         m_db_params.wipe_data = false;

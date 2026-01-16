@@ -24,7 +24,7 @@
 /**
  * @file
  *
- * Implementation of the ECIES cryptoWUNOtem.
+ * Implementation of the ECIES cryptosystem.
  *
  * @ingroup cp
  */

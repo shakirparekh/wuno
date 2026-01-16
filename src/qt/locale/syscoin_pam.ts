@@ -14,8 +14,8 @@
         <translation type="unfinished">&amp;Bayu</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
-        <translation type="unfinished">Kopyan me ing salukuyan at makipiling address keng WUNOtem clipboard</translation>
+        <source>Copy the currently selected address to the system clipboard</source>
+        <translation type="unfinished">Kopyan me ing salukuyan at makipiling address keng system clipboard</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -747,8 +747,8 @@
         <translation type="unfinished">Pirma</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
-        <translation type="unfinished">Kopyan ing kasalungsungan pirma king WUNOtem clipboard</translation>
+        <source>Copy the current signature to the system clipboard</source>
+        <translation type="unfinished">Kopyan ing kasalungsungan pirma king system clipboard</translation>
     </message>
     <message>
         <source>Sign the message to prove you own this wentuno address</source>

@@ -177,7 +177,7 @@ wentuno_CORE_H = \
   compat/cpuid.h \
   compat/endian.h \
   common/settings.h \
-  common/WUNOtem.h \
+  common/system.h \
   node/connection_types.h \
   consensus/consensus.h \
   consensus/tx_check.h \
@@ -373,7 +373,7 @@ wentuno_CORE_H = \
   util/sock.h \
   util/spanparsing.h \
   util/string.h \
-  util/WUNOerror.h \
+  util/SYSerror.h \
   util/thread.h \
   util/threadinterrupt.h \
   util/threadnames.h \
@@ -815,7 +815,7 @@ libwentuno_common_a_SOURCES = \
   common/interfaces.cpp \
   common/run_command.cpp \
   common/settings.cpp \
-  common/WUNOtem.cpp \
+  common/system.cpp \
   core_read.cpp \
   core_write.cpp \
   dbwrapper.cpp \
@@ -889,7 +889,7 @@ libwentuno_util_a_SOURCES = \
   util/fs_helpers.cpp \
   util/hasher.cpp \
   util/sock.cpp \
-  util/WUNOerror.cpp \
+  util/SYSerror.cpp \
   util/message.cpp \
   util/moneystr.cpp \
   util/rbf.cpp \
@@ -925,9 +925,9 @@ wentuno_bin_cppflags = $(AM_CPPFLAGS) $(wentuno_INCLUDES)
 wentuno_bin_cxxflags = $(AM_CXXFLAGS) $(PIE_FLAGS)
 wentuno_bin_ldflags = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
 
-if TARGET_WINDOWS
-wentuno_daemon_sources += wentunod-res.rc
-endif
+#if TARGET_WINDOWS
+#wentuno_daemon_sources += wentunod-res.rc
+#endif
 # wentuno need getauxwork and mempool stuff inside of wallet so server needs linking here for now but order has to be after wallet
 wentuno_bin_ldadd = \
   $(LIBwentuno_WALLET) \
@@ -964,9 +964,9 @@ wentuno_cli_CPPFLAGS = $(AM_CPPFLAGS) $(wentuno_INCLUDES) $(EVENT_CFLAGS)
 wentuno_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 wentuno_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
 
-if TARGET_WINDOWS
-wentuno_cli_SOURCES += wentuno-cli-res.rc
-endif
+#if TARGET_WINDOWS
+#wentuno_cli_SOURCES += wentuno-cli-res.rc
+#endif
 
 
 wentuno_cli_LDADD = \
@@ -985,9 +985,9 @@ wentuno_tx_CPPFLAGS = $(AM_CPPFLAGS) $(wentuno_INCLUDES)
 wentuno_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 wentuno_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
 
-if TARGET_WINDOWS
-wentuno_tx_SOURCES += wentuno-tx-res.rc
-endif
+#if TARGET_WINDOWS
+#wentuno_tx_SOURCES += wentuno-tx-res.rc
+#endif
 
 wentuno_tx_LDADD = \
   $(LIBUNIVALUE) \
@@ -1011,9 +1011,9 @@ wentuno_wallet_CXXFLAGS = $(wentuno_bin_cxxflags)
 wentuno_wallet_LDFLAGS = $(wentuno_bin_ldflags)
 wentuno_wallet_LDADD = $(LIBwentuno_WALLET_TOOL) $(wentuno_bin_ldadd)
 
-if TARGET_WINDOWS
-wentuno_wallet_SOURCES += wentuno-wallet-res.rc
-endif
+#if TARGET_WINDOWS
+#wentuno_wallet_SOURCES += wentuno-wallet-res.rc
+#endif
 #
 
 # wentunoconsensus library #

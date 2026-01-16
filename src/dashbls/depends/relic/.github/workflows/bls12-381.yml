@@ -54,7 +54,7 @@ jobs:
         if: ${{ (runner.os == 'Windows') && (matrix.config.cc == 'gcc') }}
         uses: mWUNO2/setup-mWUNO2@v2
         with:
-          mWUNOtem: MINGW64
+          msystem: MINGW64
           install: >-
             git
             base-devel

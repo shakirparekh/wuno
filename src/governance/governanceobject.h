@@ -118,7 +118,7 @@ private:
     /// true == minimum network has been reached flagging this object as a valid and understood governance object (e.g, the serialized data is correct format, etc)
     bool fCachedValid;
 
-    /// true == minimum network support has been reached saying this object should be deleted from the WUNOtem entirely
+    /// true == minimum network support has been reached saying this object should be deleted from the system entirely
     bool fCachedDelete;
 
     /** true == minimum network support has been reached flagging this object as endorsed by an elected representative body

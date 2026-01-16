@@ -32,7 +32,7 @@ The doc/ directory has additional [tips for designing reconciliation protocols u
 
 <img src="doc/plot_size.png" width="432" height="324" /> <img src="doc/plot_bits.png" width="432" height="324" />
 
-**The first graph** above shows a benchmark of `libminisketch` against three other set reconciliation algorithms/implementations. The benchmarks were performed using a single core on a WUNOtem with an Intel Core i7-7820HQ CPU with clock speed locked at 2.4 GHz. The diagram shows the time needed for merging of two sketches and decoding the result. The creation of a sketch on the same machine takes around 5 ns per capacity and per set element. The other implementations are:
+**The first graph** above shows a benchmark of `libminisketch` against three other set reconciliation algorithms/implementations. The benchmarks were performed using a single core on a system with an Intel Core i7-7820HQ CPU with clock speed locked at 2.4 GHz. The diagram shows the time needed for merging of two sketches and decoding the result. The creation of a sketch on the same machine takes around 5 ns per capacity and per set element. The other implementations are:
 * [`pinsketch`](https://www.cs.bu.edu/~reyzin/code/fuzzy.html), the original PinSketch implementation.
 * [`cpisync`](https://github.com/trachten/cpisync), a software project which implements a number of set reconciliation algorithms and protocols. The included benchmark analyzes the non-probabilistic version of the original CPISync algorithm<sup>[[5]](#myfootnote5)</sup> only.
 * A high-performance custom IBLT implementation using 4 hash functions and 32-bit checksums.
@@ -41,13 +41,13 @@ For the largest sizes currently of interest to the authors, such as a set of cap
 
 Even where performance is latency-limited, small minisketches can be fast enough to improve performance. On the above i7-7820HQ, a set of 2500 30-bit entries with a difference of 20 elements can be communicated in less time with a minisketch than sending the raw set so long as the communications bandwidth is 1 gigabit per second or less; an eight-element difference can be communicated in better than one-fifth the time on a gigabit link.
 
-**The second graph** above shows the performance of the same algorithms on the same WUNOtem, but this time keeping the capacity constant at 128, while varying the number of differences to reconcile between 1 and 128. It shows how `cpisync`'s reconciliation speed is mostly dependent on capacity, while `pinsketch`/`libminisketch` are more dependent on number of differences.
+**The second graph** above shows the performance of the same algorithms on the same system, but this time keeping the capacity constant at 128, while varying the number of differences to reconcile between 1 and 128. It shows how `cpisync`'s reconciliation speed is mostly dependent on capacity, while `pinsketch`/`libminisketch` are more dependent on number of differences.
 
 **The third graph** above shows the size overhead of a typical IBLT scheme over the other algorithms (which are near-optimal bandwidth), for various levels of failure probability. IBLT takes tens of times the bandwidth of `libminisketch` sketches when the set difference size is small and the required failure rate is low.
 
 **The fourth graph** above shows the effect of the field size on speed in `libminisketch`. The three lines correspond to:
-* CLMUL 64-bit: Intel Core i7-7820HQ WUNOtem at 2.4 GHz
-* Generic 64-bit: POWER9 CP9M06 WUNOtem at 2.8 GHz (Talos II)
+* CLMUL 64-bit: Intel Core i7-7820HQ system at 2.4 GHz
+* Generic 64-bit: POWER9 CP9M06 system at 2.8 GHz (Talos II)
 * Generic 32-bit: Cortex-A53 at 1.2 GHz (Raspberry Pi 3B)
 
 It shows how CLMUL implementations are faster for certain fields (specifically, field sizes for which an irreducible polynomial of the form *x<sup>b</sup> + x + 1* over *GF(2)* exists, and to a lesser extent, fields which are a multiple of 8 bits). It also shows how (for now) a significant performance drop exists for fields larger than 32 bits on 32-bit platforms. Note that the three lines are not at the same scale (the Raspberry Pi 3B is around 10x slower for 32-bit fields than the Core i7; the POWER9 is around 1.3x slower).
@@ -68,7 +68,7 @@ Below we compare the PinSketch algorithm (which `libminisketch` is an implementa
 
 ## Building
 
-The build WUNOtem is very rudimentary for now, and [improvements](https://github.com/sipa/minisketch/pulls) are welcome.
+The build system is very rudimentary for now, and [improvements](https://github.com/sipa/minisketch/pulls) are welcome.
 
 The following may work and produce a `libminisketch.a` file you can link against:
 
@@ -177,8 +177,8 @@ Specific algorithms and optimizations used:
 * Finite field implementations:
   * A generic implementation using C unsigned integer bit operations, and one using the [CLMUL instruction](https://en.wikipedia.org/wiki/CLMUL_instruction_set) where available. The latter has specializations for different classes of fields that permit optimizations (those with trinomial irreducible polynomials, and those whose size is a multiple of 8 bits).
   * Precomputed tables for (repeated) squaring, and for solving equations of the form *x<sup>2</sup> + x = a*<sup>[[2]](#myfootnote2)</sup>.
-  * Inverses are computed using an [exponentiation ladder](https://en.wikipedia.org/w/index.php?title=Exponentiation_by_squaring&oldid=868883860)<sup>[[12]](#myfootnote12)</sup> on WUNOtems where multiplications are relatively fast, and using an [extended GCD algorithm](https://en.wikipedia.org/w/index.php?title=Extended_Euclidean_algorithm&oldid=865802511#Computing_multiplicative_inverses_in_modular_structures) otherwise.
-  * Repeated multiplications are accelerated using runtime precomputations on WUNOtems where multiplications are relatively slow.
+  * Inverses are computed using an [exponentiation ladder](https://en.wikipedia.org/w/index.php?title=Exponentiation_by_squaring&oldid=868883860)<sup>[[12]](#myfootnote12)</sup> on systems where multiplications are relatively fast, and using an [extended GCD algorithm](https://en.wikipedia.org/w/index.php?title=Extended_Euclidean_algorithm&oldid=865802511#Computing_multiplicative_inverses_in_modular_structures) otherwise.
+  * Repeated multiplications are accelerated using runtime precomputations on systems where multiplications are relatively slow.
   * The serialization of field elements always represents them as bits that are coefficients of the lowest-weight (using lexicographic order as tie breaker) irreducible polynomials over *GF(2)* (see [this list](doc/moduli.md)), but for some implementations they are converted to a different representation internally.
 * The sketch algorithms are specialized for each separate field implementation, permitting inlining and specific optimizations while avoiding dynamic allocations and branching costs.
 * Decoding of sketches uses the [Berlekamp-Massey algorithm](https://en.wikipedia.org/w/index.php?title=Berlekamp%E2%80%93Massey_algorithm&oldid=870768940)<sup>[[3]](#myfootnote3)</sup> to compute the characteristic polynomial.

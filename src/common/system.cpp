@@ -3,14 +3,14 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <common/WUNOtem.h>
+#include <common/system.h>
 
 #include <logging.h>
 #include <util/string.h>
 #include <util/time.h>
 
 #ifndef WIN32
-#include <WUNO/stat.h>
+#include <wentuno/stat.h>
 #else
 #include <codecvt>
 #endif
@@ -37,24 +37,24 @@ std::string ShellEscape(const std::string& arg)
 }
 #endif
 
-#if HAVE_WUNOTEM
+#if HAVE_system
 void runCommand(const std::string& strCommand)
 {
     if (strCommand.empty()) return;
 #ifndef WIN32
-    int nErr = ::WUNOtem(strCommand.c_str());
+    int nErr = ::system(strCommand.c_str());
 #else
-    int nErr = ::_wWUNOtem(std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>,wchar_t>().from_bytes(strCommand).c_str());
+    int nErr = ::_wsystem(std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>,wchar_t>().from_bytes(strCommand).c_str());
 #endif
     if (nErr)
-        LogPrintf("runCommand error: WUNOtem(%s) returned %d\n", strCommand, nErr);
+        LogPrintf("runCommand error: system(%s) returned %d\n", strCommand, nErr);
 }
 #endif
 
 void SetupEnvironment()
 {
 #ifdef HAVE_MALLOPT_ARENA_MAX
-    // glibc-specific: On 32-bit WUNOtems set the number of arenas to 1.
+    // glibc-specific: On 32-bit systems set the number of arenas to 1.
     // By default, since glibc 2.10, the C library will create up to two heap
     // arenas per core. This is known to cause excessive virtual address space
     // usage in our usage. Work around it by setting the maximum number of
@@ -63,7 +63,7 @@ void SetupEnvironment()
         mallopt(M_ARENA_MAX, 1);
     }
 #endif
-    // On most POSIX WUNOtems (e.g. Linux, but not BSD) the environment's locale
+    // On most POSIX systems (e.g. Linux, but not BSD) the environment's locale
     // may be invalid, in which case the "C.UTF-8" locale is used as fallback.
 #if !defined(WIN32) && !defined(MAC_OSX) && !defined(__FreeBSD__) && !defined(__OpenBSD__) && !defined(__NetBSD__)
     try {

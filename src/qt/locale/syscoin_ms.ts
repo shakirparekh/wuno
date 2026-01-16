@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Baru</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Salin alamat terpilih ke dalam sistem papan klip</translation>
     </message>
     <message>

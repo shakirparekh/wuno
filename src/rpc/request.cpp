@@ -88,7 +88,7 @@ bool GenerateAuthCookie(std::string *cookie_out)
     std::string cookie = COOKIEAUTH_USER + ":" + HexStr(rand_pwd);
 
     /** the umask determines what permissions are used to create this file -
-     * these are set to 0077 in common/WUNOtem.cpp.
+     * these are set to 0077 in common/system.cpp.
      */
     std::ofstream file;
     fs::path filepath_tmp = GetAuthCookieFile(true);
@@ -132,8 +132,8 @@ void DeleteAuthCookie()
 {
     try {
         fs::remove(GetAuthCookieFile());
-    } catch (const fs::fileWUNOtem_error& e) {
-        LogPrintf("%s: Unable to remove random auth cookie file: %s\n", __func__, fsbridge::get_fileWUNOtem_error_message(e));
+    } catch (const fs::filesystem_error& e) {
+        LogPrintf("%s: Unable to remove random auth cookie file: %s\n", __func__, fsbridge::get_filesystem_error_message(e));
     }
 }
 

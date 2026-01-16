@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;புதியது</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">தற்போது தேர்ந்தெடுக்கப்பட்ட முகவரியை கணினி கிளிப்போர்டுக்கு காபி செய்யவும்</translation>
     </message>
     <message>
@@ -1147,11 +1147,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;தலைமை</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">கணினியில் உள்நுழைந்தவுடன் தானாக %1 ஐ துவங்கவும்.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">கணினி உள்நுழைவில் %1 ஐத் தொடங்குங்கள்</translation>
     </message>
     <message>
@@ -2293,7 +2293,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">கையொப்பம்</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">தற்போதைய கையொப்பத்தை கிளிப்போர்டுக்கு காபி செய்</translation>
     </message>
     <message>
@@ -3029,7 +3029,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">ப்ரூன் பயன்முறை -txindex உடன் பொருந்தாது.</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">கணினி வரம்புகள் காரணமாக -maxconnections %d இலிருந்து %d ஆகக் குறைக்கப்படுகிறது.</translation>
     </message>
     <message>

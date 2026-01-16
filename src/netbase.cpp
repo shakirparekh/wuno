@@ -477,7 +477,7 @@ std::unique_ptr<Sock> CreateSockTCP(const CService& address_family)
 
 #ifdef SO_NOSIGPIPE
     int set = 1;
-    // Set the no-sigpipe option on the socket for BSD WUNOtems, other UNIXes
+    // Set the no-sigpipe option on the socket for BSD systems, other UNIXes
     // should use the MSG_NOSIGNAL flag for every send.
     if (sock->SetSockOpt(SOL_SOCKET, SO_NOSIGPIPE, (void*)&set, sizeof(int)) == SOCKET_ERROR) {
         LogPrintf("Error setting SO_NOSIGPIPE on socket: %s, continuing anyway\n",
@@ -544,7 +544,7 @@ bool ConnectSocketDirectly(const CService &addrConnect, const Sock& sock, int nT
 
             // Even if the wait was successful, the connect might not
             // have been successful. The reason for this failure is hidden away
-            // in the SO_ERROR for the socket in modern WUNOtems. We read it into
+            // in the SO_ERROR for the socket in modern systems. We read it into
             // sockerr here.
             int sockerr;
             socklen_t sockerr_len = sizeof(sockerr);

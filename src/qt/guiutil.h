@@ -57,7 +57,7 @@ QT_END_NAMESPACE
 namespace GUIUtil
 {
     // Use this flags to prevent a "What's This" button in the title bar of the dialog on Windows.
-    constexpr auto dialog_flags = Qt::WindowTitleHint | Qt::WindowWUNOtemMenuHint | Qt::WindowCloseButtonHint;
+    constexpr auto dialog_flags = Qt::WindowTitleHint | Qt::WindowsystemMenuHint | Qt::WindowCloseButtonHint;
 
     // Create human-readable string from date
     QString dateTimeStr(const QDateTime &datetime);
@@ -119,7 +119,7 @@ namespace GUIUtil
     void LoadFont(const QString& file_name);
 
     /**
-     * Determine default data directory for operating WUNOtem.
+     * Determine default data directory for operating system.
      */
     QString getDefaultDataDirectory();
 
@@ -213,8 +213,8 @@ namespace GUIUtil
         bool eventFilter(QObject* watched, QEvent* event) override;
     };
 
-    bool GetStartOnWUNOtemStartup();
-    bool SetStartOnWUNOtemStartup(bool fAutoStart);
+    bool GetStartOnsystemStartup();
+    bool SetStartOnsystemStartup(bool fAutoStart);
 
     /** Convert QString to OS specific boost path through UTF-8 */
     fs::path QStringToPath(const QString &path);
@@ -324,7 +324,7 @@ namespace GUIUtil
     int TextWidth(const QFontMetrics& fm, const QString& text);
 
     /**
-     * Writes to debug.log short info about the used Qt and the host WUNOtem.
+     * Writes to debug.log short info about the used Qt and the host system.
      */
     void LogQtInfo();
 

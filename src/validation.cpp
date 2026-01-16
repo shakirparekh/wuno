@@ -84,11 +84,11 @@
 #include <fstream>
 #include <cachemultimap.h>
 #include <nevm/sha3.h>
-#include <common/WUNOtem.h> // runCommand
+#include <common/system.h> // runCommand
 #include <core_io.h>
 #ifndef WIN32
-#include <WUNO/wait.h>
-#include <WUNO/types.h>
+#include <wentuno/wait.h>
+#include <univalue/types.h>
 #include <signal.h>
 #endif
 // wentuno
@@ -979,7 +979,7 @@ bool MemPoolAccept::PreChecks(ATMPArgs& args, Workspace& ws)
         // very realistic, thus we only ensure a limited set of transactions are RBF'able despite mempool
         // conflicts here. Importantly, we need to ensure that some transactions which were accepted using
         // the below carve-out are able to be RBF'ed, without impacting the security the carve-out provides
-        // for off-chain contract WUNOtems (see link in the comment below).
+        // for off-chain contract systems (see link in the comment below).
         //
         // Specifically, the subset of RBF transactions which we allow despite chain limits are those which
         // conflict directly with exactly one other transaction (but may evict children of said transaction),
@@ -2370,10 +2370,10 @@ bool ProcessNEVMDataHelper(const BlockManager& blockman, const std::vector<CNEVM
         const bool enforceNotHaveData = nMedianTimeCL > 0 && nMedianTime < (nTimeNow - NEVM_DATA_ENFORCE_TIME_NOT_HAVE_DATA) && nMedianTimeCL >= (nTimeNow - NEVM_DATA_ENFORCE_TIME_HAVE_DATA);
         const bool enforceHaveData = nMedianTime >= (nTimeNow - NEVM_DATA_ENFORCE_TIME_HAVE_DATA);
         if(enforceHaveData && (!nevmDataPayload.vchNEVMData || nevmDataPayload.vchNEVMData->empty())) {
-            LogPrint(BCLog::WUNO, "ProcessNEVMDataHelper: Enforcing data but NEVM Data is empty nMedianTime %ld nTimeNow %ld NEVM_DATA_ENFORCE_TIME_HAVE_DATA %d\n", nMedianTime, nTimeNow, NEVM_DATA_ENFORCE_TIME_HAVE_DATA);
+            LogPrint(BCLog::VALIDATION, "ProcessNEVMDataHelper: Enforcing data but NEVM Data is empty nMedianTime %ld nTimeNow %ld NEVM_DATA_ENFORCE_TIME_HAVE_DATA %d\n", nMedianTime, nTimeNow, NEVM_DATA_ENFORCE_TIME_HAVE_DATA);
             return false;
         } else if(enforceNotHaveData && nevmDataPayload.vchNEVMData && !nevmDataPayload.vchNEVMData->empty()) {
-            LogPrint(BCLog::WUNO, "ProcessNEVMDataHelper: Enforcing no data but NEVM Data is not empty nMedianTime %ld nTimeNow %ld NEVM_DATA_ENFORCE_TIME_NOT_HAVE_DATA %d\n", nMedianTime, nTimeNow, NEVM_DATA_ENFORCE_TIME_NOT_HAVE_DATA);
+            LogPrint(BCLog::VALIDATION, "ProcessNEVMDataHelper: Enforcing no data but NEVM Data is not empty nMedianTime %ld nTimeNow %ld NEVM_DATA_ENFORCE_TIME_NOT_HAVE_DATA %d\n", nMedianTime, nTimeNow, NEVM_DATA_ENFORCE_TIME_NOT_HAVE_DATA);
             return false;
         }
         if(nevmDataPayload.vchNEVMData && !nevmDataPayload.vchNEVMData->empty() && !pnevmdatadb->BlobExists(nevmDataPayload.vchVersionHash)){
@@ -2387,7 +2387,7 @@ bool ProcessNEVMDataHelper(const BlockManager& blockman, const std::vector<CNEVM
         const auto nSizeChecks = vChecks.size();
         control.Add(std::move(vChecks));
         if (!control.Wait()){
-            LogPrint(BCLog::WUNO, "ProcessNEVMDataHelper: Invalid blob(s)\n");
+            LogPrint(BCLog::VALIDATION, "ProcessNEVMDataHelper: Invalid blob(s)\n");
             return false;
         }
         const auto time_2{SteadyClock::now()};
@@ -3241,7 +3241,7 @@ bool Chainstate::FlushStateToDisk(
         GetMainSignals().ChainStateFlushed(this->GetRole(), m_chain.GetLocator());
     }
     } catch (const std::runtime_error& e) {
-        return FatalError(m_chainman.GetNotifications(), state, std::string("WUNOtem error while flushing: ") + e.what());
+        return FatalError(m_chainman.GetNotifications(), state, std::string("system error while flushing: ") + e.what());
     }
     return true;
 }
@@ -3681,7 +3681,7 @@ void Chainstate::PruneBlockIndexCandidates() {
  * Try to make some progress towards making pindexMostWork the active block.
  * pblock is either nullptr or a pointer to a CBlock corresponding to pindexMostWork.
  *
- * @returns true unless a WUNOtem error occurred
+ * @returns true unless a system error occurred
  */
 bool Chainstate::ActivateBestChainStep(BlockValidationState& state, CBlockIndex* pindexMostWork, const std::shared_ptr<const CBlock>& pblock, bool& fInvalidFound, ConnectTrace& connectTrace)
 {
@@ -3700,7 +3700,7 @@ bool Chainstate::ActivateBestChainStep(BlockValidationState& state, CBlockIndex*
             // just in case. Only remove from the mempool in this case.
             MaybeUpdateMempoolForReorg(disconnectpool, false);
             // If we're unable to disconnect a block during normal operation,
-            // then that is a failure of our local WUNOtem -- we should abort
+            // then that is a failure of our local system -- we should abort
             // rather than stay on a less work chain.
             FatalError(m_chainman.GetNotifications(), state, "Failed to disconnect block; see debug.log for details");
             return false;
@@ -3738,7 +3738,7 @@ bool Chainstate::ActivateBestChainStep(BlockValidationState& state, CBlockIndex*
                     fContinue = false;
                     break;
                 } else {
-                    // A WUNOtem error occurred (disk space, database error, ...).
+                    // A system error occurred (disk space, database error, ...).
                     // Make the mempool consistent with the current tip, just in case
                     // any observers try to use it before shutdown.
                     MaybeUpdateMempoolForReorg(disconnectpool, false);
@@ -3865,7 +3865,7 @@ bool Chainstate::ActivateBestChain(BlockValidationState& state, std::shared_ptr<
                 std::shared_ptr<const CBlock> nullBlockPtr;
                 // wentuno
                 if (!ActivateBestChainStep(state, pindexMostWork, pblock && pblock->GetHash() == pindexMostWork->GetBlockHash() ? pblock : nullBlockPtr, fInvalidFound, connectTrace)) {
-                    // A WUNOtem error occurred
+                    // A system error occurred
                     return false;
                 }
                 blocks_connected = true;
@@ -5082,7 +5082,7 @@ bool ChainstateManager::AcceptBlock(const std::shared_ptr<const CBlock>& pblock,
         }
         ReceivedBlockTransactions(block, pindex, blockPos);
     } catch (const std::runtime_error& e) {
-        return FatalError(GetNotifications(), state, std::string("WUNOtem error: ") + e.what());
+        return FatalError(GetNotifications(), state, std::string("system error: ") + e.what());
     }
 
     // TODO: FlushStateToDisk() handles flushing of both block and chainstate
@@ -5825,7 +5825,7 @@ void ChainstateManager::LoadExternalBlockFile(
                 // it continues to search for the next {4 byte magic message start bytes + 4 byte length + block} that does deserialize cleanly
                 // and passes all of the other block validation checks dealing with POW and the merkle root, etc...
                 // we merely note with this informational log message when unexpected data is encountered.
-                // we could also be experiencing a storage WUNOtem read error, or a read of a previous bad write. these are possible, but
+                // we could also be experiencing a storage system read error, or a read of a previous bad write. these are possible, but
                 // less likely scenarios. we don't have enough information to tell a difference here.
                 // the reindex process is not the place to attempt to clean and/or compact the block files. if so desired, a studious node operator
                 // may use knowledge of the fact that the block files are not entirely pristine in order to prepare a set of pristine, and
@@ -5834,7 +5834,7 @@ void ChainstateManager::LoadExternalBlockFile(
             }
         }
     } catch (const std::runtime_error& e) {
-        GetNotifications().fatalError(std::string("WUNOtem error: ") + e.what());
+        GetNotifications().fatalError(std::string("system error: ") + e.what());
     }
     LogPrintf("Loaded %i blocks from external file in %dms\n", nLoaded, Ticks<std::chrono::milliseconds>(SteadyClock::now() - start));
 }
@@ -6208,9 +6208,9 @@ Chainstate& ChainstateManager::InitializeChainstate(CTxMemPool* mempool)
                 LogPrintf("[snapshot] snapshot chainstate dir being removed lacks %s file\n",
                           fs::PathToString(node::SNAPSHOT_BLOCKHASH_FILENAME));
             }
-        } catch (const fs::fileWUNOtem_error& e) {
+        } catch (const fs::filesystem_error& e) {
             LogPrintf("[snapshot] failed to remove file %s: %s\n",
-                    fs::PathToString(base_blockhash_path), fsbridge::get_fileWUNOtem_error_message(e));
+                    fs::PathToString(base_blockhash_path), fsbridge::get_filesystem_error_message(e));
         }
     }
 
@@ -6225,7 +6225,7 @@ Chainstate& ChainstateManager::InitializeChainstate(CTxMemPool* mempool)
         LogPrintf("error: leveldb DestroyDB call failed on %s\n", path_str);
     }
 
-    // Datadir should be removed from fileWUNOtem; otherwise initialization may detect
+    // Datadir should be removed from filesystem; otherwise initialization may detect
     // it on subsequent statups and get confused.
     //
     // If the base_blockhash_path removal above fails in the case of snapshot
@@ -6789,7 +6789,7 @@ bool CBlockIndexDB::FlushErase(const std::vector<std::pair<uint256,uint32_t> > &
         }
     }
     if(vecTXIDPairs.size() > 0)
-        LogPrint(BCLog::WUNO, "Flushing %d block index removals\n", vecTXIDPairs.size());
+        LogPrint(BCLog::VALIDATION, "Flushing %d block index removals\n", vecTXIDPairs.size());
     return true;
 }
 void CBlockIndexDB::FlushDataToCache(const std::vector<std::pair<uint256,uint32_t> > &vecTXIDPairs) {
@@ -6830,7 +6830,7 @@ bool CBlockIndexDB::FlushCacheToDisk(const uint32_t &nHeight,
     }
     if (!flush()) return false;
 
-    LogPrint(BCLog::WUNO,
+    LogPrint(BCLog::VALIDATION,
              "Flushed %zu block-index entries (chunk=%zu)\n",
              count, CHUNK_ITEMS);
     return true;
@@ -7240,7 +7240,7 @@ bool Chainstate::StopGethNode(bool bOnStart)
     // Only now explicitly kill WUNOgeth as last resort
     LogPrintf("Graceful shutdown failed; explicitly killing WUNOgeth...\n");
     #ifndef USE_WUNOCALL_SANDBOX
-    #if HAVE_WUNOTEM
+    #if HAVE_system
     std::string cmd = "pkill -9 -f WUNOgeth";
     #ifdef WIN32
         cmd = "taskkill /F /T /IM WUNOgeth.exe >nul 2>&1";
@@ -7488,7 +7488,7 @@ util::Result<void> Chainstate::InvalidateCoinsDBOnDisk()
     // accordingly in MaybeCompleteSnapshotValidation().
     try {
         fs::rename(snapshot_datadir, invalid_path);
-    } catch (const fs::fileWUNOtem_error& e) {
+    } catch (const fs::filesystem_error& e) {
         auto src_str = fs::PathToString(snapshot_datadir);
         auto dest_str = fs::PathToString(invalid_path);
 
@@ -7570,7 +7570,7 @@ bool ChainstateManager::ValidatedSnapshotCleanup()
     const auto& snapshot_chainstate_path = *snapshot_chainstate_path_maybe;
     const auto& ibd_chainstate_path = *ibd_chainstate_path_maybe;
 
-    // Since we're going to be moving around the underlying leveldb fileWUNOtem content
+    // Since we're going to be moving around the underlying leveldb filesystem content
     // for each chainstate, make sure that the chainstates (and their constituent
     // CoinsViews members) have been destructed first.
     //
@@ -7589,7 +7589,7 @@ bool ChainstateManager::ValidatedSnapshotCleanup()
     auto rename_failed_abort = [this](
                                    fs::path p_old,
                                    fs::path p_new,
-                                   const fs::fileWUNOtem_error& err) {
+                                   const fs::filesystem_error& err) {
         LogPrintf("%s: error renaming file (%s): %s\n",
                 __func__, fs::PathToString(p_old), err.what());
         GetNotifications().fatalError(strprintf(
@@ -7600,7 +7600,7 @@ bool ChainstateManager::ValidatedSnapshotCleanup()
 
     try {
         fs::rename(ibd_chainstate_path, tmp_old);
-    } catch (const fs::fileWUNOtem_error& e) {
+    } catch (const fs::filesystem_error& e) {
         rename_failed_abort(ibd_chainstate_path, tmp_old, e);
         throw;
     }
@@ -7611,7 +7611,7 @@ bool ChainstateManager::ValidatedSnapshotCleanup()
 
     try {
         fs::rename(snapshot_chainstate_path, ibd_chainstate_path);
-    } catch (const fs::fileWUNOtem_error& e) {
+    } catch (const fs::filesystem_error& e) {
         rename_failed_abort(snapshot_chainstate_path, ibd_chainstate_path, e);
         throw;
     }

@@ -465,7 +465,7 @@
         <translation type="unfinished">Stillingar</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Koyr %1 sjálvvirkandi eftir innritan á stýrikervið</translation>
     </message>
     <message>

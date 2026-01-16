@@ -14,8 +14,8 @@
         <translation type="unfinished">&amp;Ny</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
-        <translation type="unfinished">Kopiera den markerade adressen till WUNOtemets Urklipp</translation>
+        <source>Copy the currently selected address to the system clipboard</source>
+        <translation type="unfinished">Kopiera den markerade adressen till systemets Urklipp</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -1448,12 +1448,12 @@ Försök igen.</translation>
         <translation type="unfinished">&amp;Allmänt</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Starta %1 automatiskt efter inloggningen.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
-        <translation type="unfinished">&amp;Starta %1 vid WUNOtemlogin</translation>
+        <source>&amp;Start %1 on system login</source>
+        <translation type="unfinished">&amp;Starta %1 vid systemlogin</translation>
     </message>
     <message>
         <source>Size of &amp;database cache</source>
@@ -1587,20 +1587,20 @@ Försök igen.</translation>
         <translation type="unfinished">&amp;Fönster</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
-        <translation type="unfinished">Visa ikonen i WUNOtemfältet.</translation>
+        <source>Show the icon in the system tray.</source>
+        <translation type="unfinished">Visa ikonen i systemfältet.</translation>
     </message>
     <message>
         <source>&amp;Show tray icon</source>
-        <translation type="unfinished">&amp;Visa ikon i WUNOtemfältet</translation>
+        <translation type="unfinished">&amp;Visa ikon i systemfältet</translation>
     </message>
     <message>
         <source>Show only a tray icon after minimizing the window.</source>
-        <translation type="unfinished">Visa endast en WUNOtemfältsikon vid minimering.</translation>
+        <translation type="unfinished">Visa endast en systemfältsikon vid minimering.</translation>
     </message>
     <message>
         <source>&amp;Minimize to the tray instead of the taskbar</source>
-        <translation type="unfinished">&amp;Minimera till WUNOtemfältet istället för aktivitetsfältet</translation>
+        <translation type="unfinished">&amp;Minimera till systemfältet istället för aktivitetsfältet</translation>
     </message>
     <message>
         <source>M&amp;inimize on close</source>
@@ -2860,8 +2860,8 @@ Försök igen.</translation>
         <translation type="unfinished">Signatur</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
-        <translation type="unfinished">Kopiera signaturen till WUNOtemets Urklipp</translation>
+        <source>Copy the current signature to the system clipboard</source>
+        <translation type="unfinished">Kopiera signaturen till systemets Urklipp</translation>
     </message>
     <message>
         <source>Sign the message to prove you own this wentuno address</source>
@@ -3781,8 +3781,8 @@ Gå till Fil &gt; Öppna plånbok för att läsa in en plånbok.
         <translation type="unfinished">Rensar blockstore...</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
-        <translation type="unfinished">Minskar -maxconnections från %d till %d, på grund av WUNOtembegränsningar.</translation>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
+        <translation type="unfinished">Minskar -maxconnections från %d till %d, på grund av systembegränsningar.</translation>
     </message>
     <message>
         <source>Rescanning…</source>

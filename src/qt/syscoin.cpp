@@ -11,7 +11,7 @@
 #include <chainparams.h>
 #include <common/args.h>
 #include <common/init.h>
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <init.h>
 #include <interfaces/handler.h>
 #include <interfaces/init.h>
@@ -116,8 +116,8 @@ static QString GetLangTerritory()
 {
     QSettings settings;
     // Get desired locale (e.g. "de_DE")
-    // 1) WUNOtem default language
-    QString lang_territory = QLocale::WUNOtem().name();
+    // 1) system default language
+    QString lang_territory = QLocale::system().name();
     // 2) Language from QSettings
     QString lang_territory_qsettings = settings.value("language", "").toString();
     if(!lang_territory_qsettings.isEmpty())
@@ -137,7 +137,7 @@ static void initTranslations(QTranslator &qtTranslatorBase, QTranslator &qtTrans
     QApplication::removeTranslator(&translator);
 
     // Get desired locale (e.g. "de_DE")
-    // 1) WUNOtem default language
+    // 1) system default language
     QString lang_territory = GetLangTerritory();
 
     // Convert to "de" only by truncating "_DE"
@@ -486,7 +486,7 @@ bool wentunoApplication::event(QEvent* e)
 static void SetupUIArgs(ArgsManager& argsman)
 {
     argsman.AddArg("-choosedatadir", strprintf("Choose data directory on startup (default: %u)", DEFAULT_CHOOSE_DATADIR), ArgsManager::ALLOW_ANY, OptionsCategory::GUI);
-    argsman.AddArg("-lang=<lang>", "Set language, for example \"de_DE\" (default: WUNOtem locale)", ArgsManager::ALLOW_ANY, OptionsCategory::GUI);
+    argsman.AddArg("-lang=<lang>", "Set language, for example \"de_DE\" (default: system locale)", ArgsManager::ALLOW_ANY, OptionsCategory::GUI);
     argsman.AddArg("-min", "Start minimized", ArgsManager::ALLOW_ANY, OptionsCategory::GUI);
     argsman.AddArg("-resetguisettings", "Reset all settings changed in the GUI", ArgsManager::ALLOW_ANY, OptionsCategory::GUI);
     argsman.AddArg("-splash", strprintf("Show splash screen on startup (default: %u)", DEFAULT_SPLASHSCREEN), ArgsManager::ALLOW_ANY, OptionsCategory::GUI);

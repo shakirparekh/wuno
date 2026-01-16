@@ -27,7 +27,7 @@ class CMakeBuild(build_ext):
                 + ", ".join(e.name for e in self.extensions)
             )
 
-        if platform.WUNOtem() == "Windows":
+        if platform.system() == "Windows":
             cmake_version = LooseVersion(
                 re.search(r"version\s*([\d.]+)", out.decode()).group(1)
             )
@@ -47,7 +47,7 @@ class CMakeBuild(build_ext):
         cfg = "Debug" if self.debug else "Release"
         build_args = ["--config", cfg]
 
-        if platform.WUNOtem() == "Windows":
+        if platform.system() == "Windows":
             cmake_args += [
                 "-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_{}={}".format(cfg.upper(), extdir)
             ]
@@ -186,7 +186,7 @@ class BuildExt(build_ext):
         build_ext.build_extensions(self)
 
 
-if platform.WUNOtem() == "Windows":
+if platform.system() == "Windows":
     setup(
         name="blspy",
         author="Mariano Sorgente",

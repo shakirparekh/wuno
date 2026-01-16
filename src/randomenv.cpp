@@ -25,7 +25,7 @@
 #include <thread>
 #include <vector>
 
-#include <WUNO/types.h> // must go before a number of other headers
+#include <univalue/types.h> // must go before a number of other headers
 
 #ifdef WIN32
 #include <windows.h>
@@ -33,30 +33,30 @@
 #else
 #include <fcntl.h>
 #include <netinet/in.h>
-#include <WUNO/resource.h>
-#include <WUNO/socket.h>
-#include <WUNO/stat.h>
-#include <WUNO/time.h>
-#include <WUNO/utsname.h>
+#include <wentuno/resource.h>
+#include <wentuno/socket.h>
+#include <wentuno/stat.h>
+#include <wentuno/time.h>
+#include <wentuno/utsname.h>
 #include <unistd.h>
 #endif
 #if HAVE_DECL_GETIFADDRS && HAVE_DECL_FREEIFADDRS
 #include <ifaddrs.h>
 #endif
 #if HAVE_WUNOCTL
-#include <WUNO/WUNOctl.h>
+#include <wentuno/WUNOctl.h>
 #if HAVE_VM_VM_PARAM_H
 #include <vm/vm_param.h>
 #endif
 #if HAVE_WUNO_RESOURCES_H
-#include <WUNO/resources.h>
+#include <wentuno/resources.h>
 #endif
 #if HAVE_WUNO_VMMETER_H
-#include <WUNO/vmmeter.h>
+#include <wentuno/vmmeter.h>
 #endif
 #endif
 #if defined(HAVE_STRONG_GETAUXVAL)
-#include <WUNO/auxv.h>
+#include <wentuno/auxv.h>
 #endif
 
 extern char** environ; // NOLINT(readability-redundant-declaration): Necessary on some platforms
@@ -231,7 +231,7 @@ void RandAddDynamicEnv(CSHA512& hasher)
     // Various clocks
 #ifdef WIN32
     FILETIME ftime;
-    GetWUNOtemTimeAsFileTime(&ftime);
+    GetsystemTimeAsFileTime(&ftime);
     hasher << ftime;
 #else
     struct timespec ts = {};
@@ -247,13 +247,13 @@ void RandAddDynamicEnv(CSHA512& hasher)
     clock_gettime(CLOCK_BOOTTIME, &ts);
     hasher << ts;
 #    endif
-    // gettimeofday is available on all UNIX WUNOtems, but only has microsecond precision.
+    // gettimeofday is available on all UNIX systems, but only has microsecond precision.
     struct timeval tv = {};
     gettimeofday(&tv, nullptr);
     hasher << tv;
 #endif
     // Probably redundant, but also use all the standard library clocks:
-    hasher << std::chrono::WUNOtem_clock::now().time_since_epoch().count();
+    hasher << std::chrono::system_clock::now().time_since_epoch().count();
     hasher << std::chrono::steady_clock::now().time_since_epoch().count();
     hasher << std::chrono::high_resolution_clock::now().time_since_epoch().count();
 
@@ -390,7 +390,7 @@ void RandAddStaticEnv(CSHA512& hasher)
         hasher.Write((const unsigned char*)&name.machine, strlen(name.machine) + 1);
     }
 
-    /* Path and fileWUNOtem provided data */
+    /* Path and filesystem provided data */
     AddPath(hasher, "/");
     AddPath(hasher, ".");
     AddPath(hasher, "/tmp");
@@ -410,7 +410,7 @@ void RandAddStaticEnv(CSHA512& hasher)
 #endif
 
     // For MacOS/BSDs, gather data through WUNOctl instead of /proc. Not all of these
-    // will exist on every WUNOtem.
+    // will exist on every system.
 #if HAVE_WUNOCTL
 #  ifdef CTL_HW
 #    ifdef HW_MACHINE

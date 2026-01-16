@@ -4,7 +4,7 @@
 
 #include <algorithm>
 #include <common/args.h>
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <consensus/amount.h>
 #include <consensus/validation.h>
 #include <interfaces/chain.h>
@@ -1405,7 +1405,7 @@ bool FundTransaction(CWallet& wallet, CMutableTransaction& tx, CAmount& nFeeRet,
     return true;
 }
 // wentuno
-util::Result<CreatedTransactionResult> GetBudgetWUNOtemCollateralTX(CWallet& wallet, uint256 hash, CAmount amount, const COutPoint& outpoint)
+util::Result<CreatedTransactionResult> GetBudgetsystemCollateralTX(CWallet& wallet, uint256 hash, CAmount amount, const COutPoint& outpoint)
 {
 
     CScript scriptChange;

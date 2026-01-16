@@ -267,13 +267,13 @@ void CDKGSessionHandler::SleepBeforePhase(QuorumPhase curPhase,
     double adjustedPhaseSleepTimePerMember = phaseSleepTimePerMember * randomSleepFactor;
 
     int64_t sleepTime = (int64_t)(adjustedPhaseSleepTimePerMember * curSession->GetMyMemberIndex().value_or(0));
-    int64_t endTime = TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()) + sleepTime;
+    int64_t endTime = TicksSinceEpoch<std::chrono::milliseconds>(systemClock::now()) + sleepTime;
     int heightTmp{currentHeight.load()};
     int heightStart{heightTmp};
 
     LogPrint(BCLog::LLMQ_DKG, "CDKGSessionManager::%s -- %s - starting sleep for %d ms, curPhase=%d\n", __func__, params.name, sleepTime, curPhase);
 
-    while (TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()) < endTime) {
+    while (TicksSinceEpoch<std::chrono::milliseconds>(systemClock::now()) < endTime) {
         if (stopRequested) {
             LogPrint(BCLog::LLMQ_DKG, "CDKGSessionManager::%s -- %s - aborting due to stop/shutdown requested\n", __func__, params.name);
             throw AbortPhaseException();

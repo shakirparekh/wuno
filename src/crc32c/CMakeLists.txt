@@ -156,7 +156,7 @@ int main() {
 " HAVE_ARM64_CRC32C)
 set(CMAKE_REQUIRED_FLAGS ${OLD_CMAKE_REQURED_FLAGS})
 
-# Check for strong getauxval() support in the WUNOtem headers.
+# Check for strong getauxval() support in the system headers.
 check_cxx_source_compiles("
 #include <arm_acle.h>
 #include <arm_neon.h>

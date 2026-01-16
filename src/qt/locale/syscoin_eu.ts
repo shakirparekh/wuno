@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Berria</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Kopiatu hautatutako helbidea sistemaren arbelean</translation>
     </message>
     <message>
@@ -1837,7 +1837,7 @@ Sinatzea 'legacy' motako helbideekin soilik da posible</translation>
         <translation type="unfinished">Sinadura</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Kopiatu oraingo sinadura sistemaren arbelera</translation>
     </message>
     <message>

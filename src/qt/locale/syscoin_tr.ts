@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Yeni</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Seçili adresi panoya kopyalayın</translation>
     </message>
     <message>
@@ -1373,11 +1373,11 @@ Cüzdan kilidini aç.</translation>
         <translation type="unfinished">&amp;Genel</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Sisteme giriş yaptıktan sonra otomatik olarak %1'i başlat.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">&amp;Açılışta %1 açılsın</translation>
     </message>
     <message>
@@ -1438,8 +1438,8 @@ Cüzdan kilidini aç.</translation>
         <translation type="unfinished">Maksimum veritabanı önbellek boyutu. Daha büyük bir önbellek daha hızlı eşitlemeye katkıda bulunabilir, bundan sonra çoğu kullanım durumu için fayda daha az belirgindir. Önbellek boyutunu düşürmek bellek kullanımını azaltır. Bu önbellek için kullanılmayan mempool belleği paylaşılır.</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished">Komut dosyası doğrulama iş parçacığı sayısını ayarlayın. Negatif değerler sisteme serbest bırakmak istediğiniz çekirdek sayısına karşılık gelir.</translation>
     </message>
     <message>
@@ -2825,7 +2825,7 @@ Cüzdan kilidini aç.</translation>
         <translation type="unfinished">İmza</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Güncel imzayı sistem panosuna kopyala</translation>
     </message>
     <message>
@@ -3715,7 +3715,7 @@ Cüzdan yedeği geri yüklenemiyor.</translation>
         <translation type="unfinished">Budama kipi -txindex ile uyumsuzdur.</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">Sistem sınırlamaları sebebiyle -maxconnections %d değerinden %d değerine düşürülmüştür.</translation>
     </message>
     <message>

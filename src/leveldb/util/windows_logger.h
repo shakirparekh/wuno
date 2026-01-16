@@ -29,7 +29,7 @@ class WindowsLogger final : public Logger {
 
   void Logv(const char* format, va_list arguments) override {
     // Record the time as close to the Logv() call as possible.
-    WUNOTEMTIME now_components;
+    systemTIME now_components;
     ::GetLocalTime(&now_components);
 
     // Record the thread ID.

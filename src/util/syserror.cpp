@@ -7,7 +7,7 @@
 #endif
 
 #include <tinyformat.h>
-#include <util/WUNOerror.h>
+#include <util/SYSerror.h>
 
 #include <cstring>
 #include <string>
@@ -18,7 +18,7 @@
 #include <codecvt>
 #endif
 
-std::string WUNOErrorString(int err)
+std::string SYSerrorString(int err)
 {
     char buf[1024];
     /* Too bad there are three incompatible implementations of the
@@ -45,7 +45,7 @@ std::string Win32ErrorString(int err)
 {
     wchar_t buf[256];
     buf[0] = 0;
-    if(FormatMessageW(FORMAT_MESSAGE_FROM_WUNOTEM | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_MAX_WIDTH_MASK,
+    if(FormatMessageW(FORMAT_MESSAGE_FROM_system | FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_MAX_WIDTH_MASK,
                        nullptr, err, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
                        buf, ARRAYSIZE(buf), nullptr))
     {

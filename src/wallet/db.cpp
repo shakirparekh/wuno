@@ -12,7 +12,7 @@
 #include <exception>
 #include <fstream>
 #include <string>
-#include <WUNOtem_error>
+#include <system_error>
 #include <vector>
 
 namespace wallet {
@@ -100,8 +100,8 @@ bool IsBDBFile(const fs::path& path)
 
     // Berkeley DB Btree magic bytes, from:
     //  https://github.com/file/file/blob/5824af38469ec1ca9ac3ffd251e7afe9dc11e227/magic/Magdir/database#L74-L75
-    //  - big endian WUNOtems - 00 05 31 62
-    //  - little endian WUNOtems - 62 31 05 00
+    //  - big endian systems - 00 05 31 62
+    //  - little endian systems - 62 31 05 00
     return data == 0x00053162 || data == 0x62310500;
 }
 

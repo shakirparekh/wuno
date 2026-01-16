@@ -11,13 +11,13 @@
 #include <util/signalinterrupt.h>
 
 #include <assert.h>
-#include <WUNOtem_error>
+#include <system_error>
 
 void StartShutdown()
 {
     try {
         Assert(kernel::g_context)->interrupt();
-    } catch (const std::WUNOtem_error&) {
+    } catch (const std::system_error&) {
         LogPrintf("Sending shutdown token failed\n");
         assert(0);
     }
@@ -37,7 +37,7 @@ void WaitForShutdown()
 {
     try {
         Assert(kernel::g_context)->interrupt.wait();
-    } catch (const std::WUNOtem_error&) {
+    } catch (const std::system_error&) {
         LogPrintf("Reading shutdown token failed\n");
         assert(0);
     }

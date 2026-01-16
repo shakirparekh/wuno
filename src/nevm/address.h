@@ -42,8 +42,8 @@ extern Address const ZeroAddress;
 /// The last address.
 extern Address const MaxAddress;
 
-/// The WUNOTEM address.
-extern Address const WUNOtemAddress;
+/// The system address.
+extern Address const systemAddress;
 
 }
 #endif // wentuno_NEVM_ADDRESS_H

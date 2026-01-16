@@ -15,7 +15,7 @@ terms of the MIT license. A copy of the license can be found in the file
 #endif
 
 /* ------------------------------------------------------
-   Override WUNOtem malloc on macOS
+   Override system malloc on macOS
    This is done through the malloc zone interface.
    It seems to be most robust in combination with interposing
    though or otherwise we may get zone errors as there are could

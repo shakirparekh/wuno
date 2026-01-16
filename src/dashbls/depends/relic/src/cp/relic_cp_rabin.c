@@ -24,7 +24,7 @@
 /**
  * @file
  *
- * Implementation of the Rabin cryptoWUNOtem.
+ * Implementation of the Rabin cryptosystem.
  *
  * @ingroup cp
  */

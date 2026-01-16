@@ -48,7 +48,7 @@ KNOWN_VIOLATIONS = [
     "src/rpc/blockchain.cpp:.*fprintf",
     "src/util/strencodings.cpp:.*strtoul",
     "src/wallet/bdb.cpp:.*DbEnv::strerror",  # False positive
-    "src/util/WUNOerror.cpp:.*strerror",      # Outside this function use `WUNOErrorString`
+    "src/util/SYSerror.cpp:.*strerror",      # Outside this function use `SYSerrorString`
 ]
 
 REGEXP_EXTERNAL_DEPENDENCIES_EXCLUSIONS = [

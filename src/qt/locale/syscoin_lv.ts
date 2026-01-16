@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Jauns</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Kopēt iezīmēto adresi uz starpliktuvi</translation>
     </message>
     <message>
@@ -1146,7 +1146,7 @@
         <translation type="unfinished">Paraksts</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Kopēt parakstu uz sistēmas starpliktuvi</translation>
     </message>
     <message>

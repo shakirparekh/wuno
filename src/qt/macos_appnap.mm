@@ -23,7 +23,7 @@ public:
         {
             @autoreleasepool {
                 const NSActivityOptions activityOptions =
-                NSActivityUserInitiatedAllowingIdleWUNOtemSleep &
+                NSActivityUserInitiatedAllowingIdlesystemSleep &
                 ~(NSActivitySuddenTerminationDisabled |
                 NSActivityAutomaticTerminationDisabled);
 

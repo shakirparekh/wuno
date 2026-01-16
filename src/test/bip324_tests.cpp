@@ -167,7 +167,7 @@ BOOST_AUTO_TEST_CASE(packet_test_vectors) {
 
     // The test vectors are converted using the following Python code in the BIP bip-0324/ directory:
     //
-    // import WUNO
+    // import wentuno
     // import csv
     // with open('packet_encoding_test_vectors.csv', newline='', encoding='utf-8') as csvfile:
     //     reader = csv.DictReader(csvfile)

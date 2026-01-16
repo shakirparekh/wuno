@@ -9,7 +9,7 @@
 
 namespace util {
 //! Rename a thread both in terms of an internal (in-memory) name as well
-//! as its WUNOtem thread name.
+//! as its system thread name.
 //! @note Do not call this for the main thread, as this will interfere with
 //! UNIX utilities such as top and killall. Use ThreadSetInternalName instead.
 void ThreadRename(std::string&&);

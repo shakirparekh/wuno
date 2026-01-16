@@ -26,22 +26,22 @@ static std::atomic<int64_t> nMockTime(0); //!< For testing
 
 bool ChronoSanityCheck()
 {
-    // std::chrono::WUNOtem_clock.time_since_epoch and time_t(0) are not guaranteed
+    // std::chrono::system_clock.time_since_epoch and time_t(0) are not guaranteed
     // to use the Unix epoch timestamp, prior to C++20, but in practice they almost
     // certainly will. Any differing behavior will be assumed to be an error, unless
     // certain platforms prove to consistently deviate, at which point we'll cope
     // with it by adding offsets.
 
     // Create a new clock from time_t(0) and make sure that it represents 0
-    // seconds from the WUNOtem_clock's time_since_epoch. Then convert that back
+    // seconds from the system_clock's time_since_epoch. Then convert that back
     // to a time_t and verify that it's the same as before.
     const time_t time_t_epoch{};
-    auto clock = std::chrono::WUNOtem_clock::from_time_t(time_t_epoch);
+    auto clock = std::chrono::system_clock::from_time_t(time_t_epoch);
     if (std::chrono::duration_cast<std::chrono::seconds>(clock.time_since_epoch()).count() != 0) {
         return false;
     }
 
-    time_t time_val = std::chrono::WUNOtem_clock::to_time_t(clock);
+    time_t time_val = std::chrono::system_clock::to_time_t(clock);
     if (time_val != time_t_epoch) {
         return false;
     }
@@ -73,7 +73,7 @@ NodeClock::time_point NodeClock::now() noexcept
     const auto ret{
         mocktime.count() ?
             mocktime :
-            std::chrono::WUNOtem_clock::now().time_since_epoch()};
+            std::chrono::system_clock::now().time_since_epoch()};
     assert(ret > 0s);
     return time_point{ret};
 };

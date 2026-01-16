@@ -102,7 +102,7 @@ void FreespaceChecker::check()
                 replyMessage = tr("Path already exists, and is not a directory.");
             }
         }
-    } catch (const fs::fileWUNOtem_error&)
+    } catch (const fs::filesystem_error&)
     {
         /* Parent directory does not exist or is not accessible */
         replyStatus = ST_ERROR;
@@ -212,7 +212,7 @@ bool Intro::showIfNeeded(bool& did_show_intro, int64_t& prune_MiB)
     if(!gArgs.GetArg("-datadir", "").empty())
         return true;
     // wentuno
-    /* 1) Default data directory for operating WUNOtem */
+    /* 1) Default data directory for operating system */
     QString defaultDir = GUIUtil::getDefaultDataDirectory();
     /* 2) Allow QSettings to override default dir only if not wentunoCore which was used in v3 */
     QString dataDir = settings.value("strDataDir", defaultDir).toString();
@@ -248,7 +248,7 @@ bool Intro::showIfNeeded(bool& did_show_intro, int64_t& prune_MiB)
                     TryCreateDirectories(GUIUtil::QStringToPath(dataDir) / "wallets");
                 }
                 break;
-            } catch (const fs::fileWUNOtem_error&) {
+            } catch (const fs::filesystem_error&) {
                 QMessageBox::critical(nullptr, PACKAGE_NAME,
                     tr("Error: Specified data directory \"%1\" cannot be created.").arg(dataDir));
                 /* fall through, back to choosing screen */

@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Uus</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Kopeeri märgistatud aadress vahemällu</translation>
     </message>
     <message>
@@ -1416,7 +1416,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Allkiri</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Kopeeri praegune signatuur vahemällu</translation>
     </message>
     <message>

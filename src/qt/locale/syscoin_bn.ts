@@ -14,7 +14,7 @@
         <translation type="unfinished">নতুন</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">বর্তমানে নির্বাচিত ঠিকানাটি সিস্টেম ক্লিপবোর্ডে কপি করুন</translation>
     </message>
     <message>

@@ -14,7 +14,7 @@
         <translation type="unfinished">يېڭى(&amp;N)</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">نۆۋەتتە تاللىغان ئادرېسنى سىستېما چاپلاش تاختىسىغا كۆچۈرىدۇ</translation>
     </message>
     <message>

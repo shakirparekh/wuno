@@ -751,7 +751,7 @@ static RPCHelpMan importmempool()
              "",
              {
                  {"use_current_time", RPCArg::Type::BOOL, RPCArg::Default{true},
-                  "Whether to use the current WUNOtem time or use the entry time metadata from the mempool file.\n"
+                  "Whether to use the current system time or use the entry time metadata from the mempool file.\n"
                   "Warning: Importing untrusted metadata may lead to unexpected issues and undesirable behavior."},
                  {"apply_fee_delta_priority", RPCArg::Type::BOOL, RPCArg::Default{false},
                   "Whether to apply the fee delta metadata from the mempool file.\n"

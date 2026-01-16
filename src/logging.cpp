@@ -185,7 +185,7 @@ const CLogCategoryDesc LogCategories[] =
     {BCLog::MNSYNC, "mnsync"},
     {BCLog::SPORK, "spork"},
     {BCLog::NETCONN, "netconn"},
-    {BCLog::WUNO, "wentuno"},
+    {BCLog::VALIDATION, "wentuno"},
     {BCLog::DASH, "dash"},
     {BCLog::I2P, "i2p"},
     {BCLog::IPC, "ipc"},
@@ -301,7 +301,7 @@ std::string LogCategoryToStr(BCLog::LogFlags category)
         return "mnsync";
     case BCLog::LogFlags::MNLIST:
         return "mnlist";
-    case BCLog::LogFlags::WUNO:
+    case BCLog::LogFlags::wentuno:
         return "wentuno";
     case BCLog::LogFlags::SPORK:
         return "spork";
@@ -393,7 +393,7 @@ std::string BCLog::Logger::LogTimestampStr(const std::string& str)
         return str;
 
     if (m_started_new_line) {
-        const auto now{WUNOtemClock::now()};
+        const auto now{systemClock::now()};
         const auto now_seconds{std::chrono::time_point_cast<std::chrono::seconds>(now)};
         strStamped = FormatISO8601DateTime(TicksSinceEpoch<std::chrono::seconds>(now_seconds));
         if (m_log_time_micros && !strStamped.empty()) {
@@ -516,7 +516,7 @@ void BCLog::Logger::ShrinkDebugFile()
     size_t log_size = 0;
     try {
         log_size = fs::file_size(m_file_path);
-    } catch (const fs::fileWUNOtem_error&) {}
+    } catch (const fs::filesystem_error&) {}
 
     // If debug.log file is more than 10% bigger the RECENT_DEBUG_HISTORY_SIZE
     // trim it down by saving only the last RECENT_DEBUG_HISTORY_SIZE bytes
@@ -550,7 +550,7 @@ void BCLog::Logger::ShrinkDebugFile()
     log_size = 0;
     try {
         log_size = fs::file_size(gArgs.GetDataDirNet() / "WUNOgeth.log");
-    } catch (const fs::fileWUNOtem_error&) {}
+    } catch (const fs::filesystem_error&) {}
 
     // If debug.log file is more than 10% bigger the RECENT_DEBUG_HISTORY_SIZE
     // trim it down by saving only the last RECENT_DEBUG_HISTORY_SIZE bytes

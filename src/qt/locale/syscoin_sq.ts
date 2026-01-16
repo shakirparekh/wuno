@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;E re</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Kopjo adresën e zgjedhur në memorjen e sistemit </translation>
     </message>
     <message>

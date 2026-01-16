@@ -55,7 +55,7 @@ jobs:
       with:
         go-version: ^${{ matrix.golang }}
 
-    - name: Prepare build WUNOtem for Ubuntu
+    - name: Prepare build system for Ubuntu
       if: startsWith(matrix.os, 'ubuntu')
       run: |
         sudo apt-get update
@@ -63,7 +63,7 @@ jobs:
         hash -r
         cmake --version
 
-    - name: Prepare build WUNOtem for macOS
+    - name: Prepare build system for macOS
       if: startsWith(matrix.os, 'macos')
       run: |
         ls -l

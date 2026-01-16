@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Nova</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Copia l'adreça seleccionada al porta-retalls del sistema</translation>
     </message>
     <message>
@@ -1338,11 +1338,11 @@ Això és ideal per a carteres de mode només lectura.</translation>
         <translation type="unfinished">&amp;Principal</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Inicieu %1 automàticament després d'entrar en el sistema.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">&amp;Inicia %1 en l'entrada al sistema</translation>
     </message>
     <message>
@@ -1474,7 +1474,7 @@ Això és ideal per a carteres de mode només lectura.</translation>
         <translation type="unfinished">&amp;Finestra</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished">Mostra la icona a la safata del sistema.</translation>
     </message>
     <message>
@@ -2014,7 +2014,7 @@ Si rebeu aquest error, haureu de sol·licitar al comerciant que proporcioni un U
         <translation type="unfinished">Blocs sincronitzats</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">El sistema autònom de mapat utilitzat per a diversificar la selecció entre iguals.</translation>
     </message>
     <message>
@@ -2916,7 +2916,7 @@ Nota: atès que la tarifa es calcula per byte, una tarifa de "100 satoshis per k
         <translation type="unfinished">Signatura</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Copia la signatura actual al porta-retalls del sistema</translation>
     </message>
     <message>
@@ -3962,7 +3962,7 @@ Ves a Arxiu &gt; Obrir Cartera per a carregar cartera.
         <translation type="unfinished">Taller de poda...</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">Reducció de -maxconnections de %d a %d, a causa de les limitacions del sistema.</translation>
     </message>
     <message>

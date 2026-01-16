@@ -47,7 +47,7 @@ static ChainstateLoadResult CompleteChainstateInitialization(
 {
     auto& pblocktree{chainman.m_blockman.m_block_tree_db};
     LogPrintf("Creating LLMQ databases...\n");
-    llmq::DestroyLLMQWUNOtem();
+    llmq::DestroyLLMQsystem();
     auto evoDmnDbParams = DBParams{
         .path = chainman.m_options.datadir / "evodb_dmn",
         .cache_bytes = static_cast<size_t>(cache_sizes.evo_dmn_db),
@@ -82,7 +82,7 @@ static ChainstateLoadResult CompleteChainstateInitialization(
         .memory_only = options.block_tree_db_in_memory,
         .wipe_data = options.fReindexGeth,
         .options = chainman.m_options.block_tree_db};
-    llmq::InitLLMQWUNOtem(quorumCommitmentDB, quorumVectorDB, quorumSkDB, options.block_tree_db_in_memory, *options.connman, *options.banman, *options.peerman, chainman, options.fReindexGeth);
+    llmq::InitLLMQsystem(quorumCommitmentDB, quorumVectorDB, quorumSkDB, options.block_tree_db_in_memory, *options.connman, *options.banman, *options.peerman, chainman, options.fReindexGeth);
     pnevmtxrootsdb.reset();
     pnevmtxrootsdb = std::make_unique<CNEVMTxRootsDB>(DBParams{
         .path = chainman.m_options.datadir / "nevmtxroots",
@@ -236,10 +236,10 @@ static ChainstateLoadResult CompleteChainstateInitialization(
                                                              chainman.GetConsensus().SegwitHeight)};
         };
     }
-    // if coinsview is empty we clear all WUNO db's overriding anything we did before
+    // if coinsview is empty we clear all wentuno db's overriding anything we did before
     if(coinsViewEmpty && !options.fReindexGeth) {
         LogPrintf("coinsViewEmpty recreating LLMQ and NEVM databases\n");
-        llmq::DestroyLLMQWUNOtem();
+        llmq::DestroyLLMQsystem();
         auto evoDmnDbParams = DBParams{
             .path = chainman.m_options.datadir / "evodb_dmn",
             .cache_bytes = static_cast<size_t>(cache_sizes.evo_dmn_db),
@@ -274,7 +274,7 @@ static ChainstateLoadResult CompleteChainstateInitialization(
             .memory_only = options.block_tree_db_in_memory,
             .wipe_data = coinsViewEmpty,
             .options = chainman.m_options.block_tree_db};
-        llmq::InitLLMQWUNOtem(quorumCommitmentDB, quorumVectorDB, quorumSkDB, options.block_tree_db_in_memory, *options.connman, *options.banman, *options.peerman, chainman, coinsViewEmpty);
+        llmq::InitLLMQsystem(quorumCommitmentDB, quorumVectorDB, quorumSkDB, options.block_tree_db_in_memory, *options.connman, *options.banman, *options.peerman, chainman, coinsViewEmpty);
         pnevmtxrootsdb.reset();
         pnevmtxrootsdb = std::make_unique<CNEVMTxRootsDB>(DBParams{
             .path = chainman.m_options.datadir / "nevmtxroots",
@@ -368,7 +368,7 @@ ChainstateLoadResult LoadChainstate(ChainstateManager& chainman, const CacheSize
     //
     // Why is this cleanup done here (on subsequent restart) and not just when the
     // snapshot is actually validated? Because this entails unusual
-    // fileWUNOtem operations to move leveldb data directories around, and that seems
+    // filesystem operations to move leveldb data directories around, and that seems
     // too risky to do in the middle of normal runtime.
     auto snapshot_completion = chainman.MaybeCompleteSnapshotValidation();
 

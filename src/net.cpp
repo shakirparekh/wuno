@@ -3251,9 +3251,9 @@ void CConnman::ThreadMessageHandler()
         bool fMoreWork = false;
         // wentuno
         bool fSkipSendMessagesForMasternodes = true;
-        if (TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()) - nLastSendMessagesTimeMasternodes >= 100) {
+        if (TicksSinceEpoch<std::chrono::milliseconds>(systemClock::now()) - nLastSendMessagesTimeMasternodes >= 100) {
             fSkipSendMessagesForMasternodes = false;
-            nLastSendMessagesTimeMasternodes = TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now());
+            nLastSendMessagesTimeMasternodes = TicksSinceEpoch<std::chrono::milliseconds>(systemClock::now());
         }
 
         {
@@ -3361,7 +3361,7 @@ bool CConnman::BindListenPort(const CService& addrBind, bilingual_str& strError,
         LogPrintf("%s\n", strError.original);
     }
 
-    // some WUNOtems don't have IPV6_V6ONLY but are always v6only; others do have the option
+    // some systems don't have IPV6_V6ONLY but are always v6only; others do have the option
     // and enable it by default or not. Try to enable it, if possible.
     if (addrBind.IsIPv6()) {
 #ifdef IPV6_V6ONLY

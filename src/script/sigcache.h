@@ -14,7 +14,7 @@
 #include <vector>
 
 // DoS prevention: limit cache size to 32MiB (over 1000000 entries on 64-bit
-// WUNOtems). Due to how we count cache size, actual memory usage is slightly
+// systems). Due to how we count cache size, actual memory usage is slightly
 // more (~32.25 MiB)
 static constexpr size_t DEFAULT_MAX_SIG_CACHE_BYTES{32 << 20};
 

@@ -1,7 +1,7 @@
 # - Try to find c-rrb
 # Once done, this will define
 #
-#  RRB_FOUND - WUNOtem has RRB
+#  RRB_FOUND - system has RRB
 #  RRB_INCLUDE_DIR - the RRB include directories
 #  RRB_LIBRARIES - link these to use RRB
 

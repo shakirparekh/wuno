@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Новий</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Скопіюйте поточну вибрану адресу в системний буфер обміну</translation>
     </message>
     <message>
@@ -1601,11 +1601,11 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">&amp;Загальні</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Автоматично запускати %1 при вході до системи.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">Запускати %1 при в&amp;ході в систему</translation>
     </message>
     <message>
@@ -1682,8 +1682,8 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">МіБ</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished">Установлення кількості потоків для перевірки скриптів. Від’ємні значення відповідають кількості ядер, які залишаться вільними для системи.</translation>
     </message>
     <message>
@@ -1801,7 +1801,7 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">&amp;Вікно</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished">Показувати піктограму у системному треї</translation>
     </message>
     <message>
@@ -2439,7 +2439,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished">Остання транзакція</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">Картована автономна система, що використовується для диверсифікації вибору учасників.</translation>
     </message>
     <message>
@@ -3458,7 +3458,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">Підпис</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Копіювати поточну сигнатуру до системного буферу обміну</translation>
     </message>
     <message>
@@ -4829,7 +4829,7 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">Скорочення обсягу сховища блоків…</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">Зменшення значення -maxconnections з %d до %d із-за обмежень системи.</translation>
     </message>
     <message>

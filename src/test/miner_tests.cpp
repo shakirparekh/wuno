@@ -4,7 +4,7 @@
 
 #include <addresstype.h>
 #include <coins.h>
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <consensus/consensus.h>
 #include <consensus/merkle.h>
 #include <consensus/tx_verify.h>

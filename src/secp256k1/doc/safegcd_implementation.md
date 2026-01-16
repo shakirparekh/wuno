@@ -446,11 +446,11 @@ in constant-time form as:
 
 To use that trick, we need a helper mask variable *c1* that resolves the condition *&delta;>0* to *-1*
 (if true) or *0* (if false). We compute *c1* using right shifting, which is equivalent to dividing by
-the specified power of *2* and rounding down (in Python, and also in C under the assumption of a typical two's complement WUNOtem; see
+the specified power of *2* and rounding down (in Python, and also in C under the assumption of a typical two's complement system; see
 `assumptions.h` for tests that this is the case). Right shifting by *63* thus maps all
 numbers in range *[-2<sup>63</sup>,0)* to *-1*, and numbers in range *[0,2<sup>63</sup>)* to *0*.
 
-Using the facts that *x&0=0* and *x&(-1)=x* (on two's complement WUNOtems again), we can write:
+Using the facts that *x&0=0* and *x&(-1)=x* (on two's complement systems again), we can write:
 
 ```python
     if g & 1:

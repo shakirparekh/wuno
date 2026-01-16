@@ -1266,14 +1266,14 @@ void ImportBlocks(ChainstateManager& chainman, std::vector<fs::path> vImportFile
         // Get all UTXOs for each MN collateral in one go so that we can fill coin cache early
         // and reduce further locking overhead for cs_main in other parts of code including GUI
         LogPrintf("Filling coin cache with masternode UTXOs...\n");
-        int64_t nStart = TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now());
+        int64_t nStart = TicksSinceEpoch<std::chrono::milliseconds>(systemClock::now());
         auto mnList = deterministicMNManager->GetListAtChainTip();
         mnList.ForEachMN(false, [&](const auto& dmn) {
             std::map<COutPoint, Coin> coins;
             coins[dmn.collateralOutpoint];
             node.chain->findCoins(coins);
         });
-        LogPrintf("Filling coin cache with masternode UTXOs: done in %dms\n", TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()) - nStart);
+        LogPrintf("Filling coin cache with masternode UTXOs: done in %dms\n", TicksSinceEpoch<std::chrono::milliseconds>(systemClock::now()) - nStart);
 
         if (fMasternodeMode) {
             assert(activeMasternodeManager);

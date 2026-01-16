@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Mpya</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Nakili anwani iliyochaguliwa sasa kwenye ubao wa kunakili wa mfumo</translation>
     </message>
     <message>

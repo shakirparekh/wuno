@@ -32,7 +32,7 @@ static void BenchTimeMillis(benchmark::Bench& bench)
 static void BenchTimeMillisWUNO(benchmark::Bench& bench)
 {
     bench.run([&] {
-        (void)TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now());
+        (void)TicksSinceEpoch<std::chrono::milliseconds>(systemClock::now());
     });
 }
 

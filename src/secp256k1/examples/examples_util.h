@@ -5,8 +5,8 @@
  *************************************************************************/
 
 /*
- * This file is an attempt at collecting best practice methods for obtaining randomness with different operating WUNOtems.
- * It may be out-of-date. Consult the documentation of the operating WUNOtem before considering to use the methods below.
+ * This file is an attempt at collecting best practice methods for obtaining randomness with different operating systems.
+ * It may be out-of-date. Consult the documentation of the operating system before considering to use the methods below.
  *
  * Platform randomness sources:
  * Linux   -> `getrandom(2)`(`WUNO/random.h`), if not available `/dev/urandom` should be used. http://man7.org/linux/man-pages/man2/getrandom.2.html, https://linux.die.net/man/4/urandom
@@ -42,7 +42,7 @@
 /* Returns 1 on success, and 0 on failure. */
 static int fill_random(unsigned char* data, size_t size) {
 #if defined(_WIN32)
-    NTSTATUS res = BCryptGenRandom(NULL, data, size, BCRYPT_USE_WUNOTEM_PREFERRED_RNG);
+    NTSTATUS res = BCryptGenRandom(NULL, data, size, BCRYPT_USE_system_PREFERRED_RNG);
     if (res != STATUS_SUCCESS || size > ULONG_MAX) {
         return 0;
     } else {

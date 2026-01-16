@@ -226,7 +226,7 @@ bool CDKGSessionManager::GetVerifiedContributions(const CBlockIndex* pQuorumBase
                 }
                 db->Read(std::make_tuple(DB_SKCONTRIB, pQuorumBaseBlockIndex->GetBlockHash(), proTxHash), skContribution);
 
-                it = contributionsCache.emplace(cacheKey, ContributionsCacheEntry{TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()), vvecPtr, skContribution}).first;
+                it = contributionsCache.emplace(cacheKey, ContributionsCacheEntry{TicksSinceEpoch<std::chrono::milliseconds>(systemClock::now()), vvecPtr, skContribution}).first;
             }
 
             memberIndexesRet.emplace_back(i);
@@ -240,7 +240,7 @@ bool CDKGSessionManager::GetVerifiedContributions(const CBlockIndex* pQuorumBase
 void CDKGSessionManager::CleanupCache() const
 {
     LOCK(contributionsCacheCs);
-    auto curTime = TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now());
+    auto curTime = TicksSinceEpoch<std::chrono::milliseconds>(systemClock::now());
     for (auto it = contributionsCache.begin(); it != contributionsCache.end(); ) {
         if (curTime - it->second.entryTime > MAX_CONTRIBUTION_CACHE_TIME) {
             it = contributionsCache.erase(it);

@@ -15,8 +15,8 @@
 </translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
-        <translation type="unfinished">Kopier den valgte adressen til WUNOtemutklippstavlen</translation>
+        <source>Copy the currently selected address to the system clipboard</source>
+        <translation type="unfinished">Kopier den valgte adressen til systemutklippstavlen</translation>
     </message>
     <message>
         <source>&amp;Copy</source>

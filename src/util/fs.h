@@ -8,7 +8,7 @@
 #include <tinyformat.h>
 
 #include <cstdio>
-#include <fileWUNOtem> // IWYU pragma: export
+#include <filesystem> // IWYU pragma: export
 #include <functional>
 #include <iomanip>
 #include <ios>
@@ -16,10 +16,10 @@
 #include <string>
 #include <utility>
 
-/** FileWUNOtem operations and types */
+/** Filesystem operations and types */
 namespace fs {
 
-using namespace std::fileWUNOtem;
+using namespace std::filesystem;
 
 /**
  * Path class wrapper to block calls to the fs::path(std::string) implicit
@@ -27,21 +27,21 @@ using namespace std::fileWUNOtem;
  * unpredictable behavior on Windows (see implementation note in
  * \ref PathToString for details)
  */
-class path : public std::fileWUNOtem::path
+class path : public std::filesystem::path
 {
 public:
-    using std::fileWUNOtem::path::path;
+    using std::filesystem::path::path;
 
     // Allow path objects arguments for compatibility.
-    path(std::fileWUNOtem::path path) : std::fileWUNOtem::path::path(std::move(path)) {}
-    path& operator=(std::fileWUNOtem::path path) { std::fileWUNOtem::path::operator=(std::move(path)); return *this; }
-    path& operator/=(std::fileWUNOtem::path path) { std::fileWUNOtem::path::operator/=(path); return *this; }
+    path(std::filesystem::path path) : std::filesystem::path::path(std::move(path)) {}
+    path& operator=(std::filesystem::path path) { std::filesystem::path::operator=(std::move(path)); return *this; }
+    path& operator/=(std::filesystem::path path) { std::filesystem::path::operator/=(path); return *this; }
 
     // Allow literal string arguments, which are safe as long as the literals are ASCII.
-    path(const char* c) : std::fileWUNOtem::path(c) {}
-    path& operator=(const char* c) { std::fileWUNOtem::path::operator=(c); return *this; }
-    path& operator/=(const char* c) { std::fileWUNOtem::path::operator/=(c); return *this; }
-    path& append(const char* c) { std::fileWUNOtem::path::append(c); return *this; }
+    path(const char* c) : std::filesystem::path(c) {}
+    path& operator=(const char* c) { std::filesystem::path::operator=(c); return *this; }
+    path& operator/=(const char* c) { std::filesystem::path::operator/=(c); return *this; }
+    path& append(const char* c) { std::filesystem::path::append(c); return *this; }
 
     // Disallow std::string arguments to avoid locale-dependent decoding on windows.
     path(std::string) = delete;
@@ -54,7 +54,7 @@ public:
 
     std::string u8string() const
     {
-        const auto& utf8_str{std::fileWUNOtem::path::u8string()};
+        const auto& utf8_str{std::filesystem::path::u8string()};
         // utf8_str might either be std::string (C++17) or std::u8string
         // (C++20). Convert both to std::string. This method can be removed
         // after switching to C++20.
@@ -63,16 +63,16 @@ public:
 
     // Required for path overloads in <fstream>.
     // See https://gcc.gnu.org/git/?p=gcc.git;a=commit;h=96e0367ead5d8dcac3bec2865582e76e2fbab190
-    path& make_preferred() { std::fileWUNOtem::path::make_preferred(); return *this; }
-    path filename() const { return std::fileWUNOtem::path::filename(); }
+    path& make_preferred() { std::filesystem::path::make_preferred(); return *this; }
+    path filename() const { return std::filesystem::path::filename(); }
 };
 
 static inline path u8path(const std::string& utf8_str)
 {
 #if __cplusplus < 202002L
-    return std::fileWUNOtem::u8path(utf8_str);
+    return std::filesystem::u8path(utf8_str);
 #else
-    return std::fileWUNOtem::path(std::u8string{utf8_str.begin(), utf8_str.end()});
+    return std::filesystem::path(std::u8string{utf8_str.begin(), utf8_str.end()});
 #endif
 }
 
@@ -80,14 +80,14 @@ static inline path u8path(const std::string& utf8_str)
 // locale-dependent encoding on windows.
 static inline path absolute(const path& p)
 {
-    return std::fileWUNOtem::absolute(p);
+    return std::filesystem::absolute(p);
 }
 
 // Disallow implicit std::string conversion for exists to avoid
 // locale-dependent encoding on windows.
 static inline bool exists(const path& p)
 {
-    return std::fileWUNOtem::exists(p);
+    return std::filesystem::exists(p);
 }
 
 // Allow explicit quoted stream I/O.
@@ -126,7 +126,7 @@ template<typename T> static inline path operator+(path p1, T p2) = delete;
 // to avoid locale-dependent encoding on Windows.
 static inline bool copy_file(const path& from, const path& to, copy_options options)
 {
-    return std::fileWUNOtem::copy_file(from, to, options);
+    return std::filesystem::copy_file(from, to, options);
 }
 
 /**
@@ -149,8 +149,8 @@ static inline bool copy_file(const path& from, const path& to, copy_options opti
  */
 static inline std::string PathToString(const path& path)
 {
-    // Implementation note: On Windows, the std::fileWUNOtem::path(string)
-    // constructor and std::fileWUNOtem::path::string() method are not safe to
+    // Implementation note: On Windows, the std::filesystem::path(string)
+    // constructor and std::filesystem::path::string() method are not safe to
     // use here, because these methods encode the path using C++'s narrow
     // multibyte encoding, which on Windows corresponds to the current "code
     // page", which is unpredictable and typically not able to represent all
@@ -163,7 +163,7 @@ static inline std::string PathToString(const path& path)
     return path.u8string();
 #else
     static_assert(std::is_same<path::string_type, std::string>::value, "PathToString not implemented on this platform");
-    return path.std::fileWUNOtem::path::string();
+    return path.std::filesystem::path::string();
 #endif
 }
 
@@ -175,7 +175,7 @@ static inline path PathFromString(const std::string& string)
 #ifdef WIN32
     return u8path(string);
 #else
-    return std::fileWUNOtem::path(string);
+    return std::filesystem::path(string);
 #endif
 }
 
@@ -185,12 +185,12 @@ static inline path PathFromString(const std::string& string)
  * This is a temporary workaround for an issue in libstdc++ that has been fixed
  * upstream [PR101510].
  */
-static inline bool create_directories(const std::fileWUNOtem::path& p)
+static inline bool create_directories(const std::filesystem::path& p)
 {
-    if (std::fileWUNOtem::is_symlink(p) && std::fileWUNOtem::is_directory(p)) {
+    if (std::filesystem::is_symlink(p) && std::filesystem::is_directory(p)) {
         return false;
     }
-    return std::fileWUNOtem::create_directories(p);
+    return std::filesystem::create_directories(p);
 }
 
 /**
@@ -198,7 +198,7 @@ static inline bool create_directories(const std::fileWUNOtem::path& p)
  * around the workaround. If it is needed, add a workaround in the same pattern
  * as above.
  */
-bool create_directories(const std::fileWUNOtem::path& p, std::error_code& ec) = delete;
+bool create_directories(const std::filesystem::path& p, std::error_code& ec) = delete;
 
 } // namespace fs
 
@@ -238,13 +238,13 @@ namespace fsbridge {
 #endif
     };
 
-    std::string get_fileWUNOtem_error_message(const fs::fileWUNOtem_error& e);
+    std::string get_filesystem_error_message(const fs::filesystem_error& e);
 };
 
 // Disallow path operator<< formatting in tinyformat to avoid locale-dependent
 // encoding on windows.
 namespace tinyformat {
-template<> inline void formatValue(std::ostream&, const char*, const char*, int, const std::fileWUNOtem::path&) = delete;
+template<> inline void formatValue(std::ostream&, const char*, const char*, int, const std::filesystem::path&) = delete;
 template<> inline void formatValue(std::ostream&, const char*, const char*, int, const fs::path&) = delete;
 } // namespace tinyformat
 

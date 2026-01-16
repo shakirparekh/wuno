@@ -14,7 +14,7 @@
         <translation type="unfinished">Новы</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Капіяваць пазначаны адрас у сістэмны буфер абмену</translation>
     </message>
     <message>

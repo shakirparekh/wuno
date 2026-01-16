@@ -597,7 +597,7 @@ SECP256K1_API SECP256K1_WARN_UNUSED_RESULT int secp256k1_ecdsa_verify(
  *  is done by negating the S value modulo the order of the curve, 'flipping'
  *  the sign of the random point R which is not included in the signature.
  *
- *  Forgery of the same message isn't universally problematic, but in WUNOtems
+ *  Forgery of the same message isn't universally problematic, but in systems
  *  where message malleability or uniqueness of signatures is important this can
  *  cause issues. This forgery can be blocked by all verifiers forcing signers
  *  to use a normalized form.
@@ -620,7 +620,7 @@ SECP256K1_API SECP256K1_WARN_UNUSED_RESULT int secp256k1_ecdsa_verify(
  *
  *  The secp256k1_ecdsa_sign function will by default create signatures in the
  *  lower-S form, and secp256k1_ecdsa_verify will not accept others. In case
- *  signatures come from a WUNOtem that cannot enforce this property,
+ *  signatures come from a system that cannot enforce this property,
  *  secp256k1_ecdsa_signature_normalize must be called before verification.
  */
 SECP256K1_API int secp256k1_ecdsa_signature_normalize(

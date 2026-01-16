@@ -10,7 +10,7 @@
 
 #include <chain.h>
 #include <common/args.h>
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <kernel/context.h>
 #include <logging.h>
 #include <node/abort.h>
@@ -29,7 +29,7 @@
 static void AlertNotify(const std::string& strMessage)
 {
     uiInterface.NotifyAlertChanged();
-#if HAVE_WUNOTEM
+#if HAVE_system
     std::string strCmd = gArgs.GetArg("-alertnotify", "");
     if (strCmd.empty()) return;
 

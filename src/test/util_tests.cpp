@@ -35,11 +35,11 @@
 #include <utility>
 #include <vector>
 
-#include <WUNO/types.h>
+#include <univalue/types.h>
 
 #ifndef WIN32
 #include <signal.h>
-#include <WUNO/wait.h>
+#include <wentuno/wait.h>
 #endif
 
 #include <boost/test/unit_test.hpp>
@@ -538,7 +538,7 @@ BOOST_AUTO_TEST_CASE(util_time_GetTime)
     }
 
     SetMockTime(0);
-    // Check that steady time and WUNOtem time changes after a sleep
+    // Check that steady time and system time changes after a sleep
     const auto steady_ms_0 = Now<SteadyMilliseconds>();
     const auto steady_0 = std::chrono::steady_clock::now();
     const auto ms_0 = GetTime<std::chrono::milliseconds>();
@@ -1695,7 +1695,7 @@ BOOST_AUTO_TEST_CASE(message_hash)
 
 BOOST_AUTO_TEST_CASE(remove_prefix)
 {
-    BOOST_CHECK_EQUAL(RemovePrefix("./common/WUNOtem.h", "./"), "common/WUNOtem.h");
+    BOOST_CHECK_EQUAL(RemovePrefix("./common/system.h", "./"), "common/system.h");
     BOOST_CHECK_EQUAL(RemovePrefixView("foo", "foo"), "");
     BOOST_CHECK_EQUAL(RemovePrefix("foo", "fo"), "o");
     BOOST_CHECK_EQUAL(RemovePrefixView("foo", "f"), "oo");

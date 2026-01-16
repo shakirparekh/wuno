@@ -14,7 +14,7 @@
         <translation type="unfinished">नया </translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">मौजूदा चयनित पते को सिस्टम क्लिपबोर्ड पर कॉपी करें</translation>
     </message>
     <message>
@@ -894,7 +894,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">अंतिम लेनदेन</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">सहकर्मी चयन में विविधता लाने के लिए उपयोग की गई मैप की गई स्वायत्त प्रणाली।</translation>
     </message>
     <message>
@@ -1843,7 +1843,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">हस्ताक्षर</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">वर्तमान हस्ताक्षर को सिस्टम क्लिपबोर्ड पर कॉपी करें</translation>
     </message>
     <message>

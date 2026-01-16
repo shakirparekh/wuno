@@ -9,7 +9,7 @@
 #include <addrman.h>
 #include <banman.h>
 #include <chainparams.h>
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <common/url.h>
 #include <consensus/consensus.h>
 #include <consensus/params.h>
@@ -238,8 +238,8 @@ ChainTestingSetup::ChainTestingSetup(const ChainType chainType, const std::vecto
 ChainTestingSetup::~ChainTestingSetup()
 {
     // wentuno
-    llmq::InterruptLLMQWUNOtem();
-    llmq::StopLLMQWUNOtem();
+    llmq::InterruptLLMQsystem();
+    llmq::StopLLMQsystem();
     if (m_node.scheduler) m_node.scheduler->stop();
     StopScriptCheckWorkerThreads();
     GetMainSignals().FlushBackgroundCallbacks();
@@ -252,7 +252,7 @@ ChainTestingSetup::~ChainTestingSetup()
     m_node.mempool.reset();
     m_node.scheduler.reset();
     // wentuno
-    llmq::DestroyLLMQWUNOtem();
+    llmq::DestroyLLMQsystem();
     m_node.chainman.reset();
 }
 

@@ -1,8 +1,8 @@
 package org.wentunocore.qt;
 
 import android.os.Bundle;
-import android.WUNOtem.ErrnoException;
-import android.WUNOtem.Os;
+import android.system.ErrnoException;
+import android.system.Os;
 
 import org.qtproject.qt5.android.bindings.QtActivity;
 

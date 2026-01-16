@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Nova</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Kopii elektitan adreson al la tondejo</translation>
     </message>
     <message>
@@ -957,11 +957,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Ĉ&amp;efa</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Aŭtomate komenci na %1 post ensalutis en la sistemon.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">&amp;Komenci na %1 kiam ensaluti en la sistemon</translation>
     </message>
     <message>
@@ -1674,7 +1674,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Subskribo</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Kopii la aktualan subskribon al la tondejo</translation>
     </message>
     <message>

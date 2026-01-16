@@ -28,7 +28,7 @@
             <meta-data android:name="android.app.bundle_local_qt_libs" android:value="1"/>
             <meta-data android:name="android.app.use_local_qt_libs" android:value="1"/>
             <meta-data android:name="android.app.libs_prefix" android:value="/data/local/tmp/qt/"/>
-            <meta-data android:name="android.app.WUNOtem_libs_prefix" android:value="/WUNOtem/lib/"/>
+            <meta-data android:name="android.app.system_libs_prefix" android:value="/system/lib/"/>
             <meta-data android:name="android.app.background_running" android:value="true"/>
             <meta-data android:name="android.app.auto_screen_scale_factor" android:value="true"/>
             <meta-data android:name="android.app.extract_android_style" android:value="default"/>

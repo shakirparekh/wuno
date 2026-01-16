@@ -20,8 +20,8 @@
     </message>
     <message>
         <location line="+14"/>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
-        <translation>Copy the currently selected address to the WUNOtem clipboard</translation>
+        <source>Copy the currently selected address to the system clipboard</source>
+        <translation>Copy the currently selected address to the system clipboard</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1700,12 +1700,12 @@ The migration process will create a backup of the wallet before migrating. This 
     </message>
     <message>
         <location line="+6"/>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1804,8 +1804,8 @@ The migration process will create a backup of the wallet before migrating. This 
     </message>
     <message>
         <location line="+27"/>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1969,7 +1969,7 @@ The migration process will create a backup of the wallet before migrating. This 
     </message>
     <message>
         <location line="+6"/>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3051,7 +3051,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
     </message>
     <message>
         <location line="+210"/>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4430,8 +4430,8 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
     </message>
     <message>
         <location line="+30"/>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
-        <translation>Copy the current signature to the WUNOtem clipboard</translation>
+        <source>Copy the current signature to the system clipboard</source>
+        <translation>Copy the current signature to the system clipboard</translation>
     </message>
     <message>
         <location line="+21"/>
@@ -6183,7 +6183,7 @@ Unable to restore backup of wallet.</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

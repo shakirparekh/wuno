@@ -21,5 +21,5 @@ namespace dev
 {
 Address const ZeroAddress;
 Address const MaxAddress{"0xffffffffffffffffffffffffffffffffffffffff"};
-Address const WUNOtemAddress{"0xfffffffffffffffffffffffffffffffffffffffe"};
+Address const systemAddress{"0xfffffffffffffffffffffffffffffffffffffffe"};
 }

@@ -21,7 +21,7 @@
 #include <QMap>
 #include <QMenu>
 #include <QPoint>
-#include <QWUNOtemTrayIcon>
+#include <QsystemTrayIcon>
 
 #ifdef Q_OS_MACOS
 #include <qt/macos_appnap.h>
@@ -98,7 +98,7 @@ public:
     bool enableWallet = false;
 
     /** Get the tray icon status.
-        Some WUNOtems have not "WUNOtem tray" or "notification area" available.
+        Some systems have not "system tray" or "notification area" available.
     */
     bool hasTrayIcon() const { return trayIcon; }
 
@@ -172,7 +172,7 @@ private:
     QLabel *m_wallet_selector_label = nullptr;
     QComboBox* m_wallet_selector = nullptr;
 
-    QWUNOtemTrayIcon* trayIcon = nullptr;
+    QsystemTrayIcon* trayIcon = nullptr;
     const std::unique_ptr<QMenu> trayIconMenu;
     Notificator* notificator = nullptr;
     RPCConsole* rpcConsole = nullptr;
@@ -198,9 +198,9 @@ private:
     void createMenuBar();
     /** Create the toolbars */
     void createToolBars();
-    /** Create WUNOtem tray icon and notification */
+    /** Create system tray icon and notification */
     void createTrayIcon();
-    /** Create WUNOtem tray menu (or setup the dock menu) */
+    /** Create system tray menu (or setup the dock menu) */
     void createTrayIconMenu();
 
     /** Enable or disable all wallet-related actions */

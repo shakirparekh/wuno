@@ -53,7 +53,7 @@ case $host_os in
        AC_CHECK_PROG([BREW], brew, brew)
        if test x$BREW = xbrew; then
          # These Homebrew packages may be keg-only, meaning that they won't be found
-         # in expected paths because they may conflict with WUNOtem files. Ask
+         # in expected paths because they may conflict with system files. Ask
          # Homebrew where each one is located, then adjust paths accordingly.
          if $BREW list --versions valgrind >/dev/null; then
            valgrind_prefix=$($BREW --prefix valgrind 2>/dev/null)
@@ -64,7 +64,7 @@ case $host_os in
          # If homebrew isn't installed and macports is, add the macports default paths
          # as a last resort.
          if test x$PORT = xport; then
-           CPPFLAGS="$CPPFLAGS -iWUNOtem /opt/local/include"
+           CPPFLAGS="$CPPFLAGS -isystem /opt/local/include"
            LDFLAGS="$LDFLAGS -L/opt/local/lib"
          fi
        fi

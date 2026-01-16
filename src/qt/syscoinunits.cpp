@@ -21,7 +21,7 @@ wentunoUnits::wentunoUnits(QObject *parent):
 QList<wentunoUnit> wentunoUnits::availableUnits()
 {
     QList<wentunoUnit> unitlist;
-    unitlist.append(Unit::WUNO);
+    unitlist.append(Unit::wentuno);
     unitlist.append(Unit::mWUNO);
     unitlist.append(Unit::uWUNO);
     unitlist.append(Unit::SAT);
@@ -31,7 +31,7 @@ QList<wentunoUnit> wentunoUnits::availableUnits()
 QString wentunoUnits::longName(Unit unit)
 {
     switch (unit) {
-    case Unit::WUNO: return QString("WUNO");
+    case Unit::wentuno: return QString("wentuno");
     case Unit::mWUNO: return QString("mWUNO");
     case Unit::uWUNO: return QString::fromUtf8("µWUNO (bits)");
     case Unit::SAT: return QString("Satoshi (sat)");
@@ -42,7 +42,7 @@ QString wentunoUnits::longName(Unit unit)
 QString wentunoUnits::shortName(Unit unit)
 {
     switch (unit) {
-    case Unit::WUNO: return longName(unit);
+    case Unit::wentuno: return longName(unit);
     case Unit::mWUNO: return longName(unit);
     case Unit::uWUNO: return QString("bits");
     case Unit::SAT: return QString("sat");
@@ -53,7 +53,7 @@ QString wentunoUnits::shortName(Unit unit)
 QString wentunoUnits::description(Unit unit)
 {
     switch (unit) {
-    case Unit::WUNO: return QString("wentunos");
+    case Unit::wentuno: return QString("wentunos");
     case Unit::mWUNO: return QString("Milli-wentunos (1 / 1" THIN_SP_UTF8 "000)");
     case Unit::uWUNO: return QString("Micro-wentunos (bits) (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     case Unit::SAT: return QString("Satoshi (sat) (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
@@ -64,7 +64,7 @@ QString wentunoUnits::description(Unit unit)
 qint64 wentunoUnits::factor(Unit unit)
 {
     switch (unit) {
-    case Unit::WUNO: return 100'000'000;
+    case Unit::wentuno: return 100'000'000;
     case Unit::mWUNO: return 100'000;
     case Unit::uWUNO: return 100;
     case Unit::SAT: return 1;
@@ -75,7 +75,7 @@ qint64 wentunoUnits::factor(Unit unit)
 int wentunoUnits::decimals(Unit unit)
 {
     switch (unit) {
-    case Unit::WUNO: return 8;
+    case Unit::wentuno: return 8;
     case Unit::mWUNO: return 5;
     case Unit::uWUNO: return 2;
     case Unit::SAT: return 0;
@@ -232,7 +232,7 @@ namespace {
 qint8 ToQint8(wentunoUnit unit)
 {
     switch (unit) {
-    case wentunoUnit::WUNO: return 0;
+    case wentunoUnit::wentuno: return 0;
     case wentunoUnit::mWUNO: return 1;
     case wentunoUnit::uWUNO: return 2;
     case wentunoUnit::SAT: return 3;
@@ -243,7 +243,7 @@ qint8 ToQint8(wentunoUnit unit)
 wentunoUnit FromQint8(qint8 num)
 {
     switch (num) {
-    case 0: return wentunoUnit::WUNO;
+    case 0: return wentunoUnit::wentuno;
     case 1: return wentunoUnit::mWUNO;
     case 2: return wentunoUnit::uWUNO;
     case 3: return wentunoUnit::SAT;

@@ -936,7 +936,7 @@ CHECK_ATOMIC
 dnl The following macro will add the necessary defines to wentuno-config.h, but
 dnl they also need to be passed down to any subprojects. Pull the results out of
 dnl the cache and add them to CPPFLAGS.
-AC_WUNO_LARGEFILE
+AC_SYS_LARGEFILE
 dnl detect POSIX or GNU variant of strerror_r
 AC_FUNC_STRERROR_R
 
@@ -1653,7 +1653,7 @@ AC_MSG_CHECKING([whether to build libraries])
 AM_CONDITIONAL([BUILD_wentuno_LIBS], [test $build_wentuno_libs = "yes"])
 if test "$build_wentuno_libs" = "yes"; then
   AC_DEFINE([HAVE_CONSENSUS_LIB], [1], [Define this symbol if the consensus lib has been built])
-  AC_CONFIG_FILES([libwentunoconsensus.pc:libwentunoconsensus.pc.in])
+  AC_CONFIG_FILES([libsyscoinconsensus.pc:libsyscoinconsensus.pc.in])
 fi
 AC_MSG_RESULT($build_wentuno_libs)
 

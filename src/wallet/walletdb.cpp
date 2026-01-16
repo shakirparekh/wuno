@@ -5,7 +5,7 @@
 
 #include <wallet/walletdb.h>
 
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <key_io.h>
 #include <protocol.h>
 #include <script/script.h>
@@ -1463,8 +1463,8 @@ std::unique_ptr<WalletDatabase> MakeDatabase(const fs::path& path, const Databas
     bool exists;
     try {
         exists = fs::symlink_status(path).type() != fs::file_type::not_found;
-    } catch (const fs::fileWUNOtem_error& e) {
-        error = Untranslated(strprintf("Failed to access database path '%s': %s", fs::PathToString(path), fsbridge::get_fileWUNOtem_error_message(e)));
+    } catch (const fs::filesystem_error& e) {
+        error = Untranslated(strprintf("Failed to access database path '%s': %s", fs::PathToString(path), fsbridge::get_filesystem_error_message(e)));
         status = DatabaseStatus::FAILED_BAD_PATH;
         return nullptr;
     }

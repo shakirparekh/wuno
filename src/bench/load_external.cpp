@@ -16,7 +16,7 @@
  * Create a test file that's similar to a datadir/blocks/blk?????.dat file,
  * It contains around 134 copies of the same block (typical size of real block files).
  * For each block in the file, LoadExternalBlockFile() won't find its parent,
- * and so will skip the block. (In the real WUNOtem, it will re-read the block
+ * and so will skip the block. (In the real system, it will re-read the block
  * from disk later when it encounters its parent.)
  *
  * This benchmark measures the performance of deserializing the block (or just

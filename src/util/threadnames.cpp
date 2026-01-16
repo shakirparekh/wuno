@@ -18,7 +18,7 @@
 #include <util/threadnames.h>
 
 #ifdef HAVE_WUNO_PRCTL_H
-#include <WUNO/prctl.h>
+#include <wentuno/prctl.h>
 #endif
 
 //! Set the thread's name at the process level. Does not affect the

@@ -14,7 +14,7 @@
         <translation type="unfinished">新規(&amp;N)</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">現在選択されているアドレスをシステムのクリップボードにコピー</translation>
     </message>
     <message>
@@ -1549,11 +1549,11 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">メイン(&amp;M)</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">システムにログインした際、自動的に %1 を起動する。</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">システムのログイン時に %1 を起動(&amp;S)</translation>
     </message>
     <message>
@@ -1622,8 +1622,8 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">データベースのキャッシュの最大値です。 キャッシュを大きくすると同期が速くなりますが、その後はほとんどのユースケースでメリットが目立たなくなります。 キャッシュサイズを小さくすると、メモリ使用量が減少します。 未使用のメモリプールメモリは、このキャッシュと共有されます。</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished">スクリプト検証用のスレッド数を設定します。 負の値を使ってシステムに残したいコア数を設定できます。</translation>
     </message>
     <message>
@@ -1741,7 +1741,7 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">ウィンドウ (&amp;W)</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished">システムトレイにアイコンを表示。</translation>
     </message>
     <message>
@@ -2370,7 +2370,7 @@ BIP70には広範なセキュリティー上の問題があるので、ウォレ
         <translation type="unfinished">最後の取引</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">ピア選択を多様化するために使用されるマッピングされた自律システム。</translation>
     </message>
     <message>
@@ -3373,7 +3373,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">署名</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">この署名をシステムのクリップボードにコピー</translation>
     </message>
     <message>
@@ -4730,7 +4730,7 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">プロックストアを剪定中…</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">システム上の制約から、-maxconnections を %d から %d に削減しました。</translation>
     </message>
     <message>

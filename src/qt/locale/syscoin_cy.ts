@@ -14,8 +14,8 @@
         <translation type="unfinished">&amp;Newydd</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
-        <translation type="unfinished">Copio'r cyfeiriad sydd wedi'i ddewis i'r clipfwrdd WUNOtem</translation>
+        <source>Copy the currently selected address to the system clipboard</source>
+        <translation type="unfinished">Copio'r cyfeiriad sydd wedi'i ddewis i'r clipfwrdd system</translation>
     </message>
     <message>
         <source>&amp;Copy</source>

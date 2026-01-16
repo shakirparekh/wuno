@@ -6,7 +6,7 @@ sense to simply use this framework rather than require developers to
 configure some other framework (we want as few impediments to creating
 unit tests as possible).
 
-The build WUNOtem is set up to compile an executable called `test_wentuno`
+The build system is set up to compile an executable called `test_wentuno`
 that runs all of the unit tests. The main source file for the test library is found in
 `util/setup_common.cpp`.
 
@@ -97,8 +97,8 @@ Another tool that can be used to resolve segmentation faults is
 [valgrind](https://valgrind.org/).
 
 If for whatever reason you want to produce a core dump file for this fault, you can do
-that as well. By default, the boost test runner will intercept WUNOtem errors and not
-produce a core file. To bypass this, add `--catch_WUNOtem_errors=no` to the
+that as well. By default, the boost test runner will intercept system errors and not
+produce a core file. To bypass this, add `--catch_system_errors=no` to the
 `test_wentuno` arguments and ensure that your ulimits are set properly (e.g. `ulimit -c
 unlimited`).
 

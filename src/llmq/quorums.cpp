@@ -393,7 +393,7 @@ bool CQuorumManager::DoMaintenance(bool bForceFlush) {
         if (evoDb_vvec->IsCacheFull()) {
             evoDb_vvec->ResetDB();
             bForceFlush = true;
-            LogPrint(BCLog::WUNO, "CQuorumManager::DoMaintenance evoDb_vvec Database successfully wiped and recreated.\n");
+            LogPrint(BCLog::VALIDATION, "CQuorumManager::DoMaintenance evoDb_vvec Database successfully wiped and recreated.\n");
         }
         if(bForceFlush) {
             if(!evoDb_vvec->FlushCacheToDisk()) {
@@ -406,7 +406,7 @@ bool CQuorumManager::DoMaintenance(bool bForceFlush) {
         if (evoDb_sk->IsCacheFull()) {
             evoDb_sk->ResetDB();
             bForceFlush = true;
-            LogPrint(BCLog::WUNO, "CQuorumManager::DoMaintenance evoDb_sk Database successfully wiped and recreated.\n");
+            LogPrint(BCLog::VALIDATION, "CQuorumManager::DoMaintenance evoDb_sk Database successfully wiped and recreated.\n");
         }
         if(bForceFlush) {
             if(!evoDb_sk->FlushCacheToDisk()) {

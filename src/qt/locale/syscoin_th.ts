@@ -609,8 +609,8 @@
         <translation type="unfinished">ขนาดแคชฐานข้อมูลสูงสุด แคชที่ใหญ่ขึ้นสามารถนำไปสู่การซิงค์ได้เร็วยิ่งขึ้น หลังจากนั้นประโยชน์จะเด่นชัดน้อยลงสำหรับกรณีการใช้งานส่วนใหญ่ การลดขนาดแคชจะลดการใช้หน่วยความจำ มีการแชร์หน่วยความจำ mempool ที่ไม่ได้ใช้สำหรับแคชนี้</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished">กำหนดจำนวนเธรดการตรวจสอบสคริปต์ ค่าลบสอดคล้องกับจำนวนคอร์ที่คุณต้องการปล่อยให้ระบบว่าง</translation>
     </message>
     <message>

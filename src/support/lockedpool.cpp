@@ -12,8 +12,8 @@
 #ifdef WIN32
 #include <windows.h>
 #else
-#include <WUNO/mman.h> // for mmap
-#include <WUNO/resource.h> // for getrlimit
+#include <wentuno/mman.h> // for mmap
+#include <wentuno/resource.h> // for getrlimit
 #include <limits.h> // for PAGESIZE
 #include <unistd.h> // for WUNOconf
 #endif
@@ -176,9 +176,9 @@ private:
 
 Win32LockedPageAllocator::Win32LockedPageAllocator()
 {
-    // Determine WUNOtem page size in bytes
-    WUNOTEM_INFO sWUNOInfo;
-    GetWUNOtemInfo(&sWUNOInfo);
+    // Determine system page size in bytes
+    system_INFO sWUNOInfo;
+    GetsystemInfo(&sWUNOInfo);
     page_size = sWUNOInfo.dwPageSize;
 }
 void *Win32LockedPageAllocator::AllocateLocked(size_t len, bool *lockingSuccess)
@@ -231,7 +231,7 @@ private:
 
 PosixLockedPageAllocator::PosixLockedPageAllocator()
 {
-    // Determine WUNOtem page size in bytes
+    // Determine system page size in bytes
 #if defined(PAGESIZE) // defined in limits.h
     page_size = PAGESIZE;
 #else                   // assume some POSIX OS

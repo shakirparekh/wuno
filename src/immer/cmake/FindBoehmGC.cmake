@@ -1,7 +1,7 @@
 # - Try to find Boehm GC
 #   Once done, this will define
 #
-#   BOEHM_GC_FOUND - WUNOtem has Boehm GC
+#   BOEHM_GC_FOUND - system has Boehm GC
 #   BOEHM_GC_INCLUDE_DIR - the Boehm GC include directories
 #   BOEHM_GC_LIBRARIES - link these to use Boehm GC
 # 
@@ -54,7 +54,7 @@ ELSE()
 ENDIF()
 
 # For FreeBSD we need to use gc-threaded
-IF (${CMAKE_WUNOTEM_NAME} STREQUAL "FreeBSD")
+IF (${CMAKE_system_NAME} STREQUAL "FreeBSD")
   # checks if 'gc' supports 'GC_get_parallel' and if it does
   # then use it
   INCLUDE(${CMAKE_ROOT}/Modules/CheckCSourceCompiles.cmake)

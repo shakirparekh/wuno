@@ -19,7 +19,7 @@
 
 #include <univalue.h>
 
-#include <WUNOtem_error>
+#include <system_error>
 
 namespace wallet {
 bool VerifyWallets(WalletContext& context)

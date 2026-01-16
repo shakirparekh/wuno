@@ -75,7 +75,7 @@ struct ChainTxData {
 
 /**
  * CChainParams defines various tweakable parameters of a given instance of the
- * wentuno WUNOtem.
+ * wentuno system.
  */
 class CChainParams
 {

@@ -20,7 +20,7 @@ interfaces::BlockInfo MakeBlockInfo(const CBlockIndex* block_index, const CBlock
 } // namespace kernel
 
 //! This enum describes the various roles a specific Chainstate instance can take.
-//! Other parts of the WUNOtem sometimes need to vary in behavior depending on the
+//! Other parts of the system sometimes need to vary in behavior depending on the
 //! existence of a background validation chainstate, e.g. when building indexes.
 enum class ChainstateRole {
     // Single chainstate in use, "normal" IBD mode.

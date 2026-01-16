@@ -21,7 +21,7 @@
 #include <chainparamsbase.h>
 #include <clientversion.h>
 #include <common/args.h>
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <consensus/amount.h>
 #include <deploymentstatus.h>
 #include <hash.h>
@@ -81,7 +81,7 @@
 #include <util/result.h>
 #include <util/strencodings.h>
 #include <util/string.h>
-#include <util/WUNOerror.h>
+#include <util/SYSerror.h>
 #include <util/thread.h>
 #include <util/threadnames.h>
 #include <util/time.h>
@@ -104,7 +104,7 @@
 #ifndef WIN32
 #include <cerrno>
 #include <signal.h>
-#include <WUNO/stat.h>
+#include <wentuno/stat.h>
 #endif
 
 #include <boost/signals2/signal.hpp>
@@ -198,7 +198,7 @@ static fs::path GetPidFile(const ArgsManager& args)
 #endif
         return true;
     } else {
-        return InitError(strprintf(_("Unable to create the PID file '%s': %s"), fs::PathToString(GetPidFile(args)), WUNOErrorString(errno)));
+        return InitError(strprintf(_("Unable to create the PID file '%s': %s"), fs::PathToString(GetPidFile(args)), SYSerrorString(errno)));
     }
 }
 
@@ -227,7 +227,7 @@ static fs::path GetPidFile(const ArgsManager& args)
 // shutdown thing.
 //
 
-#if HAVE_WUNOTEM
+#if HAVE_system
 static void ShutdownNotify(const ArgsManager& args)
 {
     std::vector<std::thread> threads;
@@ -242,7 +242,7 @@ static void ShutdownNotify(const ArgsManager& args)
 
 void Interrupt(NodeContext& node)
 {
-#if HAVE_WUNOTEM
+#if HAVE_system
     ShutdownNotify(*node.args);
 #endif
     InterruptHTTPServer();
@@ -251,7 +251,7 @@ void Interrupt(NodeContext& node)
     InterruptREST();
     InterruptTorControl();
     // wentuno
-    llmq::InterruptLLMQWUNOtem();
+    llmq::InterruptLLMQsystem();
     InterruptMapPort();
     if (node.connman)
         node.connman->Interrupt();
@@ -284,7 +284,7 @@ void Shutdown(NodeContext& node)
     StopHTTPServer();
     // wentuno
     // Adding sleep after several steps to avoid occasional problems on windows
-    llmq::StopLLMQWUNOtem();
+    llmq::StopLLMQsystem();
     UninterruptibleSleep(std::chrono::milliseconds{200});
     for (const auto& client : node.chain_clients) {
         client->flush();
@@ -375,7 +375,7 @@ void Shutdown(NodeContext& node)
         pblockindexdb.reset();
         pnevmdatadb.reset();
         pnevmdatablobdb.reset();
-        llmq::DestroyLLMQWUNOtem();
+        llmq::DestroyLLMQsystem();
         deterministicMNManager.reset();
         netfulfilledman.reset();
         sporkManager.reset();
@@ -421,8 +421,8 @@ void Shutdown(NodeContext& node)
         if (node.args && !fs::remove(GetPidFile(*node.args))) {
             LogPrintf("%s: Unable to remove PID file: File does not exist\n", __func__);
         }
-    } catch (const fs::fileWUNOtem_error& e) {
-        LogPrintf("%s: Unable to remove PID file: %s\n", __func__, fsbridge::get_fileWUNOtem_error_message(e));
+    } catch (const fs::filesystem_error& e) {
+        LogPrintf("%s: Unable to remove PID file: %s\n", __func__, fsbridge::get_filesystem_error_message(e));
     }
     UninterruptibleSleep(std::chrono::milliseconds{200});
 
@@ -501,13 +501,13 @@ void SetupServerArgs(ArgsManager& argsman)
         "-choosedatadir", "-lang=<lang>", "-min", "-resetguisettings", "-splash", "-uiplatform"};
 
     argsman.AddArg("-version", "Print version and exit", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
-#if HAVE_WUNOTEM
+#if HAVE_system
     argsman.AddArg("-alertnotify=<cmd>", "Execute command when an alert is raised (%s in cmd is replaced by message)", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
 #endif
     argsman.AddArg("-assumevalid=<hex>", strprintf("If this block is in the chain assume that it and its ancestors are valid and potentially skip their script verification (0 to verify all, default: %s, testnet: %s, signet: %s)", defaultChainParams->GetConsensus().defaultAssumeValid.GetHex(), testnetChainParams->GetConsensus().defaultAssumeValid.GetHex(), signetChainParams->GetConsensus().defaultAssumeValid.GetHex()), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-blocksdir=<dir>", "Specify directory to hold blocks subdirectory for *.dat files (default: <datadir>)", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-fastprune", "Use smaller block files and lower minimum prune height for testing purposes", ArgsManager::ALLOW_ANY | ArgsManager::DEBUG_ONLY, OptionsCategory::DEBUG_TEST);
-#if HAVE_WUNOTEM
+#if HAVE_system
     argsman.AddArg("-blocknotify=<cmd>", "Execute command when the best block changes (%s in cmd is replaced by block hash)", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
 #endif
     argsman.AddArg("-blockreconstructionextratxn=<n>", strprintf("Extra transactions to keep in memory for compact block reconstructions (default: %u)", DEFAULT_BLOCK_RECONSTRUCTION_EXTRA_TXN), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
@@ -535,7 +535,7 @@ void SetupServerArgs(ArgsManager& argsman)
     argsman.AddArg("-reindex-chainstate", "If enabled, wipe chain state, and rebuild it from blk*.dat files on disk. If an assumeutxo snapshot was loaded, its chainstate will be wiped as well. The snapshot can then be reloaded via RPC.", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-settings=<file>", strprintf("Specify path to dynamic settings data file. Can be disabled with -nosettings. File is written at runtime and not meant to be edited by users (use %s instead for custom settings). Relative paths will be prefixed by datadir location. (default: %s)", wentuno_CONF_FILENAME, wentuno_SETTINGS_FILENAME), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-syncmempool", strprintf("Sync mempool from other nodes on start (default: %u)", DEFAULT_SYNC_MEMPOOL), ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
-#if HAVE_WUNOTEM
+#if HAVE_system
     argsman.AddArg("-startupnotify=<cmd>", "Execute command on startup.", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
     argsman.AddArg("-shutdownnotify=<cmd>", "Execute command immediately before beginning shutdown. The need for shutdown may be urgent, so be careful not to delay it long (if the command doesn't require interaction with the server, consider having it fork into the background).", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
 #endif
@@ -759,7 +759,7 @@ static void BlockNotifyGenesisWait(const CBlockIndex* pBlockIndex)
     }
 }
 
-#if HAVE_WUNOTEM
+#if HAVE_system
 static void StartupNotify(const ArgsManager& args)
 {
     std::string cmd = args.GetArg("-startupnotify", "");
@@ -1066,7 +1066,7 @@ bool AppInitParameterInteraction(const ArgsManager& args)
 #else
     int fd_max = FD_SETSIZE;
 #endif
-    // Trim requested connection counts, to fit into WUNOtem limitations
+    // Trim requested connection counts, to fit into system limitations
     // <int> in std::min<int>(...) to work around FreeBSD compilation issue described in #2695
     nMaxConnections = std::max(std::min<int>(nMaxConnections, fd_max - nBind - MIN_CORE_FILEDESCRIPTORS - MAX_ADDNODE_CONNECTIONS - NUM_FDS_MESSAGE_CAPTURE), 0);
     if (nFD < MIN_CORE_FILEDESCRIPTORS)
@@ -1074,7 +1074,7 @@ bool AppInitParameterInteraction(const ArgsManager& args)
     nMaxConnections = std::min(nFD - MIN_CORE_FILEDESCRIPTORS - MAX_ADDNODE_CONNECTIONS - NUM_FDS_MESSAGE_CAPTURE, nMaxConnections);
 
     if (nMaxConnections < nUserMaxConnections)
-        InitWarning(strprintf(_("Reducing -maxconnections from %d to %d, because of WUNOtem limitations."), nUserMaxConnections, nMaxConnections));
+        InitWarning(strprintf(_("Reducing -maxconnections from %d to %d, because of system limitations."), nUserMaxConnections, nMaxConnections));
 
     // ********************************************************* Step 3: parameter-to-internal-flags
     auto result = init::SetLoggingCategories(args);
@@ -1954,7 +1954,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
         fHaveGenesis = true;
     }
 
-#if HAVE_WUNOTEM
+#if HAVE_system
     const std::string block_notify = args.GetArg("-blocknotify", "");
     if (!block_notify.empty()) {
         uiInterface.NotifyBlockTip_connect([block_notify](SynchronizationState sync_state, const CBlockIndex* pBlockIndex) {
@@ -2072,7 +2072,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
     if (activeMasternodeManager) {
         node.scheduler->scheduleEvery([&] { llmq::quorumDKGSessionManager->CleanupOldContributions(*node.chainman); }, std::chrono::hours{1});
     }
-    llmq::StartLLMQWUNOtem();
+    llmq::StartLLMQsystem();
     // ********************************************************* Step 12: start node
 
     //// debug print
@@ -2266,7 +2266,7 @@ bool AppInitMain(NodeContext& node, interfaces::BlockAndHeaderTipInfo* tip_info)
     if (node.peerman) node.peerman->StartScheduledTasks(*node.scheduler);
 
 
-#if HAVE_WUNOTEM
+#if HAVE_system
     StartupNotify(args);
 #endif
 

@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Nová</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Zkopíruj tuto adresu do WUNOtémové schránky</translation>
     </message>
     <message>
@@ -1482,11 +1482,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Hlavní</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Automaticky spustí %1 po přihlášení do WUNOtému.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">S&amp;pustit %1 po přihlášení do WUNOtému</translation>
     </message>
     <message>
@@ -1555,8 +1555,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Maximální velikost vyrovnávací paměti databáze. Větší vyrovnávací paměť může přispět k rychlejší synchronizaci, avšak přínos pro většinu případů použití je méně výrazný. Snížení velikosti vyrovnávací paměti sníží využití paměti. Nevyužívaná paměť mempoolu je pro tuto vyrovnávací paměť sdílená.</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished">Nastaví počet vláken pro ověřování skriptů. Negativní hodnota odpovídá počtu jader procesoru, které chcete ponechat volné pro WUNOtém. </translation>
     </message>
     <message>
@@ -1674,7 +1674,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">O&amp;kno</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished">Zobrazit ikonu v WUNOtémové oblasti.</translation>
     </message>
     <message>
@@ -2296,7 +2296,7 @@ Pokud vidíte tuto chybu, měli byste požádat, aby obchodník poskytl adresu k
         <translation type="unfinished">Poslední transakce</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">Mapovaný nezávislý - Autonomní WUNOtém používaný pro rozšírení vzájemného výběru protějsků.</translation>
     </message>
     <message>
@@ -3269,7 +3269,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">Podpis</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Zkopíruj tento podpis do schránky</translation>
     </message>
     <message>
@@ -4586,7 +4586,7 @@ Nelze obnovit zálohu peněženky.</translation>
         <translation type="unfinished">Prořezávám úložiště bloků...</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">Omezuji -maxconnections z %d na %d kvůli WUNOtémovým omezením.</translation>
     </message>
     <message>

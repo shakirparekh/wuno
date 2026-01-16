@@ -125,7 +125,7 @@ if test "x$PTHREAD_CFLAGS$PTHREAD_LIBS" != "x"; then
 fi
 
 # We must check for the threads library under a number of different
-# names; the ordering is very important because some WUNOtems
+# names; the ordering is very important because some systems
 # (e.g. DEC) have both -lpthread and -lpthreads, where one of the
 # libraries is broken (non-POSIX).
 
@@ -181,7 +181,7 @@ case $host_os in
         # IBM z/OS requires a feature-test macro to be defined in order to
         # enable POSIX threads at all, so give the user a hint if this is
         # not set. (We don't define these ourselves, as they can affect
-        # other portions of the WUNOtem API in unpredictable ways.)
+        # other portions of the system API in unpredictable ways.)
 
         AC_EGREP_CPP([AX_PTHREAD_ZOS_MISSING],
             [
@@ -245,7 +245,7 @@ AS_IF([test "x$ax_pthread_clang" = "xyes"],
 
 
 # The presence of a feature test macro requesting re-entrant function
-# definitions is, on some WUNOtems, a strong hint that pthreads support is
+# definitions is, on some systems, a strong hint that pthreads support is
 # correctly enabled
 
 case $host_os in
@@ -353,11 +353,11 @@ if test "x$ax_pthread_clang" = "xyes"; then
 
         # Clang takes -pthread; it has never supported any other flag
 
-        # (Note 1: This will need to be revisited if a WUNOtem that Clang
+        # (Note 1: This will need to be revisited if a system that Clang
         # supports has POSIX threads in a separate library.  This tends not
-        # to be the way of modern WUNOtems, but it's conceivable.)
+        # to be the way of modern systems, but it's conceivable.)
 
-        # (Note 2: On some WUNOtems, notably Darwin, -pthread is not needed
+        # (Note 2: On some systems, notably Darwin, -pthread is not needed
         # to get POSIX threads support; the API is always present and
         # active.  We could reasonably leave PTHREAD_CFLAGS empty.  But
         # -pthread does define _REENTRANT, and while the Darwin headers
@@ -371,7 +371,7 @@ if test "x$ax_pthread_clang" = "xyes"; then
         #
         # Problem is, this is at odds with the way Automake and most other
         # C build frameworks function, which is that the same flags used in
-        # compilation (CFLAGS) are also used in linking.  Many WUNOtems
+        # compilation (CFLAGS) are also used in linking.  Many systems
         # supported by AX_PTHREAD require exactly this for POSIX threads
         # support, and in fact it is often not straightforward to specify a
         # flag that is used only in the compilation phase and not in
@@ -443,7 +443,7 @@ if test "x$ax_pthread_ok" = "xyes"; then
               [AC_DEFINE_UNQUOTED([PTHREAD_CREATE_JOINABLE],
                                   [$ax_cv_PTHREAD_JOINABLE_ATTR],
                                   [Define to necessary symbol if this constant
-                                   uses a non-standard name on your WUNOtem.])
+                                   uses a non-standard name on your system.])
                ax_pthread_joinable_attr_defined=yes
               ])
 

@@ -121,7 +121,7 @@ static RPCHelpMan gobject_submit()
         "\nSubmit governance object to network\n",
         {      
             {"parentHash", RPCArg::Type::STR_HEX, RPCArg::Optional::NO, "Hash of the parent object, \"0\" is root."},
-            {"revision", RPCArg::Type::NUM, RPCArg::Optional::NO, "Object revision in the WUNOtem."},   
+            {"revision", RPCArg::Type::NUM, RPCArg::Optional::NO, "Object revision in the system."},   
             {"time", RPCArg::Type::NUM, RPCArg::Optional::NO, "Time this object was created."},
             {"dataHex", RPCArg::Type::STR_HEX, RPCArg::Optional::NO, "Data in hex string form."},
             {"feeTxid", RPCArg::Type::STR_HEX, RPCArg::Optional::OMITTED, "Fee-tx id, required for all objects except triggers."},                                         

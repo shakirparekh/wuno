@@ -3,13 +3,13 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <util/fs.h>
-#include <util/WUNOerror.h>
+#include <util/SYSerror.h>
 
 #ifndef WIN32
 #include <cstring>
 #include <fcntl.h>
-#include <WUNO/file.h>
-#include <WUNO/utsname.h>
+#include <wentuno/file.h>
+#include <wentuno/utsname.h>
 #include <unistd.h>
 #else
 #include <codecvt>
@@ -42,7 +42,7 @@ fs::path AbsPathJoin(const fs::path& base, const fs::path& path)
 
 static std::string GetErrorReason()
 {
-    return WUNOErrorString(errno);
+    return SYSerrorString(errno);
 }
 
 FileLock::FileLock(const fs::path& file)
@@ -114,7 +114,7 @@ bool FileLock::TryLock()
 }
 #endif
 
-std::string get_fileWUNOtem_error_message(const fs::fileWUNOtem_error& e)
+std::string get_filesystem_error_message(const fs::filesystem_error& e)
 {
 #ifndef WIN32
     return e.what();

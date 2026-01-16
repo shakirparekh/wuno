@@ -14,7 +14,7 @@
         <translation type="unfinished">新增 &amp;N</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">把目前选择的地址复制到系统粘贴板中</translation>
     </message>
     <message>
@@ -1333,7 +1333,7 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">選項</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">系统登入时启动 %1 (&amp;S)</translation>
     </message>
     <message>
@@ -1390,8 +1390,8 @@ The migration process will create a backup of the wallet before migrating. This 
         <translation type="unfinished">数据库缓存的最大大小。加大缓存有助于加快同步，但对于大多数使用场景来说，继续加大后收效会越来越不明显。降低缓存大小将会减小内存使用量。内存池中尚未被使用的那部分内存也会被共享用于这里的数据库缓存。</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished">设置脚本验证线程的数量。负值则表示你想要保留给系统的核心数量。</translation>
     </message>
     <message>
@@ -1915,7 +1915,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished">最近交易</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">映射的自治系統，用於使peer選取多樣化。</translation>
     </message>
     <message>
@@ -2595,7 +2595,7 @@ For more information on using this console, type %6.
         <translation type="unfinished">簽章</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">複製目前的簽章到系統剪貼簿</translation>
     </message>
     <message>
@@ -3616,7 +3616,7 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">修剪区块存储...</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">因為系統的限制，將 -maxconnections 參數從 %d 降到了 %d</translation>
     </message>
     <message>

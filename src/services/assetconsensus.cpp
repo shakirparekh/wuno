@@ -246,7 +246,7 @@ bool CheckwentunoMint(
     CAssetsMap &mapAssetIn,
     CAssetsMap &mapAssetOut
 ) {
-    LogPrint(BCLog::WUNO,"*** ASSET MINT blockHeight=%d tx=%s %s\n",
+    LogPrint(BCLog::VALIDATION,"*** ASSET MINT blockHeight=%d tx=%s %s\n",
             nHeight, txHash.ToString(), fJustCheck ? "JUSTCHECK" : "BLOCK");
     const CMintwentuno mintwentuno(tx);
     if (mintwentuno.IsNull()) {
@@ -297,7 +297,7 @@ bool CheckwentunoMint(
     // This is important because we now will have assets in and out (minus this asset). 
     // Since we may create a new asset output without an input via this function, 
     // we cannot gaurantee in==out unless we remove the asset from in and out. 
-    // The same pattern is used with wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION where WUNOx(asset) is minted by burning WUNO (non-asset).
+    // The same pattern is used with wentuno_TX_VERSION_wentuno_BURN_TO_ALLOCATION where WUNOx(asset) is minted by burning wentuno (non-asset).
     mapAssetOut.erase(itOut);
 
     // Must match the bridging "outputAmount"
@@ -306,7 +306,7 @@ bool CheckwentunoMint(
     }
     if (!fJustCheck) {
         if (nHeight > 0) {
-            LogPrint(BCLog::WUNO,"CONNECTED ASSET MINT: asset=%llu tx=%s height=%d fJustCheck=%s\n",
+            LogPrint(BCLog::VALIDATION,"CONNECTED ASSET MINT: asset=%llu tx=%s height=%d fJustCheck=%s\n",
                 nAssetFromLog,
                 txHash.ToString(),
                 nHeight,
@@ -321,7 +321,7 @@ bool CheckwentunoMint(
 bool DisconnectMintAsset(const CTransaction &tx, NEVMMintTxSet &setMintTxs){
     CMintwentuno mintwentuno(tx);
     if(mintwentuno.IsNull()) {
-        LogPrint(BCLog::WUNO,"DisconnectMintAsset: Cannot unserialize data inside of this transaction relating to an assetallocationmint\n");
+        LogPrint(BCLog::VALIDATION,"DisconnectMintAsset: Cannot unserialize data inside of this transaction relating to an assetallocationmint\n");
         return false;
     }
     setMintTxs.insert(mintwentuno.nTxHash);
@@ -354,7 +354,7 @@ bool CheckwentunoInputs(const Consensus::Params& params, const CTransaction& tx,
 
 bool CheckAssetAllocationInputs(const CTransaction &tx, const uint256& txHash, TxValidationState &state,
     const uint32_t &nHeight, const bool &fJustCheck, CAssetsMap &mapAssetIn, CAssetsMap &mapAssetOut) {
-    LogPrint(BCLog::WUNO,"*** ASSET ALLOCATION %d %s %s\n", nHeight,
+    LogPrint(BCLog::VALIDATION,"*** ASSET ALLOCATION %d %s %s\n", nHeight,
             txHash.ToString().c_str(),
             fJustCheck ? "JUSTCHECK" : "BLOCK");
         
@@ -387,7 +387,7 @@ bool CheckAssetAllocationInputs(const CTransaction &tx, const uint256& txHash, T
             }
             mapAssetOut.erase(itOut);
             // erase in / out of this asset as equality is checked for the rest after CheckwentunoInputs()
-            // the burn amount in opreturn (WUNO) should match total output for WUNOX
+            // the burn amount in opreturn (wentuno) should match total output for WUNOX
             if(nTotal != nBurnAmount) {
                 return FormatwentunoErrorMessage(state, "wentuno-burn-mismatch-amount", fJustCheck);
             }
@@ -404,7 +404,7 @@ bool CheckAssetAllocationInputs(const CTransaction &tx, const uint256& txHash, T
                 if(nOut == 0) {
                     return FormatwentunoErrorMessage(state, "assetallocation-invalid-burn-index", fJustCheck);
                 }
-                // the burn of asset in opreturn should match the output value of index 0 (WUNO)
+                // the burn of asset in opreturn should match the output value of index 0 (wentuno)
                 if(nBurnAmount != tx.vout[0].nValue) {
                     return FormatwentunoErrorMessage(state, "assetallocation-mismatch-burn-amount", fJustCheck);
                 }  
@@ -420,7 +420,7 @@ bool CheckAssetAllocationInputs(const CTransaction &tx, const uint256& txHash, T
 
     if(!fJustCheck){
         if(nHeight > 0) {  
-            LogPrint(BCLog::WUNO,"CONNECTED ASSET ALLOCATION: op=%s hash=%s height=%d fJustCheck=%s\n",
+            LogPrint(BCLog::VALIDATION,"CONNECTED ASSET ALLOCATION: op=%s hash=%s height=%d fJustCheck=%s\n",
                 stringFromwentunoTx(tx.nVersion).c_str(),
                 txHash.ToString().c_str(),
                 nHeight,
@@ -467,7 +467,7 @@ bool CNEVMTxRootsDB::FlushCacheToDisk(std::size_t CHUNK_ITEMS)
     }
     if (!flush()) return false;       // last partial chunk
 
-    LogPrint(BCLog::WUNO,
+    LogPrint(BCLog::VALIDATION,
              "Flushed NEVM-tx-roots cache, %zu items written in %zu-entry chunks\n",
              count, CHUNK_ITEMS);
     return true;
@@ -495,7 +495,7 @@ bool CNEVMTxRootsDB::FlushErase(const std::vector<uint256> &vecBlockHashes) {
         }
     }
     if(vecBlockHashes.size() > 0)
-        LogPrint(BCLog::WUNO, "Flushing, erasing %d nevm tx roots\n", vecBlockHashes.size());
+        LogPrint(BCLog::VALIDATION, "Flushing, erasing %d nevm tx roots\n", vecBlockHashes.size());
     return WriteBatch(batch, true);
 }
 void CNEVMMintedTxDB::FlushDataToCache(const NEVMMintTxSet &mapNEVMTxRoots) {
@@ -531,7 +531,7 @@ bool CNEVMMintedTxDB::FlushCacheToDisk(std::size_t CHUNK_ITEMS)
     }
     if (!flush()) return false;
 
-    LogPrint(BCLog::WUNO,
+    LogPrint(BCLog::VALIDATION,
              "Flushed NEVM-minted-tx cache, %zu items written in %zu-entry chunks\n",
              count, CHUNK_ITEMS);
     return true;
@@ -550,7 +550,7 @@ bool CNEVMMintedTxDB::FlushErase(const NEVMMintTxSet &mapNEVMTxRoots) {
         }
     }
     if(mapNEVMTxRoots.size() > 0)
-        LogPrint(BCLog::WUNO, "Flushing, erasing %d nevm tx mints\n", mapNEVMTxRoots.size());
+        LogPrint(BCLog::VALIDATION, "Flushing, erasing %d nevm tx mints\n", mapNEVMTxRoots.size());
     return WriteBatch(batch, true);
 }
 bool CNEVMMintedTxDB::ExistsTx(const uint256& nTxHash) {

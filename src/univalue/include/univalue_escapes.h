@@ -1,5 +1,5 @@
-#ifndef wentuno_UNIVALUE_INCLUDE_UNIVALUE_ESCAPES_H
-#define wentuno_UNIVALUE_INCLUDE_UNIVALUE_ESCAPES_H
+#ifndef SYSCOIN_UNIVALUE_INCLUDE_UNIVALUE_ESCAPES_H
+#define SYSCOIN_UNIVALUE_INCLUDE_UNIVALUE_ESCAPES_H
 static const char *escapes[256] = {
 	"\\u0000",
 	"\\u0001",
@@ -258,4 +258,4 @@ static const char *escapes[256] = {
 	nullptr,
 	nullptr,
 };
-#endif // wentuno_UNIVALUE_INCLUDE_UNIVALUE_ESCAPES_H
+#endif // SYSCOIN_UNIVALUE_INCLUDE_UNIVALUE_ESCAPES_H

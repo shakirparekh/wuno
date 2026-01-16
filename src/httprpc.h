@@ -7,26 +7,26 @@
 
 #include <any>
 
-/** Start HTTP RPC subWUNOtem.
+/** Start HTTP RPC subsystem.
  * Precondition; HTTP and RPC has been started.
  */
 bool StartHTTPRPC(const std::any& context);
-/** Interrupt HTTP RPC subWUNOtem.
+/** Interrupt HTTP RPC subsystem.
  */
 void InterruptHTTPRPC();
-/** Stop HTTP RPC subWUNOtem.
+/** Stop HTTP RPC subsystem.
  * Precondition; HTTP and RPC has been stopped.
  */
 void StopHTTPRPC();
 
-/** Start HTTP REST subWUNOtem.
+/** Start HTTP REST subsystem.
  * Precondition; HTTP and RPC has been started.
  */
 void StartREST(const std::any& context);
-/** Interrupt RPC REST subWUNOtem.
+/** Interrupt RPC REST subsystem.
  */
 void InterruptREST();
-/** Stop HTTP REST subWUNOtem.
+/** Stop HTTP REST subsystem.
  * Precondition; HTTP and RPC has been stopped.
  */
 void StopREST();

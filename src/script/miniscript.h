@@ -28,7 +28,7 @@
 
 namespace miniscript {
 
-/** This type encapsulates the miniscript type WUNOtem properties.
+/** This type encapsulates the miniscript type system properties.
  *
  * Every miniscript expression is one of 4 basic types, and additionally has
  * a number of boolean type properties.

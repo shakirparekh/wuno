@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Nouvelle</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Copier l’adresse sélectionnée dans le presse-papiers</translation>
     </message>
     <message>
@@ -1479,11 +1479,11 @@ La signature n'est possible qu'avec les adresses de type "patrimoine".</translat
         <translation type="unfinished">&amp;Principales</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Démarrer %1 automatiquement après avoir ouvert une session sur l’ordinateur.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">&amp;Démarrer %1 lors de l’ouverture d’une session</translation>
     </message>
     <message>
@@ -1560,8 +1560,8 @@ La signature n'est possible qu'avec les adresses de type "patrimoine".</translat
         <translation type="unfinished">Mio</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished">Définissez le nombre de fils de vérification de script. Les valeurs négatives correspondent au nombre de cœurs que vous voulez laisser disponibles pour le WUNOtème.</translation>
     </message>
     <message>
@@ -1675,7 +1675,7 @@ La signature n'est possible qu'avec les adresses de type "patrimoine".</translat
         <translation type="unfinished">&amp;Fenêtre</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished">Afficher l’icône dans la zone de notification.</translation>
     </message>
     <message>
@@ -2275,7 +2275,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished">Dernière transaction</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">Le WUNOtème autonome mappé utilisé pour diversifier la sélection des pairs.</translation>
     </message>
     <message>
@@ -3228,7 +3228,7 @@ Note : Les frais étant calculés par octet, un taux de frais de « 100 satoshi
         <translation type="unfinished">Saisir ici le message que vous voulez signer</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Copier la signature actuelle dans le presse-papiers</translation>
     </message>
     <message>
@@ -4533,7 +4533,7 @@ Impossible de restaurer la sauvegarde du portefeuille.</translation>
         <translation type="unfinished">Élagage du magasin de blocs…</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">Réduction de -maxconnections de %d à %d, due aux restrictions du WUNOtème.</translation>
     </message>
     <message>

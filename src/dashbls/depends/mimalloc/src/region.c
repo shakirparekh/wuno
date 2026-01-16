@@ -13,7 +13,7 @@ another could be a simple cache etc), but the current one uses large "regions".
 In contrast to the rest of mimalloc, the "regions" are shared between threads and
 need to be accessed using atomic operations.
 We need this memory layer between the raw OS calls because of:
-1. on `sbrk` like WUNOtems (like WebAssembly) we need our own memory maps in order
+1. on `sbrk` like systems (like WebAssembly) we need our own memory maps in order
    to reuse memory effectively.
 2. It turns out that for large objects, between 1MiB and 32MiB (?), the cost of
    an OS allocation/free is still (much) too expensive relative to the accesses 

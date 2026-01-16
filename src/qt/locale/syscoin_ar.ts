@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;جديد</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">‫انسخ العنوان المحدد للحافظة‬</translation>
     </message>
     <message>
@@ -1530,11 +1530,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">‫&amp;الرئيسية‬</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">‫تشغيل البرنامج تلقائيا %1 بعد تسجيل الدخول إلى النظام.‬</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">تشغيل %1 عند الدخول إلى النظام</translation>
     </message>
     <message>
@@ -1720,7 +1720,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">‫&amp;نافذة‬</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished">عرض الأيقونة في زاوية الأيقونات.</translation>
     </message>
     <message>
@@ -2334,7 +2334,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished">‫آخر عملية‬</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">‫النظام التفصيلي المستقل المستخدم لتنويع اختيار الأقران.‬</translation>
     </message>
     <message>
@@ -3277,7 +3277,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">التوقيع</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">نسخ التوقيع الحالي إلى حافظة النظام</translation>
     </message>
     <message>

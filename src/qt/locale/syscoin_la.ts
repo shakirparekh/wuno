@@ -10,8 +10,8 @@
         <translation type="unfinished">&amp;Novus</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
-        <translation type="unfinished">Copia inscriptionem iam selectam in latibulum WUNOtematis</translation>
+        <source>Copy the currently selected address to the system clipboard</source>
+        <translation type="unfinished">Copia inscriptionem iam selectam in latibulum systematis</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -569,11 +569,11 @@
     </message>
     <message>
         <source>Show only a tray icon after minimizing the window.</source>
-        <translation type="unfinished">Monstra tantum iconem in tabella WUNOtematis postquam fenestram minifactam est.</translation>
+        <translation type="unfinished">Monstra tantum iconem in tabella systematis postquam fenestram minifactam est.</translation>
     </message>
     <message>
         <source>&amp;Minimize to the tray instead of the taskbar</source>
-        <translation type="unfinished">&amp;Minifac in tabellam WUNOtematis potius quam applicationum</translation>
+        <translation type="unfinished">&amp;Minifac in tabellam systematis potius quam applicationum</translation>
     </message>
     <message>
         <source>M&amp;inimize on close</source>
@@ -923,8 +923,8 @@
         <translation type="unfinished">Signatio</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
-        <translation type="unfinished">Copia signationem in latibulum WUNOtematis</translation>
+        <source>Copy the current signature to the system clipboard</source>
+        <translation type="unfinished">Copia signationem in latibulum systematis</translation>
     </message>
     <message>
         <source>Sign the message to prove you own this wentuno address</source>
@@ -1321,7 +1321,7 @@
     </message>
     <message>
         <source>Error initializing wallet database environment %s!</source>
-        <translation type="unfinished">Error initiando WUNOtematem databasi cassidilis %s!</translation>
+        <translation type="unfinished">Error initiando systematem databasi cassidilis %s!</translation>
     </message>
     <message>
         <source>Error loading block database</source>

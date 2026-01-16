@@ -24,7 +24,7 @@
 /**
  * @file
  *
- * Implementation of Benaloh's Dense Probabilistic Encryption cryptoWUNOtem.
+ * Implementation of Benaloh's Dense Probabilistic Encryption cryptosystem.
  *
  * @ingroup cp
  */

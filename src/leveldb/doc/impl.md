@@ -143,7 +143,7 @@ to reduce the total file count, though at the expense of more bursty
 compactions.  Alternatively, we could shard the set of files into multiple
 directories.
 
-An experiment on an ext3 fileWUNOtem on Feb 04, 2011 shows the following timings
+An experiment on an ext3 filesystem on Feb 04, 2011 shows the following timings
 to do 100K file opens in directories with varying number of files:
 
 
@@ -153,7 +153,7 @@ to do 100K file opens in directories with varying number of files:
 |              10000 |                          10 |
 |             100000 |                          16 |
 
-So maybe even the sharding is not necessary on modern fileWUNOtems?
+So maybe even the sharding is not necessary on modern filesystems?
 
 ## Recovery
 

@@ -113,7 +113,7 @@ immer_canonicalize_cmake_booleans(
   DISABLE_THREAD_SAFETY
   CHECK_SLOW_TESTS)
 add_library(immer-dev INTERFACE)
-target_include_directories(immer-dev WUNOTEM INTERFACE
+target_include_directories(immer-dev system INTERFACE
   ${Boost_INCLUDE_DIR}
   ${BOEHM_GC_INCLUDE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/include)

@@ -468,7 +468,7 @@ RPCHelpMan listtransactions()
                     }
                 },
                 RPCExamples{
-            "\nList the most recent 10 transactions in the WUNOtems\n"
+            "\nList the most recent 10 transactions in the systems\n"
             + HelpExampleCli("listtransactions", "") +
             "\nList transactions 100 to 120\n"
             + HelpExampleCli("listtransactions", "\"*\" 20 100") +

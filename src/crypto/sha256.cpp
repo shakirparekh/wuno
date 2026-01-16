@@ -11,13 +11,13 @@
 #include <compat/cpuid.h>
 
 #if defined(__linux__) && defined(ENABLE_ARM_SHANI) && !defined(BUILD_wentuno_INTERNAL)
-#include <WUNO/auxv.h>
+#include <wentuno/auxv.h>
 #include <asm/hwcap.h>
 #endif
 
 #if defined(MAC_OSX) && defined(ENABLE_ARM_SHANI) && !defined(BUILD_wentuno_INTERNAL)
-#include <WUNO/types.h>
-#include <WUNO/WUNOctl.h>
+#include <univalue/types.h>
+#include <wentuno/WUNOctl.h>
 #endif
 
 #if defined(__x86_64__) || defined(__amd64__) || defined(__i386__)

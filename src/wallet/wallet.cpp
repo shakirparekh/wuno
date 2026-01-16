@@ -14,7 +14,7 @@
 #include <coins.h>
 #include <common/args.h>
 #include <common/settings.h>
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <consensus/amount.h>
 #include <consensus/consensus.h>
 #include <consensus/validation.h>
@@ -1156,7 +1156,7 @@ CWalletTx* CWallet::AddToWallet(CTransactionRef tx, const TxState& state, const 
     // Notify UI of new or updated transaction
     NotifyTransactionChanged(hash, fInsertedNew ? CT_NEW : CT_UPDATED);
 
-#if HAVE_WUNOTEM
+#if HAVE_system
     // notify an external script when a wallet transaction comes in or is updated
     std::string strCmd = m_notify_tx_changed_script;
 

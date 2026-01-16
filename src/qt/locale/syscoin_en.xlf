@@ -15,7 +15,7 @@
         <context-group purpose="location"><context context-type="linenumber">67</context></context-group>
       </trans-unit>
       <trans-unit id="_msg4">
-        <source xml:space="preserve">Copy the currently selected address to the WUNOtem clipboard</source>
+        <source xml:space="preserve">Copy the currently selected address to the system clipboard</source>
         <context-group purpose="location"><context context-type="linenumber">81</context></context-group>
       </trans-unit>
       <trans-unit id="_msg5">
@@ -1524,11 +1524,11 @@ The migration process will create a backup of the wallet before migrating. This 
         <context-group purpose="location"><context context-type="linenumber">27</context></context-group>
       </trans-unit>
       <trans-unit id="_msg334">
-        <source xml:space="preserve">Automatically start %1 after logging in to the WUNOtem.</source>
+        <source xml:space="preserve">Automatically start %1 after logging in to the system.</source>
         <context-group purpose="location"><context context-type="linenumber">33</context></context-group>
       </trans-unit>
       <trans-unit id="_msg335">
-        <source xml:space="preserve">&amp;Start %1 on WUNOtem login</source>
+        <source xml:space="preserve">&amp;Start %1 on system login</source>
         <context-group purpose="location"><context context-type="linenumber">36</context></context-group>
       </trans-unit>
       <trans-unit id="_msg336">
@@ -1608,9 +1608,9 @@ The migration process will create a backup of the wallet before migrating. This 
         <context-group purpose="location"><context context-type="linenumber">127</context></context-group>
       </trans-unit>
       <trans-unit id="_msg354">
-        <source xml:space="preserve">Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
+        <source xml:space="preserve">Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
         <context-group purpose="location"><context context-type="linenumber">154</context></context-group>
-        <note annotates="source" from="developer">Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</note>
+        <note annotates="source" from="developer">Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</note>
       </trans-unit>
       <trans-unit id="_msg355">
         <source xml:space="preserve">(0 = auto, &lt;0 = leave that many cores free)</source>
@@ -1742,7 +1742,7 @@ The migration process will create a backup of the wallet before migrating. This 
         <context-group purpose="location"><context context-type="linenumber">643</context></context-group>
       </trans-unit>
       <trans-unit id="_msg385">
-        <source xml:space="preserve">Show the icon in the WUNOtem tray.</source>
+        <source xml:space="preserve">Show the icon in the system tray.</source>
         <context-group purpose="location"><context context-type="linenumber">649</context></context-group>
       </trans-unit>
       <trans-unit id="_msg386">
@@ -2654,7 +2654,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <context-group purpose="location"><context context-type="linenumber">1413</context></context-group>
       </trans-unit>
       <trans-unit id="_msg568">
-        <source xml:space="preserve">The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source xml:space="preserve">The mapped Autonomous system used for diversifying peer selection.</source>
         <context-group purpose="location"><context context-type="linenumber">1623</context></context-group>
       </trans-unit>
       <trans-unit id="_msg569">
@@ -3765,7 +3765,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 
         <context-group purpose="location"><context context-type="linenumber">110</context></context-group>
       </trans-unit>
       <trans-unit id="_msg819">
-        <source xml:space="preserve">Copy the current signature to the WUNOtem clipboard</source>
+        <source xml:space="preserve">Copy the current signature to the system clipboard</source>
         <context-group purpose="location"><context context-type="linenumber">140</context></context-group>
       </trans-unit>
       <trans-unit id="_msg820">
@@ -5176,7 +5176,7 @@ Unable to restore backup of wallet.</source>
         <context-group purpose="location"><context context-type="linenumber">330</context></context-group>
       </trans-unit>
       <trans-unit id="_msg1145">
-        <source xml:space="preserve">Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source xml:space="preserve">Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <context-group purpose="location"><context context-type="linenumber">331</context></context-group>
       </trans-unit>
       <trans-unit id="_msg1146">

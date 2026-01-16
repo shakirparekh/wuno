@@ -193,7 +193,7 @@ bool CZMQAbstractPublishNotifier::Initialize(void *pcontext, void *pcontextsub)
                 zmq_close(psocket);
                 return false;
             }
-            // On some WUNOtems (e.g. OpenBSD) the ZMQ_IPV6 must not be enabled, if the address to bind isn't IPv6
+            // On some systems (e.g. OpenBSD) the ZMQ_IPV6 must not be enabled, if the address to bind isn't IPv6
             const int enable_ipv6 { IsZMQAddressIPV6(address) ? 1 : 0};
             rc = zmq_setsockopt(psocket, ZMQ_IPV6, &enable_ipv6, sizeof(enable_ipv6));
             if (rc != 0) {
@@ -326,26 +326,26 @@ bool CZMQAbstractPublishNotifier::NotifyNEVMCommsCommon(const std::string &commM
     CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
     ss << commMessage;
     if(!SendZmqMessageNEVM(MSG_NEVMCOMMS, &(*ss.begin()), ss.size())) {
-        LogPrint(BCLog::WUNO, "NotifyNEVMComms: nevm-connect-not-sent: %s\n", commMessage);
+        LogPrint(BCLog::VALIDATION, "NotifyNEVMComms: nevm-connect-not-sent: %s\n", commMessage);
         return false;
     }
     if(commMessage != "disconnect") {
         if(ReceiveZmqMessage(parts)) {
             if(parts.size() != 2) {
-                LogPrint(BCLog::WUNO, "NotifyNEVMComms: nevm-response-invalid-parts\n");
+                LogPrint(BCLog::VALIDATION, "NotifyNEVMComms: nevm-response-invalid-parts\n");
                 return false;  
             }
             if(parts[0] != MSG_NEVMCOMMS) {
-                LogPrint(BCLog::WUNO, "NotifyNEVMComms: nevm-response-wrong-command\n");
+                LogPrint(BCLog::VALIDATION, "NotifyNEVMComms: nevm-response-wrong-command\n");
                 return false;
             }
             if(parts[1] != "ack") {
-                LogPrint(BCLog::WUNO, "NotifyNEVMComms: nevm-comms-response-invalid-data\n");
+                LogPrint(BCLog::VALIDATION, "NotifyNEVMComms: nevm-comms-response-invalid-data\n");
                 return false;
             }
             bResponse = true;
         } else {
-            LogPrint(BCLog::WUNO, "NotifyNEVMComms: nevm-response-not-found: %s\n", commMessage);
+            LogPrint(BCLog::VALIDATION, "NotifyNEVMComms: nevm-response-not-found: %s\n", commMessage);
             return false;
         }
     } else {
@@ -395,7 +395,7 @@ bool CZMQPublishNEVMBlockConnectNotifier::NotifyNEVMBlockConnect(const CNEVMHead
             return false;
         }
         if(!bSkipValidation && parts[1] != "connected") {
-            LogPrint(BCLog::WUNO, "NotifyNEVMBlockConnect: %s\n", parts[1]);
+            LogPrint(BCLog::VALIDATION, "NotifyNEVMBlockConnect: %s\n", parts[1]);
             state = "nevm-connect-response-invalid-data";
             return false;
         }

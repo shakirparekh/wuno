@@ -9,7 +9,7 @@
 #include <mapport.h>
 
 #include <clientversion.h>
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <logging.h>
 #include <net.h>
 #include <netaddress.h>
@@ -164,7 +164,9 @@ static bool ProcessUpnp()
     struct IGDdatas data;
     int r;
 
-    r = UPNP_GetValidIGD(devlist, &urls, &data, lanaddr, sizeof(lanaddr));
+    char extip[16] = {0};
+    char intip[16] = {0};
+    r = UPNP_GetValidIGD(devlist, &urls, &data, lanaddr, sizeof(lanaddr), extip, sizeof(extip));
     if (r == 1)
     {
         if (fDiscover) {

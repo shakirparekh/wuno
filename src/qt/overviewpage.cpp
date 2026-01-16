@@ -124,7 +124,7 @@ public:
         return {DECORATION_SIZE + 8 + minimum_text_width, DECORATION_SIZE};
     }
 
-    wentunoUnit unit{wentunoUnit::WUNO};
+    wentunoUnit unit{wentunoUnit::wentuno};
 
 Q_SIGNALS:
     //! An intermediate signal for emitting from the `paint() const` member function.
@@ -288,7 +288,7 @@ void OverviewPage::setWalletModel(WalletModel *model)
         });
     }
 
-    // update the display unit, to not use the default ("WUNO")
+    // update the display unit, to not use the default ("wentuno")
     updateDisplayUnit();
 }
 

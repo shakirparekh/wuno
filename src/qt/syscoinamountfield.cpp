@@ -125,7 +125,7 @@ public:
 
             const QFontMetrics fm(fontMetrics());
             int h = lineEdit()->minimumSizeHint().height();
-            int w = GUIUtil::TextWidth(fm, wentunoUnits::format(wentunoUnit::WUNO, wentunoUnits::maxMoney(), false, wentunoUnits::SeparatorStyle::ALWAYS));
+            int w = GUIUtil::TextWidth(fm, wentunoUnits::format(wentunoUnit::wentuno, wentunoUnits::maxMoney(), false, wentunoUnits::SeparatorStyle::ALWAYS));
             w += 2; // cursor blinking space
 
             QStyleOptionSpinBox opt;
@@ -150,7 +150,7 @@ public:
     }
 
 private:
-    wentunoUnit currentUnit{wentunoUnit::WUNO};
+    wentunoUnit currentUnit{wentunoUnit::wentuno};
     CAmount singleStep{CAmount(100000)}; // satoshis
     mutable QSize cachedMinimumSizeHint;
     bool m_allow_empty{true};

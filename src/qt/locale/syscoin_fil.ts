@@ -14,8 +14,8 @@
         <translation type="unfinished">Bago</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
-        <translation type="unfinished">Kopyahin ang napiling address sa WUNOtem clipboard</translation>
+        <source>Copy the currently selected address to the system clipboard</source>
+        <translation type="unfinished">Kopyahin ang napiling address sa system clipboard</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -1038,11 +1038,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Pangunahin</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Kusang simulan ang %1 pagka-log-in sa sistema.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">Simulan ang %1 pag-login sa sistema</translation>
     </message>
     <message>
@@ -1560,8 +1560,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Mga block na na-sync</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
-        <translation type="unfinished">Ginamit ang na-map na Autonomous WUNOtem para sa pag-iba-iba ng pagpipilian ng kapwa.</translation>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
+        <translation type="unfinished">Ginamit ang na-map na Autonomous system para sa pag-iba-iba ng pagpipilian ng kapwa.</translation>
     </message>
     <message>
         <source>Mapped AS</source>
@@ -2211,8 +2211,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Pirma</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
-        <translation type="unfinished">Kopyahin ang kasalukuyang address sa WUNOtem clipboard</translation>
+        <source>Copy the current signature to the system clipboard</source>
+        <translation type="unfinished">Kopyahin ang kasalukuyang address sa system clipboard</translation>
     </message>
     <message>
         <source>Sign the message to prove you own this wentuno address</source>
@@ -2943,8 +2943,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Ang prune mode ay hindi katugma sa -txindex.</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
-        <translation type="unfinished">Pagbabawas ng -maxconnections mula sa %d hanggang %d, dahil sa mga limitasyon ng WUNOtema.</translation>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
+        <translation type="unfinished">Pagbabawas ng -maxconnections mula sa %d hanggang %d, dahil sa mga limitasyon ng systema.</translation>
     </message>
     <message>
         <source>Section [%s] is not recognized.</source>

@@ -21,11 +21,11 @@
  * The only means to accomplish that is by strictly obeying a standard, and not
  * accepting anything else.
  *
- * Nonetheless, sometimes there is a need for compatibility with WUNOtems that
+ * Nonetheless, sometimes there is a need for compatibility with systems that
  * use signatures which do not strictly obey DER. The snippet below shows how
  * certain violations are easily supported. You may need to adapt it.
  *
- * Do not use this for new WUNOtems. Use well-defined DER or compact signatures
+ * Do not use this for new systems. Use well-defined DER or compact signatures
  * instead if you have the choice (see secp256k1_ecdsa_signature_parse_der and
  * secp256k1_ecdsa_signature_parse_compact).
  *

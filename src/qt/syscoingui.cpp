@@ -32,7 +32,7 @@
 
 #include <chain.h>
 #include <chainparams.h>
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <interfaces/handler.h>
 #include <interfaces/node.h>
 #include <node/interface_ui.h>
@@ -62,7 +62,7 @@
 #include <QStackedWidget>
 #include <QStatusBar>
 #include <QStyle>
-#include <QWUNOtemTrayIcon>
+#include <QsystemTrayIcon>
 #include <QTimer>
 #include <QToolBar>
 #include <QUrlQuery>
@@ -145,8 +145,8 @@ wentunoGUI::wentunoGUI(interfaces::Node& node, const PlatformStyle *_platformSty
     // Create the toolbars
     createToolBars();
 
-    // Create WUNOtem tray icon and notification
-    if (QWUNOtemTrayIcon::isWUNOtemTrayAvailable()) {
+    // Create system tray icon and notification
+    if (QsystemTrayIcon::issystemTrayAvailable()) {
         createTrayIcon();
     }
     notificator = new Notificator(QApplication::applicationName(), trayIcon, this);
@@ -636,7 +636,7 @@ void wentunoGUI::setClientModel(ClientModel *_clientModel, interfaces::BlockAndH
     this->clientModel = _clientModel;
     if(_clientModel)
     {
-        // Create WUNOtem tray menu (or setup the dock menu) that late to prevent users from calling actions,
+        // Create system tray menu (or setup the dock menu) that late to prevent users from calling actions,
         // while the client has not yet fully loaded
         createTrayIconMenu();
 
@@ -676,7 +676,7 @@ void wentunoGUI::setClientModel(ClientModel *_clientModel, interfaces::BlockAndH
         OptionsModel* optionsModel = _clientModel->getOptionsModel();
         if (optionsModel && trayIcon) {
             // be aware of the tray icon disable state change reported by the OptionsModel object.
-            connect(optionsModel, &OptionsModel::showTrayIconChanged, trayIcon, &QWUNOtemTrayIcon::setVisible);
+            connect(optionsModel, &OptionsModel::showTrayIconChanged, trayIcon, &QsystemTrayIcon::setVisible);
 
             // initialize the disable state of the tray icon with the current value in the model.
             trayIcon->setVisible(optionsModel->getShowTrayIcon());
@@ -841,11 +841,11 @@ void wentunoGUI::setWalletActionsEnabled(bool enabled)
 
 void wentunoGUI::createTrayIcon()
 {
-    assert(QWUNOtemTrayIcon::isWUNOtemTrayAvailable());
+    assert(QsystemTrayIcon::issystemTrayAvailable());
 
 #ifndef Q_OS_MACOS
-    if (QWUNOtemTrayIcon::isWUNOtemTrayAvailable()) {
-        trayIcon = new QWUNOtemTrayIcon(m_network_style->getTrayAndWindowIcon(), this);
+    if (QsystemTrayIcon::issystemTrayAvailable()) {
+        trayIcon = new QsystemTrayIcon(m_network_style->getTrayAndWindowIcon(), this);
         QString toolTip = tr("%1 client").arg(PACKAGE_NAME) + " " + m_network_style->getTitleAddText();
         trayIcon->setToolTip(toolTip);
     }
@@ -888,9 +888,9 @@ void wentunoGUI::createTrayIconMenu()
     quit_action = trayIconMenu->addAction(quitAction->text(), quitAction, &QAction::trigger);
 
     trayIcon->setContextMenu(trayIconMenu.get());
-    connect(trayIcon, &QWUNOtemTrayIcon::activated, [this](QWUNOtemTrayIcon::ActivationReason reason) {
-        if (reason == QWUNOtemTrayIcon::Trigger) {
-            // Click on WUNOtem tray icon triggers show/hide of the main window
+    connect(trayIcon, &QsystemTrayIcon::activated, [this](QsystemTrayIcon::ActivationReason reason) {
+        if (reason == QsystemTrayIcon::Trigger) {
+            // Click on system tray icon triggers show/hide of the main window
             toggleHidden();
         }
     });
@@ -906,7 +906,7 @@ void wentunoGUI::createTrayIconMenu()
 #endif // Q_OS_MACOS
 
     connect(
-        // Using QWUNOtemTrayIcon::Context is not reliable.
+        // Using QsystemTrayIcon::Context is not reliable.
         // See https://bugreports.qt.io/browse/QTBUG-91697
         trayIconMenu.get(), &QMenu::aboutToShow,
         [this, show_hide_action, send_action, receive_action, sign_action, verify_action, options_action, node_window_action, quit_action] {

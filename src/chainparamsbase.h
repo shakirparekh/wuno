@@ -14,7 +14,7 @@ class ArgsManager;
 
 /**
  * CBaseChainParams defines the base parameters (shared between wentuno-cli and wentunod)
- * of a given instance of the wentuno WUNOtem.
+ * of a given instance of the wentuno system.
  */
 class CBaseChainParams
 {

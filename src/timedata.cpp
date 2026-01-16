@@ -23,9 +23,9 @@ static int64_t nTimeOffset GUARDED_BY(g_timeoffset_mutex) = 0;
 /**
  * "Never go to sea with two chronometers; take one or three."
  * Our three time sources are:
- *  - WUNOtem clock
+ *  - system clock
  *  - Median of other nodes clocks
- *  - The user (asking the user to fix the WUNOtem clock if the first two disagree)
+ *  - The user (asking the user to fix the system clock if the first two disagree)
  */
 int64_t GetTimeOffset()
 {

@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Mới</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Sao chép địa chỉ được chọn vào bộ nhớ tạm</translation>
     </message>
     <message>
@@ -832,11 +832,11 @@
 <context>
     <name>OptionsDialog</name>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Tự động bắt đầu %1 sau khi đăng nhập vào hệ thống.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">&amp;Bắt đầu %1 trên đăng nhập hệ thống</translation>
     </message>
     <message>
@@ -877,8 +877,8 @@
         <translation type="unfinished">Kích thước bộ đệm cơ sở dữ liệu tối đa. Bộ nhớ đệm lớn hơn có thể góp phần đồng bộ hóa nhanh hơn, sau đó lợi ích ít rõ rệt hơn đối với hầu hết các trường hợp sử dụng. Giảm kích thước bộ nhớ cache sẽ làm giảm mức sử dụng bộ nhớ. Bộ nhớ mempool không sử dụng được chia sẻ cho bộ nhớ cache này.</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished">Đặt số lượng chuỗi xác minh tập lệnh. Giá trị âm tương ứng với số lõi bạn muốn để lại miễn phí cho hệ thống.</translation>
     </message>
     <message>

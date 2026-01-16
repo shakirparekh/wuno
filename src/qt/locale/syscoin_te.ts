@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;క్రొత్త</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">ప్రస్తుతం ఎంచుకున్న చిరునామాను సిస్టం క్లిప్ బోర్డుకు కాపీ చేయండి</translation>
     </message>
     <message>
@@ -1411,11 +1411,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;ప్రధాన</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">సిస్టమ్‌కు లాగిన్ అయిన తర్వాత స్వయంచాలకంగా "%1" ని ప్రారంభించండి.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">సిస్టమ్ లాగిన్‌లో "%1" ని &amp;ప్రారంభించండి</translation>
     </message>
     <message>
@@ -1561,7 +1561,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;విండో</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished">సిస్టమ్ ట్రేలో చిహ్నాన్ని చూపించు.</translation>
     </message>
     <message>

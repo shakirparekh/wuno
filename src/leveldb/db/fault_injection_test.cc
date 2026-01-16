@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file. See the AUTHORS file for names of contributors.
 
-// This test uses a custom Env to keep track of the state of a fileWUNOtem as of
+// This test uses a custom Env to keep track of the state of a filesystem as of
 // the last "sync". It then checks for data loss errors by purposely dropping
 // file data (or entire files) not protected by a "sync".
 
@@ -128,7 +128,7 @@ class TestWritableFile : public WritableFile {
 class FaultInjectionTestEnv : public EnvWrapper {
  public:
   FaultInjectionTestEnv()
-      : EnvWrapper(Env::Default()), fileWUNOtem_active_(true) {}
+      : EnvWrapper(Env::Default()), filesystem_active_(true) {}
   ~FaultInjectionTestEnv() override = default;
   Status NewWritableFile(const std::string& fname,
                          WritableFile** result) override;
@@ -144,24 +144,24 @@ class FaultInjectionTestEnv : public EnvWrapper {
   bool IsFileCreatedSinceLastDirSync(const std::string& filename);
   void ResetState();
   void UntrackFile(const std::string& f);
-  // Setting the fileWUNOtem to inactive is the test equivalent to simulating a
-  // WUNOtem reset. Setting to inactive will freeze our saved fileWUNOtem state so
+  // Setting the filesystem to inactive is the test equivalent to simulating a
+  // system reset. Setting to inactive will freeze our saved filesystem state so
   // that it will stop being recorded. It can then be reset back to the state at
   // the time of the reset.
-  bool IsFileWUNOtemActive() LOCKS_EXCLUDED(mutex_) {
+  bool IsFilesystemActive() LOCKS_EXCLUDED(mutex_) {
     MutexLock l(&mutex_);
-    return fileWUNOtem_active_;
+    return filesystem_active_;
   }
-  void SetFileWUNOtemActive(bool active) LOCKS_EXCLUDED(mutex_) {
+  void SetFilesystemActive(bool active) LOCKS_EXCLUDED(mutex_) {
     MutexLock l(&mutex_);
-    fileWUNOtem_active_ = active;
+    filesystem_active_ = active;
   }
 
  private:
   port::Mutex mutex_;
   std::map<std::string, FileState> db_file_state_ GUARDED_BY(mutex_);
   std::set<std::string> new_files_since_last_dir_sync_ GUARDED_BY(mutex_);
-  bool fileWUNOtem_active_ GUARDED_BY(mutex_);  // Record flushes, syncs, writes
+  bool filesystem_active_ GUARDED_BY(mutex_);  // Record flushes, syncs, writes
 };
 
 TestWritableFile::TestWritableFile(const FileState& state, WritableFile* f,
@@ -179,7 +179,7 @@ TestWritableFile::~TestWritableFile() {
 
 Status TestWritableFile::Append(const Slice& data) {
   Status s = target_->Append(data);
-  if (s.ok() && env_->IsFileWUNOtemActive()) {
+  if (s.ok() && env_->IsFilesystemActive()) {
     state_.pos_ += data.size();
   }
   return s;
@@ -196,7 +196,7 @@ Status TestWritableFile::Close() {
 
 Status TestWritableFile::Flush() {
   Status s = target_->Flush();
-  if (s.ok() && env_->IsFileWUNOtemActive()) {
+  if (s.ok() && env_->IsFilesystemActive()) {
     state_.pos_at_last_flush_ = state_.pos_;
   }
   return s;
@@ -211,10 +211,10 @@ Status TestWritableFile::SyncParent() {
 }
 
 Status TestWritableFile::Sync() {
-  if (!env_->IsFileWUNOtemActive()) {
+  if (!env_->IsFilesystemActive()) {
     return Status::OK();
   }
-  // Ensure new files referred to by the manifest are in the fileWUNOtem.
+  // Ensure new files referred to by the manifest are in the filesystem.
   Status s = target_->Sync();
   if (s.ok()) {
     state_.pos_at_last_sync_ = state_.pos_;
@@ -333,7 +333,7 @@ void FaultInjectionTestEnv::ResetState() {
   // Since we are not destroying the database, the existing files
   // should keep their recorded synced/flushed state. Therefore
   // we do not reset db_file_state_ and new_files_since_last_dir_sync_.
-  SetFileWUNOtemActive(true);
+  SetFilesystemActive(true);
 }
 
 Status FaultInjectionTestEnv::DeleteFilesCreatedAfterLastDirSync() {
@@ -494,7 +494,7 @@ class FaultInjectionTest {
 
   void PartialCompactTestReopenWithFault(ResetMethod reset_method,
                                          int num_pre_sync, int num_post_sync) {
-    env_->SetFileWUNOtemActive(false);
+    env_->SetFilesystemActive(false);
     CloseDB();
     ResetDBState(reset_method);
     ASSERT_OK(OpenDB());

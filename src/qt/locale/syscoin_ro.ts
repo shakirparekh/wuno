@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Nou</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Copiază adresa selectată curent în clipboard</translation>
     </message>
     <message>
@@ -1262,11 +1262,11 @@ Semnarea este posibilă numai cu adrese de tip "legacy".</translation>
         <translation type="unfinished">Principal</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Porneşte automat %1 după logarea in sistem.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">&amp;Porneste %1 la logarea in sistem.</translation>
     </message>
     <message>
@@ -2384,7 +2384,7 @@ Semnarea este posibilă numai cu adrese de tip "legacy".</translation>
         <translation type="unfinished">Semnătură</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Copiază semnatura curentă în clipboard-ul sistemului</translation>
     </message>
     <message>
@@ -3131,7 +3131,7 @@ Semnarea este posibilă numai cu adrese de tip "legacy".</translation>
         <translation type="unfinished">Modul redus este incompatibil cu -txindex.</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">Se micsoreaza -maxconnections de la %d la %d, datorita limitarilor de sistem.</translation>
     </message>
     <message>

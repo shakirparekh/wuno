@@ -7,7 +7,7 @@
 #
 # Once done this will define
 #
-#  GMP_FOUND - WUNOtem has GMP lib with correct version
+#  GMP_FOUND - system has GMP lib with correct version
 #  GMP_INCLUDES - the GMP include directory
 #  GMP_LIBRARIES - the GMP library
 #  GMP_VERSION - GMP version

@@ -156,7 +156,7 @@ typedef sokaka_st *sokaka_t;
 #endif
 
 /**
- * Represents a Boneh-Goh-Nissim cryptoWUNOtem key pair.
+ * Represents a Boneh-Goh-Nissim cryptosystem key pair.
  */
 typedef struct {
 	/** The first exponent. */
@@ -180,7 +180,7 @@ typedef struct {
 } bgn_st;
 
 /**
- * Pointer to a Boneh-Goh-Nissim cryptoWUNOtem key pair.
+ * Pointer to a Boneh-Goh-Nissim cryptosystem key pair.
  */
 #if ALLOC == AUTO
 typedef bgn_st bgn_t[1];
@@ -206,7 +206,7 @@ typedef struct _ers_st {
  * Pointer to an extendable ring signature.
  */
 /**
- * Pointer to a Boneh-Goh-Nissim cryptoWUNOtem key pair.
+ * Pointer to a Boneh-Goh-Nissim cryptosystem key pair.
  */
 #if ALLOC == AUTO
 typedef ers_st ers_t[1];
@@ -234,7 +234,7 @@ typedef struct _etrs_st {
  * Pointer to an extendable ring signature.
  */
 /**
- * Pointer to a Boneh-Goh-Nissim cryptoWUNOtem key pair.
+ * Pointer to a Boneh-Goh-Nissim cryptosystem key pair.
  */
 #if ALLOC == AUTO
 typedef etrs_st etrs_t[1];
@@ -665,7 +665,7 @@ typedef etrs_st *etrs_t;
 /*============================================================================*/
 
 /**
- * Generates a key pair for the RSA cryptoWUNOtem. Generates additional values
+ * Generates a key pair for the RSA cryptosystem. Generates additional values
  * for the CRT optimization if CP_CRT is on.
  *
  * @param[out] pub			- the public key.
@@ -676,7 +676,7 @@ typedef etrs_st *etrs_t;
 int cp_rsa_gen(rsa_t pub, rsa_t prv, int bits);
 
 /**
- * Encrypts using the RSA cryptoWUNOtem.
+ * Encrypts using the RSA cryptosystem.
  *
  * @param[out] out			- the output buffer.
  * @param[in, out] out_len	- the buffer capacity and number of bytes written.
@@ -688,7 +688,7 @@ int cp_rsa_gen(rsa_t pub, rsa_t prv, int bits);
 int cp_rsa_enc(uint8_t *out, int *out_len, uint8_t *in, int in_len, rsa_t pub);
 
 /**
- * Decrypts using the RSA cryptoWUNOtem. Uses the CRT optimization if
+ * Decrypts using the RSA cryptosystem. Uses the CRT optimization if
  * CP_CRT is on.
  *
  * @param[out] out			- the output buffer.
@@ -732,7 +732,7 @@ int cp_rsa_ver(uint8_t *sig, int sig_len, uint8_t *msg, int msg_len, int hash,
 		rsa_t pub);
 
 /**
- * Generates a key pair for the Rabin cryptoWUNOtem.
+ * Generates a key pair for the Rabin cryptosystem.
  *
  * @param[out] pub			- the public key.
  * @param[out] prv			- the private key,
@@ -742,7 +742,7 @@ int cp_rsa_ver(uint8_t *sig, int sig_len, uint8_t *msg, int msg_len, int hash,
 int cp_rabin_gen(rabin_t pub, rabin_t prv, int bits);
 
 /**
- * Encrypts using the Rabin cryptoWUNOtem.
+ * Encrypts using the Rabin cryptosystem.
  *
  * @param[out] out			- the output buffer.
  * @param[in, out] out_len	- the buffer capacity and number of bytes written.
@@ -755,7 +755,7 @@ int cp_rabin_enc(uint8_t *out, int *out_len, uint8_t *in, int in_len,
 		rabin_t pub);
 
 /**
- * Decrypts using the Rabin cryptoWUNOtem.
+ * Decrypts using the Rabin cryptosystem.
  *
  * @param[out] out			- the output buffer.
  * @param[in, out] out_len	- the buffer capacity and number of bytes written.
@@ -779,7 +779,7 @@ int cp_rabin_dec(uint8_t *out, int *out_len, uint8_t *in, int in_len,
 int cp_bdpe_gen(bdpe_t pub, bdpe_t prv, dig_t block, int bits);
 
 /**
- * Encrypts using Benaloh's cryptoWUNOtem.
+ * Encrypts using Benaloh's cryptosystem.
  *
  * @param[out] out			- the output buffer.
  * @param[in, out] out_len	- the buffer capacity and number of bytes written.
@@ -790,7 +790,7 @@ int cp_bdpe_gen(bdpe_t pub, bdpe_t prv, dig_t block, int bits);
 int cp_bdpe_enc(uint8_t *out, int *out_len, dig_t in, bdpe_t pub);
 
 /**
- * Decrypts using Benaloh's cryptoWUNOtem.
+ * Decrypts using Benaloh's cryptosystem.
  *
  * @param[out] out			- the decrypted small integer.
  * @param[in] in			- the input buffer.
@@ -811,7 +811,7 @@ int cp_bdpe_dec(dig_t *out, uint8_t *in, int in_len, bdpe_t prv);
 int cp_phpe_gen(bn_t pub, phpe_t prv, int bits);
 
 /**
- * Encrypts using the Paillier cryptoWUNOtem.
+ * Encrypts using the Paillier cryptosystem.
  *
  * @param[out] c			- the ciphertex, represented as an integer.
  * @param[in] m				- the plaintext as an integer.
@@ -821,7 +821,7 @@ int cp_phpe_gen(bn_t pub, phpe_t prv, int bits);
 int cp_phpe_enc(bn_t c, bn_t m, bn_t pub);
 
 /**
- * Decrypts using the Paillier cryptoWUNOtem.
+ * Decrypts using the Paillier cryptosystem.
  *
  * @param[out] m			- the plaintext, represented as an integer.
  * @param[in] c				- the ciphertex as an integer.
@@ -841,7 +841,7 @@ int cp_phpe_dec(bn_t m, bn_t c, phpe_t prv);
 int cp_ghpe_gen(bn_t pub, bn_t prv, int bits);
 
 /**
- * Encrypts using the Generalized Paillier cryptoWUNOtem.
+ * Encrypts using the Generalized Paillier cryptosystem.
  *
  * @param[out] c			- the ciphertext.
  * @param[in] m				- the plaintext.
@@ -852,7 +852,7 @@ int cp_ghpe_gen(bn_t pub, bn_t prv, int bits);
 int cp_ghpe_enc(bn_t c, bn_t m, bn_t pub, int s);
 
 /**
- * Decrypts using the Generalized Paillier cryptoWUNOtem.
+ * Decrypts using the Generalized Paillier cryptosystem.
  *
  * @param[out] m			- the plaintext.
  * @param[in] c				- the ciphertext.
@@ -918,7 +918,7 @@ int cp_ecmqv_key(uint8_t *key, int key_len, bn_t d1, bn_t d2, ec_t q2u,
 int cp_ecies_gen(bn_t d, ec_t q);
 
 /**
- * Encrypts using the ECIES cryptoWUNOtem.
+ * Encrypts using the ECIES cryptosystem.
  *
  * @param[out] r 			- the resulting elliptic curve point.
  * @param[out] out			- the output buffer.
@@ -933,7 +933,7 @@ int cp_ecies_enc(ec_t r, uint8_t *out, int *out_len, uint8_t *in, int in_len,
 		ec_t q);
 
 /**
- * Decrypts using the ECIES cryptoWUNOtem.
+ * Decrypts using the ECIES cryptosystem.
  *
  * @param[out] out			- the output buffer.
  * @param[in, out] out_len	- the buffer capacity and number of bytes written.
@@ -1270,7 +1270,7 @@ int cp_sokaka_key(uint8_t *key, unsigned int key_len, char *id1,
 		sokaka_t k, char *id2);
 
 /**
- * Generates a key pair for the Boneh-Go-Nissim (BGN) cryptoWUNOtem.
+ * Generates a key pair for the Boneh-Go-Nissim (BGN) cryptosystem.
  *
  * @param[out] pub 			- the public key.
  * @param[out] prv 			- the private key.
@@ -1279,7 +1279,7 @@ int cp_sokaka_key(uint8_t *key, unsigned int key_len, char *id1,
 int cp_bgn_gen(bgn_t pub, bgn_t prv);
 
 /**
- * Encrypts in G_1 using the BGN cryptoWUNOtem.
+ * Encrypts in G_1 using the BGN cryptosystem.
  *
  * @param[out] out 			- the ciphertext.
  * @param[in] in 			- the plaintext as a small integer.
@@ -1289,7 +1289,7 @@ int cp_bgn_gen(bgn_t pub, bgn_t prv);
 int cp_bgn_enc1(g1_t out[2], dig_t in, bgn_t pub);
 
 /**
- * Decrypts in G_1 using the BGN cryptoWUNOtem.
+ * Decrypts in G_1 using the BGN cryptosystem.
  *
  * @param[out] out 			- the decrypted small integer.
  * @param[in] in 			- the ciphertext.
@@ -1299,7 +1299,7 @@ int cp_bgn_enc1(g1_t out[2], dig_t in, bgn_t pub);
 int cp_bgn_dec1(dig_t *out, g1_t in[2], bgn_t prv);
 
 /**
- * Encrypts in G_2 using the BGN cryptoWUNOtem.
+ * Encrypts in G_2 using the BGN cryptosystem.
  *
  * @param[out] c 			- the ciphertext.
  * @param[in] m 			- the plaintext as a small integer.
@@ -1309,7 +1309,7 @@ int cp_bgn_dec1(dig_t *out, g1_t in[2], bgn_t prv);
 int cp_bgn_enc2(g2_t out[2], dig_t in, bgn_t pub);
 
 /**
- * Decrypts in G_2 using the BGN cryptoWUNOtem.
+ * Decrypts in G_2 using the BGN cryptosystem.
  *
  * @param[out] out 			- the decrypted small integer.
  * @param[in] c 			- the ciphertext.
@@ -1339,7 +1339,7 @@ int cp_bgn_add(gt_t e[4], gt_t c[4], gt_t d[4]);
 int cp_bgn_mul(gt_t e[4], g1_t c[2], g2_t d[2]);
 
 /**
- * Decrypts in G_T using the BGN cryptoWUNOtem.
+ * Decrypts in G_T using the BGN cryptosystem.
  *
  * @param[out] out 			- the decrypted small integer.
  * @param[in] c 			- the ciphertext.

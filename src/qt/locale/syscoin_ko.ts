@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;새 항목</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">현재 선택한 주소를 시스템 클립보드로 복사</translation>
     </message>
     <message>
@@ -1443,11 +1443,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">메인(&amp;M)</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">시스템 로그인 후 %1을 자동으로 시작합니다.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">시스템 로그인시 %1 시작(&amp;S)</translation>
     </message>
     <message>
@@ -1508,8 +1508,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">최대 데이터베이스 캐시 사이즈에 도달했습니다. 더 큰 용량의 캐시는 더 빠르게 싱크를 맞출 수 있으며 대부분의 유저 경우에 유리합니다. 캐시 사이즈를 작게 만드는 것은 메모리 사용을 줄입니다. 미사용 멤풀의 메모리는 이 캐시를 위해 공유됩니다.</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished">스크립트 검증 수명의 숫자를 설정하세요. 음수는 시스템에 묶이지 않는 자유로운 코어의 수를 뜻합니다.</translation>
     </message>
     <message>
@@ -1628,7 +1628,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">창(&amp;W)</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished">시스템 트레이에 있는 아이콘 숨기기</translation>
     </message>
     <message>
@@ -2213,7 +2213,7 @@ BIP70의 광범위한 보안 결함으로 인해 모든 가맹점에서는 지�
         <translation type="unfinished">마지막 거래</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">피어 선택을 다양 화하는 데 사용되는 매핑 된 자율 시스템입니다.</translation>
     </message>
     <message>
@@ -3158,7 +3158,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">서명</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">이 서명을 시스템 클립보드로 복사</translation>
     </message>
     <message>
@@ -4193,7 +4193,7 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished">블록 데이터를 축소 중입니다...</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">시스템 한계로 인하여 -maxconnections를 %d 에서 %d로 줄였습니다.</translation>
     </message>
     <message>

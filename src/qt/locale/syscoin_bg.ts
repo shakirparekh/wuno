@@ -14,7 +14,7 @@
         <translation type="unfinished">Нов</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Копирай текущо избрания адрес към клипборда</translation>
     </message>
     <message>
@@ -1465,11 +1465,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Основни</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Автоматично стартиране %1 след влизане в системата.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">&amp;Стартиране %1 при влизане в системата</translation>
     </message>
     <message>
@@ -1534,8 +1534,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Максимален размер кеш за базата данни.  По-големият кеш може да допринесе за по-бърза синхронизация, след което ползата е по-малко изразена за повечето случаи на употреба. Намаляването на размера на кеша ще намали използването на паметта. Неизползваната mempool памет се споделя за този кеш.</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished">Задайте броя на нишките за проверка на скрипта. Отрицателните стойности съответстват на броя ядра, които искате да оставите свободни за системата.</translation>
     </message>
     <message>
@@ -2459,7 +2459,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Подпис</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Копиране на текущия подпис</translation>
     </message>
     <message>

@@ -913,7 +913,7 @@ namespace cxx17
 
   }
 
-  namespace test_exception_spec_type_WUNOtem
+  namespace test_exception_spec_type_system
   {
 
     struct Good {};

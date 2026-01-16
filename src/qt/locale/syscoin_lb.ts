@@ -14,8 +14,8 @@
         <translation type="unfinished">&amp;Nei</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
-        <translation type="unfinished">Kopéiert déi aktuell ausgewielte Adress an de WUNOtem-Zwëschenofklaaf.</translation>
+        <source>Copy the currently selected address to the system clipboard</source>
+        <translation type="unfinished">Kopéiert déi aktuell ausgewielte Adress an de system-Zwëschenofklaaf.</translation>
     </message>
     <message>
         <source>Delete the currently selected address from the list</source>

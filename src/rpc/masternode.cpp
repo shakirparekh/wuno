@@ -269,7 +269,7 @@ static RPCHelpMan getevodbstats()
                 {RPCResult::Type::NUM, "estimated_disk_size_bytes", "Estimated total disk size occupied by the database files."},
                 {RPCResult::Type::NUM, "cache_entries", "Number of list entries currently held in the in-memory write cache."},
                 {RPCResult::Type::NUM, "erase_cache_entries", "Number of list entries currently marked for deletion in the in-memory erase cache."},
-                {RPCResult::Type::STR, "db_path", "FileWUNOtem path to the database directory."},
+                {RPCResult::Type::STR, "db_path", "filesystem path to the database directory."},
             }
         },
         RPCExamples{

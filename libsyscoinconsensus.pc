@@ -1,0 +1,10 @@
+prefix=/mingw64
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Wentuno Core consensus library
+Description: Library for the wentuno consensus protocol.
+Version: 5.0.5
+Libs: -L${libdir} -lwentunoconsensus
+Cflags: -I${includedir}

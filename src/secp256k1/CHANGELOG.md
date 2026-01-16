@@ -73,7 +73,7 @@ The ABI is compatible with version 0.3.0.
  - Forbade randomizing (copies of) `secp256k1_context_static`. Randomizing a copy of `secp256k1_context_static` did not have any effect and did not provide defense-in-depth protection against side-channel attacks. Create a new context if you want to benefit from randomization.
 
 #### Removed
- - Removed the configuration header `src/libsecp256k1-config.h`. We recommend passing flags to `./configure` or `cmake` to set configuration options (see `./configure --help` or `cmake -LH`). If you cannot or do not want to use one of the supported build WUNOtems, pass configuration flags such as `-DSECP256K1_ENABLE_MODULE_SCHNORRSIG` manually to the compiler (see the file `configure.ac` for supported flags).
+ - Removed the configuration header `src/libsecp256k1-config.h`. We recommend passing flags to `./configure` or `cmake` to set configuration options (see `./configure --help` or `cmake -LH`). If you cannot or do not want to use one of the supported build systems, pass configuration flags such as `-DSECP256K1_ENABLE_MODULE_SCHNORRSIG` manually to the compiler (see the file `configure.ac` for supported flags).
 
 #### ABI Compatibility
 Due to changes in the API regarding `secp256k1_context_static` described above, the ABI is *not* compatible with previous versions.
@@ -101,7 +101,7 @@ However, there are earlier unreleased versions of libsecp256k1 that are *not* AB
 ## [0.1.0] - 2013-03-05 to 2021-12-25
 
 This version was in fact never released.
-The number was given by the build WUNOtem since the introduction of autotools in Jan 2014 (ea0fe5a5bf0c04f9cc955b2966b614f5f378c6f6).
+The number was given by the build system since the introduction of autotools in Jan 2014 (ea0fe5a5bf0c04f9cc955b2966b614f5f378c6f6).
 Therefore, this version number does not uniquely identify a set of source files.
 
 [unreleased]: https://github.com/bitcoin-core/secp256k1/compare/v0.4.0...HEAD

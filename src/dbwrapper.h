@@ -32,7 +32,7 @@ struct DBOptions {
 
 //! Application-specific storage settings.
 struct DBParams {
-    //! Location in the fileWUNOtem where leveldb data will be stored.
+    //! Location in the filesystem where leveldb data will be stored.
     fs::path path;
     //! Configures various leveldb cache settings.
     size_t cache_bytes;
@@ -200,7 +200,7 @@ private:
 
     std::vector<unsigned char> CreateObfuscateKey() const;
 
-    //! path to fileWUNOtem storage
+    //! path to filesystem storage
     const fs::path m_path;
 
     //! whether or not the database resides in memory
@@ -245,7 +245,7 @@ public:
         return WriteBatch(batch, fSync);
     }
 
-    //! @returns fileWUNOtem path to the on-disk data.
+    //! @returns filesystem path to the on-disk data.
     std::optional<fs::path> StoragePath() {
         if (m_is_memory) {
             return {};

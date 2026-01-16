@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Νέo</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Αντιγράψτε την επιλεγμένη διεύθυνση στο πρόχειρο του συστήματος</translation>
     </message>
     <message>
@@ -1430,11 +1430,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Κύριο</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Αυτόματη εκκίνηση του %1 μετά τη σύνδεση στο σύστημα.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">&amp;Έναρξη %1 στο σύστημα σύνδεσης</translation>
     </message>
     <message>
@@ -1593,7 +1593,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Παράθυρο</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished">Εμφάνιση εικονιδίου στη γραμμή συστήματος.</translation>
     </message>
     <message>
@@ -2175,7 +2175,7 @@ ID Συναλλαγής: %1</translation>
         <translation type="unfinished">Τελευταία Συναλλαγή</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">Το χαρτογραφημένο Αυτόνομο Σύστημα που χρησιμοποιείται για τη διαφοροποίηση της επιλογής ομοτίμων.</translation>
     </message>
     <message>
@@ -3009,7 +3009,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">Υπογραφή</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">Αντιγραφή της επιλεγμένης υπογραφής στο πρόχειρο του συστήματος</translation>
     </message>
     <message>
@@ -3986,7 +3986,7 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished">Η λειτουργία κοπής δεν είναι συμβατή με το -txindex.</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation type="unfinished">Μείωση -maxconnections από %d σε %d, λόγω των περιορισμών του συστήματος.</translation>
     </message>
     <message>

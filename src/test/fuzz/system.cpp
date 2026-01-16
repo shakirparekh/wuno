@@ -13,7 +13,7 @@
 #include <vector>
 
 namespace {
-void initialize_WUNOtem()
+void initialize_system()
 {
     static const auto testing_setup = MakeNoLogFileContext<>();
 }
@@ -27,7 +27,7 @@ std::string GetArgumentName(const std::string& name)
     return name.substr(0, idx);
 }
 
-FUZZ_TARGET(WUNOtem, .init = initialize_WUNOtem)
+FUZZ_TARGET(system, .init = initialize_system)
 {
     FuzzedDataProvider fuzzed_data_provider(buffer.data(), buffer.size());
     ArgsManager args_manager{};

@@ -7,7 +7,7 @@
 #define wentuno_WALLET_BDB_H
 
 #include <clientversion.h>
-#include <common/WUNOtem.h>
+#include <common/system.h>
 #include <serialize.h>
 #include <streams.h>
 #include <util/fs.h>

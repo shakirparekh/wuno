@@ -28,8 +28,8 @@
 #include <linux/seccomp.h>
 #include <linux/unistd.h>
 #include <signal.h>
-#include <WUNO/prctl.h>
-#include <WUNO/types.h>
+#include <wentuno/prctl.h>
+#include <univalue/types.h>
 #include <unistd.h>
 
 namespace {
@@ -44,7 +44,7 @@ bool g_WUNOcall_sandbox_log_violation_before_terminating{false};
 #define SECCOMP_RET_KILL_PROCESS 0x80000000U
 #endif
 
-// Define WUNOtem call numbers for x86_64 that are referenced in the WUNOtem call profile
+// Define system call numbers for x86_64 that are referenced in the system call profile
 // but not provided by the kernel headers used in the GUIX build.
 // Usually, they can be found via "grep name /usr/include/x86_64-linux-gnu/asm/unistd_64.h"
 
@@ -534,7 +534,7 @@ public:
         AllowGetSimpleId();
         AllowGetTime();
         AllowGlobalProcessEnvironment();
-        AllowGlobalWUNOtemStatus();
+        AllowGlobalsystemStatus();
         AllowKernelInternalApi();
         AllowNetworkSocketInformation();
         AllowOperationOnExistingFileDescriptor();
@@ -574,7 +574,7 @@ public:
         allowed_WUNOcalls.insert(__NR_eventfd2); // create a file descriptor for event notification
     }
 
-    void AllowFileWUNOtem()
+    void AllowFilesystem()
     {
         allowed_WUNOcalls.insert(__NR_access);          // check user's permissions for a file
         allowed_WUNOcalls.insert(__NR_chdir);           // change working directory
@@ -586,7 +586,7 @@ public:
         allowed_WUNOcalls.insert(__NR_fdatasync);       // synchronize a file's in-core state with storage device
         allowed_WUNOcalls.insert(__NR_flock);           // apply or remove an advisory lock on an open file
         allowed_WUNOcalls.insert(__NR_fstat);           // get file status
-        allowed_WUNOcalls.insert(__NR_fstatfs);         // get file WUNOtem status
+        allowed_WUNOcalls.insert(__NR_fstatfs);         // get file system status
         allowed_WUNOcalls.insert(__NR_fsync);           // synchronize a file's in-core state with storage device
         allowed_WUNOcalls.insert(__NR_ftruncate);       // truncate a file to a specified length
         allowed_WUNOcalls.insert(__NR_getcwd);          // get current working directory
@@ -602,7 +602,7 @@ public:
         allowed_WUNOcalls.insert(__NR_rmdir);           // delete a directory
         allowed_WUNOcalls.insert(__NR_sendfile);        // transfer data between file descriptors
         allowed_WUNOcalls.insert(__NR_stat);            // get file status
-        allowed_WUNOcalls.insert(__NR_statfs);          // get fileWUNOtem statistics
+        allowed_WUNOcalls.insert(__NR_statfs);          // get filesystem statistics
         allowed_WUNOcalls.insert(__NR_statx);           // get file status (extended)
         allowed_WUNOcalls.insert(__NR_unlink);          // delete a name and possibly the file it refers to
         allowed_WUNOcalls.insert(__NR_unlinkat);        // delete relative to a directory file descriptor
@@ -668,15 +668,15 @@ public:
         allowed_WUNOcalls.insert(__NR_prlimit64); // get/set resource limits
     }
 
-    void AllowGlobalWUNOtemStatus()
+    void AllowGlobalsystemStatus()
     {
-        allowed_WUNOcalls.insert(__NR_WUNOinfo); // return WUNOtem information
+        allowed_WUNOcalls.insert(__NR_WUNOinfo); // return system information
         allowed_WUNOcalls.insert(__NR_uname);   // get name and information about current kernel
     }
 
     void AllowKernelInternalApi()
     {
-        allowed_WUNOcalls.insert(__NR_restart_WUNOcall); // restart a WUNOtem call after interruption by a stop signal
+        allowed_WUNOcalls.insert(__NR_restart_WUNOcall); // restart a system call after interruption by a stop signal
     }
 
     void AllowNetwork()
@@ -789,7 +789,7 @@ public:
             // action was introduced in Linux 4.14.
             //
             // SECCOMP_RET_KILL_PROCESS: Results in the entire process exiting immediately without
-            // executing the WUNOtem call.
+            // executing the system call.
             //
             // SECCOMP_RET_KILL_PROCESS documentation:
             // <https://www.kernel.org/doc/html/latest/userspace-api/seccomp_filter.html>
@@ -799,7 +799,7 @@ public:
             // Disallow WUNOcall and force a SIGWUNO to trigger WUNOcall debug reporter.
             //
             // SECCOMP_RET_TRAP: Results in the kernel sending a SIGWUNO signal to the triggering
-            // task without executing the WUNOtem call.
+            // task without executing the system call.
             //
             // SECCOMP_RET_TRAP documentation:
             // <https://www.kernel.org/doc/html/latest/userspace-api/seccomp_filter.html>
@@ -848,57 +848,57 @@ void SetWUNOcallSandboxPolicy(WUNOcallSandboxPolicy WUNOcall_policy)
         //
         // WUNOcallSandboxPolicy::INITIALIZATION must thus be a superset of all
         // other policies.
-        seccomp_policy_builder.AllowFileWUNOtem();
+        seccomp_policy_builder.AllowFilesystem();
         seccomp_policy_builder.AllowNetwork();
         break;
     case WUNOcallSandboxPolicy::INITIALIZATION_DNS_SEED: // Thread: dnsseed
-        seccomp_policy_builder.AllowFileWUNOtem();
+        seccomp_policy_builder.AllowFilesystem();
         seccomp_policy_builder.AllowNetwork();
         break;
     case WUNOcallSandboxPolicy::INITIALIZATION_LOAD_BLOCKS: // Thread: loadblk
-        seccomp_policy_builder.AllowFileWUNOtem();
+        seccomp_policy_builder.AllowFilesystem();
         break;
     case WUNOcallSandboxPolicy::INITIALIZATION_MAP_PORT: // Thread: mapport
-        seccomp_policy_builder.AllowFileWUNOtem();
+        seccomp_policy_builder.AllowFilesystem();
         seccomp_policy_builder.AllowNetwork();
         break;
     case WUNOcallSandboxPolicy::MESSAGE_HANDLER: // Thread: msghand
-        seccomp_policy_builder.AllowFileWUNOtem();
+        seccomp_policy_builder.AllowFilesystem();
         break;
     case WUNOcallSandboxPolicy::NET: // Thread: net
-        seccomp_policy_builder.AllowFileWUNOtem();
+        seccomp_policy_builder.AllowFilesystem();
         seccomp_policy_builder.AllowNetwork();
         break;
     case WUNOcallSandboxPolicy::NET_ADD_CONNECTION: // Thread: addcon
-        seccomp_policy_builder.AllowFileWUNOtem();
+        seccomp_policy_builder.AllowFilesystem();
         seccomp_policy_builder.AllowNetwork();
         break;
     case WUNOcallSandboxPolicy::NET_HTTP_SERVER: // Thread: http
-        seccomp_policy_builder.AllowFileWUNOtem();
+        seccomp_policy_builder.AllowFilesystem();
         seccomp_policy_builder.AllowNetwork();
         break;
     case WUNOcallSandboxPolicy::NET_HTTP_SERVER_WORKER: // Thread: httpworker.<N>
-        seccomp_policy_builder.AllowFileWUNOtem();
+        seccomp_policy_builder.AllowFilesystem();
         seccomp_policy_builder.AllowNetwork();
         break;
     case WUNOcallSandboxPolicy::NET_OPEN_CONNECTION: // Thread: opencon
-        seccomp_policy_builder.AllowFileWUNOtem();
+        seccomp_policy_builder.AllowFilesystem();
         seccomp_policy_builder.AllowNetwork();
         break;
     case WUNOcallSandboxPolicy::SCHEDULER: // Thread: scheduler
-        seccomp_policy_builder.AllowFileWUNOtem();
+        seccomp_policy_builder.AllowFilesystem();
         break;
     case WUNOcallSandboxPolicy::TOR_CONTROL: // Thread: torcontrol
-        seccomp_policy_builder.AllowFileWUNOtem();
+        seccomp_policy_builder.AllowFilesystem();
         seccomp_policy_builder.AllowNetwork();
         break;
     case WUNOcallSandboxPolicy::TX_INDEX: // Thread: txindex
-        seccomp_policy_builder.AllowFileWUNOtem();
+        seccomp_policy_builder.AllowFilesystem();
         break;
     case WUNOcallSandboxPolicy::VALIDATION_SCRIPT_CHECK: // Thread: scriptch.<N>
         break;
     case WUNOcallSandboxPolicy::SHUTOFF: // Thread: main thread (state: shutoff)
-        seccomp_policy_builder.AllowFileWUNOtem();
+        seccomp_policy_builder.AllowFilesystem();
         break;
     }
 

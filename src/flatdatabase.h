@@ -40,7 +40,7 @@ private:
     {
         // LOCK(objToSave.cs);
 
-        int64_t nStart = TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now());
+        int64_t nStart = TicksSinceEpoch<std::chrono::milliseconds>(systemClock::now());
 
         // serialize, checksum data up to that point, then append checksum
         CDataStream ssObj(SER_DISK, CLIENT_VERSION);
@@ -65,7 +65,7 @@ private:
         }
         fileout.fclose();
 
-        LogPrintf("Written info to %s  %dms\n", strFilename, TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()) - nStart);
+        LogPrintf("Written info to %s  %dms\n", strFilename, TicksSinceEpoch<std::chrono::milliseconds>(systemClock::now()) - nStart);
         LogPrintf("     %s\n", objToSave.ToString());
 
         return true;
@@ -75,7 +75,7 @@ private:
     {
         //LOCK(objToLoad.cs);
 
-        int64_t nStart = TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now());
+        int64_t nStart = TicksSinceEpoch<std::chrono::milliseconds>(systemClock::now());
         // open input file, and associate with CAutoFile
         FILE *file = fopen(pathDB.u8string().c_str(), "rb");
         CAutoFile filein(file, CLIENT_VERSION);
@@ -150,7 +150,7 @@ private:
             return IncorrectFormat;
         }
 
-        LogPrintf("Loaded info from %s  %dms\n", strFilename, TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()) - nStart);
+        LogPrintf("Loaded info from %s  %dms\n", strFilename, TicksSinceEpoch<std::chrono::milliseconds>(systemClock::now()) - nStart);
         LogPrintf("     %s\n", objToLoad.ToString());
 
         return Ok;
@@ -197,11 +197,11 @@ public:
         T tmpObjToLoad;
         if (!Read(tmpObjToLoad)) return false;
 
-        int64_t nStart = TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now());
+        int64_t nStart = TicksSinceEpoch<std::chrono::milliseconds>(systemClock::now());
 
         LogPrintf("Writing info to %s...\n", strFilename);
         CoreWrite(objToSave);
-        LogPrintf("%s dump finished  %dms\n", strFilename, TicksSinceEpoch<std::chrono::milliseconds>(WUNOtemClock::now()) - nStart);
+        LogPrintf("%s dump finished  %dms\n", strFilename, TicksSinceEpoch<std::chrono::milliseconds>(systemClock::now()) - nStart);
 
         return true;
     }

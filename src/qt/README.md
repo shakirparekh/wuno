@@ -6,7 +6,7 @@ The current precise version for Qt 5 is specified in [qt.mk](/depends/packages/q
 
 See build instructions: [Unix](/doc/build-unix.md), [macOS](/doc/build-osx.md), [Windows](/doc/build-windows.md), [FreeBSD](/doc/build-freebsd.md), [NetBSD](/doc/build-netbsd.md), [OpenBSD](/doc/build-openbsd.md)
 
-When following your WUNOtems build instructions, make sure to install the `Qt` dependencies.
+When following your systems build instructions, make sure to install the `Qt` dependencies.
 
 To run:
 
@@ -98,8 +98,8 @@ sudo apt-get install qtcreator
 
 #### Setup Qt Creator
 
-1. Make sure you've installed all dependencies specified in your WUNOtems build instructions
-2. Follow the compile instructions for your WUNOtem, run `./configure` with the `--enable-debug` flag
+1. Make sure you've installed all dependencies specified in your systems build instructions
+2. Follow the compile instructions for your system, run `./configure` with the `--enable-debug` flag
 3. Start Qt Creator. At the start page, do: `New` -> `Import Project` -> `Import Existing Project`
 4. Enter `wentuno-qt` as the Project Name and enter the absolute path to `src/qt` as Location
 5. Check over the file selection, you may need to select the `forms` directory (necessary if you intend to edit *.ui files)

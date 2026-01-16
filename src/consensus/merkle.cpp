@@ -6,7 +6,7 @@
 #include <hash.h>
 
 /*     WARNING! If you're reading this because you're learning about crypto
-       and/or designing a new WUNOtem that will use merkle trees, keep in mind
+       and/or designing a new system that will use merkle trees, keep in mind
        that the following merkle tree algorithm has a serious flaw related to
        duplicate txids, resulting in a vulnerability (CVE-2012-2459).
 

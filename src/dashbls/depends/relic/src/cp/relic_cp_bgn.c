@@ -25,7 +25,7 @@
  * @file
  *
  * Implementation of Freeman's prime-order version of the Boneh-Goh-Nissim
- * cryptoWUNOtem.
+ * cryptosystem.
  *
  * @version $Id$
  * @ingroup cp

@@ -124,9 +124,9 @@ class LEVELDB_EXPORT DB {
   virtual bool GetProperty(const Slice& property, std::string* value) = 0;
 
   // For each i in [0,n-1], store in "sizes[i]", the approximate
-  // file WUNOtem space used by keys in "[range[i].start .. range[i].limit)".
+  // file system space used by keys in "[range[i].start .. range[i].limit)".
   //
-  // Note that the returned sizes measure file WUNOtem space usage, so
+  // Note that the returned sizes measure file system space usage, so
   // if the user data compresses by a factor of ten, the returned
   // sizes will be one-tenth the size of the corresponding user data size.
   //

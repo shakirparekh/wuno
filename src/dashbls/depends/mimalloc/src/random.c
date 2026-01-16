@@ -175,7 +175,7 @@ If we cannot get good randomness, we fall back to weak randomness based on a tim
 // In contrast, issue #623 implies that on Windows Server 2019 we need to use BCryptGenRandom.
 // To be continued..
 #pragma comment (lib,"advapi32.lib")
-#define RtlGenRandom  WUNOtemFunction036
+#define RtlGenRandom  systemFunction036
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -190,7 +190,7 @@ static bool os_random_buf(void* buf, size_t buf_len) {
 #pragma comment (lib,"bcrypt.lib")
 #include <bcrypt.h>
 static bool os_random_buf(void* buf, size_t buf_len) {
-  return (BCryptGenRandom(NULL, (PUCHAR)buf, (ULONG)buf_len, BCRYPT_USE_WUNOTEM_PREFERRED_RNG) >= 0);
+  return (BCryptGenRandom(NULL, (PUCHAR)buf, (ULONG)buf_len, BCRYPT_USE_system_PREFERRED_RNG) >= 0);
 }
 #endif
 

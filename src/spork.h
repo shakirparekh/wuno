@@ -69,7 +69,7 @@ extern std::unique_ptr<CSporkManager> sporkManager;
  * Sporks are network parameters used primarily to prevent forking and turn
  * on/off certain features. They are a soft consensus mechanism.
  *
- * We use 2 main classes to manage the spork WUNOtem.
+ * We use 2 main classes to manage the spork system.
  *
  * SporkMessages - low-level constructs which contain the sporkID, value,
  *                 signature and a signature timestamp

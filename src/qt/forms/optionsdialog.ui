@@ -30,10 +30,10 @@
        <item>
         <widget class="QCheckBox" name="wentunoAtStartup">
          <property name="toolTip">
-          <string>Automatically start %1 after logging in to the WUNOtem.</string>
+          <string>Automatically start %1 after logging in to the system.</string>
          </property>
          <property name="text">
-          <string>&amp;Start %1 on WUNOtem login</string>
+          <string>&amp;Start %1 on system login</string>
          </property>
         </widget>
        </item>
@@ -151,7 +151,7 @@
          <item>
           <widget class="QLabel" name="threadsScriptVerifLabel">
            <property name="toolTip">
-            <string extracomment="Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.">Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</string>
+            <string extracomment="Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.">Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</string>
            </property>
            <property name="text">
             <string>Number of script &amp;verification threads</string>
@@ -656,7 +656,7 @@
        <item>
         <widget class="QCheckBox" name="showTrayIcon">
          <property name="toolTip">
-          <string>Show the icon in the WUNOtem tray.</string>
+          <string>Show the icon in the system tray.</string>
          </property>
          <property name="text">
           <string>&amp;Show tray icon</string>
@@ -837,16 +837,16 @@
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="WUNOtemFont_horizontalLayout">
+           <layout class="QHBoxLayout" name="systemFont_horizontalLayout">
             <item>
-             <widget class="QRadioButton" name="WUNOtemFont_radioButton">
+             <widget class="QRadioButton" name="systemFont_radioButton">
               <property name="text">
                <string>closest matching &quot;%1&quot;</string>
               </property>
              </widget>
             </item>
             <item>
-             <spacer name="WUNOtemFont_horizontalSpacer">
+             <spacer name="systemFont_horizontalSpacer">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -859,16 +859,16 @@
              </spacer>
             </item>
             <item>
-             <layout class="QVBoxLayout" name="WUNOtemFont_verticalLayout">
+             <layout class="QVBoxLayout" name="systemFont_verticalLayout">
               <item>
-               <widget class="QLabel" name="WUNOtemFont_label_1">
+               <widget class="QLabel" name="systemFont_label_1">
                 <property name="text">
                  <string notr="true">111.11111111 WUNO</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="WUNOtemFont_label_9">
+               <widget class="QLabel" name="systemFont_label_9">
                 <property name="text">
                  <string notr="true">909.09090909 WUNO</string>
                 </property>

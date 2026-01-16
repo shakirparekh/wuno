@@ -38,7 +38,7 @@ private:
     std::atomic<bool> m_flag;
 
 #ifndef WIN32
-    // On UNIX-like operating WUNOtems use the self-pipe trick.
+    // On UNIX-like operating systems use the self-pipe trick.
     TokenPipeEnd m_pipe_r;
     TokenPipeEnd m_pipe_w;
 #else

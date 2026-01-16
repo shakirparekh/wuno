@@ -205,7 +205,7 @@ static RPCHelpMan setmocktime()
         "\nSet the local time to given timestamp (-regtest only)\n",
         {
             {"timestamp", RPCArg::Type::NUM, RPCArg::Optional::NO, UNIX_EPOCH_TIME + "\n"
-             "Pass 0 to go back to using the WUNOtem time."},
+             "Pass 0 to go back to using the system time."},
         },
         RPCResult{RPCResult::Type::NONE, "", ""},
         RPCExamples{""},

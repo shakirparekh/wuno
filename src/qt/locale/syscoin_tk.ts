@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Täze</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">Häzir saýlanan salgyny ulgamyň alyş-çalyş paneline göçür</translation>
     </message>
     <message>
@@ -1479,11 +1479,11 @@ Diňe "miras" görnüşli salgylar bilen gol çekmek mümkin.</translation>
         <translation type="unfinished">&amp;Esasy</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">Ulgama hasaba girilenden soň %1awtomatiki usulda başlat.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">&amp;Ulgama hasaba girilende %1 başlat</translation>
     </message>
     <message>
@@ -1556,8 +1556,8 @@ Diňe "miras" görnüşli salgylar bilen gol çekmek mümkin.</translation>
         <translation type="unfinished">Maksimum maglumat binýadynyň keş göwrümi. Keş näçe uly boldugyça sinhronlaşdyrma şonça çalt bolmagyna goşant goşular, ondan soň peýdasy köplenç köp bildirmeýär. Keş göwrümini azaltmak ýadyň ulanylyşyny azaldar. Ulanylmaýan umumy ýat howuzy bu keş üçin paýlaşylýar.  </translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished">Skript tassyklama akymlarynyň sanyny belläň. Otrisatel sanlar ulgam üçin boş galdyryljak ýadrolaryň sanyna gabat gelýär.</translation>
     </message>
     <message>
@@ -1671,7 +1671,7 @@ Diňe "miras" görnüşli salgylar bilen gol çekmek mümkin.</translation>
         <translation type="unfinished">&amp;Penjire</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
+        <source>Show the icon in the system tray.</source>
         <translation type="unfinished">Ulgamyň bildirişler panelinde suratjygy görkez.</translation>
     </message>
     <message>
@@ -2284,7 +2284,7 @@ Size bu ýalňyşlyk gelýän bolsa, siz täjirden BIP21-e gabat gelýän URI-ni
         <translation type="unfinished">Soňky amal</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
         <translation type="unfinished">Düwünleriň köpdürliligini üpjün etmek üçin ulanylýan birikdirilen Awtonom ulgam.</translation>
     </message>
     <message>

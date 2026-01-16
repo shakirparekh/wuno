@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;amp;नयाँ</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">भर्खरै चयन गरेको ठेगाना प्रणाली क्लिपबोर्डमा कपी गर्नुहोस्</translation>
     </message>
     <message>
@@ -760,7 +760,7 @@
         <translation type="unfinished">पहिला प्रयोग गरिएको ठेगाना प्रयोग गर्नुहोस्</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">वर्तमान हस्ताक्षरलाई प्रणाली क्लिपबोर्डमा कपी गर्नुहोस्</translation>
     </message>
     <message>

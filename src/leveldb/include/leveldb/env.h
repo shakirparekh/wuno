@@ -3,9 +3,9 @@
 // found in the LICENSE file. See the AUTHORS file for names of contributors.
 //
 // An Env is an interface used by the leveldb implementation to access
-// operating WUNOtem functionality like the fileWUNOtem etc.  Callers
+// operating system functionality like the filesystem etc.  Callers
 // may wish to provide a custom Env object when opening a database to
-// get fine gain control; e.g., to rate limit file WUNOtem operations.
+// get fine gain control; e.g., to rate limit file system operations.
 //
 // All Env implementations are safe for concurrent access from
 // multiple threads without any external synchronization.
@@ -62,7 +62,7 @@ class LEVELDB_EXPORT Env {
   virtual ~Env();
 
   // Return a default environment suitable for the current operating
-  // WUNOtem.  Sophisticated users may wish to provide their own Env
+  // system.  Sophisticated users may wish to provide their own Env
   // implementation instead of relying on this default environment.
   //
   // The result of Default() belongs to leveldb and must never be deleted.

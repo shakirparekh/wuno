@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;Nû</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">کۆپیکردنی ناونیشانی هەڵبژێردراوی ئێستا بۆ کلیپ بۆردی سیستەم</translation>
     </message>
     <message>

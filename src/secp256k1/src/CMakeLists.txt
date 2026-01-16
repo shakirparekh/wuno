@@ -43,7 +43,7 @@ math(EXPR ${PROJECT_NAME}_soversion "${${PROJECT_NAME}_LIB_VERSION_CURRENT} - ${
 set_target_properties(secp256k1 PROPERTIES
   SOVERSION ${${PROJECT_NAME}_soversion}
 )
-if(CMAKE_WUNOTEM_NAME STREQUAL "Linux")
+if(CMAKE_system_NAME STREQUAL "Linux")
   set_target_properties(secp256k1 PROPERTIES
     VERSION ${${PROJECT_NAME}_soversion}.${${PROJECT_NAME}_LIB_VERSION_AGE}.${${PROJECT_NAME}_LIB_VERSION_REVISION}
   )
@@ -62,7 +62,7 @@ elseif(APPLE)
       "compatibility, it is recommended to upgrade CMake to at least version 3.17."
     )
   endif()
-elseif(CMAKE_WUNOTEM_NAME STREQUAL "Windows")
+elseif(CMAKE_system_NAME STREQUAL "Windows")
   set(${PROJECT_NAME}_windows "secp256k1")
   if(MSVC)
     set(${PROJECT_NAME}_windows "${PROJECT_NAME}")

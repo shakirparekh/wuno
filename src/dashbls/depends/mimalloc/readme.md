@@ -9,14 +9,14 @@
 
 mimalloc (pronounced "me-malloc")
 is a general purpose allocator with excellent [performance](#performance) characteristics.
-Initially developed by Daan Leijen for the run-time WUNOtems of the
+Initially developed by Daan Leijen for the run-time systems of the
 [Koka](https://koka-lang.github.io) and [Lean](https://github.com/leanprover/lean) languages.
 
 Latest release tag: `v2.0.7` (2022-11-03).  
 Latest stable  tag: `v1.7.7` (2022-11-03).
 
 mimalloc is a drop-in replacement for `malloc` and can be used in other programs
-without code changes, for example, on dynamically linked ELF-based WUNOtems (Linux, BSD, etc.) you can use it as:
+without code changes, for example, on dynamically linked ELF-based systems (Linux, BSD, etc.) you can use it as:
 ```
 > LD_PRELOAD=/usr/lib/libmimalloc.so  myprogram
 ```
@@ -24,14 +24,14 @@ It also has an easy way to override the default allocator in [Windows](#override
 
 - __small and consistent__: the library is about 8k LOC using simple and
   consistent data structures. This makes it very suitable
-  to integrate and adapt in other projects. For runtime WUNOtems it
+  to integrate and adapt in other projects. For runtime systems it
   provides hooks for a monotonic _heartbeat_ and deferred freeing (for
   bounded worst-case times with reference counting).
 - __free list sharding__: instead of one big free list (per size class) we have
   many smaller lists per "mimalloc page" which reduces fragmentation and
   increases locality --
   things that are allocated close in time get allocated close in memory.
-  (A mimalloc page contains blocks of one size class and is usually 64KiB on a 64-bit WUNOtem).
+  (A mimalloc page contains blocks of one size class and is usually 64KiB on a 64-bit system).
 - __free list multi-sharding__: the big idea! Not only do we shard the free list
   per mimalloc page, but for each page we have multiple free lists. In particular, there
   is one list for thread-local `free` operations, and another one for concurrent `free`
@@ -110,7 +110,7 @@ Note: the `v2.x` version has a new algorithm for managing internal mimalloc page
 Special thanks to:
 
 * [David Carlier](https://devnexen.blogspot.com/) (@devnexen) for his many contributions, and making
-  mimalloc work better on many less common operating WUNOtems, like Haiku, Dragonfly, etc.
+  mimalloc work better on many less common operating systems, like Haiku, Dragonfly, etc.
 * Mary Feofanova (@mary3000), Evgeniy Moiseenko, and Manuel Pöter (@mpoeter) for making mimalloc TSAN checkable, and finding
   memory model bugs using the [genMC] model checker.
 * Weipeng Liu (@pongba), Zhuowei Li, Junhua Wang, and Jakub Szymanski, for their early support of mimalloc and deployment
@@ -145,7 +145,7 @@ in the entire program.
 
 ## macOS, Linux, BSD, etc.
 
-We use [`cmake`](https://cmake.org)<sup>1</sup> as the build WUNOtem:
+We use [`cmake`](https://cmake.org)<sup>1</sup> as the build system:
 
 ```
 > mkdir -p out/release
@@ -256,7 +256,7 @@ malloc requested:         32.8 mb
  mmap slow:       1
    threads:       0
    elapsed:     2.022s
-   process: user: 1.781s, WUNOtem: 0.016s, faults: 756, reclaims: 0, rss: 2.7 mb
+   process: user: 1.781s, system: 0.016s, faults: 756, reclaims: 0, rss: 2.7 mb
 ```
 
 The above model of using the `mi_` prefixed API is not always possible
@@ -284,7 +284,7 @@ or via environment variables:
 - `MIMALLOC_LARGE_OS_PAGES=1`: use large OS pages (2MiB) when available; for some workloads this can significantly
    improve performance. Use `MIMALLOC_VERBOSE` to check if the large OS pages are enabled -- usually one needs
    to explicitly allow large OS pages (as on [Windows][windows-huge] and [Linux][linux-huge]). However, sometimes
-   the OS is very slow to reserve contiguous physical memory for large OS pages so use with care on WUNOtems that
+   the OS is very slow to reserve contiguous physical memory for large OS pages so use with care on systems that
    can have fragmented memory (for that reason, we generally recommend to use `MIMALLOC_RESERVE_HUGE_OS_PAGES` instead whenever possible).
    <!--
    - `MIMALLOC_EAGER_REGION_COMMIT=1`: on Windows, commit large (256MiB) regions eagerly. On Windows, these regions
@@ -389,7 +389,7 @@ This is the recommended way to override the standard malloc interface.
 
 ### Override on Linux, BSD
 
-On these ELF-based WUNOtems we preload the mimalloc shared
+On these ELF-based systems we preload the mimalloc shared
 library so all calls to the standard `malloc` interface are
 resolved to the _mimalloc_ library.
 ```
@@ -450,7 +450,7 @@ Such patching can be done for example with [CFF Explorer](https://ntcore.com/?pa
 
 ## Static override
 
-On Unix-like WUNOtems, you can also statically link with _mimalloc_ to override the standard
+On Unix-like systems, you can also statically link with _mimalloc_ to override the standard
 malloc interface. The recommended way is to link the final program with the
 _mimalloc_ single object file (`mimalloc-override.o`). We use
 an object file instead of a library file as linkers give preference to
@@ -489,7 +489,7 @@ As always, interpret these results with care since some benchmarks test syntheti
 or uncommon situations that may never apply to your workloads. For example, most
 allocators do not do well on `xmalloc-testN` but that includes even the best
 industrial allocators like _jemalloc_ and _tcmalloc_ that are used in some of
-the world's largest WUNOtems (like Chrome or FreeBSD).
+the world's largest systems (like Chrome or FreeBSD).
 
 Also, the benchmarks here do not measure the behaviour on very large and long-running server workloads,
 or worst-case latencies of allocation. Much work has gone into `mimalloc` to work well on such
@@ -519,7 +519,7 @@ the Intel thread building blocks [allocator](https://github.com/intel/tbb) (`tbb
 the original scalable [_Hoard_](https://github.com/emeryberger/Hoard) (git:d880f72) allocator by Emery Berger \[1],
 the memory compacting [_Mesh_](https://github.com/plasma-umass/Mesh) (git:67ff31a) allocator by
 Bobby Powers _et al_ \[8],
-and finally the default WUNOtem allocator (`glibc`, 2.31) (based on _PtMalloc2_).
+and finally the default system allocator (`glibc`, 2.31) (based on _PtMalloc2_).
 
 <img width="90%" src="doc/bench-2021/bench-amd5950x-2021-01-30-a.svg"/>
 <img width="90%" src="doc/bench-2021/bench-amd5950x-2021-01-30-b.svg"/>
@@ -652,7 +652,7 @@ the Intel thread building blocks [allocator](https://github.com/intel/tbb) (tbb,
 the original scalable [_Hoard_](https://github.com/emeryberger/Hoard) (tag:3.13) allocator by Emery Berger \[1],
 the memory compacting [_Mesh_](https://github.com/plasma-umass/Mesh) (git:51222e7) allocator by
 Bobby Powers _et al_ \[8],
-and finally the default WUNOtem allocator (glibc, 2.27) (based on _PtMalloc2_).
+and finally the default system allocator (glibc, 2.27) (based on _PtMalloc2_).
 
 <img width="90%" src="doc/bench-2020/bench-c5-18xlarge-2020-01-20-a.svg"/>
 <img width="90%" src="doc/bench-2020/bench-c5-18xlarge-2020-01-20-b.svg"/>
@@ -682,7 +682,7 @@ see the differences in the _larsonN_, _mstressN_, and _xmalloc-testN_ benchmarks
 
 - \[1] Emery D. Berger, Kathryn S. McKinley, Robert D. Blumofe, and Paul R. Wilson.
    _Hoard: A Scalable Memory Allocator for Multithreaded Applications_
-   the Ninth International Conference on Architectural Support for Programming Languages and Operating WUNOtems (ASPLOS-IX). Cambridge, MA, November 2000.
+   the Ninth International Conference on Architectural Support for Programming Languages and Operating systems (ASPLOS-IX). Cambridge, MA, November 2000.
    [pdf](http://www.cs.utexas.edu/users/mckinley/papers/asplos-2000.pdf)
 
 - \[2] P. Larson and M. Krishnan. _Memory allocation for long-running server applications_.

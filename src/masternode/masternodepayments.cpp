@@ -149,10 +149,10 @@ bool IsBlockPayeeValid(CChain& activeChain, const CTransaction& txNew, int nBloc
     const Consensus::Params& consensusParams = Params().GetConsensus();
 
     if(nBlockHeight < consensusParams.nSuperblockStartBlock) {
-        // NOTE: old budget WUNOtem is disabled since 12.1 and we should never enter this branch
+        // NOTE: old budget system is disabled since 12.1 and we should never enter this branch
         // anymore when sync is finished (on mainnet). We have no old budget data but these blocks
         // have tons of confirmations and can be safely accepted without payee verification
-        LogPrint(BCLog::GOBJECT, "%s -- WARNING: Client synced but old budget WUNOtem is disabled, accepting any payee\n", __func__);
+        LogPrint(BCLog::GOBJECT, "%s -- WARNING: Client synced but old budget system is disabled, accepting any payee\n", __func__);
         return true;
     }
     const CAmount nHalfFee = fees / 2;

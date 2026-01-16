@@ -14,7 +14,7 @@
         <translation type="unfinished">&amp;ਨਵਾਂ</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">ਚੁਣੇ ਪਤੇ ਦੀ ਸਿਸਟਮ ਦੀ ਚੂੰਢੀ-ਤਖਤੀ 'ਤੇ ਨਕਲ ਲਾਹੋ</translation>
     </message>
     <message>

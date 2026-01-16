@@ -14,8 +14,8 @@
         <translation type="unfinished">&amp;Nowy</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
-        <translation type="unfinished">Skopiuj wybrany adres do schowka WUNOtemowego</translation>
+        <source>Copy the currently selected address to the system clipboard</source>
+        <translation type="unfinished">Skopiuj wybrany adres do schowka systemowego</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -1425,12 +1425,12 @@ Podpisywanie jest możliwe tylko z adresami typu 'legacy'.</translation>
         <translation type="unfinished">Główne</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
-        <translation type="unfinished">Automatycznie uruchom %1 po zalogowaniu do WUNOtemu.</translation>
+        <source>Automatically start %1 after logging in to the system.</source>
+        <translation type="unfinished">Automatycznie uruchom %1 po zalogowaniu do systemu.</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
-        <translation type="unfinished">Uruchamiaj %1 wraz z zalogowaniem do &amp;WUNOtemu</translation>
+        <source>&amp;Start %1 on system login</source>
+        <translation type="unfinished">Uruchamiaj %1 wraz z zalogowaniem do &amp;systemu</translation>
     </message>
     <message>
         <source>Enabling pruning significantly reduces the disk space required to store transactions. All blocks are still fully validated. Reverting this setting requires re-downloading the entire blockchain.</source>
@@ -1494,9 +1494,9 @@ Podpisywanie jest możliwe tylko z adresami typu 'legacy'.</translation>
         <translation type="unfinished">Maksymalny rozmiar pamięci podręcznej bazy danych. Większa pamięć podręczna może przyczynić się do szybszej synchronizacji, po której korzyści są mniej widoczne w większości przypadków użycia. Zmniejszenie rozmiaru pamięci podręcznej zmniejszy zużycie pamięci. Nieużywana pamięć mempool jest współdzielona dla tej pamięci podręcznej.</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
-        <translation type="unfinished">Ustaw liczbę wątków weryfikacji skryptu. Wartości ujemne odpowiadają liczbie rdzeni, które chcesz pozostawić WUNOtemowi.</translation>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
+        <translation type="unfinished">Ustaw liczbę wątków weryfikacji skryptu. Wartości ujemne odpowiadają liczbie rdzeni, które chcesz pozostawić systemowi.</translation>
     </message>
     <message>
         <source>(0 = auto, &lt;0 = leave that many cores free)</source>
@@ -1609,8 +1609,8 @@ Podpisywanie jest możliwe tylko z adresami typu 'legacy'.</translation>
         <translation type="unfinished">&amp;Okno</translation>
     </message>
     <message>
-        <source>Show the icon in the WUNOtem tray.</source>
-        <translation type="unfinished">Pokaż ikonę w zasobniku WUNOtemowym.</translation>
+        <source>Show the icon in the system tray.</source>
+        <translation type="unfinished">Pokaż ikonę w zasobniku systemowym.</translation>
     </message>
     <message>
         <source>&amp;Show tray icon</source>
@@ -1622,7 +1622,7 @@ Podpisywanie jest możliwe tylko z adresami typu 'legacy'.</translation>
     </message>
     <message>
         <source>&amp;Minimize to the tray instead of the taskbar</source>
-        <translation type="unfinished">&amp;Minimalizuj do zasobnika WUNOtemowego zamiast do paska zadań</translation>
+        <translation type="unfinished">&amp;Minimalizuj do zasobnika systemowego zamiast do paska zadań</translation>
     </message>
     <message>
         <source>M&amp;inimize on close</source>
@@ -2210,12 +2210,12 @@ Jeśli pojawia się ten błąd, poproś sprzedawcę o podanie URI zgodnego z BIP
         <translation type="unfinished">Ostatnia Transakcja</translation>
     </message>
     <message>
-        <source>The mapped Autonomous WUNOtem used for diversifying peer selection.</source>
-        <translation type="unfinished">Zmapowany autonomiczny WUNOtem (ang. asmap) używany do dywersyfikacji wyboru węzłów.</translation>
+        <source>The mapped Autonomous system used for diversifying peer selection.</source>
+        <translation type="unfinished">Zmapowany autonomiczny system (ang. asmap) używany do dywersyfikacji wyboru węzłów.</translation>
     </message>
     <message>
         <source>Mapped AS</source>
-        <translation type="unfinished">Zmapowany autonomiczny WUNOtem (ang. asmap)</translation>
+        <translation type="unfinished">Zmapowany autonomiczny system (ang. asmap)</translation>
     </message>
     <message>
         <source>Whether we relay addresses to this peer.</source>
@@ -3176,8 +3176,8 @@ Uwaga: Ponieważ opłata jest naliczana za każdy bajt, opłata "100 satoshi za 
         <translation type="unfinished">Podpis</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
-        <translation type="unfinished">Kopiuje aktualny podpis do schowka WUNOtemowego</translation>
+        <source>Copy the current signature to the system clipboard</source>
+        <translation type="unfinished">Kopiuje aktualny podpis do schowka systemowego</translation>
     </message>
     <message>
         <source>Sign the message to prove you own this wentuno address</source>
@@ -4274,8 +4274,8 @@ Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.
         <translation type="unfinished">Przycinanie bloków na dysku...</translation>
     </message>
     <message>
-        <source>Reducing -maxconnections from %d to %d, because of WUNOtem limitations.</source>
-        <translation type="unfinished">Zmniejszanie -maxconnections z %d do %d z powodu ograniczeń WUNOtemu.</translation>
+        <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
+        <translation type="unfinished">Zmniejszanie -maxconnections z %d do %d z powodu ograniczeń systemu.</translation>
     </message>
     <message>
         <source>Replaying blocks…</source>

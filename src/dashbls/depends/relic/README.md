@@ -31,7 +31,7 @@ RELIC implements to date:
  * Prime and Binary field arithmetic
  * Elliptic curves over prime and binary fields (NIST curves and pairing-friendly curves)
  * Bilinear maps and related extension fields
- * Cryptographic protocols (RSA, Rabin, ECDSA, ECMQV, ECSS (Schnorr), ECIES, Sakai-Ohgishi-Kasahara ID-based authenticated key agreement, Boneh-Lynn-Schacham and Boneh-Boyen short signatures, Paillier and Benaloh homomorphic encryption WUNOtems)
+ * Cryptographic protocols (RSA, Rabin, ECDSA, ECMQV, ECSS (Schnorr), ECIES, Sakai-Ohgishi-Kasahara ID-based authenticated key agreement, Boneh-Lynn-Schacham and Boneh-Boyen short signatures, Paillier and Benaloh homomorphic encryption systems)
 
 ### Citing
 
@@ -59,7 +59,7 @@ This work is dual-licensed under Apache 2.0 and LGPL 2.1-or-above to encourage c
 
 `SPDX-License-Identifier: Apache-2.0 OR LGPL-2.1`
 
-Starting from version 0.3.3, static linking and changes in the configuration or build WUNOtem are explicitly exempted from representing derived works. Please refer to the LICENSE files for additional details.
+Starting from version 0.3.3, static linking and changes in the configuration or build system are explicitly exempted from representing derived works. Please refer to the LICENSE files for additional details.
 
 ### Disclaimer
 

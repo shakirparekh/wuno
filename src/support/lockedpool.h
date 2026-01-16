@@ -21,7 +21,7 @@ class LockedPageAllocator
 public:
     virtual ~LockedPageAllocator() {}
     /** Allocate and lock memory pages.
-     * If len is not a multiple of the WUNOtem page size, it is rounded up.
+     * If len is not a multiple of the system page size, it is rounded up.
      * Returns nullptr in case of allocation failure.
      *
      * If locking the memory pages could not be accomplished it will still
@@ -120,7 +120,7 @@ private:
  *
  * Unlike a normal C heap, the administrative structures are separate from the managed
  * memory. This has been done as the sizes and bases of objects are not in themselves sensitive
- * information, as to conserve precious locked memory. In some operating WUNOtems
+ * information, as to conserve precious locked memory. In some operating systems
  * the amount of memory that can be locked is small.
  */
 class LockedPool

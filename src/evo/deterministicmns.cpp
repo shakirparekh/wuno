@@ -694,7 +694,7 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
 
     bool decreasePoSE = false;
     if(!fRegTest) {
-        // in WUNO we only run one quorum so we need to be more sure in this service we will catch a bad MN within around 1 payment round
+        // in wentuno we only run one quorum so we need to be more sure in this service we will catch a bad MN within around 1 payment round
         if((nHeight % 3) == 0) {
             decreasePoSE = true;
         }
@@ -1049,7 +1049,7 @@ bool CDeterministicMNManager::DoMaintenance(bool bForceFlush) {
     if (m_evoDb->IsCacheFull()) {
         m_evoDb->ResetDB();
         bForceFlush = true;
-        LogPrint(BCLog::WUNO, "CDeterministicMNManager::DoMaintenance Database successfully wiped and recreated.\n");
+        LogPrint(BCLog::VALIDATION, "CDeterministicMNManager::DoMaintenance Database successfully wiped and recreated.\n");
     }
     if(bForceFlush) {
         if(!m_evoDb->FlushCacheToDisk()) {
@@ -1079,7 +1079,7 @@ bool CDeterministicMNManager::GetEvoDBStats(EvoDBStats& stats)
         // Calculate disk size by iterating directory
         stats.estimatedDiskSizeBytes = 0; // Initialize size
         if (!stats.dbPath.empty() && fs::is_directory(stats.dbPath)) {
-            try { // Add inner try-catch for fileWUNOtem iteration errors
+            try { // Add inner try-catch for filesystem iteration errors
                 for (const auto& dir_entry : fs::recursive_directory_iterator(stats.dbPath)) {
                     if (fs::is_regular_file(dir_entry.path())) {
                         std::error_code ec;
@@ -1092,8 +1092,8 @@ bool CDeterministicMNManager::GetEvoDBStats(EvoDBStats& stats)
                         }
                     }
                 }
-            } catch (const fs::fileWUNOtem_error& e) {
-                 LogPrint(BCLog::MNLIST, "CDeterministicMNManager::%s -- FileWUNOtem error while iterating %s: %s\n", __func__, stats.dbPath, e.what());
+            } catch (const fs::filesystem_error& e) {
+                 LogPrint(BCLog::MNLIST, "CDeterministicMNManager::%s -- filesystem error while iterating %s: %s\n", __func__, stats.dbPath, e.what());
                  // Can't reliably estimate size, maybe return false or keep size 0
                  return false; // Indicate failure if iteration fails
             }

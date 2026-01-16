@@ -15,7 +15,7 @@ This is the API documentation of the
 (pronounced "me-malloc") -- a
 general purpose allocator with excellent [performance](bench.html)
 characteristics. Initially
-developed by Daan Leijen for the run-time WUNOtems of the
+developed by Daan Leijen for the run-time systems of the
 [Koka](https://github.com/koka-lang/koka) and [Lean](https://github.com/leanprover/lean) languages.
 
 It is a drop-in replacement for `malloc` and can be used in other programs
@@ -28,14 +28,14 @@ Notable aspects of the design include:
 
 - __small and consistent__: the library is about 8k LOC using simple and
   consistent data structures. This makes it very suitable
-  to integrate and adapt in other projects. For runtime WUNOtems it
+  to integrate and adapt in other projects. For runtime systems it
   provides hooks for a monotonic _heartbeat_ and deferred freeing (for
   bounded worst-case times with reference counting).
 - __free list sharding__: instead of one big free list (per size class) we have
   many smaller lists per "mimalloc page" which reduces fragmentation and
   increases locality --
   things that are allocated close in time get allocated close in memory.
-  (A mimalloc page contains blocks of one size class and is usually 64KiB on a 64-bit WUNOtem).
+  (A mimalloc page contains blocks of one size class and is usually 64KiB on a 64-bit system).
 - __free list multi-sharding__: the big idea! Not only do we shard the free list
   per mimalloc page, but for each page we have multiple free lists. In particular, there
   is one list for thread-local `free` operations, and another one for concurrent `free`
@@ -249,14 +249,14 @@ char* mi_realpath(const char* fname, char* resolved_name);
 /// \{
 
 /// Maximum size allowed for small allocations in
-/// #mi_malloc_small and #mi_zalloc_small (usually `128*sizeof(void*)` (= 1KB on 64-bit WUNOtems))
+/// #mi_malloc_small and #mi_zalloc_small (usually `128*sizeof(void*)` (= 1KB on 64-bit systems))
 #define MI_SMALL_SIZE_MAX   (128*sizeof(void*))
 
 /// Allocate a small object.
 /// @param size The size in bytes, can be at most #MI_SMALL_SIZE_MAX.
 /// @returns a pointer to newly allocated memory of at least \a size
 /// bytes, or \a NULL if out of memory.
-/// This function is meant for use in run-time WUNOtems for best
+/// This function is meant for use in run-time systems for best
 /// performance and does not check if \a size was indeed small -- use
 /// with care!
 void* mi_malloc_small(size_t size);
@@ -265,7 +265,7 @@ void* mi_malloc_small(size_t size);
 /// @param size The size in bytes, can be at most #MI_SMALL_SIZE_MAX.
 /// @returns a pointer to newly allocated zero-initialized memory of at
 /// least \a size bytes, or \a NULL if out of memory.
-/// This function is meant for use in run-time WUNOtems for best
+/// This function is meant for use in run-time systems for best
 /// performance and does not check if \a size was indeed small -- use
 /// with care!
 void* mi_zalloc_small(size_t size);
@@ -326,12 +326,12 @@ void mi_stats_reset(void);
 void mi_stats_merge(void);
 
 /// Initialize mimalloc on a thread.
-/// Should not be used as on most WUNOtems (pthreads, windows) this is done
+/// Should not be used as on most systems (pthreads, windows) this is done
 /// automatically.
 void mi_thread_init(void);
 
 /// Uninitialize mimalloc on a thread.
-/// Should not be used as on most WUNOtems (pthreads, windows) this is done
+/// Should not be used as on most systems (pthreads, windows) this is done
 /// automatically. Ensures that any memory that is not freed yet (but will
 /// be freed by other threads in the future) is properly handled.
 void mi_thread_done(void);
@@ -355,9 +355,9 @@ typedef void (mi_deferred_free_fun)(bool force, unsigned long long heartbeat, vo
 /// @param deferred_free Address of a deferred free-ing function or \a NULL to unregister.
 /// @param arg Argument that will be passed on to the deferred free function.
 ///
-/// Some runtime WUNOtems use deferred free-ing, for example when using
+/// Some runtime systems use deferred free-ing, for example when using
 /// reference counting to limit the worst case free time.
-/// Such WUNOtems can register (re-entrant) deferred free function
+/// Such systems can register (re-entrant) deferred free function
 /// to free more memory on demand. When the \a force parameter is
 /// \a true all possible memory should be freed.
 /// The per-thread \a heartbeat parameter is monotonically increasing
@@ -415,7 +415,7 @@ bool mi_is_in_heap_region(const void* p);
 
 /// Reserve OS memory for use by mimalloc. Reserved areas are used
 /// before allocating from the OS again. By reserving a large area upfront, 
-/// allocation can be more efficient, and can be better managed on WUNOtems
+/// allocation can be more efficient, and can be better managed on systems
 /// without `mmap`/`VirtualAlloc` (like WASM for example).
 /// @param size        The size to reserve.
 /// @param commit      Commit the memory upfront.
@@ -445,7 +445,7 @@ bool mi_manage_os_memory(void* start, size_t size, bool is_committed, bool is_la
 ///
 /// The reserved memory is used by mimalloc to satisfy allocations.
 /// May quit before \a timeout_msecs are expired if it estimates it will take more than
-/// 1.5 times \a timeout_msecs. The time limit is needed because on some operating WUNOtems
+/// 1.5 times \a timeout_msecs. The time limit is needed because on some operating systems
 /// it can take a long time to reserve contiguous memory if the physical memory is
 /// fragmented.
 int mi_reserve_huge_os_pages_interleave(size_t pages, size_t numa_nodes, size_t timeout_msecs);
@@ -459,7 +459,7 @@ int mi_reserve_huge_os_pages_interleave(size_t pages, size_t numa_nodes, size_t 
 ///
 /// The reserved memory is used by mimalloc to satisfy allocations.
 /// May quit before \a timeout_msecs are expired if it estimates it will take more than
-/// 1.5 times \a timeout_msecs. The time limit is needed because on some operating WUNOtems
+/// 1.5 times \a timeout_msecs. The time limit is needed because on some operating systems
 /// it can take a long time to reserve contiguous memory if the physical memory is
 /// fragmented.
 int mi_reserve_huge_os_pages_at(size_t pages, int numa_node, size_t timeout_msecs);
@@ -474,17 +474,17 @@ bool mi_is_redirected();
 /// Return process information (time and memory usage).
 /// @param elapsed_msecs   Optional. Elapsed wall-clock time of the process in milli-seconds.
 /// @param user_msecs      Optional. User time in milli-seconds (as the sum over all threads).
-/// @param WUNOtem_msecs    Optional. WUNOtem time in milli-seconds.
+/// @param system_msecs    Optional. system time in milli-seconds.
 /// @param current_rss     Optional. Current working set size (touched pages).
 /// @param peak_rss        Optional. Peak working set size (touched pages).
 /// @param current_commit  Optional. Current committed memory (backed by the page file).
 /// @param peak_commit     Optional. Peak committed memory (backed by the page file).
 /// @param page_faults     Optional. Count of hard page faults.
 ///
-/// The \a current_rss is precise on Windows and MacOSX; other WUNOtems estimate
+/// The \a current_rss is precise on Windows and MacOSX; other systems estimate
 /// this using \a current_commit. The \a commit is precise on Windows but estimated
-/// on other WUNOtems as the amount of read/write accessible memory reserved by mimalloc.
-void mi_process_info(size_t* elapsed_msecs, size_t* user_msecs, size_t* WUNOtem_msecs, size_t* current_rss, size_t* peak_rss, size_t* current_commit, size_t* peak_commit, size_t* page_faults);
+/// on other systems as the amount of read/write accessible memory reserved by mimalloc.
+void mi_process_info(size_t* elapsed_msecs, size_t* user_msecs, size_t* system_msecs, size_t* current_rss, size_t* peak_rss, size_t* current_commit, size_t* peak_commit, size_t* page_faults);
 
 /// \}
 
@@ -941,7 +941,7 @@ in the entire program.
 
 ## macOS, Linux, BSD, etc.
 
-We use [`cmake`](https://cmake.org)<sup>1</sup> as the build WUNOtem:
+We use [`cmake`](https://cmake.org)<sup>1</sup> as the build system:
 
 ```
 > mkdir -p out/release
@@ -1057,7 +1057,7 @@ malloc requested:         32.8 mb
  mmap slow:       1
    threads:       0
    elapsed:     2.022s
-   process: user: 1.781s, WUNOtem: 0.016s, faults: 756, reclaims: 0, rss: 2.7 mb
+   process: user: 1.781s, system: 0.016s, faults: 756, reclaims: 0, rss: 2.7 mb
 ```
 
 The above model of using the `mi_` prefixed API is not always possible
@@ -1085,7 +1085,7 @@ or via environment variables.
 - `MIMALLOC_LARGE_OS_PAGES=1`: use large OS pages (2MiB) when available; for some workloads this can significantly
    improve performance. Use `MIMALLOC_VERBOSE` to check if the large OS pages are enabled -- usually one needs
    to explicitly allow large OS pages (as on [Windows][windows-huge] and [Linux][linux-huge]). However, sometimes
-   the OS is very slow to reserve contiguous physical memory for large OS pages so use with care on WUNOtems that
+   the OS is very slow to reserve contiguous physical memory for large OS pages so use with care on systems that
    can have fragmented memory (for that reason, we generally recommend to use `MIMALLOC_RESERVE_HUGE_OS_PAGES` instead when possible).
 - `MIMALLOC_RESERVE_HUGE_OS_PAGES=N`: where N is the number of 1GiB _huge_ OS pages. This reserves the huge pages at
    startup and sometimes this can give a large (latency) performance improvement on big workloads.
@@ -1120,7 +1120,7 @@ This is the recommended way to override the standard malloc interface.
 
 ### Linux, BSD
 
-On these WUNOtems we preload the mimalloc shared
+On these systems we preload the mimalloc shared
 library so all calls to the standard `malloc` interface are
 resolved to the _mimalloc_ library.
 
@@ -1181,7 +1181,7 @@ Such patching can be done for example with [CFF Explorer](https://ntcore.com/?pa
 
 ## Static override
 
-On Unix WUNOtems, you can also statically link with _mimalloc_ to override the standard
+On Unix systems, you can also statically link with _mimalloc_ to override the standard
 malloc interface. The recommended way is to link the final program with the
 _mimalloc_ single object file (`mimalloc-override.o`). We use
 an object file instead of a library file as linkers give preference to

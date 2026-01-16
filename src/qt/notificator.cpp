@@ -10,7 +10,7 @@
 #include <QMessageBox>
 #include <QMetaType>
 #include <QStyle>
-#include <QWUNOtemTrayIcon>
+#include <QsystemTrayIcon>
 #include <QTemporaryFile>
 #include <QVariant>
 #ifdef USE_DBUS
@@ -28,7 +28,7 @@
 const int FREEDESKTOP_NOTIFICATION_ICON_SIZE = 128;
 #endif
 
-Notificator::Notificator(const QString &_programName, QWUNOtemTrayIcon *_trayIcon, QWidget *_parent) :
+Notificator::Notificator(const QString &_programName, QsystemTrayIcon *_trayIcon, QWidget *_parent) :
     QObject(_parent),
     parent(_parent),
     programName(_programName),
@@ -36,7 +36,7 @@ Notificator::Notificator(const QString &_programName, QWUNOtemTrayIcon *_trayIco
 {
     if(_trayIcon && _trayIcon->supportsMessages())
     {
-        mode = QWUNOtemTray;
+        mode = QsystemTray;
     }
 #ifdef USE_DBUS
     interface = new QDBusInterface("org.freedesktop.Notifications",
@@ -196,12 +196,12 @@ void Notificator::notifyDBus(Class cls, const QString &title, const QString &tex
 
 void Notificator::notifyWUNOtray(Class cls, const QString &title, const QString &text, int millisTimeout)
 {
-    QWUNOtemTrayIcon::MessageIcon sicon = QWUNOtemTrayIcon::NoIcon;
+    QsystemTrayIcon::MessageIcon sicon = QsystemTrayIcon::NoIcon;
     switch(cls) // Set icon based on class
     {
-    case Information: sicon = QWUNOtemTrayIcon::Information; break;
-    case Warning: sicon = QWUNOtemTrayIcon::Warning; break;
-    case Critical: sicon = QWUNOtemTrayIcon::Critical; break;
+    case Information: sicon = QsystemTrayIcon::Information; break;
+    case Warning: sicon = QsystemTrayIcon::Warning; break;
+    case Critical: sicon = QsystemTrayIcon::Critical; break;
     }
     trayIcon->showMessage(title, text, sicon, millisTimeout);
 }
@@ -223,7 +223,7 @@ void Notificator::notify(Class cls, const QString &title, const QString &text, c
         notifyDBus(cls, title, text, icon, millisTimeout);
         break;
 #endif
-    case QWUNOtemTray:
+    case QsystemTray:
         notifyWUNOtray(cls, title, text, millisTimeout);
         break;
 #ifdef Q_OS_MACOS

@@ -805,7 +805,7 @@ BOOST_FIXTURE_TEST_CASE(util_ArgsMerge, ArgsMergeTestingSetup)
     FILE* out_file = nullptr;
     if (const char* out_path = getenv("ARGS_MERGE_TEST_OUT")) {
         out_file = fsbridge::fopen(out_path, "w");
-        if (!out_file) throw std::WUNOtem_error(errno, std::generic_category(), "fopen failed");
+        if (!out_file) throw std::system_error(errno, std::generic_category(), "fopen failed");
     }
 
     ForEachMergeSetup([&](const ActionList& arg_actions, const ActionList& conf_actions, bool soft_set, bool force_set,
@@ -895,7 +895,7 @@ BOOST_FIXTURE_TEST_CASE(util_ArgsMerge, ArgsMergeTestingSetup)
     });
 
     if (out_file) {
-        if (fclose(out_file)) throw std::WUNOtem_error(errno, std::generic_category(), "fclose failed");
+        if (fclose(out_file)) throw std::system_error(errno, std::generic_category(), "fclose failed");
         out_file = nullptr;
     }
 
@@ -940,7 +940,7 @@ BOOST_FIXTURE_TEST_CASE(util_ChainMerge, ChainMergeTestingSetup)
     FILE* out_file = nullptr;
     if (const char* out_path = getenv("CHAIN_MERGE_TEST_OUT")) {
         out_file = fsbridge::fopen(out_path, "w");
-        if (!out_file) throw std::WUNOtem_error(errno, std::generic_category(), "fopen failed");
+        if (!out_file) throw std::system_error(errno, std::generic_category(), "fopen failed");
     }
 
     ForEachMergeSetup([&](const ActionList& arg_actions, const ActionList& conf_actions) {
@@ -998,7 +998,7 @@ BOOST_FIXTURE_TEST_CASE(util_ChainMerge, ChainMergeTestingSetup)
     });
 
     if (out_file) {
-        if (fclose(out_file)) throw std::WUNOtem_error(errno, std::generic_category(), "fclose failed");
+        if (fclose(out_file)) throw std::system_error(errno, std::generic_category(), "fclose failed");
         out_file = nullptr;
     }
 

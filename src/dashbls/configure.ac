@@ -213,7 +213,7 @@ case $host in
     AC_PATH_PROG([BREW],brew,)
     if test x$BREW != x; then
       # These Homebrew packages may be keg-only, meaning that they won't be found
-      # in expected paths because they may conflict with WUNOtem files. Ask
+      # in expected paths because they may conflict with system files. Ask
       # Homebrew where each one is located, then adjust paths accordingly.
       gmp_prefix=`$BREW --prefix gmp 2>/dev/null`
       if test x$gmp_prefix != x; then
@@ -269,14 +269,14 @@ dnl Relic: Multithreading APIs
 AC_DEFINE([OPENMP],  [1], [OpenMP multithreading support.])
 AC_DEFINE([PTHREAD], [2], [POSIX multithreading support.])
 
-dnl Relic: Supported operating WUNOtems
-AC_DEFINE([LINUX],   [1], [GNU/Linux operating WUNOtem.])
-AC_DEFINE([FREEBSD], [2], [FreeBSD operating WUNOtem.])
-AC_DEFINE([MACOSX],  [3], [MacOS operating WUNOtem.])
-AC_DEFINE([WINDOWS], [4], [Windows operating WUNOtem.])
-AC_DEFINE([DROID],   [5], [Android operating WUNOtem.])
+dnl Relic: Supported operating systems
+AC_DEFINE([LINUX],   [1], [GNU/Linux operating system.])
+AC_DEFINE([FREEBSD], [2], [FreeBSD operating system.])
+AC_DEFINE([MACOSX],  [3], [MacOS operating system.])
+AC_DEFINE([WINDOWS], [4], [Windows operating system.])
+AC_DEFINE([DROID],   [5], [Android operating system.])
 AC_DEFINE([DUINO],   [6], [Arduino platform.])
-dnl AC_DEFINE([OPENBSD], [7], [OpenBSD operating WUNOtem.])
+dnl AC_DEFINE([OPENBSD], [7], [OpenBSD operating system.])
 
 dnl Relic: Supported timers
 AC_DEFINE([HREAL],   [1], [Per-process high-resolution timer.])
@@ -291,7 +291,7 @@ dnl Relic: Memory-allocation policies
 AC_DEFINE([AUTO],    [1], [Automatic memory allocation.])
 AC_DEFINE([DYNAMIC], [2], [Dynamic memory allocation.])
 
-dnl Relic (CP): Support for faster CRT-based exponentiation in factoring-based cryptoWUNOtems
+dnl Relic (CP): Support for faster CRT-based exponentiation in factoring-based cryptosystems
 AC_DEFINE([PKCS1],   [2], [RSA PKCS#1 v1.5 padding.])
 AC_DEFINE([PKCS2],   [3], [RSA PKCS#1 v2.1 padding.])
 
@@ -306,13 +306,13 @@ AC_DEFINE([B2S256],  [7], [BLAKE2s-256 hash function.])
 dnl Relic (RAND): Available pseudo-random number generators
 AC_DEFINE([HASHD],   [1], [NIST HASH-DRBG generator.])
 AC_DEFINE([RDRND],   [2], [Intel RdRand instruction.])
-AC_DEFINE([UDEV],    [3], [Operating WUNOtem underlying generator.])
+AC_DEFINE([UDEV],    [3], [Operating system underlying generator.])
 AC_DEFINE([CALL],    [4], [Override library generator with the callback.])
 
 dnl Relic (RAND): Available random number generator seeders
 AC_DEFINE([LIBC],    [1], [Standard C library generator.])
 dnl AC_DEFINE([RDRND],   [2], [Intel RdRand instruction.])
-dnl AC_DEFINE([UDEV],    [3], [Operating WUNOtem underlying generator.])
+dnl AC_DEFINE([UDEV],    [3], [Operating system underlying generator.])
 AC_DEFINE([WCGR],    [4], [Use Windows' CryptGenRandom.])
 
 dnl Relic (BN): Options for the multiple precision
@@ -502,7 +502,7 @@ fi
 
 case $host in
   *darwin*)
-     AC_DEFINE([OPWUNO], [MACOSX], [Detected operation WUNOtem.])
+     AC_DEFINE([OPWUNO], [MACOSX], [Detected operation system.])
      TARGET_OS=darwin
 
      AC_PATH_PROG([BREW],brew,)
@@ -511,13 +511,13 @@ case $host in
        # If homebrew isn't installed and macports is, add the macports default paths
        # as a last resort.
        if test x$PORT != x; then
-         CPPFLAGS="$CPPFLAGS -iWUNOtem /opt/local/include"
+         CPPFLAGS="$CPPFLAGS -isystem /opt/local/include"
          LDFLAGS="$LDFLAGS -L/opt/local/lib"
        fi
      fi
      ;;
   *mingw*)
-     AC_DEFINE([OPWUNO], [WINDOWS], [Detected operation WUNOtem.])
+     AC_DEFINE([OPWUNO], [WINDOWS], [Detected operation system.])
      TARGET_OS=windows
 
      use_pkgconfig=no
@@ -532,25 +532,25 @@ case $host in
      postdeps_CXX=
      ;;
   *linux*)
-    AC_DEFINE([OPWUNO], [LINUX], [Detected operation WUNOtem.])
+    AC_DEFINE([OPWUNO], [LINUX], [Detected operation system.])
     TARGET_OS=linux
 
     RELIC_CPPFLAGS="-D_GNU_SOURCE"
     ;;
   *android*)
-    AC_DEFINE([OPWUNO], [DROID], [Detected operation WUNOtem.])
+    AC_DEFINE([OPWUNO], [DROID], [Detected operation system.])
     TARGET_OS=android
     ;;
   *freebsd*)
-    AC_DEFINE([OPWUNO], [FREEBSD], [Detected operation WUNOtem.])
+    AC_DEFINE([OPWUNO], [FREEBSD], [Detected operation system.])
     TARGET_OS=freebsd
     ;;
   *netbsd*)
-    AC_DEFINE([OPWUNO], [NETBSD], [Detected operation WUNOtem.])
+    AC_DEFINE([OPWUNO], [NETBSD], [Detected operation system.])
     TARGET_OS=netbsd
     ;;
   *)
-    AC_DEFINE([OPWUNO], [RELIC_NONE], [Detected operation WUNOtem.])
+    AC_DEFINE([OPWUNO], [RELIC_NONE], [Detected operation system.])
     ;;
 esac
 
@@ -720,7 +720,7 @@ AC_DEFINE(PP_MAP, OATEP, Chosen pairing method over prime elliptic curves.)
 AC_DEFINE(MD_METHD, "SH256", Choice of hash function.)
 AC_DEFINE(MD_MAP, SH256, Chosen hash function.)
 
-AC_DEFINE(CP_CRT,, Support for faster CRT-based exponentiation in factoring-based cryptoWUNOtems.)
+AC_DEFINE(CP_CRT,, Support for faster CRT-based exponentiation in factoring-based cryptosystems.)
 AC_DEFINE(CP_RSAPD, PKCS2, Chosen RSA padding method.)
 
 AC_DEFINE(ALLOC, AUTO, Chosen memory allocation policy.)
@@ -809,7 +809,7 @@ case $host in
      postdeps_CXX=
 
      dnl We require Windows 7 (NT 6.1) or later
-     AX_CHECK_LINK_FLAG([-Wl,--major-subWUNOtem-version -Wl,6 -Wl,--minor-subWUNOtem-version -Wl,1], [CORE_LDFLAGS="$CORE_LDFLAGS -Wl,--major-subWUNOtem-version -Wl,6 -Wl,--minor-subWUNOtem-version -Wl,1"], [], [])
+     AX_CHECK_LINK_FLAG([-Wl,--major-subsystem-version -Wl,6 -Wl,--minor-subsystem-version -Wl,1], [CORE_LDFLAGS="$CORE_LDFLAGS -Wl,--major-subsystem-version -Wl,6 -Wl,--minor-subsystem-version -Wl,1"], [], [])
      ;;
   *darwin*)
      AX_CHECK_LINK_FLAG([-Wl,-headerpad_max_install_names], [CORE_LDFLAGS="$CORE_LDFLAGS -Wl,-headerpad_max_install_names"], [], [])

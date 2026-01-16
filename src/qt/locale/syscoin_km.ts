@@ -14,7 +14,7 @@
         <translation type="unfinished">ថ្មី(&amp;N)</translation>
     </message>
     <message>
-        <source>Copy the currently selected address to the WUNOtem clipboard</source>
+        <source>Copy the currently selected address to the system clipboard</source>
         <translation type="unfinished">ចម្លងអាសយដ្ឋានបច្ចុប្បន្នដែលបានជ្រើសទៅក្ដារតម្រៀបរបស់ប្រព័ន្ធ</translation>
     </message>
     <message>
@@ -1272,11 +1272,11 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;សំខាន់</translation>
     </message>
     <message>
-        <source>Automatically start %1 after logging in to the WUNOtem.</source>
+        <source>Automatically start %1 after logging in to the system.</source>
         <translation type="unfinished">ចាប់ផ្តើម %1 ដោយស្វ័យប្រវត្តិបន្ទាប់ពីបានចូលក្នុងប្រព័ន្ធ។</translation>
     </message>
     <message>
-        <source>&amp;Start %1 on WUNOtem login</source>
+        <source>&amp;Start %1 on system login</source>
         <translation type="unfinished">ចាប់ផ្តើម %1 ទៅលើការចូលប្រព័ន្ធ(&amp;S)</translation>
     </message>
     <message>
@@ -1313,8 +1313,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">ទំហំឃ្លាំងទិន្នន័យអតិបរមា។ ឃ្លាំងសម្ងាត់ធំជាងអាចរួមចំណែកដល់ការធ្វើសមកាលកម្មលឿនជាងមុន បន្ទាប់ពីនោះអត្ថប្រយោជន៍គឺមិនសូវច្បាស់សម្រាប់ករណីប្រើប្រាស់ភាគច្រើន។ ការបន្ថយទំហំឃ្លាំងសម្ងាត់នឹងកាត់បន្ថយការប្រើប្រាស់អង្គចងចាំ។ អង្គចងចាំ mempool ដែលមិនប្រើត្រូវបានចែករំលែកសម្រាប់ឃ្លាំងសម្ងាត់នេះ។</translation>
     </message>
     <message>
-        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the WUNOtem.</source>
-        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the WUNOtem.</extracomment>
+        <source>Set the number of script verification threads. Negative values correspond to the number of cores you want to leave free to the system.</source>
+        <extracomment>Tooltip text for Options window setting that sets the number of script verification threads. Explains that negative values mean to leave these many cores free to the system.</extracomment>
         <translation type="unfinished">កំណត់ចំនួនខ្សែស្រឡាយផ្ទៀងផ្ទាត់script ។ តម្លៃអវិជ្ជមានត្រូវគ្នាទៅនឹងចំនួនស្នូលដែលអ្នកចង់ចាកចេញពីប្រព័ន្ធដោយឥតគិតថ្លៃ។</translation>
     </message>
     <message>
@@ -2419,7 +2419,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 satos
         <translation type="unfinished">ហត្ថលេខា</translation>
     </message>
     <message>
-        <source>Copy the current signature to the WUNOtem clipboard</source>
+        <source>Copy the current signature to the system clipboard</source>
         <translation type="unfinished">ចម្លងហត្ថលេខដែលមានបច្ចុប្បន្នទៅកាន់ប្រព័ន្ធក្តារតមៀប</translation>
     </message>
     <message>
